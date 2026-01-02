@@ -1,0 +1,121 @@
+#!usr/bin/env python3
+from collections import defaultdict,deque
+from heapq import heappush, heappop
+import sys
+import math
+import bisect
+import random
+def LI(): return [int(x) for x in sys.stdin.readline().split()]
+def I(): return int(sys.stdin.readline())
+def LS():return [list(x) for x in sys.stdin.readline().split()]
+def S(): return list(sys.stdin.readline())[:-1]
+def IR(n):
+    return [I() for i in range(n)]
+def LIR(n):
+    return [LI() for i in range(n)]
+def SR(n):
+    return [S() for i in range(n)]
+def LSR(n):
+    return [LS() for i in range(n)]
+
+sys.setrecursionlimit(1000000)
+mod = 1000000007
+
+#A
+def A():
+    n = I()
+    p = LI()
+    t = LI()
+    ans = float("inf")
+    for i in range(n+1):
+        x0 = t[0]*i
+        m0 = p[0]*i
+        for j in range(n+1):
+            x1 = x0+t[1]*j
+            m1 = m0+p[1]*j
+            for k in range(n+1):
+                x2 = x1+t[2]*k
+                m2 = m1+p[2]*k
+                rest = max(0,math.ceil((n-x2)/t[3]))
+                m3 = m2+p[3]*rest
+                if m3 < ans:
+                    ans = m3
+    print(ans)
+    return
+
+#B
+def B():
+    def f(n):
+        if n < 4:
+            return 1
+        m = n
+        res = 1
+        i = 2
+        while i**2 <= n:
+            if m%i == 0:
+                if m//i != i:
+                    res *= m//i
+                res *= i
+            i += 1
+        return res
+    MA = 100000
+    d = [0]*(MA+1)
+    for i in range(12,MA+1):
+        if not d[i]:
+            if f(i) >= (i<<1):
+                j = i
+                while j <= MA:
+                    d[j] = 1
+                    j += i
+    for i in range(MA):
+        d[i+1] += d[i]
+    q = I()
+    for i in range(q):
+        print(d[I()])
+    return
+
+#C
+def C():
+    n = I()
+
+    return
+
+#D
+def D():
+    a,b = LI()
+    for i in range(b+1,b+a):
+        x = i//b
+        j = i%b
+        x += j//a
+        j = j%a
+        x += j
+        y = i//a+i%a
+        if y < x:
+            print(i)
+            break
+    else:
+        print(-1)
+    return
+
+#E
+def E():
+    n = I()
+
+    return
+
+#F
+def F():
+    n = I()
+
+    return
+
+#G
+def G():
+    n = I()
+
+    return
+
+#Solve
+if __name__ == "__main__":
+    D()
+
