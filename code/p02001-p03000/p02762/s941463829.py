@@ -1,0 +1,141 @@
+import sys
+from io import StringIO
+import unittest
+
+class UnionFind():
+    # 作りたい要素数nで初期化
+    # 使用するインスタンス変数の初期化
+    def __init__(self, n):
+        self.n = n
+        # root[x]<0ならそのノードが根かつその値が木の要素数
+        # rootノードでその木の要素数を記録する
+        self.root = [-1]*(n+1)
+        # 木をくっつける時にアンバランスにならないように調整する
+        self.rnk = [0]*(n+1)
+
+    # ノードxのrootノードを見つける
+    def Find_Root(self, x):
+        if(self.root[x] < 0):
+            return x
+        else:
+            # ここで代入しておくことで、後の繰り返しを避ける
+            self.root[x] = self.Find_Root(self.root[x])
+            return self.root[x]
+    # 木の併合、入力は併合したい各ノード
+    def Unite(self, x, y):
+        # 入力ノードのrootノードを見つける
+        x = self.Find_Root(x)
+        y = self.Find_Root(y)
+        # すでに同じ木に属していた場合
+        if(x == y):
+            return 
+        # 違う木に属していた場合rnkを見てくっつける方を決める
+        elif(self.rnk[x] > self.rnk[y]):
+            self.root[x] += self.root[y]
+            self.root[y] = x
+
+        else:
+            self.root[y] += self.root[x]
+            self.root[x] = y
+            # rnkが同じ（深さに差がない場合）は1増やす
+            if(self.rnk[x] == self.rnk[y]):
+                self.rnk[y] += 1
+    # xとyが同じグループに属するか判断
+    def isSameGroup(self, x, y):
+        return self.Find_Root(x) == self.Find_Root(y)
+
+    # ノードxが属する木のサイズを返す
+    def Count(self, x):
+        return -self.root[self.Find_Root(x)]
+
+def resolve():
+    n,m,k=list(map(int,input().strip().split()))
+
+    uf = UnionFind(n)
+
+    res=[[] for i in range(n)]
+    frd=[[] for i in range(n)]
+    blk=[[] for i in range(n)]
+
+    for i in range(m):
+        a,b=list(map(int,input().strip().split()))
+        a-=1
+        b-=1
+        uf.Unite(a,b)
+        frd[a].append(b)
+        frd[b].append(a)
+    
+    for i in range(k):
+        a,b=list(map(int,input().strip().split()))
+        a-=1
+        b-=1
+        #blk[a].append(b)
+        #blk[b].append(a)
+        frd[a].append(b)
+        frd[b].append(a)
+    
+    rescnt=[]
+
+    for i in range(n):
+        ri=uf.Count(i)-1
+        for f in frd[i]:
+            if uf.isSameGroup(f,i):
+                ri-=1
+        rescnt.append(str(ri))
+        ##rescnt.append(str(n-uf.size(i)-len(blk[i])))
+    
+    print(" ".join(rescnt))
+
+resolve()
+
+class TestClass(unittest.TestCase):
+    def assertIO(self, input, output):
+        stdout, stdin = sys.stdout, sys.stdin
+        sys.stdout, sys.stdin = StringIO(), StringIO(input)
+        resolve()
+        sys.stdout.seek(0)
+        out = sys.stdout.read()[:-1]
+        sys.stdout, sys.stdin = stdout, stdin
+        self.assertEqual(out, output)
+    def test_入力例_1(self):
+        input = """4 4 1
+2 1
+1 3
+3 2
+3 4
+4 1"""
+        output = """0 1 0 1"""
+        self.assertIO(input, output)
+    def test_入力例_2(self):
+        input = """5 10 0
+1 2
+1 3
+1 4
+1 5
+3 2
+2 4
+2 5
+4 3
+5 3
+4 5"""
+        output = """0 0 0 0 0"""
+        self.assertIO(input, output)
+    def test_入力例_3(self):
+        input = """10 9 3
+10 1
+6 7
+8 2
+2 5
+8 4
+7 3
+10 9
+6 4
+5 8
+2 6
+7 5
+3 1"""
+        output = """1 3 5 4 3 3 3 3 1 0"""
+        self.assertIO(input, output)
+
+if __name__ == "__main__":
+    unittest.main()
