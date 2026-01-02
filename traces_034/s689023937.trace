@@ -1,0 +1,93 @@
+ --- modulename: s689023937, funcname: <module>
+s689023937.py(1): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s689023937.py(2): X = input()
+s689023937.py(3): int_x = int(X, 2)
+s689023937.py(4): mod = 998244353
+s689023937.py(7): def divisors(num):
+s689023937.py(21): def is_repeatable(block):
+s689023937.py(37): def get_small_repeatable_list(length):
+s689023937.py(58): ans = (2 * n * (int_x+1)) % mod
+s689023937.py(59): div_list = divisors(n)
+ --- modulename: s689023937, funcname: divisors
+s689023937.py(8):     array = []
+s689023937.py(9):     limit = int(num ** 0.5) + 1
+s689023937.py(10):     for i in range(1, limit):
+s689023937.py(11):         if num % i == 0:
+s689023937.py(12):             div1 = i
+s689023937.py(13):             div2 = num//i
+s689023937.py(14):             array.append(div1)
+s689023937.py(15):             if div1 != div2:
+s689023937.py(16):                 array.append(div2)
+s689023937.py(10):     for i in range(1, limit):
+s689023937.py(17):     array.sort()
+s689023937.py(18):     return array
+s689023937.py(61): blocks = []
+s689023937.py(62): for div in div_list:
+s689023937.py(63):     block = div
+s689023937.py(64):     if is_repeatable(block):
+ --- modulename: s689023937, funcname: is_repeatable
+s689023937.py(28):     if block == 1:
+s689023937.py(29):         return False
+s689023937.py(62): for div in div_list:
+s689023937.py(63):     block = div
+s689023937.py(64):     if is_repeatable(block):
+ --- modulename: s689023937, funcname: is_repeatable
+s689023937.py(28):     if block == 1:
+s689023937.py(31):         if block % 2 == 1:
+s689023937.py(32):             return True
+s689023937.py(65):         blocks.append(block)
+s689023937.py(62): for div in div_list:
+s689023937.py(67): blocks.sort(reverse=True)
+s689023937.py(68): done = {}
+s689023937.py(69): for block in blocks:
+s689023937.py(70):     length = n // block
+s689023937.py(71):     forward = X[:length]
+s689023937.py(72):     reverse = 2**length-1 - int(forward, 2)
+s689023937.py(73):     reverse = format(reverse, '0'+str(length)+'b')
+s689023937.py(74):     count = int(forward, 2) + 1
+s689023937.py(75):     for i in range(1, block):
+s689023937.py(76):         if i % 2 == 1:
+s689023937.py(77):             compare = reverse
+s689023937.py(81):         check = X[length*i:length*(i+1)]
+s689023937.py(82):         if compare == check:
+s689023937.py(84):         elif compare > check:
+s689023937.py(87):         elif compare < check:
+s689023937.py(88):             break
+s689023937.py(90):     small_repeatable_list = get_small_repeatable_list(length)
+ --- modulename: s689023937, funcname: get_small_repeatable_list
+s689023937.py(48):     small_blocks = divisors(length)
+ --- modulename: s689023937, funcname: divisors
+s689023937.py(8):     array = []
+s689023937.py(9):     limit = int(num ** 0.5) + 1
+s689023937.py(10):     for i in range(1, limit):
+s689023937.py(11):         if num % i == 0:
+s689023937.py(12):             div1 = i
+s689023937.py(13):             div2 = num//i
+s689023937.py(14):             array.append(div1)
+s689023937.py(15):             if div1 != div2:
+s689023937.py(10):     for i in range(1, limit):
+s689023937.py(17):     array.sort()
+s689023937.py(18):     return array
+s689023937.py(49):     small_length_list = []
+s689023937.py(50):     for small_block in small_blocks:
+s689023937.py(51):         if is_repeatable(small_block):
+ --- modulename: s689023937, funcname: is_repeatable
+s689023937.py(28):     if block == 1:
+s689023937.py(29):         return False
+s689023937.py(50):     for small_block in small_blocks:
+s689023937.py(55):     return small_length_list
+s689023937.py(91):     for small_length in small_repeatable_list:
+s689023937.py(95):     done[length] = count
+s689023937.py(96):     ans -= 2*n*count
+s689023937.py(97):     ans += 2*length*count
+s689023937.py(98):     ans %= mod
+s689023937.py(69): for block in blocks:
+s689023937.py(100): print(ans)
+40
