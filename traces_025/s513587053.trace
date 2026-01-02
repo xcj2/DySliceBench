@@ -1,0 +1,1041 @@
+ --- modulename: s513587053, funcname: <module>
+s513587053.py(1): class LazySegmentTree:
+ --- modulename: s513587053, funcname: LazySegmentTree
+s513587053.py(1): class LazySegmentTree:
+s513587053.py(4):     __slots__ = ["n", "original_size", "log", "data", "lazy", "me", "oe", "fmm", "fmo", "foo"]
+s513587053.py(7):     def __init__(self, length_or_list, monoid_identity, operator_identity, func_monoid_monoid, func_monoid_operator, func_operator_operator):
+s513587053.py(32):     def replace(self, index, value):
+s513587053.py(60):     def __getitem__(self, index):
+s513587053.py(79):     def effect_single(self, index, operator):
+s513587053.py(106):     def effect(self, l, r, operator):
+s513587053.py(166):     def folded(self, l, r):
+s513587053.py(210):     def all_folded(self):
+s513587053.py(214):     def max_right(self, l, f):
+s513587053.py(256):     def min_left(self, r, f):
+s513587053.py(299): MOD = 998244353
+s513587053.py(300): mask32 = (1 << 32) - 1
+s513587053.py(303): import sys
+s513587053.py(304): input = sys.stdin.buffer.readline
+s513587053.py(305): read = sys.stdin.buffer.read
+s513587053.py(309): N, Q = map(int, input().split())
+s513587053.py(312): pw = [1]
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(314):     pw.append(pw[-1] * 10 % MOD)
+s513587053.py(313): for _ in range(N + 2):
+s513587053.py(318): def fmm(m1, m2):
+s513587053.py(327): inv9 = pow(9, MOD - 2, MOD)
+s513587053.py(328): def fmo(m, o):
+s513587053.py(336): def foo(o1, o2):
+s513587053.py(342): lst = LazySegmentTree([(1 << 32) + 1] * N, 0, -1, fmm, fmo, foo)
+ --- modulename: s513587053, funcname: __init__
+s513587053.py(8):         self.me = monoid_identity
+s513587053.py(9):         self.oe = operator_identity
+s513587053.py(10):         self.fmm = func_monoid_monoid
+s513587053.py(11):         self.fmo = func_monoid_operator
+s513587053.py(12):         self.foo = func_operator_operator
+s513587053.py(14):         if isinstance(length_or_list, int):
+s513587053.py(20):         elif isinstance(length_or_list, list):
+s513587053.py(21):             self.original_size = len(length_or_list)
+s513587053.py(22):             self.log = (self.original_size - 1).bit_length()
+s513587053.py(23):             self.n = 1 << self.log
+s513587053.py(24):             self.data = [self.me] * self.n + length_or_list + [self.me] * (self.n - self.original_size)
+s513587053.py(25):             for i in range(self.n-1, 0, -1):
+s513587053.py(26):                 self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(25):             for i in range(self.n-1, 0, -1):
+s513587053.py(26):                 self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(25):             for i in range(self.n-1, 0, -1):
+s513587053.py(26):                 self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(25):             for i in range(self.n-1, 0, -1):
+s513587053.py(26):                 self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(25):             for i in range(self.n-1, 0, -1):
+s513587053.py(26):                 self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(25):             for i in range(self.n-1, 0, -1):
+s513587053.py(26):                 self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(25):             for i in range(self.n-1, 0, -1):
+s513587053.py(26):                 self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(25):             for i in range(self.n-1, 0, -1):
+s513587053.py(27):             self.lazy = [self.oe] * (self.n * 2)
+s513587053.py(344): LRDs = map(int, read().split())
+s513587053.py(345): for L, R, D in zip(LRDs, LRDs, LRDs):
+s513587053.py(346):     lst.effect(L - 1, R, D)
+ --- modulename: s513587053, funcname: effect
+s513587053.py(107):         if l < 0:
+s513587053.py(109):         if r < 0:
+s513587053.py(111):         if not 0 <= l <= r <= self.original_size:
+s513587053.py(114):         if l == r:
+s513587053.py(117):         l += self.n
+s513587053.py(118):         r += self.n
+s513587053.py(120):         l0 = l
+s513587053.py(121):         r0 = r - 1
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(123):             l0 //= 2
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(125):             r0 //= 2
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(137):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(138):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(139):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(140):                 self.lazy[i] = self.oe
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(137):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(138):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(139):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(140):                 self.lazy[i] = self.oe
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(147):             if r % 2:
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(145):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(146):                 l += 1
+s513587053.py(147):             if r % 2:
+s513587053.py(148):                 r -= 1
+s513587053.py(149):                 self.lazy[r] = self.foo(self.lazy[r], operator)
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(154):         i = l0
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(159):         i = r0
+s513587053.py(160):         while i > 1:
+s513587053.py(161):             i //= 2
+s513587053.py(162):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(163):             self.lazy[i] = self.oe
+s513587053.py(160):         while i > 1:
+s513587053.py(161):             i //= 2
+s513587053.py(162):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(163):             self.lazy[i] = self.oe
+s513587053.py(160):         while i > 1:
+s513587053.py(347):     print(lst.all_folded() >> 32)
+ --- modulename: s513587053, funcname: all_folded
+s513587053.py(211):         return self.data[1]
+11222211
+s513587053.py(345): for L, R, D in zip(LRDs, LRDs, LRDs):
+s513587053.py(346):     lst.effect(L - 1, R, D)
+ --- modulename: s513587053, funcname: effect
+s513587053.py(107):         if l < 0:
+s513587053.py(109):         if r < 0:
+s513587053.py(111):         if not 0 <= l <= r <= self.original_size:
+s513587053.py(114):         if l == r:
+s513587053.py(117):         l += self.n
+s513587053.py(118):         r += self.n
+s513587053.py(120):         l0 = l
+s513587053.py(121):         r0 = r - 1
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(123):             l0 //= 2
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(123):             l0 //= 2
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(123):             l0 //= 2
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(125):             r0 //= 2
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(125):             r0 //= 2
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(137):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(138):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(139):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(140):                 self.lazy[i] = self.oe
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(147):             if r % 2:
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(147):             if r % 2:
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(147):             if r % 2:
+s513587053.py(148):                 r -= 1
+s513587053.py(149):                 self.lazy[r] = self.foo(self.lazy[r], operator)
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(154):         i = l0
+s513587053.py(155):         while i > 1:
+s513587053.py(159):         i = r0
+s513587053.py(160):         while i > 1:
+s513587053.py(161):             i //= 2
+s513587053.py(162):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(163):             self.lazy[i] = self.oe
+s513587053.py(160):         while i > 1:
+s513587053.py(347):     print(lst.all_folded() >> 32)
+ --- modulename: s513587053, funcname: all_folded
+s513587053.py(211):         return self.data[1]
+77772211
+s513587053.py(345): for L, R, D in zip(LRDs, LRDs, LRDs):
+s513587053.py(346):     lst.effect(L - 1, R, D)
+ --- modulename: s513587053, funcname: effect
+s513587053.py(107):         if l < 0:
+s513587053.py(109):         if r < 0:
+s513587053.py(111):         if not 0 <= l <= r <= self.original_size:
+s513587053.py(114):         if l == r:
+s513587053.py(117):         l += self.n
+s513587053.py(118):         r += self.n
+s513587053.py(120):         l0 = l
+s513587053.py(121):         r0 = r - 1
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(123):             l0 //= 2
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(125):             r0 //= 2
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(125):             r0 //= 2
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(125):             r0 //= 2
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(125):             r0 //= 2
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(147):             if r % 2:
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(145):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(146):                 l += 1
+s513587053.py(147):             if r % 2:
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(145):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(146):                 l += 1
+s513587053.py(147):             if r % 2:
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(154):         i = l0
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(159):         i = r0
+s513587053.py(160):         while i > 1:
+s513587053.py(347):     print(lst.all_folded() >> 32)
+ --- modulename: s513587053, funcname: all_folded
+s513587053.py(211):         return self.data[1]
+77333333
+s513587053.py(345): for L, R, D in zip(LRDs, LRDs, LRDs):
+s513587053.py(346):     lst.effect(L - 1, R, D)
+ --- modulename: s513587053, funcname: effect
+s513587053.py(107):         if l < 0:
+s513587053.py(109):         if r < 0:
+s513587053.py(111):         if not 0 <= l <= r <= self.original_size:
+s513587053.py(114):         if l == r:
+s513587053.py(117):         l += self.n
+s513587053.py(118):         r += self.n
+s513587053.py(120):         l0 = l
+s513587053.py(121):         r0 = r - 1
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(125):             r0 //= 2
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(137):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(138):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(139):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(140):                 self.lazy[i] = self.oe
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(137):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(138):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(139):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(140):                 self.lazy[i] = self.oe
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(145):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(146):                 l += 1
+s513587053.py(147):             if r % 2:
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(154):         i = l0
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(159):         i = r0
+s513587053.py(160):         while i > 1:
+s513587053.py(161):             i //= 2
+s513587053.py(162):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(163):             self.lazy[i] = self.oe
+s513587053.py(160):         while i > 1:
+s513587053.py(161):             i //= 2
+s513587053.py(162):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(163):             self.lazy[i] = self.oe
+s513587053.py(160):         while i > 1:
+s513587053.py(347):     print(lst.all_folded() >> 32)
+ --- modulename: s513587053, funcname: all_folded
+s513587053.py(211):         return self.data[1]
+72333333
+s513587053.py(345): for L, R, D in zip(LRDs, LRDs, LRDs):
+s513587053.py(346):     lst.effect(L - 1, R, D)
+ --- modulename: s513587053, funcname: effect
+s513587053.py(107):         if l < 0:
+s513587053.py(109):         if r < 0:
+s513587053.py(111):         if not 0 <= l <= r <= self.original_size:
+s513587053.py(114):         if l == r:
+s513587053.py(117):         l += self.n
+s513587053.py(118):         r += self.n
+s513587053.py(120):         l0 = l
+s513587053.py(121):         r0 = r - 1
+s513587053.py(122):         while l0 % 2 == 0:
+s513587053.py(124):         while r0 % 2 == 1:
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(137):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(138):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(139):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(140):                 self.lazy[i] = self.oe
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(338):         return o1
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(137):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(138):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(139):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+s513587053.py(140):                 self.lazy[i] = self.oe
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(129):             i = l >> shift
+s513587053.py(130):             if i << shift != l:
+s513587053.py(131):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(132):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(133):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+s513587053.py(134):                 self.lazy[i] = self.oe
+s513587053.py(135):             i = r >> shift
+s513587053.py(136):             if i << shift != r:
+s513587053.py(137):                 self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(138):                 self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(139):                 self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+s513587053.py(140):                 self.lazy[i] = self.oe
+s513587053.py(128):         for shift in range(self.log, 0, -1):
+s513587053.py(143):         while l < r:
+s513587053.py(144):             if l % 2:
+s513587053.py(145):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(146):                 l += 1
+s513587053.py(147):             if r % 2:
+s513587053.py(148):                 r -= 1
+s513587053.py(149):                 self.lazy[r] = self.foo(self.lazy[r], operator)
+ --- modulename: s513587053, funcname: foo
+s513587053.py(337):     if o2 == -1:
+s513587053.py(340):         return o2
+s513587053.py(150):             l //= 2
+s513587053.py(151):             r //= 2
+s513587053.py(143):         while l < r:
+s513587053.py(154):         i = l0
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(156):             i //= 2
+s513587053.py(157):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(158):             self.lazy[i] = self.oe
+s513587053.py(155):         while i > 1:
+s513587053.py(159):         i = r0
+s513587053.py(160):         while i > 1:
+s513587053.py(161):             i //= 2
+s513587053.py(162):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(163):             self.lazy[i] = self.oe
+s513587053.py(160):         while i > 1:
+s513587053.py(161):             i //= 2
+s513587053.py(162):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(332):         l = m & mask32
+s513587053.py(333):         v = o * (pw[l] - 1) * inv9 % MOD
+s513587053.py(334):         return (v << 32) + l
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(163):             self.lazy[i] = self.oe
+s513587053.py(160):         while i > 1:
+s513587053.py(161):             i //= 2
+s513587053.py(162):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmo
+s513587053.py(329):     if o == -1:
+s513587053.py(330):         return m
+ --- modulename: s513587053, funcname: fmm
+s513587053.py(319):     v1 = m1 >> 32
+s513587053.py(320):     l1 = m1 & mask32
+s513587053.py(321):     v2 = m2 >> 32
+s513587053.py(322):     l2 = m2 & mask32
+s513587053.py(323):     v = (v1 * pw[l2] + v2) % MOD
+s513587053.py(324):     l = l1 + l2
+s513587053.py(325):     return (v << 32) + l
+s513587053.py(163):             self.lazy[i] = self.oe
+s513587053.py(160):         while i > 1:
+s513587053.py(347):     print(lst.all_folded() >> 32)
+ --- modulename: s513587053, funcname: all_folded
+s513587053.py(211):         return self.data[1]
+72311333
+s513587053.py(345): for L, R, D in zip(LRDs, LRDs, LRDs):
