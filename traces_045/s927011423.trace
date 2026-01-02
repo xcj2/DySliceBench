@@ -1,0 +1,446 @@
+ --- modulename: s927011423, funcname: <module>
+s927011423.py(1): import sys
+s927011423.py(2): readline = sys.stdin.readline
+s927011423.py(3): write = sys.stdout.write
+s927011423.py(5): N, Q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s927011423.py(6): INF = 2**31-1
+s927011423.py(8): LV = (N-1).bit_length()
+s927011423.py(9): N0 = 2**LV
+s927011423.py(10): data = [0]*(2*N0)
+s927011423.py(11): lazy = [0]*(2*N0)
+s927011423.py(13): def gindex(l, r):
+s927011423.py(27): def propagates(*ids):
+s927011423.py(36): def update(l, r, x):
+s927011423.py(49): def query(l, r):
+s927011423.py(65): ans = []
+s927011423.py(66): for q in range(Q):
+s927011423.py(67):     t, *cmd = map(int, readline().split())
+s927011423.py(68):     if t:
+s927011423.py(72):         s, t, x = cmd
+s927011423.py(73):         update(s, t+1, x)
+ --- modulename: s927011423, funcname: update
+s927011423.py(37):     L = N0 + l; R = N0 + r
+s927011423.py(38):     while L < R:
+s927011423.py(39):         if R & 1:
+s927011423.py(42):         if L & 1:
+s927011423.py(43):             lazy[L-1] += x; data[L-1] += x
+s927011423.py(44):             L += 1
+s927011423.py(45):         L >>= 1; R >>= 1
+s927011423.py(38):     while L < R:
+s927011423.py(39):         if R & 1:
+s927011423.py(42):         if L & 1:
+s927011423.py(43):             lazy[L-1] += x; data[L-1] += x
+s927011423.py(44):             L += 1
+s927011423.py(45):         L >>= 1; R >>= 1
+s927011423.py(38):     while L < R:
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(14):     L = l + N0; R = r + N0
+s927011423.py(15):     lm = (L // (L & -L)) >> 1
+s927011423.py(16):     rm = (R // (R & -R)) >> 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(21):             yield L
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(21):             yield L
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(23):     while L:
+s927011423.py(24):         yield L
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(25):         L >>= 1
+s927011423.py(23):     while L:
+s927011423.py(66): for q in range(Q):
+s927011423.py(67):     t, *cmd = map(int, readline().split())
+s927011423.py(68):     if t:
+s927011423.py(72):         s, t, x = cmd
+s927011423.py(73):         update(s, t+1, x)
+ --- modulename: s927011423, funcname: update
+s927011423.py(37):     L = N0 + l; R = N0 + r
+s927011423.py(38):     while L < R:
+s927011423.py(39):         if R & 1:
+s927011423.py(40):             R -= 1
+s927011423.py(41):             lazy[R-1] += x; data[R-1] += x
+s927011423.py(42):         if L & 1:
+s927011423.py(45):         L >>= 1; R >>= 1
+s927011423.py(38):     while L < R:
+s927011423.py(39):         if R & 1:
+s927011423.py(42):         if L & 1:
+s927011423.py(43):             lazy[L-1] += x; data[L-1] += x
+s927011423.py(44):             L += 1
+s927011423.py(45):         L >>= 1; R >>= 1
+s927011423.py(38):     while L < R:
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(14):     L = l + N0; R = r + N0
+s927011423.py(15):     lm = (L // (L & -L)) >> 1
+s927011423.py(16):     rm = (R // (R & -R)) >> 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(19):             yield R
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(19):             yield R
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(20):         if L <= lm:
+s927011423.py(21):             yield L
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(23):     while L:
+s927011423.py(24):         yield L
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(25):         L >>= 1
+s927011423.py(23):     while L:
+s927011423.py(66): for q in range(Q):
+s927011423.py(67):     t, *cmd = map(int, readline().split())
+s927011423.py(68):     if t:
+s927011423.py(69):         s, t = cmd
+s927011423.py(70):         ans.append(str(query(s, t+1)))
+ --- modulename: s927011423, funcname: query
+s927011423.py(50):     propagates(*gindex(l, r))
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(14):     L = l + N0; R = r + N0
+s927011423.py(15):     lm = (L // (L & -L)) >> 1
+s927011423.py(16):     rm = (R // (R & -R)) >> 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(19):             yield R
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(23):     while L:
+s927011423.py(24):         yield L
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(25):         L >>= 1
+s927011423.py(23):     while L:
+ --- modulename: s927011423, funcname: propagates
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(31):             continue
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(31):             continue
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(51):     L = N0 + l; R = N0 + r
+s927011423.py(53):     s = INF
+s927011423.py(54):     while L < R:
+s927011423.py(55):         if R & 1:
+s927011423.py(58):         if L & 1:
+s927011423.py(61):         L >>= 1; R >>= 1
+s927011423.py(54):     while L < R:
+s927011423.py(55):         if R & 1:
+s927011423.py(56):             R -= 1
+s927011423.py(57):             s = min(s, data[R-1])
+s927011423.py(58):         if L & 1:
+s927011423.py(61):         L >>= 1; R >>= 1
+s927011423.py(54):     while L < R:
+s927011423.py(55):         if R & 1:
+s927011423.py(56):             R -= 1
+s927011423.py(57):             s = min(s, data[R-1])
+s927011423.py(58):         if L & 1:
+s927011423.py(61):         L >>= 1; R >>= 1
+s927011423.py(54):     while L < R:
+s927011423.py(62):     return s
+s927011423.py(66): for q in range(Q):
+s927011423.py(67):     t, *cmd = map(int, readline().split())
+s927011423.py(68):     if t:
+s927011423.py(69):         s, t = cmd
+s927011423.py(70):         ans.append(str(query(s, t+1)))
+ --- modulename: s927011423, funcname: query
+s927011423.py(50):     propagates(*gindex(l, r))
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(14):     L = l + N0; R = r + N0
+s927011423.py(15):     lm = (L // (L & -L)) >> 1
+s927011423.py(16):     rm = (R // (R & -R)) >> 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(23):     while L:
+s927011423.py(24):         yield L
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(25):         L >>= 1
+s927011423.py(23):     while L:
+s927011423.py(24):         yield L
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(25):         L >>= 1
+s927011423.py(23):     while L:
+ --- modulename: s927011423, funcname: propagates
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(31):             continue
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(31):             continue
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(51):     L = N0 + l; R = N0 + r
+s927011423.py(53):     s = INF
+s927011423.py(54):     while L < R:
+s927011423.py(55):         if R & 1:
+s927011423.py(58):         if L & 1:
+s927011423.py(61):         L >>= 1; R >>= 1
+s927011423.py(54):     while L < R:
+s927011423.py(55):         if R & 1:
+s927011423.py(56):             R -= 1
+s927011423.py(57):             s = min(s, data[R-1])
+s927011423.py(58):         if L & 1:
+s927011423.py(61):         L >>= 1; R >>= 1
+s927011423.py(54):     while L < R:
+s927011423.py(62):     return s
+s927011423.py(66): for q in range(Q):
+s927011423.py(67):     t, *cmd = map(int, readline().split())
+s927011423.py(68):     if t:
+s927011423.py(72):         s, t, x = cmd
+s927011423.py(73):         update(s, t+1, x)
+ --- modulename: s927011423, funcname: update
+s927011423.py(37):     L = N0 + l; R = N0 + r
+s927011423.py(38):     while L < R:
+s927011423.py(39):         if R & 1:
+s927011423.py(42):         if L & 1:
+s927011423.py(43):             lazy[L-1] += x; data[L-1] += x
+s927011423.py(44):             L += 1
+s927011423.py(45):         L >>= 1; R >>= 1
+s927011423.py(38):     while L < R:
+s927011423.py(39):         if R & 1:
+s927011423.py(40):             R -= 1
+s927011423.py(41):             lazy[R-1] += x; data[R-1] += x
+s927011423.py(42):         if L & 1:
+s927011423.py(45):         L >>= 1; R >>= 1
+s927011423.py(38):     while L < R:
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(14):     L = l + N0; R = r + N0
+s927011423.py(15):     lm = (L // (L & -L)) >> 1
+s927011423.py(16):     rm = (R // (R & -R)) >> 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(21):             yield L
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(19):             yield R
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(20):         if L <= lm:
+s927011423.py(21):             yield L
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(23):     while L:
+s927011423.py(24):         yield L
+s927011423.py(47):         data[i-1] = min(data[2*i-1], data[2*i]) + lazy[i-1]
+s927011423.py(46):     for i in gindex(l, r):
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(25):         L >>= 1
+s927011423.py(23):     while L:
+s927011423.py(66): for q in range(Q):
+s927011423.py(67):     t, *cmd = map(int, readline().split())
+s927011423.py(68):     if t:
+s927011423.py(69):         s, t = cmd
+s927011423.py(70):         ans.append(str(query(s, t+1)))
+ --- modulename: s927011423, funcname: query
+s927011423.py(50):     propagates(*gindex(l, r))
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(14):     L = l + N0; R = r + N0
+s927011423.py(15):     lm = (L // (L & -L)) >> 1
+s927011423.py(16):     rm = (R // (R & -R)) >> 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(19):             yield R
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(20):         if L <= lm:
+s927011423.py(21):             yield L
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(19):             yield R
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(20):         if L <= lm:
+s927011423.py(21):             yield L
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(23):     while L:
+s927011423.py(24):         yield L
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(25):         L >>= 1
+s927011423.py(23):     while L:
+ --- modulename: s927011423, funcname: propagates
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(31):             continue
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(31):             continue
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(31):             continue
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(32):         lazy[2*i-1] += v; lazy[2*i] += v
+s927011423.py(33):         data[2*i-1] += v; data[2*i] += v
+s927011423.py(34):         lazy[i-1] = 0
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(32):         lazy[2*i-1] += v; lazy[2*i] += v
+s927011423.py(33):         data[2*i-1] += v; data[2*i] += v
+s927011423.py(34):         lazy[i-1] = 0
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(51):     L = N0 + l; R = N0 + r
+s927011423.py(53):     s = INF
+s927011423.py(54):     while L < R:
+s927011423.py(55):         if R & 1:
+s927011423.py(56):             R -= 1
+s927011423.py(57):             s = min(s, data[R-1])
+s927011423.py(58):         if L & 1:
+s927011423.py(59):             s = min(s, data[L-1])
+s927011423.py(60):             L += 1
+s927011423.py(61):         L >>= 1; R >>= 1
+s927011423.py(54):     while L < R:
+s927011423.py(62):     return s
+s927011423.py(66): for q in range(Q):
+s927011423.py(67):     t, *cmd = map(int, readline().split())
+s927011423.py(68):     if t:
+s927011423.py(69):         s, t = cmd
+s927011423.py(70):         ans.append(str(query(s, t+1)))
+ --- modulename: s927011423, funcname: query
+s927011423.py(50):     propagates(*gindex(l, r))
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(14):     L = l + N0; R = r + N0
+s927011423.py(15):     lm = (L // (L & -L)) >> 1
+s927011423.py(16):     rm = (R // (R & -R)) >> 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(18):         if R <= rm:
+s927011423.py(19):             yield R
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(20):         if L <= lm:
+s927011423.py(22):         L >>= 1; R >>= 1
+s927011423.py(17):     while L < R:
+s927011423.py(23):     while L:
+s927011423.py(24):         yield L
+ --- modulename: s927011423, funcname: gindex
+s927011423.py(25):         L >>= 1
+s927011423.py(23):     while L:
+ --- modulename: s927011423, funcname: propagates
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(31):             continue
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(29):         v = lazy[i-1]
+s927011423.py(30):         if not v:
+s927011423.py(31):             continue
+s927011423.py(28):     for i in reversed(ids):
+s927011423.py(51):     L = N0 + l; R = N0 + r
+s927011423.py(53):     s = INF
+s927011423.py(54):     while L < R:
+s927011423.py(55):         if R & 1:
+s927011423.py(58):         if L & 1:
+s927011423.py(61):         L >>= 1; R >>= 1
+s927011423.py(54):     while L < R:
+s927011423.py(55):         if R & 1:
+s927011423.py(56):             R -= 1
+s927011423.py(57):             s = min(s, data[R-1])
+s927011423.py(58):         if L & 1:
+s927011423.py(61):         L >>= 1; R >>= 1
+s927011423.py(54):     while L < R:
+s927011423.py(55):         if R & 1:
+s927011423.py(56):             R -= 1
+s927011423.py(57):             s = min(s, data[R-1])
+s927011423.py(58):         if L & 1:
+s927011423.py(61):         L >>= 1; R >>= 1
+s927011423.py(54):     while L < R:
+s927011423.py(62):     return s
+s927011423.py(66): for q in range(Q):
+s927011423.py(75): write("\n".join(ans))
+-2
+0
+1
+-1s927011423.py(76): write("\n")
+
