@@ -1,0 +1,266 @@
+ --- modulename: s101095161, funcname: <module>
+s101095161.py(2): import sys
+s101095161.py(3): input = sys.stdin.readline
+s101095161.py(4): def bsearch(target, min_i, max_i, func):
+s101095161.py(19): class Bit:
+ --- modulename: s101095161, funcname: Bit
+s101095161.py(19): class Bit:
+s101095161.py(20):     def __init__(self, n):
+s101095161.py(23):     def sum(self, i):
+s101095161.py(29):     def add(self, i, x):
+s101095161.py(34): q=int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s101095161.py(35): xs = []
+s101095161.py(36): ys = []
+s101095161.py(37): qs = dict()
+s101095161.py(38): c = 0
+s101095161.py(39): for _ in range(q):
+s101095161.py(40):     xy = list(map(int,input().split()))
+s101095161.py(41):     if len(xy) == 1:
+s101095161.py(46):         c += 1
+s101095161.py(47):         xs.append(xy[1])
+s101095161.py(48):         ys.append(xy[2])
+s101095161.py(39): for _ in range(q):
+s101095161.py(40):     xy = list(map(int,input().split()))
+s101095161.py(41):     if len(xy) == 1:
+s101095161.py(42):         if c not in qs:
+s101095161.py(43):             qs[c] = 0
+s101095161.py(44):         qs[c] += 1
+s101095161.py(39): for _ in range(q):
+s101095161.py(40):     xy = list(map(int,input().split()))
+s101095161.py(41):     if len(xy) == 1:
+s101095161.py(46):         c += 1
+s101095161.py(47):         xs.append(xy[1])
+s101095161.py(48):         ys.append(xy[2])
+s101095161.py(39): for _ in range(q):
+s101095161.py(40):     xy = list(map(int,input().split()))
+s101095161.py(41):     if len(xy) == 1:
+s101095161.py(42):         if c not in qs:
+s101095161.py(43):             qs[c] = 0
+s101095161.py(44):         qs[c] += 1
+s101095161.py(39): for _ in range(q):
+s101095161.py(50): N=len(xs)
+s101095161.py(51): sxs=sorted(xs)
+s101095161.py(52): zxs = [0]*N
+s101095161.py(53): for i, x in enumerate(sorted(range(N), key=lambda x : xs[x])):
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(53): for i, x in enumerate(sorted(range(N), key=lambda x : xs[x])):
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(53): for i, x in enumerate(sorted(range(N), key=lambda x : xs[x])):
+s101095161.py(54):     zxs[x] = i
+s101095161.py(53): for i, x in enumerate(sorted(range(N), key=lambda x : xs[x])):
+s101095161.py(54):     zxs[x] = i
+s101095161.py(53): for i, x in enumerate(sorted(range(N), key=lambda x : xs[x])):
+s101095161.py(56): seg_sum_tree = Bit(N)
+ --- modulename: s101095161, funcname: __init__
+s101095161.py(21):         self.size = n
+s101095161.py(22):         self.tree = [0] * (n + 1)
+s101095161.py(57): seg_count_tree = Bit(N)
+ --- modulename: s101095161, funcname: __init__
+s101095161.py(21):         self.size = n
+s101095161.py(22):         self.tree = [0] * (n + 1)
+s101095161.py(59): sy = 0
+s101095161.py(60): for i in range(c+1):
+s101095161.py(61):     if i in qs:
+s101095161.py(73):     if i == c:
+s101095161.py(75):     x, y = xs[i], ys[i]
+s101095161.py(76):     xi = zxs[i]
+s101095161.py(77):     sy += y
+s101095161.py(78):     seg_sum_tree.add(xi+1, x)
+ --- modulename: s101095161, funcname: add
+s101095161.py(30):         while i <= self.size:
+s101095161.py(31):             self.tree[i] += x
+s101095161.py(32):             i += i & -i
+s101095161.py(30):         while i <= self.size:
+s101095161.py(79):     seg_count_tree.add(xi+1, 1)
+ --- modulename: s101095161, funcname: add
+s101095161.py(30):         while i <= self.size:
+s101095161.py(31):             self.tree[i] += x
+s101095161.py(32):             i += i & -i
+s101095161.py(30):         while i <= self.size:
+s101095161.py(60): for i in range(c+1):
+s101095161.py(61):     if i in qs:
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: bsearch
+s101095161.py(6):     if func(max_i) <= target:
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(8):     if target < func(min_i):
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(10):     index = (max_i + min_i)//2
+s101095161.py(12):         if func(index) <= target:
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(13):             if target < func(index+1):
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(14):                 return index
+s101095161.py(64):         if i % 2:
+s101095161.py(66):             r = sy - seg_sum_tree.sum(x1i) + \
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(67):                    seg_sum_tree.sum(N) - seg_sum_tree.sum(x1i+1)
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(66):             r = sy - seg_sum_tree.sum(x1i) + \
+s101095161.py(67):                    seg_sum_tree.sum(N) - seg_sum_tree.sum(x1i+1)
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(66):             r = sy - seg_sum_tree.sum(x1i) + \
+s101095161.py(71):         for _ in range(qs[i]):
+s101095161.py(72):             print(sxs[x1i], r)
+4 2
+s101095161.py(71):         for _ in range(qs[i]):
+s101095161.py(73):     if i == c:
+s101095161.py(75):     x, y = xs[i], ys[i]
+s101095161.py(76):     xi = zxs[i]
+s101095161.py(77):     sy += y
+s101095161.py(78):     seg_sum_tree.add(xi+1, x)
+ --- modulename: s101095161, funcname: add
+s101095161.py(30):         while i <= self.size:
+s101095161.py(31):             self.tree[i] += x
+s101095161.py(32):             i += i & -i
+s101095161.py(30):         while i <= self.size:
+s101095161.py(31):             self.tree[i] += x
+s101095161.py(32):             i += i & -i
+s101095161.py(30):         while i <= self.size:
+s101095161.py(79):     seg_count_tree.add(xi+1, 1)
+ --- modulename: s101095161, funcname: add
+s101095161.py(30):         while i <= self.size:
+s101095161.py(31):             self.tree[i] += x
+s101095161.py(32):             i += i & -i
+s101095161.py(30):         while i <= self.size:
+s101095161.py(31):             self.tree[i] += x
+s101095161.py(32):             i += i & -i
+s101095161.py(30):         while i <= self.size:
+s101095161.py(60): for i in range(c+1):
+s101095161.py(61):     if i in qs:
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: bsearch
+s101095161.py(6):     if func(max_i) <= target:
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(8):     if target < func(min_i):
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(10):     index = (max_i + min_i)//2
+s101095161.py(12):         if func(index) <= target:
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(17):         index, max_i = (index-1 + min_i)//2, index-1
+s101095161.py(12):         if func(index) <= target:
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(13):             if target < func(index+1):
+ --- modulename: s101095161, funcname: <lambda>
+s101095161.py(62):         x1i=bsearch(i//2 + (-1 if i % 2 == 0 else 0) ,0 ,N ,lambda x : seg_count_tree.sum(x))
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(14):                 return index
+s101095161.py(64):         if i % 2:
+s101095161.py(69):             r = sy - seg_sum_tree.sum(x1i+1) + \
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(70):                    seg_sum_tree.sum(N) - seg_sum_tree.sum(x1i+1)
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(69):             r = sy - seg_sum_tree.sum(x1i+1) + \
+s101095161.py(70):                    seg_sum_tree.sum(N) - seg_sum_tree.sum(x1i+1)
+ --- modulename: s101095161, funcname: sum
+s101095161.py(24):         s = 0
+s101095161.py(25):         while i > 0:
+s101095161.py(26):             s += self.tree[i]
+s101095161.py(27):             i -= i & -i
+s101095161.py(25):         while i > 0:
+s101095161.py(28):         return s
+s101095161.py(69):             r = sy - seg_sum_tree.sum(x1i+1) + \
+s101095161.py(71):         for _ in range(qs[i]):
+s101095161.py(72):             print(sxs[x1i], r)
+1 -3
+s101095161.py(71):         for _ in range(qs[i]):
+s101095161.py(73):     if i == c:
+s101095161.py(74):         break
