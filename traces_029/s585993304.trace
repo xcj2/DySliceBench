@@ -1,0 +1,283 @@
+ --- modulename: s585993304, funcname: <module>
+s585993304.py(2): def segfunc(x, y):
+s585993304.py(10): ide_ele =(float("inf"),-1)
+s585993304.py(13): class SegTree:
+ --- modulename: s585993304, funcname: SegTree
+s585993304.py(13): class SegTree:
+s585993304.py(14):     """
+s585993304.py(19):     def __init__(self, init_val, segfunc, ide_ele):
+s585993304.py(40):     def update(self, k, x):
+s585993304.py(52):     def query(self, l, r):
+s585993304.py(72): import heapq
+s585993304.py(74): N=int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s585993304.py(75): p=list(map(int,input().split()))
+s585993304.py(76): n=N//2
+s585993304.py(77): op=[(p[2*i+1],2*i+1) for i in range(n)]
+ --- modulename: s585993304, funcname: <listcomp>
+s585993304.py(77): op=[(p[2*i+1],2*i+1) for i in range(n)]
+s585993304.py(77): op=[(p[2*i+1],2*i+1) for i in range(n)]
+s585993304.py(77): op=[(p[2*i+1],2*i+1) for i in range(n)]
+s585993304.py(78): ep=[(p[2*i],2*i) for i in range(n)]
+ --- modulename: s585993304, funcname: <listcomp>
+s585993304.py(78): ep=[(p[2*i],2*i) for i in range(n)]
+s585993304.py(78): ep=[(p[2*i],2*i) for i in range(n)]
+s585993304.py(78): ep=[(p[2*i],2*i) for i in range(n)]
+s585993304.py(80): oseg=SegTree(op,segfunc,ide_ele)
+ --- modulename: s585993304, funcname: __init__
+s585993304.py(28):         n = len(init_val)
+s585993304.py(29):         self.segfunc = segfunc
+s585993304.py(30):         self.ide_ele = ide_ele
+s585993304.py(31):         self.num = 1 << (n - 1).bit_length()
+s585993304.py(32):         self.tree = [ide_ele] * 2 * self.num
+s585993304.py(34):         for i in range(n):
+s585993304.py(35):             self.tree[self.num + i] = init_val[i]
+s585993304.py(34):         for i in range(n):
+s585993304.py(35):             self.tree[self.num + i] = init_val[i]
+s585993304.py(34):         for i in range(n):
+s585993304.py(37):         for i in range(self.num - 1, 0, -1):
+s585993304.py(38):             self.tree[i] = self.segfunc(self.tree[2 * i], self.tree[2 * i + 1])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(6):         return y
+s585993304.py(37):         for i in range(self.num - 1, 0, -1):
+s585993304.py(81): eseg=SegTree(ep,segfunc,ide_ele)
+ --- modulename: s585993304, funcname: __init__
+s585993304.py(28):         n = len(init_val)
+s585993304.py(29):         self.segfunc = segfunc
+s585993304.py(30):         self.ide_ele = ide_ele
+s585993304.py(31):         self.num = 1 << (n - 1).bit_length()
+s585993304.py(32):         self.tree = [ide_ele] * 2 * self.num
+s585993304.py(34):         for i in range(n):
+s585993304.py(35):             self.tree[self.num + i] = init_val[i]
+s585993304.py(34):         for i in range(n):
+s585993304.py(35):             self.tree[self.num + i] = init_val[i]
+s585993304.py(34):         for i in range(n):
+s585993304.py(37):         for i in range(self.num - 1, 0, -1):
+s585993304.py(38):             self.tree[i] = self.segfunc(self.tree[2 * i], self.tree[2 * i + 1])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(4):         return x
+s585993304.py(37):         for i in range(self.num - 1, 0, -1):
+s585993304.py(83): def first(l,r):
+s585993304.py(95): val,val2,index,index2=first(0,N)
+ --- modulename: s585993304, funcname: first
+s585993304.py(84):     if l>=r:
+s585993304.py(86):     if l%2==0:
+s585993304.py(87):         val,index=eseg.query(l//2,r//2)
+ --- modulename: s585993304, funcname: query
+s585993304.py(58):         res = self.ide_ele
+s585993304.py(60):         l += self.num
+s585993304.py(61):         r += self.num
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(64):                 res = self.segfunc(res, self.tree[l])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(6):         return y
+s585993304.py(65):                 l += 1
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(70):         return res
+s585993304.py(88):         val2,index2=oseg.query(index//2,r//2)
+ --- modulename: s585993304, funcname: query
+s585993304.py(58):         res = self.ide_ele
+s585993304.py(60):         l += self.num
+s585993304.py(61):         r += self.num
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(64):                 res = self.segfunc(res, self.tree[l])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(6):         return y
+s585993304.py(65):                 l += 1
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(70):         return res
+s585993304.py(89):         return (val,val2,index,index2)
+s585993304.py(96): que=[((val,val2),0,N)]
+s585993304.py(97): heapq.heapify(que)
+s585993304.py(98): ans=[]
+s585993304.py(99): while que:
+s585993304.py(100):     tuple,l,r=heapq.heappop(que)
+s585993304.py(101):     ans.append(tuple[0])
+s585993304.py(102):     ans.append(tuple[1])
+s585993304.py(103):     val,val2,index,index2=first(l,r)
+ --- modulename: s585993304, funcname: first
+s585993304.py(84):     if l>=r:
+s585993304.py(86):     if l%2==0:
+s585993304.py(87):         val,index=eseg.query(l//2,r//2)
+ --- modulename: s585993304, funcname: query
+s585993304.py(58):         res = self.ide_ele
+s585993304.py(60):         l += self.num
+s585993304.py(61):         r += self.num
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(64):                 res = self.segfunc(res, self.tree[l])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(6):         return y
+s585993304.py(65):                 l += 1
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(70):         return res
+s585993304.py(88):         val2,index2=oseg.query(index//2,r//2)
+ --- modulename: s585993304, funcname: query
+s585993304.py(58):         res = self.ide_ele
+s585993304.py(60):         l += self.num
+s585993304.py(61):         r += self.num
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(64):                 res = self.segfunc(res, self.tree[l])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(6):         return y
+s585993304.py(65):                 l += 1
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(70):         return res
+s585993304.py(89):         return (val,val2,index,index2)
+s585993304.py(104):     val,val2,l1,r1=first(l,index)
+ --- modulename: s585993304, funcname: first
+s585993304.py(84):     if l>=r:
+s585993304.py(85):         return (-1,-1,-1,-1)
+s585993304.py(105):     if val!=-1:
+s585993304.py(107):     val,val2,l2,r2=first(index+1,index2)
+ --- modulename: s585993304, funcname: first
+s585993304.py(84):     if l>=r:
+s585993304.py(86):     if l%2==0:
+s585993304.py(91):         val,index=oseg.query(l//2,r//2)
+ --- modulename: s585993304, funcname: query
+s585993304.py(58):         res = self.ide_ele
+s585993304.py(60):         l += self.num
+s585993304.py(61):         r += self.num
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(66):             if r & 1:
+s585993304.py(67):                 res = self.segfunc(res, self.tree[r - 1])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(6):         return y
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(70):         return res
+s585993304.py(92):         val2,index2=eseg.query(index//2+1,r//2+1)
+ --- modulename: s585993304, funcname: query
+s585993304.py(58):         res = self.ide_ele
+s585993304.py(60):         l += self.num
+s585993304.py(61):         r += self.num
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(64):                 res = self.segfunc(res, self.tree[l])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(6):         return y
+s585993304.py(65):                 l += 1
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(70):         return res
+s585993304.py(93):         return (val,val2,index,index2)
+s585993304.py(108):     if val!=-1:
+s585993304.py(109):         heapq.heappush(que,((val,val2),index+1,index2))
+s585993304.py(110):     val,val2,l3,r3=first(index2+1,r)
+ --- modulename: s585993304, funcname: first
+s585993304.py(84):     if l>=r:
+s585993304.py(85):         return (-1,-1,-1,-1)
+s585993304.py(111):     if val!=-1:
+s585993304.py(99): while que:
+s585993304.py(100):     tuple,l,r=heapq.heappop(que)
+s585993304.py(101):     ans.append(tuple[0])
+s585993304.py(102):     ans.append(tuple[1])
+s585993304.py(103):     val,val2,index,index2=first(l,r)
+ --- modulename: s585993304, funcname: first
+s585993304.py(84):     if l>=r:
+s585993304.py(86):     if l%2==0:
+s585993304.py(91):         val,index=oseg.query(l//2,r//2)
+ --- modulename: s585993304, funcname: query
+s585993304.py(58):         res = self.ide_ele
+s585993304.py(60):         l += self.num
+s585993304.py(61):         r += self.num
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(66):             if r & 1:
+s585993304.py(67):                 res = self.segfunc(res, self.tree[r - 1])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(6):         return y
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(70):         return res
+s585993304.py(92):         val2,index2=eseg.query(index//2+1,r//2+1)
+ --- modulename: s585993304, funcname: query
+s585993304.py(58):         res = self.ide_ele
+s585993304.py(60):         l += self.num
+s585993304.py(61):         r += self.num
+s585993304.py(62):         while l < r:
+s585993304.py(63):             if l & 1:
+s585993304.py(64):                 res = self.segfunc(res, self.tree[l])
+ --- modulename: s585993304, funcname: segfunc
+s585993304.py(3):     if y[0]>x[0]:
+s585993304.py(6):         return y
+s585993304.py(65):                 l += 1
+s585993304.py(66):             if r & 1:
+s585993304.py(68):             l >>= 1
+s585993304.py(69):             r >>= 1
+s585993304.py(62):         while l < r:
+s585993304.py(70):         return res
+s585993304.py(93):         return (val,val2,index,index2)
+s585993304.py(104):     val,val2,l1,r1=first(l,index)
+ --- modulename: s585993304, funcname: first
+s585993304.py(84):     if l>=r:
+s585993304.py(85):         return (-1,-1,-1,-1)
+s585993304.py(105):     if val!=-1:
+s585993304.py(107):     val,val2,l2,r2=first(index+1,index2)
+ --- modulename: s585993304, funcname: first
+s585993304.py(84):     if l>=r:
+s585993304.py(85):         return (-1,-1,-1,-1)
+s585993304.py(108):     if val!=-1:
+s585993304.py(110):     val,val2,l3,r3=first(index2+1,r)
+ --- modulename: s585993304, funcname: first
+s585993304.py(84):     if l>=r:
+s585993304.py(85):         return (-1,-1,-1,-1)
+s585993304.py(111):     if val!=-1:
+s585993304.py(99): while que:
+s585993304.py(114): print(*ans)
+3 1 2 4

@@ -1,0 +1,631 @@
+ --- modulename: s586790769, funcname: <module>
+s586790769.py(2): class SegTree:  # モノイドに対して適用可能、Nが2冪でなくても良い
+ --- modulename: s586790769, funcname: SegTree
+s586790769.py(2): class SegTree:  # モノイドに対して適用可能、Nが2冪でなくても良い
+s586790769.py(3):     def __init__(self ,N ,seg_func ,unit):
+s586790769.py(9):     def build(self ,init_value):  # 初期値を[N,2N)に格納
+s586790769.py(15):     def set_val(self ,i ,x):  # i番目(0-index)の値をxに変更
+s586790769.py(23):     def fold(self ,L ,R):  # [L,R)の区間取得
+s586790769.py(41): class DSU:
+ --- modulename: s586790769, funcname: DSU
+s586790769.py(41): class DSU:
+s586790769.py(42):   def __init__(self, n):
+s586790769.py(46):   def leader(self, x):
+s586790769.py(51):   def merge(self, x, y):
+s586790769.py(63):   def same(self, x, y): return self.leader(x) == self.leader(y)
+s586790769.py(64):   def size(self, x):  return -self.root[self.leader(x)]
+s586790769.py(65):   def group(self):
+s586790769.py(73): def main():
+s586790769.py(84): def seg_func(x,y):
+s586790769.py(89): def seg_func1(x,y):
+s586790769.py(95): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s586790769.py(96): X = []
+s586790769.py(97): for xx in range(n):
+s586790769.py(99):     a, b = map(int, input().split())
+s586790769.py(100):     X.append([xx, a, b])
+s586790769.py(97): for xx in range(n):
+s586790769.py(99):     a, b = map(int, input().split())
+s586790769.py(100):     X.append([xx, a, b])
+s586790769.py(97): for xx in range(n):
+s586790769.py(99):     a, b = map(int, input().split())
+s586790769.py(100):     X.append([xx, a, b])
+s586790769.py(97): for xx in range(n):
+s586790769.py(99):     a, b = map(int, input().split())
+s586790769.py(100):     X.append([xx, a, b])
+s586790769.py(97): for xx in range(n):
+s586790769.py(102): X = sorted(X, key=lambda x: x[1])
+ --- modulename: s586790769, funcname: <lambda>
+s586790769.py(102): X = sorted(X, key=lambda x: x[1])
+ --- modulename: s586790769, funcname: <lambda>
+s586790769.py(102): X = sorted(X, key=lambda x: x[1])
+ --- modulename: s586790769, funcname: <lambda>
+s586790769.py(102): X = sorted(X, key=lambda x: x[1])
+ --- modulename: s586790769, funcname: <lambda>
+s586790769.py(102): X = sorted(X, key=lambda x: x[1])
+s586790769.py(104): dsu = DSU(n)
+ --- modulename: s586790769, funcname: __init__
+s586790769.py(43):     self.n = n
+s586790769.py(44):     self.root = [-1] * (n + 1)
+s586790769.py(45):     self.rank = [0] * (n + 1)
+s586790769.py(105): tree = SegTree(n+1,seg_func,[-1,-1])
+ --- modulename: s586790769, funcname: __init__
+s586790769.py(4):         self.N = 1 << ( N -1).bit_length()
+s586790769.py(5):         self.func = seg_func
+s586790769.py(6):         self.unit = unit
+s586790769.py(7):         self.tree = [self.unit ] *( 2 *self.N)
+s586790769.py(107): for  v in X:
+s586790769.py(108):     tree.set_val(v[2], [v[2], v[0]])
+ --- modulename: s586790769, funcname: set_val
+s586790769.py(16):         i += self.N
+s586790769.py(17):         self.tree[i] = x
+s586790769.py(18):         i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(109):     get = tree.fold(0, v[2])
+ --- modulename: s586790769, funcname: fold
+s586790769.py(24):         L += self.N
+s586790769.py(25):         R += self.N
+s586790769.py(26):         vL = self.unit
+s586790769.py(27):         vR = self.unit
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(33):                 R -= 1
+s586790769.py(34):                 vR = self.func(self.tree[R] ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(37):         return self.func(vL ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(110):     if get[0] != -1:
+s586790769.py(107): for  v in X:
+s586790769.py(108):     tree.set_val(v[2], [v[2], v[0]])
+ --- modulename: s586790769, funcname: set_val
+s586790769.py(16):         i += self.N
+s586790769.py(17):         self.tree[i] = x
+s586790769.py(18):         i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(109):     get = tree.fold(0, v[2])
+ --- modulename: s586790769, funcname: fold
+s586790769.py(24):         L += self.N
+s586790769.py(25):         R += self.N
+s586790769.py(26):         vL = self.unit
+s586790769.py(27):         vR = self.unit
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(33):                 R -= 1
+s586790769.py(34):                 vR = self.func(self.tree[R] ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(33):                 R -= 1
+s586790769.py(34):                 vR = self.func(self.tree[R] ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(37):         return self.func(vL ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(110):     if get[0] != -1:
+s586790769.py(107): for  v in X:
+s586790769.py(108):     tree.set_val(v[2], [v[2], v[0]])
+ --- modulename: s586790769, funcname: set_val
+s586790769.py(16):         i += self.N
+s586790769.py(17):         self.tree[i] = x
+s586790769.py(18):         i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(109):     get = tree.fold(0, v[2])
+ --- modulename: s586790769, funcname: fold
+s586790769.py(24):         L += self.N
+s586790769.py(25):         R += self.N
+s586790769.py(26):         vL = self.unit
+s586790769.py(27):         vR = self.unit
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(33):                 R -= 1
+s586790769.py(34):                 vR = self.func(self.tree[R] ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(37):         return self.func(vL ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(110):     if get[0] != -1:
+s586790769.py(107): for  v in X:
+s586790769.py(108):     tree.set_val(v[2], [v[2], v[0]])
+ --- modulename: s586790769, funcname: set_val
+s586790769.py(16):         i += self.N
+s586790769.py(17):         self.tree[i] = x
+s586790769.py(18):         i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(109):     get = tree.fold(0, v[2])
+ --- modulename: s586790769, funcname: fold
+s586790769.py(24):         L += self.N
+s586790769.py(25):         R += self.N
+s586790769.py(26):         vL = self.unit
+s586790769.py(27):         vR = self.unit
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(33):                 R -= 1
+s586790769.py(34):                 vR = self.func(self.tree[R] ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(37):         return self.func(vL ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(110):     if get[0] != -1:
+s586790769.py(111):         dsu.merge(get[1], v[0])
+ --- modulename: s586790769, funcname: merge
+s586790769.py(52):     leader = self.leader
+s586790769.py(53):     xrt = leader(x)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(54):     yrt = leader(y)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(55):     if xrt == yrt: return
+s586790769.py(56):     if self.rank[xrt] > self.rank[yrt]:
+s586790769.py(60):       self.root[yrt] += self.root[xrt]
+s586790769.py(61):       self.root[xrt] = yrt
+s586790769.py(62):       self.rank[yrt] += self.rank[xrt] == self.rank[yrt]
+s586790769.py(107): for  v in X:
+s586790769.py(113): X = sorted(X, reverse=True, key=lambda x: x[1])
+ --- modulename: s586790769, funcname: <lambda>
+s586790769.py(113): X = sorted(X, reverse=True, key=lambda x: x[1])
+ --- modulename: s586790769, funcname: <lambda>
+s586790769.py(113): X = sorted(X, reverse=True, key=lambda x: x[1])
+ --- modulename: s586790769, funcname: <lambda>
+s586790769.py(113): X = sorted(X, reverse=True, key=lambda x: x[1])
+ --- modulename: s586790769, funcname: <lambda>
+s586790769.py(113): X = sorted(X, reverse=True, key=lambda x: x[1])
+s586790769.py(115): tree = SegTree(n+2,seg_func,[-1,-1])
+ --- modulename: s586790769, funcname: __init__
+s586790769.py(4):         self.N = 1 << ( N -1).bit_length()
+s586790769.py(5):         self.func = seg_func
+s586790769.py(6):         self.unit = unit
+s586790769.py(7):         self.tree = [self.unit ] *( 2 *self.N)
+s586790769.py(117): for v in X:
+s586790769.py(118):     tree.set_val(v[2], [v[2],v[0]])
+ --- modulename: s586790769, funcname: set_val
+s586790769.py(16):         i += self.N
+s586790769.py(17):         self.tree[i] = x
+s586790769.py(18):         i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(119):     get = tree.fold(v[2]+1, n+2)
+ --- modulename: s586790769, funcname: fold
+s586790769.py(24):         L += self.N
+s586790769.py(25):         R += self.N
+s586790769.py(26):         vL = self.unit
+s586790769.py(27):         vR = self.unit
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(30):                 vL = self.func(vL ,self.tree[L])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(31):                 L += 1
+s586790769.py(32):             if R & 1:
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(33):                 R -= 1
+s586790769.py(34):                 vR = self.func(self.tree[R] ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(37):         return self.func(vL ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(120):     if get[0] != -1:
+s586790769.py(117): for v in X:
+s586790769.py(118):     tree.set_val(v[2], [v[2],v[0]])
+ --- modulename: s586790769, funcname: set_val
+s586790769.py(16):         i += self.N
+s586790769.py(17):         self.tree[i] = x
+s586790769.py(18):         i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(119):     get = tree.fold(v[2]+1, n+2)
+ --- modulename: s586790769, funcname: fold
+s586790769.py(24):         L += self.N
+s586790769.py(25):         R += self.N
+s586790769.py(26):         vL = self.unit
+s586790769.py(27):         vR = self.unit
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(30):                 vL = self.func(vL ,self.tree[L])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(31):                 L += 1
+s586790769.py(32):             if R & 1:
+s586790769.py(33):                 R -= 1
+s586790769.py(34):                 vR = self.func(self.tree[R] ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(37):         return self.func(vL ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(120):     if get[0] != -1:
+s586790769.py(121):         dsu.merge(get[1], v[0])
+ --- modulename: s586790769, funcname: merge
+s586790769.py(52):     leader = self.leader
+s586790769.py(53):     xrt = leader(x)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(54):     yrt = leader(y)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(49):     else: self.root[x] = self.leader(rt)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(50):     return self.root[x]
+s586790769.py(55):     if xrt == yrt: return
+s586790769.py(117): for v in X:
+s586790769.py(118):     tree.set_val(v[2], [v[2],v[0]])
+ --- modulename: s586790769, funcname: set_val
+s586790769.py(16):         i += self.N
+s586790769.py(17):         self.tree[i] = x
+s586790769.py(18):         i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(119):     get = tree.fold(v[2]+1, n+2)
+ --- modulename: s586790769, funcname: fold
+s586790769.py(24):         L += self.N
+s586790769.py(25):         R += self.N
+s586790769.py(26):         vL = self.unit
+s586790769.py(27):         vR = self.unit
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(32):             if R & 1:
+s586790769.py(33):                 R -= 1
+s586790769.py(34):                 vR = self.func(self.tree[R] ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(37):         return self.func(vL ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(120):     if get[0] != -1:
+s586790769.py(117): for v in X:
+s586790769.py(118):     tree.set_val(v[2], [v[2],v[0]])
+ --- modulename: s586790769, funcname: set_val
+s586790769.py(16):         i += self.N
+s586790769.py(17):         self.tree[i] = x
+s586790769.py(18):         i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(86):         return x
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(20):             self.tree[i] = self.func(self.tree[i << 1] ,self.tree[i << 1 | 1])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(21):             i >>= 1
+s586790769.py(19):         while i:
+s586790769.py(119):     get = tree.fold(v[2]+1, n+2)
+ --- modulename: s586790769, funcname: fold
+s586790769.py(24):         L += self.N
+s586790769.py(25):         R += self.N
+s586790769.py(26):         vL = self.unit
+s586790769.py(27):         vR = self.unit
+s586790769.py(28):         while L < R:
+s586790769.py(29):             if L & 1:
+s586790769.py(30):                 vL = self.func(vL ,self.tree[L])
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(31):                 L += 1
+s586790769.py(32):             if R & 1:
+s586790769.py(35):             L >>= 1
+s586790769.py(36):             R >>= 1
+s586790769.py(28):         while L < R:
+s586790769.py(37):         return self.func(vL ,vR)
+ --- modulename: s586790769, funcname: seg_func
+s586790769.py(85):     if x[0] > y[0]:
+s586790769.py(88):         return y
+s586790769.py(120):     if get[0] != -1:
+s586790769.py(117): for v in X:
+s586790769.py(123): groups = dsu.group()
+ --- modulename: s586790769, funcname: group
+s586790769.py(66):     n = self.n
+s586790769.py(67):     leader = self.leader
+s586790769.py(68):     res = [[] for _ in range(n + 1)]
+ --- modulename: s586790769, funcname: <listcomp>
+s586790769.py(68):     res = [[] for _ in range(n + 1)]
+s586790769.py(68):     res = [[] for _ in range(n + 1)]
+s586790769.py(68):     res = [[] for _ in range(n + 1)]
+s586790769.py(68):     res = [[] for _ in range(n + 1)]
+s586790769.py(68):     res = [[] for _ in range(n + 1)]
+s586790769.py(68):     res = [[] for _ in range(n + 1)]
+s586790769.py(69):     for x in range(n + 1): res[leader(x)].append(x)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(69):     for x in range(n + 1): res[leader(x)].append(x)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(69):     for x in range(n + 1): res[leader(x)].append(x)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(49):     else: self.root[x] = self.leader(rt)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(50):     return self.root[x]
+s586790769.py(69):     for x in range(n + 1): res[leader(x)].append(x)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(69):     for x in range(n + 1): res[leader(x)].append(x)
+ --- modulename: s586790769, funcname: leader
+s586790769.py(47):     rt = self.root[x]
+s586790769.py(48):     if rt < 0: return x
+s586790769.py(69):     for x in range(n + 1): res[leader(x)].append(x)
+s586790769.py(70):     return [res[i] for i in range(n + 1) if len(res[i])]
+ --- modulename: s586790769, funcname: <listcomp>
+s586790769.py(70):     return [res[i] for i in range(n + 1) if len(res[i])]
+s586790769.py(70):     return [res[i] for i in range(n + 1) if len(res[i])]
+s586790769.py(70):     return [res[i] for i in range(n + 1) if len(res[i])]
+s586790769.py(70):     return [res[i] for i in range(n + 1) if len(res[i])]
+s586790769.py(70):     return [res[i] for i in range(n + 1) if len(res[i])]
+s586790769.py(70):     return [res[i] for i in range(n + 1) if len(res[i])]
+s586790769.py(124): ans = [0] * (n * 2 + 10)
+s586790769.py(126): for a in groups:
+s586790769.py(127):     count = len(a)
+s586790769.py(128):     for v in a:
+s586790769.py(129):         ans[v]=count
+s586790769.py(128):     for v in a:
+s586790769.py(126): for a in groups:
+s586790769.py(127):     count = len(a)
+s586790769.py(128):     for v in a:
+s586790769.py(129):         ans[v]=count
+s586790769.py(128):     for v in a:
+s586790769.py(126): for a in groups:
+s586790769.py(127):     count = len(a)
+s586790769.py(128):     for v in a:
+s586790769.py(129):         ans[v]=count
+s586790769.py(128):     for v in a:
+s586790769.py(129):         ans[v]=count
+s586790769.py(128):     for v in a:
+s586790769.py(126): for a in groups:
+s586790769.py(127):     count = len(a)
+s586790769.py(128):     for v in a:
+s586790769.py(129):         ans[v]=count
+s586790769.py(128):     for v in a:
+s586790769.py(126): for a in groups:
+s586790769.py(131): for l, v in enumerate(ans):
+s586790769.py(132):     if l < n:
+s586790769.py(133):         print(str(v))
+1
+s586790769.py(131): for l, v in enumerate(ans):
+s586790769.py(132):     if l < n:
+s586790769.py(133):         print(str(v))
+1
+s586790769.py(131): for l, v in enumerate(ans):
+s586790769.py(132):     if l < n:
+s586790769.py(133):         print(str(v))
+2
+s586790769.py(131): for l, v in enumerate(ans):
+s586790769.py(132):     if l < n:
+s586790769.py(133):         print(str(v))
+2
+s586790769.py(131): for l, v in enumerate(ans):
+s586790769.py(132):     if l < n:
+s586790769.py(135):         exit()
+ --- modulename: _sitebuiltins, funcname: __call__
+_sitebuiltins.py(22):         try:
+_sitebuiltins.py(23):             sys.stdin.close()
+_sitebuiltins.py(26):         raise SystemExit(code)

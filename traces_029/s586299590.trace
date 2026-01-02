@@ -1,0 +1,784 @@
+ --- modulename: s586299590, funcname: <module>
+s586299590.py(1): import sys
+s586299590.py(2): read = sys.stdin.buffer.read
+s586299590.py(3): readline = sys.stdin.buffer.readline
+s586299590.py(4): readlines = sys.stdin.buffer.readlines
+s586299590.py(6): from heapq import heappop, heappush
+s586299590.py(8): N = int(readline())
+s586299590.py(9): m = map(int,read().split())
+s586299590.py(10): data = list(zip(m,m,m))
+s586299590.py(11): R = data[:N]
+s586299590.py(12): B = data[N:]
+s586299590.py(14): class MinCostFlow:
+ --- modulename: s586299590, funcname: MinCostFlow
+s586299590.py(14): class MinCostFlow:
+s586299590.py(15):     """
+s586299590.py(18):     def __init__(self, N, source, sink):
+s586299590.py(24):     def add_edge(self, fr, to, cap, cost):
+s586299590.py(30):     def MinCost(self, flow, negative_edge = False):
+s586299590.py(82): source = N+N; sink = N+N+1
+s586299590.py(83): V1 = N+N+2; V2 = N+N+3; V3 = N+N+4; V4 = N+N+5
+s586299590.py(85): G = MinCostFlow(N+N+6, source = source, sink = sink)
+ --- modulename: s586299590, funcname: __init__
+s586299590.py(19):         self.N = N
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+ --- modulename: s586299590, funcname: <listcomp>
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(20):         self.G = [[] for _ in range(N)]
+s586299590.py(21):         self.source = source
+s586299590.py(22):         self.sink = sink
+s586299590.py(86): base = 10 ** 9 * 2 # 各辺に上乗せしておく -> 最後に引く
+s586299590.py(87): INF = 10 ** 18
+s586299590.py(89): flow = 0
+s586299590.py(91): for i,(x,y,c) in enumerate(R):
+s586299590.py(92):     flow += c
+s586299590.py(93):     G.add_edge(fr=source, to=i, cap=c, cost=0)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(94):     G.add_edge(i,V1,INF,base-x-y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(95):     G.add_edge(i,V2,INF,base-x+y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(96):     G.add_edge(i,V3,INF,base+x-y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(97):     G.add_edge(i,V4,INF,base+x+y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(91): for i,(x,y,c) in enumerate(R):
+s586299590.py(92):     flow += c
+s586299590.py(93):     G.add_edge(fr=source, to=i, cap=c, cost=0)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(94):     G.add_edge(i,V1,INF,base-x-y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(95):     G.add_edge(i,V2,INF,base-x+y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(96):     G.add_edge(i,V3,INF,base+x-y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(97):     G.add_edge(i,V4,INF,base+x+y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(91): for i,(x,y,c) in enumerate(R):
+s586299590.py(99): for i,(x,y,c) in enumerate(B,N):
+s586299590.py(100):     G.add_edge(fr=i, to=sink, cap=c, cost=0)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(101):     G.add_edge(V1,i,INF,base+x+y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(102):     G.add_edge(V2,i,INF,base+x-y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(103):     G.add_edge(V3,i,INF,base-x+y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(104):     G.add_edge(V4,i,INF,base-x-y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(99): for i,(x,y,c) in enumerate(B,N):
+s586299590.py(100):     G.add_edge(fr=i, to=sink, cap=c, cost=0)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(101):     G.add_edge(V1,i,INF,base+x+y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(102):     G.add_edge(V2,i,INF,base+x-y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(103):     G.add_edge(V3,i,INF,base-x+y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(104):     G.add_edge(V4,i,INF,base-x-y)
+ --- modulename: s586299590, funcname: add_edge
+s586299590.py(25):         n1 = len(self.G[fr])
+s586299590.py(26):         n2 = len(self.G[to])
+s586299590.py(27):         self.G[fr].append([to, cap, cost, n2])
+s586299590.py(28):         self.G[to].append([fr, 0, -cost, n1])
+s586299590.py(99): for i,(x,y,c) in enumerate(B,N):
+s586299590.py(106): cost = G.MinCost(flow)
+ --- modulename: s586299590, funcname: MinCost
+s586299590.py(31):         if negative_edge:
+s586299590.py(33):         N = self.N; G = self.G; source = self.source; sink = self.sink
+s586299590.py(34):         INF = 10 ** 18
+s586299590.py(35):         prev_v = [0] * N; prev_e = [0] * N # 経路復元用
+s586299590.py(36):         H = [0] * N # potential
+s586299590.py(37):         mincost=0
+s586299590.py(38):         while flow:
+s586299590.py(39):             dist=[INF] * N
+s586299590.py(40):             dist[source]=0
+s586299590.py(41):             q = [source]
+s586299590.py(42):             mask = (1 << 20) - 1
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(47):                     continue
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(47):                     continue
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(49):                     break
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(63):             d = flow; v = sink
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(68):                     d = cap
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(71):             mincost += d * H[sink]
+s586299590.py(72):             flow -= d
+s586299590.py(73):             v = sink
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(38):         while flow:
+s586299590.py(39):             dist=[INF] * N
+s586299590.py(40):             dist[source]=0
+s586299590.py(41):             q = [source]
+s586299590.py(42):             mask = (1 << 20) - 1
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(53):                         continue
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(54):                     dist[w] = dw
+s586299590.py(55):                     prev_v[w] = v; prev_e[w] = i
+s586299590.py(56):                     heappush(q, (dw << 20) + w)
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(51):                     dw = dist[v] + cost + H[v] - H[w]
+s586299590.py(52):                     if (not cap) or (dist[w] <= dw):
+s586299590.py(50):                 for i,(w,cap,cost,rev) in enumerate(G[v]):
+s586299590.py(43):             while q:
+s586299590.py(44):                 x = heappop(q)
+s586299590.py(45):                 dv = (x >> 20); v = x & mask
+s586299590.py(46):                 if dist[v] < dv:
+s586299590.py(48):                 if v == sink:
+s586299590.py(49):                     break
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(61):                 H[v] += d
+s586299590.py(60):             for v,d in enumerate(dist):
+s586299590.py(63):             d = flow; v = sink
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(65):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(66):                 cap = G[pv][pe][1]
+s586299590.py(67):                 if d > cap:
+s586299590.py(69):                 v = pv
+s586299590.py(64):             while v != source:
+s586299590.py(71):             mincost += d * H[sink]
+s586299590.py(72):             flow -= d
+s586299590.py(73):             v = sink
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(75):                 pv = prev_v[v]; pe = prev_e[v]
+s586299590.py(76):                 G[pv][pe][1] -= d
+s586299590.py(77):                 rev = G[pv][pe][3]
+s586299590.py(78):                 G[v][rev][1] += d
+s586299590.py(79):                 v = pv
+s586299590.py(74):             while v != source:
+s586299590.py(38):         while flow:
+s586299590.py(80):         return mincost
+s586299590.py(108): answer = base * (2 * flow) - cost
+s586299590.py(109): print(answer)
+8
