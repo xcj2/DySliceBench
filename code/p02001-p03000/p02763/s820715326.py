@@ -1,0 +1,79 @@
+class SegmentTree():
+
+    def __init__(self,init_val,n,func): #init_valは長さnの配列 O(2*n)
+        self.unit=0
+        self.size=pow(2,n-1).bit_length() #n以上の最小の2のべき乗
+        self.seg=[self.unit]*2*self.size #セグメントツリー本体
+        self.f=func #セグ木により異なる関数
+        
+        for i in range(n):
+            self.seg[i+self.size-1]=init_val[i] 
+        
+        for i in range(self.size-2,-1,-1):
+            self.seg[i]=self.f(self.seg[2*i+1],self.seg[2*i+2])
+    
+    def update(self,k,x): #k番目の要素をxに変更する O(logN)
+        k+=self.size-1
+        self.seg[k]=x
+        while k:
+            k=(k-1)//2
+            self.seg[k]=self.f(self.seg[2*k+1],self.seg[2*k+2])
+    
+    def query(self,p,q): #[p,q)のクエリに答える　半開区間であることに注意 O(logN)
+        if q<=p:
+            return self.unit
+
+        p+=self.size-1
+        q+=self.size-2
+        res=self.unit
+
+        while q-p>1:
+
+            if (p&1)==0:
+                res=self.f(res,self.seg[p])
+
+            if (q&1)==1:
+                res=self.f(res,self.seg[q])
+                q-=1
+            p//=2
+            q=(q-1)//2
+        
+        if p==q:
+            res=self.f(res,self.seg[p])
+        else:
+            res=self.f(self.f(res,self.seg[p]),self.seg[q])
+        
+        return bin(res).count('1')
+
+def main():
+    n=int(input())
+    s=input()
+
+    dic={i:j for i,j in zip('abcdefghijklmnopqrstuvwxyz',[2**i for i in range(26)])}
+    l=[0]*n
+
+    for i in range(n):
+        l[i]=dic[s[i]]
+    
+    def f(x,y):
+        return x|y
+
+    st=SegmentTree(l,n,f)
+    
+    q=int(input())
+    for _ in range(q):
+        a=list(map(str,input().split()))
+        a[0]=int(a[0])
+
+        if a[0]==1:
+            a[1]=int(a[1])
+            st.update(a[1]-1,dic[a[2]])
+        
+        else:
+            a[1]=int(a[1])-1
+            a[2]=int(a[2])
+            print(st.query(a[1],a[2]))
+            
+if __name__=='__main__':
+    main()
+
