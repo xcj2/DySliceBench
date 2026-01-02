@@ -1,0 +1,143 @@
+ --- modulename: s011307163, funcname: <module>
+s011307163.py(1): import sys
+s011307163.py(2): input = sys.stdin.readline
+s011307163.py(4): class UnionFind():
+ --- modulename: s011307163, funcname: UnionFind
+s011307163.py(4): class UnionFind():
+s011307163.py(5):     def __init__(self, n):
+s011307163.py(9):     def find(self,x):
+s011307163.py(15):     def size(self, x):
+s011307163.py(18):     def same(self, x, y):
+s011307163.py(23):     def union(self,x,y):
+s011307163.py(36):     def members(self,x):
+s011307163.py(41):     def roots(self):
+s011307163.py(45):     def group_count(self):
+s011307163.py(48):     def all_group_members(self):
+s011307163.py(51): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s011307163.py(52): xs = []
+s011307163.py(53): ys = []
+s011307163.py(54): for i in range(n):
+s011307163.py(55):     x,y = map(int, input().split())
+s011307163.py(56):     xs.append([x,i])
+s011307163.py(57):     ys.append([y,i])
+s011307163.py(54): for i in range(n):
+s011307163.py(55):     x,y = map(int, input().split())
+s011307163.py(56):     xs.append([x,i])
+s011307163.py(57):     ys.append([y,i])
+s011307163.py(54): for i in range(n):
+s011307163.py(55):     x,y = map(int, input().split())
+s011307163.py(56):     xs.append([x,i])
+s011307163.py(57):     ys.append([y,i])
+s011307163.py(54): for i in range(n):
+s011307163.py(59): xs.sort()
+s011307163.py(60): ys.sort()
+s011307163.py(62): edges = []
+s011307163.py(63): for tmp in [xs,ys]:
+s011307163.py(64):     for i in range(n-1):
+s011307163.py(65):         tmp_0 = tmp[i]
+s011307163.py(66):         tmp_1 = tmp[i+1]
+s011307163.py(67):         edges.append([ tmp_1[0] - tmp_0[0], tmp_1[1], tmp_0[1] ])
+s011307163.py(64):     for i in range(n-1):
+s011307163.py(65):         tmp_0 = tmp[i]
+s011307163.py(66):         tmp_1 = tmp[i+1]
+s011307163.py(67):         edges.append([ tmp_1[0] - tmp_0[0], tmp_1[1], tmp_0[1] ])
+s011307163.py(64):     for i in range(n-1):
+s011307163.py(63): for tmp in [xs,ys]:
+s011307163.py(64):     for i in range(n-1):
+s011307163.py(65):         tmp_0 = tmp[i]
+s011307163.py(66):         tmp_1 = tmp[i+1]
+s011307163.py(67):         edges.append([ tmp_1[0] - tmp_0[0], tmp_1[1], tmp_0[1] ])
+s011307163.py(64):     for i in range(n-1):
+s011307163.py(65):         tmp_0 = tmp[i]
+s011307163.py(66):         tmp_1 = tmp[i+1]
+s011307163.py(67):         edges.append([ tmp_1[0] - tmp_0[0], tmp_1[1], tmp_0[1] ])
+s011307163.py(64):     for i in range(n-1):
+s011307163.py(63): for tmp in [xs,ys]:
+s011307163.py(69): edges.sort()
+s011307163.py(71): ans = 0
+s011307163.py(72): uf = UnionFind(n)
+ --- modulename: s011307163, funcname: __init__
+s011307163.py(6):         self.n = n
+s011307163.py(7):         self.parents = [-1] * n
+s011307163.py(74): for edge in edges:
+s011307163.py(75):     cost, a, b = edge
+s011307163.py(76):     if uf.same(a,b) == False:
+ --- modulename: s011307163, funcname: same
+s011307163.py(19):         x_root = self.find(x)
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(20):         y_root = self.find(y)
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(21):         return (x_root == y_root)
+s011307163.py(77):         uf.union(a,b)
+ --- modulename: s011307163, funcname: union
+s011307163.py(24):         x_root = self.find(x)
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(25):         y_root = self.find(y)
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(26):         if(x == y):
+s011307163.py(29):         if( self.parents[x_root] <= self.parents[y_root] ):
+s011307163.py(30):             self.parents[x_root] += self.parents[y_root]
+s011307163.py(31):             self.parents[y_root] = x_root
+s011307163.py(78):         ans += cost
+s011307163.py(80):     if( uf.size(a) == n):
+ --- modulename: s011307163, funcname: size
+s011307163.py(16):         return self.parents[ self.find(x) ] * -1
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(74): for edge in edges:
+s011307163.py(75):     cost, a, b = edge
+s011307163.py(76):     if uf.same(a,b) == False:
+ --- modulename: s011307163, funcname: same
+s011307163.py(19):         x_root = self.find(x)
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(20):         y_root = self.find(y)
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(21):         return (x_root == y_root)
+s011307163.py(77):         uf.union(a,b)
+ --- modulename: s011307163, funcname: union
+s011307163.py(24):         x_root = self.find(x)
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(25):         y_root = self.find(y)
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(26):         if(x == y):
+s011307163.py(29):         if( self.parents[x_root] <= self.parents[y_root] ):
+s011307163.py(30):             self.parents[x_root] += self.parents[y_root]
+s011307163.py(31):             self.parents[y_root] = x_root
+s011307163.py(78):         ans += cost
+s011307163.py(80):     if( uf.size(a) == n):
+ --- modulename: s011307163, funcname: size
+s011307163.py(16):         return self.parents[ self.find(x) ] * -1
+ --- modulename: s011307163, funcname: find
+s011307163.py(10):         if(self.parents[x] < 0):
+s011307163.py(11):             return x
+s011307163.py(81):         print(ans)
+3
+s011307163.py(82):         exit()
+ --- modulename: _sitebuiltins, funcname: __call__
+_sitebuiltins.py(22):         try:
+_sitebuiltins.py(23):             sys.stdin.close()
+_sitebuiltins.py(26):         raise SystemExit(code)
