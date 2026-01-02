@@ -1,0 +1,108 @@
+ --- modulename: s891650491, funcname: <module>
+s891650491.py(1): ''' ===============================
+s891650491.py(8): import sys
+s891650491.py(9): import os
+s891650491.py(10): from io import BytesIO, IOBase
+s891650491.py(11): BUFSIZE = 8192
+s891650491.py(12): class FastIO(IOBase):
+ --- modulename: s891650491, funcname: FastIO
+s891650491.py(12): class FastIO(IOBase):
+s891650491.py(13):     newlines = 0
+s891650491.py(14):     def __init__(self, file): self._fd = file.fileno(); self.buffer = BytesIO(); self.writable = "x" in file.mode or "r" not in file.mode; self.write = self.buffer.write if self.writable else None
+s891650491.py(15):     def read(self):
+s891650491.py(21):     def readline(self):
+s891650491.py(25):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s891650491.py(27): class IOWrapper(IOBase):
+ --- modulename: s891650491, funcname: IOWrapper
+s891650491.py(27): class IOWrapper(IOBase):
+s891650491.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s891650491.py(29): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout); input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s891650491, funcname: __init__
+s891650491.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s891650491, funcname: __init__
+s891650491.py(14):     def __init__(self, file): self._fd = file.fileno(); self.buffer = BytesIO(); self.writable = "x" in file.mode or "r" not in file.mode; self.write = self.buffer.write if self.writable else None
+ --- modulename: s891650491, funcname: __init__
+s891650491.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s891650491, funcname: __init__
+s891650491.py(14):     def __init__(self, file): self._fd = file.fileno(); self.buffer = BytesIO(); self.writable = "x" in file.mode or "r" not in file.mode; self.write = self.buffer.write if self.writable else None
+s891650491.py(33): mod = 10**9+7
+s891650491.py(34): def lcm(x, y): return (x * y) / (gcd(x, y))
+s891650491.py(35): def fact(x, mod=mod):
+s891650491.py(39): def arr2D(n, m, default=0):
+s891650491.py(43): def sortDictV(x): return {k: v for k, v in sorted(x.items(), key = lambda item : item[1])}
+s891650491.py(45): def solve(n, k, lst):
+s891650491.py(57): n, k = list(map(int, input().split()))
+ --- modulename: s891650491, funcname: <lambda>
+s891650491.py(29): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout); input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s891650491, funcname: <lambda>
+s891650491.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s891650491, funcname: readline
+s891650491.py(22):         while self.newlines == 0:
+s891650491.py(23):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE)); self.newlines = b.count(b"\n") + (not b); ptr = self.buffer.tell(); self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s891650491.py(22):         while self.newlines == 0:
+s891650491.py(24):         self.newlines -= 1; return self.buffer.readline()
+s891650491.py(58): lst = list(map(int, input().split()))
+ --- modulename: s891650491, funcname: <lambda>
+s891650491.py(29): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout); input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s891650491, funcname: <lambda>
+s891650491.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s891650491, funcname: readline
+s891650491.py(22):         while self.newlines == 0:
+s891650491.py(24):         self.newlines -= 1; return self.buffer.readline()
+s891650491.py(59): print(solve(n, k, lst))
+ --- modulename: s891650491, funcname: solve
+s891650491.py(46): 	dp = [0] * n
+s891650491.py(47): 	dp[1] = abs(lst[1] - lst[0])
+s891650491.py(49): 	for i in range(2, n):
+s891650491.py(50): 		minn = float("inf")
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(52): 			if i-x >= 0:
+s891650491.py(53):  				minn = min(minn, dp[i-x] + abs(lst[i] - lst[i-x]))
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(52): 			if i-x >= 0:
+s891650491.py(53):  				minn = min(minn, dp[i-x] + abs(lst[i] - lst[i-x]))
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(52): 			if i-x >= 0:
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(54): 		dp[i] = minn
+s891650491.py(49): 	for i in range(2, n):
+s891650491.py(50): 		minn = float("inf")
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(52): 			if i-x >= 0:
+s891650491.py(53):  				minn = min(minn, dp[i-x] + abs(lst[i] - lst[i-x]))
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(52): 			if i-x >= 0:
+s891650491.py(53):  				minn = min(minn, dp[i-x] + abs(lst[i] - lst[i-x]))
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(52): 			if i-x >= 0:
+s891650491.py(53):  				minn = min(minn, dp[i-x] + abs(lst[i] - lst[i-x]))
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(54): 		dp[i] = minn
+s891650491.py(49): 	for i in range(2, n):
+s891650491.py(50): 		minn = float("inf")
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(52): 			if i-x >= 0:
+s891650491.py(53):  				minn = min(minn, dp[i-x] + abs(lst[i] - lst[i-x]))
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(52): 			if i-x >= 0:
+s891650491.py(53):  				minn = min(minn, dp[i-x] + abs(lst[i] - lst[i-x]))
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(52): 			if i-x >= 0:
+s891650491.py(53):  				minn = min(minn, dp[i-x] + abs(lst[i] - lst[i-x]))
+s891650491.py(51): 		for x in range(1, k+1):
+s891650491.py(54): 		dp[i] = minn
+s891650491.py(49): 	for i in range(2, n):
+s891650491.py(55): 	return dp[n-1]
+ --- modulename: s891650491, funcname: <lambda>
+s891650491.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+30 --- modulename: s891650491, funcname: <lambda>
+s891650491.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+
