@@ -1,0 +1,87 @@
+#!usr/bin/env python3
+from collections import defaultdict
+from collections import deque
+from heapq import heappush, heappop
+import sys
+import math
+import bisect
+import random
+def LI(): return list(map(int, sys.stdin.readline().split()))
+def I(): return int(sys.stdin.readline())
+def LS():return list(map(list, sys.stdin.readline().split()))
+def S(): return list(sys.stdin.readline())[:-1]
+def IR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = I()
+    return l
+def LIR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = LI()
+    return l
+def SR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = S()
+    return l
+def LSR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = SR()
+    return l
+mod = 1000000007
+
+#A
+
+#B
+
+#C
+n = I()
+d = defaultdict(int)
+a = LI()
+for i in a:
+    d[i] += 1
+d = list(d.items())
+d.sort(key = lambda x:-x[0])
+l = 0
+k = 0
+for i,j in d:
+    if j >= 2:
+        if l == 0:
+            l = i
+        else:
+            k = i
+        if j >= 4:
+            k = i
+    if k != 0:break
+print(l*k)
+#D
+
+#E
+
+#F
+
+#G
+
+#H
+
+#I
+
+#J
+
+#K
+
+#L
+
+#M
+
+#N
+
+#O
+
+#P
+
+#Q
+
+#R
+
+#S
+
+#T
