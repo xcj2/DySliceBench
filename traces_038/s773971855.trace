@@ -1,0 +1,170 @@
+ --- modulename: s773971855, funcname: <module>
+s773971855.py(1): import sys
+s773971855.py(2): input = sys.stdin.readline
+s773971855.py(4): N,Q=map(int,input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s773971855.py(5): A=list(map(int,input().split()))
+s773971855.py(7): seg_el=1<<(N.bit_length()) # Segment treeの台の要素数
+s773971855.py(8): SEG=[0]*(2*seg_el) # 1-indexedなので、要素数2*seg_el.Segment treeの初期値で初期化
+s773971855.py(10): for i in range(N): # Aを対応する箇所へupdate. Aは0-indexedなことに注意. 
+s773971855.py(11):     SEG[i+seg_el]=A[i]
+s773971855.py(10): for i in range(N): # Aを対応する箇所へupdate. Aは0-indexedなことに注意. 
+s773971855.py(11):     SEG[i+seg_el]=A[i]
+s773971855.py(10): for i in range(N): # Aを対応する箇所へupdate. Aは0-indexedなことに注意. 
+s773971855.py(11):     SEG[i+seg_el]=A[i]
+s773971855.py(10): for i in range(N): # Aを対応する箇所へupdate. Aは0-indexedなことに注意. 
+s773971855.py(11):     SEG[i+seg_el]=A[i]
+s773971855.py(10): for i in range(N): # Aを対応する箇所へupdate. Aは0-indexedなことに注意. 
+s773971855.py(11):     SEG[i+seg_el]=A[i]
+s773971855.py(10): for i in range(N): # Aを対応する箇所へupdate. Aは0-indexedなことに注意. 
+s773971855.py(13): for i in range(seg_el-1,0,-1): # 親の部分もupdate
+s773971855.py(14):     SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(13): for i in range(seg_el-1,0,-1): # 親の部分もupdate
+s773971855.py(14):     SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(13): for i in range(seg_el-1,0,-1): # 親の部分もupdate
+s773971855.py(14):     SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(13): for i in range(seg_el-1,0,-1): # 親の部分もupdate
+s773971855.py(14):     SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(13): for i in range(seg_el-1,0,-1): # 親の部分もupdate
+s773971855.py(14):     SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(13): for i in range(seg_el-1,0,-1): # 親の部分もupdate
+s773971855.py(14):     SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(13): for i in range(seg_el-1,0,-1): # 親の部分もupdate
+s773971855.py(14):     SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(13): for i in range(seg_el-1,0,-1): # 親の部分もupdate
+s773971855.py(16): def update(n,x,seg_el): # A[n]をxへ更新（反映）
+s773971855.py(25): def getvalues(l,r): # 区間[l,r)に関するmaxを調べる
+s773971855.py(43): def bisect_on_SEG(l,x):  
+s773971855.py(65): for queries in range(Q):
+s773971855.py(66):     T,X,V=map(int,input().split())
+s773971855.py(67):     if T==1:
+s773971855.py(69):     elif T==2:
+s773971855.py(70):         print(getvalues(X-1,V))
+ --- modulename: s773971855, funcname: getvalues
+s773971855.py(26):     L=l+seg_el
+s773971855.py(27):     R=r+seg_el
+s773971855.py(28):     ANS=0
+s773971855.py(30):     while L<R:
+s773971855.py(31):         if L & 1:
+s773971855.py(35):         if R & 1:
+s773971855.py(36):             R-=1
+s773971855.py(37):             ANS=max(ANS , SEG[R])
+s773971855.py(38):         L>>=1
+s773971855.py(39):         R>>=1
+s773971855.py(30):     while L<R:
+s773971855.py(31):         if L & 1:
+s773971855.py(35):         if R & 1:
+s773971855.py(38):         L>>=1
+s773971855.py(39):         R>>=1
+s773971855.py(30):     while L<R:
+s773971855.py(31):         if L & 1:
+s773971855.py(35):         if R & 1:
+s773971855.py(36):             R-=1
+s773971855.py(37):             ANS=max(ANS , SEG[R])
+s773971855.py(38):         L>>=1
+s773971855.py(39):         R>>=1
+s773971855.py(30):     while L<R:
+s773971855.py(41):     return ANS
+3
+s773971855.py(65): for queries in range(Q):
+s773971855.py(66):     T,X,V=map(int,input().split())
+s773971855.py(67):     if T==1:
+s773971855.py(69):     elif T==2:
+s773971855.py(72):         print(1+bisect_on_SEG(X-1,V))
+ --- modulename: s773971855, funcname: bisect_on_SEG
+s773971855.py(44):     L=l+seg_el
+s773971855.py(45):     R=seg_el*2-1
+s773971855.py(46):     while L<R:
+s773971855.py(47):         if SEG[L]>=x:
+s773971855.py(49):         if L & 1:
+s773971855.py(50):             L+=1
+s773971855.py(51):         L>>=1
+s773971855.py(52):         R>>=1
+s773971855.py(46):     while L<R:
+s773971855.py(47):         if SEG[L]>=x:
+s773971855.py(48):             break
+s773971855.py(54):     if SEG[L]<x:
+s773971855.py(57):     while L<seg_el:
+s773971855.py(58):         if SEG[L*2]>=x:
+s773971855.py(59):             L=L*2
+s773971855.py(57):     while L<seg_el:
+s773971855.py(63):     return L-seg_el
+3
+s773971855.py(65): for queries in range(Q):
+s773971855.py(66):     T,X,V=map(int,input().split())
+s773971855.py(67):     if T==1:
+s773971855.py(68):         update(X-1,V,seg_el)
+ --- modulename: s773971855, funcname: update
+s773971855.py(17):     i=n+seg_el
+s773971855.py(18):     SEG[i]=x
+s773971855.py(19):     i>>=1 # 子ノードへ
+s773971855.py(21):     while i!=0:
+s773971855.py(22):         SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(23):         i>>=1
+s773971855.py(21):     while i!=0:
+s773971855.py(22):         SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(23):         i>>=1
+s773971855.py(21):     while i!=0:
+s773971855.py(22):         SEG[i]=max(SEG[i*2],SEG[i*2+1])
+s773971855.py(23):         i>>=1
+s773971855.py(21):     while i!=0:
+s773971855.py(65): for queries in range(Q):
+s773971855.py(66):     T,X,V=map(int,input().split())
+s773971855.py(67):     if T==1:
+s773971855.py(69):     elif T==2:
+s773971855.py(70):         print(getvalues(X-1,V))
+ --- modulename: s773971855, funcname: getvalues
+s773971855.py(26):     L=l+seg_el
+s773971855.py(27):     R=r+seg_el
+s773971855.py(28):     ANS=0
+s773971855.py(30):     while L<R:
+s773971855.py(31):         if L & 1:
+s773971855.py(32):             ANS=max(ANS , SEG[L])
+s773971855.py(33):             L+=1
+s773971855.py(35):         if R & 1:
+s773971855.py(38):         L>>=1
+s773971855.py(39):         R>>=1
+s773971855.py(30):     while L<R:
+s773971855.py(31):         if L & 1:
+s773971855.py(32):             ANS=max(ANS , SEG[L])
+s773971855.py(33):             L+=1
+s773971855.py(35):         if R & 1:
+s773971855.py(38):         L>>=1
+s773971855.py(39):         R>>=1
+s773971855.py(30):     while L<R:
+s773971855.py(41):     return ANS
+2
+s773971855.py(65): for queries in range(Q):
+s773971855.py(66):     T,X,V=map(int,input().split())
+s773971855.py(67):     if T==1:
+s773971855.py(69):     elif T==2:
+s773971855.py(72):         print(1+bisect_on_SEG(X-1,V))
+ --- modulename: s773971855, funcname: bisect_on_SEG
+s773971855.py(44):     L=l+seg_el
+s773971855.py(45):     R=seg_el*2-1
+s773971855.py(46):     while L<R:
+s773971855.py(47):         if SEG[L]>=x:
+s773971855.py(49):         if L & 1:
+s773971855.py(51):         L>>=1
+s773971855.py(52):         R>>=1
+s773971855.py(46):     while L<R:
+s773971855.py(47):         if SEG[L]>=x:
+s773971855.py(49):         if L & 1:
+s773971855.py(51):         L>>=1
+s773971855.py(52):         R>>=1
+s773971855.py(46):     while L<R:
+s773971855.py(47):         if SEG[L]>=x:
+s773971855.py(49):         if L & 1:
+s773971855.py(51):         L>>=1
+s773971855.py(52):         R>>=1
+s773971855.py(46):     while L<R:
+s773971855.py(54):     if SEG[L]<x:
+s773971855.py(55):         return N
+6
+s773971855.py(65): for queries in range(Q):
