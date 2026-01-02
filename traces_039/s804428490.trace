@@ -1,0 +1,648 @@
+ --- modulename: s804428490, funcname: <module>
+s804428490.py(1): from typing import List
+s804428490.py(2): from typing import Tuple
+s804428490.py(3): from sys import setrecursionlimit
+s804428490.py(5): setrecursionlimit(100000)
+s804428490.py(7): def articulation_points(adj, n):
+s804428490.py(20): def dfs(v: int, p: int, adj: List[List[int]], id: List[int], low_link: List[int], mark: List[bool], points: List[int]) -> None:
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(834):         if not isinstance(params, tuple):
+typing.py(835):             params = (params,)
+typing.py(836):         msg = "Parameters to generic types must be types."
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+typing.py(838):         _check_generic(self, params, self._nparams)
+ --- modulename: typing, funcname: _check_generic
+typing.py(210):     if not elen:
+typing.py(212):     alen = len(parameters)
+typing.py(213):     if alen != elen:
+typing.py(839):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+typing.py(843):                              name=self._name, inst=self._inst)
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __hash__
+typing.py(757):         return hash((self.__origin__, self.__args__))
+ --- modulename: typing, funcname: __getitem__
+typing.py(834):         if not isinstance(params, tuple):
+typing.py(835):             params = (params,)
+typing.py(836):         msg = "Parameters to generic types must be types."
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(157):             arg.__origin__ in invalid_generic_forms):
+typing.py(159):     if arg in (Any, NoReturn, Final):
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(165):     if not callable(arg):
+typing.py(167):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+typing.py(838):         _check_generic(self, params, self._nparams)
+ --- modulename: typing, funcname: _check_generic
+typing.py(210):     if not elen:
+typing.py(212):     alen = len(parameters)
+typing.py(213):     if alen != elen:
+typing.py(839):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+typing.py(843):                              name=self._name, inst=self._inst)
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(202):             tvars.extend([t for t in t.__parameters__ if t not in tvars])
+ --- modulename: typing, funcname: <listcomp>
+typing.py(202):             tvars.extend([t for t in t.__parameters__ if t not in tvars])
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(834):         if not isinstance(params, tuple):
+typing.py(835):             params = (params,)
+typing.py(836):         msg = "Parameters to generic types must be types."
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+typing.py(838):         _check_generic(self, params, self._nparams)
+ --- modulename: typing, funcname: _check_generic
+typing.py(210):     if not elen:
+typing.py(212):     alen = len(parameters)
+typing.py(213):     if alen != elen:
+typing.py(839):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+typing.py(843):                              name=self._name, inst=self._inst)
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+s804428490.py(42): def read() -> Tuple[List[List[int]], int]:
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __hash__
+typing.py(757):         return hash((self.__origin__, self.__args__))
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __hash__
+typing.py(757):         return hash((self.__origin__, self.__args__))
+ --- modulename: typing, funcname: __hash__
+typing.py(757):         return hash((self.__origin__, self.__args__))
+ --- modulename: typing, funcname: __getitem__
+typing.py(911):         if params == ():
+typing.py(913):         if not isinstance(params, tuple):
+typing.py(915):         if len(params) == 2 and params[1] is ...:
+typing.py(919):         msg = "Tuple[t0, t1, ...]: each t must be a type."
+typing.py(920):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(920):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(157):             arg.__origin__ in invalid_generic_forms):
+typing.py(159):     if arg in (Any, NoReturn, Final):
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(165):     if not callable(arg):
+typing.py(167):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(920):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(920):         params = tuple(_type_check(p, msg) for p in params)
+typing.py(921):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+typing.py(843):                              name=self._name, inst=self._inst)
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(202):             tvars.extend([t for t in t.__parameters__ if t not in tvars])
+ --- modulename: typing, funcname: <listcomp>
+typing.py(202):             tvars.extend([t for t in t.__parameters__ if t not in tvars])
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s804428490.py(54): def write(point_list):
+s804428490.py(58): adj, n = read()
+ --- modulename: s804428490, funcname: read
+s804428490.py(43):     v, e = tuple([int(i) for i in input().split()])
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+ --- modulename: s804428490, funcname: <listcomp>
+s804428490.py(43):     v, e = tuple([int(i) for i in input().split()])
+s804428490.py(43):     v, e = tuple([int(i) for i in input().split()])
+s804428490.py(43):     v, e = tuple([int(i) for i in input().split()])
+s804428490.py(45):     adj = [[] for _ in range(v)]
+ --- modulename: s804428490, funcname: <listcomp>
+s804428490.py(45):     adj = [[] for _ in range(v)]
+s804428490.py(45):     adj = [[] for _ in range(v)]
+s804428490.py(45):     adj = [[] for _ in range(v)]
+s804428490.py(45):     adj = [[] for _ in range(v)]
+s804428490.py(45):     adj = [[] for _ in range(v)]
+s804428490.py(47):     for i in range(e):
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+ --- modulename: s804428490, funcname: <listcomp>
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(49):         adj[v1].append(v2)
+s804428490.py(50):         adj[v2].append(v1)
+s804428490.py(47):     for i in range(e):
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+ --- modulename: s804428490, funcname: <listcomp>
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(49):         adj[v1].append(v2)
+s804428490.py(50):         adj[v2].append(v1)
+s804428490.py(47):     for i in range(e):
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+ --- modulename: s804428490, funcname: <listcomp>
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(49):         adj[v1].append(v2)
+s804428490.py(50):         adj[v2].append(v1)
+s804428490.py(47):     for i in range(e):
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+ --- modulename: s804428490, funcname: <listcomp>
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(48):         v1, v2 = tuple([int(j) for j in input().split()])
+s804428490.py(49):         adj[v1].append(v2)
+s804428490.py(50):         adj[v2].append(v1)
+s804428490.py(47):     for i in range(e):
+s804428490.py(52):     return adj, v
+s804428490.py(59): articulation_point_list = articulation_points(adj, n)
+ --- modulename: s804428490, funcname: articulation_points
+s804428490.py(8):     low_link = [None for _ in range(n)]
+ --- modulename: s804428490, funcname: <listcomp>
+s804428490.py(8):     low_link = [None for _ in range(n)]
+s804428490.py(8):     low_link = [None for _ in range(n)]
+s804428490.py(8):     low_link = [None for _ in range(n)]
+s804428490.py(8):     low_link = [None for _ in range(n)]
+s804428490.py(8):     low_link = [None for _ in range(n)]
+s804428490.py(9):     mark = [False for _ in range(n)]
+ --- modulename: s804428490, funcname: <listcomp>
+s804428490.py(9):     mark = [False for _ in range(n)]
+s804428490.py(9):     mark = [False for _ in range(n)]
+s804428490.py(9):     mark = [False for _ in range(n)]
+s804428490.py(9):     mark = [False for _ in range(n)]
+s804428490.py(9):     mark = [False for _ in range(n)]
+s804428490.py(10):     id = [-1 for _ in range(n + 1)]
+ --- modulename: s804428490, funcname: <listcomp>
+s804428490.py(10):     id = [-1 for _ in range(n + 1)]
+s804428490.py(10):     id = [-1 for _ in range(n + 1)]
+s804428490.py(10):     id = [-1 for _ in range(n + 1)]
+s804428490.py(10):     id = [-1 for _ in range(n + 1)]
+s804428490.py(10):     id = [-1 for _ in range(n + 1)]
+s804428490.py(10):     id = [-1 for _ in range(n + 1)]
+s804428490.py(11):     points = []
+s804428490.py(13):     for v in range(n):
+s804428490.py(14):         if mark[v]:
+s804428490.py(16):         dfs(v, -1, adj, id, low_link, mark, points)
+ --- modulename: s804428490, funcname: dfs
+s804428490.py(21):     mark[v] = True
+s804428490.py(22):     id[-1] += 1
+s804428490.py(23):     id[v] = id[-1]
+s804428490.py(24):     low_link[v] = id[v]
+s804428490.py(26):     is_articulation_point = False
+s804428490.py(27):     childs = 1 if p != -1 else 0 
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(30):         if a_v == p: continue
+s804428490.py(31):         if not mark[a_v]:
+s804428490.py(32):             childs += 1
+s804428490.py(33):             dfs(a_v, v, adj, id, low_link, mark, points)
+ --- modulename: s804428490, funcname: dfs
+s804428490.py(21):     mark[v] = True
+s804428490.py(22):     id[-1] += 1
+s804428490.py(23):     id[v] = id[-1]
+s804428490.py(24):     low_link[v] = id[v]
+s804428490.py(26):     is_articulation_point = False
+s804428490.py(27):     childs = 1 if p != -1 else 0 
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(30):         if a_v == p: continue
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(30):         if a_v == p: continue
+s804428490.py(31):         if not mark[a_v]:
+s804428490.py(32):             childs += 1
+s804428490.py(33):             dfs(a_v, v, adj, id, low_link, mark, points)
+ --- modulename: s804428490, funcname: dfs
+s804428490.py(21):     mark[v] = True
+s804428490.py(22):     id[-1] += 1
+s804428490.py(23):     id[v] = id[-1]
+s804428490.py(24):     low_link[v] = id[v]
+s804428490.py(26):     is_articulation_point = False
+s804428490.py(27):     childs = 1 if p != -1 else 0 
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(30):         if a_v == p: continue
+s804428490.py(31):         if not mark[a_v]:
+s804428490.py(38):             low_link[v] = min(low_link[v], id[a_v])
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(30):         if a_v == p: continue
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(30):         if a_v == p: continue
+s804428490.py(31):         if not mark[a_v]:
+s804428490.py(32):             childs += 1
+s804428490.py(33):             dfs(a_v, v, adj, id, low_link, mark, points)
+ --- modulename: s804428490, funcname: dfs
+s804428490.py(21):     mark[v] = True
+s804428490.py(22):     id[-1] += 1
+s804428490.py(23):     id[v] = id[-1]
+s804428490.py(24):     low_link[v] = id[v]
+s804428490.py(26):     is_articulation_point = False
+s804428490.py(27):     childs = 1 if p != -1 else 0 
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(30):         if a_v == p: continue
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(39):     if is_articulation_point:
+s804428490.py(34):             low_link[v] = min(low_link[v], low_link[a_v])
+s804428490.py(35):             if childs > 1 and id[v] <= low_link[a_v]:
+s804428490.py(36):                 is_articulation_point = True
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(39):     if is_articulation_point:
+s804428490.py(40):         points.append(v)
+s804428490.py(34):             low_link[v] = min(low_link[v], low_link[a_v])
+s804428490.py(35):             if childs > 1 and id[v] <= low_link[a_v]:
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(39):     if is_articulation_point:
+s804428490.py(34):             low_link[v] = min(low_link[v], low_link[a_v])
+s804428490.py(35):             if childs > 1 and id[v] <= low_link[a_v]:
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(30):         if a_v == p: continue
+s804428490.py(31):         if not mark[a_v]:
+s804428490.py(38):             low_link[v] = min(low_link[v], id[a_v])
+s804428490.py(29):     for a_v in adj[v]:
+s804428490.py(39):     if is_articulation_point:
+s804428490.py(13):     for v in range(n):
+s804428490.py(14):         if mark[v]:
+s804428490.py(15):             continue
+s804428490.py(13):     for v in range(n):
+s804428490.py(14):         if mark[v]:
+s804428490.py(15):             continue
+s804428490.py(13):     for v in range(n):
+s804428490.py(14):         if mark[v]:
+s804428490.py(15):             continue
+s804428490.py(13):     for v in range(n):
+s804428490.py(17):     points.sort()
+s804428490.py(18):     return points
+s804428490.py(60): write(articulation_point_list)
+ --- modulename: s804428490, funcname: write
+s804428490.py(55):     for point in point_list:
+s804428490.py(56):         print(point)
+2
+s804428490.py(55):     for point in point_list:
