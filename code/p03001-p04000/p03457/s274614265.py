@@ -1,0 +1,105 @@
+from __future__ import print_function
+
+import sys
+sys.setrecursionlimit(500000)
+
+import re
+import array
+import copy
+import functools
+import operator
+
+import math
+import string
+import fractions
+from fractions import Fraction
+
+import collections
+import itertools
+import bisect
+
+import random
+import time
+
+import heapq
+from heapq import heappush
+from heapq import heappop
+from heapq import heappushpop
+from heapq import heapify
+from heapq import heapreplace
+from queue import PriorityQueue as pq
+from queue import Queue
+
+from itertools import accumulate
+
+from collections import deque
+from collections import Counter
+
+from operator import mul
+from functools import reduce
+
+input = sys.stdin.readline
+
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+    return
+
+# from fractions import gcd
+# from math import gcd
+
+# def lcm(n, m):
+#     return int(n * m / gcd(n, m))
+
+
+# def coprimize(p, q):
+#     common = gcd(p, q)
+#     return (p // common, q // common)
+
+
+# def find_gcd(list_l):
+#     x = reduce(gcd, list_l)
+#     return x
+
+
+def combinations_count(n, r):
+    r = min(r, n - r)
+    numer = reduce(mul, range(n, n - r, -1), 1)
+    denom = reduce(mul, range(1, r + 1), 1)
+    return numer // denom
+
+
+def judge(s,g):
+    t=g[0] - s[0]
+    x=g[1] - s[1]
+    y=g[2] - s[2]
+    eprint('x,y,t ',end=':\n')
+    eprint(x,y,t)
+    if (abs(x)+abs(y))%2 == t%2 and (abs(x)+abs(y))<=t:
+        return True
+    else:
+        return False
+
+
+def main():
+    n = int(input().strip())
+    txy=[(0,0,0)]
+    for i in range(n):
+        tmp1, tmp2, tmp3 = map(int,input().strip().split())
+        txy.append((tmp1,tmp2,tmp3))
+    txy.sort()
+    n+=1
+
+    for i in range(0,n-1):
+        if judge(txy[i], txy[i+1]) != True:
+            print("No")
+            return
+    print("Yes")
+
+        
+
+
+
+
+if __name__ == '__main__':
+    main()
