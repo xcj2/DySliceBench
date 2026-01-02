@@ -1,0 +1,80 @@
+ --- modulename: s367469643, funcname: <module>
+s367469643.py(1): def determine_string_code(bracket_string):
+s367469643.py(14): def build_left(in_list):
+s367469643.py(26): def build_right(in_list):
+s367469643.py(38): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s367469643.py(39): residues = list()
+s367469643.py(40): for _ in range(n):
+s367469643.py(41):   new_string = input()
+s367469643.py(42):   residues.append(determine_string_code(new_string))
+ --- modulename: s367469643, funcname: determine_string_code
+s367469643.py(2):   brackets_left = 0 # )
+s367469643.py(3):   brackets_right = 0 # (
+s367469643.py(4):   for char in bracket_string:
+s367469643.py(5):     if char == "(":
+s367469643.py(8):       if brackets_right > 0:
+s367469643.py(11):         brackets_left += 1
+s367469643.py(4):   for char in bracket_string:
+s367469643.py(12):   return (brackets_left, brackets_right)
+s367469643.py(40): for _ in range(n):
+s367469643.py(41):   new_string = input()
+s367469643.py(42):   residues.append(determine_string_code(new_string))
+ --- modulename: s367469643, funcname: determine_string_code
+s367469643.py(2):   brackets_left = 0 # )
+s367469643.py(3):   brackets_right = 0 # (
+s367469643.py(4):   for char in bracket_string:
+s367469643.py(5):     if char == "(":
+s367469643.py(6):       brackets_right += 1
+s367469643.py(4):   for char in bracket_string:
+s367469643.py(5):     if char == "(":
+s367469643.py(6):       brackets_right += 1
+s367469643.py(4):   for char in bracket_string:
+s367469643.py(5):     if char == "(":
+s367469643.py(8):       if brackets_right > 0:
+s367469643.py(9):         brackets_right -= 1
+s367469643.py(4):   for char in bracket_string:
+s367469643.py(12):   return (brackets_left, brackets_right)
+s367469643.py(40): for _ in range(n):
+s367469643.py(43): first_half = list()
+s367469643.py(44): second_half = list()
+s367469643.py(45): for res in residues:
+s367469643.py(46):   if res[1] > res[0]:
+s367469643.py(49):     second_half.append(res)
+s367469643.py(45): for res in residues:
+s367469643.py(46):   if res[1] > res[0]:
+s367469643.py(47):     first_half.append(res)
+s367469643.py(45): for res in residues:
+s367469643.py(50): first_res = build_left(first_half)
+ --- modulename: s367469643, funcname: build_left
+s367469643.py(15):   in_list.sort(key=lambda x: x[0])
+ --- modulename: s367469643, funcname: <lambda>
+s367469643.py(15):   in_list.sort(key=lambda x: x[0])
+s367469643.py(16):   final_res = (0, 0)
+s367469643.py(17):   for res in in_list:
+s367469643.py(18):     if res[0]>final_res[1]:
+s367469643.py(20):     elif res[0]<final_res[1]:
+s367469643.py(23):       final_res = (final_res[0], res[1])
+s367469643.py(17):   for res in in_list:
+s367469643.py(24):   return final_res
+s367469643.py(51): second_res = build_right(second_half)
+ --- modulename: s367469643, funcname: build_right
+s367469643.py(27):   in_list.sort(key=lambda x: x[1])
+ --- modulename: s367469643, funcname: <lambda>
+s367469643.py(27):   in_list.sort(key=lambda x: x[1])
+s367469643.py(28):   final_res = (0, 0)
+s367469643.py(29):   for res in in_list:
+s367469643.py(30):     if final_res[0]>res[1]:
+s367469643.py(32):     elif final_res[0]<res[1]:
+s367469643.py(35):       final_res = (res[0], final_res[1])
+s367469643.py(29):   for res in in_list:
+s367469643.py(36):   return final_res
+s367469643.py(52): if first_res[0] == 0 and second_res[1] == 0 and first_res[1] == second_res[0]:
+s367469643.py(53):   print("Yes")
+Yes
