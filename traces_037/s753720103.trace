@@ -1,0 +1,1846 @@
+ --- modulename: s753720103, funcname: <module>
+s753720103.py(1): from typing import Callable, List, TypeVar
+s753720103.py(3): S = TypeVar("S")  # モノイドの型
+ --- modulename: typing, funcname: __init__
+typing.py(630):         self.__name__ = name
+typing.py(631):         if covariant and contravariant:
+typing.py(633):         self.__covariant__ = bool(covariant)
+typing.py(634):         self.__contravariant__ = bool(contravariant)
+typing.py(635):         if constraints and bound is not None:
+typing.py(637):         if constraints and len(constraints) == 1:
+typing.py(639):         msg = "TypeVar(name, constraint, ...): constraints must be types."
+typing.py(640):         self.__constraints__ = tuple(_type_check(t, msg) for t in constraints)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(640):         self.__constraints__ = tuple(_type_check(t, msg) for t in constraints)
+typing.py(641):         if bound:
+typing.py(644):             self.__bound__ = None
+typing.py(645):         try:
+typing.py(646):             def_mod = sys._getframe(1).f_globals.get('__name__', '__main__')  # for pickling
+typing.py(649):         if def_mod != 'typing':
+typing.py(650):             self.__module__ = def_mod
+s753720103.py(4): F = TypeVar("F")  # 写像の型
+ --- modulename: typing, funcname: __init__
+typing.py(630):         self.__name__ = name
+typing.py(631):         if covariant and contravariant:
+typing.py(633):         self.__covariant__ = bool(covariant)
+typing.py(634):         self.__contravariant__ = bool(contravariant)
+typing.py(635):         if constraints and bound is not None:
+typing.py(637):         if constraints and len(constraints) == 1:
+typing.py(639):         msg = "TypeVar(name, constraint, ...): constraints must be types."
+typing.py(640):         self.__constraints__ = tuple(_type_check(t, msg) for t in constraints)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(640):         self.__constraints__ = tuple(_type_check(t, msg) for t in constraints)
+typing.py(641):         if bound:
+typing.py(644):             self.__bound__ = None
+typing.py(645):         try:
+typing.py(646):             def_mod = sys._getframe(1).f_globals.get('__name__', '__main__')  # for pickling
+typing.py(649):         if def_mod != 'typing':
+typing.py(650):             self.__module__ = def_mod
+s753720103.py(7): class LazySegmentTree:
+ --- modulename: s753720103, funcname: LazySegmentTree
+s753720103.py(7): class LazySegmentTree:
+s753720103.py(8):     """
+s753720103.py(15):     __slots__ = ["e", "op", "id", "mapping", "composition", "_n", "_log", "_size", "tree", "lazy"]
+s753720103.py(18):                  a: List[S],
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(834):         if not isinstance(params, tuple):
+typing.py(835):             params = (params,)
+typing.py(836):         msg = "Parameters to generic types must be types."
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+typing.py(838):         _check_generic(self, params, self._nparams)
+ --- modulename: typing, funcname: _check_generic
+typing.py(210):     if not elen:
+typing.py(212):     alen = len(parameters)
+typing.py(213):     if alen != elen:
+typing.py(839):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+typing.py(843):                              name=self._name, inst=self._inst)
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s753720103.py(19):                  e: S,
+s753720103.py(20):                  op: Callable[[S, S], S],
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem_inner__
+typing.py(896):         args, result = params
+typing.py(897):         msg = "Callable[args, result]: result must be a type."
+typing.py(898):         result = _type_check(result, msg)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+typing.py(899):         if args is Ellipsis:
+typing.py(901):         if not isinstance(args, tuple):
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+typing.py(904):         params = args + (result,)
+typing.py(905):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+typing.py(878):                                      name=self._name, inst=self._inst)
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s753720103.py(21):                  id_: F,
+s753720103.py(22):                  mapping: Callable[[F, S], S],
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem_inner__
+typing.py(896):         args, result = params
+typing.py(897):         msg = "Callable[args, result]: result must be a type."
+typing.py(898):         result = _type_check(result, msg)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+typing.py(899):         if args is Ellipsis:
+typing.py(901):         if not isinstance(args, tuple):
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+typing.py(904):         params = args + (result,)
+typing.py(905):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+typing.py(878):                                      name=self._name, inst=self._inst)
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s753720103.py(23):                  composition: Callable[[F, F], F]) -> None:
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem_inner__
+typing.py(896):         args, result = params
+typing.py(897):         msg = "Callable[args, result]: result must be a type."
+typing.py(898):         result = _type_check(result, msg)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+typing.py(899):         if args is Ellipsis:
+typing.py(901):         if not isinstance(args, tuple):
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+typing.py(904):         params = args + (result,)
+typing.py(905):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+typing.py(878):                                      name=self._name, inst=self._inst)
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s753720103.py(17):     def __init__(self,
+s753720103.py(40):     def _update(self, k: int) -> None:
+s753720103.py(44):     def _apply_all(self, k: int, f: F) -> None:
+s753720103.py(49):     def _push(self, k: int) -> None:
+s753720103.py(54):     def set(self, k: int, x: S) -> None:
+s753720103.py(65):     def get(self, k: int) -> S:
+s753720103.py(74):     def prod(self, l: int, r: int) -> S:
+s753720103.py(103):     def prod_all(self) -> S:
+s753720103.py(109):     def apply(self, k: int, f: F) -> None:
+s753720103.py(120):     def apply_range(self, l: int, r: int, f: F) -> None:
+s753720103.py(154): mod = 998244353
+s753720103.py(157): def op(l, r):
+s753720103.py(163): def mapping(f, x):
+s753720103.py(169): def composition(l, r):
+s753720103.py(175): N, Q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s753720103.py(176): a = list(map(int, input().split()))
+s753720103.py(178): lst = LazySegmentTree([(v << 32) + 1 for v in a], 0, op, 1 << 32, mapping, composition)
+ --- modulename: s753720103, funcname: <listcomp>
+s753720103.py(178): lst = LazySegmentTree([(v << 32) + 1 for v in a], 0, op, 1 << 32, mapping, composition)
+s753720103.py(178): lst = LazySegmentTree([(v << 32) + 1 for v in a], 0, op, 1 << 32, mapping, composition)
+s753720103.py(178): lst = LazySegmentTree([(v << 32) + 1 for v in a], 0, op, 1 << 32, mapping, composition)
+s753720103.py(178): lst = LazySegmentTree([(v << 32) + 1 for v in a], 0, op, 1 << 32, mapping, composition)
+s753720103.py(178): lst = LazySegmentTree([(v << 32) + 1 for v in a], 0, op, 1 << 32, mapping, composition)
+s753720103.py(178): lst = LazySegmentTree([(v << 32) + 1 for v in a], 0, op, 1 << 32, mapping, composition)
+ --- modulename: s753720103, funcname: __init__
+s753720103.py(24):         self.e = e
+s753720103.py(25):         self.op = op
+s753720103.py(26):         self.id = id_
+s753720103.py(27):         self.mapping = mapping
+s753720103.py(28):         self.composition = composition
+s753720103.py(30):         self._n = len(a)
+s753720103.py(31):         self._log = (self._n - 1).bit_length()
+s753720103.py(32):         self._size = 1 << self._log
+s753720103.py(34):         self.tree = [e] * self._size + a + [e] * (self._size - self._n)
+s753720103.py(35):         for i in range(self._size - 1, 0, -1):
+s753720103.py(36):             self._update(i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(35):         for i in range(self._size - 1, 0, -1):
+s753720103.py(36):             self._update(i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(35):         for i in range(self._size - 1, 0, -1):
+s753720103.py(36):             self._update(i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(35):         for i in range(self._size - 1, 0, -1):
+s753720103.py(36):             self._update(i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(35):         for i in range(self._size - 1, 0, -1):
+s753720103.py(36):             self._update(i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(35):         for i in range(self._size - 1, 0, -1):
+s753720103.py(36):             self._update(i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(35):         for i in range(self._size - 1, 0, -1):
+s753720103.py(36):             self._update(i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(35):         for i in range(self._size - 1, 0, -1):
+s753720103.py(38):         self.lazy = [id_] * self._size
+s753720103.py(180): for i in range(Q):
+s753720103.py(181):     q, *p = map(int, input().split())
+s753720103.py(182):     if q == 0:
+s753720103.py(185):         print(lst.prod(*p) >> 32)
+ --- modulename: s753720103, funcname: prod
+s753720103.py(78):         assert 0 <= l <= r <= self._n
+s753720103.py(80):         if l == r:
+s753720103.py(83):         l += self._size
+s753720103.py(84):         r += self._size
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(91):         sml, smr = self.e, self.e
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(96):             if r & 1:
+s753720103.py(97):                 r -= 1
+s753720103.py(98):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(96):             if r & 1:
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(96):             if r & 1:
+s753720103.py(97):                 r -= 1
+s753720103.py(98):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(101):         return self.op(sml, smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+15
+s753720103.py(180): for i in range(Q):
+s753720103.py(181):     q, *p = map(int, input().split())
+s753720103.py(182):     if q == 0:
+s753720103.py(183):         lst.apply_range(p[0], p[1], (p[2] << 32) + p[3])
+ --- modulename: s753720103, funcname: apply_range
+s753720103.py(122):         assert 0 <= l <= r <= self._n
+s753720103.py(124):         if l == r:
+s753720103.py(127):         l += self._size
+s753720103.py(128):         r += self._size
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(130):             if ((l >> i) << i) != l:
+s753720103.py(131):                 self._push(l >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(132):             if ((r >> i) << i) != r:
+s753720103.py(133):                 self._push((r - 1) >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(130):             if ((l >> i) << i) != l:
+s753720103.py(131):                 self._push(l >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(132):             if ((r >> i) << i) != r:
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(130):             if ((l >> i) << i) != l:
+s753720103.py(132):             if ((r >> i) << i) != r:
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(135):         l_tmp, r_tmp = l, r
+s753720103.py(136):         while l < r:
+s753720103.py(137):             if l & 1:
+s753720103.py(140):             if r & 1:
+s753720103.py(143):             l >>= 1
+s753720103.py(144):             r >>= 1
+s753720103.py(136):         while l < r:
+s753720103.py(137):             if l & 1:
+s753720103.py(138):                 self._apply_all(l, f)
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(139):                 l += 1
+s753720103.py(140):             if r & 1:
+s753720103.py(143):             l >>= 1
+s753720103.py(144):             r >>= 1
+s753720103.py(136):         while l < r:
+s753720103.py(145):         l, r = l_tmp, r_tmp
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(148):             if ((l >> i) << i) != l:
+s753720103.py(150):             if ((r >> i) << i) != r:
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(148):             if ((l >> i) << i) != l:
+s753720103.py(149):                 self._update(l >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(150):             if ((r >> i) << i) != r:
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(148):             if ((l >> i) << i) != l:
+s753720103.py(149):                 self._update(l >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(150):             if ((r >> i) << i) != r:
+s753720103.py(151):                 self._update((r - 1) >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(180): for i in range(Q):
+s753720103.py(181):     q, *p = map(int, input().split())
+s753720103.py(182):     if q == 0:
+s753720103.py(185):         print(lst.prod(*p) >> 32)
+ --- modulename: s753720103, funcname: prod
+s753720103.py(78):         assert 0 <= l <= r <= self._n
+s753720103.py(80):         if l == r:
+s753720103.py(83):         l += self._size
+s753720103.py(84):         r += self._size
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(91):         sml, smr = self.e, self.e
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(96):             if r & 1:
+s753720103.py(97):                 r -= 1
+s753720103.py(98):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(96):             if r & 1:
+s753720103.py(97):                 r -= 1
+s753720103.py(98):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(101):         return self.op(sml, smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+404
+s753720103.py(180): for i in range(Q):
+s753720103.py(181):     q, *p = map(int, input().split())
+s753720103.py(182):     if q == 0:
+s753720103.py(183):         lst.apply_range(p[0], p[1], (p[2] << 32) + p[3])
+ --- modulename: s753720103, funcname: apply_range
+s753720103.py(122):         assert 0 <= l <= r <= self._n
+s753720103.py(124):         if l == r:
+s753720103.py(127):         l += self._size
+s753720103.py(128):         r += self._size
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(130):             if ((l >> i) << i) != l:
+s753720103.py(131):                 self._push(l >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(132):             if ((r >> i) << i) != r:
+s753720103.py(133):                 self._push((r - 1) >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(130):             if ((l >> i) << i) != l:
+s753720103.py(131):                 self._push(l >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(132):             if ((r >> i) << i) != r:
+s753720103.py(133):                 self._push((r - 1) >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(130):             if ((l >> i) << i) != l:
+s753720103.py(131):                 self._push(l >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(132):             if ((r >> i) << i) != r:
+s753720103.py(133):                 self._push((r - 1) >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(135):         l_tmp, r_tmp = l, r
+s753720103.py(136):         while l < r:
+s753720103.py(137):             if l & 1:
+s753720103.py(138):                 self._apply_all(l, f)
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(139):                 l += 1
+s753720103.py(140):             if r & 1:
+s753720103.py(141):                 r -= 1
+s753720103.py(142):                 self._apply_all(r, f)
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(143):             l >>= 1
+s753720103.py(144):             r >>= 1
+s753720103.py(136):         while l < r:
+s753720103.py(145):         l, r = l_tmp, r_tmp
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(148):             if ((l >> i) << i) != l:
+s753720103.py(149):                 self._update(l >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(150):             if ((r >> i) << i) != r:
+s753720103.py(151):                 self._update((r - 1) >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(148):             if ((l >> i) << i) != l:
+s753720103.py(149):                 self._update(l >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(150):             if ((r >> i) << i) != r:
+s753720103.py(151):                 self._update((r - 1) >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(148):             if ((l >> i) << i) != l:
+s753720103.py(149):                 self._update(l >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(150):             if ((r >> i) << i) != r:
+s753720103.py(151):                 self._update((r - 1) >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(180): for i in range(Q):
+s753720103.py(181):     q, *p = map(int, input().split())
+s753720103.py(182):     if q == 0:
+s753720103.py(185):         print(lst.prod(*p) >> 32)
+ --- modulename: s753720103, funcname: prod
+s753720103.py(78):         assert 0 <= l <= r <= self._n
+s753720103.py(80):         if l == r:
+s753720103.py(83):         l += self._size
+s753720103.py(84):         r += self._size
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(87):                 self._push(l >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(87):                 self._push(l >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(91):         sml, smr = self.e, self.e
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(96):             if r & 1:
+s753720103.py(97):                 r -= 1
+s753720103.py(98):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(94):                 sml = self.op(sml, self.tree[l])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(95):                 l += 1
+s753720103.py(96):             if r & 1:
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(101):         return self.op(sml, smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+41511
+s753720103.py(180): for i in range(Q):
+s753720103.py(181):     q, *p = map(int, input().split())
+s753720103.py(182):     if q == 0:
+s753720103.py(183):         lst.apply_range(p[0], p[1], (p[2] << 32) + p[3])
+ --- modulename: s753720103, funcname: apply_range
+s753720103.py(122):         assert 0 <= l <= r <= self._n
+s753720103.py(124):         if l == r:
+s753720103.py(127):         l += self._size
+s753720103.py(128):         r += self._size
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(130):             if ((l >> i) << i) != l:
+s753720103.py(131):                 self._push(l >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(132):             if ((r >> i) << i) != r:
+s753720103.py(133):                 self._push((r - 1) >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(130):             if ((l >> i) << i) != l:
+s753720103.py(131):                 self._push(l >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(132):             if ((r >> i) << i) != r:
+s753720103.py(133):                 self._push((r - 1) >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(130):             if ((l >> i) << i) != l:
+s753720103.py(132):             if ((r >> i) << i) != r:
+s753720103.py(133):                 self._push((r - 1) >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(129):         for i in range(self._log, 0, -1):
+s753720103.py(135):         l_tmp, r_tmp = l, r
+s753720103.py(136):         while l < r:
+s753720103.py(137):             if l & 1:
+s753720103.py(140):             if r & 1:
+s753720103.py(141):                 r -= 1
+s753720103.py(142):                 self._apply_all(r, f)
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(143):             l >>= 1
+s753720103.py(144):             r >>= 1
+s753720103.py(136):         while l < r:
+s753720103.py(137):             if l & 1:
+s753720103.py(138):                 self._apply_all(l, f)
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(139):                 l += 1
+s753720103.py(140):             if r & 1:
+s753720103.py(143):             l >>= 1
+s753720103.py(144):             r >>= 1
+s753720103.py(136):         while l < r:
+s753720103.py(145):         l, r = l_tmp, r_tmp
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(148):             if ((l >> i) << i) != l:
+s753720103.py(150):             if ((r >> i) << i) != r:
+s753720103.py(151):                 self._update((r - 1) >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(148):             if ((l >> i) << i) != l:
+s753720103.py(149):                 self._update(l >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(150):             if ((r >> i) << i) != r:
+s753720103.py(151):                 self._update((r - 1) >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(148):             if ((l >> i) << i) != l:
+s753720103.py(149):                 self._update(l >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(150):             if ((r >> i) << i) != r:
+s753720103.py(151):                 self._update((r - 1) >> i)
+ --- modulename: s753720103, funcname: _update
+s753720103.py(42):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(147):         for i in range(1, self._log + 1):
+s753720103.py(180): for i in range(Q):
+s753720103.py(181):     q, *p = map(int, input().split())
+s753720103.py(182):     if q == 0:
+s753720103.py(185):         print(lst.prod(*p) >> 32)
+ --- modulename: s753720103, funcname: prod
+s753720103.py(78):         assert 0 <= l <= r <= self._n
+s753720103.py(80):         if l == r:
+s753720103.py(83):         l += self._size
+s753720103.py(84):         r += self._size
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(47):             self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s753720103, funcname: composition
+s753720103.py(170):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(171):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(172):     return (((l1 * r1) % mod) << 32) + ((r2 * l1 + l2) % mod)
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(86):             if ((l >> i) << i) != l:
+s753720103.py(88):             if ((r >> i) << i) != r:
+s753720103.py(89):                 self._push(r >> i)
+ --- modulename: s753720103, funcname: _push
+s753720103.py(50):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(51):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s753720103, funcname: _apply_all
+s753720103.py(45):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s753720103, funcname: mapping
+s753720103.py(164):     f1, f2 = f >> 32, f % (1 << 32)
+s753720103.py(165):     x1, x2 = x >> 32, x % (1 << 32)
+s753720103.py(166):     return (((f1 * x1 + f2 * x2) % mod) << 32) + x2
+s753720103.py(46):         if k < self._size:
+s753720103.py(52):         self.lazy[k] = self.id
+s753720103.py(85):         for i in range(self._log, 0, -1):
+s753720103.py(91):         sml, smr = self.e, self.e
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(96):             if r & 1:
+s753720103.py(97):                 r -= 1
+s753720103.py(98):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(96):             if r & 1:
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(93):             if l & 1:
+s753720103.py(96):             if r & 1:
+s753720103.py(97):                 r -= 1
+s753720103.py(98):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+s753720103.py(99):             l >>= 1
+s753720103.py(100):             r >>= 1
+s753720103.py(92):         while l < r:
+s753720103.py(101):         return self.op(sml, smr)
+ --- modulename: s753720103, funcname: op
+s753720103.py(158):     l1, l2 = l >> 32, l % (1 << 32)
+s753720103.py(159):     r1, r2 = r >> 32, r % (1 << 32)
+s753720103.py(160):     return (((l1 + r1) % mod) << 32) + l2 + r2
+4317767
+s753720103.py(180): for i in range(Q):
