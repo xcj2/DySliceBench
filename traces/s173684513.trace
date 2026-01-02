@@ -1,0 +1,199 @@
+ --- modulename: s173684513, funcname: <module>
+s173684513.py(2): import sys
+s173684513.py(3): sys.setrecursionlimit(10**9)
+s173684513.py(4): input = sys.stdin.readline
+s173684513.py(7): class SegmentTree():
+ --- modulename: s173684513, funcname: SegmentTree
+s173684513.py(7): class SegmentTree():
+s173684513.py(8):     '''
+s173684513.py(13):     def __init__(self, _n, func, inf=float('inf')):
+s173684513.py(27):     def set(self, k, v):
+s173684513.py(33):     def build(self):
+s173684513.py(40):     def update(self, k, a):
+s173684513.py(52):     def query(self, l, r):
+s173684513.py(71): def gcd(a, b):
+s173684513.py(77): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s173684513.py(78): L = list(map(int, input().split()))
+s173684513.py(79): T = SegmentTree(N, gcd, 0)
+ --- modulename: s173684513, funcname: __init__
+s173684513.py(22):         self.n = 2**(_n-1).bit_length()
+s173684513.py(23):         self.inf = inf
+s173684513.py(24):         self.data = [inf]*(2*self.n)
+s173684513.py(25):         self.func = func
+s173684513.py(80): for i, l in enumerate(L):
+s173684513.py(81):     T.set(i, l)
+ --- modulename: s173684513, funcname: set
+s173684513.py(31):         self.data[k+self.n-1] = v
+s173684513.py(80): for i, l in enumerate(L):
+s173684513.py(81):     T.set(i, l)
+ --- modulename: s173684513, funcname: set
+s173684513.py(31):         self.data[k+self.n-1] = v
+s173684513.py(80): for i, l in enumerate(L):
+s173684513.py(81):     T.set(i, l)
+ --- modulename: s173684513, funcname: set
+s173684513.py(31):         self.data[k+self.n-1] = v
+s173684513.py(80): for i, l in enumerate(L):
+s173684513.py(82): T.build()
+ --- modulename: s173684513, funcname: build
+s173684513.py(37):         for k in reversed(range(self.n-1)):
+s173684513.py(38):             self.data[k] = self.func(self.data[k*2+1], self.data[k*2+2])
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(37):         for k in reversed(range(self.n-1)):
+s173684513.py(38):             self.data[k] = self.func(self.data[k*2+1], self.data[k*2+2])
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(37):         for k in reversed(range(self.n-1)):
+s173684513.py(38):             self.data[k] = self.func(self.data[k*2+1], self.data[k*2+2])
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(37):         for k in reversed(range(self.n-1)):
+s173684513.py(84): ans = 0
+s173684513.py(85): for i in range(N):
+s173684513.py(86):     l = i
+s173684513.py(87):     r = i+1
+s173684513.py(88):     ans = max(ans, gcd(T.query(0, l), T.query(r, N)))
+ --- modulename: s173684513, funcname: query
+s173684513.py(56):         L = l+self.n
+s173684513.py(57):         R = r+self.n
+s173684513.py(58):         ret = self.inf
+s173684513.py(59):         while L < R:
+s173684513.py(68):         return ret
+ --- modulename: s173684513, funcname: query
+s173684513.py(56):         L = l+self.n
+s173684513.py(57):         R = r+self.n
+s173684513.py(58):         ret = self.inf
+s173684513.py(59):         while L < R:
+s173684513.py(60):             if R & 1:
+s173684513.py(61):                 R -= 1
+s173684513.py(62):                 ret = self.func(ret, self.data[R-1])
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(63):             if L & 1:
+s173684513.py(64):                 ret = self.func(ret, self.data[L-1])
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(65):                 L += 1
+s173684513.py(66):             L >>= 1
+s173684513.py(67):             R >>= 1
+s173684513.py(59):         while L < R:
+s173684513.py(68):         return ret
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(85): for i in range(N):
+s173684513.py(86):     l = i
+s173684513.py(87):     r = i+1
+s173684513.py(88):     ans = max(ans, gcd(T.query(0, l), T.query(r, N)))
+ --- modulename: s173684513, funcname: query
+s173684513.py(56):         L = l+self.n
+s173684513.py(57):         R = r+self.n
+s173684513.py(58):         ret = self.inf
+s173684513.py(59):         while L < R:
+s173684513.py(60):             if R & 1:
+s173684513.py(61):                 R -= 1
+s173684513.py(62):                 ret = self.func(ret, self.data[R-1])
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(63):             if L & 1:
+s173684513.py(66):             L >>= 1
+s173684513.py(67):             R >>= 1
+s173684513.py(59):         while L < R:
+s173684513.py(68):         return ret
+ --- modulename: s173684513, funcname: query
+s173684513.py(56):         L = l+self.n
+s173684513.py(57):         R = r+self.n
+s173684513.py(58):         ret = self.inf
+s173684513.py(59):         while L < R:
+s173684513.py(60):             if R & 1:
+s173684513.py(61):                 R -= 1
+s173684513.py(62):                 ret = self.func(ret, self.data[R-1])
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(63):             if L & 1:
+s173684513.py(66):             L >>= 1
+s173684513.py(67):             R >>= 1
+s173684513.py(59):         while L < R:
+s173684513.py(68):         return ret
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(85): for i in range(N):
+s173684513.py(86):     l = i
+s173684513.py(87):     r = i+1
+s173684513.py(88):     ans = max(ans, gcd(T.query(0, l), T.query(r, N)))
+ --- modulename: s173684513, funcname: query
+s173684513.py(56):         L = l+self.n
+s173684513.py(57):         R = r+self.n
+s173684513.py(58):         ret = self.inf
+s173684513.py(59):         while L < R:
+s173684513.py(60):             if R & 1:
+s173684513.py(63):             if L & 1:
+s173684513.py(66):             L >>= 1
+s173684513.py(67):             R >>= 1
+s173684513.py(59):         while L < R:
+s173684513.py(60):             if R & 1:
+s173684513.py(61):                 R -= 1
+s173684513.py(62):                 ret = self.func(ret, self.data[R-1])
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(73):         a, b = b, a % b
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(63):             if L & 1:
+s173684513.py(66):             L >>= 1
+s173684513.py(67):             R >>= 1
+s173684513.py(59):         while L < R:
+s173684513.py(68):         return ret
+ --- modulename: s173684513, funcname: query
+s173684513.py(56):         L = l+self.n
+s173684513.py(57):         R = r+self.n
+s173684513.py(58):         ret = self.inf
+s173684513.py(59):         while L < R:
+s173684513.py(68):         return ret
+ --- modulename: s173684513, funcname: gcd
+s173684513.py(72):     while b:
+s173684513.py(74):     return a
+s173684513.py(85): for i in range(N):
+s173684513.py(89): print(ans)
+2
