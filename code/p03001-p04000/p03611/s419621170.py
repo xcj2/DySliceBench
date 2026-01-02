@@ -1,0 +1,46 @@
+# encoding: "utf-8"
+
+import numpy as np
+
+class Stdin:
+    @staticmethod
+    def read_line(converter=str):
+        return [converter(x) for x in input().split()]
+    
+    @staticmethod
+    def read_lines(n, converter=str):
+        result = list()
+        for _ in range(n):
+            result.append(Stdin.read_line(converter))
+        return result
+    
+    @staticmethod
+    def convert(data, converter):
+        assert(len(data) == len(converter))
+        return tuple(map(lambda x, f: f(x), data, converter))
+
+    @staticmethod
+    def convert_lines(datas, n, converter):
+        return [converter(data, n, converter) for data in datas]
+
+
+def main():
+    _ = input()
+    xs = Stdin.read_line(converter=int)
+    ys = np.array(list(map(lambda x: [x-1, x, x+1], xs))).flatten()
+    ys.sort()
+    cnt = 0
+    m = 0
+    prev = ys[0]
+    for y in ys:
+        if y == prev:
+            cnt += 1
+        else:
+            if m < cnt:
+                m = cnt
+            prev = y
+            cnt = 1
+    print(m)
+
+if __name__ == "__main__":
+    main()
