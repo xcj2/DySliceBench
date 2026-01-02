@@ -1,0 +1,573 @@
+ --- modulename: s719881952, funcname: <module>
+s719881952.py(1): """
+s719881952.py(30): class lazy_segment_tree:
+ --- modulename: s719881952, funcname: lazy_segment_tree
+s719881952.py(30): class lazy_segment_tree:
+s719881952.py(31):     def __init__(self, N, operator_M, e_M, compose, funcval, ID_M=None):
+s719881952.py(52):     def build(self, initial):
+s719881952.py(58):     def propagate(self,k):
+s719881952.py(71):     def propagate_all(self):
+s719881952.py(75):     def thrust(self,k):
+s719881952.py(78):     def thrust2(self,L,R):
+s719881952.py(85):     def update(self, l,r,f):
+s719881952.py(105):     def reflect(self,k):
+s719881952.py(110):     def recalc_dat(self,k):
+s719881952.py(117):     def recalc_dat2(self,l,r):
+s719881952.py(128):     def point_get(self, k):
+s719881952.py(138):     def point_set(self, k,x): 
+s719881952.py(145):     def query(self, L,R):
+s719881952.py(163): import sys
+s719881952.py(164): sys.setrecursionlimit(10**6)
+s719881952.py(165): readline = sys.stdin.buffer.readline 
+s719881952.py(167): n,m = [int(i) for i in readline().split()]
+ --- modulename: s719881952, funcname: <listcomp>
+s719881952.py(167): n,m = [int(i) for i in readline().split()]
+s719881952.py(167): n,m = [int(i) for i in readline().split()]
+s719881952.py(167): n,m = [int(i) for i in readline().split()]
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <listcomp>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+ --- modulename: s719881952, funcname: <genexpr>
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+s719881952.py(168): lra = [tuple(int(i) for i in readline().split()) for _ in range(m)]
+s719881952.py(170): from operator import add, itemgetter
+s719881952.py(171): operator_M = max
+s719881952.py(172): compose = add
+s719881952.py(173): funcval = add
+s719881952.py(174): ID_M = 0
+s719881952.py(175): e_M = -10**18
+s719881952.py(177): seg = lazy_segment_tree(n+1, operator_M, e_M, compose, funcval, ID_M)
+ --- modulename: s719881952, funcname: __init__
+s719881952.py(32):         self.compose = compose #作用素の合成（右から）
+s719881952.py(33):         self.ID_M = ID_M       #恒等作用素
+s719881952.py(34):         self.funcval = funcval #関数適用
+s719881952.py(36):         self.op_M = operator_M # Mの演算
+s719881952.py(37):         self.e_M = e_M         # Mの単位元
+s719881952.py(39):         self.height = (N-1).bit_length() #木の段数
+s719881952.py(40):         self.N0 = N0 = 1<<self.height #木の横幅 >= N
+s719881952.py(42):         self.dat = [self.e_M]*(2*N0) #データの木
+s719881952.py(43):         self.laz = [self.ID_M]*(2*N0) #作用素の木
+s719881952.py(45):         """
+s719881952.py(178): seg.build([0]+[ID_M]*(n))
+ --- modulename: s719881952, funcname: build
+s719881952.py(53):         self.dat[self.N0:self.N0+len(initial)] = initial[:]
+s719881952.py(54):         for k in range(self.N0-1,0,-1):
+s719881952.py(55):             self.dat[k] = self.op_M(self.dat[2*k], self.dat[2*k+1])
+s719881952.py(54):         for k in range(self.N0-1,0,-1):
+s719881952.py(55):             self.dat[k] = self.op_M(self.dat[2*k], self.dat[2*k+1])
+s719881952.py(54):         for k in range(self.N0-1,0,-1):
+s719881952.py(55):             self.dat[k] = self.op_M(self.dat[2*k], self.dat[2*k+1])
+s719881952.py(54):         for k in range(self.N0-1,0,-1):
+s719881952.py(55):             self.dat[k] = self.op_M(self.dat[2*k], self.dat[2*k+1])
+s719881952.py(54):         for k in range(self.N0-1,0,-1):
+s719881952.py(55):             self.dat[k] = self.op_M(self.dat[2*k], self.dat[2*k+1])
+s719881952.py(54):         for k in range(self.N0-1,0,-1):
+s719881952.py(55):             self.dat[k] = self.op_M(self.dat[2*k], self.dat[2*k+1])
+s719881952.py(54):         for k in range(self.N0-1,0,-1):
+s719881952.py(55):             self.dat[k] = self.op_M(self.dat[2*k], self.dat[2*k+1])
+s719881952.py(54):         for k in range(self.N0-1,0,-1):
+s719881952.py(182): ans = [] 
+s719881952.py(184): lra.sort(key = itemgetter(1))
+s719881952.py(186): j = 0
+s719881952.py(195): N0 = seg.N0
+s719881952.py(196): for i in range(1,n+1):
+s719881952.py(200):     seg.dat[i+N0] = seg.query(0,i-1)
+ --- modulename: s719881952, funcname: query
+s719881952.py(146):         L += self.N0; R += self.N0 + 1 
+s719881952.py(147):         self.thrust2(L,R)
+ --- modulename: s719881952, funcname: thrust2
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(149):         sl = sr = self.e_M
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(152):                 R -= 1
+s719881952.py(153):                 sr = self.op_M(self.reflect(R),sr)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(158):         return self.op_M(sl,sr)
+s719881952.py(201):     seg.recalc_dat(i+N0)
+ --- modulename: s719881952, funcname: recalc_dat
+s719881952.py(111):         k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(203):     while j < m and i == lra[j][1]:
+s719881952.py(196): for i in range(1,n+1):
+s719881952.py(200):     seg.dat[i+N0] = seg.query(0,i-1)
+ --- modulename: s719881952, funcname: query
+s719881952.py(146):         L += self.N0; R += self.N0 + 1 
+s719881952.py(147):         self.thrust2(L,R)
+ --- modulename: s719881952, funcname: thrust2
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(82):                 self.propagate(R>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(149):         sl = sr = self.e_M
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(152):                 R -= 1
+s719881952.py(153):                 sr = self.op_M(self.reflect(R),sr)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(158):         return self.op_M(sl,sr)
+s719881952.py(201):     seg.recalc_dat(i+N0)
+ --- modulename: s719881952, funcname: recalc_dat
+s719881952.py(111):         k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(203):     while j < m and i == lra[j][1]:
+s719881952.py(196): for i in range(1,n+1):
+s719881952.py(200):     seg.dat[i+N0] = seg.query(0,i-1)
+ --- modulename: s719881952, funcname: query
+s719881952.py(146):         L += self.N0; R += self.N0 + 1 
+s719881952.py(147):         self.thrust2(L,R)
+ --- modulename: s719881952, funcname: thrust2
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(82):                 self.propagate(R>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(149):         sl = sr = self.e_M
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(152):                 R -= 1
+s719881952.py(153):                 sr = self.op_M(self.reflect(R),sr)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(152):                 R -= 1
+s719881952.py(153):                 sr = self.op_M(self.reflect(R),sr)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(158):         return self.op_M(sl,sr)
+s719881952.py(201):     seg.recalc_dat(i+N0)
+ --- modulename: s719881952, funcname: recalc_dat
+s719881952.py(111):         k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(203):     while j < m and i == lra[j][1]:
+s719881952.py(205):         seg.update(*lra[j])#[0],lra[j][1],lra[j][2])
+ --- modulename: s719881952, funcname: update
+s719881952.py(86):         l += self.N0; r += self.N0
+s719881952.py(91):         L = l; R = r+1
+s719881952.py(93):         while L < R:
+s719881952.py(94):             if R & 1:
+s719881952.py(97):             if L & 1:
+s719881952.py(98):                 self.laz[L] = self.compose(self.laz[L], f)
+s719881952.py(99):                 L += 1
+s719881952.py(100):             L >>= 1; R >>= 1
+s719881952.py(93):         while L < R:
+s719881952.py(94):             if R & 1:
+s719881952.py(97):             if L & 1:
+s719881952.py(98):                 self.laz[L] = self.compose(self.laz[L], f)
+s719881952.py(99):                 L += 1
+s719881952.py(100):             L >>= 1; R >>= 1
+s719881952.py(93):         while L < R:
+s719881952.py(103):         self.recalc_dat2(l,r)
+ --- modulename: s719881952, funcname: recalc_dat2
+s719881952.py(118):         l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(121):             self.dat[l] = self.op_M(self.funcval(self.dat[2*l],self.laz[2*l]),self.funcval(self.dat[2*l+1],self.laz[2*l+1]))
+s719881952.py(122):             if l != r:
+s719881952.py(124):                 self.dat[r] = self.op_M(self.funcval(self.dat[2*r],self.laz[2*r]),self.funcval(self.dat[2*r+1],self.laz[2*r+1]))
+s719881952.py(125):             l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(121):             self.dat[l] = self.op_M(self.funcval(self.dat[2*l],self.laz[2*l]),self.funcval(self.dat[2*l+1],self.laz[2*l+1]))
+s719881952.py(122):             if l != r:
+s719881952.py(125):             l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(121):             self.dat[l] = self.op_M(self.funcval(self.dat[2*l],self.laz[2*l]),self.funcval(self.dat[2*l+1],self.laz[2*l+1]))
+s719881952.py(122):             if l != r:
+s719881952.py(125):             l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(206):         j += 1
+s719881952.py(203):     while j < m and i == lra[j][1]:
+s719881952.py(196): for i in range(1,n+1):
+s719881952.py(200):     seg.dat[i+N0] = seg.query(0,i-1)
+ --- modulename: s719881952, funcname: query
+s719881952.py(146):         L += self.N0; R += self.N0 + 1 
+s719881952.py(147):         self.thrust2(L,R)
+ --- modulename: s719881952, funcname: thrust2
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(82):                 self.propagate(R>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(82):                 self.propagate(R>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(149):         sl = sr = self.e_M
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(152):                 R -= 1
+s719881952.py(153):                 sr = self.op_M(self.reflect(R),sr)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(158):         return self.op_M(sl,sr)
+s719881952.py(201):     seg.recalc_dat(i+N0)
+ --- modulename: s719881952, funcname: recalc_dat
+s719881952.py(111):         k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(203):     while j < m and i == lra[j][1]:
+s719881952.py(205):         seg.update(*lra[j])#[0],lra[j][1],lra[j][2])
+ --- modulename: s719881952, funcname: update
+s719881952.py(86):         l += self.N0; r += self.N0
+s719881952.py(91):         L = l; R = r+1
+s719881952.py(93):         while L < R:
+s719881952.py(94):             if R & 1:
+s719881952.py(95):                 R -= 1
+s719881952.py(96):                 self.laz[R] = self.compose(self.laz[R], f)
+s719881952.py(97):             if L & 1:
+s719881952.py(100):             L >>= 1; R >>= 1
+s719881952.py(93):         while L < R:
+s719881952.py(94):             if R & 1:
+s719881952.py(97):             if L & 1:
+s719881952.py(98):                 self.laz[L] = self.compose(self.laz[L], f)
+s719881952.py(99):                 L += 1
+s719881952.py(100):             L >>= 1; R >>= 1
+s719881952.py(93):         while L < R:
+s719881952.py(103):         self.recalc_dat2(l,r)
+ --- modulename: s719881952, funcname: recalc_dat2
+s719881952.py(118):         l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(121):             self.dat[l] = self.op_M(self.funcval(self.dat[2*l],self.laz[2*l]),self.funcval(self.dat[2*l+1],self.laz[2*l+1]))
+s719881952.py(122):             if l != r:
+s719881952.py(124):                 self.dat[r] = self.op_M(self.funcval(self.dat[2*r],self.laz[2*r]),self.funcval(self.dat[2*r+1],self.laz[2*r+1]))
+s719881952.py(125):             l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(121):             self.dat[l] = self.op_M(self.funcval(self.dat[2*l],self.laz[2*l]),self.funcval(self.dat[2*l+1],self.laz[2*l+1]))
+s719881952.py(122):             if l != r:
+s719881952.py(124):                 self.dat[r] = self.op_M(self.funcval(self.dat[2*r],self.laz[2*r]),self.funcval(self.dat[2*r+1],self.laz[2*r+1]))
+s719881952.py(125):             l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(121):             self.dat[l] = self.op_M(self.funcval(self.dat[2*l],self.laz[2*l]),self.funcval(self.dat[2*l+1],self.laz[2*l+1]))
+s719881952.py(122):             if l != r:
+s719881952.py(125):             l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(206):         j += 1
+s719881952.py(203):     while j < m and i == lra[j][1]:
+s719881952.py(196): for i in range(1,n+1):
+s719881952.py(200):     seg.dat[i+N0] = seg.query(0,i-1)
+ --- modulename: s719881952, funcname: query
+s719881952.py(146):         L += self.N0; R += self.N0 + 1 
+s719881952.py(147):         self.thrust2(L,R)
+ --- modulename: s719881952, funcname: thrust2
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(82):                 self.propagate(R>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(80):             self.propagate(L>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(81):             if (L>>i) != R>>i:
+s719881952.py(82):                 self.propagate(R>>i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(79):         for i in range(self.height,0,-1):
+s719881952.py(149):         sl = sr = self.e_M
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(152):                 R -= 1
+s719881952.py(153):                 sr = self.op_M(self.reflect(R),sr)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(107):         else: return self.funcval(self.dat[k],self.laz[k])
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(151):             if R & 1:
+s719881952.py(152):                 R -= 1
+s719881952.py(153):                 sr = self.op_M(self.reflect(R),sr)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(154):             if L & 1:
+s719881952.py(157):             L >>= 1; R >>= 1
+s719881952.py(150):         while L < R:
+s719881952.py(158):         return self.op_M(sl,sr)
+s719881952.py(201):     seg.recalc_dat(i+N0)
+ --- modulename: s719881952, funcname: recalc_dat
+s719881952.py(111):         k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(113):             self.dat[k] = self.op_M(self.funcval(self.dat[2*k],self.laz[2*k]),self.funcval(self.dat[2*k+1],self.laz[2*k+1]))
+s719881952.py(115):             k //= 2
+s719881952.py(112):         while k:
+s719881952.py(203):     while j < m and i == lra[j][1]:
+s719881952.py(205):         seg.update(*lra[j])#[0],lra[j][1],lra[j][2])
+ --- modulename: s719881952, funcname: update
+s719881952.py(86):         l += self.N0; r += self.N0
+s719881952.py(91):         L = l; R = r+1
+s719881952.py(93):         while L < R:
+s719881952.py(94):             if R & 1:
+s719881952.py(97):             if L & 1:
+s719881952.py(98):                 self.laz[L] = self.compose(self.laz[L], f)
+s719881952.py(99):                 L += 1
+s719881952.py(100):             L >>= 1; R >>= 1
+s719881952.py(93):         while L < R:
+s719881952.py(94):             if R & 1:
+s719881952.py(95):                 R -= 1
+s719881952.py(96):                 self.laz[R] = self.compose(self.laz[R], f)
+s719881952.py(97):             if L & 1:
+s719881952.py(100):             L >>= 1; R >>= 1
+s719881952.py(93):         while L < R:
+s719881952.py(103):         self.recalc_dat2(l,r)
+ --- modulename: s719881952, funcname: recalc_dat2
+s719881952.py(118):         l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(121):             self.dat[l] = self.op_M(self.funcval(self.dat[2*l],self.laz[2*l]),self.funcval(self.dat[2*l+1],self.laz[2*l+1]))
+s719881952.py(122):             if l != r:
+s719881952.py(124):                 self.dat[r] = self.op_M(self.funcval(self.dat[2*r],self.laz[2*r]),self.funcval(self.dat[2*r+1],self.laz[2*r+1]))
+s719881952.py(125):             l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(121):             self.dat[l] = self.op_M(self.funcval(self.dat[2*l],self.laz[2*l]),self.funcval(self.dat[2*l+1],self.laz[2*l+1]))
+s719881952.py(122):             if l != r:
+s719881952.py(124):                 self.dat[r] = self.op_M(self.funcval(self.dat[2*r],self.laz[2*r]),self.funcval(self.dat[2*r+1],self.laz[2*r+1]))
+s719881952.py(125):             l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(121):             self.dat[l] = self.op_M(self.funcval(self.dat[2*l],self.laz[2*l]),self.funcval(self.dat[2*l+1],self.laz[2*l+1]))
+s719881952.py(122):             if l != r:
+s719881952.py(125):             l //= 2; r //= 2
+s719881952.py(119):         while l:
+s719881952.py(206):         j += 1
+s719881952.py(203):     while j < m and i == lra[j][1]:
+s719881952.py(196): for i in range(1,n+1):
+s719881952.py(208): seg.propagate_all()
+ --- modulename: s719881952, funcname: propagate_all
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(60):         self.dat[k] = self.reflect(k)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(107):         else: return self.funcval(self.dat[k],self.laz[k])
+s719881952.py(61):         if self.N0 <= k:
+s719881952.py(65):             self.laz[2*k  ] = self.compose(self.laz[2*k  ],self.laz[k])
+s719881952.py(66):             self.laz[2*k+1] = self.compose(self.laz[2*k+1],self.laz[k])
+s719881952.py(67):             self.laz[k] = self.ID_M
+s719881952.py(68):             return
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(60):         self.dat[k] = self.reflect(k)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(107):         else: return self.funcval(self.dat[k],self.laz[k])
+s719881952.py(61):         if self.N0 <= k:
+s719881952.py(62):             self.laz[k] = self.ID_M
+s719881952.py(63):             return
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(60):         self.dat[k] = self.reflect(k)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(107):         else: return self.funcval(self.dat[k],self.laz[k])
+s719881952.py(61):         if self.N0 <= k:
+s719881952.py(62):             self.laz[k] = self.ID_M
+s719881952.py(63):             return
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(60):         self.dat[k] = self.reflect(k)
+ --- modulename: s719881952, funcname: reflect
+s719881952.py(106):         if self.laz[k] == self.ID_M: return self.dat[k]
+s719881952.py(107):         else: return self.funcval(self.dat[k],self.laz[k])
+s719881952.py(61):         if self.N0 <= k:
+s719881952.py(62):             self.laz[k] = self.ID_M
+s719881952.py(63):             return
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+ --- modulename: s719881952, funcname: propagate
+s719881952.py(59):         if self.laz[k] == self.ID_M: return;
+s719881952.py(72):         for i in range(1,2*self.N0): self.propagate(i)
+s719881952.py(209): print(max(seg.dat[seg.N0:seg.N0+n+1]))
+20
