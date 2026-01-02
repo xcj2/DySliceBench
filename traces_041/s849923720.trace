@@ -1,0 +1,90 @@
+ --- modulename: s849923720, funcname: <module>
+s849923720.py(1): import os
+s849923720.py(2): import sys
+s849923720.py(4): if os.getenv("LOCAL"):
+ --- modulename: os, funcname: getenv
+os.py(775):     return environ.get(key, default)
+ --- modulename: _collections_abc, funcname: get
+_collections_abc.py(762):         try:
+_collections_abc.py(763):             return self[key]
+ --- modulename: os, funcname: __getitem__
+os.py(675):         try:
+os.py(676):             value = self._data[self.encodekey(key)]
+ --- modulename: os, funcname: encodekey
+os.py(747):             return encode(key).upper()
+ --- modulename: os, funcname: check_str
+os.py(741):             if not isinstance(value, str):
+os.py(743):             return value
+os.py(677):         except KeyError:
+os.py(679):             raise KeyError(key) from None
+_collections_abc.py(764):         except KeyError:
+_collections_abc.py(765):             return default
+s849923720.py(7): sys.setrecursionlimit(10 ** 9)
+s849923720.py(8): INF = float("inf")
+s849923720.py(9): IINF = 10 ** 18
+s849923720.py(10): MOD = 10 ** 9 + 7
+s849923720.py(15): def div_mod(a, b, mod):
+s849923720.py(29): def mod_inv(a, mod):
+s849923720.py(39): def get_factorials(max, mod=None):
+s849923720.py(60): def mod_invs(max, mod):
+s849923720.py(72): def factorial_invs(max, mod):
+s849923720.py(86): class Combination:
+ --- modulename: s849923720, funcname: Combination
+s849923720.py(86): class Combination:
+s849923720.py(87):     def __init__(self, max, mod):
+s849923720.py(96):     def ncr(self, n, r):
+s849923720.py(107): X, Y = list(map(int, sys.stdin.readline().split()))
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s849923720.py(109): if (X + Y) % 3 != 0:
+s849923720.py(113): X, Y = min(X, Y), max(X, Y)
+s849923720.py(114): if X * 2 < Y:
+s849923720.py(118): comb = Combination(max=(X + Y) // 3, mod=MOD)
+ --- modulename: s849923720, funcname: __init__
+s849923720.py(92):         self._factorials = get_factorials(max, mod)
+ --- modulename: s849923720, funcname: get_factorials
+s849923720.py(46):     ret = [1]
+s849923720.py(47):     n = 1
+s849923720.py(48):     if mod:
+s849923720.py(49):         for i in range(1, max + 1):
+s849923720.py(50):             n *= i
+s849923720.py(51):             n %= mod
+s849923720.py(52):             ret.append(n)
+s849923720.py(49):         for i in range(1, max + 1):
+s849923720.py(50):             n *= i
+s849923720.py(51):             n %= mod
+s849923720.py(52):             ret.append(n)
+s849923720.py(49):         for i in range(1, max + 1):
+s849923720.py(57):     return ret
+s849923720.py(93):         self._finvs = factorial_invs(max, mod)
+ --- modulename: s849923720, funcname: factorial_invs
+s849923720.py(78):     ret = []
+s849923720.py(79):     r = 1
+s849923720.py(80):     for inv in mod_invs(max, mod):
+ --- modulename: s849923720, funcname: mod_invs
+s849923720.py(66):     invs = [1] * (max + 1)
+s849923720.py(67):     for x in range(2, max + 1):
+s849923720.py(68):         invs[x] = (-(mod // x) * invs[mod % x]) % mod
+s849923720.py(67):     for x in range(2, max + 1):
+s849923720.py(69):     return invs
+s849923720.py(81):         r = r * inv % mod
+s849923720.py(82):         ret.append(r)
+s849923720.py(80):     for inv in mod_invs(max, mod):
+s849923720.py(81):         r = r * inv % mod
+s849923720.py(82):         ret.append(r)
+s849923720.py(80):     for inv in mod_invs(max, mod):
+s849923720.py(81):         r = r * inv % mod
+s849923720.py(82):         ret.append(r)
+s849923720.py(80):     for inv in mod_invs(max, mod):
+s849923720.py(83):     return ret
+s849923720.py(94):         self._mod = mod
+s849923720.py(119): print(comb.ncr((X + Y) // 3, X - (X + Y) // 3))
+ --- modulename: s849923720, funcname: ncr
+s849923720.py(102):         if n < r:
+s849923720.py(104):         return self._factorials[n] * self._finvs[r] % self._mod * self._finvs[n - r] % self._mod
+2
