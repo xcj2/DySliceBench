@@ -1,0 +1,154 @@
+ --- modulename: s952145416, funcname: <module>
+s952145416.py(1): from heapq import heappop, heapify
+s952145416.py(2): import sys
+s952145416.py(3): input = sys.stdin.buffer.readline
+s952145416.py(5): class UnionFind :
+ --- modulename: s952145416, funcname: UnionFind
+s952145416.py(5): class UnionFind :
+s952145416.py(6):     """
+s952145416.py(23):     def __init__(self, size) :
+s952145416.py(35):     def root(self, index) :
+s952145416.py(55):     def union(self, index1, index2) :  # 結合
+s952145416.py(83):     def isSameRoot(self, index1, index2) :
+s952145416.py(98):     def sizeOfSameRoot(self, index) :
+s952145416.py(104):     def getComponent(self) :
+s952145416.py(110): N = int(input())
+s952145416.py(111): X = []
+s952145416.py(112): Y = []
+s952145416.py(114): for i in range(N):
+s952145416.py(115):     x, y = map(int, input().split())
+s952145416.py(116):     X.append((x, i))
+s952145416.py(117):     Y.append((y, i))
+s952145416.py(114): for i in range(N):
+s952145416.py(115):     x, y = map(int, input().split())
+s952145416.py(116):     X.append((x, i))
+s952145416.py(117):     Y.append((y, i))
+s952145416.py(114): for i in range(N):
+s952145416.py(115):     x, y = map(int, input().split())
+s952145416.py(116):     X.append((x, i))
+s952145416.py(117):     Y.append((y, i))
+s952145416.py(114): for i in range(N):
+s952145416.py(119): X.sort()
+s952145416.py(120): Y.sort()
+s952145416.py(121): edges = []
+s952145416.py(123): for (u, fr), (v, to) in zip(X, X[1:]):
+s952145416.py(124):     edges.append((abs(u - v), fr, to,))
+s952145416.py(123): for (u, fr), (v, to) in zip(X, X[1:]):
+s952145416.py(124):     edges.append((abs(u - v), fr, to,))
+s952145416.py(123): for (u, fr), (v, to) in zip(X, X[1:]):
+s952145416.py(125): for (u, fr), (v, to) in zip(Y, Y[1:]):
+s952145416.py(126):     edges.append((abs(u - v), fr, to,))
+s952145416.py(125): for (u, fr), (v, to) in zip(Y, Y[1:]):
+s952145416.py(126):     edges.append((abs(u - v), fr, to,))
+s952145416.py(125): for (u, fr), (v, to) in zip(Y, Y[1:]):
+s952145416.py(128): heapify(edges)
+s952145416.py(129): tree = UnionFind(N)
+ --- modulename: s952145416, funcname: __init__
+s952145416.py(30):         self.parent = list(range(size))
+s952145416.py(31):         self.height = [0] * size
+s952145416.py(32):         self.size = [1] * size
+s952145416.py(33):         self.component = size
+s952145416.py(130): ans = 0
+s952145416.py(131): while edges:
+s952145416.py(132):     cost, fr, to = heappop(edges)
+s952145416.py(133):     if not tree.isSameRoot(fr, to):
+ --- modulename: s952145416, funcname: isSameRoot
+s952145416.py(96):         return self.root(index1) == self.root(index2)
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(134):         ans += cost
+s952145416.py(135):         tree.union(fr, to)
+ --- modulename: s952145416, funcname: union
+s952145416.py(65):         root1 = self.root(index1)
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(66):         root2 = self.root(index2)
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(68):         if root1 == root2 :  # 連結されている場合
+s952145416.py(71):         self.component -= 1  # 連結成分を減らす
+s952145416.py(73):         if self.height[root1] < self.height[root2] :
+s952145416.py(77):             self.parent[root2] = root1  # root1に結合
+s952145416.py(78):             self.size[root1] += self.size[root2]
+s952145416.py(79):             if self.height[root1] == self.height[root2] :
+s952145416.py(80):                 self.height[root1] += 1
+s952145416.py(81):         return
+s952145416.py(131): while edges:
+s952145416.py(132):     cost, fr, to = heappop(edges)
+s952145416.py(133):     if not tree.isSameRoot(fr, to):
+ --- modulename: s952145416, funcname: isSameRoot
+s952145416.py(96):         return self.root(index1) == self.root(index2)
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(51):         rootIndex = self.root(self.parent[index])  # 葉の場合親の根を取得
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(52):         self.parent[index] = rootIndex  # 親の付け直し
+s952145416.py(53):         return rootIndex
+s952145416.py(134):         ans += cost
+s952145416.py(135):         tree.union(fr, to)
+ --- modulename: s952145416, funcname: union
+s952145416.py(65):         root1 = self.root(index1)
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(66):         root2 = self.root(index2)
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(51):         rootIndex = self.root(self.parent[index])  # 葉の場合親の根を取得
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(52):         self.parent[index] = rootIndex  # 親の付け直し
+s952145416.py(53):         return rootIndex
+s952145416.py(68):         if root1 == root2 :  # 連結されている場合
+s952145416.py(71):         self.component -= 1  # 連結成分を減らす
+s952145416.py(73):         if self.height[root1] < self.height[root2] :
+s952145416.py(74):             self.parent[root1] = root2  # root2に結合
+s952145416.py(75):             self.size[root2] += self.size[root1]
+s952145416.py(81):         return
+s952145416.py(131): while edges:
+s952145416.py(132):     cost, fr, to = heappop(edges)
+s952145416.py(133):     if not tree.isSameRoot(fr, to):
+ --- modulename: s952145416, funcname: isSameRoot
+s952145416.py(96):         return self.root(index1) == self.root(index2)
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(51):         rootIndex = self.root(self.parent[index])  # 葉の場合親の根を取得
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(52):         self.parent[index] = rootIndex  # 親の付け直し
+s952145416.py(53):         return rootIndex
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(131): while edges:
+s952145416.py(132):     cost, fr, to = heappop(edges)
+s952145416.py(133):     if not tree.isSameRoot(fr, to):
+ --- modulename: s952145416, funcname: isSameRoot
+s952145416.py(96):         return self.root(index1) == self.root(index2)
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(51):         rootIndex = self.root(self.parent[index])  # 葉の場合親の根を取得
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(52):         self.parent[index] = rootIndex  # 親の付け直し
+s952145416.py(53):         return rootIndex
+ --- modulename: s952145416, funcname: root
+s952145416.py(49):         if self.parent[index] == index :  # 根の場合
+s952145416.py(50):             return index
+s952145416.py(131): while edges:
+s952145416.py(137): print(ans)
+3
