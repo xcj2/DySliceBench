@@ -1,0 +1,759 @@
+ --- modulename: s685266474, funcname: <module>
+s685266474.py(1): class LazySegmentTree:
+ --- modulename: s685266474, funcname: LazySegmentTree
+s685266474.py(1): class LazySegmentTree:
+s685266474.py(2):     """
+s685266474.py(29):     @classmethod
+s685266474.py(30):     def all_identity(cls, op, op_e, comp, comp_e, apply, size):
+s685266474.py(42):     @classmethod
+s685266474.py(43):     def from_initial_data(cls, op, op_e, comp, comp_e, apply, data):
+s685266474.py(61):     def __init__(self, op, op_e, comp, comp_e, apply, data, lazy):
+s685266474.py(74):     def _update_indices(self, i, l):
+s685266474.py(82):     def _propagate_top_down(self):
+s685266474.py(113):     def _propagate_bottom_up(self):
+s685266474.py(122):     def update_interval(self, l, r, m):
+s685266474.py(148):     def get_interval(self, l, r):
+s685266474.py(174): import sys
+s685266474.py(175): read = sys.stdin.buffer.read
+s685266474.py(176): readline = sys.stdin.buffer.readline
+s685266474.py(178): from operator import add
+s685266474.py(180): if __name__ == '__main__':
+s685266474.py(181):     n,q = map(int,readline().split())
+s685266474.py(182):     temp = map(int,read().split())
+s685266474.py(184):     seg = LazySegmentTree.all_identity(
+s685266474.py(185):         add,
+s685266474.py(186):         0,
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(188):         None,
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(190):         n)
+s685266474.py(184):     seg = LazySegmentTree.all_identity(
+ --- modulename: s685266474, funcname: all_identity
+s685266474.py(31):         size = 2 << (size-1).bit_length()
+s685266474.py(32):         return cls(
+s685266474.py(33):             op,
+s685266474.py(34):             op_e,
+s685266474.py(35):             comp,
+s685266474.py(36):             comp_e,
+s685266474.py(37):             apply,
+s685266474.py(38):             [op_e]*size,
+s685266474.py(39):             [comp_e]*size
+s685266474.py(32):         return cls(
+ --- modulename: s685266474, funcname: __init__
+s685266474.py(62):         self.op = op
+s685266474.py(63):         self.op_e = op_e
+s685266474.py(64):         self.comp = comp
+s685266474.py(65):         self.comp_e = comp_e
+s685266474.py(66):         self.apply = apply
+s685266474.py(67):         self.data = data
+s685266474.py(68):         self.lazy = lazy
+s685266474.py(69):         self.size = len(self.data)//2
+s685266474.py(70):         self.depth = self.size.bit_length()-1
+s685266474.py(71):         self._l_indices = [0]*self.depth
+s685266474.py(72):         self._r_indices = [0]*self.depth
+s685266474.py(192):     try:
+s685266474.py(194):             mode = next(temp)
+s685266474.py(195):             if mode:
+s685266474.py(199):                 l,r,x = next(temp), next(temp)+1, next(temp)
+s685266474.py(200):                 seg.update_interval(l,r,x)
+ --- modulename: s685266474, funcname: update_interval
+s685266474.py(123):         lazy = self.lazy
+s685266474.py(124):         data = self.data
+s685266474.py(125):         comp = self.comp
+s685266474.py(126):         apply = self.apply
+s685266474.py(128):         l += self.size
+s685266474.py(129):         r += self.size
+s685266474.py(130):         self._update_indices(l, self._l_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(131):         self._update_indices(r, self._r_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(132):         self._propagate_top_down()
+ --- modulename: s685266474, funcname: _propagate_top_down
+s685266474.py(83):         data = self.data
+s685266474.py(84):         lazy = self.lazy
+s685266474.py(85):         apply = self.apply
+s685266474.py(86):         comp = self.comp
+s685266474.py(87):         comp_e = self.comp_e
+s685266474.py(88):         k = self.size >> 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(133):         k = 1
+s685266474.py(134):         while l < r:
+s685266474.py(135):             if l & 1:
+s685266474.py(136):                 lazy[l] = comp(lazy[l],m)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(137):                 data[l] = apply(data[l],m,k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(138):                 l += 1
+s685266474.py(139):             if r & 1:
+s685266474.py(143):             l >>= 1
+s685266474.py(144):             r >>= 1
+s685266474.py(145):             k <<= 1
+s685266474.py(134):         while l < r:
+s685266474.py(135):             if l & 1:
+s685266474.py(136):                 lazy[l] = comp(lazy[l],m)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(137):                 data[l] = apply(data[l],m,k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(138):                 l += 1
+s685266474.py(139):             if r & 1:
+s685266474.py(143):             l >>= 1
+s685266474.py(144):             r >>= 1
+s685266474.py(145):             k <<= 1
+s685266474.py(134):         while l < r:
+s685266474.py(146):         self._propagate_bottom_up()
+ --- modulename: s685266474, funcname: _propagate_bottom_up
+s685266474.py(114):         data = self.data
+s685266474.py(115):         op = self.op
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(117):             if i > 0:
+s685266474.py(118):                 data[i] = op(data[2*i],data[2*i+1])
+s685266474.py(119):             if i < j:
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(117):             if i > 0:
+s685266474.py(118):                 data[i] = op(data[2*i],data[2*i+1])
+s685266474.py(119):             if i < j:
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(117):             if i > 0:
+s685266474.py(118):                 data[i] = op(data[2*i],data[2*i+1])
+s685266474.py(119):             if i < j:
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(194):             mode = next(temp)
+s685266474.py(195):             if mode:
+s685266474.py(199):                 l,r,x = next(temp), next(temp)+1, next(temp)
+s685266474.py(200):                 seg.update_interval(l,r,x)
+ --- modulename: s685266474, funcname: update_interval
+s685266474.py(123):         lazy = self.lazy
+s685266474.py(124):         data = self.data
+s685266474.py(125):         comp = self.comp
+s685266474.py(126):         apply = self.apply
+s685266474.py(128):         l += self.size
+s685266474.py(129):         r += self.size
+s685266474.py(130):         self._update_indices(l, self._l_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(131):         self._update_indices(r, self._r_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(132):         self._propagate_top_down()
+ --- modulename: s685266474, funcname: _propagate_top_down
+s685266474.py(83):         data = self.data
+s685266474.py(84):         lazy = self.lazy
+s685266474.py(85):         apply = self.apply
+s685266474.py(86):         comp = self.comp
+s685266474.py(87):         comp_e = self.comp_e
+s685266474.py(88):         k = self.size >> 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(133):         k = 1
+s685266474.py(134):         while l < r:
+s685266474.py(135):             if l & 1:
+s685266474.py(139):             if r & 1:
+s685266474.py(140):                 r -= 1
+s685266474.py(141):                 lazy[r] = comp(lazy[r],m)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(142):                 data[r] = apply(data[r],m,k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(143):             l >>= 1
+s685266474.py(144):             r >>= 1
+s685266474.py(145):             k <<= 1
+s685266474.py(134):         while l < r:
+s685266474.py(135):             if l & 1:
+s685266474.py(136):                 lazy[l] = comp(lazy[l],m)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(137):                 data[l] = apply(data[l],m,k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(138):                 l += 1
+s685266474.py(139):             if r & 1:
+s685266474.py(143):             l >>= 1
+s685266474.py(144):             r >>= 1
+s685266474.py(145):             k <<= 1
+s685266474.py(134):         while l < r:
+s685266474.py(146):         self._propagate_bottom_up()
+ --- modulename: s685266474, funcname: _propagate_bottom_up
+s685266474.py(114):         data = self.data
+s685266474.py(115):         op = self.op
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(117):             if i > 0:
+s685266474.py(119):             if i < j:
+s685266474.py(120):                 data[j] = op(data[2*j],data[2*j+1])
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(117):             if i > 0:
+s685266474.py(118):                 data[i] = op(data[2*i],data[2*i+1])
+s685266474.py(119):             if i < j:
+s685266474.py(120):                 data[j] = op(data[2*j],data[2*j+1])
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(117):             if i > 0:
+s685266474.py(118):                 data[i] = op(data[2*i],data[2*i+1])
+s685266474.py(119):             if i < j:
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(194):             mode = next(temp)
+s685266474.py(195):             if mode:
+s685266474.py(196):                 l,r = next(temp), next(temp)+1
+s685266474.py(197):                 print(seg.get_interval(l,r))
+ --- modulename: s685266474, funcname: get_interval
+s685266474.py(149):         data = self.data
+s685266474.py(150):         op = self.op
+s685266474.py(152):         l += self.size
+s685266474.py(153):         r += self.size
+s685266474.py(154):         self._update_indices(l, self._l_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(155):         self._update_indices(r, self._r_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(156):         self._propagate_top_down()
+ --- modulename: s685266474, funcname: _propagate_top_down
+s685266474.py(83):         data = self.data
+s685266474.py(84):         lazy = self.lazy
+s685266474.py(85):         apply = self.apply
+s685266474.py(86):         comp = self.comp
+s685266474.py(87):         comp_e = self.comp_e
+s685266474.py(88):         k = self.size >> 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(158):         lx = self.op_e
+s685266474.py(159):         rx = self.op_e
+s685266474.py(160):         while l < r:
+s685266474.py(161):             if l & 1:
+s685266474.py(164):             if r & 1:
+s685266474.py(167):             l >>= 1
+s685266474.py(168):             r >>= 1
+s685266474.py(160):         while l < r:
+s685266474.py(161):             if l & 1:
+s685266474.py(164):             if r & 1:
+s685266474.py(165):                 r -= 1
+s685266474.py(166):                 rx = op(data[r], rx)
+s685266474.py(167):             l >>= 1
+s685266474.py(168):             r >>= 1
+s685266474.py(160):         while l < r:
+s685266474.py(161):             if l & 1:
+s685266474.py(164):             if r & 1:
+s685266474.py(165):                 r -= 1
+s685266474.py(166):                 rx = op(data[r], rx)
+s685266474.py(167):             l >>= 1
+s685266474.py(168):             r >>= 1
+s685266474.py(160):         while l < r:
+s685266474.py(169):         return op(lx,rx)
+-5
+s685266474.py(194):             mode = next(temp)
+s685266474.py(195):             if mode:
+s685266474.py(196):                 l,r = next(temp), next(temp)+1
+s685266474.py(197):                 print(seg.get_interval(l,r))
+ --- modulename: s685266474, funcname: get_interval
+s685266474.py(149):         data = self.data
+s685266474.py(150):         op = self.op
+s685266474.py(152):         l += self.size
+s685266474.py(153):         r += self.size
+s685266474.py(154):         self._update_indices(l, self._l_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(155):         self._update_indices(r, self._r_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(156):         self._propagate_top_down()
+ --- modulename: s685266474, funcname: _propagate_top_down
+s685266474.py(83):         data = self.data
+s685266474.py(84):         lazy = self.lazy
+s685266474.py(85):         apply = self.apply
+s685266474.py(86):         comp = self.comp
+s685266474.py(87):         comp_e = self.comp_e
+s685266474.py(88):         k = self.size >> 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(158):         lx = self.op_e
+s685266474.py(159):         rx = self.op_e
+s685266474.py(160):         while l < r:
+s685266474.py(161):             if l & 1:
+s685266474.py(164):             if r & 1:
+s685266474.py(167):             l >>= 1
+s685266474.py(168):             r >>= 1
+s685266474.py(160):         while l < r:
+s685266474.py(161):             if l & 1:
+s685266474.py(164):             if r & 1:
+s685266474.py(165):                 r -= 1
+s685266474.py(166):                 rx = op(data[r], rx)
+s685266474.py(167):             l >>= 1
+s685266474.py(168):             r >>= 1
+s685266474.py(160):         while l < r:
+s685266474.py(169):         return op(lx,rx)
+1
+s685266474.py(194):             mode = next(temp)
+s685266474.py(195):             if mode:
+s685266474.py(199):                 l,r,x = next(temp), next(temp)+1, next(temp)
+s685266474.py(200):                 seg.update_interval(l,r,x)
+ --- modulename: s685266474, funcname: update_interval
+s685266474.py(123):         lazy = self.lazy
+s685266474.py(124):         data = self.data
+s685266474.py(125):         comp = self.comp
+s685266474.py(126):         apply = self.apply
+s685266474.py(128):         l += self.size
+s685266474.py(129):         r += self.size
+s685266474.py(130):         self._update_indices(l, self._l_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(131):         self._update_indices(r, self._r_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(132):         self._propagate_top_down()
+ --- modulename: s685266474, funcname: _propagate_top_down
+s685266474.py(83):         data = self.data
+s685266474.py(84):         lazy = self.lazy
+s685266474.py(85):         apply = self.apply
+s685266474.py(86):         comp = self.comp
+s685266474.py(87):         comp_e = self.comp_e
+s685266474.py(88):         k = self.size >> 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(94):                     lazy[i] = comp_e
+s685266474.py(95):                     a = i << 1
+s685266474.py(96):                     b = (i << 1) | 1
+s685266474.py(97):                     lazy[a] = comp(lazy[a], temp)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(98):                     data[a] = apply(data[a], temp, k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(99):                     lazy[b] = comp(lazy[b], temp)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(100):                     data[b] = apply(data[b], temp, k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(133):         k = 1
+s685266474.py(134):         while l < r:
+s685266474.py(135):             if l & 1:
+s685266474.py(136):                 lazy[l] = comp(lazy[l],m)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(137):                 data[l] = apply(data[l],m,k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(138):                 l += 1
+s685266474.py(139):             if r & 1:
+s685266474.py(143):             l >>= 1
+s685266474.py(144):             r >>= 1
+s685266474.py(145):             k <<= 1
+s685266474.py(134):         while l < r:
+s685266474.py(135):             if l & 1:
+s685266474.py(139):             if r & 1:
+s685266474.py(140):                 r -= 1
+s685266474.py(141):                 lazy[r] = comp(lazy[r],m)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(142):                 data[r] = apply(data[r],m,k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(143):             l >>= 1
+s685266474.py(144):             r >>= 1
+s685266474.py(145):             k <<= 1
+s685266474.py(134):         while l < r:
+s685266474.py(146):         self._propagate_bottom_up()
+ --- modulename: s685266474, funcname: _propagate_bottom_up
+s685266474.py(114):         data = self.data
+s685266474.py(115):         op = self.op
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(117):             if i > 0:
+s685266474.py(118):                 data[i] = op(data[2*i],data[2*i+1])
+s685266474.py(119):             if i < j:
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(117):             if i > 0:
+s685266474.py(118):                 data[i] = op(data[2*i],data[2*i+1])
+s685266474.py(119):             if i < j:
+s685266474.py(120):                 data[j] = op(data[2*j],data[2*j+1])
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(117):             if i > 0:
+s685266474.py(118):                 data[i] = op(data[2*i],data[2*i+1])
+s685266474.py(119):             if i < j:
+s685266474.py(116):         for i,j in zip(reversed(self._l_indices), reversed(self._r_indices)):
+s685266474.py(194):             mode = next(temp)
+s685266474.py(195):             if mode:
+s685266474.py(196):                 l,r = next(temp), next(temp)+1
+s685266474.py(197):                 print(seg.get_interval(l,r))
+ --- modulename: s685266474, funcname: get_interval
+s685266474.py(149):         data = self.data
+s685266474.py(150):         op = self.op
+s685266474.py(152):         l += self.size
+s685266474.py(153):         r += self.size
+s685266474.py(154):         self._update_indices(l, self._l_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(155):         self._update_indices(r, self._r_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(156):         self._propagate_top_down()
+ --- modulename: s685266474, funcname: _propagate_top_down
+s685266474.py(83):         data = self.data
+s685266474.py(84):         lazy = self.lazy
+s685266474.py(85):         apply = self.apply
+s685266474.py(86):         comp = self.comp
+s685266474.py(87):         comp_e = self.comp_e
+s685266474.py(88):         k = self.size >> 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(92):                 temp = self.lazy[i]
+s685266474.py(93):                 if temp != comp_e:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(104):                     lazy[j] = comp_e
+s685266474.py(105):                     a = j << 1
+s685266474.py(106):                     b = (j << 1) | 1
+s685266474.py(107):                     lazy[a] = comp(lazy[a], temp)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(108):                     data[a] = apply(data[a], temp, k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(109):                     lazy[b] = comp(lazy[b], temp)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(187):         lambda x,y: x if y is None else y,
+s685266474.py(110):                     data[b] = apply(data[b], temp, k)
+ --- modulename: s685266474, funcname: <lambda>
+s685266474.py(189):         lambda x,m,l: x if m is None else m*l,
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(158):         lx = self.op_e
+s685266474.py(159):         rx = self.op_e
+s685266474.py(160):         while l < r:
+s685266474.py(161):             if l & 1:
+s685266474.py(162):                 lx = op(lx, data[l])
+s685266474.py(163):                 l += 1
+s685266474.py(164):             if r & 1:
+s685266474.py(165):                 r -= 1
+s685266474.py(166):                 rx = op(data[r], rx)
+s685266474.py(167):             l >>= 1
+s685266474.py(168):             r >>= 1
+s685266474.py(160):         while l < r:
+s685266474.py(169):         return op(lx,rx)
+6
+s685266474.py(194):             mode = next(temp)
+s685266474.py(195):             if mode:
+s685266474.py(196):                 l,r = next(temp), next(temp)+1
+s685266474.py(197):                 print(seg.get_interval(l,r))
+ --- modulename: s685266474, funcname: get_interval
+s685266474.py(149):         data = self.data
+s685266474.py(150):         op = self.op
+s685266474.py(152):         l += self.size
+s685266474.py(153):         r += self.size
+s685266474.py(154):         self._update_indices(l, self._l_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(155):         self._update_indices(r, self._r_indices)
+ --- modulename: s685266474, funcname: _update_indices
+s685266474.py(75):         m = i//(i&-i)
+s685266474.py(76):         i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(78):             l[k] = i if i < m else 0
+s685266474.py(79):             i >>= 1
+s685266474.py(77):         for k in reversed(range(self.depth)):
+s685266474.py(156):         self._propagate_top_down()
+ --- modulename: s685266474, funcname: _propagate_top_down
+s685266474.py(83):         data = self.data
+s685266474.py(84):         lazy = self.lazy
+s685266474.py(85):         apply = self.apply
+s685266474.py(86):         comp = self.comp
+s685266474.py(87):         comp_e = self.comp_e
+s685266474.py(88):         k = self.size >> 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(102):                 temp = self.lazy[j]
+s685266474.py(103):                 if temp != comp_e:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(91):             if i > 0:
+s685266474.py(101):             if i < j:
+s685266474.py(111):             k >>= 1
+s685266474.py(90):         for i,j in zip(self._l_indices, self._r_indices):
+s685266474.py(158):         lx = self.op_e
+s685266474.py(159):         rx = self.op_e
+s685266474.py(160):         while l < r:
+s685266474.py(161):             if l & 1:
+s685266474.py(164):             if r & 1:
+s685266474.py(167):             l >>= 1
+s685266474.py(168):             r >>= 1
+s685266474.py(160):         while l < r:
+s685266474.py(161):             if l & 1:
+s685266474.py(164):             if r & 1:
+s685266474.py(165):                 r -= 1
+s685266474.py(166):                 rx = op(data[r], rx)
+s685266474.py(167):             l >>= 1
+s685266474.py(168):             r >>= 1
+s685266474.py(160):         while l < r:
+s685266474.py(161):             if l & 1:
+s685266474.py(164):             if r & 1:
+s685266474.py(165):                 r -= 1
+s685266474.py(166):                 rx = op(data[r], rx)
+s685266474.py(167):             l >>= 1
+s685266474.py(168):             r >>= 1
+s685266474.py(160):         while l < r:
+s685266474.py(169):         return op(lx,rx)
+8
+s685266474.py(194):             mode = next(temp)
+s685266474.py(201):     except StopIteration:
+s685266474.py(202):         pass
