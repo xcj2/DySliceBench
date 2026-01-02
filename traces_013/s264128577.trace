@@ -1,0 +1,237 @@
+ --- modulename: s264128577, funcname: <module>
+s264128577.py(1): class SegmentTree:
+ --- modulename: s264128577, funcname: SegmentTree
+s264128577.py(1): class SegmentTree:
+s264128577.py(2):     def __init__(self, n, func=lambda x, y : max(x, y), default_val = -float('inf'), init_list = None):
+s264128577.py(18):     def set_values(self, val_list):
+s264128577.py(23):     def set_value(self, index, val):
+s264128577.py(27):     def get_value(self, index):
+s264128577.py(31):     def update_all(self):
+s264128577.py(40):     def update(self, index, val):
+s264128577.py(50):     def query(self, l, r):
+s264128577.py(68):     def search_max_right(self, l, check_func):
+s264128577.py(98):     def search_min_left(self, r, check_func):
+s264128577.py(128): n, q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s264128577.py(129): a = list(map(int, input().split()))
+s264128577.py(130): a.reverse()
+s264128577.py(132): st = SegmentTree(n, max, 0, a)
+ --- modulename: s264128577, funcname: __init__
+s264128577.py(3):         assert n > 0 and (not init_list or len(init_list) <= n)
+s264128577.py(4):         self.n = n
+s264128577.py(5):         self.leaf_n = 1
+s264128577.py(6):         while n > self.leaf_n:
+s264128577.py(7):             self.leaf_n <<= 1
+s264128577.py(6):         while n > self.leaf_n:
+s264128577.py(7):             self.leaf_n <<= 1
+s264128577.py(6):         while n > self.leaf_n:
+s264128577.py(7):             self.leaf_n <<= 1
+s264128577.py(6):         while n > self.leaf_n:
+s264128577.py(8):         self.node_n = (self.leaf_n << 1) - 1
+s264128577.py(9):         self.offset = self.leaf_n - 1
+s264128577.py(10):         self.tree = [default_val] * self.node_n
+s264128577.py(11):         self.default_val = default_val
+s264128577.py(12):         self.f = func
+s264128577.py(14):         if init_list:
+s264128577.py(15):             self.tree[self.offset:self.offset+n] = init_list
+s264128577.py(16):             self.update_all()
+ --- modulename: s264128577, funcname: update_all
+s264128577.py(32):         l = self.offset
+s264128577.py(33):         n = self.leaf_n
+s264128577.py(34):         while l > 0:
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(36):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(36):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(36):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(36):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(37):             l >>= 1
+s264128577.py(38):             n >>= 1
+s264128577.py(34):         while l > 0:
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(36):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(36):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(37):             l >>= 1
+s264128577.py(38):             n >>= 1
+s264128577.py(34):         while l > 0:
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(36):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(35):             for i in range(l, l + n, 2):
+s264128577.py(37):             l >>= 1
+s264128577.py(38):             n >>= 1
+s264128577.py(34):         while l > 0:
+s264128577.py(133): ans = []
+s264128577.py(134): for _ in range(q):
+s264128577.py(135):     t, x, v = map(int, input().split())
+s264128577.py(136):     if t == 1:
+s264128577.py(138):     elif t == 2:
+s264128577.py(139):         ans.append(st.query(n-v, n-x))
+ --- modulename: s264128577, funcname: query
+s264128577.py(51):         assert 0 <= l <= r < self.leaf_n
+s264128577.py(52):         left_val = self.default_val
+s264128577.py(53):         right_val = self.default_val
+s264128577.py(54):         l += self.offset
+s264128577.py(55):         r += self.offset
+s264128577.py(56):         while l < r:
+s264128577.py(57):             if l & 1 == 0:
+s264128577.py(59):             if r & 1 == 1:
+s264128577.py(60):                 right_val = self.f(self.tree[r], right_val)
+s264128577.py(61):                 r -= 1
+s264128577.py(62):             l >>= 1
+s264128577.py(63):             r = (r >> 1) - 1
+s264128577.py(56):         while l < r:
+s264128577.py(57):             if l & 1 == 0:
+s264128577.py(59):             if r & 1 == 1:
+s264128577.py(62):             l >>= 1
+s264128577.py(63):             r = (r >> 1) - 1
+s264128577.py(56):         while l < r:
+s264128577.py(64):         if l == r:
+s264128577.py(65):             left_val = self.f(left_val, self.tree[l])
+s264128577.py(66):         return self.f(left_val, right_val)
+s264128577.py(134): for _ in range(q):
+s264128577.py(135):     t, x, v = map(int, input().split())
+s264128577.py(136):     if t == 1:
+s264128577.py(138):     elif t == 2:
+s264128577.py(141):         if v == 0:
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+ --- modulename: s264128577, funcname: search_min_left
+s264128577.py(106):         assert(0 <= r < self.leaf_n and check_func(self.default_val))
+ --- modulename: s264128577, funcname: <lambda>
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+s264128577.py(107):         i = r + self.offset
+s264128577.py(108):         if not check_func(self.tree[i]):
+ --- modulename: s264128577, funcname: <lambda>
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+s264128577.py(110):         right_val = self.default_val
+s264128577.py(112):             while i & 1 == 0 and i > 0: # iを右端とする最上の層まで移動
+s264128577.py(113):                 i = (i - 1) >> 1
+s264128577.py(112):             while i & 1 == 0 and i > 0: # iを右端とする最上の層まで移動
+s264128577.py(113):                 i = (i - 1) >> 1
+s264128577.py(112):             while i & 1 == 0 and i > 0: # iを右端とする最上の層まで移動
+s264128577.py(114):             x = self.f(self.tree[i], right_val)
+s264128577.py(115):             if not check_func(x):
+ --- modulename: s264128577, funcname: <lambda>
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+s264128577.py(116):                 while i < self.offset:
+s264128577.py(117):                     i = (i + 1) << 1 #iを右端とする1個下の層に移動
+s264128577.py(118):                     x = self.f(self.tree[i], right_val)
+s264128577.py(119):                     if check_func(x):
+ --- modulename: s264128577, funcname: <lambda>
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+s264128577.py(116):                 while i < self.offset:
+s264128577.py(117):                     i = (i + 1) << 1 #iを右端とする1個下の層に移動
+s264128577.py(118):                     x = self.f(self.tree[i], right_val)
+s264128577.py(119):                     if check_func(x):
+ --- modulename: s264128577, funcname: <lambda>
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+s264128577.py(120):                         right_val = x
+s264128577.py(121):                         i -= 1
+s264128577.py(116):                 while i < self.offset:
+s264128577.py(122):                 return i - self.offset + 1
+s264128577.py(145):             if i < 0:
+s264128577.py(148):                 ans.append(n - i + 1)
+s264128577.py(134): for _ in range(q):
+s264128577.py(135):     t, x, v = map(int, input().split())
+s264128577.py(136):     if t == 1:
+s264128577.py(137):         st.update(n-x, v)
+ --- modulename: s264128577, funcname: update
+s264128577.py(41):         assert 0 <= index < self.leaf_n
+s264128577.py(42):         i = self.offset + index
+s264128577.py(43):         self.tree[i] = val
+s264128577.py(44):         while i > 0:
+s264128577.py(45):             if i & 1 == 0:
+s264128577.py(47):             self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(48):             i >>= 1
+s264128577.py(44):         while i > 0:
+s264128577.py(45):             if i & 1 == 0:
+s264128577.py(46):                 i -= 1
+s264128577.py(47):             self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(48):             i >>= 1
+s264128577.py(44):         while i > 0:
+s264128577.py(45):             if i & 1 == 0:
+s264128577.py(47):             self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s264128577.py(48):             i >>= 1
+s264128577.py(44):         while i > 0:
+s264128577.py(134): for _ in range(q):
+s264128577.py(135):     t, x, v = map(int, input().split())
+s264128577.py(136):     if t == 1:
+s264128577.py(138):     elif t == 2:
+s264128577.py(139):         ans.append(st.query(n-v, n-x))
+ --- modulename: s264128577, funcname: query
+s264128577.py(51):         assert 0 <= l <= r < self.leaf_n
+s264128577.py(52):         left_val = self.default_val
+s264128577.py(53):         right_val = self.default_val
+s264128577.py(54):         l += self.offset
+s264128577.py(55):         r += self.offset
+s264128577.py(56):         while l < r:
+s264128577.py(57):             if l & 1 == 0:
+s264128577.py(58):                 left_val = self.f(left_val, self.tree[l])
+s264128577.py(59):             if r & 1 == 1:
+s264128577.py(62):             l >>= 1
+s264128577.py(63):             r = (r >> 1) - 1
+s264128577.py(56):         while l < r:
+s264128577.py(64):         if l == r:
+s264128577.py(65):             left_val = self.f(left_val, self.tree[l])
+s264128577.py(66):         return self.f(left_val, right_val)
+s264128577.py(134): for _ in range(q):
+s264128577.py(135):     t, x, v = map(int, input().split())
+s264128577.py(136):     if t == 1:
+s264128577.py(138):     elif t == 2:
+s264128577.py(141):         if v == 0:
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+ --- modulename: s264128577, funcname: search_min_left
+s264128577.py(106):         assert(0 <= r < self.leaf_n and check_func(self.default_val))
+ --- modulename: s264128577, funcname: <lambda>
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+s264128577.py(107):         i = r + self.offset
+s264128577.py(108):         if not check_func(self.tree[i]):
+ --- modulename: s264128577, funcname: <lambda>
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+s264128577.py(110):         right_val = self.default_val
+s264128577.py(112):             while i & 1 == 0 and i > 0: # iを右端とする最上の層まで移動
+s264128577.py(114):             x = self.f(self.tree[i], right_val)
+s264128577.py(115):             if not check_func(x):
+ --- modulename: s264128577, funcname: <lambda>
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+s264128577.py(123):             right_val = x
+s264128577.py(124):             if i & (i + 1) == 0:
+s264128577.py(126):             i -= 1
+s264128577.py(112):             while i & 1 == 0 and i > 0: # iを右端とする最上の層まで移動
+s264128577.py(113):                 i = (i - 1) >> 1
+s264128577.py(112):             while i & 1 == 0 and i > 0: # iを右端とする最上の層まで移動
+s264128577.py(113):                 i = (i - 1) >> 1
+s264128577.py(112):             while i & 1 == 0 and i > 0: # iを右端とする最上の層まで移動
+s264128577.py(114):             x = self.f(self.tree[i], right_val)
+s264128577.py(115):             if not check_func(x):
+ --- modulename: s264128577, funcname: <lambda>
+s264128577.py(144):             i = st.search_min_left(n - x, lambda y: y < v)
+s264128577.py(123):             right_val = x
+s264128577.py(124):             if i & (i + 1) == 0:
+s264128577.py(125):                 return 0
+s264128577.py(145):             if i < 0:
+s264128577.py(148):                 ans.append(n - i + 1)
+s264128577.py(134): for _ in range(q):
+s264128577.py(149): for x in ans:
+s264128577.py(150):     print(x)
+3
+s264128577.py(149): for x in ans:
+s264128577.py(150):     print(x)
+3
+s264128577.py(149): for x in ans:
+s264128577.py(150):     print(x)
+2
+s264128577.py(149): for x in ans:
+s264128577.py(150):     print(x)
+6
+s264128577.py(149): for x in ans:
