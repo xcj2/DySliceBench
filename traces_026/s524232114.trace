@@ -1,0 +1,79 @@
+ --- modulename: s524232114, funcname: <module>
+s524232114.py(2): def inv_mod(n:int, mod:int) -> list:
+s524232114.py(9): def fact(n:int, mod:int) -> list:
+s524232114.py(18): def fact_inv(n:int, inv:list, mod:int) -> list:
+s524232114.py(25): def nCr(n:int, r:int, mod:int, fac:list, facInv:list) -> int:
+s524232114.py(35): H,W,A,B = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s524232114.py(36): mod = 10**9+7
+s524232114.py(38): inv = inv_mod(H+W, mod)
+ --- modulename: s524232114, funcname: inv_mod
+s524232114.py(3):     inv = [0,1]
+s524232114.py(4):     for i in range(2,n+1):
+s524232114.py(5):         inv.append(mod - ((mod//i)*inv[mod%i]) % mod)
+s524232114.py(4):     for i in range(2,n+1):
+s524232114.py(5):         inv.append(mod - ((mod//i)*inv[mod%i]) % mod)
+s524232114.py(4):     for i in range(2,n+1):
+s524232114.py(5):         inv.append(mod - ((mod//i)*inv[mod%i]) % mod)
+s524232114.py(4):     for i in range(2,n+1):
+s524232114.py(5):         inv.append(mod - ((mod//i)*inv[mod%i]) % mod)
+s524232114.py(4):     for i in range(2,n+1):
+s524232114.py(6):     return inv
+s524232114.py(39): fac = fact(H+W, mod)
+ --- modulename: s524232114, funcname: fact
+s524232114.py(10):     fac = [1,1]
+s524232114.py(11):     res = 1
+s524232114.py(12):     for i in range(2,n+1):
+s524232114.py(13):         res = res*i%mod
+s524232114.py(14):         fac.append(res)
+s524232114.py(12):     for i in range(2,n+1):
+s524232114.py(13):         res = res*i%mod
+s524232114.py(14):         fac.append(res)
+s524232114.py(12):     for i in range(2,n+1):
+s524232114.py(13):         res = res*i%mod
+s524232114.py(14):         fac.append(res)
+s524232114.py(12):     for i in range(2,n+1):
+s524232114.py(13):         res = res*i%mod
+s524232114.py(14):         fac.append(res)
+s524232114.py(12):     for i in range(2,n+1):
+s524232114.py(15):     return fac
+s524232114.py(40): facInv = fact_inv(H+W,inv,mod)
+ --- modulename: s524232114, funcname: fact_inv
+s524232114.py(19):     facInv = [1,1]
+s524232114.py(20):     for i in range(2,n+1):
+s524232114.py(21):         facInv.append(facInv[i-1]*inv[i] % mod)
+s524232114.py(20):     for i in range(2,n+1):
+s524232114.py(21):         facInv.append(facInv[i-1]*inv[i] % mod)
+s524232114.py(20):     for i in range(2,n+1):
+s524232114.py(21):         facInv.append(facInv[i-1]*inv[i] % mod)
+s524232114.py(20):     for i in range(2,n+1):
+s524232114.py(21):         facInv.append(facInv[i-1]*inv[i] % mod)
+s524232114.py(20):     for i in range(2,n+1):
+s524232114.py(22):     return facInv
+s524232114.py(42): checkPoint = []
+s524232114.py(43): for i in range(H-A):
+s524232114.py(44):     checkPoint.append((i,B-1))
+s524232114.py(43): for i in range(H-A):
+s524232114.py(46): ans = 0
+s524232114.py(47): for h,w in checkPoint:
+s524232114.py(48):     ans = (ans + nCr(h+w,h,mod,fac,facInv) \
+ --- modulename: s524232114, funcname: nCr
+s524232114.py(26):     if n==0 and r==0:
+s524232114.py(27):         return 1
+s524232114.py(49):                 * nCr(H+W-h-w-3, H-h-1, mod, fac, facInv)) % mod
+ --- modulename: s524232114, funcname: nCr
+s524232114.py(26):     if n==0 and r==0:
+s524232114.py(29):     elif not (0<=r and r<=n):
+s524232114.py(32):     return ((fac[n]*facInv[r]) % mod) * facInv[n-r] % mod
+s524232114.py(48):     ans = (ans + nCr(h+w,h,mod,fac,facInv) \
+s524232114.py(49):                 * nCr(H+W-h-w-3, H-h-1, mod, fac, facInv)) % mod
+s524232114.py(48):     ans = (ans + nCr(h+w,h,mod,fac,facInv) \
+s524232114.py(47): for h,w in checkPoint:
+s524232114.py(51): print(ans)
+2
