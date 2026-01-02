@@ -1,0 +1,337 @@
+ --- modulename: s279638621, funcname: <module>
+s279638621.py(1): import sys
+s279638621.py(3): from collections import deque, defaultdict, Counter; from heapq import heappush, heappop
+ --- modulename: _bootstrap, funcname: _handle_fromlist
+<frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1067): s279638621.py(7): sys.setrecursionlimit(10 ** 7)
+s279638621.py(8): inf = 10 ** 20; INF = float("INF"); ans = 0; tmp = 0; ansli = []; tmpli = []; candili = []; mod = 10 ** 9 + 7
+s279638621.py(9): dd = [(-1, 0), (0, 1), (1, 0), (0, -1)]; ddn = dd + [(-1, 1), (1, 1), (1, -1), (-1, -1)]; ddn9 = ddn + [(0, 0)]
+s279638621.py(13): def wi(): return list(map(int, sys.stdin.readline().split()))
+s279638621.py(14): def wip(): return [int(x) - 1 for x in sys.stdin.readline().split()]#WideIntPoint
+s279638621.py(15): def ws(): return sys.stdin.readline().split()
+s279638621.py(16): def i(): return int(sys.stdin.readline())
+s279638621.py(17): def s(): return input()
+s279638621.py(18): def hi(n): return [i() for _ in range(n)]
+s279638621.py(19): def hs(n): return [s() for _ in range(n)]#HeightString
+s279638621.py(20): def mi(n): return [wi() for _ in range(n)]#MatrixInt
+s279638621.py(21): def mip(n): return [wip() for _ in range(n)]
+s279638621.py(22): def ms(n): return [ws() for _ in range(n)]
+s279638621.py(26): h, w = wi()
+ --- modulename: s279638621, funcname: wi
+s279638621.py(13): def wi(): return list(map(int, sys.stdin.readline().split()))
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s279638621.py(27): s = hs(h)
+ --- modulename: s279638621, funcname: hs
+s279638621.py(19): def hs(n): return [s() for _ in range(n)]#HeightString
+ --- modulename: s279638621, funcname: <listcomp>
+s279638621.py(19): def hs(n): return [s() for _ in range(n)]#HeightString
+ --- modulename: s279638621, funcname: s
+s279638621.py(17): def s(): return input()
+s279638621.py(19): def hs(n): return [s() for _ in range(n)]#HeightString
+ --- modulename: s279638621, funcname: s
+s279638621.py(17): def s(): return input()
+s279638621.py(19): def hs(n): return [s() for _ in range(n)]#HeightString
+ --- modulename: s279638621, funcname: s
+s279638621.py(17): def s(): return input()
+s279638621.py(19): def hs(n): return [s() for _ in range(n)]#HeightString
+s279638621.py(28): flagli = [[0] * w for i in range(h)]
+ --- modulename: s279638621, funcname: <listcomp>
+s279638621.py(28): flagli = [[0] * w for i in range(h)]
+s279638621.py(28): flagli = [[0] * w for i in range(h)]
+s279638621.py(28): flagli = [[0] * w for i in range(h)]
+s279638621.py(28): flagli = [[0] * w for i in range(h)]
+s279638621.py(29): stack = deque()
+s279638621.py(30): black = 0
+s279638621.py(31): white = 0
+s279638621.py(32): for i in range(h):
+s279638621.py(33):     for j in range(w):
+s279638621.py(34):         if flagli[i][j] == 0:
+s279638621.py(35):             flagli[i][j] = 1
+s279638621.py(36):             white = 1 if s[i][j] == "." else 0
+s279638621.py(37):             black = 1 if s[i][j] == "#" else 0
+s279638621.py(38):             stack.append([i, j])
+s279638621.py(39):             while stack != deque():
+s279638621.py(40):                 p, q = stack.pop()
+s279638621.py(41):                 k = 0 if s[p][q] == "." else 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(51):                             elif k == 1 and s[ny][nx] == ".":
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(48):                                 flagli[ny][nx] = 1
+s279638621.py(49):                                 stack.append([ny, nx])
+s279638621.py(50):                                 black += 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(39):             while stack != deque():
+s279638621.py(40):                 p, q = stack.pop()
+s279638621.py(41):                 k = 0 if s[p][q] == "." else 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(51):                             elif k == 1 and s[ny][nx] == ".":
+s279638621.py(52):                                 flagli[ny][nx] = 1
+s279638621.py(53):                                 stack.append([ny, nx])
+s279638621.py(54):                                 white += 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(51):                             elif k == 1 and s[ny][nx] == ".":
+s279638621.py(52):                                 flagli[ny][nx] = 1
+s279638621.py(53):                                 stack.append([ny, nx])
+s279638621.py(54):                                 white += 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(39):             while stack != deque():
+s279638621.py(40):                 p, q = stack.pop()
+s279638621.py(41):                 k = 0 if s[p][q] == "." else 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(48):                                 flagli[ny][nx] = 1
+s279638621.py(49):                                 stack.append([ny, nx])
+s279638621.py(50):                                 black += 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(39):             while stack != deque():
+s279638621.py(40):                 p, q = stack.pop()
+s279638621.py(41):                 k = 0 if s[p][q] == "." else 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(51):                             elif k == 1 and s[ny][nx] == ".":
+s279638621.py(52):                                 flagli[ny][nx] = 1
+s279638621.py(53):                                 stack.append([ny, nx])
+s279638621.py(54):                                 white += 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(39):             while stack != deque():
+s279638621.py(40):                 p, q = stack.pop()
+s279638621.py(41):                 k = 0 if s[p][q] == "." else 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(51):                             elif k == 1 and s[ny][nx] == ".":
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(39):             while stack != deque():
+s279638621.py(40):                 p, q = stack.pop()
+s279638621.py(41):                 k = 0 if s[p][q] == "." else 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(51):                             elif k == 1 and s[ny][nx] == ".":
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(51):                             elif k == 1 and s[ny][nx] == ".":
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(39):             while stack != deque():
+s279638621.py(55):             ans += black * white
+s279638621.py(56):             black = 0
+s279638621.py(57):             white = 0
+s279638621.py(33):     for j in range(w):
+s279638621.py(34):         if flagli[i][j] == 0:
+s279638621.py(33):     for j in range(w):
+s279638621.py(34):         if flagli[i][j] == 0:
+s279638621.py(33):     for j in range(w):
+s279638621.py(32): for i in range(h):
+s279638621.py(33):     for j in range(w):
+s279638621.py(34):         if flagli[i][j] == 0:
+s279638621.py(35):             flagli[i][j] = 1
+s279638621.py(36):             white = 1 if s[i][j] == "." else 0
+s279638621.py(37):             black = 1 if s[i][j] == "#" else 0
+s279638621.py(38):             stack.append([i, j])
+s279638621.py(39):             while stack != deque():
+s279638621.py(40):                 p, q = stack.pop()
+s279638621.py(41):                 k = 0 if s[p][q] == "." else 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(48):                                 flagli[ny][nx] = 1
+s279638621.py(49):                                 stack.append([ny, nx])
+s279638621.py(50):                                 black += 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(39):             while stack != deque():
+s279638621.py(40):                 p, q = stack.pop()
+s279638621.py(41):                 k = 0 if s[p][q] == "." else 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(47):                             if k == 0 and s[ny][nx] == "#":
+s279638621.py(51):                             elif k == 1 and s[ny][nx] == ".":
+s279638621.py(52):                                 flagli[ny][nx] = 1
+s279638621.py(53):                                 stack.append([ny, nx])
+s279638621.py(54):                                 white += 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(39):             while stack != deque():
+s279638621.py(40):                 p, q = stack.pop()
+s279638621.py(41):                 k = 0 if s[p][q] == "." else 1
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(43):                     nx = q + dx;
+s279638621.py(44):                     ny = p + dy
+s279638621.py(45):                     if 0 <= nx < w and 0 <= ny < h:
+s279638621.py(46):                         if flagli[ny][nx] == 0:
+s279638621.py(42):                 for dx, dy in dd:
+s279638621.py(39):             while stack != deque():
+s279638621.py(55):             ans += black * white
+s279638621.py(56):             black = 0
+s279638621.py(57):             white = 0
+s279638621.py(33):     for j in range(w):
+s279638621.py(34):         if flagli[i][j] == 0:
+s279638621.py(33):     for j in range(w):
+s279638621.py(34):         if flagli[i][j] == 0:
+s279638621.py(33):     for j in range(w):
+s279638621.py(32): for i in range(h):
+s279638621.py(33):     for j in range(w):
+s279638621.py(34):         if flagli[i][j] == 0:
+s279638621.py(33):     for j in range(w):
+s279638621.py(34):         if flagli[i][j] == 0:
+s279638621.py(33):     for j in range(w):
+s279638621.py(34):         if flagli[i][j] == 0:
+s279638621.py(33):     for j in range(w):
+s279638621.py(32): for i in range(h):
+s279638621.py(58): print(ans)
+10
