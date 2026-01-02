@@ -1,0 +1,53 @@
+ --- modulename: s019337513, funcname: <module>
+s019337513.py(2): N, Kstr = map(str, input().split()) # N: 元の数, K: NG数の数
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s019337513.py(3): K = int(Kstr)
+s019337513.py(4): D = list(map(str, input().split())) # D: NG数のリスト
+s019337513.py(10): def getMinimumOK():
+s019337513.py(19): def getFirstNG():
+s019337513.py(27): def isOK(number):
+s019337513.py(36): def makeUpperHalf(upperHalf_org):
+s019337513.py(46): if isOK(int(N)): # N に　NG数 が含まれていなければ
+ --- modulename: s019337513, funcname: isOK
+s019337513.py(29):     strNumber = str(number)
+s019337513.py(30):     strlen = len(strNumber)
+s019337513.py(31):     for i in range(strlen):
+s019337513.py(32):         if strNumber[i] in D: # i桁目の数が D の中にあれば
+s019337513.py(33):             return False      # number に NG数 が含まれる
+s019337513.py(49):     minimumOK = getMinimumOK() # 最小のOK数字（文字列型）
+ --- modulename: s019337513, funcname: getMinimumOK
+s019337513.py(12):     for i in range(0, 9):
+s019337513.py(13):         for j in range(1, K):
+s019337513.py(14):             if D[j - 1] == str(i):
+s019337513.py(17):                 return str(i)
+s019337513.py(50):     firstNG = getFirstNG()     # 上位から数えて最初のNG数が出てくる桁
+ --- modulename: s019337513, funcname: getFirstNG
+s019337513.py(22):     for i in range(0, len(N)):
+s019337513.py(23):         for ng in D:
+s019337513.py(24):             if ng == N[i]:
+s019337513.py(25):                 return i + 1
+s019337513.py(52):     upperHalf = N[:firstNG] # 先頭から最初のNG数まで
+s019337513.py(53):     lowerHalf = N[firstNG:] # 最初のNG数の次から末尾まで
+s019337513.py(54):     upper = makeUpperHalf(upperHalf)
+ --- modulename: s019337513, funcname: makeUpperHalf
+s019337513.py(39):     numUpper = int(upperHalf_org)
+s019337513.py(41):         numUpper += 1
+s019337513.py(42):         if isOK(numUpper): # NG数が無くなるまで numUpper を増やしていく
+ --- modulename: s019337513, funcname: isOK
+s019337513.py(29):     strNumber = str(number)
+s019337513.py(30):     strlen = len(strNumber)
+s019337513.py(31):     for i in range(strlen):
+s019337513.py(32):         if strNumber[i] in D: # i桁目の数が D の中にあれば
+s019337513.py(31):     for i in range(strlen):
+s019337513.py(34):     return True
+s019337513.py(43):             break
+s019337513.py(44):     return str(numUpper)
+s019337513.py(55):     lower = minimumOK * len(lowerHalf) # 下半分はNGでない最小の数を桁数分、並べる
+s019337513.py(56):     print(upper + lower)
+2000

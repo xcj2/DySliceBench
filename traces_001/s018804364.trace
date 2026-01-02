@@ -1,0 +1,397 @@
+ --- modulename: s018804364, funcname: <module>
+s018804364.py(1): def main():
+s018804364.py(89): if __name__ == '__main__':
+s018804364.py(90):     main()
+ --- modulename: s018804364, funcname: main
+s018804364.py(2):     import sys
+s018804364.py(3):     input = sys.stdin.readline
+s018804364.py(5):     class LazySegTree:
+ --- modulename: s018804364, funcname: LazySegTree
+s018804364.py(5):     class LazySegTree:
+s018804364.py(7):         def __init__(self, A, initialize=True, segfunc=min, ident=2000000000):
+s018804364.py(21):         def _ascend(self, i):
+s018804364.py(26):         def _descend(self, idx):
+s018804364.py(40):         def add(self, l, r, x):
+s018804364.py(60):         def query(self, l, r):
+s018804364.py(77):     N, Q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s018804364.py(78):     segtree = LazySegTree([0] * N)
+ --- modulename: s018804364, funcname: __init__
+s018804364.py(8):             self.N = len(A)
+s018804364.py(9):             self.LV = (self.N - 1).bit_length()
+s018804364.py(10):             self.N0 = 1 << self.LV
+s018804364.py(11):             self.segfunc = segfunc
+s018804364.py(12):             self.ident = ident
+s018804364.py(13):             if initialize:
+s018804364.py(14):                 self.data = [self.ident] * self.N0 + A + [self.ident] * (self.N0 - self.N)
+s018804364.py(15):                 for i in range(self.N0 - 1, 0, -1):
+s018804364.py(16):                     self.data[i] = segfunc(self.data[i * 2], self.data[i * 2 + 1])
+s018804364.py(15):                 for i in range(self.N0 - 1, 0, -1):
+s018804364.py(16):                     self.data[i] = segfunc(self.data[i * 2], self.data[i * 2 + 1])
+s018804364.py(15):                 for i in range(self.N0 - 1, 0, -1):
+s018804364.py(16):                     self.data[i] = segfunc(self.data[i * 2], self.data[i * 2 + 1])
+s018804364.py(15):                 for i in range(self.N0 - 1, 0, -1):
+s018804364.py(16):                     self.data[i] = segfunc(self.data[i * 2], self.data[i * 2 + 1])
+s018804364.py(15):                 for i in range(self.N0 - 1, 0, -1):
+s018804364.py(16):                     self.data[i] = segfunc(self.data[i * 2], self.data[i * 2 + 1])
+s018804364.py(15):                 for i in range(self.N0 - 1, 0, -1):
+s018804364.py(16):                     self.data[i] = segfunc(self.data[i * 2], self.data[i * 2 + 1])
+s018804364.py(15):                 for i in range(self.N0 - 1, 0, -1):
+s018804364.py(16):                     self.data[i] = segfunc(self.data[i * 2], self.data[i * 2 + 1])
+s018804364.py(15):                 for i in range(self.N0 - 1, 0, -1):
+s018804364.py(19):             self.lazy = [0] * (self.N0 * 2)
+s018804364.py(79):     for _ in range(Q):
+s018804364.py(80):         q = list(map(int, input().split()))
+s018804364.py(81):         if q[0] == 0:
+s018804364.py(82):             s, t, x = q[1:]
+s018804364.py(83):             segtree.add(s+1, t+2, x)
+ --- modulename: s018804364, funcname: add
+s018804364.py(41):             l += self.N0 - 1
+s018804364.py(42):             r += self.N0 - 1
+s018804364.py(43):             l_ori = l
+s018804364.py(44):             r_ori = r
+s018804364.py(45):             while l < r:
+s018804364.py(46):                 if l & 1:
+s018804364.py(47):                     self.data[l] += x
+s018804364.py(48):                     self.lazy[l] += x
+s018804364.py(49):                     l += 1
+s018804364.py(50):                 if r & 1:
+s018804364.py(54):                 l >>= 1
+s018804364.py(55):                 r >>= 1
+s018804364.py(45):             while l < r:
+s018804364.py(46):                 if l & 1:
+s018804364.py(47):                     self.data[l] += x
+s018804364.py(48):                     self.lazy[l] += x
+s018804364.py(49):                     l += 1
+s018804364.py(50):                 if r & 1:
+s018804364.py(54):                 l >>= 1
+s018804364.py(55):                 r >>= 1
+s018804364.py(45):             while l < r:
+s018804364.py(56):             self._ascend(l_ori // (l_ori & -l_ori))
+ --- modulename: s018804364, funcname: _ascend
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(57):             self._ascend(r_ori // (r_ori & -r_ori) - 1)
+ --- modulename: s018804364, funcname: _ascend
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(79):     for _ in range(Q):
+s018804364.py(80):         q = list(map(int, input().split()))
+s018804364.py(81):         if q[0] == 0:
+s018804364.py(82):             s, t, x = q[1:]
+s018804364.py(83):             segtree.add(s+1, t+2, x)
+ --- modulename: s018804364, funcname: add
+s018804364.py(41):             l += self.N0 - 1
+s018804364.py(42):             r += self.N0 - 1
+s018804364.py(43):             l_ori = l
+s018804364.py(44):             r_ori = r
+s018804364.py(45):             while l < r:
+s018804364.py(46):                 if l & 1:
+s018804364.py(50):                 if r & 1:
+s018804364.py(51):                     r -= 1
+s018804364.py(52):                     self.data[r] += x
+s018804364.py(53):                     self.lazy[r] += x
+s018804364.py(54):                 l >>= 1
+s018804364.py(55):                 r >>= 1
+s018804364.py(45):             while l < r:
+s018804364.py(46):                 if l & 1:
+s018804364.py(47):                     self.data[l] += x
+s018804364.py(48):                     self.lazy[l] += x
+s018804364.py(49):                     l += 1
+s018804364.py(50):                 if r & 1:
+s018804364.py(54):                 l >>= 1
+s018804364.py(55):                 r >>= 1
+s018804364.py(45):             while l < r:
+s018804364.py(56):             self._ascend(l_ori // (l_ori & -l_ori))
+ --- modulename: s018804364, funcname: _ascend
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(57):             self._ascend(r_ori // (r_ori & -r_ori) - 1)
+ --- modulename: s018804364, funcname: _ascend
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(79):     for _ in range(Q):
+s018804364.py(80):         q = list(map(int, input().split()))
+s018804364.py(81):         if q[0] == 0:
+s018804364.py(85):             s, t = q[1:]
+s018804364.py(86):             print(segtree.query(s+1, t+2))
+ --- modulename: s018804364, funcname: query
+s018804364.py(61):             l += self.N0 - 1
+s018804364.py(62):             r += self.N0 - 1
+s018804364.py(63):             self._descend(l // (l & -l))
+ --- modulename: s018804364, funcname: _descend
+s018804364.py(27):             lv = idx.bit_length()
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(64):             self._descend(r // (r & -r) - 1)
+ --- modulename: s018804364, funcname: _descend
+s018804364.py(27):             lv = idx.bit_length()
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(65):             ret = self.ident
+s018804364.py(66):             while l < r:
+s018804364.py(67):                 if l & 1:
+s018804364.py(70):                 if r & 1:
+s018804364.py(73):                 l >>= 1
+s018804364.py(74):                 r >>= 1
+s018804364.py(66):             while l < r:
+s018804364.py(67):                 if l & 1:
+s018804364.py(70):                 if r & 1:
+s018804364.py(71):                     ret = self.segfunc(self.data[r - 1], ret)
+s018804364.py(72):                     r -= 1
+s018804364.py(73):                 l >>= 1
+s018804364.py(74):                 r >>= 1
+s018804364.py(66):             while l < r:
+s018804364.py(67):                 if l & 1:
+s018804364.py(70):                 if r & 1:
+s018804364.py(71):                     ret = self.segfunc(self.data[r - 1], ret)
+s018804364.py(72):                     r -= 1
+s018804364.py(73):                 l >>= 1
+s018804364.py(74):                 r >>= 1
+s018804364.py(66):             while l < r:
+s018804364.py(75):             return ret
+-2
+s018804364.py(79):     for _ in range(Q):
+s018804364.py(80):         q = list(map(int, input().split()))
+s018804364.py(81):         if q[0] == 0:
+s018804364.py(85):             s, t = q[1:]
+s018804364.py(86):             print(segtree.query(s+1, t+2))
+ --- modulename: s018804364, funcname: query
+s018804364.py(61):             l += self.N0 - 1
+s018804364.py(62):             r += self.N0 - 1
+s018804364.py(63):             self._descend(l // (l & -l))
+ --- modulename: s018804364, funcname: _descend
+s018804364.py(27):             lv = idx.bit_length()
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(64):             self._descend(r // (r & -r) - 1)
+ --- modulename: s018804364, funcname: _descend
+s018804364.py(27):             lv = idx.bit_length()
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(65):             ret = self.ident
+s018804364.py(66):             while l < r:
+s018804364.py(67):                 if l & 1:
+s018804364.py(70):                 if r & 1:
+s018804364.py(73):                 l >>= 1
+s018804364.py(74):                 r >>= 1
+s018804364.py(66):             while l < r:
+s018804364.py(67):                 if l & 1:
+s018804364.py(70):                 if r & 1:
+s018804364.py(71):                     ret = self.segfunc(self.data[r - 1], ret)
+s018804364.py(72):                     r -= 1
+s018804364.py(73):                 l >>= 1
+s018804364.py(74):                 r >>= 1
+s018804364.py(66):             while l < r:
+s018804364.py(75):             return ret
+0
+s018804364.py(79):     for _ in range(Q):
+s018804364.py(80):         q = list(map(int, input().split()))
+s018804364.py(81):         if q[0] == 0:
+s018804364.py(82):             s, t, x = q[1:]
+s018804364.py(83):             segtree.add(s+1, t+2, x)
+ --- modulename: s018804364, funcname: add
+s018804364.py(41):             l += self.N0 - 1
+s018804364.py(42):             r += self.N0 - 1
+s018804364.py(43):             l_ori = l
+s018804364.py(44):             r_ori = r
+s018804364.py(45):             while l < r:
+s018804364.py(46):                 if l & 1:
+s018804364.py(47):                     self.data[l] += x
+s018804364.py(48):                     self.lazy[l] += x
+s018804364.py(49):                     l += 1
+s018804364.py(50):                 if r & 1:
+s018804364.py(54):                 l >>= 1
+s018804364.py(55):                 r >>= 1
+s018804364.py(45):             while l < r:
+s018804364.py(46):                 if l & 1:
+s018804364.py(50):                 if r & 1:
+s018804364.py(51):                     r -= 1
+s018804364.py(52):                     self.data[r] += x
+s018804364.py(53):                     self.lazy[r] += x
+s018804364.py(54):                 l >>= 1
+s018804364.py(55):                 r >>= 1
+s018804364.py(45):             while l < r:
+s018804364.py(56):             self._ascend(l_ori // (l_ori & -l_ori))
+ --- modulename: s018804364, funcname: _ascend
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(57):             self._ascend(r_ori // (r_ori & -r_ori) - 1)
+ --- modulename: s018804364, funcname: _ascend
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(23):                 i >>= 1
+s018804364.py(24):                 self.data[i] = self.segfunc(self.data[i * 2], self.data[i * 2 + 1]) + self.lazy[i]
+s018804364.py(22):             for _ in range(i.bit_length() - 1):
+s018804364.py(79):     for _ in range(Q):
+s018804364.py(80):         q = list(map(int, input().split()))
+s018804364.py(81):         if q[0] == 0:
+s018804364.py(85):             s, t = q[1:]
+s018804364.py(86):             print(segtree.query(s+1, t+2))
+ --- modulename: s018804364, funcname: query
+s018804364.py(61):             l += self.N0 - 1
+s018804364.py(62):             r += self.N0 - 1
+s018804364.py(63):             self._descend(l // (l & -l))
+ --- modulename: s018804364, funcname: _descend
+s018804364.py(27):             lv = idx.bit_length()
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(33):                 self.lazy[i] = 0
+s018804364.py(34):                 self.lazy[i * 2] += x
+s018804364.py(35):                 self.lazy[i * 2 + 1] += x
+s018804364.py(36):                 self.data[i * 2] += x
+s018804364.py(37):                 self.data[i * 2 + 1] += x
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(64):             self._descend(r // (r & -r) - 1)
+ --- modulename: s018804364, funcname: _descend
+s018804364.py(27):             lv = idx.bit_length()
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(33):                 self.lazy[i] = 0
+s018804364.py(34):                 self.lazy[i * 2] += x
+s018804364.py(35):                 self.lazy[i * 2 + 1] += x
+s018804364.py(36):                 self.data[i * 2] += x
+s018804364.py(37):                 self.data[i * 2 + 1] += x
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(65):             ret = self.ident
+s018804364.py(66):             while l < r:
+s018804364.py(67):                 if l & 1:
+s018804364.py(68):                     ret = self.segfunc(ret, self.data[l])
+s018804364.py(69):                     l += 1
+s018804364.py(70):                 if r & 1:
+s018804364.py(71):                     ret = self.segfunc(self.data[r - 1], ret)
+s018804364.py(72):                     r -= 1
+s018804364.py(73):                 l >>= 1
+s018804364.py(74):                 r >>= 1
+s018804364.py(66):             while l < r:
+s018804364.py(75):             return ret
+1
+s018804364.py(79):     for _ in range(Q):
+s018804364.py(80):         q = list(map(int, input().split()))
+s018804364.py(81):         if q[0] == 0:
+s018804364.py(85):             s, t = q[1:]
+s018804364.py(86):             print(segtree.query(s+1, t+2))
+ --- modulename: s018804364, funcname: query
+s018804364.py(61):             l += self.N0 - 1
+s018804364.py(62):             r += self.N0 - 1
+s018804364.py(63):             self._descend(l // (l & -l))
+ --- modulename: s018804364, funcname: _descend
+s018804364.py(27):             lv = idx.bit_length()
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(64):             self._descend(r // (r & -r) - 1)
+ --- modulename: s018804364, funcname: _descend
+s018804364.py(27):             lv = idx.bit_length()
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(29):                 i = idx >> j
+s018804364.py(30):                 x = self.lazy[i]
+s018804364.py(31):                 if not x:
+s018804364.py(32):                     continue
+s018804364.py(28):             for j in range(lv - 1, 0, -1):
+s018804364.py(65):             ret = self.ident
+s018804364.py(66):             while l < r:
+s018804364.py(67):                 if l & 1:
+s018804364.py(70):                 if r & 1:
+s018804364.py(73):                 l >>= 1
+s018804364.py(74):                 r >>= 1
+s018804364.py(66):             while l < r:
+s018804364.py(67):                 if l & 1:
+s018804364.py(70):                 if r & 1:
+s018804364.py(71):                     ret = self.segfunc(self.data[r - 1], ret)
+s018804364.py(72):                     r -= 1
+s018804364.py(73):                 l >>= 1
+s018804364.py(74):                 r >>= 1
+s018804364.py(66):             while l < r:
+s018804364.py(67):                 if l & 1:
+s018804364.py(70):                 if r & 1:
+s018804364.py(71):                     ret = self.segfunc(self.data[r - 1], ret)
+s018804364.py(72):                     r -= 1
+s018804364.py(73):                 l >>= 1
+s018804364.py(74):                 r >>= 1
+s018804364.py(66):             while l < r:
+s018804364.py(75):             return ret
+-1
+s018804364.py(79):     for _ in range(Q):
