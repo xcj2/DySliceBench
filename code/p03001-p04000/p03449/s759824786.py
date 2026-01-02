@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+import sys
+
+
+def solve(N: int, A: "List[List[int]]"):
+    #s_0 = sum(A[0])
+    #s_1 = sum(A[1])
+    ret = 0
+    for i in range(N):
+        tmp = sum(A[0][:i + 1]) + sum(A[1][i:])
+        ret = max(ret, tmp)
+    print(ret)
+    return
+
+
+def main():
+    def iterate_tokens():
+        for line in sys.stdin:
+            for word in line.split():
+                yield word
+    tokens = iterate_tokens()
+    N = int(next(tokens))  # type: int
+    A = [ [ int(next(tokens)) for _ in range(N) ] for _ in range(2) ]  # type: "List[List[int]]"
+    solve(N, A)
+
+if __name__ == '__main__':
+    main()
