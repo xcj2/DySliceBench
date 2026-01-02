@@ -1,0 +1,50 @@
+import sys
+
+def is_stable(bs_data, ss_data):
+    # in_data : ??????????????????????????????????????????
+    # ss_data : ???????????????????????????????????????
+    len_data = len(bs_data)
+
+    for i in range(len_data):
+        if bs_data[i] != ss_data[i]:
+            return False
+
+    return True
+
+def bubble_sort(data, n):
+    for i in range(n):
+        for j in range(n-1, i, -1):
+            if data[j][1] < data[j-1][1]:
+                data[j], data[j-1] = data[j-1], data[j]
+
+def selection_sort(data, n):
+    for i in range(n):
+        minj = i                # ??¨?????????????????????????°??????¨??????
+        for j in range(i, n):
+            if data[j][1] < data[minj][1]:
+                minj = j
+
+        data[i], data[minj] = data[minj], data[i]
+
+def main():
+    n = int(sys.stdin.readline().strip())
+    card1 = sys.stdin.readline().strip().split(' ')
+
+    card2 = card1[::]
+    bubble_sort(card2, n)
+    print(' '.join(card2))
+    
+    print('Stable')
+
+    card3 = card1[::]
+    selection_sort(card3, n)
+    print(' '.join(card3))
+    
+    if is_stable(card2, card3):
+        print('Stable')
+    else:
+        print('Not stable')
+
+if __name__ == '__main__':
+    main()
+    
