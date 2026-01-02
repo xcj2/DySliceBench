@@ -1,0 +1,237 @@
+ --- modulename: s191957162, funcname: <module>
+s191957162.py(2): from functools import reduce
+s191957162.py(3): from itertools import accumulate,chain
+s191957162.py(4): def rerooting(N, adj, merge, identity, finalize):
+s191957162.py(62): def solve(N,M,E):
+s191957162.py(78): if __name__ == '__main__':
+s191957162.py(79):     N,M = map(int,input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s191957162.py(80):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s191957162, funcname: <listcomp>
+s191957162.py(80):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s191957162, funcname: <lambda>
+s191957162.py(80):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s191957162, funcname: <lambda>
+s191957162.py(80):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+s191957162.py(80):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s191957162, funcname: <lambda>
+s191957162.py(80):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s191957162, funcname: <lambda>
+s191957162.py(80):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+s191957162.py(80):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+s191957162.py(81):     print(*solve(N,M,E),sep='\n')
+ --- modulename: s191957162, funcname: solve
+s191957162.py(64):     adj = [[] for _ in range(N)]
+ --- modulename: s191957162, funcname: <listcomp>
+s191957162.py(64):     adj = [[] for _ in range(N)]
+s191957162.py(64):     adj = [[] for _ in range(N)]
+s191957162.py(64):     adj = [[] for _ in range(N)]
+s191957162.py(64):     adj = [[] for _ in range(N)]
+s191957162.py(65):     for a,b in E:
+s191957162.py(66):         adj[a].append(b)
+s191957162.py(67):         adj[b].append(a)
+s191957162.py(65):     for a,b in E:
+s191957162.py(66):         adj[a].append(b)
+s191957162.py(67):         adj[b].append(a)
+s191957162.py(65):     for a,b in E:
+s191957162.py(69):     def merge(x,y):
+s191957162.py(71):     def finalize(x):
+s191957162.py(74):     res = rerooting(N,adj,merge,1,finalize)
+ --- modulename: s191957162, funcname: rerooting
+s191957162.py(15):     order = [None]*N
+s191957162.py(16):     parent = [None]*N
+s191957162.py(17):     parent[0] = -1
+s191957162.py(18):     stack = [0]
+s191957162.py(19):     for i in range(N):
+s191957162.py(20):         v = stack.pop()
+s191957162.py(21):         order[i] = v
+s191957162.py(22):         for u in adj[v]:
+s191957162.py(23):             if parent[u] is None:
+s191957162.py(24):                 parent[u] = v
+s191957162.py(25):                 stack.append(u)
+s191957162.py(22):         for u in adj[v]:
+s191957162.py(19):     for i in range(N):
+s191957162.py(20):         v = stack.pop()
+s191957162.py(21):         order[i] = v
+s191957162.py(22):         for u in adj[v]:
+s191957162.py(23):             if parent[u] is None:
+s191957162.py(22):         for u in adj[v]:
+s191957162.py(23):             if parent[u] is None:
+s191957162.py(24):                 parent[u] = v
+s191957162.py(25):                 stack.append(u)
+s191957162.py(22):         for u in adj[v]:
+s191957162.py(19):     for i in range(N):
+s191957162.py(20):         v = stack.pop()
+s191957162.py(21):         order[i] = v
+s191957162.py(22):         for u in adj[v]:
+s191957162.py(23):             if parent[u] is None:
+s191957162.py(22):         for u in adj[v]:
+s191957162.py(19):     for i in range(N):
+s191957162.py(28):     dp_down = [None]*N
+s191957162.py(29):     for v in reversed(order[1:]):
+s191957162.py(30):         p = parent[v]
+s191957162.py(31):         dp_down[v] = finalize(reduce(merge,
+s191957162.py(32):             (dp_down[c] for c in adj[v] if c != p),
+s191957162.py(33):             identity))
+s191957162.py(31):         dp_down[v] = finalize(reduce(merge,
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(32):             (dp_down[c] for c in adj[v] if c != p),
+s191957162.py(32):             (dp_down[c] for c in adj[v] if c != p),
+ --- modulename: s191957162, funcname: finalize
+s191957162.py(72):         return x+1
+s191957162.py(29):     for v in reversed(order[1:]):
+s191957162.py(30):         p = parent[v]
+s191957162.py(31):         dp_down[v] = finalize(reduce(merge,
+s191957162.py(32):             (dp_down[c] for c in adj[v] if c != p),
+s191957162.py(33):             identity))
+s191957162.py(31):         dp_down[v] = finalize(reduce(merge,
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(32):             (dp_down[c] for c in adj[v] if c != p),
+s191957162.py(32):             (dp_down[c] for c in adj[v] if c != p),
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(32):             (dp_down[c] for c in adj[v] if c != p),
+ --- modulename: s191957162, funcname: finalize
+s191957162.py(72):         return x+1
+s191957162.py(29):     for v in reversed(order[1:]):
+s191957162.py(36):     dp_up = [None]*N
+s191957162.py(37):     dp_up[0] = identity
+s191957162.py(38):     for v in order:
+s191957162.py(39):         p = parent[v]
+s191957162.py(40):         if len(adj[v]) == 1 and adj[v][0] == p:
+s191957162.py(42):         left = tuple(accumulate(
+s191957162.py(43):             chain((dp_up[v],),(dp_down[u] for u in adj[v] if u != p)),
+s191957162.py(44):             merge))
+s191957162.py(42):         left = tuple(accumulate(
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(43):             chain((dp_up[v],),(dp_down[u] for u in adj[v] if u != p)),
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(43):             chain((dp_up[v],),(dp_down[u] for u in adj[v] if u != p)),
+s191957162.py(45):         right = tuple(accumulate(
+s191957162.py(46):             chain((identity,),(dp_down[u] for u in reversed(adj[v]) if u != p)),
+s191957162.py(47):             merge))
+s191957162.py(45):         right = tuple(accumulate(
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(46):             chain((identity,),(dp_down[u] for u in reversed(adj[v]) if u != p)),
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(46):             chain((identity,),(dp_down[u] for u in reversed(adj[v]) if u != p)),
+s191957162.py(48):         i = 0
+s191957162.py(49):         for u in adj[v]:
+s191957162.py(50):             if u != p:
+s191957162.py(51):                 dp_up[u] = finalize(merge(left[i],right[-i-2]))
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: finalize
+s191957162.py(72):         return x+1
+s191957162.py(52):                 i += 1
+s191957162.py(49):         for u in adj[v]:
+s191957162.py(38):     for v in order:
+s191957162.py(39):         p = parent[v]
+s191957162.py(40):         if len(adj[v]) == 1 and adj[v][0] == p:
+s191957162.py(42):         left = tuple(accumulate(
+s191957162.py(43):             chain((dp_up[v],),(dp_down[u] for u in adj[v] if u != p)),
+s191957162.py(44):             merge))
+s191957162.py(42):         left = tuple(accumulate(
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(43):             chain((dp_up[v],),(dp_down[u] for u in adj[v] if u != p)),
+s191957162.py(43):             chain((dp_up[v],),(dp_down[u] for u in adj[v] if u != p)),
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(43):             chain((dp_up[v],),(dp_down[u] for u in adj[v] if u != p)),
+s191957162.py(45):         right = tuple(accumulate(
+s191957162.py(46):             chain((identity,),(dp_down[u] for u in reversed(adj[v]) if u != p)),
+s191957162.py(47):             merge))
+s191957162.py(45):         right = tuple(accumulate(
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(46):             chain((identity,),(dp_down[u] for u in reversed(adj[v]) if u != p)),
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(46):             chain((identity,),(dp_down[u] for u in reversed(adj[v]) if u != p)),
+s191957162.py(46):             chain((identity,),(dp_down[u] for u in reversed(adj[v]) if u != p)),
+s191957162.py(48):         i = 0
+s191957162.py(49):         for u in adj[v]:
+s191957162.py(50):             if u != p:
+s191957162.py(49):         for u in adj[v]:
+s191957162.py(50):             if u != p:
+s191957162.py(51):                 dp_up[u] = finalize(merge(left[i],right[-i-2]))
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: finalize
+s191957162.py(72):         return x+1
+s191957162.py(52):                 i += 1
+s191957162.py(49):         for u in adj[v]:
+s191957162.py(38):     for v in order:
+s191957162.py(39):         p = parent[v]
+s191957162.py(40):         if len(adj[v]) == 1 and adj[v][0] == p:
+s191957162.py(41):             continue
+s191957162.py(38):     for v in order:
+s191957162.py(54):     for v,l in enumerate(adj):
+s191957162.py(55):         order[v] = reduce(merge,
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+s191957162.py(57):                     identity)
+s191957162.py(55):         order[v] = reduce(merge,
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+s191957162.py(58):         order[v] = finalize(merge(order[v], dp_up[v]))
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: finalize
+s191957162.py(72):         return x+1
+s191957162.py(54):     for v,l in enumerate(adj):
+s191957162.py(55):         order[v] = reduce(merge,
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+s191957162.py(57):                     identity)
+s191957162.py(55):         order[v] = reduce(merge,
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+s191957162.py(58):         order[v] = finalize(merge(order[v], dp_up[v]))
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: finalize
+s191957162.py(72):         return x+1
+s191957162.py(54):     for v,l in enumerate(adj):
+s191957162.py(55):         order[v] = reduce(merge,
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+s191957162.py(57):                     identity)
+s191957162.py(55):         order[v] = reduce(merge,
+ --- modulename: s191957162, funcname: <genexpr>
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+s191957162.py(56):                     (dp_down[u] for u in adj[v] if u != parent[v]),
+s191957162.py(58):         order[v] = finalize(merge(order[v], dp_up[v]))
+ --- modulename: s191957162, funcname: merge
+s191957162.py(70):         return (x*y)%M
+ --- modulename: s191957162, funcname: finalize
+s191957162.py(72):         return x+1
+s191957162.py(54):     for v,l in enumerate(adj):
+s191957162.py(60):     return order
+s191957162.py(75):     return [v-1 for v in res]
+ --- modulename: s191957162, funcname: <listcomp>
+s191957162.py(75):     return [v-1 for v in res]
+s191957162.py(75):     return [v-1 for v in res]
+s191957162.py(75):     return [v-1 for v in res]
+s191957162.py(75):     return [v-1 for v in res]
+3
+4
+3
