@@ -1,0 +1,140 @@
+ --- modulename: s269143428, funcname: <module>
+s269143428.py(3): from collections import defaultdict
+ --- modulename: _bootstrap, funcname: _handle_fromlist
+<frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1067): s269143428.py(6): import sys
+s269143428.py(7): from collections import deque
+ --- modulename: _bootstrap, funcname: _handle_fromlist
+<frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1067): s269143428.py(9): sys.setrecursionlimit(10**6)
+s269143428.py(10): input = sys.stdin.buffer.readline
+s269143428.py(11): INF = 10 ** 9 + 1  # sys.maxsize # float("inf")
+s269143428.py(13): debug_indent = 0
+s269143428.py(16): def debug(*x):
+s269143428.py(29): def solve(N, M, edges):
+s269143428.py(85): def main():
+s269143428.py(100): T1 = """
+s269143428.py(107): def test_T1():
+s269143428.py(117): T2 = """
+s269143428.py(125): def test_T2():
+s269143428.py(136): T3 = """
+s269143428.py(141): def test_T3():
+s269143428.py(149): T4 = """
+s269143428.py(163): def test_T4():
+s269143428.py(191): def _test():
+s269143428.py(196): def as_input(s):
+s269143428.py(209): USE_NUMBA = False
+s269143428.py(210): if (USE_NUMBA and sys.argv[-1] == 'ONLINE_JUDGE') or sys.argv[-1] == '-c':
+s269143428.py(218):     input = sys.stdin.buffer.readline
+s269143428.py(219):     read = sys.stdin.buffer.read
+s269143428.py(221):     if (USE_NUMBA and sys.argv[-1] != '-p') or sys.argv[-1] == "--numba":
+s269143428.py(225):     elif sys.argv[-1] == "-t":
+s269143428.py(229):     elif sys.argv[-1] != '-p' and len(sys.argv) == 2:
+s269143428.py(235):     main()
+ --- modulename: s269143428, funcname: main
+s269143428.py(87):     N, M = map(int, input().split())
+s269143428.py(88):     edges = defaultdict(list)
+s269143428.py(89):     for i in range(N - 1):
+s269143428.py(90):         x, y = map(int, input().split())
+s269143428.py(91):         edges[x].append(y)
+s269143428.py(92):         edges[y].append(x)
+s269143428.py(89):     for i in range(N - 1):
+s269143428.py(90):         x, y = map(int, input().split())
+s269143428.py(91):         edges[x].append(y)
+s269143428.py(92):         edges[y].append(x)
+s269143428.py(89):     for i in range(N - 1):
+s269143428.py(95):     for x in solve(N, M, edges):
+ --- modulename: s269143428, funcname: solve
+s269143428.py(31):     root = 1
+s269143428.py(32):     parent = [-1] * (N + 1)
+s269143428.py(33):     to_visit = deque([root])
+s269143428.py(34):     bfs_visited_order = []
+s269143428.py(35):     while to_visit:
+s269143428.py(36):         cur = to_visit.popleft()
+s269143428.py(37):         bfs_visited_order.append(cur)
+s269143428.py(38):         for child in edges[cur]:
+s269143428.py(39):             if child == parent[cur]:
+s269143428.py(41):             parent[child] = cur
+s269143428.py(42):             edges[child].remove(cur)  # remove back-link
+s269143428.py(43):             to_visit.append(child)
+s269143428.py(38):         for child in edges[cur]:
+s269143428.py(35):     while to_visit:
+s269143428.py(36):         cur = to_visit.popleft()
+s269143428.py(37):         bfs_visited_order.append(cur)
+s269143428.py(38):         for child in edges[cur]:
+s269143428.py(39):             if child == parent[cur]:
+s269143428.py(41):             parent[child] = cur
+s269143428.py(42):             edges[child].remove(cur)  # remove back-link
+s269143428.py(43):             to_visit.append(child)
+s269143428.py(38):         for child in edges[cur]:
+s269143428.py(35):     while to_visit:
+s269143428.py(36):         cur = to_visit.popleft()
+s269143428.py(37):         bfs_visited_order.append(cur)
+s269143428.py(38):         for child in edges[cur]:
+s269143428.py(35):     while to_visit:
+s269143428.py(48):     upedge = [0] * (N + 1)
+s269143428.py(50):     multiply_of_upedge = [1] * (N + 1)
+s269143428.py(51):     for cur in reversed(bfs_visited_order[1:]):
+s269143428.py(53):         upedge[cur] = multiply_of_upedge[cur] + 1
+s269143428.py(54):         p = parent[cur]
+s269143428.py(55):         multiply_of_upedge[p] *= upedge[cur]
+s269143428.py(56):         multiply_of_upedge[p] %= M
+s269143428.py(51):     for cur in reversed(bfs_visited_order[1:]):
+s269143428.py(53):         upedge[cur] = multiply_of_upedge[cur] + 1
+s269143428.py(54):         p = parent[cur]
+s269143428.py(55):         multiply_of_upedge[p] *= upedge[cur]
+s269143428.py(56):         multiply_of_upedge[p] %= M
+s269143428.py(51):     for cur in reversed(bfs_visited_order[1:]):
+s269143428.py(59):     upedge[root] = multiply_of_upedge[root]
+s269143428.py(60):     final_result = upedge[:]
+s269143428.py(63):     downedge = [1] * (N + 1)
+s269143428.py(64):     for cur in bfs_visited_order:
+s269143428.py(65):         prod = downedge[cur]
+s269143428.py(67):         for child in edges[cur]:
+s269143428.py(68):             downedge[child] = prod
+s269143428.py(69):             prod *= upedge[child]
+s269143428.py(70):             prod %= M
+s269143428.py(67):         for child in edges[cur]:
+s269143428.py(72):         prod = 1
+s269143428.py(73):         for child in reversed(edges[cur]):
+s269143428.py(74):             downedge[child] = (downedge[child] * prod) % M + 1
+s269143428.py(75):             prod *= upedge[child]
+s269143428.py(76):             prod %= M
+s269143428.py(79):                 multiply_of_upedge[child]
+s269143428.py(80):                 * downedge[child]) % M
+s269143428.py(79):                 multiply_of_upedge[child]
+s269143428.py(80):                 * downedge[child]) % M
+s269143428.py(78):             final_result[child] = (
+s269143428.py(73):         for child in reversed(edges[cur]):
+s269143428.py(64):     for cur in bfs_visited_order:
+s269143428.py(65):         prod = downedge[cur]
+s269143428.py(67):         for child in edges[cur]:
+s269143428.py(68):             downedge[child] = prod
+s269143428.py(69):             prod *= upedge[child]
+s269143428.py(70):             prod %= M
+s269143428.py(67):         for child in edges[cur]:
+s269143428.py(72):         prod = 1
+s269143428.py(73):         for child in reversed(edges[cur]):
+s269143428.py(74):             downedge[child] = (downedge[child] * prod) % M + 1
+s269143428.py(75):             prod *= upedge[child]
+s269143428.py(76):             prod %= M
+s269143428.py(79):                 multiply_of_upedge[child]
+s269143428.py(80):                 * downedge[child]) % M
+s269143428.py(79):                 multiply_of_upedge[child]
+s269143428.py(80):                 * downedge[child]) % M
+s269143428.py(78):             final_result[child] = (
+s269143428.py(73):         for child in reversed(edges[cur]):
+s269143428.py(64):     for cur in bfs_visited_order:
+s269143428.py(65):         prod = downedge[cur]
+s269143428.py(67):         for child in edges[cur]:
+s269143428.py(72):         prod = 1
+s269143428.py(73):         for child in reversed(edges[cur]):
+s269143428.py(64):     for cur in bfs_visited_order:
+s269143428.py(82):     return final_result[1:]
+s269143428.py(96):         print(x)
+3
+s269143428.py(95):     for x in solve(N, M, edges):
+s269143428.py(96):         print(x)
+4
+s269143428.py(95):     for x in solve(N, M, edges):
+s269143428.py(96):         print(x)
+3
+s269143428.py(95):     for x in solve(N, M, edges):
