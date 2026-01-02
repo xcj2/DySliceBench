@@ -1,0 +1,44 @@
+import sys
+import socket
+
+hostname = socket.gethostname()
+
+if hostname == 'F451C':
+    sys.stdin = open('b1.in')
+
+
+def read_int_list():
+    return list(map(int, input().split()))
+
+
+def read_str_list():
+    return input().split()
+
+
+def read_int():
+    return int(input())
+
+
+def read_str():
+    return input()
+
+
+def main():
+    h, w = read_int_list()
+    s = [list(read_str()) for i in range(h)]
+    for i in range(h):
+        for j in range(w):
+            if s[i][j] == '.':
+                c = 0
+                for k in [-1, 0, 1]:
+                    for l in [-1, 0, 1]:
+                        if 0 <= i + k < h:
+                            if 0 <= j + l < w:
+                                if s[i + k][j + l] == '#':
+                                    c += 1
+                s[i][j] = str(c)
+    for i in range(h):
+        print(''.join(s[i]))
+
+
+main()
