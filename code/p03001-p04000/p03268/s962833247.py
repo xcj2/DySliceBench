@@ -1,0 +1,81 @@
+# -*- coding: utf-8 -*-
+import bisect
+import heapq
+import math
+import random
+import sys
+from collections import Counter, defaultdict, deque
+from decimal import ROUND_CEILING, ROUND_HALF_UP, Decimal
+from functools import lru_cache, reduce
+from itertools import combinations, combinations_with_replacement, product, permutations
+from operator import add, mul, sub
+
+sys.setrecursionlimit(10000)
+
+
+def read_int():
+    return int(input())
+
+
+def read_int_n():
+    return list(map(int, input().split()))
+
+
+def read_float():
+    return float(input())
+
+
+def read_float_n():
+    return list(map(float, input().split()))
+
+
+def read_str():
+    return input().strip()
+
+
+def read_str_n():
+    return list(map(str, input().split()))
+
+
+def error_print(*args):
+    print(*args, file=sys.stderr)
+
+
+def mt(f):
+    import time
+
+    def wrap(*args, **kwargs):
+        s = time.time()
+        ret = f(*args, **kwargs)
+        e = time.time()
+
+        error_print(e - s, 'sec')
+        return ret
+
+    return wrap
+
+
+@mt
+def slv(N, K):
+    ans = 0
+    for a in range(1, N+1):
+        if (a + a % K) % K != 0:
+            continue
+        n = math.floor(((N-(K-a) % K))/K)
+        m = math.floor((N-(a % K))/K)
+        if (K-a) % K != 0:
+            n += 1
+        if a % K != 0:
+            m += 1
+        ans += n * m
+
+    return ans
+
+
+def main():
+    N, K = read_int_n()
+    print(slv(N, K))
+
+
+if __name__ == '__main__':
+    main()
