@@ -1,0 +1,135 @@
+ --- modulename: s355208638, funcname: <module>
+s355208638.py(1): class PotentializedUnionFind():
+ --- modulename: s355208638, funcname: PotentializedUnionFind
+s355208638.py(1): class PotentializedUnionFind():
+s355208638.py(2):     "Either 0-indexed or 1-indexed"
+s355208638.py(4):     __slots__ = ["parent", "potential_diff"]
+s355208638.py(6):     def __init__(self, size):
+s355208638.py(10):     def find(self, a):
+s355208638.py(20):     def union(self, a, b, diff):
+s355208638.py(49):     def same(self, a, b):
+s355208638.py(52):     def diff(self, a, b):
+s355208638.py(57): def main():
+s355208638.py(75): if __name__ == "__main__":
+s355208638.py(76):     main()
+ --- modulename: s355208638, funcname: main
+s355208638.py(58):     import sys
+s355208638.py(59):     input = sys.stdin.buffer.readline
+s355208638.py(61):     N, M = map(int, input().split())
+s355208638.py(62):     lrds = list(map(int, sys.stdin.buffer.read().split()))
+s355208638.py(63):     puf = PotentializedUnionFind(N)
+ --- modulename: s355208638, funcname: __init__
+s355208638.py(7):         self.parent = [-1] * (size + 1)
+s355208638.py(8):         self.potential_diff = [0] * (size + 1) # potential_diff[node] = potential[parent[node]] - potential[node]
+s355208638.py(64):     ls = lrds[::3]
+s355208638.py(65):     rs = lrds[1::3]
+s355208638.py(66):     ds = lrds[2::3]
+s355208638.py(67):     for l, r, d in zip(ls, rs, ds):
+s355208638.py(68):         if not puf.union(l, r, d):
+ --- modulename: s355208638, funcname: union
+s355208638.py(28):         a_root = self.find(a)
+ --- modulename: s355208638, funcname: find
+s355208638.py(11):         path = []
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(18):         return a
+s355208638.py(29):         b_root = self.find(b)
+ --- modulename: s355208638, funcname: find
+s355208638.py(11):         path = []
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(18):         return a
+s355208638.py(30):         diff += self.potential_diff[b] - self.potential_diff[a] # find で経路圧縮しているのでこれでよい。
+s355208638.py(31):         a = a_root
+s355208638.py(32):         b = b_root
+s355208638.py(34):         if a == b:
+s355208638.py(37):             if self.parent[a] == self.parent[b]:
+s355208638.py(38):                 self.parent[a] = b
+s355208638.py(39):                 self.parent[b] -= 1
+s355208638.py(40):                 self.potential_diff[a] = diff
+s355208638.py(47):             return True
+s355208638.py(67):     for l, r, d in zip(ls, rs, ds):
+s355208638.py(68):         if not puf.union(l, r, d):
+ --- modulename: s355208638, funcname: union
+s355208638.py(28):         a_root = self.find(a)
+ --- modulename: s355208638, funcname: find
+s355208638.py(11):         path = []
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(18):         return a
+s355208638.py(29):         b_root = self.find(b)
+ --- modulename: s355208638, funcname: find
+s355208638.py(11):         path = []
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(18):         return a
+s355208638.py(30):         diff += self.potential_diff[b] - self.potential_diff[a] # find で経路圧縮しているのでこれでよい。
+s355208638.py(31):         a = a_root
+s355208638.py(32):         b = b_root
+s355208638.py(34):         if a == b:
+s355208638.py(37):             if self.parent[a] == self.parent[b]:
+s355208638.py(41):             elif self.parent[a] < self.parent[b]: #aのほうが大きい
+s355208638.py(42):                 self.parent[b] = a
+s355208638.py(43):                 self.potential_diff[b] = -diff
+s355208638.py(47):             return True
+s355208638.py(67):     for l, r, d in zip(ls, rs, ds):
+s355208638.py(68):         if not puf.union(l, r, d):
+ --- modulename: s355208638, funcname: union
+s355208638.py(28):         a_root = self.find(a)
+ --- modulename: s355208638, funcname: find
+s355208638.py(11):         path = []
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(13):             path.append(a)
+s355208638.py(14):             a = self.parent[a]
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(16):             self.potential_diff[child] += self.potential_diff[self.parent[child]]
+s355208638.py(17):             self.parent[child] = a
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(18):         return a
+s355208638.py(29):         b_root = self.find(b)
+ --- modulename: s355208638, funcname: find
+s355208638.py(11):         path = []
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(13):             path.append(a)
+s355208638.py(14):             a = self.parent[a]
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(16):             self.potential_diff[child] += self.potential_diff[self.parent[child]]
+s355208638.py(17):             self.parent[child] = a
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(18):         return a
+s355208638.py(30):         diff += self.potential_diff[b] - self.potential_diff[a] # find で経路圧縮しているのでこれでよい。
+s355208638.py(31):         a = a_root
+s355208638.py(32):         b = b_root
+s355208638.py(34):         if a == b:
+s355208638.py(35):             return False 
+s355208638.py(69):             if not puf.diff(l, r) == d:
+ --- modulename: s355208638, funcname: diff
+s355208638.py(53):         assert self.find(a) == self.find(b) # find(a) と find(b) 内での経路圧縮が本質なので、コメントアウトしない。
+ --- modulename: s355208638, funcname: find
+s355208638.py(11):         path = []
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(13):             path.append(a)
+s355208638.py(14):             a = self.parent[a]
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(16):             self.potential_diff[child] += self.potential_diff[self.parent[child]]
+s355208638.py(17):             self.parent[child] = a
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(18):         return a
+ --- modulename: s355208638, funcname: find
+s355208638.py(11):         path = []
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(13):             path.append(a)
+s355208638.py(14):             a = self.parent[a]
+s355208638.py(12):         while self.parent[a] > 0:
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(16):             self.potential_diff[child] += self.potential_diff[self.parent[child]]
+s355208638.py(17):             self.parent[child] = a
+s355208638.py(15):         for child in reversed(path):
+s355208638.py(18):         return a
+s355208638.py(54):         return self.potential_diff[a] - self.potential_diff[b]
+s355208638.py(67):     for l, r, d in zip(ls, rs, ds):
+s355208638.py(73):     print("Yes")
+Yes
