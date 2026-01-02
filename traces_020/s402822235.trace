@@ -1,0 +1,1083 @@
+ --- modulename: s402822235, funcname: <module>
+s402822235.py(7): MOD = 998244353
+s402822235.py(8): mask = (1 << 32) - 1
+s402822235.py(11): class LazySegmentTree:
+ --- modulename: s402822235, funcname: LazySegmentTree
+s402822235.py(11): class LazySegmentTree:
+s402822235.py(13):     __slots__ = ["n", "data", "lazy", "me", "oe", "fmm", "fmo", "foo"]
+s402822235.py(15):     def __init__(self, monoid_data, monoid_identity, operator_identity, func_monoid_monoid, func_monoid_operator, func_operator_operator):
+s402822235.py(29):     def replace(self, index, value):
+s402822235.py(52):     def effect(self, l, r, operator):
+s402822235.py(95):     def folded(self, l, r):
+s402822235.py(139): def main():
+s402822235.py(174): def test():
+s402822235.py(203): if __name__ == "__main__":
+s402822235.py(204):     main()
+ --- modulename: s402822235, funcname: main
+s402822235.py(140):     import sys
+s402822235.py(141):     input = sys.stdin.buffer.readline
+s402822235.py(143):     def fmm(m1, m2):
+s402822235.py(147):     def fmo(m1, o1):
+s402822235.py(154):     def foo(o1, o2):
+s402822235.py(163):     N, Q = map(int, input().split())
+s402822235.py(164):     monoid_data = [(A << 32) + 1 for A in map(int, input().split())]
+ --- modulename: s402822235, funcname: <listcomp>
+s402822235.py(164):     monoid_data = [(A << 32) + 1 for A in map(int, input().split())]
+s402822235.py(164):     monoid_data = [(A << 32) + 1 for A in map(int, input().split())]
+s402822235.py(164):     monoid_data = [(A << 32) + 1 for A in map(int, input().split())]
+s402822235.py(164):     monoid_data = [(A << 32) + 1 for A in map(int, input().split())]
+s402822235.py(164):     monoid_data = [(A << 32) + 1 for A in map(int, input().split())]
+s402822235.py(164):     monoid_data = [(A << 32) + 1 for A in map(int, input().split())]
+s402822235.py(165):     lst = LazySegmentTree(monoid_data, 1, 1 << 32, fmm, fmo, foo)
+ --- modulename: s402822235, funcname: __init__
+s402822235.py(16):         self.me = monoid_identity
+s402822235.py(17):         self.oe = operator_identity
+s402822235.py(18):         self.fmm = func_monoid_monoid
+s402822235.py(19):         self.fmo = func_monoid_operator
+s402822235.py(20):         self.foo = func_operator_operator
+s402822235.py(22):         self.n = len(monoid_data)
+s402822235.py(23):         self.data = monoid_data * 2
+s402822235.py(24):         for i in range(self.n-1, 0, -1):
+s402822235.py(25):             self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(24):         for i in range(self.n-1, 0, -1):
+s402822235.py(25):             self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(24):         for i in range(self.n-1, 0, -1):
+s402822235.py(25):             self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(24):         for i in range(self.n-1, 0, -1):
+s402822235.py(25):             self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(24):         for i in range(self.n-1, 0, -1):
+s402822235.py(26):         self.lazy = [self.oe] * (self.n * 2)
+s402822235.py(166):     for _ in range(Q):
+s402822235.py(167):         q, *k = map(int, input().split())
+s402822235.py(168):         if q == 0:
+s402822235.py(172):             print(lst.folded(k[0], k[1]) >> 32)
+ --- modulename: s402822235, funcname: folded
+s402822235.py(96):         l += self.n
+s402822235.py(97):         r += self.n
+s402822235.py(100):         indices = []
+s402822235.py(101):         l0 = (l // (l & -l))     // 2
+s402822235.py(102):         r0 = (r // (r & -r) - 1) // 2
+s402822235.py(103):         while l0 and l0 != r0:
+s402822235.py(110):         while r0:
+s402822235.py(111):             indices.append(r0)
+s402822235.py(112):             r0 //= 2
+s402822235.py(110):         while r0:
+s402822235.py(111):             indices.append(r0)
+s402822235.py(112):             r0 //= 2
+s402822235.py(110):         while r0:
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(116):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(117):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(118):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(119):             self.lazy[i] = self.oe
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(116):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(117):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(118):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(119):             self.lazy[i] = self.oe
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(122):         left_folded = self.me
+s402822235.py(123):         right_folded = self.me
+s402822235.py(124):         while l < r:
+s402822235.py(125):             if l % 2:
+s402822235.py(126):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(127):                 l += 1
+s402822235.py(128):             if r % 2:
+s402822235.py(131):             l //= 2
+s402822235.py(132):             r //= 2
+s402822235.py(124):         while l < r:
+s402822235.py(125):             if l % 2:
+s402822235.py(126):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(127):                 l += 1
+s402822235.py(128):             if r % 2:
+s402822235.py(129):                 r -= 1
+s402822235.py(130):                 right_folded = self.fmm(self.fmo(self.data[r], self.lazy[r]), right_folded)
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(131):             l //= 2
+s402822235.py(132):             r //= 2
+s402822235.py(124):         while l < r:
+s402822235.py(133):         return self.fmm(left_folded, right_folded)
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+15
+s402822235.py(166):     for _ in range(Q):
+s402822235.py(167):         q, *k = map(int, input().split())
+s402822235.py(168):         if q == 0:
+s402822235.py(169):             o = (k[2] << 32) + k[3]
+s402822235.py(170):             lst.effect(k[0], k[1], o)
+ --- modulename: s402822235, funcname: effect
+s402822235.py(53):         l += self.n
+s402822235.py(54):         r += self.n
+s402822235.py(57):         indices = []
+s402822235.py(58):         l0 = (l // (l & -l))     // 2
+s402822235.py(59):         r0 = (r // (r & -r) - 1) // 2
+s402822235.py(60):         while l0 and l0 != r0:
+s402822235.py(61):             if l0 < r0:
+s402822235.py(62):                 indices.append(r0)
+s402822235.py(63):                 r0 //= 2
+s402822235.py(60):         while l0 and l0 != r0:
+s402822235.py(61):             if l0 < r0:
+s402822235.py(65):                 indices.append(l0)
+s402822235.py(66):                 l0 //= 2
+s402822235.py(60):         while l0 and l0 != r0:
+s402822235.py(61):             if l0 < r0:
+s402822235.py(62):                 indices.append(r0)
+s402822235.py(63):                 r0 //= 2
+s402822235.py(60):         while l0 and l0 != r0:
+s402822235.py(67):         while r0:
+s402822235.py(68):             indices.append(r0)
+s402822235.py(69):             r0 //= 2
+s402822235.py(67):         while r0:
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(73):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(74):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(75):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(76):             self.lazy[i] = self.oe
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(73):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(74):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(75):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(76):             self.lazy[i] = self.oe
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(73):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(74):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(75):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(76):             self.lazy[i] = self.oe
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(73):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(74):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(75):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(76):             self.lazy[i] = self.oe
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(79):         while l < r:
+s402822235.py(80):             if l % 2:
+s402822235.py(81):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(82):                 l += 1
+s402822235.py(83):             if r % 2:
+s402822235.py(84):                 r -= 1
+s402822235.py(85):                 self.lazy[r] = self.foo(self.lazy[r], operator)
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(86):             l //= 2
+s402822235.py(87):             r //= 2
+s402822235.py(79):         while l < r:
+s402822235.py(90):         for i in indices:
+s402822235.py(91):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(92):             self.lazy[i] = self.oe
+s402822235.py(90):         for i in indices:
+s402822235.py(91):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(92):             self.lazy[i] = self.oe
+s402822235.py(90):         for i in indices:
+s402822235.py(91):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(92):             self.lazy[i] = self.oe
+s402822235.py(90):         for i in indices:
+s402822235.py(91):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(92):             self.lazy[i] = self.oe
+s402822235.py(90):         for i in indices:
+s402822235.py(166):     for _ in range(Q):
+s402822235.py(167):         q, *k = map(int, input().split())
+s402822235.py(168):         if q == 0:
+s402822235.py(172):             print(lst.folded(k[0], k[1]) >> 32)
+ --- modulename: s402822235, funcname: folded
+s402822235.py(96):         l += self.n
+s402822235.py(97):         r += self.n
+s402822235.py(100):         indices = []
+s402822235.py(101):         l0 = (l // (l & -l))     // 2
+s402822235.py(102):         r0 = (r // (r & -r) - 1) // 2
+s402822235.py(103):         while l0 and l0 != r0:
+s402822235.py(104):             if l0 < r0:
+s402822235.py(108):                 indices.append(l0)
+s402822235.py(109):                 l0 //= 2
+s402822235.py(103):         while l0 and l0 != r0:
+s402822235.py(104):             if l0 < r0:
+s402822235.py(108):                 indices.append(l0)
+s402822235.py(109):                 l0 //= 2
+s402822235.py(103):         while l0 and l0 != r0:
+s402822235.py(110):         while r0:
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(116):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(117):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(118):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(119):             self.lazy[i] = self.oe
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(116):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(117):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(118):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(119):             self.lazy[i] = self.oe
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(122):         left_folded = self.me
+s402822235.py(123):         right_folded = self.me
+s402822235.py(124):         while l < r:
+s402822235.py(125):             if l % 2:
+s402822235.py(126):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(127):                 l += 1
+s402822235.py(128):             if r % 2:
+s402822235.py(131):             l //= 2
+s402822235.py(132):             r //= 2
+s402822235.py(124):         while l < r:
+s402822235.py(125):             if l % 2:
+s402822235.py(126):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(127):                 l += 1
+s402822235.py(128):             if r % 2:
+s402822235.py(131):             l //= 2
+s402822235.py(132):             r //= 2
+s402822235.py(124):         while l < r:
+s402822235.py(133):         return self.fmm(left_folded, right_folded)
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+404
+s402822235.py(166):     for _ in range(Q):
+s402822235.py(167):         q, *k = map(int, input().split())
+s402822235.py(168):         if q == 0:
+s402822235.py(169):             o = (k[2] << 32) + k[3]
+s402822235.py(170):             lst.effect(k[0], k[1], o)
+ --- modulename: s402822235, funcname: effect
+s402822235.py(53):         l += self.n
+s402822235.py(54):         r += self.n
+s402822235.py(57):         indices = []
+s402822235.py(58):         l0 = (l // (l & -l))     // 2
+s402822235.py(59):         r0 = (r // (r & -r) - 1) // 2
+s402822235.py(60):         while l0 and l0 != r0:
+s402822235.py(61):             if l0 < r0:
+s402822235.py(65):                 indices.append(l0)
+s402822235.py(66):                 l0 //= 2
+s402822235.py(60):         while l0 and l0 != r0:
+s402822235.py(67):         while r0:
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(73):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(74):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(75):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(76):             self.lazy[i] = self.oe
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(79):         while l < r:
+s402822235.py(80):             if l % 2:
+s402822235.py(83):             if r % 2:
+s402822235.py(86):             l //= 2
+s402822235.py(87):             r //= 2
+s402822235.py(79):         while l < r:
+s402822235.py(80):             if l % 2:
+s402822235.py(81):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(82):                 l += 1
+s402822235.py(83):             if r % 2:
+s402822235.py(86):             l //= 2
+s402822235.py(87):             r //= 2
+s402822235.py(79):         while l < r:
+s402822235.py(90):         for i in indices:
+s402822235.py(91):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(92):             self.lazy[i] = self.oe
+s402822235.py(90):         for i in indices:
+s402822235.py(166):     for _ in range(Q):
+s402822235.py(167):         q, *k = map(int, input().split())
+s402822235.py(168):         if q == 0:
+s402822235.py(172):             print(lst.folded(k[0], k[1]) >> 32)
+ --- modulename: s402822235, funcname: folded
+s402822235.py(96):         l += self.n
+s402822235.py(97):         r += self.n
+s402822235.py(100):         indices = []
+s402822235.py(101):         l0 = (l // (l & -l))     // 2
+s402822235.py(102):         r0 = (r // (r & -r) - 1) // 2
+s402822235.py(103):         while l0 and l0 != r0:
+s402822235.py(104):             if l0 < r0:
+s402822235.py(108):                 indices.append(l0)
+s402822235.py(109):                 l0 //= 2
+s402822235.py(103):         while l0 and l0 != r0:
+s402822235.py(104):             if l0 < r0:
+s402822235.py(105):                 indices.append(r0)
+s402822235.py(106):                 r0 //= 2
+s402822235.py(103):         while l0 and l0 != r0:
+s402822235.py(110):         while r0:
+s402822235.py(111):             indices.append(r0)
+s402822235.py(112):             r0 //= 2
+s402822235.py(110):         while r0:
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(116):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(117):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(118):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(119):             self.lazy[i] = self.oe
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(116):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(117):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(118):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(119):             self.lazy[i] = self.oe
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(116):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(117):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(118):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(119):             self.lazy[i] = self.oe
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(122):         left_folded = self.me
+s402822235.py(123):         right_folded = self.me
+s402822235.py(124):         while l < r:
+s402822235.py(125):             if l % 2:
+s402822235.py(126):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(127):                 l += 1
+s402822235.py(128):             if r % 2:
+s402822235.py(131):             l //= 2
+s402822235.py(132):             r //= 2
+s402822235.py(124):         while l < r:
+s402822235.py(125):             if l % 2:
+s402822235.py(128):             if r % 2:
+s402822235.py(129):                 r -= 1
+s402822235.py(130):                 right_folded = self.fmm(self.fmo(self.data[r], self.lazy[r]), right_folded)
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(131):             l //= 2
+s402822235.py(132):             r //= 2
+s402822235.py(124):         while l < r:
+s402822235.py(133):         return self.fmm(left_folded, right_folded)
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+41511
+s402822235.py(166):     for _ in range(Q):
+s402822235.py(167):         q, *k = map(int, input().split())
+s402822235.py(168):         if q == 0:
+s402822235.py(169):             o = (k[2] << 32) + k[3]
+s402822235.py(170):             lst.effect(k[0], k[1], o)
+ --- modulename: s402822235, funcname: effect
+s402822235.py(53):         l += self.n
+s402822235.py(54):         r += self.n
+s402822235.py(57):         indices = []
+s402822235.py(58):         l0 = (l // (l & -l))     // 2
+s402822235.py(59):         r0 = (r // (r & -r) - 1) // 2
+s402822235.py(60):         while l0 and l0 != r0:
+s402822235.py(61):             if l0 < r0:
+s402822235.py(65):                 indices.append(l0)
+s402822235.py(66):                 l0 //= 2
+s402822235.py(60):         while l0 and l0 != r0:
+s402822235.py(61):             if l0 < r0:
+s402822235.py(62):                 indices.append(r0)
+s402822235.py(63):                 r0 //= 2
+s402822235.py(60):         while l0 and l0 != r0:
+s402822235.py(67):         while r0:
+s402822235.py(68):             indices.append(r0)
+s402822235.py(69):             r0 //= 2
+s402822235.py(67):         while r0:
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(73):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(74):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(75):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(76):             self.lazy[i] = self.oe
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(73):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(74):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(75):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(76):             self.lazy[i] = self.oe
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(73):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(74):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(75):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(76):             self.lazy[i] = self.oe
+s402822235.py(72):         for i in reversed(indices):
+s402822235.py(79):         while l < r:
+s402822235.py(80):             if l % 2:
+s402822235.py(81):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(82):                 l += 1
+s402822235.py(83):             if r % 2:
+s402822235.py(86):             l //= 2
+s402822235.py(87):             r //= 2
+s402822235.py(79):         while l < r:
+s402822235.py(80):             if l % 2:
+s402822235.py(83):             if r % 2:
+s402822235.py(84):                 r -= 1
+s402822235.py(85):                 self.lazy[r] = self.foo(self.lazy[r], operator)
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(86):             l //= 2
+s402822235.py(87):             r //= 2
+s402822235.py(79):         while l < r:
+s402822235.py(90):         for i in indices:
+s402822235.py(91):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(92):             self.lazy[i] = self.oe
+s402822235.py(90):         for i in indices:
+s402822235.py(91):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(92):             self.lazy[i] = self.oe
+s402822235.py(90):         for i in indices:
+s402822235.py(91):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(92):             self.lazy[i] = self.oe
+s402822235.py(90):         for i in indices:
+s402822235.py(166):     for _ in range(Q):
+s402822235.py(167):         q, *k = map(int, input().split())
+s402822235.py(168):         if q == 0:
+s402822235.py(172):             print(lst.folded(k[0], k[1]) >> 32)
+ --- modulename: s402822235, funcname: folded
+s402822235.py(96):         l += self.n
+s402822235.py(97):         r += self.n
+s402822235.py(100):         indices = []
+s402822235.py(101):         l0 = (l // (l & -l))     // 2
+s402822235.py(102):         r0 = (r // (r & -r) - 1) // 2
+s402822235.py(103):         while l0 and l0 != r0:
+s402822235.py(110):         while r0:
+s402822235.py(111):             indices.append(r0)
+s402822235.py(112):             r0 //= 2
+s402822235.py(110):         while r0:
+s402822235.py(111):             indices.append(r0)
+s402822235.py(112):             r0 //= 2
+s402822235.py(110):         while r0:
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(116):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(117):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(118):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(119):             self.lazy[i] = self.oe
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(116):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(117):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+ --- modulename: s402822235, funcname: foo
+s402822235.py(155):         b1 = o1 >> 32
+s402822235.py(156):         c1 = o1 & mask
+s402822235.py(157):         b2 = o2 >> 32
+s402822235.py(158):         c2 = o2 & mask
+s402822235.py(159):         b = b1 * b2 % MOD
+s402822235.py(160):         c = (c1 * b2 + c2) % MOD
+s402822235.py(161):         return (b << 32) + c
+s402822235.py(118):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+s402822235.py(119):             self.lazy[i] = self.oe
+s402822235.py(115):         for i in reversed(indices):
+s402822235.py(122):         left_folded = self.me
+s402822235.py(123):         right_folded = self.me
+s402822235.py(124):         while l < r:
+s402822235.py(125):             if l % 2:
+s402822235.py(126):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(127):                 l += 1
+s402822235.py(128):             if r % 2:
+s402822235.py(131):             l //= 2
+s402822235.py(132):             r //= 2
+s402822235.py(124):         while l < r:
+s402822235.py(125):             if l % 2:
+s402822235.py(126):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(127):                 l += 1
+s402822235.py(128):             if r % 2:
+s402822235.py(129):                 r -= 1
+s402822235.py(130):                 right_folded = self.fmm(self.fmo(self.data[r], self.lazy[r]), right_folded)
+ --- modulename: s402822235, funcname: fmo
+s402822235.py(148):         val = m1 >> 32
+s402822235.py(149):         cnt = m1 & mask
+s402822235.py(150):         b = o1 >> 32
+s402822235.py(151):         c = o1 & mask
+s402822235.py(152):         return (((b * val + c * cnt) % MOD) << 32) + cnt
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+s402822235.py(131):             l //= 2
+s402822235.py(132):             r //= 2
+s402822235.py(124):         while l < r:
+s402822235.py(133):         return self.fmm(left_folded, right_folded)
+ --- modulename: s402822235, funcname: fmm
+s402822235.py(144):         m = m1 + m2
+s402822235.py(145):         return (((m >> 32) % MOD) << 32) + (m & mask)
+4317767
+s402822235.py(166):     for _ in range(Q):
