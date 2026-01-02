@@ -1,0 +1,171 @@
+ --- modulename: s115355654, funcname: <module>
+s115355654.py(1): def main():
+s115355654.py(81): main()
+ --- modulename: s115355654, funcname: main
+s115355654.py(2):     from sys import stdin
+s115355654.py(3):     input = stdin.readline
+s115355654.py(4):     n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s115355654.py(5):     ab = [list(map(int, input().split())) for _ in [0]*(n-1)]
+ --- modulename: s115355654, funcname: <listcomp>
+s115355654.py(5):     ab = [list(map(int, input().split())) for _ in [0]*(n-1)]
+s115355654.py(5):     ab = [list(map(int, input().split())) for _ in [0]*(n-1)]
+s115355654.py(5):     ab = [list(map(int, input().split())) for _ in [0]*(n-1)]
+s115355654.py(7):     g = [[] for _ in [0]*n]
+ --- modulename: s115355654, funcname: <listcomp>
+s115355654.py(7):     g = [[] for _ in [0]*n]
+s115355654.py(7):     g = [[] for _ in [0]*n]
+s115355654.py(7):     g = [[] for _ in [0]*n]
+s115355654.py(7):     g = [[] for _ in [0]*n]
+s115355654.py(8):     for a, b in ab:
+s115355654.py(9):         g[a-1].append(b-1)
+s115355654.py(10):         g[b-1].append(a-1)
+s115355654.py(8):     for a, b in ab:
+s115355654.py(9):         g[a-1].append(b-1)
+s115355654.py(10):         g[b-1].append(a-1)
+s115355654.py(8):     for a, b in ab:
+s115355654.py(12):     mod = 10**9+7
+s115355654.py(13):     fact = [1, 1]
+s115355654.py(14):     inv = [pow(i, mod-2, mod) for i in range(n+1)]
+ --- modulename: s115355654, funcname: <listcomp>
+s115355654.py(14):     inv = [pow(i, mod-2, mod) for i in range(n+1)]
+s115355654.py(14):     inv = [pow(i, mod-2, mod) for i in range(n+1)]
+s115355654.py(14):     inv = [pow(i, mod-2, mod) for i in range(n+1)]
+s115355654.py(14):     inv = [pow(i, mod-2, mod) for i in range(n+1)]
+s115355654.py(14):     inv = [pow(i, mod-2, mod) for i in range(n+1)]
+s115355654.py(15):     for i in range(2, n+1):
+s115355654.py(16):         fact.append(fact[-1]*i % mod)
+s115355654.py(15):     for i in range(2, n+1):
+s115355654.py(16):         fact.append(fact[-1]*i % mod)
+s115355654.py(15):     for i in range(2, n+1):
+s115355654.py(22):     def merge(a, b): return a * b % mod
+s115355654.py(23):     def adj_bu(a, i): return a * inv[size[i]] % mod
+s115355654.py(24):     def adj_td(a, i, p): return a * inv[n-size[i]] % mod
+s115355654.py(25):     def adj_fin(a, i): return a * fact[n-1] % mod
+s115355654.py(32):     T = g
+s115355654.py(33):     P = [-1]*n
+s115355654.py(34):     q = [0]
+s115355654.py(35):     ini = 1
+s115355654.py(36):     order = []
+s115355654.py(37):     while q:
+s115355654.py(38):         i = q.pop()
+s115355654.py(39):         order.append(i)
+s115355654.py(40):         for a in T[i]:
+s115355654.py(41):             if a != P[i]:
+s115355654.py(42):                 P[a] = i
+s115355654.py(43):                 T[a].remove(i)
+s115355654.py(44):                 q.append(a)
+s115355654.py(40):         for a in T[i]:
+s115355654.py(41):             if a != P[i]:
+s115355654.py(42):                 P[a] = i
+s115355654.py(43):                 T[a].remove(i)
+s115355654.py(44):                 q.append(a)
+s115355654.py(40):         for a in T[i]:
+s115355654.py(37):     while q:
+s115355654.py(38):         i = q.pop()
+s115355654.py(39):         order.append(i)
+s115355654.py(40):         for a in T[i]:
+s115355654.py(37):     while q:
+s115355654.py(38):         i = q.pop()
+s115355654.py(39):         order.append(i)
+s115355654.py(40):         for a in T[i]:
+s115355654.py(37):     while q:
+s115355654.py(48):     size = [1]*n
+s115355654.py(49):     for i in order[1:][::-1]:
+s115355654.py(50):         size[P[i]] += size[i]
+s115355654.py(49):     for i in order[1:][::-1]:
+s115355654.py(50):         size[P[i]] += size[i]
+s115355654.py(49):     for i in order[1:][::-1]:
+s115355654.py(55):     ME = [ini]*n
+s115355654.py(56):     DP = [0]*n
+s115355654.py(57):     for i in order[1:][::-1]:
+s115355654.py(58):         DP[i] = adj_bu(ME[i], i)
+ --- modulename: s115355654, funcname: adj_bu
+s115355654.py(23):     def adj_bu(a, i): return a * inv[size[i]] % mod
+s115355654.py(59):         p = P[i]
+s115355654.py(60):         ME[p] = merge(ME[p], DP[i])
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+s115355654.py(57):     for i in order[1:][::-1]:
+s115355654.py(58):         DP[i] = adj_bu(ME[i], i)
+ --- modulename: s115355654, funcname: adj_bu
+s115355654.py(23):     def adj_bu(a, i): return a * inv[size[i]] % mod
+s115355654.py(59):         p = P[i]
+s115355654.py(60):         ME[p] = merge(ME[p], DP[i])
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+s115355654.py(57):     for i in order[1:][::-1]:
+s115355654.py(61):     DP[order[0]] = adj_fin(ME[order[0]], order[0])
+ --- modulename: s115355654, funcname: adj_fin
+s115355654.py(25):     def adj_fin(a, i): return a * fact[n-1] % mod
+s115355654.py(62):     TD = [ini]*n
+s115355654.py(65):     for i in order:
+s115355654.py(67):         ac = TD[i]
+s115355654.py(68):         for j in T[i]:
+s115355654.py(69):             TD[j] = ac
+s115355654.py(70):             ac = merge(ac, DP[j])
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+s115355654.py(68):         for j in T[i]:
+s115355654.py(69):             TD[j] = ac
+s115355654.py(70):             ac = merge(ac, DP[j])
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+s115355654.py(68):         for j in T[i]:
+s115355654.py(72):         ac = ini
+s115355654.py(73):         for j in T[i][::-1]:
+s115355654.py(74):             TD[j] = adj_td(merge(TD[j], ac), j, i)
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+ --- modulename: s115355654, funcname: adj_td
+s115355654.py(24):     def adj_td(a, i, p): return a * inv[n-size[i]] % mod
+s115355654.py(75):             ac = merge(ac, DP[j])
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+s115355654.py(76):             DP[j] = adj_fin(merge(ME[j], TD[j]), j)
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+ --- modulename: s115355654, funcname: adj_fin
+s115355654.py(25):     def adj_fin(a, i): return a * fact[n-1] % mod
+s115355654.py(73):         for j in T[i][::-1]:
+s115355654.py(74):             TD[j] = adj_td(merge(TD[j], ac), j, i)
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+ --- modulename: s115355654, funcname: adj_td
+s115355654.py(24):     def adj_td(a, i, p): return a * inv[n-size[i]] % mod
+s115355654.py(75):             ac = merge(ac, DP[j])
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+s115355654.py(76):             DP[j] = adj_fin(merge(ME[j], TD[j]), j)
+ --- modulename: s115355654, funcname: merge
+s115355654.py(22):     def merge(a, b): return a * b % mod
+ --- modulename: s115355654, funcname: adj_fin
+s115355654.py(25):     def adj_fin(a, i): return a * fact[n-1] % mod
+s115355654.py(73):         for j in T[i][::-1]:
+s115355654.py(65):     for i in order:
+s115355654.py(67):         ac = TD[i]
+s115355654.py(68):         for j in T[i]:
+s115355654.py(72):         ac = ini
+s115355654.py(73):         for j in T[i][::-1]:
+s115355654.py(65):     for i in order:
+s115355654.py(67):         ac = TD[i]
+s115355654.py(68):         for j in T[i]:
+s115355654.py(72):         ac = ini
+s115355654.py(73):         for j in T[i][::-1]:
+s115355654.py(65):     for i in order:
+s115355654.py(77):     for i in DP:
+s115355654.py(78):         print(i)
+2
+s115355654.py(77):     for i in DP:
+s115355654.py(78):         print(i)
+1
+s115355654.py(77):     for i in DP:
+s115355654.py(78):         print(i)
+1
+s115355654.py(77):     for i in DP:
