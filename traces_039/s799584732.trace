@@ -1,0 +1,227 @@
+ --- modulename: s799584732, funcname: <module>
+s799584732.py(1): class SegmentTree:
+ --- modulename: s799584732, funcname: SegmentTree
+s799584732.py(1): class SegmentTree:
+s799584732.py(2):     '''
+s799584732.py(7):     def __init__(self, n, func=lambda x, y : max(x, y), e = -float('inf'), init_list = None):
+s799584732.py(23):     def set_values(self, val_list):
+s799584732.py(28):     def set_value(self, index, val):
+s799584732.py(32):     def get_value(self, index):
+s799584732.py(36):     def update_all(self):
+s799584732.py(45):     def update(self, index, val):
+s799584732.py(55):     def query(self, l, r):
+s799584732.py(76):     def search_max_right(self, l, check_func):
+s799584732.py(106):     def search_min_right(self, l, check_func):
+s799584732.py(137):     def search_min_left(self, r, check_func):
+s799584732.py(167):     def search_max_left(self, r, check_func):
+s799584732.py(195): n, q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s799584732.py(196): a = list(map(int, input().split()))
+s799584732.py(197): a.reverse()
+s799584732.py(199): st = SegmentTree(n, max, 0, a)
+ --- modulename: s799584732, funcname: __init__
+s799584732.py(8):         assert n > 0 and (not init_list or len(init_list) <= n)
+s799584732.py(9):         self.n = n
+s799584732.py(10):         self.leaf_n = 1
+s799584732.py(11):         while n > self.leaf_n:
+s799584732.py(12):             self.leaf_n <<= 1
+s799584732.py(11):         while n > self.leaf_n:
+s799584732.py(12):             self.leaf_n <<= 1
+s799584732.py(11):         while n > self.leaf_n:
+s799584732.py(12):             self.leaf_n <<= 1
+s799584732.py(11):         while n > self.leaf_n:
+s799584732.py(13):         self.node_n = (self.leaf_n << 1) - 1
+s799584732.py(14):         self.offset = self.leaf_n - 1
+s799584732.py(15):         self.tree = [e] * self.node_n
+s799584732.py(16):         self.f = func
+s799584732.py(17):         self.e = e
+s799584732.py(19):         if init_list:
+s799584732.py(20):             self.tree[self.offset:self.offset+n] = init_list
+s799584732.py(21):             self.update_all()
+ --- modulename: s799584732, funcname: update_all
+s799584732.py(37):         l = self.offset
+s799584732.py(38):         n = self.leaf_n
+s799584732.py(39):         while l > 0:
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(41):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(41):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(41):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(41):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(42):             l >>= 1
+s799584732.py(43):             n >>= 1
+s799584732.py(39):         while l > 0:
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(41):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(41):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(42):             l >>= 1
+s799584732.py(43):             n >>= 1
+s799584732.py(39):         while l > 0:
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(41):                 self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(40):             for i in range(l, l + n, 2):
+s799584732.py(42):             l >>= 1
+s799584732.py(43):             n >>= 1
+s799584732.py(39):         while l > 0:
+s799584732.py(200): ans = []
+s799584732.py(201): for _ in range(q):
+s799584732.py(202):     t, x, v = map(int, input().split())
+s799584732.py(203):     if t == 1:
+s799584732.py(205):     elif t == 2:
+s799584732.py(206):         ans.append(st.query(n-v, n-x))
+ --- modulename: s799584732, funcname: query
+s799584732.py(59):         assert 0 <= l <= r < self.leaf_n
+s799584732.py(60):         left_val = self.e
+s799584732.py(61):         right_val = self.e
+s799584732.py(62):         l += self.offset
+s799584732.py(63):         r += self.offset
+s799584732.py(64):         while l < r:
+s799584732.py(65):             if l & 1 == 0:
+s799584732.py(67):             if r & 1 == 1:
+s799584732.py(68):                 right_val = self.f(self.tree[r], right_val)
+s799584732.py(69):                 r -= 1
+s799584732.py(70):             l >>= 1
+s799584732.py(71):             r = (r >> 1) - 1
+s799584732.py(64):         while l < r:
+s799584732.py(65):             if l & 1 == 0:
+s799584732.py(67):             if r & 1 == 1:
+s799584732.py(70):             l >>= 1
+s799584732.py(71):             r = (r >> 1) - 1
+s799584732.py(64):         while l < r:
+s799584732.py(72):         if l == r:
+s799584732.py(73):             left_val = self.f(left_val, self.tree[l])
+s799584732.py(74):         return self.f(left_val, right_val)
+s799584732.py(201): for _ in range(q):
+s799584732.py(202):     t, x, v = map(int, input().split())
+s799584732.py(203):     if t == 1:
+s799584732.py(205):     elif t == 2:
+s799584732.py(208):         i = st.search_max_left(n - x, lambda y: y >= v)
+ --- modulename: s799584732, funcname: search_max_left
+s799584732.py(175):         assert(0 <= r < self.leaf_n)
+s799584732.py(176):         i = r + self.offset
+s799584732.py(177):         right_val = self.e
+s799584732.py(179):             x = self.f(self.tree[i], right_val)
+s799584732.py(180):             if check_func(x):
+ --- modulename: s799584732, funcname: <lambda>
+s799584732.py(208):         i = st.search_max_left(n - x, lambda y: y >= v)
+s799584732.py(188):             if i & 1 == 1:
+s799584732.py(190):             if i & (i + 1) == 0: #iが左端
+s799584732.py(192):             i = (i >> 1) - 1
+s799584732.py(179):             x = self.f(self.tree[i], right_val)
+s799584732.py(180):             if check_func(x):
+ --- modulename: s799584732, funcname: <lambda>
+s799584732.py(208):         i = st.search_max_left(n - x, lambda y: y >= v)
+s799584732.py(181):                 while i < self.offset:
+s799584732.py(182):                     i = (i + 1) << 1 #下の右側
+s799584732.py(183):                     x = self.f(self.tree[i], right_val)
+s799584732.py(184):                     if not check_func(x):
+ --- modulename: s799584732, funcname: <lambda>
+s799584732.py(208):         i = st.search_max_left(n - x, lambda y: y >= v)
+s799584732.py(185):                         right_val = x
+s799584732.py(186):                         i -= 1
+s799584732.py(181):                 while i < self.offset:
+s799584732.py(187):                 return i - self.offset if check_func(self.f(self.tree[i], right_val)) else -1
+ --- modulename: s799584732, funcname: <lambda>
+s799584732.py(208):         i = st.search_max_left(n - x, lambda y: y >= v)
+s799584732.py(209):         ans.append(n - i if i >= 0 else n + 1)
+s799584732.py(201): for _ in range(q):
+s799584732.py(202):     t, x, v = map(int, input().split())
+s799584732.py(203):     if t == 1:
+s799584732.py(204):         st.update(n-x, v)
+ --- modulename: s799584732, funcname: update
+s799584732.py(46):         assert 0 <= index < self.leaf_n
+s799584732.py(47):         i = self.offset + index
+s799584732.py(48):         self.tree[i] = val
+s799584732.py(49):         while i > 0:
+s799584732.py(50):             if i & 1 == 0:
+s799584732.py(52):             self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(53):             i >>= 1
+s799584732.py(49):         while i > 0:
+s799584732.py(50):             if i & 1 == 0:
+s799584732.py(51):                 i -= 1
+s799584732.py(52):             self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(53):             i >>= 1
+s799584732.py(49):         while i > 0:
+s799584732.py(50):             if i & 1 == 0:
+s799584732.py(52):             self.tree[i>>1] = self.f(self.tree[i], self.tree[i+1])
+s799584732.py(53):             i >>= 1
+s799584732.py(49):         while i > 0:
+s799584732.py(201): for _ in range(q):
+s799584732.py(202):     t, x, v = map(int, input().split())
+s799584732.py(203):     if t == 1:
+s799584732.py(205):     elif t == 2:
+s799584732.py(206):         ans.append(st.query(n-v, n-x))
+ --- modulename: s799584732, funcname: query
+s799584732.py(59):         assert 0 <= l <= r < self.leaf_n
+s799584732.py(60):         left_val = self.e
+s799584732.py(61):         right_val = self.e
+s799584732.py(62):         l += self.offset
+s799584732.py(63):         r += self.offset
+s799584732.py(64):         while l < r:
+s799584732.py(65):             if l & 1 == 0:
+s799584732.py(66):                 left_val = self.f(left_val, self.tree[l])
+s799584732.py(67):             if r & 1 == 1:
+s799584732.py(70):             l >>= 1
+s799584732.py(71):             r = (r >> 1) - 1
+s799584732.py(64):         while l < r:
+s799584732.py(72):         if l == r:
+s799584732.py(73):             left_val = self.f(left_val, self.tree[l])
+s799584732.py(74):         return self.f(left_val, right_val)
+s799584732.py(201): for _ in range(q):
+s799584732.py(202):     t, x, v = map(int, input().split())
+s799584732.py(203):     if t == 1:
+s799584732.py(205):     elif t == 2:
+s799584732.py(208):         i = st.search_max_left(n - x, lambda y: y >= v)
+ --- modulename: s799584732, funcname: search_max_left
+s799584732.py(175):         assert(0 <= r < self.leaf_n)
+s799584732.py(176):         i = r + self.offset
+s799584732.py(177):         right_val = self.e
+s799584732.py(179):             x = self.f(self.tree[i], right_val)
+s799584732.py(180):             if check_func(x):
+ --- modulename: s799584732, funcname: <lambda>
+s799584732.py(208):         i = st.search_max_left(n - x, lambda y: y >= v)
+s799584732.py(188):             if i & 1 == 1:
+s799584732.py(189):                 right_val = x
+s799584732.py(190):             if i & (i + 1) == 0: #iが左端
+s799584732.py(192):             i = (i >> 1) - 1
+s799584732.py(179):             x = self.f(self.tree[i], right_val)
+s799584732.py(180):             if check_func(x):
+ --- modulename: s799584732, funcname: <lambda>
+s799584732.py(208):         i = st.search_max_left(n - x, lambda y: y >= v)
+s799584732.py(188):             if i & 1 == 1:
+s799584732.py(190):             if i & (i + 1) == 0: #iが左端
+s799584732.py(192):             i = (i >> 1) - 1
+s799584732.py(179):             x = self.f(self.tree[i], right_val)
+s799584732.py(180):             if check_func(x):
+ --- modulename: s799584732, funcname: <lambda>
+s799584732.py(208):         i = st.search_max_left(n - x, lambda y: y >= v)
+s799584732.py(188):             if i & 1 == 1:
+s799584732.py(189):                 right_val = x
+s799584732.py(190):             if i & (i + 1) == 0: #iが左端
+s799584732.py(191):                 return -1
+s799584732.py(209):         ans.append(n - i if i >= 0 else n + 1)
+s799584732.py(201): for _ in range(q):
+s799584732.py(210): for x in ans:
+s799584732.py(211):     print(x)
+3
+s799584732.py(210): for x in ans:
+s799584732.py(211):     print(x)
+3
+s799584732.py(210): for x in ans:
+s799584732.py(211):     print(x)
+2
+s799584732.py(210): for x in ans:
+s799584732.py(211):     print(x)
+6
+s799584732.py(210): for x in ans:
