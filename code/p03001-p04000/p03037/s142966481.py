@@ -1,0 +1,139 @@
+#!usr/bin/env python3
+from collections import defaultdict
+from collections import deque
+from heapq import heappush, heappop
+import sys
+import math
+import bisect
+import random
+def LI(): return list(map(int, sys.stdin.readline().split()))
+def I(): return int(sys.stdin.readline())
+def LS():return list(map(list, sys.stdin.readline().split()))
+def S(): return list(sys.stdin.readline())[:-1]
+def IR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = I()
+    return l
+def LIR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = LI()
+    return l
+def SR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = S()
+    return l
+def LSR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = LS()
+    return l
+sys.setrecursionlimit(1000000)
+mod = 1000000007
+
+#A
+def A():
+    return
+
+#B
+def B():
+    return
+
+#C
+def C():
+    n,m = LI()
+    t = [0 for i in range(n+1)]
+    for i in range(m):
+        l,r = LI()
+        t[l-1] += 1
+        t[r] -= 1
+    for i in range(n):
+        t[i+1] += t[i]
+        if t[i] == m:
+            t[i] = 1
+        else:
+            t[i] = 0
+    print(sum(t[:n]))
+    return
+
+#D
+def D():
+    return
+
+#E
+def E():
+    return
+
+#F
+def F():
+    q = I()
+    m = 0
+    l = [-float("inf"),float("inf")]
+    x = 0
+    num = 0
+    for _ in range(q):
+        Q = LI()
+        if len(Q) == 1:
+            print(x,m)
+        else:
+            z,a,b = Q
+            m += b
+            if num == 0:
+                num += 1
+                l = [a,float("inf")]
+                x = a
+            elif num == 1:
+                if a != l[0]:
+                    num += 1
+                    l = [min(a,l[0]),max(a,l[0])]
+                    x = l[0]
+                    m += l[1]-l[0]
+            else:
+                num += 1
+                if num % 2:
+                    if l[0] <= a < l[1]:
+                        m += min(a-l[0],l[1]-a)
+                        x = a
+                    elif a < l[0]:
+                        m += l[0]-a
+                        x = l[0]
+                        l = [a,l[1]]
+                    else:
+                        m += a-l[1]
+                        x = l[1]
+                        l = [l[0],a]
+                else:
+                    if l[0] <= a < l[1]:
+                        if a < x:
+                            m += x-a
+                            l = [a,x]
+                            x = a
+                        else:
+                            m += a-x
+                            l = [x,a]
+                    elif a < l[0]:
+                        m += x-a
+                        x = l[0]
+                        l = [l[0],x]
+                    else:
+                        m += a-x
+                        l = [x,l[1]]
+    return
+
+#G
+def G():
+    return
+
+#H
+def H():
+    return
+
+#I
+def I_():
+    return
+
+#J
+def J():
+    return
+
+#Solve
+if __name__ == "__main__":
+    C()
