@@ -1,0 +1,743 @@
+ --- modulename: s874740201, funcname: <module>
+s874740201.py(2): import sys
+s874740201.py(3): sys.setrecursionlimit(10**6)
+s874740201.py(4): input = sys.stdin.buffer.readline
+s874740201.py(5): INF = 10 ** 9 + 1  # sys.maxsize # float("inf")
+s874740201.py(6): MOD = 10 ** 9 + 7
+s874740201.py(9): def debug(*x):
+s874740201.py(13): def set_depth(depth):
+s874740201.py(20): def set_width(width):
+s874740201.py(24): def get_size(pos):
+s874740201.py(29): def up(pos):
+s874740201.py(34): def up_propagate(table, pos, binop):
+s874740201.py(43): def force_down_propagate(
+s874740201.py(61): def force_range_update(
+s874740201.py(87): def range_reduce(table, left, right, binop, unity):
+s874740201.py(105): def lazy_range_update(
+s874740201.py(131): def lazy_range_reduce(
+s874740201.py(147): def debugprint(xs, minsize=0, maxsize=None):
+s874740201.py(169): def main():
+s874740201.py(210): T1 = """
+s874740201.py(220): TEST_T1 = """
+s874740201.py(230): def _test():
+s874740201.py(239): def as_input(s):
+s874740201.py(252): input = sys.stdin.buffer.readline
+s874740201.py(253): read = sys.stdin.buffer.read
+s874740201.py(255): if sys.argv[-1] == "-t":
+s874740201.py(260): main()
+ --- modulename: s874740201, funcname: main
+s874740201.py(171):     from operator import add
+s874740201.py(172):     N, Q = map(int, input().split())
+s874740201.py(173):     set_width(N)
+ --- modulename: s874740201, funcname: set_width
+s874740201.py(21):     set_depth((width - 1).bit_length() + 1)
+ --- modulename: s874740201, funcname: set_depth
+s874740201.py(15):     DEPTH = depth
+s874740201.py(16):     SEGTREE_SIZE = 1 << DEPTH
+s874740201.py(17):     NONLEAF_SIZE = 1 << (DEPTH - 1)
+s874740201.py(175):     value_unity = 0
+s874740201.py(176):     value_table = [0] * SEGTREE_SIZE
+s874740201.py(177):     value_binop = add
+s874740201.py(178):     action_unity = None
+s874740201.py(179):     action_table = [action_unity] * SEGTREE_SIZE
+s874740201.py(181):     def force(action, value, size):
+s874740201.py(186):     def composite(new_action, old_action):
+s874740201.py(191):     for _time in range(Q):
+s874740201.py(192):         q, *args = map(int, input().split())
+s874740201.py(194):         if q == 0:
+s874740201.py(196):             s, t, value = args
+s874740201.py(197):             lazy_range_update(
+s874740201.py(198):                 action_table, value_table, s, t + 1,
+s874740201.py(199):                 value, composite, force, action_unity, value_binop
+s874740201.py(197):             lazy_range_update(
+ --- modulename: s874740201, funcname: lazy_range_update
+s874740201.py(109):     L = up(start)
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(110):     R = up(end)
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(111):     force_down_propagate(
+s874740201.py(112):         action_table, value_table, L,
+s874740201.py(113):         action_composite, action_force, action_unity)
+s874740201.py(111):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(114):     force_down_propagate(
+s874740201.py(115):         action_table, value_table, R,
+s874740201.py(116):         action_composite, action_force, action_unity)
+s874740201.py(114):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(124):     force_range_update(
+s874740201.py(125):         value_table, action_table, start, end,
+s874740201.py(126):         action, action_force, action_composite, action_unity)
+s874740201.py(124):     force_range_update(
+ --- modulename: s874740201, funcname: force_range_update
+s874740201.py(69):     left += NONLEAF_SIZE
+s874740201.py(70):     right += NONLEAF_SIZE
+s874740201.py(71):     while left < right:
+s874740201.py(72):         if left & 1:
+s874740201.py(73):             value_table[left] = action_force(
+s874740201.py(74):                 action, value_table[left], get_size(left))
+ --- modulename: s874740201, funcname: get_size
+s874740201.py(25):     ret = pos.bit_length()
+s874740201.py(26):     return (1 << (DEPTH - ret))
+s874740201.py(73):             value_table[left] = action_force(
+ --- modulename: s874740201, funcname: force
+s874740201.py(182):         if action == action_unity:
+s874740201.py(184):         return action * size
+s874740201.py(75):             action_table[left] = action_composite(action, action_table[left])
+ --- modulename: s874740201, funcname: composite
+s874740201.py(187):         if new_action != action_unity:
+s874740201.py(188):             return new_action
+s874740201.py(76):             left += 1
+s874740201.py(77):         if right & 1:
+s874740201.py(83):         left //= 2
+s874740201.py(84):         right //= 2
+s874740201.py(71):     while left < right:
+s874740201.py(72):         if left & 1:
+s874740201.py(73):             value_table[left] = action_force(
+s874740201.py(74):                 action, value_table[left], get_size(left))
+ --- modulename: s874740201, funcname: get_size
+s874740201.py(25):     ret = pos.bit_length()
+s874740201.py(26):     return (1 << (DEPTH - ret))
+s874740201.py(73):             value_table[left] = action_force(
+ --- modulename: s874740201, funcname: force
+s874740201.py(182):         if action == action_unity:
+s874740201.py(184):         return action * size
+s874740201.py(75):             action_table[left] = action_composite(action, action_table[left])
+ --- modulename: s874740201, funcname: composite
+s874740201.py(187):         if new_action != action_unity:
+s874740201.py(188):             return new_action
+s874740201.py(76):             left += 1
+s874740201.py(77):         if right & 1:
+s874740201.py(83):         left //= 2
+s874740201.py(84):         right //= 2
+s874740201.py(71):     while left < right:
+s874740201.py(127):     up_propagate(value_table, L, value_binop)
+ --- modulename: s874740201, funcname: up_propagate
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(128):     up_propagate(value_table, R, value_binop)
+ --- modulename: s874740201, funcname: up_propagate
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(191):     for _time in range(Q):
+s874740201.py(192):         q, *args = map(int, input().split())
+s874740201.py(194):         if q == 0:
+s874740201.py(196):             s, t, value = args
+s874740201.py(197):             lazy_range_update(
+s874740201.py(198):                 action_table, value_table, s, t + 1,
+s874740201.py(199):                 value, composite, force, action_unity, value_binop
+s874740201.py(197):             lazy_range_update(
+ --- modulename: s874740201, funcname: lazy_range_update
+s874740201.py(109):     L = up(start)
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(110):     R = up(end)
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(111):     force_down_propagate(
+s874740201.py(112):         action_table, value_table, L,
+s874740201.py(113):         action_composite, action_force, action_unity)
+s874740201.py(111):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(114):     force_down_propagate(
+s874740201.py(115):         action_table, value_table, R,
+s874740201.py(116):         action_composite, action_force, action_unity)
+s874740201.py(114):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(124):     force_range_update(
+s874740201.py(125):         value_table, action_table, start, end,
+s874740201.py(126):         action, action_force, action_composite, action_unity)
+s874740201.py(124):     force_range_update(
+ --- modulename: s874740201, funcname: force_range_update
+s874740201.py(69):     left += NONLEAF_SIZE
+s874740201.py(70):     right += NONLEAF_SIZE
+s874740201.py(71):     while left < right:
+s874740201.py(72):         if left & 1:
+s874740201.py(77):         if right & 1:
+s874740201.py(78):             right -= 1
+s874740201.py(79):             value_table[right] = action_force(
+s874740201.py(80):                 action, value_table[right], get_size(right))
+ --- modulename: s874740201, funcname: get_size
+s874740201.py(25):     ret = pos.bit_length()
+s874740201.py(26):     return (1 << (DEPTH - ret))
+s874740201.py(79):             value_table[right] = action_force(
+ --- modulename: s874740201, funcname: force
+s874740201.py(182):         if action == action_unity:
+s874740201.py(184):         return action * size
+s874740201.py(81):             action_table[right] = action_composite(action, action_table[right])
+ --- modulename: s874740201, funcname: composite
+s874740201.py(187):         if new_action != action_unity:
+s874740201.py(188):             return new_action
+s874740201.py(83):         left //= 2
+s874740201.py(84):         right //= 2
+s874740201.py(71):     while left < right:
+s874740201.py(72):         if left & 1:
+s874740201.py(73):             value_table[left] = action_force(
+s874740201.py(74):                 action, value_table[left], get_size(left))
+ --- modulename: s874740201, funcname: get_size
+s874740201.py(25):     ret = pos.bit_length()
+s874740201.py(26):     return (1 << (DEPTH - ret))
+s874740201.py(73):             value_table[left] = action_force(
+ --- modulename: s874740201, funcname: force
+s874740201.py(182):         if action == action_unity:
+s874740201.py(184):         return action * size
+s874740201.py(75):             action_table[left] = action_composite(action, action_table[left])
+ --- modulename: s874740201, funcname: composite
+s874740201.py(187):         if new_action != action_unity:
+s874740201.py(188):             return new_action
+s874740201.py(76):             left += 1
+s874740201.py(77):         if right & 1:
+s874740201.py(83):         left //= 2
+s874740201.py(84):         right //= 2
+s874740201.py(71):     while left < right:
+s874740201.py(127):     up_propagate(value_table, L, value_binop)
+ --- modulename: s874740201, funcname: up_propagate
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(128):     up_propagate(value_table, R, value_binop)
+ --- modulename: s874740201, funcname: up_propagate
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(191):     for _time in range(Q):
+s874740201.py(192):         q, *args = map(int, input().split())
+s874740201.py(194):         if q == 0:
+s874740201.py(203):             s, t = args
+s874740201.py(204):             print(lazy_range_reduce(
+s874740201.py(205):                 action_table, value_table, s, t + 1,
+s874740201.py(206):                 composite, force, action_unity, value_binop, value_unity))
+s874740201.py(204):             print(lazy_range_reduce(
+ --- modulename: s874740201, funcname: lazy_range_reduce
+s874740201.py(137):     force_down_propagate(
+s874740201.py(138):         action_table, value_table, up(start),
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(139):         action_composite, action_force,  action_unity)
+s874740201.py(137):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(140):     force_down_propagate(
+s874740201.py(141):         action_table, value_table, up(end),
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(142):         action_composite, action_force, action_unity)
+s874740201.py(140):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(144):     return range_reduce(value_table, start, end, value_binop, value_unity)
+ --- modulename: s874740201, funcname: range_reduce
+s874740201.py(88):     ret_left = unity
+s874740201.py(89):     ret_right = unity
+s874740201.py(90):     left += NONLEAF_SIZE
+s874740201.py(91):     right += NONLEAF_SIZE
+s874740201.py(92):     while left < right:
+s874740201.py(93):         if left & 1:
+s874740201.py(96):         if right & 1:
+s874740201.py(100):         left //= 2
+s874740201.py(101):         right //= 2
+s874740201.py(92):     while left < right:
+s874740201.py(93):         if left & 1:
+s874740201.py(96):         if right & 1:
+s874740201.py(97):             right -= 1
+s874740201.py(98):             ret_right = binop(table[right], ret_right)
+s874740201.py(100):         left //= 2
+s874740201.py(101):         right //= 2
+s874740201.py(92):     while left < right:
+s874740201.py(93):         if left & 1:
+s874740201.py(96):         if right & 1:
+s874740201.py(97):             right -= 1
+s874740201.py(98):             ret_right = binop(table[right], ret_right)
+s874740201.py(100):         left //= 2
+s874740201.py(101):         right //= 2
+s874740201.py(92):     while left < right:
+s874740201.py(102):     return binop(ret_left, ret_right)
+-5
+s874740201.py(191):     for _time in range(Q):
+s874740201.py(192):         q, *args = map(int, input().split())
+s874740201.py(194):         if q == 0:
+s874740201.py(203):             s, t = args
+s874740201.py(204):             print(lazy_range_reduce(
+s874740201.py(205):                 action_table, value_table, s, t + 1,
+s874740201.py(206):                 composite, force, action_unity, value_binop, value_unity))
+s874740201.py(204):             print(lazy_range_reduce(
+ --- modulename: s874740201, funcname: lazy_range_reduce
+s874740201.py(137):     force_down_propagate(
+s874740201.py(138):         action_table, value_table, up(start),
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(139):         action_composite, action_force,  action_unity)
+s874740201.py(137):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(140):     force_down_propagate(
+s874740201.py(141):         action_table, value_table, up(end),
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(142):         action_composite, action_force, action_unity)
+s874740201.py(140):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(144):     return range_reduce(value_table, start, end, value_binop, value_unity)
+ --- modulename: s874740201, funcname: range_reduce
+s874740201.py(88):     ret_left = unity
+s874740201.py(89):     ret_right = unity
+s874740201.py(90):     left += NONLEAF_SIZE
+s874740201.py(91):     right += NONLEAF_SIZE
+s874740201.py(92):     while left < right:
+s874740201.py(93):         if left & 1:
+s874740201.py(96):         if right & 1:
+s874740201.py(100):         left //= 2
+s874740201.py(101):         right //= 2
+s874740201.py(92):     while left < right:
+s874740201.py(93):         if left & 1:
+s874740201.py(96):         if right & 1:
+s874740201.py(97):             right -= 1
+s874740201.py(98):             ret_right = binop(table[right], ret_right)
+s874740201.py(100):         left //= 2
+s874740201.py(101):         right //= 2
+s874740201.py(92):     while left < right:
+s874740201.py(102):     return binop(ret_left, ret_right)
+1
+s874740201.py(191):     for _time in range(Q):
+s874740201.py(192):         q, *args = map(int, input().split())
+s874740201.py(194):         if q == 0:
+s874740201.py(196):             s, t, value = args
+s874740201.py(197):             lazy_range_update(
+s874740201.py(198):                 action_table, value_table, s, t + 1,
+s874740201.py(199):                 value, composite, force, action_unity, value_binop
+s874740201.py(197):             lazy_range_update(
+ --- modulename: s874740201, funcname: lazy_range_update
+s874740201.py(109):     L = up(start)
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(110):     R = up(end)
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(111):     force_down_propagate(
+s874740201.py(112):         action_table, value_table, L,
+s874740201.py(113):         action_composite, action_force, action_unity)
+s874740201.py(111):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(54):             action_table[i * 2] = action
+s874740201.py(55):             action_table[i * 2 + 1] = action
+s874740201.py(56):             action_table[i] = action_unity
+s874740201.py(57):             value_table[i * 2] = action * size
+s874740201.py(58):             value_table[i * 2 + 1] = action * size
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(114):     force_down_propagate(
+s874740201.py(115):         action_table, value_table, R,
+s874740201.py(116):         action_composite, action_force, action_unity)
+s874740201.py(114):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(124):     force_range_update(
+s874740201.py(125):         value_table, action_table, start, end,
+s874740201.py(126):         action, action_force, action_composite, action_unity)
+s874740201.py(124):     force_range_update(
+ --- modulename: s874740201, funcname: force_range_update
+s874740201.py(69):     left += NONLEAF_SIZE
+s874740201.py(70):     right += NONLEAF_SIZE
+s874740201.py(71):     while left < right:
+s874740201.py(72):         if left & 1:
+s874740201.py(73):             value_table[left] = action_force(
+s874740201.py(74):                 action, value_table[left], get_size(left))
+ --- modulename: s874740201, funcname: get_size
+s874740201.py(25):     ret = pos.bit_length()
+s874740201.py(26):     return (1 << (DEPTH - ret))
+s874740201.py(73):             value_table[left] = action_force(
+ --- modulename: s874740201, funcname: force
+s874740201.py(182):         if action == action_unity:
+s874740201.py(184):         return action * size
+s874740201.py(75):             action_table[left] = action_composite(action, action_table[left])
+ --- modulename: s874740201, funcname: composite
+s874740201.py(187):         if new_action != action_unity:
+s874740201.py(188):             return new_action
+s874740201.py(76):             left += 1
+s874740201.py(77):         if right & 1:
+s874740201.py(83):         left //= 2
+s874740201.py(84):         right //= 2
+s874740201.py(71):     while left < right:
+s874740201.py(72):         if left & 1:
+s874740201.py(77):         if right & 1:
+s874740201.py(78):             right -= 1
+s874740201.py(79):             value_table[right] = action_force(
+s874740201.py(80):                 action, value_table[right], get_size(right))
+ --- modulename: s874740201, funcname: get_size
+s874740201.py(25):     ret = pos.bit_length()
+s874740201.py(26):     return (1 << (DEPTH - ret))
+s874740201.py(79):             value_table[right] = action_force(
+ --- modulename: s874740201, funcname: force
+s874740201.py(182):         if action == action_unity:
+s874740201.py(184):         return action * size
+s874740201.py(81):             action_table[right] = action_composite(action, action_table[right])
+ --- modulename: s874740201, funcname: composite
+s874740201.py(187):         if new_action != action_unity:
+s874740201.py(188):             return new_action
+s874740201.py(83):         left //= 2
+s874740201.py(84):         right //= 2
+s874740201.py(71):     while left < right:
+s874740201.py(127):     up_propagate(value_table, L, value_binop)
+ --- modulename: s874740201, funcname: up_propagate
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(128):     up_propagate(value_table, R, value_binop)
+ --- modulename: s874740201, funcname: up_propagate
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(36):         pos >>= 1
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(38):             table[pos * 2],
+s874740201.py(39):             table[pos * 2 + 1]
+s874740201.py(37):         table[pos] = binop(
+s874740201.py(35):     while pos > 1:
+s874740201.py(191):     for _time in range(Q):
+s874740201.py(192):         q, *args = map(int, input().split())
+s874740201.py(194):         if q == 0:
+s874740201.py(203):             s, t = args
+s874740201.py(204):             print(lazy_range_reduce(
+s874740201.py(205):                 action_table, value_table, s, t + 1,
+s874740201.py(206):                 composite, force, action_unity, value_binop, value_unity))
+s874740201.py(204):             print(lazy_range_reduce(
+ --- modulename: s874740201, funcname: lazy_range_reduce
+s874740201.py(137):     force_down_propagate(
+s874740201.py(138):         action_table, value_table, up(start),
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(139):         action_composite, action_force,  action_unity)
+s874740201.py(137):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(140):     force_down_propagate(
+s874740201.py(141):         action_table, value_table, up(end),
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(142):         action_composite, action_force, action_unity)
+s874740201.py(140):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(54):             action_table[i * 2] = action
+s874740201.py(55):             action_table[i * 2 + 1] = action
+s874740201.py(56):             action_table[i] = action_unity
+s874740201.py(57):             value_table[i * 2] = action * size
+s874740201.py(58):             value_table[i * 2 + 1] = action * size
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(144):     return range_reduce(value_table, start, end, value_binop, value_unity)
+ --- modulename: s874740201, funcname: range_reduce
+s874740201.py(88):     ret_left = unity
+s874740201.py(89):     ret_right = unity
+s874740201.py(90):     left += NONLEAF_SIZE
+s874740201.py(91):     right += NONLEAF_SIZE
+s874740201.py(92):     while left < right:
+s874740201.py(93):         if left & 1:
+s874740201.py(94):             ret_left = binop(ret_left, table[left])
+s874740201.py(95):             left += 1
+s874740201.py(96):         if right & 1:
+s874740201.py(97):             right -= 1
+s874740201.py(98):             ret_right = binop(table[right], ret_right)
+s874740201.py(100):         left //= 2
+s874740201.py(101):         right //= 2
+s874740201.py(92):     while left < right:
+s874740201.py(102):     return binop(ret_left, ret_right)
+6
+s874740201.py(191):     for _time in range(Q):
+s874740201.py(192):         q, *args = map(int, input().split())
+s874740201.py(194):         if q == 0:
+s874740201.py(203):             s, t = args
+s874740201.py(204):             print(lazy_range_reduce(
+s874740201.py(205):                 action_table, value_table, s, t + 1,
+s874740201.py(206):                 composite, force, action_unity, value_binop, value_unity))
+s874740201.py(204):             print(lazy_range_reduce(
+ --- modulename: s874740201, funcname: lazy_range_reduce
+s874740201.py(137):     force_down_propagate(
+s874740201.py(138):         action_table, value_table, up(start),
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(139):         action_composite, action_force,  action_unity)
+s874740201.py(137):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(140):     force_down_propagate(
+s874740201.py(141):         action_table, value_table, up(end),
+ --- modulename: s874740201, funcname: up
+s874740201.py(30):     pos += SEGTREE_SIZE // 2
+s874740201.py(31):     return pos // (pos & -pos)
+s874740201.py(142):         action_composite, action_force, action_unity)
+s874740201.py(140):     force_down_propagate(
+ --- modulename: s874740201, funcname: force_down_propagate
+s874740201.py(47):     max_level = pos.bit_length() - 1
+s874740201.py(48):     size = NONLEAF_SIZE
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(50):         size //= 2
+s874740201.py(51):         i = pos >> (max_level - level)
+s874740201.py(52):         action = action_table[i]
+s874740201.py(53):         if action != action_unity:
+s874740201.py(49):     for level in range(max_level):
+s874740201.py(144):     return range_reduce(value_table, start, end, value_binop, value_unity)
+ --- modulename: s874740201, funcname: range_reduce
+s874740201.py(88):     ret_left = unity
+s874740201.py(89):     ret_right = unity
+s874740201.py(90):     left += NONLEAF_SIZE
+s874740201.py(91):     right += NONLEAF_SIZE
+s874740201.py(92):     while left < right:
+s874740201.py(93):         if left & 1:
+s874740201.py(96):         if right & 1:
+s874740201.py(100):         left //= 2
+s874740201.py(101):         right //= 2
+s874740201.py(92):     while left < right:
+s874740201.py(93):         if left & 1:
+s874740201.py(96):         if right & 1:
+s874740201.py(97):             right -= 1
+s874740201.py(98):             ret_right = binop(table[right], ret_right)
+s874740201.py(100):         left //= 2
+s874740201.py(101):         right //= 2
+s874740201.py(92):     while left < right:
+s874740201.py(93):         if left & 1:
+s874740201.py(96):         if right & 1:
+s874740201.py(97):             right -= 1
+s874740201.py(98):             ret_right = binop(table[right], ret_right)
+s874740201.py(100):         left //= 2
+s874740201.py(101):         right //= 2
+s874740201.py(92):     while left < right:
+s874740201.py(102):     return binop(ret_left, ret_right)
+8
+s874740201.py(191):     for _time in range(Q):
