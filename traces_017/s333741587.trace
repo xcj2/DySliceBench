@@ -1,0 +1,158 @@
+ --- modulename: s333741587, funcname: <module>
+s333741587.py(1): import sys
+s333741587.py(4): def get_checks(lefts, rights, used):
+s333741587.py(34): def simulate(left_first=True):
+s333741587.py(55): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s333741587.py(56): lefts, rights = [], []
+s333741587.py(57): for i, line in enumerate(sys.stdin.readlines()):
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s333741587.py(58):     l, r = map(int, line.split())
+s333741587.py(59):     lefts.append((l, i))
+s333741587.py(60):     rights.append((r, i))
+s333741587.py(57): for i, line in enumerate(sys.stdin.readlines()):
+s333741587.py(58):     l, r = map(int, line.split())
+s333741587.py(59):     lefts.append((l, i))
+s333741587.py(60):     rights.append((r, i))
+s333741587.py(57): for i, line in enumerate(sys.stdin.readlines()):
+s333741587.py(58):     l, r = map(int, line.split())
+s333741587.py(59):     lefts.append((l, i))
+s333741587.py(60):     rights.append((r, i))
+s333741587.py(57): for i, line in enumerate(sys.stdin.readlines()):
+s333741587.py(62): lefts.sort()
+s333741587.py(63): rights.sort(reverse=True)
+s333741587.py(65): lf = simulate(True)
+ --- modulename: s333741587, funcname: simulate
+s333741587.py(35):     ans = 0
+s333741587.py(36):     pos = 0
+s333741587.py(37):     _lefts = lefts.copy()
+s333741587.py(38):     _rights = rights.copy()
+s333741587.py(39):     used = [False] * n
+s333741587.py(40):     left_check, right_check = get_checks(_lefts, _rights, used)
+ --- modulename: s333741587, funcname: get_checks
+s333741587.py(5):     def left_check(pos):
+s333741587.py(18):     def right_check(pos):
+s333741587.py(31):     return left_check, right_check
+s333741587.py(41):     funcs = [left_check, right_check] if left_first else [right_check, left_check]
+s333741587.py(42):     dir = 0
+s333741587.py(45):         e = funcs[dir](pos)
+ --- modulename: s333741587, funcname: left_check
+s333741587.py(6):         while lefts:
+s333741587.py(7):             e, i = lefts.pop()
+s333741587.py(8):             if not used[i]:
+s333741587.py(9):                 break
+s333741587.py(13):         used[i] = True
+s333741587.py(14):         if pos >= e:
+s333741587.py(16):         return e
+s333741587.py(46):         if e is None:
+s333741587.py(48):         ans += abs(e - pos)
+s333741587.py(49):         pos = e
+s333741587.py(50):         dir ^= 1
+s333741587.py(45):         e = funcs[dir](pos)
+ --- modulename: s333741587, funcname: right_check
+s333741587.py(19):         while rights:
+s333741587.py(20):             e, i = rights.pop()
+s333741587.py(21):             if not used[i]:
+s333741587.py(22):                 break
+s333741587.py(26):         used[i] = True
+s333741587.py(27):         if pos <= e:
+s333741587.py(29):         return e
+s333741587.py(46):         if e is None:
+s333741587.py(48):         ans += abs(e - pos)
+s333741587.py(49):         pos = e
+s333741587.py(50):         dir ^= 1
+s333741587.py(45):         e = funcs[dir](pos)
+ --- modulename: s333741587, funcname: left_check
+s333741587.py(6):         while lefts:
+s333741587.py(7):             e, i = lefts.pop()
+s333741587.py(8):             if not used[i]:
+s333741587.py(6):         while lefts:
+s333741587.py(7):             e, i = lefts.pop()
+s333741587.py(8):             if not used[i]:
+s333741587.py(9):                 break
+s333741587.py(13):         used[i] = True
+s333741587.py(14):         if pos >= e:
+s333741587.py(15):             return None
+s333741587.py(46):         if e is None:
+s333741587.py(47):             break
+s333741587.py(51):     ans += abs(pos)
+s333741587.py(52):     return ans
+s333741587.py(66): rf = simulate(False)
+ --- modulename: s333741587, funcname: simulate
+s333741587.py(35):     ans = 0
+s333741587.py(36):     pos = 0
+s333741587.py(37):     _lefts = lefts.copy()
+s333741587.py(38):     _rights = rights.copy()
+s333741587.py(39):     used = [False] * n
+s333741587.py(40):     left_check, right_check = get_checks(_lefts, _rights, used)
+ --- modulename: s333741587, funcname: get_checks
+s333741587.py(5):     def left_check(pos):
+s333741587.py(18):     def right_check(pos):
+s333741587.py(31):     return left_check, right_check
+s333741587.py(41):     funcs = [left_check, right_check] if left_first else [right_check, left_check]
+s333741587.py(42):     dir = 0
+s333741587.py(45):         e = funcs[dir](pos)
+ --- modulename: s333741587, funcname: right_check
+s333741587.py(19):         while rights:
+s333741587.py(20):             e, i = rights.pop()
+s333741587.py(21):             if not used[i]:
+s333741587.py(22):                 break
+s333741587.py(26):         used[i] = True
+s333741587.py(27):         if pos <= e:
+s333741587.py(29):         return e
+s333741587.py(46):         if e is None:
+s333741587.py(48):         ans += abs(e - pos)
+s333741587.py(49):         pos = e
+s333741587.py(50):         dir ^= 1
+s333741587.py(45):         e = funcs[dir](pos)
+ --- modulename: s333741587, funcname: left_check
+s333741587.py(6):         while lefts:
+s333741587.py(7):             e, i = lefts.pop()
+s333741587.py(8):             if not used[i]:
+s333741587.py(9):                 break
+s333741587.py(13):         used[i] = True
+s333741587.py(14):         if pos >= e:
+s333741587.py(16):         return e
+s333741587.py(46):         if e is None:
+s333741587.py(48):         ans += abs(e - pos)
+s333741587.py(49):         pos = e
+s333741587.py(50):         dir ^= 1
+s333741587.py(45):         e = funcs[dir](pos)
+ --- modulename: s333741587, funcname: right_check
+s333741587.py(19):         while rights:
+s333741587.py(20):             e, i = rights.pop()
+s333741587.py(21):             if not used[i]:
+s333741587.py(22):                 break
+s333741587.py(26):         used[i] = True
+s333741587.py(27):         if pos <= e:
+s333741587.py(29):         return e
+s333741587.py(46):         if e is None:
+s333741587.py(48):         ans += abs(e - pos)
+s333741587.py(49):         pos = e
+s333741587.py(50):         dir ^= 1
+s333741587.py(45):         e = funcs[dir](pos)
+ --- modulename: s333741587, funcname: left_check
+s333741587.py(6):         while lefts:
+s333741587.py(7):             e, i = lefts.pop()
+s333741587.py(8):             if not used[i]:
+s333741587.py(6):         while lefts:
+s333741587.py(7):             e, i = lefts.pop()
+s333741587.py(8):             if not used[i]:
+s333741587.py(6):         while lefts:
+s333741587.py(11):             return None
+s333741587.py(46):         if e is None:
+s333741587.py(47):             break
+s333741587.py(51):     ans += abs(pos)
+s333741587.py(52):     return ans
+s333741587.py(68): print(max(lf, rf))
+10
