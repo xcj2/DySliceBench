@@ -1,0 +1,404 @@
+ --- modulename: s258513758, funcname: <module>
+s258513758.py(1): import sys
+s258513758.py(2): write = sys.stdout.write
+s258513758.py(5): class LazySegmentTree():
+ --- modulename: s258513758, funcname: LazySegmentTree
+s258513758.py(5): class LazySegmentTree():
+s258513758.py(10):                  f=lambda: None,
+s258513758.py(11):                  g=lambda: None,
+s258513758.py(12):                  h=lambda: None):
+s258513758.py(6):     def __init__(self,
+s258513758.py(53):     def gindex(self, l, r):
+s258513758.py(70):     def propagates(self, *ids):
+s258513758.py(90):     def update(self, l, r, x):
+s258513758.py(126):     def query(self, l, r):
+s258513758.py(157): I = sys.stdin.read()[:-1].split('\n')
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s258513758.py(158): N, Q = map(int, I[0].split())
+s258513758.py(160): ti = 2**31 - 1  #float('inf')
+s258513758.py(161): ei = None
+s258513758.py(165): LST = LazySegmentTree([ti] * N, ti, ei)
+ --- modulename: s258513758, funcname: __init__
+s258513758.py(35):         self.f = f
+s258513758.py(36):         self.g = g
+s258513758.py(37):         self.h = h
+s258513758.py(38):         self.ti = ti
+s258513758.py(39):         self.ei = ei
+s258513758.py(40):         self.LV = LV = (len(array) - 1).bit_length()
+s258513758.py(41):         self.N0 = N0 = 2**LV
+s258513758.py(42):         self.data = data = [ti] * N0 + array + [ti] * (N0 - len(array))
+s258513758.py(43):         self.lazy = [ei] * (2 * N0)
+s258513758.py(48):         for i in range(N0 - 1, 0, -1):  # build
+s258513758.py(49):             data[i] = data[i << 1] if data[i << 1] < data[i << 1
+s258513758.py(50):                                                           | 1] else data[i << 1
+s258513758.py(49):             data[i] = data[i << 1] if data[i << 1] < data[i << 1
+s258513758.py(50):                                                           | 1] else data[i << 1
+s258513758.py(51):                                                                          | 1]
+s258513758.py(50):                                                           | 1] else data[i << 1
+s258513758.py(49):             data[i] = data[i << 1] if data[i << 1] < data[i << 1
+s258513758.py(48):         for i in range(N0 - 1, 0, -1):  # build
+s258513758.py(49):             data[i] = data[i << 1] if data[i << 1] < data[i << 1
+s258513758.py(50):                                                           | 1] else data[i << 1
+s258513758.py(49):             data[i] = data[i << 1] if data[i << 1] < data[i << 1
+s258513758.py(50):                                                           | 1] else data[i << 1
+s258513758.py(51):                                                                          | 1]
+s258513758.py(50):                                                           | 1] else data[i << 1
+s258513758.py(49):             data[i] = data[i << 1] if data[i << 1] < data[i << 1
+s258513758.py(48):         for i in range(N0 - 1, 0, -1):  # build
+s258513758.py(49):             data[i] = data[i << 1] if data[i << 1] < data[i << 1
+s258513758.py(50):                                                           | 1] else data[i << 1
+s258513758.py(49):             data[i] = data[i << 1] if data[i << 1] < data[i << 1
+s258513758.py(50):                                                           | 1] else data[i << 1
+s258513758.py(51):                                                                          | 1]
+s258513758.py(50):                                                           | 1] else data[i << 1
+s258513758.py(49):             data[i] = data[i << 1] if data[i << 1] < data[i << 1
+s258513758.py(48):         for i in range(N0 - 1, 0, -1):  # build
+s258513758.py(166): ans = []
+s258513758.py(167): for r in I[1:]:
+s258513758.py(168):     t, *cmd = map(int, r.split())
+s258513758.py(169):     if t:
+s258513758.py(173):         s, t, x = cmd
+s258513758.py(174):         LST.update(s, t + 1, x)
+ --- modulename: s258513758, funcname: update
+s258513758.py(91):         data = self.data
+s258513758.py(92):         lazy = self.lazy
+s258513758.py(93):         N0 = self.N0
+s258513758.py(94):         *ids, = self.gindex(l, r)
+ --- modulename: s258513758, funcname: gindex
+s258513758.py(54):         LV = self.LV
+s258513758.py(55):         N0 = self.N0
+s258513758.py(56):         L = (l + N0) >> 1
+s258513758.py(57):         R = (r + N0) >> 1
+s258513758.py(58):         lc = 0 if l & 1 else (L & -L).bit_length()
+s258513758.py(59):         rc = 0 if r & 1 else (R & -R).bit_length()
+s258513758.py(60):         ret = []
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(63):                 ret += [R]
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(68):         return ret
+s258513758.py(95):         self.propagates(*ids)
+ --- modulename: s258513758, funcname: propagates
+s258513758.py(71):         data = self.data
+s258513758.py(72):         lazy = self.lazy
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(96):         L = N0 + l
+s258513758.py(97):         R = N0 + r
+s258513758.py(98):         while L < R:
+s258513758.py(109):             if R & 1:
+s258513758.py(113):             if L & 1:
+s258513758.py(117):             L >>= 1
+s258513758.py(118):             R >>= 1
+s258513758.py(98):         while L < R:
+s258513758.py(109):             if R & 1:
+s258513758.py(110):                 R -= 1
+s258513758.py(111):                 lazy[R - 1] = x
+s258513758.py(112):                 data[R - 1] = x
+s258513758.py(113):             if L & 1:
+s258513758.py(117):             L >>= 1
+s258513758.py(118):             R >>= 1
+s258513758.py(98):         while L < R:
+s258513758.py(119):         for i in ids:
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(119):         for i in ids:
+s258513758.py(167): for r in I[1:]:
+s258513758.py(168):     t, *cmd = map(int, r.split())
+s258513758.py(169):     if t:
+s258513758.py(173):         s, t, x = cmd
+s258513758.py(174):         LST.update(s, t + 1, x)
+ --- modulename: s258513758, funcname: update
+s258513758.py(91):         data = self.data
+s258513758.py(92):         lazy = self.lazy
+s258513758.py(93):         N0 = self.N0
+s258513758.py(94):         *ids, = self.gindex(l, r)
+ --- modulename: s258513758, funcname: gindex
+s258513758.py(54):         LV = self.LV
+s258513758.py(55):         N0 = self.N0
+s258513758.py(56):         L = (l + N0) >> 1
+s258513758.py(57):         R = (r + N0) >> 1
+s258513758.py(58):         lc = 0 if l & 1 else (L & -L).bit_length()
+s258513758.py(59):         rc = 0 if r & 1 else (R & -R).bit_length()
+s258513758.py(60):         ret = []
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(63):                 ret += [R]
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(65):                 ret += [L]
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(63):                 ret += [R]
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(68):         return ret
+s258513758.py(95):         self.propagates(*ids)
+ --- modulename: s258513758, funcname: propagates
+s258513758.py(71):         data = self.data
+s258513758.py(72):         lazy = self.lazy
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(83):             data[2 * i - 1] = v
+s258513758.py(84):             data[2 * i] = v
+s258513758.py(85):             lazy[2 * i - 1] = v
+s258513758.py(86):             lazy[2 * i] = v
+s258513758.py(88):             lazy[i - 1] = ei
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(96):         L = N0 + l
+s258513758.py(97):         R = N0 + r
+s258513758.py(98):         while L < R:
+s258513758.py(109):             if R & 1:
+s258513758.py(110):                 R -= 1
+s258513758.py(111):                 lazy[R - 1] = x
+s258513758.py(112):                 data[R - 1] = x
+s258513758.py(113):             if L & 1:
+s258513758.py(114):                 lazy[L - 1] = x
+s258513758.py(115):                 data[L - 1] = x
+s258513758.py(116):                 L += 1
+s258513758.py(117):             L >>= 1
+s258513758.py(118):             R >>= 1
+s258513758.py(98):         while L < R:
+s258513758.py(119):         for i in ids:
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(119):         for i in ids:
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(119):         for i in ids:
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(119):         for i in ids:
+s258513758.py(167): for r in I[1:]:
+s258513758.py(168):     t, *cmd = map(int, r.split())
+s258513758.py(169):     if t:
+s258513758.py(173):         s, t, x = cmd
+s258513758.py(174):         LST.update(s, t + 1, x)
+ --- modulename: s258513758, funcname: update
+s258513758.py(91):         data = self.data
+s258513758.py(92):         lazy = self.lazy
+s258513758.py(93):         N0 = self.N0
+s258513758.py(94):         *ids, = self.gindex(l, r)
+ --- modulename: s258513758, funcname: gindex
+s258513758.py(54):         LV = self.LV
+s258513758.py(55):         N0 = self.N0
+s258513758.py(56):         L = (l + N0) >> 1
+s258513758.py(57):         R = (r + N0) >> 1
+s258513758.py(58):         lc = 0 if l & 1 else (L & -L).bit_length()
+s258513758.py(59):         rc = 0 if r & 1 else (R & -R).bit_length()
+s258513758.py(60):         ret = []
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(63):                 ret += [R]
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(63):                 ret += [R]
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(68):         return ret
+s258513758.py(95):         self.propagates(*ids)
+ --- modulename: s258513758, funcname: propagates
+s258513758.py(71):         data = self.data
+s258513758.py(72):         lazy = self.lazy
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(96):         L = N0 + l
+s258513758.py(97):         R = N0 + r
+s258513758.py(98):         while L < R:
+s258513758.py(109):             if R & 1:
+s258513758.py(110):                 R -= 1
+s258513758.py(111):                 lazy[R - 1] = x
+s258513758.py(112):                 data[R - 1] = x
+s258513758.py(113):             if L & 1:
+s258513758.py(117):             L >>= 1
+s258513758.py(118):             R >>= 1
+s258513758.py(98):         while L < R:
+s258513758.py(119):         for i in ids:
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(119):         for i in ids:
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(124):                 2 * i - 1] if data[2 * i - 1] < data[2 * i] else data[2 * i]
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(123):             data[i - 1] = data[
+s258513758.py(119):         for i in ids:
+s258513758.py(167): for r in I[1:]:
+s258513758.py(168):     t, *cmd = map(int, r.split())
+s258513758.py(169):     if t:
+s258513758.py(170):         s, t = cmd
+s258513758.py(171):         ans.append(str(LST.query(s, t + 1)))
+ --- modulename: s258513758, funcname: query
+s258513758.py(127):         data = self.data
+s258513758.py(128):         N0 = self.N0
+s258513758.py(129):         ti = self.ti
+s258513758.py(130):         self.propagates(*self.gindex(l, r))
+ --- modulename: s258513758, funcname: gindex
+s258513758.py(54):         LV = self.LV
+s258513758.py(55):         N0 = self.N0
+s258513758.py(56):         L = (l + N0) >> 1
+s258513758.py(57):         R = (r + N0) >> 1
+s258513758.py(58):         lc = 0 if l & 1 else (L & -L).bit_length()
+s258513758.py(59):         rc = 0 if r & 1 else (R & -R).bit_length()
+s258513758.py(60):         ret = []
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(63):                 ret += [R]
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(63):                 ret += [R]
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(68):         return ret
+ --- modulename: s258513758, funcname: propagates
+s258513758.py(71):         data = self.data
+s258513758.py(72):         lazy = self.lazy
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(131):         L = N0 + l
+s258513758.py(132):         R = N0 + r
+s258513758.py(133):         vl = vr = ti
+s258513758.py(134):         while L < R:
+s258513758.py(143):             if R & 1:
+s258513758.py(144):                 R -= 1
+s258513758.py(145):                 vr = data[R - 1] if data[R - 1] < vr else vr
+s258513758.py(146):             if L & 1:
+s258513758.py(149):             L >>= 1
+s258513758.py(150):             R >>= 1
+s258513758.py(134):         while L < R:
+s258513758.py(143):             if R & 1:
+s258513758.py(144):                 R -= 1
+s258513758.py(145):                 vr = data[R - 1] if data[R - 1] < vr else vr
+s258513758.py(146):             if L & 1:
+s258513758.py(149):             L >>= 1
+s258513758.py(150):             R >>= 1
+s258513758.py(134):         while L < R:
+s258513758.py(154):         return vl if vl < vr else vr
+s258513758.py(167): for r in I[1:]:
+s258513758.py(168):     t, *cmd = map(int, r.split())
+s258513758.py(169):     if t:
+s258513758.py(170):         s, t = cmd
+s258513758.py(171):         ans.append(str(LST.query(s, t + 1)))
+ --- modulename: s258513758, funcname: query
+s258513758.py(127):         data = self.data
+s258513758.py(128):         N0 = self.N0
+s258513758.py(129):         ti = self.ti
+s258513758.py(130):         self.propagates(*self.gindex(l, r))
+ --- modulename: s258513758, funcname: gindex
+s258513758.py(54):         LV = self.LV
+s258513758.py(55):         N0 = self.N0
+s258513758.py(56):         L = (l + N0) >> 1
+s258513758.py(57):         R = (r + N0) >> 1
+s258513758.py(58):         lc = 0 if l & 1 else (L & -L).bit_length()
+s258513758.py(59):         rc = 0 if r & 1 else (R & -R).bit_length()
+s258513758.py(60):         ret = []
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(63):                 ret += [R]
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(65):                 ret += [L]
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(62):             if rc <= i:
+s258513758.py(63):                 ret += [R]
+s258513758.py(64):             if L < R and lc <= i:
+s258513758.py(66):             L >>= 1
+s258513758.py(67):             R >>= 1
+s258513758.py(61):         for i in range(LV):
+s258513758.py(68):         return ret
+ --- modulename: s258513758, funcname: propagates
+s258513758.py(71):         data = self.data
+s258513758.py(72):         lazy = self.lazy
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(74):             v = lazy[i - 1]
+s258513758.py(75):             if v is ei:
+s258513758.py(76):                 continue
+s258513758.py(73):         for i in reversed(ids):
+s258513758.py(131):         L = N0 + l
+s258513758.py(132):         R = N0 + r
+s258513758.py(133):         vl = vr = ti
+s258513758.py(134):         while L < R:
+s258513758.py(143):             if R & 1:
+s258513758.py(144):                 R -= 1
+s258513758.py(145):                 vr = data[R - 1] if data[R - 1] < vr else vr
+s258513758.py(146):             if L & 1:
+s258513758.py(147):                 vl = vl if vl < data[L - 1] else data[L - 1]
+s258513758.py(148):                 L += 1
+s258513758.py(149):             L >>= 1
+s258513758.py(150):             R >>= 1
+s258513758.py(134):         while L < R:
+s258513758.py(154):         return vl if vl < vr else vr
+s258513758.py(167): for r in I[1:]:
+s258513758.py(176): write("\n".join(ans))
+1
+2s258513758.py(177): write("\n")
+
