@@ -1,0 +1,145 @@
+ --- modulename: s103948186, funcname: <module>
+s103948186.py(1): import collections
+s103948186.py(2): import sys
+s103948186.py(4): sys.setrecursionlimit(10 ** 6)
+s103948186.py(6): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s103948186.py(7): colors = [int(x) - 1 for x in input().split()]
+ --- modulename: s103948186, funcname: <listcomp>
+s103948186.py(7): colors = [int(x) - 1 for x in input().split()]
+s103948186.py(7): colors = [int(x) - 1 for x in input().split()]
+s103948186.py(7): colors = [int(x) - 1 for x in input().split()]
+s103948186.py(7): colors = [int(x) - 1 for x in input().split()]
+s103948186.py(8): neighbors = collections.defaultdict(list)
+s103948186.py(9): for i in range(N - 1):
+s103948186.py(10):     a, b = map(int, input().split())
+s103948186.py(11):     neighbors[a - 1].append(b - 1)
+s103948186.py(12):     neighbors[b - 1].append(a - 1)
+s103948186.py(9): for i in range(N - 1):
+s103948186.py(10):     a, b = map(int, input().split())
+s103948186.py(11):     neighbors[a - 1].append(b - 1)
+s103948186.py(12):     neighbors[b - 1].append(a - 1)
+s103948186.py(9): for i in range(N - 1):
+s103948186.py(14): subtree_sizes = [0] * N
+s103948186.py(17): def calc_sizes(node, parent):
+s103948186.py(26): calc_sizes(0, -1)
+ --- modulename: s103948186, funcname: calc_sizes
+s103948186.py(18):     sz = 1
+s103948186.py(19):     for i in neighbors[node]:
+s103948186.py(20):         if i != parent:
+s103948186.py(21):             sz += calc_sizes(i, node)
+ --- modulename: s103948186, funcname: calc_sizes
+s103948186.py(18):     sz = 1
+s103948186.py(19):     for i in neighbors[node]:
+s103948186.py(20):         if i != parent:
+s103948186.py(19):     for i in neighbors[node]:
+s103948186.py(20):         if i != parent:
+s103948186.py(21):             sz += calc_sizes(i, node)
+ --- modulename: s103948186, funcname: calc_sizes
+s103948186.py(18):     sz = 1
+s103948186.py(19):     for i in neighbors[node]:
+s103948186.py(20):         if i != parent:
+s103948186.py(19):     for i in neighbors[node]:
+s103948186.py(22):     subtree_sizes[node] = sz
+s103948186.py(23):     return sz
+s103948186.py(19):     for i in neighbors[node]:
+s103948186.py(22):     subtree_sizes[node] = sz
+s103948186.py(23):     return sz
+s103948186.py(19):     for i in neighbors[node]:
+s103948186.py(22):     subtree_sizes[node] = sz
+s103948186.py(23):     return sz
+s103948186.py(27): components = {c: {0: N} for c in range(N)}
+ --- modulename: s103948186, funcname: <dictcomp>
+s103948186.py(27): components = {c: {0: N} for c in range(N)}
+s103948186.py(27): components = {c: {0: N} for c in range(N)}
+s103948186.py(27): components = {c: {0: N} for c in range(N)}
+s103948186.py(27): components = {c: {0: N} for c in range(N)}
+s103948186.py(28): components[colors[0]] = {}
+s103948186.py(29): color_stack = {c: [0] for c in range(N)}
+ --- modulename: s103948186, funcname: <dictcomp>
+s103948186.py(29): color_stack = {c: [0] for c in range(N)}
+s103948186.py(29): color_stack = {c: [0] for c in range(N)}
+s103948186.py(29): color_stack = {c: [0] for c in range(N)}
+s103948186.py(29): color_stack = {c: [0] for c in range(N)}
+s103948186.py(30): color_stack[colors[0]] = []
+s103948186.py(33): def calc_components(node, parent):
+s103948186.py(48): calc_components(0, -1)
+ --- modulename: s103948186, funcname: calc_components
+s103948186.py(34):     color_stack_pushed = False
+s103948186.py(35):     if parent >= 0 and colors[parent] != colors[node]:
+s103948186.py(41):     for i in neighbors[node]:
+s103948186.py(42):         if i != parent:
+s103948186.py(43):             calc_components(i, node)
+ --- modulename: s103948186, funcname: calc_components
+s103948186.py(34):     color_stack_pushed = False
+s103948186.py(35):     if parent >= 0 and colors[parent] != colors[node]:
+s103948186.py(36):         color_parent = color_stack[colors[node]][-1]
+s103948186.py(37):         components[colors[node]][color_parent] -= subtree_sizes[node]
+s103948186.py(38):         components[colors[parent]][node] = subtree_sizes[node]
+s103948186.py(39):         color_stack[colors[parent]].append(node)
+s103948186.py(40):         color_stack_pushed = True
+s103948186.py(41):     for i in neighbors[node]:
+s103948186.py(42):         if i != parent:
+s103948186.py(41):     for i in neighbors[node]:
+s103948186.py(42):         if i != parent:
+s103948186.py(43):             calc_components(i, node)
+ --- modulename: s103948186, funcname: calc_components
+s103948186.py(34):     color_stack_pushed = False
+s103948186.py(35):     if parent >= 0 and colors[parent] != colors[node]:
+s103948186.py(36):         color_parent = color_stack[colors[node]][-1]
+s103948186.py(37):         components[colors[node]][color_parent] -= subtree_sizes[node]
+s103948186.py(38):         components[colors[parent]][node] = subtree_sizes[node]
+s103948186.py(39):         color_stack[colors[parent]].append(node)
+s103948186.py(40):         color_stack_pushed = True
+s103948186.py(41):     for i in neighbors[node]:
+s103948186.py(42):         if i != parent:
+s103948186.py(41):     for i in neighbors[node]:
+s103948186.py(44):     if color_stack_pushed:
+s103948186.py(45):         color_stack[colors[parent]].pop()
+s103948186.py(41):     for i in neighbors[node]:
+s103948186.py(44):     if color_stack_pushed:
+s103948186.py(45):         color_stack[colors[parent]].pop()
+s103948186.py(41):     for i in neighbors[node]:
+s103948186.py(44):     if color_stack_pushed:
+s103948186.py(51): def count_paths(n):
+s103948186.py(55): total_paths = count_paths(subtree_sizes[0])
+ --- modulename: s103948186, funcname: count_paths
+s103948186.py(52):     return n * (n + 1) // 2
+s103948186.py(56): for c in range(N):
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+ --- modulename: s103948186, funcname: <genexpr>
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+ --- modulename: s103948186, funcname: count_paths
+s103948186.py(52):     return n * (n + 1) // 2
+ --- modulename: s103948186, funcname: <genexpr>
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+5
+s103948186.py(56): for c in range(N):
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+ --- modulename: s103948186, funcname: <genexpr>
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+ --- modulename: s103948186, funcname: count_paths
+s103948186.py(52):     return n * (n + 1) // 2
+ --- modulename: s103948186, funcname: <genexpr>
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+ --- modulename: s103948186, funcname: count_paths
+s103948186.py(52):     return n * (n + 1) // 2
+ --- modulename: s103948186, funcname: <genexpr>
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+4
+s103948186.py(56): for c in range(N):
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+ --- modulename: s103948186, funcname: <genexpr>
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+ --- modulename: s103948186, funcname: count_paths
+s103948186.py(52):     return n * (n + 1) // 2
+ --- modulename: s103948186, funcname: <genexpr>
+s103948186.py(57):     print(total_paths - sum(count_paths(size) for size in components[c].values()))
+0
+s103948186.py(56): for c in range(N):
