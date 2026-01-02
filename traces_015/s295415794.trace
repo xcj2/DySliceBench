@@ -1,0 +1,112 @@
+ --- modulename: s295415794, funcname: <module>
+s295415794.py(1): import sys
+s295415794.py(3): input=sys.stdin.readline
+s295415794.py(5): N=int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s295415794.py(6): robot=[]
+s295415794.py(7): for i in range(N):
+s295415794.py(8):     x,d=map(int,input().split())
+s295415794.py(9):     robot.append((x,d))
+s295415794.py(7): for i in range(N):
+s295415794.py(8):     x,d=map(int,input().split())
+s295415794.py(9):     robot.append((x,d))
+s295415794.py(7): for i in range(N):
+s295415794.py(10): mod=998244353
+s295415794.py(12): robot.sort()
+s295415794.py(13): move=[i for i in range(0,N)]
+ --- modulename: s295415794, funcname: <listcomp>
+s295415794.py(13): move=[i for i in range(0,N)]
+s295415794.py(13): move=[i for i in range(0,N)]
+s295415794.py(13): move=[i for i in range(0,N)]
+s295415794.py(14): for i in range(0,N):
+s295415794.py(15):     x,d=robot[i]
+s295415794.py(16):     start=i
+s295415794.py(17):     end=N-1
+s295415794.py(18):     while end-start>1:
+s295415794.py(25):     if x+d>robot[end][0]:
+s295415794.py(26):         move[i]=end
+s295415794.py(14): for i in range(0,N):
+s295415794.py(15):     x,d=robot[i]
+s295415794.py(16):     start=i
+s295415794.py(17):     end=N-1
+s295415794.py(18):     while end-start>1:
+s295415794.py(25):     if x+d>robot[end][0]:
+s295415794.py(26):         move[i]=end
+s295415794.py(14): for i in range(0,N):
+s295415794.py(31): n=N
+s295415794.py(33): def segfunc(x,y):
+s295415794.py(36): def init(init_val):
+s295415794.py(44): def update(k,x):
+s295415794.py(51): def query(p,q):
+s295415794.py(72): ide_ele =0
+s295415794.py(75): num =2**(n-1).bit_length()
+s295415794.py(76): seg=[ide_ele]*2*num
+s295415794.py(78): chain=[i for i in range(N)]
+ --- modulename: s295415794, funcname: <listcomp>
+s295415794.py(78): chain=[i for i in range(N)]
+s295415794.py(78): chain=[i for i in range(N)]
+s295415794.py(78): chain=[i for i in range(N)]
+s295415794.py(79): for _ in range(0,N):
+s295415794.py(80):     i=N-1-_
+s295415794.py(81):     if move[i]==i:
+s295415794.py(82):         chain[i]=i
+s295415794.py(83):         update(i,chain[i])
+ --- modulename: s295415794, funcname: update
+s295415794.py(45):     k += num-1
+s295415794.py(46):     seg[k] = x
+s295415794.py(47):     while k:
+s295415794.py(48):         k = (k-1)//2
+s295415794.py(49):         seg[k] = segfunc(seg[k*2+1],seg[k*2+2])
+ --- modulename: s295415794, funcname: segfunc
+s295415794.py(34):     return max(x,y)
+s295415794.py(47):     while k:
+s295415794.py(79): for _ in range(0,N):
+s295415794.py(80):     i=N-1-_
+s295415794.py(81):     if move[i]==i:
+s295415794.py(85):         chain[i]=query(i+1,move[i]+1)
+ --- modulename: s295415794, funcname: query
+s295415794.py(52):     if q<=p:
+s295415794.py(54):     p += num-1
+s295415794.py(55):     q += num-2
+s295415794.py(56):     res=ide_ele
+s295415794.py(57):     while q-p>1:
+s295415794.py(65):     if p == q:
+s295415794.py(66):         res = segfunc(res,seg[p])
+ --- modulename: s295415794, funcname: segfunc
+s295415794.py(34):     return max(x,y)
+s295415794.py(69):     return res
+s295415794.py(86):         update(i,chain[i])
+ --- modulename: s295415794, funcname: update
+s295415794.py(45):     k += num-1
+s295415794.py(46):     seg[k] = x
+s295415794.py(47):     while k:
+s295415794.py(48):         k = (k-1)//2
+s295415794.py(49):         seg[k] = segfunc(seg[k*2+1],seg[k*2+2])
+ --- modulename: s295415794, funcname: segfunc
+s295415794.py(34):     return max(x,y)
+s295415794.py(47):     while k:
+s295415794.py(79): for _ in range(0,N):
+s295415794.py(88): dp=[0 for i in range(0,N+1)]
+ --- modulename: s295415794, funcname: <listcomp>
+s295415794.py(88): dp=[0 for i in range(0,N+1)]
+s295415794.py(88): dp=[0 for i in range(0,N+1)]
+s295415794.py(88): dp=[0 for i in range(0,N+1)]
+s295415794.py(88): dp=[0 for i in range(0,N+1)]
+s295415794.py(89): dp[N]=1
+s295415794.py(90): for j in range(0,N):
+s295415794.py(91):     i=N-1-j
+s295415794.py(92):     if chain[i]==i:
+s295415794.py(93):         dp[i]=(2*dp[i+1])%mod
+s295415794.py(90): for j in range(0,N):
+s295415794.py(91):     i=N-1-j
+s295415794.py(92):     if chain[i]==i:
+s295415794.py(95):         dp[i]=(dp[i+1]+dp[chain[i]+1])%mod
+s295415794.py(90): for j in range(0,N):
+s295415794.py(97): print(dp[0])
+3
