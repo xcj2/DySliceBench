@@ -1,0 +1,189 @@
+ --- modulename: s954867719, funcname: <module>
+s954867719.py(1): class SegTree:
+ --- modulename: s954867719, funcname: SegTree
+s954867719.py(1): class SegTree:
+s954867719.py(2):     def __init__(self, init_val, ide_ele, segfunc):
+s954867719.py(16):     def update(self, k, x):
+s954867719.py(23):     def query(self, p, q):
+s954867719.py(43): def main():
+s954867719.py(123): main()
+ --- modulename: s954867719, funcname: main
+s954867719.py(44):     import sys
+s954867719.py(45):     input = sys.stdin.readline
+s954867719.py(47):     N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s954867719.py(48):     P = list(map(int,input().split()))
+s954867719.py(49):     Even = []
+s954867719.py(50):     Odd = []
+s954867719.py(51):     D = {}
+s954867719.py(52):     for i in range(N//2):
+s954867719.py(53):         e = P[2*i]
+s954867719.py(54):         o = P[2*i+1]
+s954867719.py(55):         D[e] = i
+s954867719.py(56):         D[o] = i
+s954867719.py(57):         Even.append(e)
+s954867719.py(58):         Odd.append(o)
+s954867719.py(52):     for i in range(N//2):
+s954867719.py(53):         e = P[2*i]
+s954867719.py(54):         o = P[2*i+1]
+s954867719.py(55):         D[e] = i
+s954867719.py(56):         D[o] = i
+s954867719.py(57):         Even.append(e)
+s954867719.py(58):         Odd.append(o)
+s954867719.py(52):     for i in range(N//2):
+s954867719.py(60):     E_Seg = SegTree(Even,float("inf"),min)
+ --- modulename: s954867719, funcname: __init__
+s954867719.py(3):         self.n = len(init_val)
+s954867719.py(4):         self.num =2**(self.n-1).bit_length()
+s954867719.py(5):         self.ide_ele = ide_ele
+s954867719.py(6):         self.seg = [self.ide_ele]*2*self.num
+s954867719.py(7):         self.segfunc = segfunc
+s954867719.py(10):         for i in range(self.n):
+s954867719.py(11):             self.seg[i+self.num-1] = init_val[i]    
+s954867719.py(10):         for i in range(self.n):
+s954867719.py(11):             self.seg[i+self.num-1] = init_val[i]    
+s954867719.py(10):         for i in range(self.n):
+s954867719.py(13):         for i in range(self.num-2,-1,-1) :
+s954867719.py(14):             self.seg[i] = segfunc(self.seg[2*i+1], self.seg[2*i+2]) 
+s954867719.py(13):         for i in range(self.num-2,-1,-1) :
+s954867719.py(61):     O_Seg = SegTree(Odd,float("inf"),min)
+ --- modulename: s954867719, funcname: __init__
+s954867719.py(3):         self.n = len(init_val)
+s954867719.py(4):         self.num =2**(self.n-1).bit_length()
+s954867719.py(5):         self.ide_ele = ide_ele
+s954867719.py(6):         self.seg = [self.ide_ele]*2*self.num
+s954867719.py(7):         self.segfunc = segfunc
+s954867719.py(10):         for i in range(self.n):
+s954867719.py(11):             self.seg[i+self.num-1] = init_val[i]    
+s954867719.py(10):         for i in range(self.n):
+s954867719.py(11):             self.seg[i+self.num-1] = init_val[i]    
+s954867719.py(10):         for i in range(self.n):
+s954867719.py(13):         for i in range(self.num-2,-1,-1) :
+s954867719.py(14):             self.seg[i] = segfunc(self.seg[2*i+1], self.seg[2*i+2]) 
+s954867719.py(13):         for i in range(self.num-2,-1,-1) :
+s954867719.py(63):     import heapq
+s954867719.py(64):     heap = []
+s954867719.py(68):     def BFS(H):
+s954867719.py(98):     H = (0, N-1)
+s954867719.py(99):     m1,m2,LH,CH,RH = BFS(H)
+ --- modulename: s954867719, funcname: BFS
+s954867719.py(69):         L = H[0]
+s954867719.py(70):         R = H[1]
+s954867719.py(71):         if R <= L:
+s954867719.py(73):         if L%2==0:
+s954867719.py(74):             l = L//2
+s954867719.py(75):             r = R//2
+s954867719.py(76):             mini = E_Seg.query(l,r+1)
+ --- modulename: s954867719, funcname: query
+s954867719.py(24):         if q<=p:
+s954867719.py(26):         p += self.num-1
+s954867719.py(27):         q += self.num-2
+s954867719.py(28):         res = self.ide_ele
+s954867719.py(29):         while q-p>1:
+s954867719.py(37):         if p == q:
+s954867719.py(40):             res = self.segfunc(self.segfunc(res, self.seg[p]), self.seg[q])
+s954867719.py(41):         return res
+s954867719.py(77):             d_mini = D[mini]
+s954867719.py(78):             mini_b = O_Seg.query(d_mini, r+1)
+ --- modulename: s954867719, funcname: query
+s954867719.py(24):         if q<=p:
+s954867719.py(26):         p += self.num-1
+s954867719.py(27):         q += self.num-2
+s954867719.py(28):         res = self.ide_ele
+s954867719.py(29):         while q-p>1:
+s954867719.py(37):         if p == q:
+s954867719.py(40):             res = self.segfunc(self.segfunc(res, self.seg[p]), self.seg[q])
+s954867719.py(41):         return res
+s954867719.py(79):             d_mini_b = D[mini_b]
+s954867719.py(81):             leftH = (L, 2*d_mini-1)
+s954867719.py(82):             centH = (2*d_mini+1, 2*d_mini_b)
+s954867719.py(83):             rightH = (2*d_mini_b+2, R)
+s954867719.py(84):             return mini, mini_b, leftH, centH, rightH
+s954867719.py(101):     heapq.heappush(heap, [m1,m2,LH,CH,RH])
+s954867719.py(102):     Q = []
+s954867719.py(103):     while heap != []:
+s954867719.py(104):         m1,m2,LH,CH,RH = heapq.heappop(heap)
+s954867719.py(105):         Q += [m1,m2]
+s954867719.py(107):         m1L,m2L,LHL,CHL,RHL = BFS(LH)
+ --- modulename: s954867719, funcname: BFS
+s954867719.py(69):         L = H[0]
+s954867719.py(70):         R = H[1]
+s954867719.py(71):         if R <= L:
+s954867719.py(72):             return -1,-1,-1,-1,-1
+s954867719.py(108):         if m1L != -1:
+s954867719.py(111):         m1C,m2C,LHC,CHC,RHC = BFS(CH)
+ --- modulename: s954867719, funcname: BFS
+s954867719.py(69):         L = H[0]
+s954867719.py(70):         R = H[1]
+s954867719.py(71):         if R <= L:
+s954867719.py(73):         if L%2==0:
+s954867719.py(86):             l = L//2
+s954867719.py(87):             r = R//2
+s954867719.py(88):             mini = O_Seg.query(l, r)
+ --- modulename: s954867719, funcname: query
+s954867719.py(24):         if q<=p:
+s954867719.py(26):         p += self.num-1
+s954867719.py(27):         q += self.num-2
+s954867719.py(28):         res = self.ide_ele
+s954867719.py(29):         while q-p>1:
+s954867719.py(37):         if p == q:
+s954867719.py(38):             res = self.segfunc(res, self.seg[p])
+s954867719.py(41):         return res
+s954867719.py(89):             d_mini = D[mini]
+s954867719.py(90):             mini_b = E_Seg.query(d_mini+1, r+1)
+ --- modulename: s954867719, funcname: query
+s954867719.py(24):         if q<=p:
+s954867719.py(26):         p += self.num-1
+s954867719.py(27):         q += self.num-2
+s954867719.py(28):         res = self.ide_ele
+s954867719.py(29):         while q-p>1:
+s954867719.py(37):         if p == q:
+s954867719.py(38):             res = self.segfunc(res, self.seg[p])
+s954867719.py(41):         return res
+s954867719.py(91):             d_mini_b = D[mini_b]
+s954867719.py(93):             leftH = (L, 2*d_mini)
+s954867719.py(94):             centH = (2*d_mini+2, 2*d_mini_b-1)
+s954867719.py(95):             rightH = (2*d_mini_b+1, R)
+s954867719.py(96):             return mini, mini_b, leftH, centH, rightH
+s954867719.py(112):         if m1C != -1:
+s954867719.py(113):             heapq.heappush(heap, [m1C,m2C,LHC,CHC,RHC])
+s954867719.py(115):         m1R,m2R,LHR,CHR,RHR = BFS(RH)
+ --- modulename: s954867719, funcname: BFS
+s954867719.py(69):         L = H[0]
+s954867719.py(70):         R = H[1]
+s954867719.py(71):         if R <= L:
+s954867719.py(72):             return -1,-1,-1,-1,-1
+s954867719.py(116):         if m1R != -1:
+s954867719.py(103):     while heap != []:
+s954867719.py(104):         m1,m2,LH,CH,RH = heapq.heappop(heap)
+s954867719.py(105):         Q += [m1,m2]
+s954867719.py(107):         m1L,m2L,LHL,CHL,RHL = BFS(LH)
+ --- modulename: s954867719, funcname: BFS
+s954867719.py(69):         L = H[0]
+s954867719.py(70):         R = H[1]
+s954867719.py(71):         if R <= L:
+s954867719.py(72):             return -1,-1,-1,-1,-1
+s954867719.py(108):         if m1L != -1:
+s954867719.py(111):         m1C,m2C,LHC,CHC,RHC = BFS(CH)
+ --- modulename: s954867719, funcname: BFS
+s954867719.py(69):         L = H[0]
+s954867719.py(70):         R = H[1]
+s954867719.py(71):         if R <= L:
+s954867719.py(72):             return -1,-1,-1,-1,-1
+s954867719.py(112):         if m1C != -1:
+s954867719.py(115):         m1R,m2R,LHR,CHR,RHR = BFS(RH)
+ --- modulename: s954867719, funcname: BFS
+s954867719.py(69):         L = H[0]
+s954867719.py(70):         R = H[1]
+s954867719.py(71):         if R <= L:
+s954867719.py(72):             return -1,-1,-1,-1,-1
+s954867719.py(116):         if m1R != -1:
+s954867719.py(103):     while heap != []:
+s954867719.py(118):     print(*Q)
+3 1 2 4
