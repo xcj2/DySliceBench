@@ -1,0 +1,86 @@
+ --- modulename: s538555839, funcname: <module>
+s538555839.py(1): MOD=10**9+7
+s538555839.py(2): class Fp(int):
+ --- modulename: s538555839, funcname: Fp
+s538555839.py(2): class Fp(int):
+s538555839.py(3):     def __new__(self,x=0):return super().__new__(self,x%MOD)
+s538555839.py(4):     def inv(self):return self.__class__(super().__pow__(MOD-2,MOD))
+s538555839.py(5):     def __add__(self,value):return self.__class__(super().__add__(value))
+s538555839.py(6):     def __sub__(self,value):return self.__class__(super().__sub__(value))
+s538555839.py(7):     def __mul__(self,value):return self.__class__(super().__mul__(value))
+s538555839.py(8):     def __floordiv__(self,value):return self.__class__(self*self.__class__(value).inv())
+s538555839.py(9):     def __pow__(self,value):return self.__class__(super().__pow__(value%(MOD-1), MOD))
+s538555839.py(10):     __radd__=__add__
+s538555839.py(11):     __rmul__=__mul__
+s538555839.py(12):     def __rsub__(self,value):return self.__class__(-super().__sub__(value))
+s538555839.py(13):     def __rfloordiv__(self,value):return self.__class__(self.inv()*value)
+s538555839.py(14):     def __iadd__(self,value):self=self+value;return self
+s538555839.py(15):     def __isub__(self,value):self=self-value;return self
+s538555839.py(16):     def __imul__(self,value):self=self*value;return self
+s538555839.py(17):     def __ifloordiv__(self,value):self=self //value;return self
+s538555839.py(18):     def __ipow__(self,value):self=self**value;return self
+s538555839.py(19):     def __neg__(self):return self.__class__(super().__neg__())
+s538555839.py(21): def main():
+s538555839.py(33): if __name__ == "__main__":
+s538555839.py(34):     main()
+ --- modulename: s538555839, funcname: main
+s538555839.py(22):     N,*C=map(int, open(0).read().split())
+ --- modulename: _bootlocale, funcname: getpreferredencoding
+_bootlocale.py(12):         if sys.flags.utf8_mode:
+_bootlocale.py(14):         return _locale._getdefaultlocale()[1]
+ --- modulename: codecs, funcname: __init__
+codecs.py(310):         IncrementalDecoder.__init__(self, errors)
+ --- modulename: codecs, funcname: __init__
+codecs.py(268):         self.errors = errors
+codecs.py(312):         self.buffer = b""
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s538555839.py(23):     DP=[Fp(1)]*(N+1)
+ --- modulename: s538555839, funcname: __new__
+s538555839.py(3):     def __new__(self,x=0):return super().__new__(self,x%MOD)
+s538555839.py(24):     prev={}
+s538555839.py(25):     for i,c in enumerate(C):
+s538555839.py(26):         d=DP[i]
+s538555839.py(27):         if c in prev and not (i and C[i-1]==c):
+s538555839.py(29):         prev[c]=i+1
+s538555839.py(30):         DP[i+1]=d
+s538555839.py(25):     for i,c in enumerate(C):
+s538555839.py(26):         d=DP[i]
+s538555839.py(27):         if c in prev and not (i and C[i-1]==c):
+s538555839.py(29):         prev[c]=i+1
+s538555839.py(30):         DP[i+1]=d
+s538555839.py(25):     for i,c in enumerate(C):
+s538555839.py(26):         d=DP[i]
+s538555839.py(27):         if c in prev and not (i and C[i-1]==c):
+s538555839.py(28):             d+=DP[prev[c]]
+ --- modulename: s538555839, funcname: __iadd__
+s538555839.py(14):     def __iadd__(self,value):self=self+value;return self
+ --- modulename: s538555839, funcname: __add__
+s538555839.py(5):     def __add__(self,value):return self.__class__(super().__add__(value))
+ --- modulename: s538555839, funcname: __new__
+s538555839.py(3):     def __new__(self,x=0):return super().__new__(self,x%MOD)
+s538555839.py(29):         prev[c]=i+1
+s538555839.py(30):         DP[i+1]=d
+s538555839.py(25):     for i,c in enumerate(C):
+s538555839.py(26):         d=DP[i]
+s538555839.py(27):         if c in prev and not (i and C[i-1]==c):
+s538555839.py(28):             d+=DP[prev[c]]
+ --- modulename: s538555839, funcname: __iadd__
+s538555839.py(14):     def __iadd__(self,value):self=self+value;return self
+ --- modulename: s538555839, funcname: __add__
+s538555839.py(5):     def __add__(self,value):return self.__class__(super().__add__(value))
+ --- modulename: s538555839, funcname: __new__
+s538555839.py(3):     def __new__(self,x=0):return super().__new__(self,x%MOD)
+s538555839.py(29):         prev[c]=i+1
+s538555839.py(30):         DP[i+1]=d
+s538555839.py(25):     for i,c in enumerate(C):
+s538555839.py(26):         d=DP[i]
+s538555839.py(27):         if c in prev and not (i and C[i-1]==c):
+s538555839.py(29):         prev[c]=i+1
+s538555839.py(30):         DP[i+1]=d
+s538555839.py(25):     for i,c in enumerate(C):
+s538555839.py(31):     print(DP[N])
+3
