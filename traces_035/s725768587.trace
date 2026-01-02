@@ -1,0 +1,279 @@
+ --- modulename: s725768587, funcname: <module>
+s725768587.py(1): class SegmentTree:
+ --- modulename: s725768587, funcname: SegmentTree
+s725768587.py(1): class SegmentTree:
+s725768587.py(3):     def __init__(self, n, op, e):
+s725768587.py(15):     def built(self, array):
+s725768587.py(22):     def update(self, i, x):
+s725768587.py(30):     def get(self, l, r):
+s725768587.py(47):     def max_right(self, l, f):
+s725768587.py(70):     def min_left(self, r, f):
+s725768587.py(93):     def __getitem__(self, i):
+s725768587.py(96):     def __iter__(self):
+s725768587.py(100):     def __str__(self):
+s725768587.py(104): import sys
+s725768587.py(105): input = sys.stdin.readline
+s725768587.py(107): N, M = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s725768587.py(109): e = 1<<60
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(111): st = SegmentTree(N, op, e)
+ --- modulename: s725768587, funcname: __init__
+s725768587.py(9):         self.n = n
+s725768587.py(10):         self.op = op
+s725768587.py(11):         self.e = e
+s725768587.py(12):         self.size = 1 << (self.n - 1).bit_length()      # st[self.size + i] = array[i]
+s725768587.py(13):         self.tree = [self.e] * (self.size << 1)
+s725768587.py(112): query = []
+s725768587.py(113): st.update(0,0)
+ --- modulename: s725768587, funcname: update
+s725768587.py(24):         i += self.size
+s725768587.py(25):         self.tree[i] = x
+s725768587.py(26):         while i > 1:
+s725768587.py(27):             i >>= 1
+s725768587.py(28):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(26):         while i > 1:
+s725768587.py(27):             i >>= 1
+s725768587.py(28):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(26):         while i > 1:
+s725768587.py(114): for _ in range(M):
+s725768587.py(115):     L, R, C = map(int, input().split())
+s725768587.py(116):     query.append((L-1, R-1, C))
+s725768587.py(114): for _ in range(M):
+s725768587.py(115):     L, R, C = map(int, input().split())
+s725768587.py(116):     query.append((L-1, R-1, C))
+s725768587.py(114): for _ in range(M):
+s725768587.py(115):     L, R, C = map(int, input().split())
+s725768587.py(116):     query.append((L-1, R-1, C))
+s725768587.py(114): for _ in range(M):
+s725768587.py(117): query.sort(key=lambda x:x[1])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(117): query.sort(key=lambda x:x[1])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(117): query.sort(key=lambda x:x[1])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(117): query.sort(key=lambda x:x[1])
+s725768587.py(118): for L, R, C in query:
+s725768587.py(119):     tmp = st.get(L, R) + C
+ --- modulename: s725768587, funcname: get
+s725768587.py(32):         l += self.size
+s725768587.py(33):         r += self.size
+s725768587.py(34):         res_l = self.e
+s725768587.py(35):         res_r = self.e
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(40):             if r & 1:
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(40):             if r & 1:
+s725768587.py(41):                 r -= 1
+s725768587.py(42):                 res_r = self.op(self.tree[r], res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(45):         return self.op(res_l, res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(120):     if st[R] > tmp:
+ --- modulename: s725768587, funcname: __getitem__
+s725768587.py(94):         return self.get(i,i+1)
+ --- modulename: s725768587, funcname: get
+s725768587.py(32):         l += self.size
+s725768587.py(33):         r += self.size
+s725768587.py(34):         res_l = self.e
+s725768587.py(35):         res_r = self.e
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(40):             if r & 1:
+s725768587.py(41):                 r -= 1
+s725768587.py(42):                 res_r = self.op(self.tree[r], res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(45):         return self.op(res_l, res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(121):         st.update(R,tmp)
+ --- modulename: s725768587, funcname: update
+s725768587.py(24):         i += self.size
+s725768587.py(25):         self.tree[i] = x
+s725768587.py(26):         while i > 1:
+s725768587.py(27):             i >>= 1
+s725768587.py(28):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(26):         while i > 1:
+s725768587.py(27):             i >>= 1
+s725768587.py(28):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(26):         while i > 1:
+s725768587.py(118): for L, R, C in query:
+s725768587.py(119):     tmp = st.get(L, R) + C
+ --- modulename: s725768587, funcname: get
+s725768587.py(32):         l += self.size
+s725768587.py(33):         r += self.size
+s725768587.py(34):         res_l = self.e
+s725768587.py(35):         res_r = self.e
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(38):                 res_l = self.op(res_l, self.tree[l])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(39):                 l += 1
+s725768587.py(40):             if r & 1:
+s725768587.py(41):                 r -= 1
+s725768587.py(42):                 res_r = self.op(self.tree[r], res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(45):         return self.op(res_l, res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(120):     if st[R] > tmp:
+ --- modulename: s725768587, funcname: __getitem__
+s725768587.py(94):         return self.get(i,i+1)
+ --- modulename: s725768587, funcname: get
+s725768587.py(32):         l += self.size
+s725768587.py(33):         r += self.size
+s725768587.py(34):         res_l = self.e
+s725768587.py(35):         res_r = self.e
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(38):                 res_l = self.op(res_l, self.tree[l])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(39):                 l += 1
+s725768587.py(40):             if r & 1:
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(45):         return self.op(res_l, res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(121):         st.update(R,tmp)
+ --- modulename: s725768587, funcname: update
+s725768587.py(24):         i += self.size
+s725768587.py(25):         self.tree[i] = x
+s725768587.py(26):         while i > 1:
+s725768587.py(27):             i >>= 1
+s725768587.py(28):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(26):         while i > 1:
+s725768587.py(27):             i >>= 1
+s725768587.py(28):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(26):         while i > 1:
+s725768587.py(118): for L, R, C in query:
+s725768587.py(119):     tmp = st.get(L, R) + C
+ --- modulename: s725768587, funcname: get
+s725768587.py(32):         l += self.size
+s725768587.py(33):         r += self.size
+s725768587.py(34):         res_l = self.e
+s725768587.py(35):         res_r = self.e
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(40):             if r & 1:
+s725768587.py(41):                 r -= 1
+s725768587.py(42):                 res_r = self.op(self.tree[r], res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(40):             if r & 1:
+s725768587.py(41):                 r -= 1
+s725768587.py(42):                 res_r = self.op(self.tree[r], res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(45):         return self.op(res_l, res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(120):     if st[R] > tmp:
+ --- modulename: s725768587, funcname: __getitem__
+s725768587.py(94):         return self.get(i,i+1)
+ --- modulename: s725768587, funcname: get
+s725768587.py(32):         l += self.size
+s725768587.py(33):         r += self.size
+s725768587.py(34):         res_l = self.e
+s725768587.py(35):         res_r = self.e
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(38):                 res_l = self.op(res_l, self.tree[l])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(39):                 l += 1
+s725768587.py(40):             if r & 1:
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(45):         return self.op(res_l, res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(118): for L, R, C in query:
+s725768587.py(122): print(st[N-1] if st[N-1]!=e else -1)
+ --- modulename: s725768587, funcname: __getitem__
+s725768587.py(94):         return self.get(i,i+1)
+ --- modulename: s725768587, funcname: get
+s725768587.py(32):         l += self.size
+s725768587.py(33):         r += self.size
+s725768587.py(34):         res_l = self.e
+s725768587.py(35):         res_r = self.e
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(38):                 res_l = self.op(res_l, self.tree[l])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(39):                 l += 1
+s725768587.py(40):             if r & 1:
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(45):         return self.op(res_l, res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+ --- modulename: s725768587, funcname: __getitem__
+s725768587.py(94):         return self.get(i,i+1)
+ --- modulename: s725768587, funcname: get
+s725768587.py(32):         l += self.size
+s725768587.py(33):         r += self.size
+s725768587.py(34):         res_l = self.e
+s725768587.py(35):         res_r = self.e
+s725768587.py(36):         while l < r:
+s725768587.py(37):             if l & 1:
+s725768587.py(38):                 res_l = self.op(res_l, self.tree[l])
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+s725768587.py(39):                 l += 1
+s725768587.py(40):             if r & 1:
+s725768587.py(43):             l >>= 1
+s725768587.py(44):             r >>= 1
+s725768587.py(36):         while l < r:
+s725768587.py(45):         return self.op(res_l, res_r)
+ --- modulename: s725768587, funcname: <lambda>
+s725768587.py(110): op = lambda x, y: x if x<y else y
+5
