@@ -1,0 +1,538 @@
+ --- modulename: s186673973, funcname: <module>
+s186673973.py(1): import sys
+s186673973.py(2): sys.setrecursionlimit(1 << 25)
+s186673973.py(3): readline = sys.stdin.buffer.readline
+s186673973.py(4): read = sys.stdin.readline  # 文字列読み込む時はこっち
+s186673973.py(5): ra = range
+s186673973.py(6): enu = enumerate
+s186673973.py(9): def exit(*argv, **kwarg):
+s186673973.py(14): def mina(*argv, sub=1): return list(map(lambda x: x - sub, argv))
+s186673973.py(18): def a_int(): return int(readline())
+s186673973.py(21): def ints(): return list(map(int, readline().split()))
+s186673973.py(24): MOD = 10**9 + 7
+s186673973.py(25): INF = 2**31  # 2147483648 > 10**9
+s186673973.py(28): class SegmentTree:
+ --- modulename: s186673973, funcname: SegmentTree
+s186673973.py(28): class SegmentTree:
+s186673973.py(29):     def __init__(self, n: int, segfunc=max, identity_element=0):
+s186673973.py(47):     def __getitem__(self, idx):  # オリジナル要素にアクセスするためのもの
+s186673973.py(58):     def update(self, i, x):
+s186673973.py(69):     def query(self, l, r):
+s186673973.py(112): N = a_int()
+ --- modulename: s186673973, funcname: a_int
+s186673973.py(18): def a_int(): return int(readline())
+s186673973.py(113): H = ints()
+ --- modulename: s186673973, funcname: ints
+s186673973.py(21): def ints(): return list(map(int, readline().split()))
+s186673973.py(114): A = ints()
+ --- modulename: s186673973, funcname: ints
+s186673973.py(21): def ints(): return list(map(int, readline().split()))
+s186673973.py(116): dpi = SegmentTree(2 * 10**5 + 1)
+ --- modulename: s186673973, funcname: __init__
+s186673973.py(37):         self.ide = identity_element
+s186673973.py(38):         self.func = segfunc
+s186673973.py(39):         self.n_origin = n
+s186673973.py(40):         self.num = 2 ** (self.n_origin - 1).bit_length()  # n以上の最小の2のべき乗
+s186673973.py(41):         self.tree = [self.ide] * (2 * self.num - 1)  # −1はぴったりに作るためだけど気にしないでいい
+s186673973.py(117): for i in range(N):
+s186673973.py(118):     ma = dpi.query(0, H[i])
+ --- modulename: s186673973, funcname: query
+s186673973.py(71):         if r <= l:
+s186673973.py(73):         l += self.num
+s186673973.py(74):         r += self.num
+s186673973.py(75):         res_right = []
+s186673973.py(76):         res_left = []
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(78):             if l & 1:
+s186673973.py(81):             if r & 1:
+s186673973.py(82):                 r -= 1
+s186673973.py(83):                 res_right.append(self.tree[r - 1])
+s186673973.py(84):             l >>= 1
+s186673973.py(85):             r >>= 1
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(78):             if l & 1:
+s186673973.py(81):             if r & 1:
+s186673973.py(82):                 r -= 1
+s186673973.py(83):                 res_right.append(self.tree[r - 1])
+s186673973.py(84):             l >>= 1
+s186673973.py(85):             r >>= 1
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(86):         res = self.ide
+s186673973.py(88):         for x in res_left:
+s186673973.py(90):         for x in reversed(res_right):
+s186673973.py(91):             res = self.func(res, x)
+s186673973.py(90):         for x in reversed(res_right):
+s186673973.py(91):             res = self.func(res, x)
+s186673973.py(90):         for x in reversed(res_right):
+s186673973.py(92):         return res
+s186673973.py(119):     dpi.update(H[i], ma + A[i])
+ --- modulename: s186673973, funcname: update
+s186673973.py(62):         i += self.num - 1
+s186673973.py(63):         self.tree[i] = x
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(117): for i in range(N):
+s186673973.py(118):     ma = dpi.query(0, H[i])
+ --- modulename: s186673973, funcname: query
+s186673973.py(71):         if r <= l:
+s186673973.py(73):         l += self.num
+s186673973.py(74):         r += self.num
+s186673973.py(75):         res_right = []
+s186673973.py(76):         res_left = []
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(78):             if l & 1:
+s186673973.py(81):             if r & 1:
+s186673973.py(82):                 r -= 1
+s186673973.py(83):                 res_right.append(self.tree[r - 1])
+s186673973.py(84):             l >>= 1
+s186673973.py(85):             r >>= 1
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(86):         res = self.ide
+s186673973.py(88):         for x in res_left:
+s186673973.py(90):         for x in reversed(res_right):
+s186673973.py(91):             res = self.func(res, x)
+s186673973.py(90):         for x in reversed(res_right):
+s186673973.py(92):         return res
+s186673973.py(119):     dpi.update(H[i], ma + A[i])
+ --- modulename: s186673973, funcname: update
+s186673973.py(62):         i += self.num - 1
+s186673973.py(63):         self.tree[i] = x
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(117): for i in range(N):
+s186673973.py(118):     ma = dpi.query(0, H[i])
+ --- modulename: s186673973, funcname: query
+s186673973.py(71):         if r <= l:
+s186673973.py(73):         l += self.num
+s186673973.py(74):         r += self.num
+s186673973.py(75):         res_right = []
+s186673973.py(76):         res_left = []
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(78):             if l & 1:
+s186673973.py(81):             if r & 1:
+s186673973.py(84):             l >>= 1
+s186673973.py(85):             r >>= 1
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(78):             if l & 1:
+s186673973.py(81):             if r & 1:
+s186673973.py(84):             l >>= 1
+s186673973.py(85):             r >>= 1
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(78):             if l & 1:
+s186673973.py(81):             if r & 1:
+s186673973.py(82):                 r -= 1
+s186673973.py(83):                 res_right.append(self.tree[r - 1])
+s186673973.py(84):             l >>= 1
+s186673973.py(85):             r >>= 1
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(86):         res = self.ide
+s186673973.py(88):         for x in res_left:
+s186673973.py(90):         for x in reversed(res_right):
+s186673973.py(91):             res = self.func(res, x)
+s186673973.py(90):         for x in reversed(res_right):
+s186673973.py(92):         return res
+s186673973.py(119):     dpi.update(H[i], ma + A[i])
+ --- modulename: s186673973, funcname: update
+s186673973.py(62):         i += self.num - 1
+s186673973.py(63):         self.tree[i] = x
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(117): for i in range(N):
+s186673973.py(118):     ma = dpi.query(0, H[i])
+ --- modulename: s186673973, funcname: query
+s186673973.py(71):         if r <= l:
+s186673973.py(73):         l += self.num
+s186673973.py(74):         r += self.num
+s186673973.py(75):         res_right = []
+s186673973.py(76):         res_left = []
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(78):             if l & 1:
+s186673973.py(81):             if r & 1:
+s186673973.py(84):             l >>= 1
+s186673973.py(85):             r >>= 1
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(78):             if l & 1:
+s186673973.py(81):             if r & 1:
+s186673973.py(82):                 r -= 1
+s186673973.py(83):                 res_right.append(self.tree[r - 1])
+s186673973.py(84):             l >>= 1
+s186673973.py(85):             r >>= 1
+s186673973.py(77):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s186673973.py(86):         res = self.ide
+s186673973.py(88):         for x in res_left:
+s186673973.py(90):         for x in reversed(res_right):
+s186673973.py(91):             res = self.func(res, x)
+s186673973.py(90):         for x in reversed(res_right):
+s186673973.py(92):         return res
+s186673973.py(119):     dpi.update(H[i], ma + A[i])
+ --- modulename: s186673973, funcname: update
+s186673973.py(62):         i += self.num - 1
+s186673973.py(63):         self.tree[i] = x
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(65):             i = (i - 1) // 2
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(67):                                      self.tree[i * 2 + 2])
+s186673973.py(66):             self.tree[i] = self.func(self.tree[i * 2 + 1],
+s186673973.py(64):         while i:  # 木を更新
+s186673973.py(117): for i in range(N):
+s186673973.py(120): print(max(dpi[0:2 * 10**5 + 1]))
+ --- modulename: s186673973, funcname: __getitem__
+s186673973.py(48):         if isinstance(idx, slice):
+s186673973.py(49):             start = idx.start if idx.start else 0
+s186673973.py(50):             stop = idx.stop if idx.stop else self.n_origin
+s186673973.py(51):             l = start + self.num - 1
+s186673973.py(52):             r = l + stop - start
+s186673973.py(53):             return self.tree[l:r:idx.step]
+60
