@@ -1,0 +1,171 @@
+ --- modulename: s995444325, funcname: <module>
+s995444325.py(1): class Grid:
+ --- modulename: s995444325, funcname: Grid
+s995444325.py(1): class Grid:
+s995444325.py(2):     def __init__(self, H, W, grid, road_wall=(".", "#"), destroy=False):
+s995444325.py(11):     def bfs(self, start=(0,0), goal=(-1,-1), time=0, save=False):
+s995444325.py(45):     def connection_counter(self):
+s995444325.py(58):     def distance_list(self, start=(0,0), save=False):
+s995444325.py(89):     def most_distant_point(self, start=(0, 0), save=False):
+s995444325.py(104):     def diameter(self, start=(0,0), save=False):
+s995444325.py(112):     def diameter2(self):
+s995444325.py(125):     def dfs(self, start=(0, 0), goal=-3, time=0, save=False):
+s995444325.py(183):     def dfs2(self, start=(0, 0), goal=-3, time=0):
+s995444325.py(219):     def debug(self, start, goal, p, t):
+s995444325.py(231):     def show_visited(self, start, goal, p, t, parent):
+s995444325.py(249): from collections import deque
+ --- modulename: _bootstrap, funcname: _handle_fromlist
+<frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1067): s995444325.py(250): import sys
+s995444325.py(251): import marshal
+s995444325.py(252): input = sys.stdin.readline
+s995444325.py(256): road, wall = ".", "#"                         # (進行可能を意味する記号, 進行不可を意味する記号)
+s995444325.py(258): H, W = map(int,input().split())                # 左上は(h,w)=(0,0)、右下は(h,w)=(H-1,W-1)
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s995444325.py(260): grid = []
+s995444325.py(261): cnt = 0
+s995444325.py(262): for h in range(H):
+s995444325.py(263):     grid.append(input().rstrip())
+s995444325.py(264):     cnt += grid[-1].count(".")
+s995444325.py(262): for h in range(H):
+s995444325.py(263):     grid.append(input().rstrip())
+s995444325.py(264):     cnt += grid[-1].count(".")
+s995444325.py(262): for h in range(H):
+s995444325.py(263):     grid.append(input().rstrip())
+s995444325.py(264):     cnt += grid[-1].count(".")
+s995444325.py(262): for h in range(H):
+s995444325.py(265): start = (0,0)
+s995444325.py(266): goal = (H-1, W-1)
+s995444325.py(268): g = Grid(H, W, grid, (road, wall), destroy=False)
+ --- modulename: s995444325, funcname: __init__
+s995444325.py(3):         self.road, self.wall = road_wall
+s995444325.py(4):         self.H = H
+s995444325.py(5):         self.W = W
+s995444325.py(6):         self.destroy = destroy
+s995444325.py(7):         self.grid = grid
+s995444325.py(8):         self.parent = [[(-1,-1)] * self.W for _ in range(self.H)]
+ --- modulename: s995444325, funcname: <listcomp>
+s995444325.py(8):         self.parent = [[(-1,-1)] * self.W for _ in range(self.H)]
+s995444325.py(8):         self.parent = [[(-1,-1)] * self.W for _ in range(self.H)]
+s995444325.py(8):         self.parent = [[(-1,-1)] * self.W for _ in range(self.H)]
+s995444325.py(8):         self.parent = [[(-1,-1)] * self.W for _ in range(self.H)]
+s995444325.py(9):         self.move = [(1, 0), (-1, 0), (0, 1), (0, -1)]     # 動ける場所の候補
+s995444325.py(269): res = g.bfs(start, goal)
+ --- modulename: s995444325, funcname: bfs
+s995444325.py(18):         if save:
+s995444325.py(21):             parent = [[(-1, -1)] * self.W for _ in range(self.H)]
+ --- modulename: s995444325, funcname: <listcomp>
+s995444325.py(21):             parent = [[(-1, -1)] * self.W for _ in range(self.H)]
+s995444325.py(21):             parent = [[(-1, -1)] * self.W for _ in range(self.H)]
+s995444325.py(21):             parent = [[(-1, -1)] * self.W for _ in range(self.H)]
+s995444325.py(21):             parent = [[(-1, -1)] * self.W for _ in range(self.H)]
+s995444325.py(22):         p, t = start, time
+s995444325.py(23):         parent[p[0]][p[1]] = (-2,-2)
+s995444325.py(24):         next_set = deque([(p, t)])
+s995444325.py(25):         while next_set:
+s995444325.py(26):             p, t = next_set.popleft()
+s995444325.py(27):             h, w = p
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(33):                     continue
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(34):                 if parent[q[0]][q[1]] != (-1, -1):
+s995444325.py(39):                 if q == goal:
+s995444325.py(41):                 parent[q[0]][q[1]] = p
+s995444325.py(42):                 next_set.append((q, t + 1))
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(25):         while next_set:
+s995444325.py(26):             p, t = next_set.popleft()
+s995444325.py(27):             h, w = p
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(34):                 if parent[q[0]][q[1]] != (-1, -1):
+s995444325.py(39):                 if q == goal:
+s995444325.py(41):                 parent[q[0]][q[1]] = p
+s995444325.py(42):                 next_set.append((q, t + 1))
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(33):                     continue
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(34):                 if parent[q[0]][q[1]] != (-1, -1):
+s995444325.py(35):                     continue
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(25):         while next_set:
+s995444325.py(26):             p, t = next_set.popleft()
+s995444325.py(27):             h, w = p
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(34):                 if parent[q[0]][q[1]] != (-1, -1):
+s995444325.py(39):                 if q == goal:
+s995444325.py(41):                 parent[q[0]][q[1]] = p
+s995444325.py(42):                 next_set.append((q, t + 1))
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(34):                 if parent[q[0]][q[1]] != (-1, -1):
+s995444325.py(35):                     continue
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(34):                 if parent[q[0]][q[1]] != (-1, -1):
+s995444325.py(39):                 if q == goal:
+s995444325.py(41):                 parent[q[0]][q[1]] = p
+s995444325.py(42):                 next_set.append((q, t + 1))
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(33):                     continue
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(25):         while next_set:
+s995444325.py(26):             p, t = next_set.popleft()
+s995444325.py(27):             h, w = p
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(34):                 if parent[q[0]][q[1]] != (-1, -1):
+s995444325.py(35):                     continue
+s995444325.py(28):             for dh, dw in self.move:
+s995444325.py(29):                 q = (h + dh, w + dw)
+s995444325.py(30):                 if q[0] < 0 or q[0] >= self.H or q[1] < 0 or q[1] >= self.W:
+s995444325.py(32):                 if self.grid[q[0]][q[1]] == self.wall:         # 壁があったら進まない
+s995444325.py(34):                 if parent[q[0]][q[1]] != (-1, -1):
+s995444325.py(39):                 if q == goal:
+s995444325.py(40):                     return t + 1
+s995444325.py(270): if res == -1:
+s995444325.py(273):     print(cnt - res - 1)
+2
