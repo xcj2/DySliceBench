@@ -1,0 +1,379 @@
+ --- modulename: s593521706, funcname: <module>
+s593521706.py(1): import sys
+s593521706.py(2): input = sys.stdin.readline
+s593521706.py(4): N=int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s593521706.py(5): A=list(map(int,input().split()))
+s593521706.py(6): B=list(map(int,input().split()))
+s593521706.py(8): UP=(N+1)//2
+s593521706.py(9): DOWN=N-UP
+s593521706.py(11): ANS=1<<31
+s593521706.py(13): def ten(A):
+s593521706.py(45): for i in range(1<<N):
+s593521706.py(46):     UD=[0,0]
+s593521706.py(47):     S0=[]
+s593521706.py(48):     S1=[]
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(62):                 S1.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(60):                 S0.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(62):                 S1.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(66):     if UD[0]==UP and UD[1]==DOWN:
+s593521706.py(45): for i in range(1<<N):
+s593521706.py(46):     UD=[0,0]
+s593521706.py(47):     S0=[]
+s593521706.py(48):     S1=[]
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(53):                 S0.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(60):                 S0.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(62):                 S1.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(66):     if UD[0]==UP and UD[1]==DOWN:
+s593521706.py(67):         S0.sort()
+s593521706.py(68):         S1.sort()
+s593521706.py(71):         for i in range(1,N):
+s593521706.py(72):             if i%2==0:
+s593521706.py(78):                 if S1[i//2][0]>=S0[(i-1)//2][0]:
+s593521706.py(79):                     True
+s593521706.py(71):         for i in range(1,N):
+s593521706.py(72):             if i%2==0:
+s593521706.py(73):                 if S0[i//2][0]>=S1[(i-1)//2][0]:
+s593521706.py(74):                     True
+s593521706.py(71):         for i in range(1,N):
+s593521706.py(83):             K=[]
+s593521706.py(84):             for i in range(N):
+s593521706.py(85):                 if i%2==0:
+s593521706.py(86):                     K.append(S0[i//2][1])
+s593521706.py(84):             for i in range(N):
+s593521706.py(85):                 if i%2==0:
+s593521706.py(88):                     K.append(S1[i//2][1])
+s593521706.py(84):             for i in range(N):
+s593521706.py(85):                 if i%2==0:
+s593521706.py(86):                     K.append(S0[i//2][1])
+s593521706.py(84):             for i in range(N):
+s593521706.py(93):             ANS=min(ANS,ten(K))
+ --- modulename: s593521706, funcname: ten
+s593521706.py(14):     LEN=len(A)
+s593521706.py(15):     MAX=max(A)
+s593521706.py(16):     MIN=min(A)
+s593521706.py(18):     BIT=[0]*(MAX-MIN+2)# 出現回数をbit indexed treeの形でもっておく.
+s593521706.py(20):     def update(v,w):# index vにwを加える
+s593521706.py(25):     def getvalue(v):# MIN～vの区間の和を求める
+s593521706.py(32):     ANS=0        
+s593521706.py(33):     for i in range(LEN):# A[0],A[1],...とBITを更新しながら,各A[i]について転倒数を求める.
+s593521706.py(34):         bit_ai=A[i]-MIN+1# A[i]がBITの中で何番目か
+s593521706.py(36):         ANS+=i# 今まで出現した個数.
+s593521706.py(37):         ANS-=getvalue(bit_ai)# 今まで出現した中で,MIN～bit_aiの個数を減らす.
+ --- modulename: s593521706, funcname: getvalue
+s593521706.py(26):         ANS=0
+s593521706.py(27):         while v!=0:
+s593521706.py(28):             ANS+=BIT[v]
+s593521706.py(29):             v-=(v&(-v))# たとえばv=3→v=2へ
+s593521706.py(27):         while v!=0:
+s593521706.py(30):         return ANS
+s593521706.py(40):         update(bit_ai,1)
+ --- modulename: s593521706, funcname: update
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(22):             BIT[v]+=w
+s593521706.py(23):             v+=(v&(-v))# 自分を含む大きなノードへ. たとえばv=3→v=4
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(33):     for i in range(LEN):# A[0],A[1],...とBITを更新しながら,各A[i]について転倒数を求める.
+s593521706.py(34):         bit_ai=A[i]-MIN+1# A[i]がBITの中で何番目か
+s593521706.py(36):         ANS+=i# 今まで出現した個数.
+s593521706.py(37):         ANS-=getvalue(bit_ai)# 今まで出現した中で,MIN～bit_aiの個数を減らす.
+ --- modulename: s593521706, funcname: getvalue
+s593521706.py(26):         ANS=0
+s593521706.py(27):         while v!=0:
+s593521706.py(28):             ANS+=BIT[v]
+s593521706.py(29):             v-=(v&(-v))# たとえばv=3→v=2へ
+s593521706.py(27):         while v!=0:
+s593521706.py(28):             ANS+=BIT[v]
+s593521706.py(29):             v-=(v&(-v))# たとえばv=3→v=2へ
+s593521706.py(27):         while v!=0:
+s593521706.py(30):         return ANS
+s593521706.py(40):         update(bit_ai,1)
+ --- modulename: s593521706, funcname: update
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(22):             BIT[v]+=w
+s593521706.py(23):             v+=(v&(-v))# 自分を含む大きなノードへ. たとえばv=3→v=4
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(33):     for i in range(LEN):# A[0],A[1],...とBITを更新しながら,各A[i]について転倒数を求める.
+s593521706.py(34):         bit_ai=A[i]-MIN+1# A[i]がBITの中で何番目か
+s593521706.py(36):         ANS+=i# 今まで出現した個数.
+s593521706.py(37):         ANS-=getvalue(bit_ai)# 今まで出現した中で,MIN～bit_aiの個数を減らす.
+ --- modulename: s593521706, funcname: getvalue
+s593521706.py(26):         ANS=0
+s593521706.py(27):         while v!=0:
+s593521706.py(28):             ANS+=BIT[v]
+s593521706.py(29):             v-=(v&(-v))# たとえばv=3→v=2へ
+s593521706.py(27):         while v!=0:
+s593521706.py(30):         return ANS
+s593521706.py(40):         update(bit_ai,1)
+ --- modulename: s593521706, funcname: update
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(22):             BIT[v]+=w
+s593521706.py(23):             v+=(v&(-v))# 自分を含む大きなノードへ. たとえばv=3→v=4
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(22):             BIT[v]+=w
+s593521706.py(23):             v+=(v&(-v))# 自分を含む大きなノードへ. たとえばv=3→v=4
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(33):     for i in range(LEN):# A[0],A[1],...とBITを更新しながら,各A[i]について転倒数を求める.
+s593521706.py(42):     return ANS
+s593521706.py(45): for i in range(1<<N):
+s593521706.py(46):     UD=[0,0]
+s593521706.py(47):     S0=[]
+s593521706.py(48):     S1=[]
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(62):                 S1.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(55):                 S1.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(62):                 S1.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(66):     if UD[0]==UP and UD[1]==DOWN:
+s593521706.py(45): for i in range(1<<N):
+s593521706.py(46):     UD=[0,0]
+s593521706.py(47):     S0=[]
+s593521706.py(48):     S1=[]
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(53):                 S0.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(55):                 S1.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(62):                 S1.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(66):     if UD[0]==UP and UD[1]==DOWN:
+s593521706.py(45): for i in range(1<<N):
+s593521706.py(46):     UD=[0,0]
+s593521706.py(47):     S0=[]
+s593521706.py(48):     S1=[]
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(62):                 S1.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(60):                 S0.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(53):                 S0.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(66):     if UD[0]==UP and UD[1]==DOWN:
+s593521706.py(67):         S0.sort()
+s593521706.py(68):         S1.sort()
+s593521706.py(71):         for i in range(1,N):
+s593521706.py(72):             if i%2==0:
+s593521706.py(78):                 if S1[i//2][0]>=S0[(i-1)//2][0]:
+s593521706.py(79):                     True
+s593521706.py(71):         for i in range(1,N):
+s593521706.py(72):             if i%2==0:
+s593521706.py(73):                 if S0[i//2][0]>=S1[(i-1)//2][0]:
+s593521706.py(74):                     True
+s593521706.py(71):         for i in range(1,N):
+s593521706.py(83):             K=[]
+s593521706.py(84):             for i in range(N):
+s593521706.py(85):                 if i%2==0:
+s593521706.py(86):                     K.append(S0[i//2][1])
+s593521706.py(84):             for i in range(N):
+s593521706.py(85):                 if i%2==0:
+s593521706.py(88):                     K.append(S1[i//2][1])
+s593521706.py(84):             for i in range(N):
+s593521706.py(85):                 if i%2==0:
+s593521706.py(86):                     K.append(S0[i//2][1])
+s593521706.py(84):             for i in range(N):
+s593521706.py(93):             ANS=min(ANS,ten(K))
+ --- modulename: s593521706, funcname: ten
+s593521706.py(14):     LEN=len(A)
+s593521706.py(15):     MAX=max(A)
+s593521706.py(16):     MIN=min(A)
+s593521706.py(18):     BIT=[0]*(MAX-MIN+2)# 出現回数をbit indexed treeの形でもっておく.
+s593521706.py(20):     def update(v,w):# index vにwを加える
+s593521706.py(25):     def getvalue(v):# MIN～vの区間の和を求める
+s593521706.py(32):     ANS=0        
+s593521706.py(33):     for i in range(LEN):# A[0],A[1],...とBITを更新しながら,各A[i]について転倒数を求める.
+s593521706.py(34):         bit_ai=A[i]-MIN+1# A[i]がBITの中で何番目か
+s593521706.py(36):         ANS+=i# 今まで出現した個数.
+s593521706.py(37):         ANS-=getvalue(bit_ai)# 今まで出現した中で,MIN～bit_aiの個数を減らす.
+ --- modulename: s593521706, funcname: getvalue
+s593521706.py(26):         ANS=0
+s593521706.py(27):         while v!=0:
+s593521706.py(28):             ANS+=BIT[v]
+s593521706.py(29):             v-=(v&(-v))# たとえばv=3→v=2へ
+s593521706.py(27):         while v!=0:
+s593521706.py(30):         return ANS
+s593521706.py(40):         update(bit_ai,1)
+ --- modulename: s593521706, funcname: update
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(22):             BIT[v]+=w
+s593521706.py(23):             v+=(v&(-v))# 自分を含む大きなノードへ. たとえばv=3→v=4
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(33):     for i in range(LEN):# A[0],A[1],...とBITを更新しながら,各A[i]について転倒数を求める.
+s593521706.py(34):         bit_ai=A[i]-MIN+1# A[i]がBITの中で何番目か
+s593521706.py(36):         ANS+=i# 今まで出現した個数.
+s593521706.py(37):         ANS-=getvalue(bit_ai)# 今まで出現した中で,MIN～bit_aiの個数を減らす.
+ --- modulename: s593521706, funcname: getvalue
+s593521706.py(26):         ANS=0
+s593521706.py(27):         while v!=0:
+s593521706.py(28):             ANS+=BIT[v]
+s593521706.py(29):             v-=(v&(-v))# たとえばv=3→v=2へ
+s593521706.py(27):         while v!=0:
+s593521706.py(30):         return ANS
+s593521706.py(40):         update(bit_ai,1)
+ --- modulename: s593521706, funcname: update
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(22):             BIT[v]+=w
+s593521706.py(23):             v+=(v&(-v))# 自分を含む大きなノードへ. たとえばv=3→v=4
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(22):             BIT[v]+=w
+s593521706.py(23):             v+=(v&(-v))# 自分を含む大きなノードへ. たとえばv=3→v=4
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(33):     for i in range(LEN):# A[0],A[1],...とBITを更新しながら,各A[i]について転倒数を求める.
+s593521706.py(34):         bit_ai=A[i]-MIN+1# A[i]がBITの中で何番目か
+s593521706.py(36):         ANS+=i# 今まで出現した個数.
+s593521706.py(37):         ANS-=getvalue(bit_ai)# 今まで出現した中で,MIN～bit_aiの個数を減らす.
+ --- modulename: s593521706, funcname: getvalue
+s593521706.py(26):         ANS=0
+s593521706.py(27):         while v!=0:
+s593521706.py(28):             ANS+=BIT[v]
+s593521706.py(29):             v-=(v&(-v))# たとえばv=3→v=2へ
+s593521706.py(27):         while v!=0:
+s593521706.py(28):             ANS+=BIT[v]
+s593521706.py(29):             v-=(v&(-v))# たとえばv=3→v=2へ
+s593521706.py(27):         while v!=0:
+s593521706.py(30):         return ANS
+s593521706.py(40):         update(bit_ai,1)
+ --- modulename: s593521706, funcname: update
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(22):             BIT[v]+=w
+s593521706.py(23):             v+=(v&(-v))# 自分を含む大きなノードへ. たとえばv=3→v=4
+s593521706.py(21):         while v<=MAX-MIN+1:
+s593521706.py(33):     for i in range(LEN):# A[0],A[1],...とBITを更新しながら,各A[i]について転倒数を求める.
+s593521706.py(42):     return ANS
+s593521706.py(45): for i in range(1<<N):
+s593521706.py(46):     UD=[0,0]
+s593521706.py(47):     S0=[]
+s593521706.py(48):     S1=[]
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(53):                 S0.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(60):                 S0.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(53):                 S0.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(66):     if UD[0]==UP and UD[1]==DOWN:
+s593521706.py(45): for i in range(1<<N):
+s593521706.py(46):     UD=[0,0]
+s593521706.py(47):     S0=[]
+s593521706.py(48):     S1=[]
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(59):             if (j+1)%2==0:
+s593521706.py(62):                 S1.append((B[j],j))
+s593521706.py(64):             UD[(j+1)%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(55):                 S1.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(53):                 S0.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(66):     if UD[0]==UP and UD[1]==DOWN:
+s593521706.py(45): for i in range(1<<N):
+s593521706.py(46):     UD=[0,0]
+s593521706.py(47):     S0=[]
+s593521706.py(48):     S1=[]
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(53):                 S0.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(55):                 S1.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(51):         if (1<<j) & i !=0:
+s593521706.py(52):             if j%2==0:
+s593521706.py(53):                 S0.append((A[j],j))
+s593521706.py(56):             UD[j%2]+=1
+s593521706.py(50):     for j in range(N):
+s593521706.py(66):     if UD[0]==UP and UD[1]==DOWN:
+s593521706.py(67):         S0.sort()
+s593521706.py(68):         S1.sort()
+s593521706.py(71):         for i in range(1,N):
+s593521706.py(72):             if i%2==0:
+s593521706.py(78):                 if S1[i//2][0]>=S0[(i-1)//2][0]:
+s593521706.py(79):                     True
+s593521706.py(71):         for i in range(1,N):
+s593521706.py(72):             if i%2==0:
+s593521706.py(73):                 if S0[i//2][0]>=S1[(i-1)//2][0]:
+s593521706.py(76):                     break
+s593521706.py(45): for i in range(1<<N):
+s593521706.py(95): if ANS==1<<31:
+s593521706.py(98):     print(ANS)
+1
