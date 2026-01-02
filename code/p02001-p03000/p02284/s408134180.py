@@ -1,0 +1,52 @@
+import sys
+class Node:
+    __slots__ = ['key', 'left', 'right']
+    def __init__(self, key):
+        self.key = key
+        self.left = self.right = None
+
+root = None
+
+def insert(key):
+    global root
+    x, y = root, None
+    while x:
+        y = x
+        if key < x.key:
+            x = x.left
+        else:
+            x = x.right
+
+    if y is None:
+        root = Node(key)
+    elif key < y.key:
+        y.left = Node(key)
+    else:
+        y.right = Node(key)
+
+def find(key):
+    global root
+    x = root
+    while x:
+        if key < x.key:
+            x = x.left
+        elif key == x.key:
+            return "yes"
+        else:
+            x = x.right
+    return "no"
+            
+def inorder(node):
+    return inorder(node.left) + f' {node.key}' + inorder(node.right) if node else ''
+def preorder(node):
+    return f' {node.key}' + preorder(node.left) + preorder(node.right) if node else ''
+
+n = int(input())
+for e in sys.stdin:
+    if e[0] == 'i':
+        insert(int(e[7:]))
+    elif e[0] == "f":
+        print(find(int(e[5:])))
+    else:
+        print(inorder(root))
+        print(preorder(root))
