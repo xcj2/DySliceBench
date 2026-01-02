@@ -1,0 +1,1024 @@
+ --- modulename: s420072860, funcname: <module>
+s420072860.py(1): class LazySegmentTree():
+ --- modulename: s420072860, funcname: LazySegmentTree
+s420072860.py(1): class LazySegmentTree():
+s420072860.py(2):   def __init__(self, n, op, e, mapping, composition, id):
+s420072860.py(14):   def update(self, k):
+s420072860.py(17):   def all_apply(self, k, f):
+s420072860.py(22):   def push(self, k): # 親の遅延配列の値を子に反映させる
+s420072860.py(27):   def build(self, arr):
+s420072860.py(34):   def set(self, p, x):
+s420072860.py(45):   def get(self, p):
+s420072860.py(53):   def prod(self, l, r):
+s420072860.py(73):   def all_prod(self):
+s420072860.py(76):   def apply(self, p, f):
+s420072860.py(85):   def range_apply(self, l, r, f):
+s420072860.py(110):   def max_right(self, l, g):
+s420072860.py(132):   def min_left(self, r, g):
+s420072860.py(154): import sys
+s420072860.py(155): input = sys.stdin.buffer.readline
+s420072860.py(157): INF = 10**18
+s420072860.py(158): MOD = 998244353
+s420072860.py(160): N, Q = map(int, input().split())
+s420072860.py(162): def op(x, y):
+s420072860.py(167): def mapping(p, x): #pが更新後の値, xが更新する前の値
+s420072860.py(173): def composition(p, q):
+s420072860.py(178): lis = [1] * (N)
+s420072860.py(179): for i in range(N-1,0,-1):
+s420072860.py(180):   lis[i - 1] = lis[i] * 10 % MOD
+s420072860.py(179): for i in range(N-1,0,-1):
+s420072860.py(180):   lis[i - 1] = lis[i] * 10 % MOD
+s420072860.py(179): for i in range(N-1,0,-1):
+s420072860.py(180):   lis[i - 1] = lis[i] * 10 % MOD
+s420072860.py(179): for i in range(N-1,0,-1):
+s420072860.py(180):   lis[i - 1] = lis[i] * 10 % MOD
+s420072860.py(179): for i in range(N-1,0,-1):
+s420072860.py(180):   lis[i - 1] = lis[i] * 10 % MOD
+s420072860.py(179): for i in range(N-1,0,-1):
+s420072860.py(180):   lis[i - 1] = lis[i] * 10 % MOD
+s420072860.py(179): for i in range(N-1,0,-1):
+s420072860.py(180):   lis[i - 1] = lis[i] * 10 % MOD
+s420072860.py(179): for i in range(N-1,0,-1):
+s420072860.py(182): arr = [(e,e) for e in lis]
+ --- modulename: s420072860, funcname: <listcomp>
+s420072860.py(182): arr = [(e,e) for e in lis]
+s420072860.py(182): arr = [(e,e) for e in lis]
+s420072860.py(182): arr = [(e,e) for e in lis]
+s420072860.py(182): arr = [(e,e) for e in lis]
+s420072860.py(182): arr = [(e,e) for e in lis]
+s420072860.py(182): arr = [(e,e) for e in lis]
+s420072860.py(182): arr = [(e,e) for e in lis]
+s420072860.py(182): arr = [(e,e) for e in lis]
+s420072860.py(182): arr = [(e,e) for e in lis]
+s420072860.py(184): e = (0,0)
+s420072860.py(185): id = INF
+s420072860.py(187): lst = LazySegmentTree(N, op, e, mapping, composition, id)
+ --- modulename: s420072860, funcname: __init__
+s420072860.py(3):     self.n = n
+s420072860.py(4):     self.op = op
+s420072860.py(5):     self.e = e
+s420072860.py(6):     self.mapping = mapping
+s420072860.py(7):     self.composition = composition
+s420072860.py(8):     self.id = id
+s420072860.py(9):     self.log = (n - 1).bit_length()
+s420072860.py(10):     self.size = 1 << self.log
+s420072860.py(11):     self.data = [e] * (2 * self.size)
+s420072860.py(12):     self.lazy = [id] * (self.size)
+s420072860.py(188): lst.build(arr)
+ --- modulename: s420072860, funcname: build
+s420072860.py(29):     for i, a in enumerate(arr):
+s420072860.py(30):       self.data[self.size + i] = a
+s420072860.py(29):     for i, a in enumerate(arr):
+s420072860.py(30):       self.data[self.size + i] = a
+s420072860.py(29):     for i, a in enumerate(arr):
+s420072860.py(30):       self.data[self.size + i] = a
+s420072860.py(29):     for i, a in enumerate(arr):
+s420072860.py(30):       self.data[self.size + i] = a
+s420072860.py(29):     for i, a in enumerate(arr):
+s420072860.py(30):       self.data[self.size + i] = a
+s420072860.py(29):     for i, a in enumerate(arr):
+s420072860.py(30):       self.data[self.size + i] = a
+s420072860.py(29):     for i, a in enumerate(arr):
+s420072860.py(30):       self.data[self.size + i] = a
+s420072860.py(29):     for i, a in enumerate(arr):
+s420072860.py(30):       self.data[self.size + i] = a
+s420072860.py(29):     for i, a in enumerate(arr):
+s420072860.py(31):     for i in range(self.size-1,0,-1):
+s420072860.py(32):       self.update(i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(31):     for i in range(self.size-1,0,-1):
+s420072860.py(32):       self.update(i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(31):     for i in range(self.size-1,0,-1):
+s420072860.py(32):       self.update(i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(31):     for i in range(self.size-1,0,-1):
+s420072860.py(32):       self.update(i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(31):     for i in range(self.size-1,0,-1):
+s420072860.py(32):       self.update(i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(31):     for i in range(self.size-1,0,-1):
+s420072860.py(32):       self.update(i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(31):     for i in range(self.size-1,0,-1):
+s420072860.py(32):       self.update(i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(31):     for i in range(self.size-1,0,-1):
+s420072860.py(190): ans = [0]*Q
+s420072860.py(192): for i in range(Q):
+s420072860.py(193):   l, r, d = map(int, input().split())
+s420072860.py(194):   lst.range_apply(l - 1, r, d)
+ --- modulename: s420072860, funcname: range_apply
+s420072860.py(87):     if l == r: return
+s420072860.py(88):     l += self.size
+s420072860.py(89):     r += self.size
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(93):     l2 = l
+s420072860.py(94):     r2 = r
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(99):       if r & 1:
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(97):         self.all_apply(l, f)
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(175):     return p
+s420072860.py(98):         l += 1
+s420072860.py(99):       if r & 1:
+s420072860.py(100):         r -= 1
+s420072860.py(101):         self.all_apply(r, f)
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(175):     return p
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(104):     l = l2
+s420072860.py(105):     r = r2
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(195):   v = lst.all_prod()
+ --- modulename: s420072860, funcname: all_prod
+s420072860.py(74):     return self.data[1]
+s420072860.py(196):   ans[i] = v[0]
+s420072860.py(192): for i in range(Q):
+s420072860.py(193):   l, r, d = map(int, input().split())
+s420072860.py(194):   lst.range_apply(l - 1, r, d)
+ --- modulename: s420072860, funcname: range_apply
+s420072860.py(87):     if l == r: return
+s420072860.py(88):     l += self.size
+s420072860.py(89):     r += self.size
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(93):     l2 = l
+s420072860.py(94):     r2 = r
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(99):       if r & 1:
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(99):       if r & 1:
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(99):       if r & 1:
+s420072860.py(100):         r -= 1
+s420072860.py(101):         self.all_apply(r, f)
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(175):     return p
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(104):     l = l2
+s420072860.py(105):     r = r2
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(195):   v = lst.all_prod()
+ --- modulename: s420072860, funcname: all_prod
+s420072860.py(74):     return self.data[1]
+s420072860.py(196):   ans[i] = v[0]
+s420072860.py(192): for i in range(Q):
+s420072860.py(193):   l, r, d = map(int, input().split())
+s420072860.py(194):   lst.range_apply(l - 1, r, d)
+ --- modulename: s420072860, funcname: range_apply
+s420072860.py(87):     if l == r: return
+s420072860.py(88):     l += self.size
+s420072860.py(89):     r += self.size
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(175):     return p
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(175):     return p
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(93):     l2 = l
+s420072860.py(94):     r2 = r
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(99):       if r & 1:
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(97):         self.all_apply(l, f)
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(175):     return p
+s420072860.py(98):         l += 1
+s420072860.py(99):       if r & 1:
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(97):         self.all_apply(l, f)
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(175):     return p
+s420072860.py(98):         l += 1
+s420072860.py(99):       if r & 1:
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(104):     l = l2
+s420072860.py(105):     r = r2
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(195):   v = lst.all_prod()
+ --- modulename: s420072860, funcname: all_prod
+s420072860.py(74):     return self.data[1]
+s420072860.py(196):   ans[i] = v[0]
+s420072860.py(192): for i in range(Q):
+s420072860.py(193):   l, r, d = map(int, input().split())
+s420072860.py(194):   lst.range_apply(l - 1, r, d)
+ --- modulename: s420072860, funcname: range_apply
+s420072860.py(87):     if l == r: return
+s420072860.py(88):     l += self.size
+s420072860.py(89):     r += self.size
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(93):     l2 = l
+s420072860.py(94):     r2 = r
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(97):         self.all_apply(l, f)
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(98):         l += 1
+s420072860.py(99):       if r & 1:
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(104):     l = l2
+s420072860.py(105):     r = r2
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(195):   v = lst.all_prod()
+ --- modulename: s420072860, funcname: all_prod
+s420072860.py(74):     return self.data[1]
+s420072860.py(196):   ans[i] = v[0]
+s420072860.py(192): for i in range(Q):
+s420072860.py(193):   l, r, d = map(int, input().split())
+s420072860.py(194):   lst.range_apply(l - 1, r, d)
+ --- modulename: s420072860, funcname: range_apply
+s420072860.py(87):     if l == r: return
+s420072860.py(88):     l += self.size
+s420072860.py(89):     r += self.size
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(171):   return x
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(176):   return q
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(175):     return p
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(20):       self.lazy[k] = self.composition(f, self.lazy[k])
+ --- modulename: s420072860, funcname: composition
+s420072860.py(174):   if p != INF:
+s420072860.py(175):     return p
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(91):       if ((l >> i) << i) != l: self.push(l >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(92):       if ((r >> i) << i) != r: self.push((r - 1) >> i)
+ --- modulename: s420072860, funcname: push
+s420072860.py(23):     self.all_apply(2 * k, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(24):     self.all_apply(2 * k + 1, self.lazy[k])
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(25):     self.lazy[k] = self.id
+s420072860.py(90):     for i in range(self.log, 0, -1):
+s420072860.py(93):     l2 = l
+s420072860.py(94):     r2 = r
+s420072860.py(95):     while l < r:
+s420072860.py(96):       if l & 1:
+s420072860.py(97):         self.all_apply(l, f)
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(98):         l += 1
+s420072860.py(99):       if r & 1:
+s420072860.py(100):         r -= 1
+s420072860.py(101):         self.all_apply(r, f)
+ --- modulename: s420072860, funcname: all_apply
+s420072860.py(18):     self.data[k] = self.mapping(f, self.data[k])
+ --- modulename: s420072860, funcname: mapping
+s420072860.py(168):   xv, xr = x
+s420072860.py(169):   if p != INF:
+s420072860.py(170):     return p * xr % MOD, xr
+s420072860.py(19):     if k < self.size:
+s420072860.py(102):       l >>= 1
+s420072860.py(103):       r >>= 1
+s420072860.py(95):     while l < r:
+s420072860.py(104):     l = l2
+s420072860.py(105):     r = r2
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(107):       if ((l >> i) << i) != l: self.update(l >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(108):       if ((r >> i) << i) != r: self.update((r - 1) >> i)
+ --- modulename: s420072860, funcname: update
+s420072860.py(15):     self.data[k] = self.op(self.data[2 * k], self.data[2 * k + 1])
+ --- modulename: s420072860, funcname: op
+s420072860.py(163):   xv, xr = x
+s420072860.py(164):   yv, yr = y
+s420072860.py(165):   return (xv + yv) % MOD, (xr + yr) % MOD
+s420072860.py(106):     for i in range(1, self.log + 1):
+s420072860.py(195):   v = lst.all_prod()
+ --- modulename: s420072860, funcname: all_prod
+s420072860.py(74):     return self.data[1]
+s420072860.py(196):   ans[i] = v[0]
+s420072860.py(192): for i in range(Q):
+s420072860.py(198): print(*ans, sep='\n')
+11222211
+77772211
+77333333
+72333333
+72311333
