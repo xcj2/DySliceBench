@@ -1,0 +1,294 @@
+ --- modulename: s624925404, funcname: <module>
+s624925404.py(1): class Graph:
+ --- modulename: s624925404, funcname: Graph
+s624925404.py(1): class Graph:
+s624925404.py(3):     def __init__(self, n_vertices, edges, directed=True):
+s624925404.py(8):     @property
+s624925404.py(9):     def adj(self):
+s624925404.py(24): class RootedTree(Graph):
+ --- modulename: s624925404, funcname: RootedTree
+s624925404.py(24): class RootedTree(Graph):
+s624925404.py(25):     def __init__(self, n_vertices, edges, root_vertex):
+s624925404.py(29):     @property
+s624925404.py(30):     def parent(self):
+s624925404.py(47):     @property
+s624925404.py(48):     def children(self):
+s624925404.py(58):     @property
+s624925404.py(59):     def dfs_order(self):
+s624925404.py(75): from functools import reduce
+s624925404.py(76): from itertools import accumulate,chain
+s624925404.py(77): def rerooting(rooted_tree, merge, identity, finalize):
+s624925404.py(119): def solve(N,M,E):
+s624925404.py(132): if __name__ == '__main__':
+s624925404.py(133):     N,M = map(int,input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s624925404.py(134):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s624925404, funcname: <listcomp>
+s624925404.py(134):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s624925404, funcname: <lambda>
+s624925404.py(134):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s624925404, funcname: <lambda>
+s624925404.py(134):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+s624925404.py(134):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s624925404, funcname: <lambda>
+s624925404.py(134):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+ --- modulename: s624925404, funcname: <lambda>
+s624925404.py(134):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+s624925404.py(134):     E = [tuple(map(lambda x: int(x)-1, input().split())) for _ in range(N-1)]
+s624925404.py(135):     print(*solve(N,M,E),sep='\n')
+ --- modulename: s624925404, funcname: solve
+s624925404.py(121):     tree = RootedTree(N,E,0)
+ --- modulename: s624925404, funcname: __init__
+s624925404.py(26):         self.root = root_vertex
+s624925404.py(27):         super().__init__(n_vertices, edges, False)
+ --- modulename: s624925404, funcname: __init__
+s624925404.py(4):         self.n_vertices = n_vertices
+s624925404.py(5):         self.edges = edges
+s624925404.py(6):         self.directed = directed
+s624925404.py(123):     def merge(x,y):
+s624925404.py(125):     def finalize(x,v):
+s624925404.py(128):     res = rerooting(tree,merge,1,finalize)
+ --- modulename: s624925404, funcname: rerooting
+s624925404.py(87):     N = rooted_tree.n_vertices
+s624925404.py(88):     parent = rooted_tree.parent
+ --- modulename: s624925404, funcname: parent
+s624925404.py(31):         try:
+s624925404.py(32):             return self._parent
+s624925404.py(33):         except AttributeError:
+s624925404.py(34):             adj = self.adj
+ --- modulename: s624925404, funcname: adj
+s624925404.py(10):         try:
+s624925404.py(11):             return self._adj
+s624925404.py(12):         except AttributeError:
+s624925404.py(13):             adj = [[] for _ in range(self.n_vertices)]
+ --- modulename: s624925404, funcname: <listcomp>
+s624925404.py(13):             adj = [[] for _ in range(self.n_vertices)]
+s624925404.py(13):             adj = [[] for _ in range(self.n_vertices)]
+s624925404.py(13):             adj = [[] for _ in range(self.n_vertices)]
+s624925404.py(13):             adj = [[] for _ in range(self.n_vertices)]
+s624925404.py(14):             if self.directed:
+s624925404.py(18):                 for u,v in self.edges:
+s624925404.py(19):                     adj[u].append(v)
+s624925404.py(20):                     adj[v].append(u)
+s624925404.py(18):                 for u,v in self.edges:
+s624925404.py(19):                     adj[u].append(v)
+s624925404.py(20):                     adj[v].append(u)
+s624925404.py(18):                 for u,v in self.edges:
+s624925404.py(21):             self._adj = adj
+s624925404.py(22):             return adj
+s624925404.py(35):             parent = [None]*self.n_vertices
+s624925404.py(36):             parent[self.root] = -1
+s624925404.py(37):             stack = [self.root]
+s624925404.py(38):             for _ in range(self.n_vertices):
+s624925404.py(39):                 v = stack.pop()
+s624925404.py(40):                 for u in adj[v]:
+s624925404.py(41):                     if parent[u] is None:
+s624925404.py(42):                         parent[u] = v
+s624925404.py(43):                         stack.append(u)
+s624925404.py(40):                 for u in adj[v]:
+s624925404.py(38):             for _ in range(self.n_vertices):
+s624925404.py(39):                 v = stack.pop()
+s624925404.py(40):                 for u in adj[v]:
+s624925404.py(41):                     if parent[u] is None:
+s624925404.py(40):                 for u in adj[v]:
+s624925404.py(41):                     if parent[u] is None:
+s624925404.py(42):                         parent[u] = v
+s624925404.py(43):                         stack.append(u)
+s624925404.py(40):                 for u in adj[v]:
+s624925404.py(38):             for _ in range(self.n_vertices):
+s624925404.py(39):                 v = stack.pop()
+s624925404.py(40):                 for u in adj[v]:
+s624925404.py(41):                     if parent[u] is None:
+s624925404.py(40):                 for u in adj[v]:
+s624925404.py(38):             for _ in range(self.n_vertices):
+s624925404.py(44):             self._parent = parent
+s624925404.py(45):             return parent
+s624925404.py(89):     children = rooted_tree.children
+ --- modulename: s624925404, funcname: children
+s624925404.py(49):         try:
+s624925404.py(50):             return self._children
+s624925404.py(51):         except AttributeError:
+s624925404.py(52):             children = [None]*self.n_vertices
+s624925404.py(53):             for v,(l,p) in enumerate(zip(self.adj,self.parent)):
+ --- modulename: s624925404, funcname: adj
+s624925404.py(10):         try:
+s624925404.py(11):             return self._adj
+ --- modulename: s624925404, funcname: parent
+s624925404.py(31):         try:
+s624925404.py(32):             return self._parent
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+ --- modulename: s624925404, funcname: <listcomp>
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+s624925404.py(53):             for v,(l,p) in enumerate(zip(self.adj,self.parent)):
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+ --- modulename: s624925404, funcname: <listcomp>
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+s624925404.py(53):             for v,(l,p) in enumerate(zip(self.adj,self.parent)):
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+ --- modulename: s624925404, funcname: <listcomp>
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+s624925404.py(54):                 children[v] = [u for u in l if u != p]
+s624925404.py(53):             for v,(l,p) in enumerate(zip(self.adj,self.parent)):
+s624925404.py(55):             self._children = children
+s624925404.py(56):             return children
+s624925404.py(90):     order = rooted_tree.dfs_order
+ --- modulename: s624925404, funcname: dfs_order
+s624925404.py(60):         try:
+s624925404.py(61):             return self._dfs_order
+s624925404.py(62):         except AttributeError:
+s624925404.py(63):             order = [None]*self.n_vertices
+s624925404.py(64):             children = self.children
+ --- modulename: s624925404, funcname: children
+s624925404.py(49):         try:
+s624925404.py(50):             return self._children
+s624925404.py(65):             stack = [self.root]
+s624925404.py(66):             for i in range(self.n_vertices):
+s624925404.py(67):                 v = stack.pop()
+s624925404.py(68):                 order[i] = v
+s624925404.py(69):                 for u in children[v]:
+s624925404.py(70):                     stack.append(u)
+s624925404.py(69):                 for u in children[v]:
+s624925404.py(66):             for i in range(self.n_vertices):
+s624925404.py(67):                 v = stack.pop()
+s624925404.py(68):                 order[i] = v
+s624925404.py(69):                 for u in children[v]:
+s624925404.py(70):                     stack.append(u)
+s624925404.py(69):                 for u in children[v]:
+s624925404.py(66):             for i in range(self.n_vertices):
+s624925404.py(67):                 v = stack.pop()
+s624925404.py(68):                 order[i] = v
+s624925404.py(69):                 for u in children[v]:
+s624925404.py(66):             for i in range(self.n_vertices):
+s624925404.py(71):             self._dfs_order = order
+s624925404.py(72):             return order
+s624925404.py(93):     dp_down = [None]*N
+s624925404.py(94):     for v in reversed(order[1:]):
+s624925404.py(95):         dp_down[v] = finalize(reduce(merge,
+s624925404.py(96):             (dp_down[c] for c in children[v]),
+s624925404.py(97):             identity), v)
+s624925404.py(95):         dp_down[v] = finalize(reduce(merge,
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(96):             (dp_down[c] for c in children[v]),
+s624925404.py(97):             identity), v)
+s624925404.py(95):         dp_down[v] = finalize(reduce(merge,
+ --- modulename: s624925404, funcname: finalize
+s624925404.py(126):         return x+1
+s624925404.py(94):     for v in reversed(order[1:]):
+s624925404.py(95):         dp_down[v] = finalize(reduce(merge,
+s624925404.py(96):             (dp_down[c] for c in children[v]),
+s624925404.py(97):             identity), v)
+s624925404.py(95):         dp_down[v] = finalize(reduce(merge,
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(96):             (dp_down[c] for c in children[v]),
+ --- modulename: s624925404, funcname: merge
+s624925404.py(124):         return (x*y)%M
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(96):             (dp_down[c] for c in children[v]),
+s624925404.py(97):             identity), v)
+s624925404.py(95):         dp_down[v] = finalize(reduce(merge,
+ --- modulename: s624925404, funcname: finalize
+s624925404.py(126):         return x+1
+s624925404.py(94):     for v in reversed(order[1:]):
+s624925404.py(100):     dp_up = [None]*N
+s624925404.py(101):     dp_up[0] = identity
+s624925404.py(102):     for v in order:
+s624925404.py(103):         if len(children[v]) == 0:
+s624925404.py(105):         temp = (dp_up[v],)+tuple(dp_down[u] for u in children[v])+(identity,)
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(105):         temp = (dp_up[v],)+tuple(dp_down[u] for u in children[v])+(identity,)
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(105):         temp = (dp_up[v],)+tuple(dp_down[u] for u in children[v])+(identity,)
+s624925404.py(106):         left = accumulate(temp[:-2],merge)
+s624925404.py(107):         right = tuple(accumulate(reversed(temp[2:]),merge))
+s624925404.py(108):         for u,l,r in zip(children[v],left,reversed(right)):
+s624925404.py(109):             dp_up[u] = finalize(merge(l,r), v)
+ --- modulename: s624925404, funcname: merge
+s624925404.py(124):         return (x*y)%M
+ --- modulename: s624925404, funcname: finalize
+s624925404.py(126):         return x+1
+s624925404.py(108):         for u,l,r in zip(children[v],left,reversed(right)):
+s624925404.py(102):     for v in order:
+s624925404.py(103):         if len(children[v]) == 0:
+s624925404.py(105):         temp = (dp_up[v],)+tuple(dp_down[u] for u in children[v])+(identity,)
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(105):         temp = (dp_up[v],)+tuple(dp_down[u] for u in children[v])+(identity,)
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(105):         temp = (dp_up[v],)+tuple(dp_down[u] for u in children[v])+(identity,)
+s624925404.py(106):         left = accumulate(temp[:-2],merge)
+s624925404.py(107):         right = tuple(accumulate(reversed(temp[2:]),merge))
+s624925404.py(108):         for u,l,r in zip(children[v],left,reversed(right)):
+s624925404.py(109):             dp_up[u] = finalize(merge(l,r), v)
+ --- modulename: s624925404, funcname: merge
+s624925404.py(124):         return (x*y)%M
+ --- modulename: s624925404, funcname: finalize
+s624925404.py(126):         return x+1
+s624925404.py(108):         for u,l,r in zip(children[v],left,reversed(right)):
+s624925404.py(102):     for v in order:
+s624925404.py(103):         if len(children[v]) == 0:
+s624925404.py(104):             continue
+s624925404.py(102):     for v in order:
+s624925404.py(111):     res = [None]*N
+s624925404.py(112):     for v,l in enumerate(children):
+s624925404.py(113):         res[v] = reduce(merge,
+s624925404.py(114):                     (dp_down[u] for u in children[v]),
+s624925404.py(115):                     identity)
+s624925404.py(113):         res[v] = reduce(merge,
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(114):                     (dp_down[u] for u in children[v]),
+ --- modulename: s624925404, funcname: merge
+s624925404.py(124):         return (x*y)%M
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(114):                     (dp_down[u] for u in children[v]),
+s624925404.py(116):         res[v] = finalize(merge(res[v], dp_up[v]), v)
+ --- modulename: s624925404, funcname: merge
+s624925404.py(124):         return (x*y)%M
+ --- modulename: s624925404, funcname: finalize
+s624925404.py(126):         return x+1
+s624925404.py(112):     for v,l in enumerate(children):
+s624925404.py(113):         res[v] = reduce(merge,
+s624925404.py(114):                     (dp_down[u] for u in children[v]),
+s624925404.py(115):                     identity)
+s624925404.py(113):         res[v] = reduce(merge,
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(114):                     (dp_down[u] for u in children[v]),
+ --- modulename: s624925404, funcname: merge
+s624925404.py(124):         return (x*y)%M
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(114):                     (dp_down[u] for u in children[v]),
+s624925404.py(116):         res[v] = finalize(merge(res[v], dp_up[v]), v)
+ --- modulename: s624925404, funcname: merge
+s624925404.py(124):         return (x*y)%M
+ --- modulename: s624925404, funcname: finalize
+s624925404.py(126):         return x+1
+s624925404.py(112):     for v,l in enumerate(children):
+s624925404.py(113):         res[v] = reduce(merge,
+s624925404.py(114):                     (dp_down[u] for u in children[v]),
+s624925404.py(115):                     identity)
+s624925404.py(113):         res[v] = reduce(merge,
+ --- modulename: s624925404, funcname: <genexpr>
+s624925404.py(114):                     (dp_down[u] for u in children[v]),
+s624925404.py(116):         res[v] = finalize(merge(res[v], dp_up[v]), v)
+ --- modulename: s624925404, funcname: merge
+s624925404.py(124):         return (x*y)%M
+ --- modulename: s624925404, funcname: finalize
+s624925404.py(126):         return x+1
+s624925404.py(112):     for v,l in enumerate(children):
+s624925404.py(117):     return res
+s624925404.py(129):     return [v-1 for v in res]
+ --- modulename: s624925404, funcname: <listcomp>
+s624925404.py(129):     return [v-1 for v in res]
+s624925404.py(129):     return [v-1 for v in res]
+s624925404.py(129):     return [v-1 for v in res]
+s624925404.py(129):     return [v-1 for v in res]
+3
+4
+3
