@@ -1,0 +1,85 @@
+ --- modulename: s430009964, funcname: <module>
+s430009964.py(1): from sys import exit
+s430009964.py(3): def mod_pow(a, n, p):
+s430009964.py(22): def mod_comb_k(n, k, p):
+s430009964.py(38): def com_init(n, p):
+s430009964.py(53): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s430009964.py(55): mod = 10 ** 9 + 7
+s430009964.py(57): if n == 1:
+s430009964.py(61): res1 = mod_pow(10, n, mod)
+ --- modulename: s430009964, funcname: mod_pow
+s430009964.py(14):     res = 1
+s430009964.py(15):     while n > 0:
+s430009964.py(16):         if n & 1:
+s430009964.py(18):         a = a * a % p
+s430009964.py(19):         n >>= 1
+s430009964.py(15):     while n > 0:
+s430009964.py(16):         if n & 1:
+s430009964.py(17):             res = res * a % p
+s430009964.py(18):         a = a * a % p
+s430009964.py(19):         n >>= 1
+s430009964.py(15):     while n > 0:
+s430009964.py(20):     return res
+s430009964.py(62): res2 = mod_pow(8, n, mod)
+ --- modulename: s430009964, funcname: mod_pow
+s430009964.py(14):     res = 1
+s430009964.py(15):     while n > 0:
+s430009964.py(16):         if n & 1:
+s430009964.py(18):         a = a * a % p
+s430009964.py(19):         n >>= 1
+s430009964.py(15):     while n > 0:
+s430009964.py(16):         if n & 1:
+s430009964.py(17):             res = res * a % p
+s430009964.py(18):         a = a * a % p
+s430009964.py(19):         n >>= 1
+s430009964.py(15):     while n > 0:
+s430009964.py(20):     return res
+s430009964.py(63): res3 = 0
+s430009964.py(64): fact = [1]
+s430009964.py(65): fact_inv = [0] * (n+1)
+s430009964.py(66): com_init(n, mod)
+ --- modulename: s430009964, funcname: com_init
+s430009964.py(45):     for i in range(n):
+s430009964.py(46):         fact.append(fact[-1] * (i+1) % p)
+s430009964.py(45):     for i in range(n):
+s430009964.py(46):         fact.append(fact[-1] * (i+1) % p)
+s430009964.py(45):     for i in range(n):
+s430009964.py(48):     fact_inv[-1] = pow(fact[-1], p-2, p)
+s430009964.py(49):     for i in range(n-1, -1, -1):
+s430009964.py(50):         fact_inv[i] = fact_inv[i+1] * (i+1) % p
+s430009964.py(49):     for i in range(n-1, -1, -1):
+s430009964.py(50):         fact_inv[i] = fact_inv[i+1] * (i+1) % p
+s430009964.py(49):     for i in range(n-1, -1, -1):
+s430009964.py(67): for i in range(1, n+1):
+s430009964.py(68):     res3 = (res3 + mod_pow(8, n-i, mod) * mod_comb_k(n, i, mod) % mod) % mod
+ --- modulename: s430009964, funcname: mod_pow
+s430009964.py(14):     res = 1
+s430009964.py(15):     while n > 0:
+s430009964.py(16):         if n & 1:
+s430009964.py(17):             res = res * a % p
+s430009964.py(18):         a = a * a % p
+s430009964.py(19):         n >>= 1
+s430009964.py(15):     while n > 0:
+s430009964.py(20):     return res
+ --- modulename: s430009964, funcname: mod_comb_k
+s430009964.py(33):     if n < k or n < 0 or k < 0:
+s430009964.py(36):         return fact[n] * fact_inv[k] * fact_inv[n-k] % p
+s430009964.py(67): for i in range(1, n+1):
+s430009964.py(68):     res3 = (res3 + mod_pow(8, n-i, mod) * mod_comb_k(n, i, mod) % mod) % mod
+ --- modulename: s430009964, funcname: mod_pow
+s430009964.py(14):     res = 1
+s430009964.py(15):     while n > 0:
+s430009964.py(20):     return res
+ --- modulename: s430009964, funcname: mod_comb_k
+s430009964.py(33):     if n < k or n < 0 or k < 0:
+s430009964.py(36):         return fact[n] * fact_inv[k] * fact_inv[n-k] % p
+s430009964.py(67): for i in range(1, n+1):
+s430009964.py(69): print(((res1 - res2) % mod - res3 * 2 % mod) % mod)
+2

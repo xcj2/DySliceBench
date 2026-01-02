@@ -1,0 +1,906 @@
+ --- modulename: s429761556, funcname: <module>
+s429761556.py(1): import heapq
+s429761556.py(2): NUMERIC_LIMITS = 10 ** 18
+s429761556.py(4): class mcf_graph:
+ --- modulename: s429761556, funcname: mcf_graph
+s429761556.py(4): class mcf_graph:
+s429761556.py(5):   def __init__ (s, n):
+s429761556.py(10):   def add_edge(s, frm, to, cap, cost):
+s429761556.py(17):   class edge:
+ --- modulename: s429761556, funcname: edge
+s429761556.py(17):   class edge:
+s429761556.py(18):     __slots__ = "frm", "to", "cap", "flow", "cost"
+s429761556.py(19):     def __init__(s, frm, to, cap, flow, cost):
+s429761556.py(23):   def get_edge(s, i):
+s429761556.py(28):   def edges(s):
+s429761556.py(32):   def flow(self, s, t, flow_limit = NUMERIC_LIMITS):
+s429761556.py(35):   def dual_ref(self, s, t):
+s429761556.py(67):   def slope(self, s, t, flow_limit = NUMERIC_LIMITS):
+s429761556.py(95):   class _edge:
+ --- modulename: s429761556, funcname: _edge
+s429761556.py(95):   class _edge:
+s429761556.py(96):     __slots__ = "to", "rev", "cap", "cost"
+s429761556.py(97):     def __init__(s, to, rev, cap, cost):
+s429761556.py(102): N, M = list(map(int, input().split()))
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s429761556.py(103): s = [list(input()) for _ in range(N)]
+ --- modulename: s429761556, funcname: <listcomp>
+s429761556.py(103): s = [list(input()) for _ in range(N)]
+s429761556.py(103): s = [list(input()) for _ in range(N)]
+s429761556.py(103): s = [list(input()) for _ in range(N)]
+s429761556.py(103): s = [list(input()) for _ in range(N)]
+s429761556.py(105): flow = mcf_graph(N * M + 2)
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(6):     s._n = n
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+ --- modulename: s429761556, funcname: <listcomp>
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(7):     s.g = [[] for _ in range(n)]
+s429761556.py(8):     s.pos = []
+s429761556.py(106): S = N * M
+s429761556.py(107): T = N * M + 1
+s429761556.py(108): ans = 0
+s429761556.py(109): cnt = 0
+s429761556.py(110): for n in range(N):
+s429761556.py(111):   for m in range(M):
+s429761556.py(112):     if s[n][m] == "#": continue
+s429761556.py(113):     x = n * M + m
+s429761556.py(114):     if m + 1 < M:
+s429761556.py(115):       if s[n][m + 1] != "#":
+s429761556.py(116):         y = n * M + m + 1
+s429761556.py(117):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(118):     if n + 1 < N:
+s429761556.py(119):       if s[n + 1][m] != "#":
+s429761556.py(120):         y = (n + 1) * M + m
+s429761556.py(121):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(122):     if s[n][m] == "o":
+s429761556.py(123):       flow.add_edge(S, x, 1, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(124):       ans += n + m
+s429761556.py(125):       cnt += 1
+s429761556.py(126):     flow.add_edge(x, T, 1, N + M -(n + m))
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(111):   for m in range(M):
+s429761556.py(112):     if s[n][m] == "#": continue
+s429761556.py(113):     x = n * M + m
+s429761556.py(114):     if m + 1 < M:
+s429761556.py(115):       if s[n][m + 1] != "#":
+s429761556.py(116):         y = n * M + m + 1
+s429761556.py(117):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(118):     if n + 1 < N:
+s429761556.py(119):       if s[n + 1][m] != "#":
+s429761556.py(120):         y = (n + 1) * M + m
+s429761556.py(121):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(122):     if s[n][m] == "o":
+s429761556.py(126):     flow.add_edge(x, T, 1, N + M -(n + m))
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(111):   for m in range(M):
+s429761556.py(112):     if s[n][m] == "#": continue
+s429761556.py(113):     x = n * M + m
+s429761556.py(114):     if m + 1 < M:
+s429761556.py(118):     if n + 1 < N:
+s429761556.py(119):       if s[n + 1][m] != "#":
+s429761556.py(120):         y = (n + 1) * M + m
+s429761556.py(121):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(122):     if s[n][m] == "o":
+s429761556.py(126):     flow.add_edge(x, T, 1, N + M -(n + m))
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(111):   for m in range(M):
+s429761556.py(110): for n in range(N):
+s429761556.py(111):   for m in range(M):
+s429761556.py(112):     if s[n][m] == "#": continue
+s429761556.py(113):     x = n * M + m
+s429761556.py(114):     if m + 1 < M:
+s429761556.py(115):       if s[n][m + 1] != "#":
+s429761556.py(116):         y = n * M + m + 1
+s429761556.py(117):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(118):     if n + 1 < N:
+s429761556.py(119):       if s[n + 1][m] != "#":
+s429761556.py(120):         y = (n + 1) * M + m
+s429761556.py(121):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(122):     if s[n][m] == "o":
+s429761556.py(126):     flow.add_edge(x, T, 1, N + M -(n + m))
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(111):   for m in range(M):
+s429761556.py(112):     if s[n][m] == "#": continue
+s429761556.py(113):     x = n * M + m
+s429761556.py(114):     if m + 1 < M:
+s429761556.py(115):       if s[n][m + 1] != "#":
+s429761556.py(116):         y = n * M + m + 1
+s429761556.py(117):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(118):     if n + 1 < N:
+s429761556.py(119):       if s[n + 1][m] != "#":
+s429761556.py(120):         y = (n + 1) * M + m
+s429761556.py(121):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(122):     if s[n][m] == "o":
+s429761556.py(126):     flow.add_edge(x, T, 1, N + M -(n + m))
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(111):   for m in range(M):
+s429761556.py(112):     if s[n][m] == "#": continue
+s429761556.py(113):     x = n * M + m
+s429761556.py(114):     if m + 1 < M:
+s429761556.py(118):     if n + 1 < N:
+s429761556.py(119):       if s[n + 1][m] != "#":
+s429761556.py(122):     if s[n][m] == "o":
+s429761556.py(126):     flow.add_edge(x, T, 1, N + M -(n + m))
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(111):   for m in range(M):
+s429761556.py(110): for n in range(N):
+s429761556.py(111):   for m in range(M):
+s429761556.py(112):     if s[n][m] == "#": continue
+s429761556.py(113):     x = n * M + m
+s429761556.py(114):     if m + 1 < M:
+s429761556.py(115):       if s[n][m + 1] != "#":
+s429761556.py(116):         y = n * M + m + 1
+s429761556.py(117):         flow.add_edge(x, y, N * M, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(118):     if n + 1 < N:
+s429761556.py(122):     if s[n][m] == "o":
+s429761556.py(123):       flow.add_edge(S, x, 1, 0)
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(124):       ans += n + m
+s429761556.py(125):       cnt += 1
+s429761556.py(126):     flow.add_edge(x, T, 1, N + M -(n + m))
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(111):   for m in range(M):
+s429761556.py(112):     if s[n][m] == "#": continue
+s429761556.py(113):     x = n * M + m
+s429761556.py(114):     if m + 1 < M:
+s429761556.py(115):       if s[n][m + 1] != "#":
+s429761556.py(118):     if n + 1 < N:
+s429761556.py(122):     if s[n][m] == "o":
+s429761556.py(126):     flow.add_edge(x, T, 1, N + M -(n + m))
+ --- modulename: s429761556, funcname: add_edge
+s429761556.py(11):     m = len(s.pos)
+s429761556.py(12):     s.pos.append([frm, len(s.g[frm])])
+s429761556.py(13):     s.g[frm].append(s._edge(to, len(s.g[to]), cap, cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(14):     s.g[to].append(s._edge(frm, len(s.g[frm]) - 1, 0, -cost))
+ --- modulename: s429761556, funcname: __init__
+s429761556.py(98):       s.to, s.rev = to, rev
+s429761556.py(99):       s.cap, s.cost = cap, cost
+s429761556.py(15):     return m
+s429761556.py(111):   for m in range(M):
+s429761556.py(112):     if s[n][m] == "#": continue
+s429761556.py(111):   for m in range(M):
+s429761556.py(110): for n in range(N):
+s429761556.py(128): f = flow.flow(S, T, cnt)[1]
+ --- modulename: s429761556, funcname: flow
+s429761556.py(33):     return self.slope(s, t, flow_limit)[-1]
+ --- modulename: s429761556, funcname: slope
+s429761556.py(68):     self.dual = [0] * self._n
+s429761556.py(70):     flow = 0
+s429761556.py(71):     cost, prev_cost = 0, -1
+s429761556.py(72):     result = [(flow,cost)]
+s429761556.py(73):     while flow < flow_limit:
+s429761556.py(74):       if not self.dual_ref(s, t): break
+ --- modulename: s429761556, funcname: dual_ref
+s429761556.py(37):     push = heapq.heappush
+s429761556.py(38):     pop = heapq.heappop
+s429761556.py(40):     dist = [NUMERIC_LIMITS] * self._n
+s429761556.py(41):     self.pv = [-1] * self._n
+s429761556.py(42):     self.pe = [-1] * self._n
+s429761556.py(43):     vis = [False] * self._n
+s429761556.py(44):     que = []
+s429761556.py(45):     dist[s] = 0
+s429761556.py(46):     push(que, (0, s))
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(61):     if not vis[t]: return False
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(65):     return True
+s429761556.py(75):       c = flow_limit - flow
+s429761556.py(76):       v = t
+s429761556.py(77):       while v != s:
+s429761556.py(78):         c = min(c, self.g[self.pv[v]][self.pe[v]].cap)
+s429761556.py(79):         v = self.pv[v]
+s429761556.py(77):       while v != s:
+s429761556.py(78):         c = min(c, self.g[self.pv[v]][self.pe[v]].cap)
+s429761556.py(79):         v = self.pv[v]
+s429761556.py(77):       while v != s:
+s429761556.py(78):         c = min(c, self.g[self.pv[v]][self.pe[v]].cap)
+s429761556.py(79):         v = self.pv[v]
+s429761556.py(77):       while v != s:
+s429761556.py(78):         c = min(c, self.g[self.pv[v]][self.pe[v]].cap)
+s429761556.py(79):         v = self.pv[v]
+s429761556.py(77):       while v != s:
+s429761556.py(78):         c = min(c, self.g[self.pv[v]][self.pe[v]].cap)
+s429761556.py(79):         v = self.pv[v]
+s429761556.py(77):       while v != s:
+s429761556.py(80):       v = t
+s429761556.py(81):       while v != s:
+s429761556.py(82):         e = self.g[self.pv[v]][self.pe[v]]
+s429761556.py(83):         e.cap -= c
+s429761556.py(84):         self.g[v][e.rev].cap += c
+s429761556.py(85):         v = self.pv[v]
+s429761556.py(81):       while v != s:
+s429761556.py(82):         e = self.g[self.pv[v]][self.pe[v]]
+s429761556.py(83):         e.cap -= c
+s429761556.py(84):         self.g[v][e.rev].cap += c
+s429761556.py(85):         v = self.pv[v]
+s429761556.py(81):       while v != s:
+s429761556.py(82):         e = self.g[self.pv[v]][self.pe[v]]
+s429761556.py(83):         e.cap -= c
+s429761556.py(84):         self.g[v][e.rev].cap += c
+s429761556.py(85):         v = self.pv[v]
+s429761556.py(81):       while v != s:
+s429761556.py(82):         e = self.g[self.pv[v]][self.pe[v]]
+s429761556.py(83):         e.cap -= c
+s429761556.py(84):         self.g[v][e.rev].cap += c
+s429761556.py(85):         v = self.pv[v]
+s429761556.py(81):       while v != s:
+s429761556.py(82):         e = self.g[self.pv[v]][self.pe[v]]
+s429761556.py(83):         e.cap -= c
+s429761556.py(84):         self.g[v][e.rev].cap += c
+s429761556.py(85):         v = self.pv[v]
+s429761556.py(81):       while v != s:
+s429761556.py(86):       d = -self.dual[s]
+s429761556.py(87):       flow += c
+s429761556.py(88):       cost += c * d
+s429761556.py(89):       if prev_cost == d:
+s429761556.py(91):       result.append((flow, cost))
+s429761556.py(92):       prev_cost = cost
+s429761556.py(73):     while flow < flow_limit:
+s429761556.py(74):       if not self.dual_ref(s, t): break
+ --- modulename: s429761556, funcname: dual_ref
+s429761556.py(37):     push = heapq.heappush
+s429761556.py(38):     pop = heapq.heappop
+s429761556.py(40):     dist = [NUMERIC_LIMITS] * self._n
+s429761556.py(41):     self.pv = [-1] * self._n
+s429761556.py(42):     self.pe = [-1] * self._n
+s429761556.py(43):     vis = [False] * self._n
+s429761556.py(44):     que = []
+s429761556.py(45):     dist[s] = 0
+s429761556.py(46):     push(que, (0, s))
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(53):         e = self.g[v][i]
+s429761556.py(54):         if vis[e.to] or not e.cap: continue
+s429761556.py(55):         cost = e.cost - self.dual[e.to] + self.dual[v]
+s429761556.py(56):         if dist[e.to] - dist[v] > cost:
+s429761556.py(57):           dist[e.to] = dist[v] + cost
+s429761556.py(58):           self.pv[e.to] = v
+s429761556.py(59):           self.pe[e.to] = i
+s429761556.py(60):           push(que,(dist[e.to], e.to))
+s429761556.py(52):       for i in range(len(self.g[v])):
+s429761556.py(47):     while que:
+s429761556.py(48):       k, v = pop(que)
+s429761556.py(49):       if vis[v]: continue
+s429761556.py(50):       vis[v] = True
+s429761556.py(51):       if v == t: break
+s429761556.py(61):     if not vis[t]: return False
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(63):       if not vis[v]: continue
+s429761556.py(64):       self.dual[v] -= dist[t] - dist[v]
+s429761556.py(62):     for v in range(self._n):
+s429761556.py(65):     return True
+s429761556.py(75):       c = flow_limit - flow
+s429761556.py(76):       v = t
+s429761556.py(77):       while v != s:
+s429761556.py(78):         c = min(c, self.g[self.pv[v]][self.pe[v]].cap)
+s429761556.py(79):         v = self.pv[v]
+s429761556.py(77):       while v != s:
+s429761556.py(78):         c = min(c, self.g[self.pv[v]][self.pe[v]].cap)
+s429761556.py(79):         v = self.pv[v]
+s429761556.py(77):       while v != s:
+s429761556.py(78):         c = min(c, self.g[self.pv[v]][self.pe[v]].cap)
+s429761556.py(79):         v = self.pv[v]
+s429761556.py(77):       while v != s:
+s429761556.py(80):       v = t
+s429761556.py(81):       while v != s:
+s429761556.py(82):         e = self.g[self.pv[v]][self.pe[v]]
+s429761556.py(83):         e.cap -= c
+s429761556.py(84):         self.g[v][e.rev].cap += c
+s429761556.py(85):         v = self.pv[v]
+s429761556.py(81):       while v != s:
+s429761556.py(82):         e = self.g[self.pv[v]][self.pe[v]]
+s429761556.py(83):         e.cap -= c
+s429761556.py(84):         self.g[v][e.rev].cap += c
+s429761556.py(85):         v = self.pv[v]
+s429761556.py(81):       while v != s:
+s429761556.py(82):         e = self.g[self.pv[v]][self.pe[v]]
+s429761556.py(83):         e.cap -= c
+s429761556.py(84):         self.g[v][e.rev].cap += c
+s429761556.py(85):         v = self.pv[v]
+s429761556.py(81):       while v != s:
+s429761556.py(86):       d = -self.dual[s]
+s429761556.py(87):       flow += c
+s429761556.py(88):       cost += c * d
+s429761556.py(89):       if prev_cost == d:
+s429761556.py(90):         result.pop()
+s429761556.py(91):       result.append((flow, cost))
+s429761556.py(92):       prev_cost = cost
+s429761556.py(73):     while flow < flow_limit:
+s429761556.py(93):     return result
+s429761556.py(130): print((N + M) * cnt - f - ans)
+4
