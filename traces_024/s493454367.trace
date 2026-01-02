@@ -1,0 +1,417 @@
+ --- modulename: s493454367, funcname: <module>
+s493454367.py(1): import sys
+s493454367.py(2): read = sys.stdin.buffer.read
+s493454367.py(3): readline = sys.stdin.buffer.readline
+s493454367.py(4): readlines = sys.stdin.buffer.readlines
+s493454367.py(6): n,c = map(int,readline().split())
+s493454367.py(7): R = [0]*n
+s493454367.py(8): chk = []
+s493454367.py(9): pre_x = 0
+s493454367.py(10): for i in range(n):
+s493454367.py(11):   x,v = map(int,readline().split())
+s493454367.py(12):   chk.append((x,v))
+s493454367.py(13):   R[i] = R[i-1]-(x-pre_x)+v
+s493454367.py(14):   pre_x = x
+s493454367.py(10): for i in range(n):
+s493454367.py(11):   x,v = map(int,readline().split())
+s493454367.py(12):   chk.append((x,v))
+s493454367.py(13):   R[i] = R[i-1]-(x-pre_x)+v
+s493454367.py(14):   pre_x = x
+s493454367.py(10): for i in range(n):
+s493454367.py(11):   x,v = map(int,readline().split())
+s493454367.py(12):   chk.append((x,v))
+s493454367.py(13):   R[i] = R[i-1]-(x-pre_x)+v
+s493454367.py(14):   pre_x = x
+s493454367.py(10): for i in range(n):
+s493454367.py(16): L = [0]*(n+1)
+s493454367.py(17): nex_x = c
+s493454367.py(18): for i,p in enumerate(chk[::-1]):
+s493454367.py(19):   x,v = p
+s493454367.py(20):   L[n-1-i] = L[n-i]-(nex_x-x)+v
+s493454367.py(21):   nex_x = x
+s493454367.py(18): for i,p in enumerate(chk[::-1]):
+s493454367.py(19):   x,v = p
+s493454367.py(20):   L[n-1-i] = L[n-i]-(nex_x-x)+v
+s493454367.py(21):   nex_x = x
+s493454367.py(18): for i,p in enumerate(chk[::-1]):
+s493454367.py(19):   x,v = p
+s493454367.py(20):   L[n-1-i] = L[n-i]-(nex_x-x)+v
+s493454367.py(21):   nex_x = x
+s493454367.py(18): for i,p in enumerate(chk[::-1]):
+s493454367.py(23): chk = [(0,0)]+chk
+s493454367.py(24): R = [0]+R
+s493454367.py(25): L = [0]+L
+s493454367.py(27): class segment_():
+ --- modulename: s493454367, funcname: segment_
+s493454367.py(27): class segment_():
+s493454367.py(28):     def __init__(self,n,ide_ele,segfunc):
+s493454367.py(34):     def update(self, k, r):
+s493454367.py(41):     def query(self, p, q):
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+ --- modulename: s493454367, funcname: __init__
+s493454367.py(29):         self.ide_ele = ide_ele
+s493454367.py(30):         self.num = 1 << n.bit_length()
+s493454367.py(31):         self.seg = [self.ide_ele] * 2 * self.num
+s493454367.py(32):         self.segfunc = segfunc
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+ --- modulename: s493454367, funcname: __init__
+s493454367.py(29):         self.ide_ele = ide_ele
+s493454367.py(30):         self.num = 1 << n.bit_length()
+s493454367.py(31):         self.seg = [self.ide_ele] * 2 * self.num
+s493454367.py(32):         self.segfunc = segfunc
+s493454367.py(61): for i in range(1,n+1):
+s493454367.py(62):   SR.update(i,R[i])
+ --- modulename: s493454367, funcname: update
+s493454367.py(35):         k += self.num
+s493454367.py(36):         self.seg[k] = r
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(63):   SL.update(i,L[i])
+ --- modulename: s493454367, funcname: update
+s493454367.py(35):         k += self.num
+s493454367.py(36):         self.seg[k] = r
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(61): for i in range(1,n+1):
+s493454367.py(62):   SR.update(i,R[i])
+ --- modulename: s493454367, funcname: update
+s493454367.py(35):         k += self.num
+s493454367.py(36):         self.seg[k] = r
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(63):   SL.update(i,L[i])
+ --- modulename: s493454367, funcname: update
+s493454367.py(35):         k += self.num
+s493454367.py(36):         self.seg[k] = r
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(61): for i in range(1,n+1):
+s493454367.py(62):   SR.update(i,R[i])
+ --- modulename: s493454367, funcname: update
+s493454367.py(35):         k += self.num
+s493454367.py(36):         self.seg[k] = r
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(63):   SL.update(i,L[i])
+ --- modulename: s493454367, funcname: update
+s493454367.py(35):         k += self.num
+s493454367.py(36):         self.seg[k] = r
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(38):             k >>= 1
+s493454367.py(39):             self.seg[k] = self.segfunc(self.seg[k*2], self.seg[k*2+1])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(37):         while k:
+s493454367.py(61): for i in range(1,n+1):
+s493454367.py(65): ans = max(0,max(SR.query(0,n+1),SL.query(1,n+1)))
+ --- modulename: s493454367, funcname: query
+s493454367.py(43):         if q < p:
+s493454367.py(45):         p += self.num;
+s493454367.py(46):         q += self.num
+s493454367.py(47):         res = self.ide_ele
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(53):                 q -= 1
+s493454367.py(54):                 res = self.segfunc(res, self.seg[q])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(57):         return res
+ --- modulename: s493454367, funcname: query
+s493454367.py(43):         if q < p:
+s493454367.py(45):         p += self.num;
+s493454367.py(46):         q += self.num
+s493454367.py(47):         res = self.ide_ele
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(50):                 res = self.segfunc(res, self.seg[p])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(51):                 p += 1
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(50):                 res = self.segfunc(res, self.seg[p])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(51):                 p += 1
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(57):         return res
+s493454367.py(66): for i in range(1,n+1):
+s493454367.py(67):   cr = chk[i][0]
+s493454367.py(68):   cc = c-cr
+s493454367.py(69):   sr = SR.query(0,i)
+ --- modulename: s493454367, funcname: query
+s493454367.py(43):         if q < p:
+s493454367.py(45):         p += self.num;
+s493454367.py(46):         q += self.num
+s493454367.py(47):         res = self.ide_ele
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(53):                 q -= 1
+s493454367.py(54):                 res = self.segfunc(res, self.seg[q])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(57):         return res
+s493454367.py(70):   sl = SL.query(i+1,n+2)
+ --- modulename: s493454367, funcname: query
+s493454367.py(43):         if q < p:
+s493454367.py(45):         p += self.num;
+s493454367.py(46):         q += self.num
+s493454367.py(47):         res = self.ide_ele
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(53):                 q -= 1
+s493454367.py(54):                 res = self.segfunc(res, self.seg[q])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(50):                 res = self.segfunc(res, self.seg[p])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(51):                 p += 1
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(57):         return res
+s493454367.py(71):   rr = R[i] + max(sl-cr,0)
+s493454367.py(72):   ll = L[i] + max(sr-cc,0)
+s493454367.py(73):   ans = max(ans, max(rr,ll))
+s493454367.py(66): for i in range(1,n+1):
+s493454367.py(67):   cr = chk[i][0]
+s493454367.py(68):   cc = c-cr
+s493454367.py(69):   sr = SR.query(0,i)
+ --- modulename: s493454367, funcname: query
+s493454367.py(43):         if q < p:
+s493454367.py(45):         p += self.num;
+s493454367.py(46):         q += self.num
+s493454367.py(47):         res = self.ide_ele
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(53):                 q -= 1
+s493454367.py(54):                 res = self.segfunc(res, self.seg[q])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(57):         return res
+s493454367.py(70):   sl = SL.query(i+1,n+2)
+ --- modulename: s493454367, funcname: query
+s493454367.py(43):         if q < p:
+s493454367.py(45):         p += self.num;
+s493454367.py(46):         q += self.num
+s493454367.py(47):         res = self.ide_ele
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(50):                 res = self.segfunc(res, self.seg[p])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(51):                 p += 1
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(53):                 q -= 1
+s493454367.py(54):                 res = self.segfunc(res, self.seg[q])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(57):         return res
+s493454367.py(71):   rr = R[i] + max(sl-cr,0)
+s493454367.py(72):   ll = L[i] + max(sr-cc,0)
+s493454367.py(73):   ans = max(ans, max(rr,ll))
+s493454367.py(66): for i in range(1,n+1):
+s493454367.py(67):   cr = chk[i][0]
+s493454367.py(68):   cc = c-cr
+s493454367.py(69):   sr = SR.query(0,i)
+ --- modulename: s493454367, funcname: query
+s493454367.py(43):         if q < p:
+s493454367.py(45):         p += self.num;
+s493454367.py(46):         q += self.num
+s493454367.py(47):         res = self.ide_ele
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(53):                 q -= 1
+s493454367.py(54):                 res = self.segfunc(res, self.seg[q])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(53):                 q -= 1
+s493454367.py(54):                 res = self.segfunc(res, self.seg[q])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(59): SR = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(57):         return res
+s493454367.py(70):   sl = SL.query(i+1,n+2)
+ --- modulename: s493454367, funcname: query
+s493454367.py(43):         if q < p:
+s493454367.py(45):         p += self.num;
+s493454367.py(46):         q += self.num
+s493454367.py(47):         res = self.ide_ele
+s493454367.py(48):         while p < q:
+s493454367.py(49):             if p & 1 == 1:
+s493454367.py(52):             if q & 1 == 1:
+s493454367.py(53):                 q -= 1
+s493454367.py(54):                 res = self.segfunc(res, self.seg[q])
+ --- modulename: s493454367, funcname: <lambda>
+s493454367.py(60): SL = segment_(n+1,0,lambda a, b: max(a,b))
+s493454367.py(55):             p >>= 1;
+s493454367.py(56):             q >>= 1
+s493454367.py(48):         while p < q:
+s493454367.py(57):         return res
+s493454367.py(71):   rr = R[i] + max(sl-cr,0)
+s493454367.py(72):   ll = L[i] + max(sr-cc,0)
+s493454367.py(73):   ans = max(ans, max(rr,ll))
+s493454367.py(66): for i in range(1,n+1):
+s493454367.py(75): print(ans)
+191

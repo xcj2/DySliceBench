@@ -1,0 +1,321 @@
+ --- modulename: s493656140, funcname: <module>
+s493656140.py(1): class MinSegmentTree():
+ --- modulename: s493656140, funcname: MinSegmentTree
+s493656140.py(1): class MinSegmentTree():
+s493656140.py(2):     def __init__(self, n):
+s493656140.py(10):     def update(self, i, val):
+s493656140.py(17):     def get_min(self, begin, end):
+s493656140.py(32): class MaxSegmentTree():
+ --- modulename: s493656140, funcname: MaxSegmentTree
+s493656140.py(32): class MaxSegmentTree():
+s493656140.py(33):     def __init__(self, n):
+s493656140.py(41):     def update(self, i, val):
+s493656140.py(48):     def get_max(self, begin, end):
+s493656140.py(64): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s493656140.py(65): a = list(map(int, input().split()))
+s493656140.py(67): ind = {}
+s493656140.py(68): for i in range(n):
+s493656140.py(69):     ind[a[i]] = i
+s493656140.py(68): for i in range(n):
+s493656140.py(69):     ind[a[i]] = i
+s493656140.py(68): for i in range(n):
+s493656140.py(69):     ind[a[i]] = i
+s493656140.py(68): for i in range(n):
+s493656140.py(70): smax = MaxSegmentTree(n+2)
+ --- modulename: s493656140, funcname: __init__
+s493656140.py(34):         self.n = n
+s493656140.py(35):         self.INF = 0
+s493656140.py(36):         self.size = 1
+s493656140.py(37):         while self.size < n:
+s493656140.py(38):             self.size *= 2
+s493656140.py(37):         while self.size < n:
+s493656140.py(38):             self.size *= 2
+s493656140.py(37):         while self.size < n:
+s493656140.py(38):             self.size *= 2
+s493656140.py(37):         while self.size < n:
+s493656140.py(39):         self.node = [self.INF] * (2*self.size - 1)
+s493656140.py(71): smin = MinSegmentTree(n+2)
+ --- modulename: s493656140, funcname: __init__
+s493656140.py(3):         self.n = n
+s493656140.py(4):         self.INF = n - 1
+s493656140.py(5):         self.size = 1
+s493656140.py(6):         while self.size < n:
+s493656140.py(7):             self.size *= 2
+s493656140.py(6):         while self.size < n:
+s493656140.py(7):             self.size *= 2
+s493656140.py(6):         while self.size < n:
+s493656140.py(7):             self.size *= 2
+s493656140.py(6):         while self.size < n:
+s493656140.py(8):         self.node = [self.INF] * (2*self.size - 1)
+s493656140.py(73): ans = 0
+s493656140.py(74): for i in range(n):
+s493656140.py(75):     pos = ind[n-i] + 1
+s493656140.py(76):     l2 = smax.get_max(0, pos)
+ --- modulename: s493656140, funcname: get_max
+s493656140.py(49):         begin += (self.size - 1)
+s493656140.py(50):         end += (self.size - 1)
+s493656140.py(51):         s = self.INF
+s493656140.py(52):         while begin < end:
+s493656140.py(53):             if (end - 1) & 1:
+s493656140.py(56):             if (begin - 1) & 1:
+s493656140.py(59):             begin = (begin - 1) // 2
+s493656140.py(60):             end = (end - 1) // 2
+s493656140.py(52):         while begin < end:
+s493656140.py(53):             if (end - 1) & 1:
+s493656140.py(54):                 end -= 1
+s493656140.py(55):                 s = max(s, self.node[end])
+s493656140.py(56):             if (begin - 1) & 1:
+s493656140.py(59):             begin = (begin - 1) // 2
+s493656140.py(60):             end = (end - 1) // 2
+s493656140.py(52):         while begin < end:
+s493656140.py(61):         return s
+s493656140.py(77):     l1 = smax.get_max(0, l2)
+ --- modulename: s493656140, funcname: get_max
+s493656140.py(49):         begin += (self.size - 1)
+s493656140.py(50):         end += (self.size - 1)
+s493656140.py(51):         s = self.INF
+s493656140.py(52):         while begin < end:
+s493656140.py(61):         return s
+s493656140.py(78):     r1 = smin.get_min(pos+1, n+2)
+ --- modulename: s493656140, funcname: get_min
+s493656140.py(18):         begin += (self.size - 1)
+s493656140.py(19):         end += (self.size - 1)
+s493656140.py(20):         s = self.INF
+s493656140.py(21):         while begin < end:
+s493656140.py(22):             if (end - 1) & 1:
+s493656140.py(23):                 end -= 1
+s493656140.py(24):                 s = min(s, self.node[end])
+s493656140.py(25):             if (begin - 1) & 1:
+s493656140.py(26):                 s = min(s, self.node[begin])
+s493656140.py(27):                 begin += 1
+s493656140.py(28):             begin = (begin - 1) // 2
+s493656140.py(29):             end = (end - 1) // 2
+s493656140.py(21):         while begin < end:
+s493656140.py(30):         return s
+s493656140.py(79):     r2 = smin.get_min(r1+1, n+2)
+ --- modulename: s493656140, funcname: get_min
+s493656140.py(18):         begin += (self.size - 1)
+s493656140.py(19):         end += (self.size - 1)
+s493656140.py(20):         s = self.INF
+s493656140.py(21):         while begin < end:
+s493656140.py(30):         return s
+s493656140.py(80):     smin.update(pos, pos)
+ --- modulename: s493656140, funcname: update
+s493656140.py(11):         i += (self.size - 1)
+s493656140.py(12):         self.node[i] = val
+s493656140.py(13):         while i > 0:
+s493656140.py(14):             i = (i - 1) // 2
+s493656140.py(15):             self.node[i] = min(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(13):         while i > 0:
+s493656140.py(14):             i = (i - 1) // 2
+s493656140.py(15):             self.node[i] = min(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(13):         while i > 0:
+s493656140.py(14):             i = (i - 1) // 2
+s493656140.py(15):             self.node[i] = min(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(13):         while i > 0:
+s493656140.py(81):     smax.update(pos, pos)
+ --- modulename: s493656140, funcname: update
+s493656140.py(42):         i += (self.size - 1)
+s493656140.py(43):         self.node[i] = val
+s493656140.py(44):         while i > 0:
+s493656140.py(45):             i = (i - 1) // 2
+s493656140.py(46):             self.node[i] = max(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(44):         while i > 0:
+s493656140.py(45):             i = (i - 1) // 2
+s493656140.py(46):             self.node[i] = max(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(44):         while i > 0:
+s493656140.py(45):             i = (i - 1) // 2
+s493656140.py(46):             self.node[i] = max(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(44):         while i > 0:
+s493656140.py(82):     ans += ((l2 - l1) * (r1 - pos) + (r2 - r1) * (pos - l2)) * (n-i)
+s493656140.py(74): for i in range(n):
+s493656140.py(75):     pos = ind[n-i] + 1
+s493656140.py(76):     l2 = smax.get_max(0, pos)
+ --- modulename: s493656140, funcname: get_max
+s493656140.py(49):         begin += (self.size - 1)
+s493656140.py(50):         end += (self.size - 1)
+s493656140.py(51):         s = self.INF
+s493656140.py(52):         while begin < end:
+s493656140.py(53):             if (end - 1) & 1:
+s493656140.py(54):                 end -= 1
+s493656140.py(55):                 s = max(s, self.node[end])
+s493656140.py(56):             if (begin - 1) & 1:
+s493656140.py(59):             begin = (begin - 1) // 2
+s493656140.py(60):             end = (end - 1) // 2
+s493656140.py(52):         while begin < end:
+s493656140.py(61):         return s
+s493656140.py(77):     l1 = smax.get_max(0, l2)
+ --- modulename: s493656140, funcname: get_max
+s493656140.py(49):         begin += (self.size - 1)
+s493656140.py(50):         end += (self.size - 1)
+s493656140.py(51):         s = self.INF
+s493656140.py(52):         while begin < end:
+s493656140.py(61):         return s
+s493656140.py(78):     r1 = smin.get_min(pos+1, n+2)
+ --- modulename: s493656140, funcname: get_min
+s493656140.py(18):         begin += (self.size - 1)
+s493656140.py(19):         end += (self.size - 1)
+s493656140.py(20):         s = self.INF
+s493656140.py(21):         while begin < end:
+s493656140.py(22):             if (end - 1) & 1:
+s493656140.py(23):                 end -= 1
+s493656140.py(24):                 s = min(s, self.node[end])
+s493656140.py(25):             if (begin - 1) & 1:
+s493656140.py(28):             begin = (begin - 1) // 2
+s493656140.py(29):             end = (end - 1) // 2
+s493656140.py(21):         while begin < end:
+s493656140.py(22):             if (end - 1) & 1:
+s493656140.py(25):             if (begin - 1) & 1:
+s493656140.py(26):                 s = min(s, self.node[begin])
+s493656140.py(27):                 begin += 1
+s493656140.py(28):             begin = (begin - 1) // 2
+s493656140.py(29):             end = (end - 1) // 2
+s493656140.py(21):         while begin < end:
+s493656140.py(30):         return s
+s493656140.py(79):     r2 = smin.get_min(r1+1, n+2)
+ --- modulename: s493656140, funcname: get_min
+s493656140.py(18):         begin += (self.size - 1)
+s493656140.py(19):         end += (self.size - 1)
+s493656140.py(20):         s = self.INF
+s493656140.py(21):         while begin < end:
+s493656140.py(22):             if (end - 1) & 1:
+s493656140.py(23):                 end -= 1
+s493656140.py(24):                 s = min(s, self.node[end])
+s493656140.py(25):             if (begin - 1) & 1:
+s493656140.py(26):                 s = min(s, self.node[begin])
+s493656140.py(27):                 begin += 1
+s493656140.py(28):             begin = (begin - 1) // 2
+s493656140.py(29):             end = (end - 1) // 2
+s493656140.py(21):         while begin < end:
+s493656140.py(30):         return s
+s493656140.py(80):     smin.update(pos, pos)
+ --- modulename: s493656140, funcname: update
+s493656140.py(11):         i += (self.size - 1)
+s493656140.py(12):         self.node[i] = val
+s493656140.py(13):         while i > 0:
+s493656140.py(14):             i = (i - 1) // 2
+s493656140.py(15):             self.node[i] = min(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(13):         while i > 0:
+s493656140.py(14):             i = (i - 1) // 2
+s493656140.py(15):             self.node[i] = min(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(13):         while i > 0:
+s493656140.py(14):             i = (i - 1) // 2
+s493656140.py(15):             self.node[i] = min(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(13):         while i > 0:
+s493656140.py(81):     smax.update(pos, pos)
+ --- modulename: s493656140, funcname: update
+s493656140.py(42):         i += (self.size - 1)
+s493656140.py(43):         self.node[i] = val
+s493656140.py(44):         while i > 0:
+s493656140.py(45):             i = (i - 1) // 2
+s493656140.py(46):             self.node[i] = max(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(44):         while i > 0:
+s493656140.py(45):             i = (i - 1) // 2
+s493656140.py(46):             self.node[i] = max(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(44):         while i > 0:
+s493656140.py(45):             i = (i - 1) // 2
+s493656140.py(46):             self.node[i] = max(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(44):         while i > 0:
+s493656140.py(82):     ans += ((l2 - l1) * (r1 - pos) + (r2 - r1) * (pos - l2)) * (n-i)
+s493656140.py(74): for i in range(n):
+s493656140.py(75):     pos = ind[n-i] + 1
+s493656140.py(76):     l2 = smax.get_max(0, pos)
+ --- modulename: s493656140, funcname: get_max
+s493656140.py(49):         begin += (self.size - 1)
+s493656140.py(50):         end += (self.size - 1)
+s493656140.py(51):         s = self.INF
+s493656140.py(52):         while begin < end:
+s493656140.py(53):             if (end - 1) & 1:
+s493656140.py(54):                 end -= 1
+s493656140.py(55):                 s = max(s, self.node[end])
+s493656140.py(56):             if (begin - 1) & 1:
+s493656140.py(59):             begin = (begin - 1) // 2
+s493656140.py(60):             end = (end - 1) // 2
+s493656140.py(52):         while begin < end:
+s493656140.py(53):             if (end - 1) & 1:
+s493656140.py(54):                 end -= 1
+s493656140.py(55):                 s = max(s, self.node[end])
+s493656140.py(56):             if (begin - 1) & 1:
+s493656140.py(59):             begin = (begin - 1) // 2
+s493656140.py(60):             end = (end - 1) // 2
+s493656140.py(52):         while begin < end:
+s493656140.py(61):         return s
+s493656140.py(77):     l1 = smax.get_max(0, l2)
+ --- modulename: s493656140, funcname: get_max
+s493656140.py(49):         begin += (self.size - 1)
+s493656140.py(50):         end += (self.size - 1)
+s493656140.py(51):         s = self.INF
+s493656140.py(52):         while begin < end:
+s493656140.py(53):             if (end - 1) & 1:
+s493656140.py(56):             if (begin - 1) & 1:
+s493656140.py(59):             begin = (begin - 1) // 2
+s493656140.py(60):             end = (end - 1) // 2
+s493656140.py(52):         while begin < end:
+s493656140.py(53):             if (end - 1) & 1:
+s493656140.py(54):                 end -= 1
+s493656140.py(55):                 s = max(s, self.node[end])
+s493656140.py(56):             if (begin - 1) & 1:
+s493656140.py(59):             begin = (begin - 1) // 2
+s493656140.py(60):             end = (end - 1) // 2
+s493656140.py(52):         while begin < end:
+s493656140.py(61):         return s
+s493656140.py(78):     r1 = smin.get_min(pos+1, n+2)
+ --- modulename: s493656140, funcname: get_min
+s493656140.py(18):         begin += (self.size - 1)
+s493656140.py(19):         end += (self.size - 1)
+s493656140.py(20):         s = self.INF
+s493656140.py(21):         while begin < end:
+s493656140.py(22):             if (end - 1) & 1:
+s493656140.py(23):                 end -= 1
+s493656140.py(24):                 s = min(s, self.node[end])
+s493656140.py(25):             if (begin - 1) & 1:
+s493656140.py(28):             begin = (begin - 1) // 2
+s493656140.py(29):             end = (end - 1) // 2
+s493656140.py(21):         while begin < end:
+s493656140.py(30):         return s
+s493656140.py(79):     r2 = smin.get_min(r1+1, n+2)
+ --- modulename: s493656140, funcname: get_min
+s493656140.py(18):         begin += (self.size - 1)
+s493656140.py(19):         end += (self.size - 1)
+s493656140.py(20):         s = self.INF
+s493656140.py(21):         while begin < end:
+s493656140.py(30):         return s
+s493656140.py(80):     smin.update(pos, pos)
+ --- modulename: s493656140, funcname: update
+s493656140.py(11):         i += (self.size - 1)
+s493656140.py(12):         self.node[i] = val
+s493656140.py(13):         while i > 0:
+s493656140.py(14):             i = (i - 1) // 2
+s493656140.py(15):             self.node[i] = min(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(13):         while i > 0:
+s493656140.py(14):             i = (i - 1) // 2
+s493656140.py(15):             self.node[i] = min(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(13):         while i > 0:
+s493656140.py(14):             i = (i - 1) // 2
+s493656140.py(15):             self.node[i] = min(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(13):         while i > 0:
+s493656140.py(81):     smax.update(pos, pos)
+ --- modulename: s493656140, funcname: update
+s493656140.py(42):         i += (self.size - 1)
+s493656140.py(43):         self.node[i] = val
+s493656140.py(44):         while i > 0:
+s493656140.py(45):             i = (i - 1) // 2
+s493656140.py(46):             self.node[i] = max(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(44):         while i > 0:
+s493656140.py(45):             i = (i - 1) // 2
+s493656140.py(46):             self.node[i] = max(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(44):         while i > 0:
+s493656140.py(45):             i = (i - 1) // 2
+s493656140.py(46):             self.node[i] = max(self.node[2*i + 1], self.node[2*i + 2])
+s493656140.py(44):         while i > 0:
+s493656140.py(82):     ans += ((l2 - l1) * (r1 - pos) + (r2 - r1) * (pos - l2)) * (n-i)
+s493656140.py(74): for i in range(n):
+s493656140.py(83): print(ans)
+5
