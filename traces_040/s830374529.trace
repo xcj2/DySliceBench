@@ -1,0 +1,147 @@
+ --- modulename: s830374529, funcname: <module>
+s830374529.py(3): import os,sys
+s830374529.py(4): from io import BytesIO, IOBase
+s830374529.py(6): def main():
+s830374529.py(19): BUFSIZE = 8192
+s830374529.py(20): class FastIO(IOBase):
+ --- modulename: s830374529, funcname: FastIO
+s830374529.py(20): class FastIO(IOBase):
+s830374529.py(21):     newlines = 0
+s830374529.py(22):     def __init__(self, file):
+s830374529.py(27):     def read(self):
+s830374529.py(36):     def readline(self):
+s830374529.py(44):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s830374529.py(48): class IOWrapper(IOBase):
+ --- modulename: s830374529, funcname: IOWrapper
+s830374529.py(48): class IOWrapper(IOBase):
+s830374529.py(49):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s830374529.py(56): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s830374529, funcname: __init__
+s830374529.py(50):         self.buffer = FastIO(file)
+ --- modulename: s830374529, funcname: __init__
+s830374529.py(23):         self._fd = file.fileno()
+s830374529.py(24):         self.buffer = BytesIO()
+s830374529.py(25):         self.writable = "x" in file.mode or "r" not in file.mode
+s830374529.py(26):         self.write = self.buffer.write if self.writable else None
+s830374529.py(51):         self.flush = self.buffer.flush
+s830374529.py(52):         self.writable = self.buffer.writable
+s830374529.py(53):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s830374529.py(54):         self.read = lambda: self.buffer.read().decode("ascii")
+s830374529.py(55):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s830374529, funcname: __init__
+s830374529.py(50):         self.buffer = FastIO(file)
+ --- modulename: s830374529, funcname: __init__
+s830374529.py(23):         self._fd = file.fileno()
+s830374529.py(24):         self.buffer = BytesIO()
+s830374529.py(25):         self.writable = "x" in file.mode or "r" not in file.mode
+s830374529.py(26):         self.write = self.buffer.write if self.writable else None
+s830374529.py(51):         self.flush = self.buffer.flush
+s830374529.py(52):         self.writable = self.buffer.writable
+s830374529.py(53):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s830374529.py(54):         self.read = lambda: self.buffer.read().decode("ascii")
+s830374529.py(55):         self.readline = lambda: self.buffer.readline().decode("ascii")
+s830374529.py(57): input = lambda: sys.stdin.readline().rstrip("\r\n")
+s830374529.py(59): if __name__ == '__main__':
+s830374529.py(60):     main()
+ --- modulename: s830374529, funcname: main
+s830374529.py(7):     n = int(input())
+ --- modulename: s830374529, funcname: <lambda>
+s830374529.py(57): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s830374529, funcname: <lambda>
+s830374529.py(55):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s830374529, funcname: readline
+s830374529.py(37):         while self.newlines == 0:
+s830374529.py(38):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s830374529.py(39):             self.newlines = b.count(b"\n") + (not b)
+s830374529.py(40):             ptr = self.buffer.tell()
+s830374529.py(41):             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s830374529.py(37):         while self.newlines == 0:
+s830374529.py(42):         self.newlines -= 1
+s830374529.py(43):         return self.buffer.readline()
+s830374529.py(8):     l = list(map(int,input().split()))
+ --- modulename: s830374529, funcname: <lambda>
+s830374529.py(57): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s830374529, funcname: <lambda>
+s830374529.py(55):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s830374529, funcname: readline
+s830374529.py(37):         while self.newlines == 0:
+s830374529.py(42):         self.newlines -= 1
+s830374529.py(43):         return self.buffer.readline()
+s830374529.py(9):     ans = 0
+s830374529.py(10):     for i in range(n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(14):                     if 2*max(l[i],l[j],l[k]) < l[i]+l[j]+l[k]:
+s830374529.py(15):                         ans += 1
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(14):                     if 2*max(l[i],l[j],l[k]) < l[i]+l[j]+l[k]:
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(14):                     if 2*max(l[i],l[j],l[k]) < l[i]+l[j]+l[k]:
+s830374529.py(15):                         ans += 1
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(10):     for i in range(n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(14):                     if 2*max(l[i],l[j],l[k]) < l[i]+l[j]+l[k]:
+s830374529.py(15):                         ans += 1
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(14):                     if 2*max(l[i],l[j],l[k]) < l[i]+l[j]+l[k]:
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(14):                     if 2*max(l[i],l[j],l[k]) < l[i]+l[j]+l[k]:
+s830374529.py(15):                         ans += 1
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(10):     for i in range(n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(13):                 if l[i] != l[j] and l[k] != l[j] and l[i] != l[k]:
+s830374529.py(14):                     if 2*max(l[i],l[j],l[k]) < l[i]+l[j]+l[k]:
+s830374529.py(15):                         ans += 1
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(10):     for i in range(n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(12):             for k in range(j+1,n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(10):     for i in range(n):
+s830374529.py(11):         for j in range(i+1,n):
+s830374529.py(10):     for i in range(n):
+s830374529.py(16):     print(ans)
+ --- modulename: s830374529, funcname: <lambda>
+s830374529.py(53):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+5 --- modulename: s830374529, funcname: <lambda>
+s830374529.py(53):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
