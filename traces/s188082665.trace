@@ -1,0 +1,286 @@
+ --- modulename: s188082665, funcname: <module>
+s188082665.py(1): import sys
+s188082665.py(2): input = sys.stdin.readline
+s188082665.py(4): n, q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s188082665.py(5): INF = 2**31-1
+s188082665.py(7): Len = (n-1).bit_length()
+s188082665.py(8): size = 2**Len
+s188082665.py(9): tree = [INF]*(2*size)
+s188082665.py(10): lazy = [None]*(2*size)
+s188082665.py(12): def gindex(l,r):
+s188082665.py(25): def propagates(ids):
+s188082665.py(35): def update(l,r,x):
+s188082665.py(54): def query(l, r):
+s188082665.py(70): ans = []
+s188082665.py(71): for i in range(q):
+s188082665.py(72):     a, *b = map(int, input().split())
+s188082665.py(73):     if a:
+s188082665.py(76):         update(b[0],b[1]+1,b[2])
+ --- modulename: s188082665, funcname: update
+s188082665.py(36):     *ids, = gindex(l, r)
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(13):     L = (l+size)>>1;R=(r+size)>>1
+s188082665.py(14):     lc = 0 if l & 1 else (L&-L).bit_length()
+s188082665.py(15):     rc = 0 if r & 1 else (R&-R).bit_length()
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(18):             yield R
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(37):     propagates(ids)
+ --- modulename: s188082665, funcname: propagates
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(39):     L = size+l
+s188082665.py(40):     R = size+r
+s188082665.py(41):     while L<R:
+s188082665.py(42):         if R&1:
+s188082665.py(45):         if L&1:
+s188082665.py(48):         L>>=1;R>>=1
+s188082665.py(41):     while L<R:
+s188082665.py(42):         if R&1:
+s188082665.py(43):             R -= 1
+s188082665.py(44):             lazy[R]=tree[R]=x
+s188082665.py(45):         if L&1:
+s188082665.py(48):         L>>=1;R>>=1
+s188082665.py(41):     while L<R:
+s188082665.py(50):     for i in ids:
+s188082665.py(51):         if 2*i+1<size*2:
+s188082665.py(52):             tree[i]=min(tree[i*2],tree[i*2+1])
+s188082665.py(50):     for i in ids:
+s188082665.py(71): for i in range(q):
+s188082665.py(72):     a, *b = map(int, input().split())
+s188082665.py(73):     if a:
+s188082665.py(76):         update(b[0],b[1]+1,b[2])
+ --- modulename: s188082665, funcname: update
+s188082665.py(36):     *ids, = gindex(l, r)
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(13):     L = (l+size)>>1;R=(r+size)>>1
+s188082665.py(14):     lc = 0 if l & 1 else (L&-L).bit_length()
+s188082665.py(15):     rc = 0 if r & 1 else (R&-R).bit_length()
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(18):             yield R
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(20):             yield L
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(18):             yield R
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(37):     propagates(ids)
+ --- modulename: s188082665, funcname: propagates
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(31):         lazy[2*i]=tree[2*i]=lazy[2*i+1]=tree[2*i+1]=v
+s188082665.py(32):         lazy[i]=None
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(39):     L = size+l
+s188082665.py(40):     R = size+r
+s188082665.py(41):     while L<R:
+s188082665.py(42):         if R&1:
+s188082665.py(43):             R -= 1
+s188082665.py(44):             lazy[R]=tree[R]=x
+s188082665.py(45):         if L&1:
+s188082665.py(46):             lazy[L]=tree[L]=x
+s188082665.py(47):             L+=1
+s188082665.py(48):         L>>=1;R>>=1
+s188082665.py(41):     while L<R:
+s188082665.py(50):     for i in ids:
+s188082665.py(51):         if 2*i+1<size*2:
+s188082665.py(52):             tree[i]=min(tree[i*2],tree[i*2+1])
+s188082665.py(50):     for i in ids:
+s188082665.py(51):         if 2*i+1<size*2:
+s188082665.py(52):             tree[i]=min(tree[i*2],tree[i*2+1])
+s188082665.py(50):     for i in ids:
+s188082665.py(51):         if 2*i+1<size*2:
+s188082665.py(52):             tree[i]=min(tree[i*2],tree[i*2+1])
+s188082665.py(50):     for i in ids:
+s188082665.py(71): for i in range(q):
+s188082665.py(72):     a, *b = map(int, input().split())
+s188082665.py(73):     if a:
+s188082665.py(76):         update(b[0],b[1]+1,b[2])
+ --- modulename: s188082665, funcname: update
+s188082665.py(36):     *ids, = gindex(l, r)
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(13):     L = (l+size)>>1;R=(r+size)>>1
+s188082665.py(14):     lc = 0 if l & 1 else (L&-L).bit_length()
+s188082665.py(15):     rc = 0 if r & 1 else (R&-R).bit_length()
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(18):             yield R
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(18):             yield R
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(37):     propagates(ids)
+ --- modulename: s188082665, funcname: propagates
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(39):     L = size+l
+s188082665.py(40):     R = size+r
+s188082665.py(41):     while L<R:
+s188082665.py(42):         if R&1:
+s188082665.py(43):             R -= 1
+s188082665.py(44):             lazy[R]=tree[R]=x
+s188082665.py(45):         if L&1:
+s188082665.py(48):         L>>=1;R>>=1
+s188082665.py(41):     while L<R:
+s188082665.py(50):     for i in ids:
+s188082665.py(51):         if 2*i+1<size*2:
+s188082665.py(52):             tree[i]=min(tree[i*2],tree[i*2+1])
+s188082665.py(50):     for i in ids:
+s188082665.py(51):         if 2*i+1<size*2:
+s188082665.py(52):             tree[i]=min(tree[i*2],tree[i*2+1])
+s188082665.py(50):     for i in ids:
+s188082665.py(71): for i in range(q):
+s188082665.py(72):     a, *b = map(int, input().split())
+s188082665.py(73):     if a:
+s188082665.py(74):         ans.append(query(b[0],b[1]+1))
+ --- modulename: s188082665, funcname: query
+s188082665.py(55):     *ids, = gindex(l, r)
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(13):     L = (l+size)>>1;R=(r+size)>>1
+s188082665.py(14):     lc = 0 if l & 1 else (L&-L).bit_length()
+s188082665.py(15):     rc = 0 if r & 1 else (R&-R).bit_length()
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(18):             yield R
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(18):             yield R
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(56):     propagates(ids)
+ --- modulename: s188082665, funcname: propagates
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(57):     L = size + l
+s188082665.py(58):     R = size + r
+s188082665.py(59):     s = INF
+s188082665.py(60):     while L<R:
+s188082665.py(61):         if R&1:
+s188082665.py(62):             R-=1
+s188082665.py(63):             s = min(s,tree[R])
+s188082665.py(64):         if L&1:
+s188082665.py(67):         L>>=1;R>>=1
+s188082665.py(60):     while L<R:
+s188082665.py(61):         if R&1:
+s188082665.py(62):             R-=1
+s188082665.py(63):             s = min(s,tree[R])
+s188082665.py(64):         if L&1:
+s188082665.py(67):         L>>=1;R>>=1
+s188082665.py(60):     while L<R:
+s188082665.py(68):     return s
+s188082665.py(71): for i in range(q):
+s188082665.py(72):     a, *b = map(int, input().split())
+s188082665.py(73):     if a:
+s188082665.py(74):         ans.append(query(b[0],b[1]+1))
+ --- modulename: s188082665, funcname: query
+s188082665.py(55):     *ids, = gindex(l, r)
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(13):     L = (l+size)>>1;R=(r+size)>>1
+s188082665.py(14):     lc = 0 if l & 1 else (L&-L).bit_length()
+s188082665.py(15):     rc = 0 if r & 1 else (R&-R).bit_length()
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(18):             yield R
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(20):             yield L
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(17):         if rc <= i:
+s188082665.py(18):             yield R
+ --- modulename: s188082665, funcname: gindex
+s188082665.py(19):         if L < R and lc <= i:
+s188082665.py(21):         L >>= 1; R >>= 1
+s188082665.py(16):     for i in range(Len):
+s188082665.py(56):     propagates(ids)
+ --- modulename: s188082665, funcname: propagates
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(28):         v = lazy[i]
+s188082665.py(29):         if v is None:
+s188082665.py(30):             continue
+s188082665.py(27):     for i in reversed(ids):
+s188082665.py(57):     L = size + l
+s188082665.py(58):     R = size + r
+s188082665.py(59):     s = INF
+s188082665.py(60):     while L<R:
+s188082665.py(61):         if R&1:
+s188082665.py(62):             R-=1
+s188082665.py(63):             s = min(s,tree[R])
+s188082665.py(64):         if L&1:
+s188082665.py(65):             s = min(s,tree[L])
+s188082665.py(66):             L+=1
+s188082665.py(67):         L>>=1;R>>=1
+s188082665.py(60):     while L<R:
+s188082665.py(68):     return s
+s188082665.py(71): for i in range(q):
+s188082665.py(78): print('\n'.join(map(str,ans)))
+1
+2
