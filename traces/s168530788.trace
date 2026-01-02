@@ -1,0 +1,241 @@
+ --- modulename: s168530788, funcname: <module>
+s168530788.py(1): import sys
+s168530788.py(2): input = sys.stdin.readline
+s168530788.py(4): class segtree:
+ --- modulename: s168530788, funcname: segtree
+s168530788.py(4): class segtree:
+s168530788.py(5):     x_unit=0 # 単位元
+s168530788.py(6):     x_func=max  # 関数
+s168530788.py(7):     def __init__(self,n,seq): # 元のseqと要素数n
+s168530788.py(14):     def update(self,i,j): # 1点更新
+s168530788.py(20):     def get(self, i): # 値を入手
+s168530788.py(22):     def fold(self,l,r): # 区間[l, r)の最小値などを取得 
+s168530788.py(37):     def max_right(self, l, v, condition): 
+s168530788.py(56): n,q=map(int,input().split()) 
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s168530788.py(57): *a,=map(int,input().split())
+s168530788.py(58): seg=segtree(n,a)
+ --- modulename: s168530788, funcname: __init__
+s168530788.py(8):         self.n=n
+s168530788.py(9):         self.x=[self.x_unit]*(2*n)
+s168530788.py(10):         for i,j in enumerate(seq, self.n): # n番目からseqをx配列に移していく
+s168530788.py(11):             self.x[i] = j
+s168530788.py(10):         for i,j in enumerate(seq, self.n): # n番目からseqをx配列に移していく
+s168530788.py(11):             self.x[i] = j
+s168530788.py(10):         for i,j in enumerate(seq, self.n): # n番目からseqをx配列に移していく
+s168530788.py(11):             self.x[i] = j
+s168530788.py(10):         for i,j in enumerate(seq, self.n): # n番目からseqをx配列に移していく
+s168530788.py(11):             self.x[i] = j
+s168530788.py(10):         for i,j in enumerate(seq, self.n): # n番目からseqをx配列に移していく
+s168530788.py(11):             self.x[i] = j
+s168530788.py(10):         for i,j in enumerate(seq, self.n): # n番目からseqをx配列に移していく
+s168530788.py(12):         for i in range(self.n-1, 0, -1):
+s168530788.py(13):             self.x[i] = self.x_func(self.x[i*2], self.x[i*2+1])
+s168530788.py(12):         for i in range(self.n-1, 0, -1):
+s168530788.py(13):             self.x[i] = self.x_func(self.x[i*2], self.x[i*2+1])
+s168530788.py(12):         for i in range(self.n-1, 0, -1):
+s168530788.py(13):             self.x[i] = self.x_func(self.x[i*2], self.x[i*2+1])
+s168530788.py(12):         for i in range(self.n-1, 0, -1):
+s168530788.py(13):             self.x[i] = self.x_func(self.x[i*2], self.x[i*2+1])
+s168530788.py(12):         for i in range(self.n-1, 0, -1):
+s168530788.py(59): condition=lambda x,y:x>=y
+s168530788.py(62): for i in range(q):
+s168530788.py(63):     t,x,y=map(int,input().split()) 
+s168530788.py(64):     if t==1:
+s168530788.py(67):     elif t==2:
+s168530788.py(68):         print(seg.fold(x-1,y))
+ --- modulename: s168530788, funcname: fold
+s168530788.py(23):         l+=self.n
+s168530788.py(24):         r+=self.n
+s168530788.py(25):         val_l=self.x_unit
+s168530788.py(26):         val_r=self.x_unit
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(29):                 val_l=self.x_func(val_l,self.x[l])
+s168530788.py(30):                 l+=1 # 偶数に調節
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(29):                 val_l=self.x_func(val_l,self.x[l])
+s168530788.py(30):                 l+=1 # 偶数に調節
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(32):                 r-=1 # 開区間なので1個前は偶数番目の要素
+s168530788.py(33):                 val_r=self.x_func(val_r,self.x[r])
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(36):         return self.x_func(val_l,val_r)
+3
+s168530788.py(62): for i in range(q):
+s168530788.py(63):     t,x,y=map(int,input().split()) 
+s168530788.py(64):     if t==1:
+s168530788.py(67):     elif t==2:
+s168530788.py(70):         print(seg.max_right(x-1, y, condition)+1)
+ --- modulename: s168530788, funcname: max_right
+s168530788.py(39):         r=self.n
+s168530788.py(40):         if condition(self.fold(l, r),v)==False:
+ --- modulename: s168530788, funcname: fold
+s168530788.py(23):         l+=self.n
+s168530788.py(24):         r+=self.n
+s168530788.py(25):         val_l=self.x_unit
+s168530788.py(26):         val_r=self.x_unit
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(29):                 val_l=self.x_func(val_l,self.x[l])
+s168530788.py(30):                 l+=1 # 偶数に調節
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(32):                 r-=1 # 開区間なので1個前は偶数番目の要素
+s168530788.py(33):                 val_r=self.x_func(val_r,self.x[r])
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(36):         return self.x_func(val_l,val_r)
+ --- modulename: s168530788, funcname: <lambda>
+s168530788.py(59): condition=lambda x,y:x>=y
+s168530788.py(43):             while r-l>1:
+s168530788.py(44):                 l1=l
+s168530788.py(45):                 r1=l+(r-l)//2
+s168530788.py(46):                 l2=l+(r-l)//2
+s168530788.py(47):                 r2=r
+s168530788.py(48):                 if condition(self.fold(l1, r1),v)==True:
+ --- modulename: s168530788, funcname: fold
+s168530788.py(23):         l+=self.n
+s168530788.py(24):         r+=self.n
+s168530788.py(25):         val_l=self.x_unit
+s168530788.py(26):         val_r=self.x_unit
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(29):                 val_l=self.x_func(val_l,self.x[l])
+s168530788.py(30):                 l+=1 # 偶数に調節
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(36):         return self.x_func(val_l,val_r)
+ --- modulename: s168530788, funcname: <lambda>
+s168530788.py(59): condition=lambda x,y:x>=y
+s168530788.py(49):                     l=l1
+s168530788.py(50):                     r=r1
+s168530788.py(43):             while r-l>1:
+s168530788.py(44):                 l1=l
+s168530788.py(45):                 r1=l+(r-l)//2
+s168530788.py(46):                 l2=l+(r-l)//2
+s168530788.py(47):                 r2=r
+s168530788.py(48):                 if condition(self.fold(l1, r1),v)==True:
+ --- modulename: s168530788, funcname: fold
+s168530788.py(23):         l+=self.n
+s168530788.py(24):         r+=self.n
+s168530788.py(25):         val_l=self.x_unit
+s168530788.py(26):         val_r=self.x_unit
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(32):                 r-=1 # 開区間なので1個前は偶数番目の要素
+s168530788.py(33):                 val_r=self.x_func(val_r,self.x[r])
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(36):         return self.x_func(val_l,val_r)
+ --- modulename: s168530788, funcname: <lambda>
+s168530788.py(59): condition=lambda x,y:x>=y
+s168530788.py(52):                     l=l2
+s168530788.py(53):                     r=r2
+s168530788.py(43):             while r-l>1:
+s168530788.py(54):             return l
+3
+s168530788.py(62): for i in range(q):
+s168530788.py(63):     t,x,y=map(int,input().split()) 
+s168530788.py(64):     if t==1:
+s168530788.py(65):         x-=1
+s168530788.py(66):         seg.update(x, y)
+ --- modulename: s168530788, funcname: update
+s168530788.py(15):         i += self.n
+s168530788.py(16):         self.x[i]=j
+s168530788.py(17):         while i>1:
+s168530788.py(18):             i//=2 # 更新後、木の上へと登っていくついでに更新
+s168530788.py(19):             self.x[i]=self.x_func(self.x[i*2], self.x[i*2+1])
+s168530788.py(17):         while i>1:
+s168530788.py(18):             i//=2 # 更新後、木の上へと登っていくついでに更新
+s168530788.py(19):             self.x[i]=self.x_func(self.x[i*2], self.x[i*2+1])
+s168530788.py(17):         while i>1:
+s168530788.py(62): for i in range(q):
+s168530788.py(63):     t,x,y=map(int,input().split()) 
+s168530788.py(64):     if t==1:
+s168530788.py(67):     elif t==2:
+s168530788.py(68):         print(seg.fold(x-1,y))
+ --- modulename: s168530788, funcname: fold
+s168530788.py(23):         l+=self.n
+s168530788.py(24):         r+=self.n
+s168530788.py(25):         val_l=self.x_unit
+s168530788.py(26):         val_r=self.x_unit
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(32):                 r-=1 # 開区間なので1個前は偶数番目の要素
+s168530788.py(33):                 val_r=self.x_func(val_r,self.x[r])
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(29):                 val_l=self.x_func(val_l,self.x[l])
+s168530788.py(30):                 l+=1 # 偶数に調節
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(36):         return self.x_func(val_l,val_r)
+2
+s168530788.py(62): for i in range(q):
+s168530788.py(63):     t,x,y=map(int,input().split()) 
+s168530788.py(64):     if t==1:
+s168530788.py(67):     elif t==2:
+s168530788.py(70):         print(seg.max_right(x-1, y, condition)+1)
+ --- modulename: s168530788, funcname: max_right
+s168530788.py(39):         r=self.n
+s168530788.py(40):         if condition(self.fold(l, r),v)==False:
+ --- modulename: s168530788, funcname: fold
+s168530788.py(23):         l+=self.n
+s168530788.py(24):         r+=self.n
+s168530788.py(25):         val_l=self.x_unit
+s168530788.py(26):         val_r=self.x_unit
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(29):                 val_l=self.x_func(val_l,self.x[l])
+s168530788.py(30):                 l+=1 # 偶数に調節
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(28):             if l & 1: # lが奇数
+s168530788.py(29):                 val_l=self.x_func(val_l,self.x[l])
+s168530788.py(30):                 l+=1 # 偶数に調節
+s168530788.py(31):             if r & 1: # rが奇数
+s168530788.py(32):                 r-=1 # 開区間なので1個前は偶数番目の要素
+s168530788.py(33):                 val_r=self.x_func(val_r,self.x[r])
+s168530788.py(34):             l //= 2
+s168530788.py(35):             r //= 2
+s168530788.py(27):         while l<r:
+s168530788.py(36):         return self.x_func(val_l,val_r)
+ --- modulename: s168530788, funcname: <lambda>
+s168530788.py(59): condition=lambda x,y:x>=y
+s168530788.py(41):             return r
+6
+s168530788.py(62): for i in range(q):
