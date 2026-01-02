@@ -1,0 +1,51 @@
+import sys
+readline = sys.stdin.readline
+
+
+class UnionFind:
+    __slots__ = ["nodes"]
+
+    def __init__(self, n: int) -> None:
+        self.nodes = [-1]*n
+
+    def get_root(self, x: int) -> int:
+        if self.nodes[x] < 0:
+            return x
+        else:
+            self.nodes[x] = self.get_root(self.nodes[x])
+            return self.nodes[x]
+
+    def unite(self, x: int, y: int) -> bool:
+        root_x, root_y = self.get_root(x), self.get_root(y)
+        if root_x != root_y:
+            bigroot, smallroot = \
+                (root_x, root_y) if self.nodes[root_x] < self.nodes[root_y] else (root_y, root_x)
+            self.nodes[bigroot] += self.nodes[smallroot]
+            self.nodes[smallroot] = bigroot
+            return True
+        else:
+            return False
+
+
+def kruskal(n: int, edges: list) -> int:
+    edges.sort()
+    tree = UnionFind(n)
+    total = 0
+    cnt = 0
+    for w, s, t in edges:
+        if tree.unite(s, t):
+            cnt += 1
+            total += w
+            if cnt == n - 1:
+                break
+
+    return total
+
+
+V, E = map(int, readline().split())
+edges = []
+append = edges.append
+for _ in [None]*E:
+    s, t, w = map(int, readline().split())
+    append((w, s, t))
+print(kruskal(V, edges))
