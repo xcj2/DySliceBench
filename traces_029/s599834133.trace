@@ -1,0 +1,328 @@
+ --- modulename: s599834133, funcname: <module>
+s599834133.py(1): import sys
+s599834133.py(2): INF = 1 << 30
+s599834133.py(5): class Node:
+ --- modulename: s599834133, funcname: Node
+s599834133.py(5): class Node:
+s599834133.py(6):     __slots__ = ["key", "val", "lch", "rch", "bias"]
+s599834133.py(7):     def __init__(self, key, val):
+s599834133.py(15): class AVLTree:
+ --- modulename: s599834133, funcname: AVLTree
+s599834133.py(15): class AVLTree:
+s599834133.py(16):     __slots__ = ["root"]
+s599834133.py(17):     def __init__(self):
+s599834133.py(20):     def rotate_left(self, v):
+s599834133.py(31):     def rotate_right(self, v):
+s599834133.py(42):     def rotateLR(self, v):
+s599834133.py(52):     def rotateRL(self, v):
+s599834133.py(62):     def update_bias_double(self, v):
+s599834133.py(74):     def insert(self, key, val):
+s599834133.py(132):     def delete(self, key):
+s599834133.py(207):     def get(self, key):
+s599834133.py(218):     def lower_bound(self, key):
+s599834133.py(230):     def __getitem__(self, key): return self.get(key)
+s599834133.py(231):     def __setitem__(self, key, val): return self.insert(key, val)
+s599834133.py(232):     def __delitem__(self, key): return self.delete(key)
+s599834133.py(233):     def __bool__(self): return self.root is not None
+s599834133.py(236): read = sys.stdin.buffer.read
+s599834133.py(237): input = sys.stdin.buffer.readline
+s599834133.py(238): N, Q = map(int, input().split())
+s599834133.py(239): event = []
+s599834133.py(240): for i in range(N):
+s599834133.py(241):     s, t, x = map(int, input().split())
+s599834133.py(242):     event.append((s-x, 1, x))
+s599834133.py(243):     event.append((t-x, -1, x))
+s599834133.py(240): for i in range(N):
+s599834133.py(241):     s, t, x = map(int, input().split())
+s599834133.py(242):     event.append((s-x, 1, x))
+s599834133.py(243):     event.append((t-x, -1, x))
+s599834133.py(240): for i in range(N):
+s599834133.py(241):     s, t, x = map(int, input().split())
+s599834133.py(242):     event.append((s-x, 1, x))
+s599834133.py(243):     event.append((t-x, -1, x))
+s599834133.py(240): for i in range(N):
+s599834133.py(241):     s, t, x = map(int, input().split())
+s599834133.py(242):     event.append((s-x, 1, x))
+s599834133.py(243):     event.append((t-x, -1, x))
+s599834133.py(240): for i in range(N):
+s599834133.py(245): event.sort(reverse=True)
+s599834133.py(247): avl = AVLTree()
+ --- modulename: s599834133, funcname: __init__
+s599834133.py(18):         self.root = None
+s599834133.py(248): ans = []
+s599834133.py(249): for d in map(int, read().split()):
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(251):         time, k, x = event.pop()
+s599834133.py(252):         if k == 1:
+s599834133.py(253):             avl.insert(x, 1)
+ --- modulename: s599834133, funcname: insert
+s599834133.py(75):         if self.root is None:
+s599834133.py(76):             self.root = Node(key, val)
+ --- modulename: s599834133, funcname: __init__
+s599834133.py(8):         self.key = key
+s599834133.py(9):         self.val = val
+s599834133.py(10):         self.lch = None
+s599834133.py(11):         self.rch = None
+s599834133.py(12):         self.bias = 0
+s599834133.py(77):             return
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(251):         time, k, x = event.pop()
+s599834133.py(252):         if k == 1:
+s599834133.py(253):             avl.insert(x, 1)
+ --- modulename: s599834133, funcname: insert
+s599834133.py(75):         if self.root is None:
+s599834133.py(79):         v = self.root
+s599834133.py(80):         history = []
+s599834133.py(81):         while v is not None:
+s599834133.py(82):             if key < v.key:
+s599834133.py(83):                 history.append((v, 1))
+s599834133.py(84):                 v = v.lch
+s599834133.py(81):         while v is not None:
+s599834133.py(92):         p, pdir = history[-1]
+s599834133.py(93):         if pdir == 1:
+s599834133.py(94):             p.lch = Node(key, val)
+ --- modulename: s599834133, funcname: __init__
+s599834133.py(8):         self.key = key
+s599834133.py(9):         self.val = val
+s599834133.py(10):         self.lch = None
+s599834133.py(11):         self.rch = None
+s599834133.py(12):         self.bias = 0
+s599834133.py(98):         while history:
+s599834133.py(99):             v, direction = history.pop()
+s599834133.py(100):             v.bias += direction
+s599834133.py(102):             new_v = None
+s599834133.py(103):             b = v.bias
+s599834133.py(104):             if b == 0:
+s599834133.py(107):             if b == 2:
+s599834133.py(114):             if b == -2:
+s599834133.py(98):         while history:
+s599834133.py(122):         if new_v is not None:
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(256):     x = avl.lower_bound(-INF)
+ --- modulename: s599834133, funcname: lower_bound
+s599834133.py(219):         ret = INF
+s599834133.py(220):         v = self.root
+s599834133.py(221):         while v is not None:
+s599834133.py(222):             if v.key >= key:
+s599834133.py(223):                 if ret > v.key:
+s599834133.py(224):                     ret = v.key
+s599834133.py(225):                 v = v.lch
+s599834133.py(221):         while v is not None:
+s599834133.py(222):             if v.key >= key:
+s599834133.py(223):                 if ret > v.key:
+s599834133.py(224):                     ret = v.key
+s599834133.py(225):                 v = v.lch
+s599834133.py(221):         while v is not None:
+s599834133.py(228):         return ret
+s599834133.py(257):     ans.append(x if x < INF else -1)
+s599834133.py(249): for d in map(int, read().split()):
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(251):         time, k, x = event.pop()
+s599834133.py(252):         if k == 1:
+s599834133.py(255):             avl.delete(x)
+ --- modulename: s599834133, funcname: delete
+s599834133.py(133):         v = self.root
+s599834133.py(134):         history = []
+s599834133.py(135):         while v is not None:
+s599834133.py(136):             if key < v.key:
+s599834133.py(137):                 history.append((v, 1))
+s599834133.py(138):                 v = v.lch
+s599834133.py(135):         while v is not None:
+s599834133.py(136):             if key < v.key:
+s599834133.py(139):             elif v.key < key:
+s599834133.py(147):         if v.lch is not None:
+s599834133.py(159):         c = v.rch if v.lch is None else v.lch
+s599834133.py(161):         if history:
+s599834133.py(162):             p, pdir = history[-1]
+s599834133.py(163):             if pdir == 1:
+s599834133.py(164):                 p.lch = c
+s599834133.py(172):         while history:
+s599834133.py(173):             new_p = None
+s599834133.py(175):             p, pdir = history.pop()
+s599834133.py(176):             p.bias -= pdir
+s599834133.py(178):             b = p.bias
+s599834133.py(179):             if b == 2:
+s599834133.py(185):             elif b == -2:
+s599834133.py(191):             elif b != 0:
+s599834133.py(194):             if new_p is not None:
+s599834133.py(172):         while history:
+s599834133.py(205):         return True
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(251):         time, k, x = event.pop()
+s599834133.py(252):         if k == 1:
+s599834133.py(253):             avl.insert(x, 1)
+ --- modulename: s599834133, funcname: insert
+s599834133.py(75):         if self.root is None:
+s599834133.py(79):         v = self.root
+s599834133.py(80):         history = []
+s599834133.py(81):         while v is not None:
+s599834133.py(82):             if key < v.key:
+s599834133.py(83):                 history.append((v, 1))
+s599834133.py(84):                 v = v.lch
+s599834133.py(81):         while v is not None:
+s599834133.py(92):         p, pdir = history[-1]
+s599834133.py(93):         if pdir == 1:
+s599834133.py(94):             p.lch = Node(key, val)
+ --- modulename: s599834133, funcname: __init__
+s599834133.py(8):         self.key = key
+s599834133.py(9):         self.val = val
+s599834133.py(10):         self.lch = None
+s599834133.py(11):         self.rch = None
+s599834133.py(12):         self.bias = 0
+s599834133.py(98):         while history:
+s599834133.py(99):             v, direction = history.pop()
+s599834133.py(100):             v.bias += direction
+s599834133.py(102):             new_v = None
+s599834133.py(103):             b = v.bias
+s599834133.py(104):             if b == 0:
+s599834133.py(107):             if b == 2:
+s599834133.py(114):             if b == -2:
+s599834133.py(98):         while history:
+s599834133.py(122):         if new_v is not None:
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(256):     x = avl.lower_bound(-INF)
+ --- modulename: s599834133, funcname: lower_bound
+s599834133.py(219):         ret = INF
+s599834133.py(220):         v = self.root
+s599834133.py(221):         while v is not None:
+s599834133.py(222):             if v.key >= key:
+s599834133.py(223):                 if ret > v.key:
+s599834133.py(224):                     ret = v.key
+s599834133.py(225):                 v = v.lch
+s599834133.py(221):         while v is not None:
+s599834133.py(222):             if v.key >= key:
+s599834133.py(223):                 if ret > v.key:
+s599834133.py(224):                     ret = v.key
+s599834133.py(225):                 v = v.lch
+s599834133.py(221):         while v is not None:
+s599834133.py(228):         return ret
+s599834133.py(257):     ans.append(x if x < INF else -1)
+s599834133.py(249): for d in map(int, read().split()):
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(251):         time, k, x = event.pop()
+s599834133.py(252):         if k == 1:
+s599834133.py(255):             avl.delete(x)
+ --- modulename: s599834133, funcname: delete
+s599834133.py(133):         v = self.root
+s599834133.py(134):         history = []
+s599834133.py(135):         while v is not None:
+s599834133.py(136):             if key < v.key:
+s599834133.py(137):                 history.append((v, 1))
+s599834133.py(138):                 v = v.lch
+s599834133.py(135):         while v is not None:
+s599834133.py(136):             if key < v.key:
+s599834133.py(139):             elif v.key < key:
+s599834133.py(147):         if v.lch is not None:
+s599834133.py(159):         c = v.rch if v.lch is None else v.lch
+s599834133.py(161):         if history:
+s599834133.py(162):             p, pdir = history[-1]
+s599834133.py(163):             if pdir == 1:
+s599834133.py(164):                 p.lch = c
+s599834133.py(172):         while history:
+s599834133.py(173):             new_p = None
+s599834133.py(175):             p, pdir = history.pop()
+s599834133.py(176):             p.bias -= pdir
+s599834133.py(178):             b = p.bias
+s599834133.py(179):             if b == 2:
+s599834133.py(185):             elif b == -2:
+s599834133.py(191):             elif b != 0:
+s599834133.py(194):             if new_p is not None:
+s599834133.py(172):         while history:
+s599834133.py(205):         return True
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(256):     x = avl.lower_bound(-INF)
+ --- modulename: s599834133, funcname: lower_bound
+s599834133.py(219):         ret = INF
+s599834133.py(220):         v = self.root
+s599834133.py(221):         while v is not None:
+s599834133.py(222):             if v.key >= key:
+s599834133.py(223):                 if ret > v.key:
+s599834133.py(224):                     ret = v.key
+s599834133.py(225):                 v = v.lch
+s599834133.py(221):         while v is not None:
+s599834133.py(228):         return ret
+s599834133.py(257):     ans.append(x if x < INF else -1)
+s599834133.py(249): for d in map(int, read().split()):
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(251):         time, k, x = event.pop()
+s599834133.py(252):         if k == 1:
+s599834133.py(255):             avl.delete(x)
+ --- modulename: s599834133, funcname: delete
+s599834133.py(133):         v = self.root
+s599834133.py(134):         history = []
+s599834133.py(135):         while v is not None:
+s599834133.py(136):             if key < v.key:
+s599834133.py(139):             elif v.key < key:
+s599834133.py(147):         if v.lch is not None:
+s599834133.py(159):         c = v.rch if v.lch is None else v.lch
+s599834133.py(161):         if history:
+s599834133.py(169):             self.root = c
+s599834133.py(170):             return True
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(256):     x = avl.lower_bound(-INF)
+ --- modulename: s599834133, funcname: lower_bound
+s599834133.py(219):         ret = INF
+s599834133.py(220):         v = self.root
+s599834133.py(221):         while v is not None:
+s599834133.py(228):         return ret
+s599834133.py(257):     ans.append(x if x < INF else -1)
+s599834133.py(249): for d in map(int, read().split()):
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(251):         time, k, x = event.pop()
+s599834133.py(252):         if k == 1:
+s599834133.py(253):             avl.insert(x, 1)
+ --- modulename: s599834133, funcname: insert
+s599834133.py(75):         if self.root is None:
+s599834133.py(76):             self.root = Node(key, val)
+ --- modulename: s599834133, funcname: __init__
+s599834133.py(8):         self.key = key
+s599834133.py(9):         self.val = val
+s599834133.py(10):         self.lch = None
+s599834133.py(11):         self.rch = None
+s599834133.py(12):         self.bias = 0
+s599834133.py(77):             return
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(256):     x = avl.lower_bound(-INF)
+ --- modulename: s599834133, funcname: lower_bound
+s599834133.py(219):         ret = INF
+s599834133.py(220):         v = self.root
+s599834133.py(221):         while v is not None:
+s599834133.py(222):             if v.key >= key:
+s599834133.py(223):                 if ret > v.key:
+s599834133.py(224):                     ret = v.key
+s599834133.py(225):                 v = v.lch
+s599834133.py(221):         while v is not None:
+s599834133.py(228):         return ret
+s599834133.py(257):     ans.append(x if x < INF else -1)
+s599834133.py(249): for d in map(int, read().split()):
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(251):         time, k, x = event.pop()
+s599834133.py(252):         if k == 1:
+s599834133.py(255):             avl.delete(x)
+ --- modulename: s599834133, funcname: delete
+s599834133.py(133):         v = self.root
+s599834133.py(134):         history = []
+s599834133.py(135):         while v is not None:
+s599834133.py(136):             if key < v.key:
+s599834133.py(139):             elif v.key < key:
+s599834133.py(147):         if v.lch is not None:
+s599834133.py(159):         c = v.rch if v.lch is None else v.lch
+s599834133.py(161):         if history:
+s599834133.py(169):             self.root = c
+s599834133.py(170):             return True
+s599834133.py(250):     while event and event[-1][0] <= d:
+s599834133.py(256):     x = avl.lower_bound(-INF)
+ --- modulename: s599834133, funcname: lower_bound
+s599834133.py(219):         ret = INF
+s599834133.py(220):         v = self.root
+s599834133.py(221):         while v is not None:
+s599834133.py(228):         return ret
+s599834133.py(257):     ans.append(x if x < INF else -1)
+s599834133.py(249): for d in map(int, read().split()):
+s599834133.py(259): print('\n'.join(map(str, ans)))
+2
+2
+10
+-1
+13
+-1

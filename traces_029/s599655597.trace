@@ -1,0 +1,1322 @@
+ --- modulename: s599655597, funcname: <module>
+s599655597.py(1): from operator import xor
+s599655597.py(2): from typing import Callable, List, TypeVar
+s599655597.py(4): S = TypeVar("S")  # モノイドの型
+ --- modulename: typing, funcname: __init__
+typing.py(630):         self.__name__ = name
+typing.py(631):         if covariant and contravariant:
+typing.py(633):         self.__covariant__ = bool(covariant)
+typing.py(634):         self.__contravariant__ = bool(contravariant)
+typing.py(635):         if constraints and bound is not None:
+typing.py(637):         if constraints and len(constraints) == 1:
+typing.py(639):         msg = "TypeVar(name, constraint, ...): constraints must be types."
+typing.py(640):         self.__constraints__ = tuple(_type_check(t, msg) for t in constraints)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(640):         self.__constraints__ = tuple(_type_check(t, msg) for t in constraints)
+typing.py(641):         if bound:
+typing.py(644):             self.__bound__ = None
+typing.py(645):         try:
+typing.py(646):             def_mod = sys._getframe(1).f_globals.get('__name__', '__main__')  # for pickling
+typing.py(649):         if def_mod != 'typing':
+typing.py(650):             self.__module__ = def_mod
+s599655597.py(5): F = TypeVar("F")  # 写像の型
+ --- modulename: typing, funcname: __init__
+typing.py(630):         self.__name__ = name
+typing.py(631):         if covariant and contravariant:
+typing.py(633):         self.__covariant__ = bool(covariant)
+typing.py(634):         self.__contravariant__ = bool(contravariant)
+typing.py(635):         if constraints and bound is not None:
+typing.py(637):         if constraints and len(constraints) == 1:
+typing.py(639):         msg = "TypeVar(name, constraint, ...): constraints must be types."
+typing.py(640):         self.__constraints__ = tuple(_type_check(t, msg) for t in constraints)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(640):         self.__constraints__ = tuple(_type_check(t, msg) for t in constraints)
+typing.py(641):         if bound:
+typing.py(644):             self.__bound__ = None
+typing.py(645):         try:
+typing.py(646):             def_mod = sys._getframe(1).f_globals.get('__name__', '__main__')  # for pickling
+typing.py(649):         if def_mod != 'typing':
+typing.py(650):             self.__module__ = def_mod
+s599655597.py(8): class LazySegmentTree:
+ --- modulename: s599655597, funcname: LazySegmentTree
+s599655597.py(8): class LazySegmentTree:
+s599655597.py(9):     """
+s599655597.py(16):     __slots__ = ["e", "op", "id", "mapping", "composition", "_n", "_log", "_size", "tree", "lazy"]
+s599655597.py(19):                  a: List[S],
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(834):         if not isinstance(params, tuple):
+typing.py(835):             params = (params,)
+typing.py(836):         msg = "Parameters to generic types must be types."
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+typing.py(838):         _check_generic(self, params, self._nparams)
+ --- modulename: typing, funcname: _check_generic
+typing.py(210):     if not elen:
+typing.py(212):     alen = len(parameters)
+typing.py(213):     if alen != elen:
+typing.py(839):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+typing.py(843):                              name=self._name, inst=self._inst)
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s599655597.py(20):                  e: S,
+s599655597.py(21):                  op: Callable[[S, S], S],
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem_inner__
+typing.py(896):         args, result = params
+typing.py(897):         msg = "Callable[args, result]: result must be a type."
+typing.py(898):         result = _type_check(result, msg)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+typing.py(899):         if args is Ellipsis:
+typing.py(901):         if not isinstance(args, tuple):
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+typing.py(904):         params = args + (result,)
+typing.py(905):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+typing.py(878):                                      name=self._name, inst=self._inst)
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s599655597.py(22):                  id_: F,
+s599655597.py(23):                  mapping: Callable[[F, S], S],
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem_inner__
+typing.py(896):         args, result = params
+typing.py(897):         msg = "Callable[args, result]: result must be a type."
+typing.py(898):         result = _type_check(result, msg)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+typing.py(899):         if args is Ellipsis:
+typing.py(901):         if not isinstance(args, tuple):
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+typing.py(904):         params = args + (result,)
+typing.py(905):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+typing.py(878):                                      name=self._name, inst=self._inst)
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s599655597.py(24):                  composition: Callable[[F, F], F]) -> None:
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem_inner__
+typing.py(896):         args, result = params
+typing.py(897):         msg = "Callable[args, result]: result must be a type."
+typing.py(898):         result = _type_check(result, msg)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+typing.py(899):         if args is Ellipsis:
+typing.py(901):         if not isinstance(args, tuple):
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+typing.py(904):         params = args + (result,)
+typing.py(905):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+typing.py(878):                                      name=self._name, inst=self._inst)
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s599655597.py(18):     def __init__(self,
+s599655597.py(41):     def _update(self, k: int) -> None:
+s599655597.py(45):     def _apply_all(self, k: int, f: F) -> None:
+s599655597.py(50):     def _push(self, k: int) -> None:
+s599655597.py(55):     def set(self, k: int, x: S) -> None:
+s599655597.py(66):     def get(self, k: int) -> S:
+s599655597.py(75):     def prod(self, l: int, r: int) -> S:
+s599655597.py(104):     def prod_all(self) -> S:
+s599655597.py(110):     def apply(self, k: int, f: F) -> None:
+s599655597.py(121):     def apply_range(self, l: int, r: int, f: F) -> None:
+s599655597.py(154):     def max_right(self, l: int, g: Callable[[S], bool]) -> int:
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem_inner__
+typing.py(896):         args, result = params
+typing.py(897):         msg = "Callable[args, result]: result must be a type."
+typing.py(898):         result = _type_check(result, msg)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+typing.py(899):         if args is Ellipsis:
+typing.py(901):         if not isinstance(args, tuple):
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+typing.py(904):         params = args + (result,)
+typing.py(905):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+typing.py(878):                                      name=self._name, inst=self._inst)
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(200):             tvars.append(t)
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s599655597.py(196):     def min_left(self, r: int, g: Callable[[S], bool]) -> int:
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+s599655597.py(238): def op(l, r):
+s599655597.py(242): def mapping(f, x):
+s599655597.py(248): N, Q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s599655597.py(249): A = list(map(int, input().split()))
+s599655597.py(250): dic = {0: [1, 0, 0], 1: [0, 1, 0]}
+s599655597.py(252): lst = LazySegmentTree([dic[v] for v in A], [0, 0, 0], op, False, mapping, xor)
+ --- modulename: s599655597, funcname: <listcomp>
+s599655597.py(252): lst = LazySegmentTree([dic[v] for v in A], [0, 0, 0], op, False, mapping, xor)
+s599655597.py(252): lst = LazySegmentTree([dic[v] for v in A], [0, 0, 0], op, False, mapping, xor)
+s599655597.py(252): lst = LazySegmentTree([dic[v] for v in A], [0, 0, 0], op, False, mapping, xor)
+s599655597.py(252): lst = LazySegmentTree([dic[v] for v in A], [0, 0, 0], op, False, mapping, xor)
+s599655597.py(252): lst = LazySegmentTree([dic[v] for v in A], [0, 0, 0], op, False, mapping, xor)
+s599655597.py(252): lst = LazySegmentTree([dic[v] for v in A], [0, 0, 0], op, False, mapping, xor)
+ --- modulename: s599655597, funcname: __init__
+s599655597.py(25):         self.e = e
+s599655597.py(26):         self.op = op
+s599655597.py(27):         self.id = id_
+s599655597.py(28):         self.mapping = mapping
+s599655597.py(29):         self.composition = composition
+s599655597.py(31):         self._n = len(a)
+s599655597.py(32):         self._log = (self._n - 1).bit_length()
+s599655597.py(33):         self._size = 1 << self._log
+s599655597.py(35):         self.tree = [e] * self._size + a + [e] * (self._size - self._n)
+s599655597.py(36):         for i in range(self._size - 1, 0, -1):
+s599655597.py(37):             self._update(i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(36):         for i in range(self._size - 1, 0, -1):
+s599655597.py(37):             self._update(i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(36):         for i in range(self._size - 1, 0, -1):
+s599655597.py(37):             self._update(i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(36):         for i in range(self._size - 1, 0, -1):
+s599655597.py(37):             self._update(i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(36):         for i in range(self._size - 1, 0, -1):
+s599655597.py(37):             self._update(i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(36):         for i in range(self._size - 1, 0, -1):
+s599655597.py(37):             self._update(i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(36):         for i in range(self._size - 1, 0, -1):
+s599655597.py(37):             self._update(i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(36):         for i in range(self._size - 1, 0, -1):
+s599655597.py(39):         self.lazy = [id_] * self._size
+s599655597.py(254): for i in range(Q):
+s599655597.py(255):     T, L, R = map(int, input().split())
+s599655597.py(256):     if T == 1:
+s599655597.py(259):         print(lst.prod(L-1, R)[2])
+ --- modulename: s599655597, funcname: prod
+s599655597.py(79):         assert 0 <= l <= r <= self._n
+s599655597.py(81):         if l == r:
+s599655597.py(84):         l += self._size
+s599655597.py(85):         r += self._size
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(87):             if ((l >> i) << i) != l:
+s599655597.py(89):             if ((r >> i) << i) != r:
+s599655597.py(90):                 self._push(r >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(87):             if ((l >> i) << i) != l:
+s599655597.py(89):             if ((r >> i) << i) != r:
+s599655597.py(90):                 self._push(r >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(87):             if ((l >> i) << i) != l:
+s599655597.py(89):             if ((r >> i) << i) != r:
+s599655597.py(90):                 self._push(r >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(92):         sml, smr = self.e, self.e
+s599655597.py(93):         while l < r:
+s599655597.py(94):             if l & 1:
+s599655597.py(97):             if r & 1:
+s599655597.py(98):                 r -= 1
+s599655597.py(99):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(100):             l >>= 1
+s599655597.py(101):             r >>= 1
+s599655597.py(93):         while l < r:
+s599655597.py(94):             if l & 1:
+s599655597.py(97):             if r & 1:
+s599655597.py(100):             l >>= 1
+s599655597.py(101):             r >>= 1
+s599655597.py(93):         while l < r:
+s599655597.py(94):             if l & 1:
+s599655597.py(97):             if r & 1:
+s599655597.py(98):                 r -= 1
+s599655597.py(99):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(100):             l >>= 1
+s599655597.py(101):             r >>= 1
+s599655597.py(93):         while l < r:
+s599655597.py(102):         return self.op(sml, smr)
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+2
+s599655597.py(254): for i in range(Q):
+s599655597.py(255):     T, L, R = map(int, input().split())
+s599655597.py(256):     if T == 1:
+s599655597.py(257):         lst.apply_range(L-1, R, True)
+ --- modulename: s599655597, funcname: apply_range
+s599655597.py(123):         assert 0 <= l <= r <= self._n
+s599655597.py(125):         if l == r:
+s599655597.py(128):         l += self._size
+s599655597.py(129):         r += self._size
+s599655597.py(130):         for i in range(self._log, 0, -1):
+s599655597.py(131):             if ((l >> i) << i) != l:
+s599655597.py(132):                 self._push(l >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(133):             if ((r >> i) << i) != r:
+s599655597.py(134):                 self._push((r - 1) >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(130):         for i in range(self._log, 0, -1):
+s599655597.py(131):             if ((l >> i) << i) != l:
+s599655597.py(132):                 self._push(l >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(133):             if ((r >> i) << i) != r:
+s599655597.py(130):         for i in range(self._log, 0, -1):
+s599655597.py(131):             if ((l >> i) << i) != l:
+s599655597.py(133):             if ((r >> i) << i) != r:
+s599655597.py(130):         for i in range(self._log, 0, -1):
+s599655597.py(136):         l_tmp, r_tmp = l, r
+s599655597.py(137):         while l < r:
+s599655597.py(138):             if l & 1:
+s599655597.py(141):             if r & 1:
+s599655597.py(144):             l >>= 1
+s599655597.py(145):             r >>= 1
+s599655597.py(137):         while l < r:
+s599655597.py(138):             if l & 1:
+s599655597.py(139):                 self._apply_all(l, f)
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(245):     return [x[1], x[0], x[0] * x[1] - x[2]]
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(140):                 l += 1
+s599655597.py(141):             if r & 1:
+s599655597.py(144):             l >>= 1
+s599655597.py(145):             r >>= 1
+s599655597.py(137):         while l < r:
+s599655597.py(146):         l, r = l_tmp, r_tmp
+s599655597.py(148):         for i in range(1, self._log + 1):
+s599655597.py(149):             if ((l >> i) << i) != l:
+s599655597.py(151):             if ((r >> i) << i) != r:
+s599655597.py(148):         for i in range(1, self._log + 1):
+s599655597.py(149):             if ((l >> i) << i) != l:
+s599655597.py(150):                 self._update(l >> i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(151):             if ((r >> i) << i) != r:
+s599655597.py(148):         for i in range(1, self._log + 1):
+s599655597.py(149):             if ((l >> i) << i) != l:
+s599655597.py(150):                 self._update(l >> i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(151):             if ((r >> i) << i) != r:
+s599655597.py(152):                 self._update((r - 1) >> i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(148):         for i in range(1, self._log + 1):
+s599655597.py(254): for i in range(Q):
+s599655597.py(255):     T, L, R = map(int, input().split())
+s599655597.py(256):     if T == 1:
+s599655597.py(259):         print(lst.prod(L-1, R)[2])
+ --- modulename: s599655597, funcname: prod
+s599655597.py(79):         assert 0 <= l <= r <= self._n
+s599655597.py(81):         if l == r:
+s599655597.py(84):         l += self._size
+s599655597.py(85):         r += self._size
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(87):             if ((l >> i) << i) != l:
+s599655597.py(88):                 self._push(l >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(89):             if ((r >> i) << i) != r:
+s599655597.py(90):                 self._push(r >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(87):             if ((l >> i) << i) != l:
+s599655597.py(88):                 self._push(l >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(89):             if ((r >> i) << i) != r:
+s599655597.py(90):                 self._push(r >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(87):             if ((l >> i) << i) != l:
+s599655597.py(88):                 self._push(l >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(89):             if ((r >> i) << i) != r:
+s599655597.py(90):                 self._push(r >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(92):         sml, smr = self.e, self.e
+s599655597.py(93):         while l < r:
+s599655597.py(94):             if l & 1:
+s599655597.py(95):                 sml = self.op(sml, self.tree[l])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(96):                 l += 1
+s599655597.py(97):             if r & 1:
+s599655597.py(98):                 r -= 1
+s599655597.py(99):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(100):             l >>= 1
+s599655597.py(101):             r >>= 1
+s599655597.py(93):         while l < r:
+s599655597.py(94):             if l & 1:
+s599655597.py(95):                 sml = self.op(sml, self.tree[l])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(96):                 l += 1
+s599655597.py(97):             if r & 1:
+s599655597.py(100):             l >>= 1
+s599655597.py(101):             r >>= 1
+s599655597.py(93):         while l < r:
+s599655597.py(102):         return self.op(sml, smr)
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+0
+s599655597.py(254): for i in range(Q):
+s599655597.py(255):     T, L, R = map(int, input().split())
+s599655597.py(256):     if T == 1:
+s599655597.py(257):         lst.apply_range(L-1, R, True)
+ --- modulename: s599655597, funcname: apply_range
+s599655597.py(123):         assert 0 <= l <= r <= self._n
+s599655597.py(125):         if l == r:
+s599655597.py(128):         l += self._size
+s599655597.py(129):         r += self._size
+s599655597.py(130):         for i in range(self._log, 0, -1):
+s599655597.py(131):             if ((l >> i) << i) != l:
+s599655597.py(133):             if ((r >> i) << i) != r:
+s599655597.py(134):                 self._push((r - 1) >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(130):         for i in range(self._log, 0, -1):
+s599655597.py(131):             if ((l >> i) << i) != l:
+s599655597.py(133):             if ((r >> i) << i) != r:
+s599655597.py(134):                 self._push((r - 1) >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(130):         for i in range(self._log, 0, -1):
+s599655597.py(131):             if ((l >> i) << i) != l:
+s599655597.py(133):             if ((r >> i) << i) != r:
+s599655597.py(134):                 self._push((r - 1) >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(245):     return [x[1], x[0], x[0] * x[1] - x[2]]
+s599655597.py(47):         if k < self._size:
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(245):     return [x[1], x[0], x[0] * x[1] - x[2]]
+s599655597.py(47):         if k < self._size:
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(130):         for i in range(self._log, 0, -1):
+s599655597.py(136):         l_tmp, r_tmp = l, r
+s599655597.py(137):         while l < r:
+s599655597.py(138):             if l & 1:
+s599655597.py(141):             if r & 1:
+s599655597.py(142):                 r -= 1
+s599655597.py(143):                 self._apply_all(r, f)
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(245):     return [x[1], x[0], x[0] * x[1] - x[2]]
+s599655597.py(47):         if k < self._size:
+s599655597.py(144):             l >>= 1
+s599655597.py(145):             r >>= 1
+s599655597.py(137):         while l < r:
+s599655597.py(138):             if l & 1:
+s599655597.py(141):             if r & 1:
+s599655597.py(142):                 r -= 1
+s599655597.py(143):                 self._apply_all(r, f)
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(245):     return [x[1], x[0], x[0] * x[1] - x[2]]
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(144):             l >>= 1
+s599655597.py(145):             r >>= 1
+s599655597.py(137):         while l < r:
+s599655597.py(146):         l, r = l_tmp, r_tmp
+s599655597.py(148):         for i in range(1, self._log + 1):
+s599655597.py(149):             if ((l >> i) << i) != l:
+s599655597.py(151):             if ((r >> i) << i) != r:
+s599655597.py(152):                 self._update((r - 1) >> i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(148):         for i in range(1, self._log + 1):
+s599655597.py(149):             if ((l >> i) << i) != l:
+s599655597.py(151):             if ((r >> i) << i) != r:
+s599655597.py(152):                 self._update((r - 1) >> i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(148):         for i in range(1, self._log + 1):
+s599655597.py(149):             if ((l >> i) << i) != l:
+s599655597.py(151):             if ((r >> i) << i) != r:
+s599655597.py(152):                 self._update((r - 1) >> i)
+ --- modulename: s599655597, funcname: _update
+s599655597.py(43):         self.tree[k] = self.op(self.tree[2 * k], self.tree[2 * k + 1])
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(148):         for i in range(1, self._log + 1):
+s599655597.py(254): for i in range(Q):
+s599655597.py(255):     T, L, R = map(int, input().split())
+s599655597.py(256):     if T == 1:
+s599655597.py(259):         print(lst.prod(L-1, R)[2])
+ --- modulename: s599655597, funcname: prod
+s599655597.py(79):         assert 0 <= l <= r <= self._n
+s599655597.py(81):         if l == r:
+s599655597.py(84):         l += self._size
+s599655597.py(85):         r += self._size
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(87):             if ((l >> i) << i) != l:
+s599655597.py(89):             if ((r >> i) << i) != r:
+s599655597.py(90):                 self._push(r >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(87):             if ((l >> i) << i) != l:
+s599655597.py(89):             if ((r >> i) << i) != r:
+s599655597.py(90):                 self._push(r >> i)
+ --- modulename: s599655597, funcname: _push
+s599655597.py(51):         self._apply_all(2 * k, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(52):         self._apply_all(2 * k + 1, self.lazy[k])
+ --- modulename: s599655597, funcname: _apply_all
+s599655597.py(46):         self.tree[k] = self.mapping(f, self.tree[k])
+ --- modulename: s599655597, funcname: mapping
+s599655597.py(243):     if not f:
+s599655597.py(244):         return x
+s599655597.py(47):         if k < self._size:
+s599655597.py(48):             self.lazy[k] = self.composition(f, self.lazy[k])
+s599655597.py(53):         self.lazy[k] = self.id
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(87):             if ((l >> i) << i) != l:
+s599655597.py(89):             if ((r >> i) << i) != r:
+s599655597.py(86):         for i in range(self._log, 0, -1):
+s599655597.py(92):         sml, smr = self.e, self.e
+s599655597.py(93):         while l < r:
+s599655597.py(94):             if l & 1:
+s599655597.py(97):             if r & 1:
+s599655597.py(100):             l >>= 1
+s599655597.py(101):             r >>= 1
+s599655597.py(93):         while l < r:
+s599655597.py(94):             if l & 1:
+s599655597.py(97):             if r & 1:
+s599655597.py(98):                 r -= 1
+s599655597.py(99):                 smr = self.op(self.tree[r], smr)
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+s599655597.py(100):             l >>= 1
+s599655597.py(101):             r >>= 1
+s599655597.py(93):         while l < r:
+s599655597.py(102):         return self.op(sml, smr)
+ --- modulename: s599655597, funcname: op
+s599655597.py(239):     return [l[0] + r[0], l[1] + r[1], l[2] + r[2] + l[1] * r[0]]
+1
+s599655597.py(254): for i in range(Q):
