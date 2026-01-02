@@ -1,0 +1,254 @@
+ --- modulename: s398686994, funcname: <module>
+s398686994.py(1): import sys
+s398686994.py(2): input = sys.stdin.readline
+s398686994.py(4): class RmaxQ:
+ --- modulename: s398686994, funcname: RmaxQ
+s398686994.py(4): class RmaxQ:
+s398686994.py(5):     def __init__(self, original):
+s398686994.py(15):     def get(self, i):
+s398686994.py(18):     def update(self, i, x):
+s398686994.py(29):     def add(self, i, d):
+s398686994.py(32):     def query(self, l, r):
+s398686994.py(47): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s398686994.py(48): P = list(map(int, input().split()))
+s398686994.py(49): seg = RmaxQ(P)
+ --- modulename: s398686994, funcname: __init__
+s398686994.py(6):         self.n = len(original)
+s398686994.py(7):         self.INF = -float("inf")
+s398686994.py(8):         self.N0 = 1 << (self.n-1).bit_length()
+s398686994.py(9):         self.seg = [self.INF]*(self.N0 << 1)
+s398686994.py(10):         for i, j in enumerate(original, self.N0):
+s398686994.py(11):             self.seg[i] = j
+s398686994.py(10):         for i, j in enumerate(original, self.N0):
+s398686994.py(11):             self.seg[i] = j
+s398686994.py(10):         for i, j in enumerate(original, self.N0):
+s398686994.py(11):             self.seg[i] = j
+s398686994.py(10):         for i, j in enumerate(original, self.N0):
+s398686994.py(12):         for i in range(self.N0-1, 0, -1):
+s398686994.py(13):             self.seg[i] = max(self.seg[2*i], self.seg[2*i+1])
+s398686994.py(12):         for i in range(self.N0-1, 0, -1):
+s398686994.py(13):             self.seg[i] = max(self.seg[2*i], self.seg[2*i+1])
+s398686994.py(12):         for i in range(self.N0-1, 0, -1):
+s398686994.py(13):             self.seg[i] = max(self.seg[2*i], self.seg[2*i+1])
+s398686994.py(12):         for i in range(self.N0-1, 0, -1):
+s398686994.py(51): def bs(i, p, right):
+s398686994.py(72): ans = 0
+s398686994.py(73): for i, p in enumerate(P):
+s398686994.py(74):   r1 = bs(i, p, True)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(53):     ok = i
+s398686994.py(54):     ng = n
+s398686994.py(55):     while ng - ok > 1:
+s398686994.py(56):       mid = (ok + ng) // 2
+s398686994.py(57):       if seg.query(i+1, mid+1) > p:
+ --- modulename: s398686994, funcname: query
+s398686994.py(33):         res = self.INF
+s398686994.py(34):         l += self.N0
+s398686994.py(35):         r += self.N0
+s398686994.py(36):         while l < r:
+s398686994.py(37):             if r & 1:
+s398686994.py(39):             if l & 1:
+s398686994.py(40):                 res = max(res, self.seg[l])
+s398686994.py(41):                 l += 1
+s398686994.py(42):             l >>= 1
+s398686994.py(43):             r >>= 1
+s398686994.py(36):         while l < r:
+s398686994.py(45):         return res
+s398686994.py(58):         ng = mid
+s398686994.py(55):     while ng - ok > 1:
+s398686994.py(70):   return ng
+s398686994.py(75):   r2 = bs(r1, p, True)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(53):     ok = i
+s398686994.py(54):     ng = n
+s398686994.py(55):     while ng - ok > 1:
+s398686994.py(56):       mid = (ok + ng) // 2
+s398686994.py(57):       if seg.query(i+1, mid+1) > p:
+ --- modulename: s398686994, funcname: query
+s398686994.py(33):         res = self.INF
+s398686994.py(34):         l += self.N0
+s398686994.py(35):         r += self.N0
+s398686994.py(36):         while l < r:
+s398686994.py(37):             if r & 1:
+s398686994.py(38):                 res = max(res, self.seg[r-1])
+s398686994.py(39):             if l & 1:
+s398686994.py(42):             l >>= 1
+s398686994.py(43):             r >>= 1
+s398686994.py(36):         while l < r:
+s398686994.py(45):         return res
+s398686994.py(60):         ok = mid
+s398686994.py(55):     while ng - ok > 1:
+s398686994.py(70):   return ng
+s398686994.py(76):   l1 = bs(i, p, False)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(62):     ok = i
+s398686994.py(63):     ng = -1
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(70):   return ng
+s398686994.py(77):   l2 = bs(l1, p, False)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(62):     ok = i
+s398686994.py(63):     ng = -1
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(70):   return ng
+s398686994.py(78):   ans += p * ((l1-l2)*(r1-i) + (i-l1)*(r2-r1))
+s398686994.py(73): for i, p in enumerate(P):
+s398686994.py(74):   r1 = bs(i, p, True)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(53):     ok = i
+s398686994.py(54):     ng = n
+s398686994.py(55):     while ng - ok > 1:
+s398686994.py(56):       mid = (ok + ng) // 2
+s398686994.py(57):       if seg.query(i+1, mid+1) > p:
+ --- modulename: s398686994, funcname: query
+s398686994.py(33):         res = self.INF
+s398686994.py(34):         l += self.N0
+s398686994.py(35):         r += self.N0
+s398686994.py(36):         while l < r:
+s398686994.py(37):             if r & 1:
+s398686994.py(38):                 res = max(res, self.seg[r-1])
+s398686994.py(39):             if l & 1:
+s398686994.py(42):             l >>= 1
+s398686994.py(43):             r >>= 1
+s398686994.py(36):         while l < r:
+s398686994.py(45):         return res
+s398686994.py(60):         ok = mid
+s398686994.py(55):     while ng - ok > 1:
+s398686994.py(70):   return ng
+s398686994.py(75):   r2 = bs(r1, p, True)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(53):     ok = i
+s398686994.py(54):     ng = n
+s398686994.py(55):     while ng - ok > 1:
+s398686994.py(70):   return ng
+s398686994.py(76):   l1 = bs(i, p, False)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(62):     ok = i
+s398686994.py(63):     ng = -1
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(65):       mid = (ok + ng) // 2
+s398686994.py(66):       if seg.query(mid, i) > p:
+ --- modulename: s398686994, funcname: query
+s398686994.py(33):         res = self.INF
+s398686994.py(34):         l += self.N0
+s398686994.py(35):         r += self.N0
+s398686994.py(36):         while l < r:
+s398686994.py(37):             if r & 1:
+s398686994.py(38):                 res = max(res, self.seg[r-1])
+s398686994.py(39):             if l & 1:
+s398686994.py(42):             l >>= 1
+s398686994.py(43):             r >>= 1
+s398686994.py(36):         while l < r:
+s398686994.py(45):         return res
+s398686994.py(69):         ok = mid
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(70):   return ng
+s398686994.py(77):   l2 = bs(l1, p, False)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(62):     ok = i
+s398686994.py(63):     ng = -1
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(70):   return ng
+s398686994.py(78):   ans += p * ((l1-l2)*(r1-i) + (i-l1)*(r2-r1))
+s398686994.py(73): for i, p in enumerate(P):
+s398686994.py(74):   r1 = bs(i, p, True)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(53):     ok = i
+s398686994.py(54):     ng = n
+s398686994.py(55):     while ng - ok > 1:
+s398686994.py(70):   return ng
+s398686994.py(75):   r2 = bs(r1, p, True)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(53):     ok = i
+s398686994.py(54):     ng = n
+s398686994.py(55):     while ng - ok > 1:
+s398686994.py(70):   return ng
+s398686994.py(76):   l1 = bs(i, p, False)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(62):     ok = i
+s398686994.py(63):     ng = -1
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(65):       mid = (ok + ng) // 2
+s398686994.py(66):       if seg.query(mid, i) > p:
+ --- modulename: s398686994, funcname: query
+s398686994.py(33):         res = self.INF
+s398686994.py(34):         l += self.N0
+s398686994.py(35):         r += self.N0
+s398686994.py(36):         while l < r:
+s398686994.py(37):             if r & 1:
+s398686994.py(39):             if l & 1:
+s398686994.py(42):             l >>= 1
+s398686994.py(43):             r >>= 1
+s398686994.py(36):         while l < r:
+s398686994.py(37):             if r & 1:
+s398686994.py(38):                 res = max(res, self.seg[r-1])
+s398686994.py(39):             if l & 1:
+s398686994.py(42):             l >>= 1
+s398686994.py(43):             r >>= 1
+s398686994.py(36):         while l < r:
+s398686994.py(45):         return res
+s398686994.py(67):         ng = mid
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(65):       mid = (ok + ng) // 2
+s398686994.py(66):       if seg.query(mid, i) > p:
+ --- modulename: s398686994, funcname: query
+s398686994.py(33):         res = self.INF
+s398686994.py(34):         l += self.N0
+s398686994.py(35):         r += self.N0
+s398686994.py(36):         while l < r:
+s398686994.py(37):             if r & 1:
+s398686994.py(39):             if l & 1:
+s398686994.py(40):                 res = max(res, self.seg[l])
+s398686994.py(41):                 l += 1
+s398686994.py(42):             l >>= 1
+s398686994.py(43):             r >>= 1
+s398686994.py(36):         while l < r:
+s398686994.py(45):         return res
+s398686994.py(67):         ng = mid
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(70):   return ng
+s398686994.py(77):   l2 = bs(l1, p, False)
+ --- modulename: s398686994, funcname: bs
+s398686994.py(52):   if right:
+s398686994.py(62):     ok = i
+s398686994.py(63):     ng = -1
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(65):       mid = (ok + ng) // 2
+s398686994.py(66):       if seg.query(mid, i) > p:
+ --- modulename: s398686994, funcname: query
+s398686994.py(33):         res = self.INF
+s398686994.py(34):         l += self.N0
+s398686994.py(35):         r += self.N0
+s398686994.py(36):         while l < r:
+s398686994.py(37):             if r & 1:
+s398686994.py(38):                 res = max(res, self.seg[r-1])
+s398686994.py(39):             if l & 1:
+s398686994.py(42):             l >>= 1
+s398686994.py(43):             r >>= 1
+s398686994.py(36):         while l < r:
+s398686994.py(45):         return res
+s398686994.py(67):         ng = mid
+s398686994.py(64):     while ok - ng > 1:
+s398686994.py(70):   return ng
+s398686994.py(78):   ans += p * ((l1-l2)*(r1-i) + (i-l1)*(r2-r1))
+s398686994.py(73): for i, p in enumerate(P):
+s398686994.py(79): print(ans)
+5
