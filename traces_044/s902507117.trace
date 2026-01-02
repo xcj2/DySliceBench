@@ -1,0 +1,179 @@
+ --- modulename: s902507117, funcname: <module>
+s902507117.py(1): ''' ===============================
+s902507117.py(8): import sys
+s902507117.py(9): import os
+s902507117.py(10): from io import BytesIO, IOBase
+s902507117.py(11): BUFSIZE = 8192
+s902507117.py(12): class FastIO(IOBase):
+ --- modulename: s902507117, funcname: FastIO
+s902507117.py(12): class FastIO(IOBase):
+s902507117.py(13):     newlines = 0
+s902507117.py(14):     def __init__(self, file): self._fd = file.fileno(); self.buffer = BytesIO(); self.writable = "x" in file.mode or "r" not in file.mode; self.write = self.buffer.write if self.writable else None
+s902507117.py(15):     def read(self):
+s902507117.py(21):     def readline(self):
+s902507117.py(25):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s902507117.py(27): class IOWrapper(IOBase):
+ --- modulename: s902507117, funcname: IOWrapper
+s902507117.py(27): class IOWrapper(IOBase):
+s902507117.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s902507117.py(29): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout); input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s902507117, funcname: __init__
+s902507117.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s902507117, funcname: __init__
+s902507117.py(14):     def __init__(self, file): self._fd = file.fileno(); self.buffer = BytesIO(); self.writable = "x" in file.mode or "r" not in file.mode; self.write = self.buffer.write if self.writable else None
+ --- modulename: s902507117, funcname: __init__
+s902507117.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s902507117, funcname: __init__
+s902507117.py(14):     def __init__(self, file): self._fd = file.fileno(); self.buffer = BytesIO(); self.writable = "x" in file.mode or "r" not in file.mode; self.write = self.buffer.write if self.writable else None
+s902507117.py(33): mod = 10**9+7
+s902507117.py(34): def lcm(x, y): return (x * y) / (gcd(x, y))
+s902507117.py(35): def fact(x, mod=mod):
+s902507117.py(39): def arr2D(n, m, default=0):
+s902507117.py(43): def sortDictV(x): return {k: v for k, v in sorted(x.items(), key = lambda item : item[1])}
+s902507117.py(45): def solve(st1, st2):
+s902507117.py(69): st1 = input()
+ --- modulename: s902507117, funcname: <lambda>
+s902507117.py(29): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout); input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s902507117, funcname: <lambda>
+s902507117.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s902507117, funcname: readline
+s902507117.py(22):         while self.newlines == 0:
+s902507117.py(23):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE)); self.newlines = b.count(b"\n") + (not b); ptr = self.buffer.tell(); self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s902507117.py(22):         while self.newlines == 0:
+s902507117.py(24):         self.newlines -= 1; return self.buffer.readline()
+s902507117.py(70): st2 = input()
+ --- modulename: s902507117, funcname: <lambda>
+s902507117.py(29): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout); input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s902507117, funcname: <lambda>
+s902507117.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s902507117, funcname: readline
+s902507117.py(22):         while self.newlines == 0:
+s902507117.py(24):         self.newlines -= 1; return self.buffer.readline()
+s902507117.py(71): print(solve(st1, st2))
+ --- modulename: s902507117, funcname: solve
+s902507117.py(46): 	n, m = len(st1), len(st2)
+s902507117.py(47): 	dp = arr2D(n+1, m+1)
+ --- modulename: s902507117, funcname: arr2D
+s902507117.py(40): 	lst = []
+s902507117.py(41): 	for i in range(n): temp = [default] * m; lst.append(temp)
+s902507117.py(41): 	for i in range(n): temp = [default] * m; lst.append(temp)
+s902507117.py(41): 	for i in range(n): temp = [default] * m; lst.append(temp)
+s902507117.py(41): 	for i in range(n): temp = [default] * m; lst.append(temp)
+s902507117.py(41): 	for i in range(n): temp = [default] * m; lst.append(temp)
+s902507117.py(41): 	for i in range(n): temp = [default] * m; lst.append(temp)
+s902507117.py(42): 	return lst
+s902507117.py(49): 	for i in range(1, n+1):
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(52): 				dp[i][j] = dp[i-1][j-1] + 1
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(49): 	for i in range(1, n+1):
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(52): 				dp[i][j] = dp[i-1][j-1] + 1
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(49): 	for i in range(1, n+1):
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(52): 				dp[i][j] = dp[i-1][j-1] + 1
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(49): 	for i in range(1, n+1):
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(52): 				dp[i][j] = dp[i-1][j-1] + 1
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(54): 				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(51): 			if st1[i-1] == st2[j-1]:
+s902507117.py(52): 				dp[i][j] = dp[i-1][j-1] + 1
+s902507117.py(50): 		for j in range(1, m+1):
+s902507117.py(49): 	for i in range(1, n+1):
+s902507117.py(56): 	lcs = ""
+s902507117.py(57): 	i, j = n, m
+s902507117.py(58): 	while i != 0 and j != 0:
+s902507117.py(59): 		if dp[i][j] == dp[i-1][j]:
+s902507117.py(61): 		elif dp[i][j] == dp[i][j-1]:
+s902507117.py(64): 			lcs += st1[i-1]
+s902507117.py(65): 			i -= 1
+s902507117.py(66): 			j -= 1
+s902507117.py(58): 	while i != 0 and j != 0:
+s902507117.py(59): 		if dp[i][j] == dp[i-1][j]:
+s902507117.py(60): 			i -= 1
+s902507117.py(58): 	while i != 0 and j != 0:
+s902507117.py(59): 		if dp[i][j] == dp[i-1][j]:
+s902507117.py(61): 		elif dp[i][j] == dp[i][j-1]:
+s902507117.py(64): 			lcs += st1[i-1]
+s902507117.py(65): 			i -= 1
+s902507117.py(66): 			j -= 1
+s902507117.py(58): 	while i != 0 and j != 0:
+s902507117.py(59): 		if dp[i][j] == dp[i-1][j]:
+s902507117.py(61): 		elif dp[i][j] == dp[i][j-1]:
+s902507117.py(62): 			j -= 1
+s902507117.py(58): 	while i != 0 and j != 0:
+s902507117.py(59): 		if dp[i][j] == dp[i-1][j]:
+s902507117.py(61): 		elif dp[i][j] == dp[i][j-1]:
+s902507117.py(62): 			j -= 1
+s902507117.py(58): 	while i != 0 and j != 0:
+s902507117.py(59): 		if dp[i][j] == dp[i-1][j]:
+s902507117.py(61): 		elif dp[i][j] == dp[i][j-1]:
+s902507117.py(64): 			lcs += st1[i-1]
+s902507117.py(65): 			i -= 1
+s902507117.py(66): 			j -= 1
+s902507117.py(58): 	while i != 0 and j != 0:
+s902507117.py(67): 	return lcs[::-1]
+ --- modulename: s902507117, funcname: <lambda>
+s902507117.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+axb --- modulename: s902507117, funcname: <lambda>
+s902507117.py(28):     def __init__(self, file): self.buffer = FastIO(file); self.flush = self.buffer.flush; self.writable = self.buffer.writable; self.write = lambda s: self.buffer.write(s.encode("ascii")); self.read = lambda: self.buffer.read().decode("ascii"); self.readline = lambda: self.buffer.readline().decode("ascii")
+
