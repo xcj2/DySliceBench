@@ -1,0 +1,1032 @@
+ --- modulename: s464557882, funcname: <module>
+s464557882.py(1): class LazySegmentTree():
+ --- modulename: s464557882, funcname: LazySegmentTree
+s464557882.py(1): class LazySegmentTree():
+s464557882.py(3):     def __init__(self, n, f, g, h, ef, eh):
+s464557882.py(23):     def built(self, array):
+s464557882.py(32):     def update(self, i, x):
+s464557882.py(42):     def get(self, i):
+s464557882.py(50):     def update_range(self, l, r, x):
+s464557882.py(74):     def get_range(self, l, r):
+s464557882.py(95):     def max_right(self, l, z):
+s464557882.py(119):     def min_left(self, r, z):
+s464557882.py(143):     def propagate_lazy(self, i):
+s464557882.py(158):     def propagate_tree(self, i):
+s464557882.py(166):     def __getitem__(self, i):
+s464557882.py(169):     def __iter__(self):
+s464557882.py(180):     def __str__(self):
+s464557882.py(185): from itertools import accumulate
+s464557882.py(186): import sys
+s464557882.py(187): input = sys.stdin.readline
+s464557882.py(189): MOD = 998244353
+s464557882.py(190): off = 22
+s464557882.py(191): mask = 1<<22
+s464557882.py(193): N, Q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+ --- modulename: s464557882, funcname: <listcomp>
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(195): P = [pow(10,p,MOD) for p in range(N+1)]
+s464557882.py(196): SP = [0]+list(accumulate(P))
+s464557882.py(198): ef = 0
+s464557882.py(199): def f(x, y):
+s464557882.py(206): eh = -1
+s464557882.py(207): def h(a,b):
+s464557882.py(210): def g(a, x):
+s464557882.py(215): st = LazySegmentTree(N, f, g, h, ef, eh)
+ --- modulename: s464557882, funcname: __init__
+s464557882.py(11):         self.n = n
+s464557882.py(12):         self.f = f
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+s464557882.py(14):         self.h = h
+s464557882.py(15):         self.ef = ef
+s464557882.py(16):         self.eh = eh
+s464557882.py(17):         l = (self.n - 1).bit_length()
+s464557882.py(18):         self.size = 1 << l
+s464557882.py(19):         self.tree = [self.ef] * (self.size << 1)
+s464557882.py(20):         self.lazy = [self.eh] * ((self.size << 1) + 1)
+s464557882.py(21):         self.plt_cnt = 0
+s464557882.py(217): st.built([(1<<off) + 1]*N)
+ --- modulename: s464557882, funcname: built
+s464557882.py(27):         for i in range(self.n):
+s464557882.py(28):             self.tree[self.size + i] = array[i]
+s464557882.py(27):         for i in range(self.n):
+s464557882.py(28):             self.tree[self.size + i] = array[i]
+s464557882.py(27):         for i in range(self.n):
+s464557882.py(28):             self.tree[self.size + i] = array[i]
+s464557882.py(27):         for i in range(self.n):
+s464557882.py(28):             self.tree[self.size + i] = array[i]
+s464557882.py(27):         for i in range(self.n):
+s464557882.py(28):             self.tree[self.size + i] = array[i]
+s464557882.py(27):         for i in range(self.n):
+s464557882.py(28):             self.tree[self.size + i] = array[i]
+s464557882.py(27):         for i in range(self.n):
+s464557882.py(28):             self.tree[self.size + i] = array[i]
+s464557882.py(27):         for i in range(self.n):
+s464557882.py(28):             self.tree[self.size + i] = array[i]
+s464557882.py(27):         for i in range(self.n):
+s464557882.py(29):         for i in range(self.size - 1, 0, -1):
+s464557882.py(30):             self.tree[i] = self.f(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(29):         for i in range(self.size - 1, 0, -1):
+s464557882.py(30):             self.tree[i] = self.f(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(29):         for i in range(self.size - 1, 0, -1):
+s464557882.py(30):             self.tree[i] = self.f(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(29):         for i in range(self.size - 1, 0, -1):
+s464557882.py(30):             self.tree[i] = self.f(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(29):         for i in range(self.size - 1, 0, -1):
+s464557882.py(30):             self.tree[i] = self.f(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(29):         for i in range(self.size - 1, 0, -1):
+s464557882.py(30):             self.tree[i] = self.f(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(29):         for i in range(self.size - 1, 0, -1):
+s464557882.py(30):             self.tree[i] = self.f(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(29):         for i in range(self.size - 1, 0, -1):
+s464557882.py(218): res = [""]*Q
+s464557882.py(219): for i in range(Q):
+s464557882.py(220):     L, R, D = map(int, input().split())
+s464557882.py(221):     st.update_range(L-1, R, D)
+ --- modulename: s464557882, funcname: update_range
+s464557882.py(54):         if l >= r:
+s464557882.py(56):         l += self.size
+s464557882.py(57):         r += self.size
+s464557882.py(58):         l0 = l//(l&-l)
+s464557882.py(59):         r0 = r//(r&-r)
+s464557882.py(60):         self.propagate_lazy(l0)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(61):         self.propagate_lazy(r0-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(66):             if l&1:
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(64):                 r -= 1              # 半開区間なので先に引いてる
+s464557882.py(65):                 self.lazy[r] = self.h(x, self.lazy[r])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(66):             if l&1:
+s464557882.py(67):                 self.lazy[l] = self.h(x, self.lazy[l])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(68):                 l += 1
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(71):         self.propagate_tree(l0)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(72):         self.propagate_tree(r0-1)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(222):     res[i] = str((st.get_range(0,N)>>off)%MOD)
+ --- modulename: s464557882, funcname: get_range
+s464557882.py(78):         l += self.size
+s464557882.py(79):         r += self.size
+s464557882.py(80):         self.propagate_lazy(l//(l&-l))
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(81):         self.propagate_lazy((r//(r&-r))-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(82):         res_l = self.ef
+s464557882.py(83):         res_r = self.ef
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(86):                 res_l = self.f(res_l, self.g(self.lazy[l], self.tree[l]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(87):                 l += 1
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(93):         return self.f(res_l, res_r)
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(219): for i in range(Q):
+s464557882.py(220):     L, R, D = map(int, input().split())
+s464557882.py(221):     st.update_range(L-1, R, D)
+ --- modulename: s464557882, funcname: update_range
+s464557882.py(54):         if l >= r:
+s464557882.py(56):         l += self.size
+s464557882.py(57):         r += self.size
+s464557882.py(58):         l0 = l//(l&-l)
+s464557882.py(59):         r0 = r//(r&-r)
+s464557882.py(60):         self.propagate_lazy(l0)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(61):         self.propagate_lazy(r0-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(66):             if l&1:
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(66):             if l&1:
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(64):                 r -= 1              # 半開区間なので先に引いてる
+s464557882.py(65):                 self.lazy[r] = self.h(x, self.lazy[r])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(66):             if l&1:
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(71):         self.propagate_tree(l0)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(72):         self.propagate_tree(r0-1)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(222):     res[i] = str((st.get_range(0,N)>>off)%MOD)
+ --- modulename: s464557882, funcname: get_range
+s464557882.py(78):         l += self.size
+s464557882.py(79):         r += self.size
+s464557882.py(80):         self.propagate_lazy(l//(l&-l))
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(81):         self.propagate_lazy((r//(r&-r))-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(82):         res_l = self.ef
+s464557882.py(83):         res_r = self.ef
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(86):                 res_l = self.f(res_l, self.g(self.lazy[l], self.tree[l]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(87):                 l += 1
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(93):         return self.f(res_l, res_r)
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(219): for i in range(Q):
+s464557882.py(220):     L, R, D = map(int, input().split())
+s464557882.py(221):     st.update_range(L-1, R, D)
+ --- modulename: s464557882, funcname: update_range
+s464557882.py(54):         if l >= r:
+s464557882.py(56):         l += self.size
+s464557882.py(57):         r += self.size
+s464557882.py(58):         l0 = l//(l&-l)
+s464557882.py(59):         r0 = r//(r&-r)
+s464557882.py(60):         self.propagate_lazy(l0)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(151):             laz = self.lazy[x]
+s464557882.py(152):             self.lazy[(x<<1)|1] = self.h(laz, self.lazy[(x<<1)|1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(153):             self.lazy[x<<1] = self.h(laz, self.lazy[x<<1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(154):             self.tree[x] = self.g(laz, self.tree[x])   # get_range ではボトムアップの伝搬を行わないため、この処理をしないと tree が更新されない
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+s464557882.py(155):             self.lazy[x] = self.eh
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(61):         self.propagate_lazy(r0-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(66):             if l&1:
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(66):             if l&1:
+s464557882.py(67):                 self.lazy[l] = self.h(x, self.lazy[l])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(68):                 l += 1
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(66):             if l&1:
+s464557882.py(67):                 self.lazy[l] = self.h(x, self.lazy[l])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(68):                 l += 1
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(71):         self.propagate_tree(l0)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(72):         self.propagate_tree(r0-1)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(222):     res[i] = str((st.get_range(0,N)>>off)%MOD)
+ --- modulename: s464557882, funcname: get_range
+s464557882.py(78):         l += self.size
+s464557882.py(79):         r += self.size
+s464557882.py(80):         self.propagate_lazy(l//(l&-l))
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(81):         self.propagate_lazy((r//(r&-r))-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(82):         res_l = self.ef
+s464557882.py(83):         res_r = self.ef
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(86):                 res_l = self.f(res_l, self.g(self.lazy[l], self.tree[l]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(87):                 l += 1
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(93):         return self.f(res_l, res_r)
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(219): for i in range(Q):
+s464557882.py(220):     L, R, D = map(int, input().split())
+s464557882.py(221):     st.update_range(L-1, R, D)
+ --- modulename: s464557882, funcname: update_range
+s464557882.py(54):         if l >= r:
+s464557882.py(56):         l += self.size
+s464557882.py(57):         r += self.size
+s464557882.py(58):         l0 = l//(l&-l)
+s464557882.py(59):         r0 = r//(r&-r)
+s464557882.py(60):         self.propagate_lazy(l0)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(151):             laz = self.lazy[x]
+s464557882.py(152):             self.lazy[(x<<1)|1] = self.h(laz, self.lazy[(x<<1)|1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(153):             self.lazy[x<<1] = self.h(laz, self.lazy[x<<1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(154):             self.tree[x] = self.g(laz, self.tree[x])   # get_range ではボトムアップの伝搬を行わないため、この処理をしないと tree が更新されない
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+s464557882.py(155):             self.lazy[x] = self.eh
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(61):         self.propagate_lazy(r0-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(66):             if l&1:
+s464557882.py(67):                 self.lazy[l] = self.h(x, self.lazy[l])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(68):                 l += 1
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(71):         self.propagate_tree(l0)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(72):         self.propagate_tree(r0-1)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(222):     res[i] = str((st.get_range(0,N)>>off)%MOD)
+ --- modulename: s464557882, funcname: get_range
+s464557882.py(78):         l += self.size
+s464557882.py(79):         r += self.size
+s464557882.py(80):         self.propagate_lazy(l//(l&-l))
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(81):         self.propagate_lazy((r//(r&-r))-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(82):         res_l = self.ef
+s464557882.py(83):         res_r = self.ef
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(86):                 res_l = self.f(res_l, self.g(self.lazy[l], self.tree[l]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(87):                 l += 1
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(93):         return self.f(res_l, res_r)
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(219): for i in range(Q):
+s464557882.py(220):     L, R, D = map(int, input().split())
+s464557882.py(221):     st.update_range(L-1, R, D)
+ --- modulename: s464557882, funcname: update_range
+s464557882.py(54):         if l >= r:
+s464557882.py(56):         l += self.size
+s464557882.py(57):         r += self.size
+s464557882.py(58):         l0 = l//(l&-l)
+s464557882.py(59):         r0 = r//(r&-r)
+s464557882.py(60):         self.propagate_lazy(l0)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(151):             laz = self.lazy[x]
+s464557882.py(152):             self.lazy[(x<<1)|1] = self.h(laz, self.lazy[(x<<1)|1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(153):             self.lazy[x<<1] = self.h(laz, self.lazy[x<<1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(154):             self.tree[x] = self.g(laz, self.tree[x])   # get_range ではボトムアップの伝搬を行わないため、この処理をしないと tree が更新されない
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+s464557882.py(155):             self.lazy[x] = self.eh
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(61):         self.propagate_lazy(r0-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(150):                 continue
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(151):             laz = self.lazy[x]
+s464557882.py(152):             self.lazy[(x<<1)|1] = self.h(laz, self.lazy[(x<<1)|1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(153):             self.lazy[x<<1] = self.h(laz, self.lazy[x<<1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(154):             self.tree[x] = self.g(laz, self.tree[x])   # get_range ではボトムアップの伝搬を行わないため、この処理をしないと tree が更新されない
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+s464557882.py(155):             self.lazy[x] = self.eh
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(148):             x = i>>k
+s464557882.py(149):             if self.lazy[x] == self.eh:
+s464557882.py(151):             laz = self.lazy[x]
+s464557882.py(152):             self.lazy[(x<<1)|1] = self.h(laz, self.lazy[(x<<1)|1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(153):             self.lazy[x<<1] = self.h(laz, self.lazy[x<<1])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(154):             self.tree[x] = self.g(laz, self.tree[x])   # get_range ではボトムアップの伝搬を行わないため、この処理をしないと tree が更新されない
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+s464557882.py(155):             self.lazy[x] = self.eh
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(62):         while l < r:
+s464557882.py(63):             if r&1:
+s464557882.py(64):                 r -= 1              # 半開区間なので先に引いてる
+s464557882.py(65):                 self.lazy[r] = self.h(x, self.lazy[r])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(66):             if l&1:
+s464557882.py(67):                 self.lazy[l] = self.h(x, self.lazy[l])
+ --- modulename: s464557882, funcname: h
+s464557882.py(208):     return a if a != eh else b
+s464557882.py(68):                 l += 1
+s464557882.py(69):             l >>= 1
+s464557882.py(70):             r >>= 1
+s464557882.py(62):         while l < r:
+s464557882.py(71):         self.propagate_tree(l0)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(72):         self.propagate_tree(r0-1)
+ --- modulename: s464557882, funcname: propagate_tree
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: g
+s464557882.py(211):     x1 = x%mask
+s464557882.py(212):     res = a*SP[x1]%MOD
+s464557882.py(213):     return (res<<off) + x1
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(163):             i>>=1
+s464557882.py(164):             self.tree[i] = self.f(self.g(self.lazy[i<<1], self.tree[i<<1]), self.g(self.lazy[(i<<1)|1], self.tree[(i<<1)|1]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(162):         while i>1:
+s464557882.py(222):     res[i] = str((st.get_range(0,N)>>off)%MOD)
+ --- modulename: s464557882, funcname: get_range
+s464557882.py(78):         l += self.size
+s464557882.py(79):         r += self.size
+s464557882.py(80):         self.propagate_lazy(l//(l&-l))
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(81):         self.propagate_lazy((r//(r&-r))-1)
+ --- modulename: s464557882, funcname: propagate_lazy
+s464557882.py(147):         for k in range(i.bit_length()-1,0,-1):
+s464557882.py(82):         res_l = self.ef
+s464557882.py(83):         res_r = self.ef
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(85):             if l & 1:
+s464557882.py(86):                 res_l = self.f(res_l, self.g(self.lazy[l], self.tree[l]))
+ --- modulename: s464557882, funcname: <lambda>
+s464557882.py(13):         self.g = lambda xh, x: g(xh, x) if xh != eh else x
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(87):                 l += 1
+s464557882.py(88):             if r & 1:
+s464557882.py(91):             l >>= 1
+s464557882.py(92):             r >>= 1
+s464557882.py(84):         while l < r:
+s464557882.py(93):         return self.f(res_l, res_r)
+ --- modulename: s464557882, funcname: f
+s464557882.py(200):     x0, x1 = divmod(x,1<<off)
+s464557882.py(201):     y0, y1 = divmod(y,1<<off)
+s464557882.py(202):     res = x0*P[y1]+y0
+s464557882.py(203):     res %= MOD
+s464557882.py(204):     return (res<<off) + x1+y1
+s464557882.py(219): for i in range(Q):
+s464557882.py(223): print("\n".join(res))
+11222211
+77772211
+77333333
+72333333
+72311333
