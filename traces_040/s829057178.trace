@@ -1,0 +1,351 @@
+ --- modulename: s829057178, funcname: <module>
+s829057178.py(1): import os
+s829057178.py(2): import sys
+s829057178.py(3): from io import BytesIO, IOBase
+s829057178.py(5): BUFSIZE = 8192
+s829057178.py(8): class FastIO(IOBase):
+ --- modulename: s829057178, funcname: FastIO
+s829057178.py(8): class FastIO(IOBase):
+s829057178.py(9):     newlines = 0
+s829057178.py(11):     def __init__(self, file):
+s829057178.py(17):     def read(self):
+s829057178.py(27):     def readline(self):
+s829057178.py(36):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s829057178.py(42): class IOWrapper(IOBase):
+ --- modulename: s829057178, funcname: IOWrapper
+s829057178.py(42): class IOWrapper(IOBase):
+s829057178.py(43):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s829057178.py(52): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s829057178, funcname: __init__
+s829057178.py(44):         self.buffer = FastIO(file)
+ --- modulename: s829057178, funcname: __init__
+s829057178.py(12):         self._fd = file.fileno()
+s829057178.py(13):         self.buffer = BytesIO()
+s829057178.py(14):         self.writable = "x" in file.mode or "r" not in file.mode
+s829057178.py(15):         self.write = self.buffer.write if self.writable else None
+s829057178.py(45):         self.flush = self.buffer.flush
+s829057178.py(46):         self.writable = self.buffer.writable
+s829057178.py(47):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s829057178.py(48):         self.read = lambda: self.buffer.read().decode("ascii")
+s829057178.py(49):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s829057178, funcname: __init__
+s829057178.py(44):         self.buffer = FastIO(file)
+ --- modulename: s829057178, funcname: __init__
+s829057178.py(12):         self._fd = file.fileno()
+s829057178.py(13):         self.buffer = BytesIO()
+s829057178.py(14):         self.writable = "x" in file.mode or "r" not in file.mode
+s829057178.py(15):         self.write = self.buffer.write if self.writable else None
+s829057178.py(45):         self.flush = self.buffer.flush
+s829057178.py(46):         self.writable = self.buffer.writable
+s829057178.py(47):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s829057178.py(48):         self.read = lambda: self.buffer.read().decode("ascii")
+s829057178.py(49):         self.readline = lambda: self.buffer.readline().decode("ascii")
+s829057178.py(53): input = lambda: sys.stdin.readline().rstrip("\r\n")
+s829057178.py(55): import threading
+s829057178.py(56): sys.setrecursionlimit(10**5)
+s829057178.py(57): threading.stack_size(10**8)
+s829057178.py(58): def dfs(x):
+s829057178.py(68): def main():
+s829057178.py(84): t=threading.Thread(target=main)
+ --- modulename: threading, funcname: __init__
+threading.py(825):         assert group is None, "group argument must be None for now"
+threading.py(826):         if kwargs is None:
+threading.py(827):             kwargs = {}
+threading.py(828):         self._target = target
+threading.py(829):         self._name = str(name or _newname())
+ --- modulename: threading, funcname: _newname
+threading.py(758):     return template % _counter()
+threading.py(830):         self._args = args
+threading.py(831):         self._kwargs = kwargs
+threading.py(832):         if daemon is not None:
+threading.py(835):             self._daemonic = current_thread().daemon
+ --- modulename: threading, funcname: current_thread
+threading.py(1365):     try:
+threading.py(1366):         return _active[get_ident()]
+ --- modulename: threading, funcname: daemon
+threading.py(1159):         assert self._initialized, "Thread.__init__() not called"
+threading.py(1160):         return self._daemonic
+threading.py(836):         self._ident = None
+threading.py(837):         if _HAVE_THREAD_NATIVE_ID:
+threading.py(838):             self._native_id = None
+threading.py(839):         self._tstate_lock = None
+threading.py(840):         self._started = Event()
+ --- modulename: threading, funcname: __init__
+threading.py(529):         self._cond = Condition(Lock())
+ --- modulename: threading, funcname: __init__
+threading.py(229):         if lock is None:
+threading.py(231):         self._lock = lock
+threading.py(233):         self.acquire = lock.acquire
+threading.py(234):         self.release = lock.release
+threading.py(238):         try:
+threading.py(239):             self._release_save = lock._release_save
+threading.py(240):         except AttributeError:
+threading.py(241):             pass
+threading.py(242):         try:
+threading.py(243):             self._acquire_restore = lock._acquire_restore
+threading.py(244):         except AttributeError:
+threading.py(245):             pass
+threading.py(246):         try:
+threading.py(247):             self._is_owned = lock._is_owned
+threading.py(248):         except AttributeError:
+threading.py(249):             pass
+threading.py(250):         self._waiters = _deque()
+threading.py(530):         self._flag = False
+threading.py(841):         self._is_stopped = False
+threading.py(842):         self._initialized = True
+threading.py(844):         self._stderr = _sys.stderr
+threading.py(845):         self._invoke_excepthook = _make_invoke_excepthook()
+ --- modulename: threading, funcname: _make_invoke_excepthook
+threading.py(1234):     old_excepthook = excepthook
+threading.py(1235):     old_sys_excepthook = _sys.excepthook
+threading.py(1236):     if old_excepthook is None:
+threading.py(1238):     if old_sys_excepthook is None:
+threading.py(1241):     sys_exc_info = _sys.exc_info
+threading.py(1242):     local_print = print
+threading.py(1243):     local_sys = _sys
+threading.py(1245):     def invoke_excepthook(thread):
+threading.py(1277):     return invoke_excepthook
+threading.py(847):         _dangling.add(self)
+ --- modulename: _weakrefset, funcname: add
+_weakrefset.py(87):         if self._pending_removals:
+_weakrefset.py(89):         self.data.add(ref(item, self._remove))
+s829057178.py(85): t.start()
+ --- modulename: threading, funcname: start
+threading.py(890):         if not self._initialized:
+threading.py(893):         if self._started.is_set():
+ --- modulename: threading, funcname: is_set
+threading.py(538):         return self._flag
+threading.py(896):         with _active_limbo_lock:
+threading.py(897):             _limbo[self] = self
+threading.py(898):         try:
+threading.py(899):             _start_new_thread(self._bootstrap, ())
+threading.py(904):         self._started.wait()
+ --- modulename: threading, funcname: wait
+threading.py(578):         with self._cond:
+ --- modulename: threading, funcname: __enter__
+threading.py(257):         return self._lock.__enter__()
+threading.py(579):             signaled = self._flag
+threading.py(580):             if not signaled:
+threading.py(581):                 signaled = self._cond.wait(timeout)
+ --- modulename: threading, funcname: wait
+threading.py(303):         if not self._is_owned():
+ --- modulename: threading, funcname: _is_owned
+threading.py(274):         if self._lock.acquire(False):
+threading.py(278):             return True
+threading.py(305):         waiter = _allocate_lock()
+threading.py(306):         waiter.acquire()
+threading.py(307):         self._waiters.append(waiter)
+threading.py(308):         saved_state = self._release_save()
+ --- modulename: threading, funcname: _release_save
+threading.py(266):         self._lock.release()           # No state to save
+threading.py(309):         gotit = False
+threading.py(310):         try:    # restore state no matter what (e.g., KeyboardInterrupt)
+threading.py(311):             if timeout is None:
+threading.py(312):                 waiter.acquire()
+ --- modulename: threading, funcname: run
+threading.py(915):         try:
+threading.py(916):             if self._target:
+threading.py(917):                 self._target(*self._args, **self._kwargs)
+ --- modulename: s829057178, funcname: main
+s829057178.py(70):     n,m=map(int,input().split())
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(53): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(49):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s829057178, funcname: readline
+s829057178.py(28):         while self.newlines == 0:
+s829057178.py(29):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s829057178.py(30):             self.newlines = b.count(b"\n") + (not b)
+s829057178.py(31):             ptr = self.buffer.tell()
+s829057178.py(32):             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s829057178.py(28):         while self.newlines == 0:
+s829057178.py(33):         self.newlines -= 1
+s829057178.py(34):         return self.buffer.readline()
+s829057178.py(71):     l=[0]*(n+1)
+s829057178.py(72):     v=[0]*(n+1)
+s829057178.py(73):     adj=[]
+s829057178.py(74):     for i in range(n+1):
+s829057178.py(75):         adj.append([])
+s829057178.py(74):     for i in range(n+1):
+s829057178.py(75):         adj.append([])
+s829057178.py(74):     for i in range(n+1):
+s829057178.py(75):         adj.append([])
+s829057178.py(74):     for i in range(n+1):
+s829057178.py(75):         adj.append([])
+s829057178.py(74):     for i in range(n+1):
+s829057178.py(75):         adj.append([])
+s829057178.py(74):     for i in range(n+1):
+s829057178.py(76):     for i in range(m):
+s829057178.py(77):         x,y=map(int,input().split())
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(53): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(49):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s829057178, funcname: readline
+s829057178.py(28):         while self.newlines == 0:
+s829057178.py(33):         self.newlines -= 1
+s829057178.py(34):         return self.buffer.readline()
+s829057178.py(78):         adj[x].append(y)
+s829057178.py(76):     for i in range(m):
+s829057178.py(77):         x,y=map(int,input().split())
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(53): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(49):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s829057178, funcname: readline
+s829057178.py(28):         while self.newlines == 0:
+s829057178.py(33):         self.newlines -= 1
+s829057178.py(34):         return self.buffer.readline()
+s829057178.py(78):         adj[x].append(y)
+s829057178.py(76):     for i in range(m):
+s829057178.py(77):         x,y=map(int,input().split())
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(53): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(49):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s829057178, funcname: readline
+s829057178.py(28):         while self.newlines == 0:
+s829057178.py(33):         self.newlines -= 1
+s829057178.py(34):         return self.buffer.readline()
+s829057178.py(78):         adj[x].append(y)
+s829057178.py(76):     for i in range(m):
+s829057178.py(77):         x,y=map(int,input().split())
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(53): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(49):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s829057178, funcname: readline
+s829057178.py(28):         while self.newlines == 0:
+s829057178.py(33):         self.newlines -= 1
+s829057178.py(34):         return self.buffer.readline()
+s829057178.py(78):         adj[x].append(y)
+s829057178.py(76):     for i in range(m):
+s829057178.py(77):         x,y=map(int,input().split())
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(53): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(49):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s829057178, funcname: readline
+s829057178.py(28):         while self.newlines == 0:
+s829057178.py(33):         self.newlines -= 1
+s829057178.py(34):         return self.buffer.readline()
+s829057178.py(78):         adj[x].append(y)
+s829057178.py(76):     for i in range(m):
+s829057178.py(79):     ans=0
+s829057178.py(80):     for i in range(1,n+1):
+s829057178.py(81):         if not v[i]:
+s829057178.py(82):             ans=max(ans,dfs(i))
+ --- modulename: s829057178, funcname: dfs
+s829057178.py(60):     if v[x]==1:
+s829057178.py(62):     v[x]=1
+s829057178.py(63):     c=0
+s829057178.py(64):     for i in adj[x]:
+s829057178.py(65):         c=max(c,dfs(i)+1)
+ --- modulename: s829057178, funcname: dfs
+s829057178.py(60):     if v[x]==1:
+s829057178.py(62):     v[x]=1
+s829057178.py(63):     c=0
+s829057178.py(64):     for i in adj[x]:
+s829057178.py(65):         c=max(c,dfs(i)+1)
+ --- modulename: s829057178, funcname: dfs
+s829057178.py(60):     if v[x]==1:
+s829057178.py(62):     v[x]=1
+s829057178.py(63):     c=0
+s829057178.py(64):     for i in adj[x]:
+s829057178.py(66):     l[x]=c
+s829057178.py(67):     return c
+s829057178.py(64):     for i in adj[x]:
+s829057178.py(66):     l[x]=c
+s829057178.py(67):     return c
+s829057178.py(64):     for i in adj[x]:
+s829057178.py(65):         c=max(c,dfs(i)+1)
+ --- modulename: s829057178, funcname: dfs
+s829057178.py(60):     if v[x]==1:
+s829057178.py(62):     v[x]=1
+s829057178.py(63):     c=0
+s829057178.py(64):     for i in adj[x]:
+s829057178.py(65):         c=max(c,dfs(i)+1)
+ --- modulename: s829057178, funcname: dfs
+s829057178.py(60):     if v[x]==1:
+s829057178.py(61):         return(l[x])
+s829057178.py(64):     for i in adj[x]:
+s829057178.py(65):         c=max(c,dfs(i)+1)
+ --- modulename: s829057178, funcname: dfs
+s829057178.py(60):     if v[x]==1:
+s829057178.py(61):         return(l[x])
+s829057178.py(64):     for i in adj[x]:
+s829057178.py(66):     l[x]=c
+s829057178.py(67):     return c
+s829057178.py(64):     for i in adj[x]:
+s829057178.py(66):     l[x]=c
+s829057178.py(67):     return c
+s829057178.py(80):     for i in range(1,n+1):
+s829057178.py(81):         if not v[i]:
+s829057178.py(80):     for i in range(1,n+1):
+s829057178.py(81):         if not v[i]:
+s829057178.py(80):     for i in range(1,n+1):
+s829057178.py(81):         if not v[i]:
+s829057178.py(80):     for i in range(1,n+1):
+s829057178.py(83):     print(ans)
+ --- modulename: s829057178, funcname: <lambda>
+s829057178.py(47):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+3 --- modulename: s829057178, funcname: <lambda>
+s829057178.py(47):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
+threading.py(921):             del self._target, self._args, self._kwargs
+threading.py(313):                 gotit = True
+threading.py(319):             return gotit
+threading.py(321):             self._acquire_restore(saved_state)
+ --- modulename: threading, funcname: _acquire_restore
+threading.py(269):         self._lock.acquire()           # Ignore saved state
+threading.py(322):             if not gotit:
+threading.py(319):             return gotit
+threading.py(582):             return signaled
+ --- modulename: threading, funcname: __exit__
+threading.py(260):         return self._lock.__exit__(*args)
+s829057178.py(86): t.join()
+ --- modulename: threading, funcname: join
+threading.py(1052):         if not self._initialized:
+threading.py(1054):         if not self._started.is_set():
+ --- modulename: threading, funcname: is_set
+threading.py(538):         return self._flag
+threading.py(1056):         if self is current_thread():
+ --- modulename: threading, funcname: current_thread
+threading.py(1365):     try:
+threading.py(1366):         return _active[get_ident()]
+threading.py(1059):         if timeout is None:
+threading.py(1060):             self._wait_for_tstate_lock()
+ --- modulename: threading, funcname: _wait_for_tstate_lock
+threading.py(1073):         lock = self._tstate_lock
+threading.py(1074):         if lock is None:
+threading.py(1079):         try:
+threading.py(1080):             if lock.acquire(block, timeout):
+threading.py(1081):                 lock.release()
+threading.py(1082):                 self._stop()
+ --- modulename: threading, funcname: _stop
+threading.py(1009):         lock = self._tstate_lock
+threading.py(1010):         if lock is not None:
+threading.py(1011):             assert not lock.locked()
+threading.py(1012):         self._is_stopped = True
+threading.py(1013):         self._tstate_lock = None
+threading.py(1014):         if not self.daemon:
+ --- modulename: threading, funcname: daemon
+threading.py(1159):         assert self._initialized, "Thread.__init__() not called"
+threading.py(1160):         return self._daemonic
+threading.py(1015):             with _shutdown_locks_lock:
+threading.py(1017):                 _maintain_shutdown_locks()
+ --- modulename: threading, funcname: _maintain_shutdown_locks
+threading.py(785):     to_remove = [lock for lock in _shutdown_locks if not lock.locked()]
+ --- modulename: threading, funcname: <listcomp>
+threading.py(785):     to_remove = [lock for lock in _shutdown_locks if not lock.locked()]
+threading.py(785):     to_remove = [lock for lock in _shutdown_locks if not lock.locked()]
+threading.py(785):     to_remove = [lock for lock in _shutdown_locks if not lock.locked()]
+threading.py(786):     _shutdown_locks.difference_update(to_remove)
