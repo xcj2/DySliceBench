@@ -1,0 +1,70 @@
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+import pprint
+from queue import Queue
+
+"""Diameter of Tree"""
+
+#fd = os.open('GRL_5_A.txt', os.O_RDONLY)
+#os.dup2(fd, sys.stdin.fileno())
+
+
+class Edge:
+    def __init__(self, to, weight):
+        self.to = to
+        self.weight = weight
+
+    def __str__(self):
+        return '{} {}'.format(self.to, self.weight)
+
+
+N = int(input())
+G = [[] for i in range(N)]
+for i in range(N-1):
+    start, end, weight = list(map(int, input().split()))
+
+    # ??????
+    edge = Edge(end, weight)
+    G[start].append(edge)
+
+    # ??°???
+    edge = Edge(start, weight)
+    G[end].append(edge)
+
+
+# ???i??????1????????????????±???????
+def bfs(index):
+    d = [float('inf')] * N
+    visited = [False] * N
+    queue = Queue()
+    queue.put(index)
+    d[index] = 0
+
+    while not queue.empty():
+        u = queue.get()
+        visited[u] = True
+
+        for edge in G[u]:
+            if d[u] + edge.weight < d[edge.to]:
+                d[edge.to] = d[u] + edge.weight
+            if not visited[edge.to]:
+                queue.put(edge.to)
+
+    max_i = 0
+    max_d = 0
+    for i in range(N):
+        if max_d < d[i]:
+            max_i = i
+            max_d = d[i]
+    #print('farthest i {} d {}'.format(max_i, max_d))
+    return max_i, max_d
+
+# ?§???????????????§????????????????????????1???????????????????????????
+temp_i, temp_d = bfs(0)
+# ?¬????????????????1???????????????????????????
+temp_i, temp_d = bfs(temp_i)
+
+# diameter
+print(temp_d)
