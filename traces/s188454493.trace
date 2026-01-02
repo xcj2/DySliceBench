@@ -1,0 +1,325 @@
+ --- modulename: s188454493, funcname: <module>
+s188454493.py(2): IN = list(map(int, input().split()))
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s188454493.py(3): N, K = IN[0], IN[1]
+s188454493.py(4): P = [None] + list(map(int, input().split()))
+s188454493.py(5): C = [None] + list(map(int, input().split()))
+s188454493.py(6): MAX_N = 45000
+s188454493.py(12): verbose = False
+s188454493.py(14): def cumsum(a):
+s188454493.py(19): def find_cycle(p, pos):
+s188454493.py(33): def score(steps, c):
+s188454493.py(38): maxsc = -10**9-1
+s188454493.py(39): done = [False] * (N+1)
+s188454493.py(40): for i in range(1, N+1):
+s188454493.py(41):     if verbose: print('entering', i)
+s188454493.py(42):     if done[i]: continue
+s188454493.py(43):     [preclosure_path, closure_path] = find_cycle(P, i)
+ --- modulename: s188454493, funcname: find_cycle
+s188454493.py(20):     cnt = 0
+s188454493.py(21):     steps = [0] * (MAX_N+1)
+s188454493.py(22):     path = [False] * (MAX_N+1)
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(29):     st = steps.index(pos) # start of closure
+s188454493.py(30):     return [steps[:st], steps[st:cnt]]
+s188454493.py(44):     if verbose: print('closure found:', closure_path)
+s188454493.py(45):     closure_scores = score(closure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(46):     preclosure_scores = score(preclosure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(47):     closure_score = sum(closure_scores)
+s188454493.py(48):     preclosure_len, closure_len = len(preclosure_path), len(closure_path)
+s188454493.py(50):     cycles = (K-preclosure_len)//closure_len
+s188454493.py(51):     resid = (K-preclosure_len)%closure_len
+s188454493.py(52):     if cycles>=1: cycles -= 1
+s188454493.py(53):     abbrev = closure_score * cycles
+s188454493.py(55):     trail = preclosure_scores + closure_scores * 3
+s188454493.py(56):     path = preclosure_path + closure_path*3
+s188454493.py(57):     if verbose: print('score trail:', trail)
+s188454493.py(58):     if verbose: print('path:', preclosure_path + closure_path*3)
+s188454493.py(59):     if verbose: print('mark:', mark)
+s188454493.py(60):     mark = min(K, len(preclosure_path+closure_path)+resid)
+s188454493.py(61):     localmax = max(cumsum(trail[0:mark])) + max(0, closure_score*cycles)
+ --- modulename: s188454493, funcname: cumsum
+s188454493.py(15):     tmp = [0]*(len(a)+1)
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(17):     return tmp[1:]
+s188454493.py(62):     if verbose: print('localmax:', localmax, 'cycles:', cycles)
+s188454493.py(63):     maxsc = max(localmax, maxsc)
+s188454493.py(65):     if verbose: print('going greedy')
+s188454493.py(66):     for j in range(1, closure_len):
+s188454493.py(67):         if K<=mark+j: break
+s188454493.py(40): for i in range(1, N+1):
+s188454493.py(41):     if verbose: print('entering', i)
+s188454493.py(42):     if done[i]: continue
+s188454493.py(43):     [preclosure_path, closure_path] = find_cycle(P, i)
+ --- modulename: s188454493, funcname: find_cycle
+s188454493.py(20):     cnt = 0
+s188454493.py(21):     steps = [0] * (MAX_N+1)
+s188454493.py(22):     path = [False] * (MAX_N+1)
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(29):     st = steps.index(pos) # start of closure
+s188454493.py(30):     return [steps[:st], steps[st:cnt]]
+s188454493.py(44):     if verbose: print('closure found:', closure_path)
+s188454493.py(45):     closure_scores = score(closure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(46):     preclosure_scores = score(preclosure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(47):     closure_score = sum(closure_scores)
+s188454493.py(48):     preclosure_len, closure_len = len(preclosure_path), len(closure_path)
+s188454493.py(50):     cycles = (K-preclosure_len)//closure_len
+s188454493.py(51):     resid = (K-preclosure_len)%closure_len
+s188454493.py(52):     if cycles>=1: cycles -= 1
+s188454493.py(53):     abbrev = closure_score * cycles
+s188454493.py(55):     trail = preclosure_scores + closure_scores * 3
+s188454493.py(56):     path = preclosure_path + closure_path*3
+s188454493.py(57):     if verbose: print('score trail:', trail)
+s188454493.py(58):     if verbose: print('path:', preclosure_path + closure_path*3)
+s188454493.py(59):     if verbose: print('mark:', mark)
+s188454493.py(60):     mark = min(K, len(preclosure_path+closure_path)+resid)
+s188454493.py(61):     localmax = max(cumsum(trail[0:mark])) + max(0, closure_score*cycles)
+ --- modulename: s188454493, funcname: cumsum
+s188454493.py(15):     tmp = [0]*(len(a)+1)
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(17):     return tmp[1:]
+s188454493.py(62):     if verbose: print('localmax:', localmax, 'cycles:', cycles)
+s188454493.py(63):     maxsc = max(localmax, maxsc)
+s188454493.py(65):     if verbose: print('going greedy')
+s188454493.py(66):     for j in range(1, closure_len):
+s188454493.py(67):         if K<=mark+j: break
+s188454493.py(40): for i in range(1, N+1):
+s188454493.py(41):     if verbose: print('entering', i)
+s188454493.py(42):     if done[i]: continue
+s188454493.py(43):     [preclosure_path, closure_path] = find_cycle(P, i)
+ --- modulename: s188454493, funcname: find_cycle
+s188454493.py(20):     cnt = 0
+s188454493.py(21):     steps = [0] * (MAX_N+1)
+s188454493.py(22):     path = [False] * (MAX_N+1)
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(29):     st = steps.index(pos) # start of closure
+s188454493.py(30):     return [steps[:st], steps[st:cnt]]
+s188454493.py(44):     if verbose: print('closure found:', closure_path)
+s188454493.py(45):     closure_scores = score(closure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(46):     preclosure_scores = score(preclosure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(47):     closure_score = sum(closure_scores)
+s188454493.py(48):     preclosure_len, closure_len = len(preclosure_path), len(closure_path)
+s188454493.py(50):     cycles = (K-preclosure_len)//closure_len
+s188454493.py(51):     resid = (K-preclosure_len)%closure_len
+s188454493.py(52):     if cycles>=1: cycles -= 1
+s188454493.py(53):     abbrev = closure_score * cycles
+s188454493.py(55):     trail = preclosure_scores + closure_scores * 3
+s188454493.py(56):     path = preclosure_path + closure_path*3
+s188454493.py(57):     if verbose: print('score trail:', trail)
+s188454493.py(58):     if verbose: print('path:', preclosure_path + closure_path*3)
+s188454493.py(59):     if verbose: print('mark:', mark)
+s188454493.py(60):     mark = min(K, len(preclosure_path+closure_path)+resid)
+s188454493.py(61):     localmax = max(cumsum(trail[0:mark])) + max(0, closure_score*cycles)
+ --- modulename: s188454493, funcname: cumsum
+s188454493.py(15):     tmp = [0]*(len(a)+1)
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(17):     return tmp[1:]
+s188454493.py(62):     if verbose: print('localmax:', localmax, 'cycles:', cycles)
+s188454493.py(63):     maxsc = max(localmax, maxsc)
+s188454493.py(65):     if verbose: print('going greedy')
+s188454493.py(66):     for j in range(1, closure_len):
+s188454493.py(67):         if K<=mark+j: break
+s188454493.py(40): for i in range(1, N+1):
+s188454493.py(41):     if verbose: print('entering', i)
+s188454493.py(42):     if done[i]: continue
+s188454493.py(43):     [preclosure_path, closure_path] = find_cycle(P, i)
+ --- modulename: s188454493, funcname: find_cycle
+s188454493.py(20):     cnt = 0
+s188454493.py(21):     steps = [0] * (MAX_N+1)
+s188454493.py(22):     path = [False] * (MAX_N+1)
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(29):     st = steps.index(pos) # start of closure
+s188454493.py(30):     return [steps[:st], steps[st:cnt]]
+s188454493.py(44):     if verbose: print('closure found:', closure_path)
+s188454493.py(45):     closure_scores = score(closure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(46):     preclosure_scores = score(preclosure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(47):     closure_score = sum(closure_scores)
+s188454493.py(48):     preclosure_len, closure_len = len(preclosure_path), len(closure_path)
+s188454493.py(50):     cycles = (K-preclosure_len)//closure_len
+s188454493.py(51):     resid = (K-preclosure_len)%closure_len
+s188454493.py(52):     if cycles>=1: cycles -= 1
+s188454493.py(53):     abbrev = closure_score * cycles
+s188454493.py(55):     trail = preclosure_scores + closure_scores * 3
+s188454493.py(56):     path = preclosure_path + closure_path*3
+s188454493.py(57):     if verbose: print('score trail:', trail)
+s188454493.py(58):     if verbose: print('path:', preclosure_path + closure_path*3)
+s188454493.py(59):     if verbose: print('mark:', mark)
+s188454493.py(60):     mark = min(K, len(preclosure_path+closure_path)+resid)
+s188454493.py(61):     localmax = max(cumsum(trail[0:mark])) + max(0, closure_score*cycles)
+ --- modulename: s188454493, funcname: cumsum
+s188454493.py(15):     tmp = [0]*(len(a)+1)
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(17):     return tmp[1:]
+s188454493.py(62):     if verbose: print('localmax:', localmax, 'cycles:', cycles)
+s188454493.py(63):     maxsc = max(localmax, maxsc)
+s188454493.py(65):     if verbose: print('going greedy')
+s188454493.py(66):     for j in range(1, closure_len):
+s188454493.py(67):         if K<=mark+j: break
+s188454493.py(40): for i in range(1, N+1):
+s188454493.py(41):     if verbose: print('entering', i)
+s188454493.py(42):     if done[i]: continue
+s188454493.py(43):     [preclosure_path, closure_path] = find_cycle(P, i)
+ --- modulename: s188454493, funcname: find_cycle
+s188454493.py(20):     cnt = 0
+s188454493.py(21):     steps = [0] * (MAX_N+1)
+s188454493.py(22):     path = [False] * (MAX_N+1)
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(24):         steps[cnt] = pos
+s188454493.py(25):         path[pos] = True
+s188454493.py(26):         cnt += 1
+s188454493.py(27):         pos = p[pos]
+s188454493.py(28):         if path[pos]: break # found closure
+s188454493.py(29):     st = steps.index(pos) # start of closure
+s188454493.py(30):     return [steps[:st], steps[st:cnt]]
+s188454493.py(44):     if verbose: print('closure found:', closure_path)
+s188454493.py(45):     closure_scores = score(closure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(46):     preclosure_scores = score(preclosure_path, C)
+ --- modulename: s188454493, funcname: score
+s188454493.py(34):     ret = [0]*len(steps)
+s188454493.py(35):     for i in range(len(steps)): ret[i] = c[steps[i]]
+s188454493.py(36):     return ret
+s188454493.py(47):     closure_score = sum(closure_scores)
+s188454493.py(48):     preclosure_len, closure_len = len(preclosure_path), len(closure_path)
+s188454493.py(50):     cycles = (K-preclosure_len)//closure_len
+s188454493.py(51):     resid = (K-preclosure_len)%closure_len
+s188454493.py(52):     if cycles>=1: cycles -= 1
+s188454493.py(53):     abbrev = closure_score * cycles
+s188454493.py(55):     trail = preclosure_scores + closure_scores * 3
+s188454493.py(56):     path = preclosure_path + closure_path*3
+s188454493.py(57):     if verbose: print('score trail:', trail)
+s188454493.py(58):     if verbose: print('path:', preclosure_path + closure_path*3)
+s188454493.py(59):     if verbose: print('mark:', mark)
+s188454493.py(60):     mark = min(K, len(preclosure_path+closure_path)+resid)
+s188454493.py(61):     localmax = max(cumsum(trail[0:mark])) + max(0, closure_score*cycles)
+ --- modulename: s188454493, funcname: cumsum
+s188454493.py(15):     tmp = [0]*(len(a)+1)
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(16):     for i in range(1, len(a)+1): tmp[i] = a[i-1] + tmp[i-1]
+s188454493.py(17):     return tmp[1:]
+s188454493.py(62):     if verbose: print('localmax:', localmax, 'cycles:', cycles)
+s188454493.py(63):     maxsc = max(localmax, maxsc)
+s188454493.py(65):     if verbose: print('going greedy')
+s188454493.py(66):     for j in range(1, closure_len):
+s188454493.py(67):         if K<=mark+j: break
+s188454493.py(40): for i in range(1, N+1):
+s188454493.py(75): print(maxsc)
+8
