@@ -1,0 +1,293 @@
+ --- modulename: s509586409, funcname: <module>
+s509586409.py(1): class LazySegTree: # Non Recursion, RmQ, RUQ
+ --- modulename: s509586409, funcname: LazySegTree
+s509586409.py(1): class LazySegTree: # Non Recursion, RmQ, RUQ
+s509586409.py(2):     def __init__(self, N):
+s509586409.py(9):     def build(self, lis):
+s509586409.py(15):     def _gindex(self, l, r):
+s509586409.py(27):     def propagates(self, *ids): # ids: 1-indexded
+s509586409.py(36):     def update(self, l, r, x): # change all[left, right) to x
+s509586409.py(51):     def query(self, l, r):
+s509586409.py(65): nm = lambda: map(int, input().split())
+s509586409.py(66): n,q = nm()
+ --- modulename: s509586409, funcname: <lambda>
+s509586409.py(65): nm = lambda: map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s509586409.py(67): S = LazySegTree(n)
+ --- modulename: s509586409, funcname: __init__
+s509586409.py(3):         self.N = N
+s509586409.py(4):         self._N = 1<<((N-1).bit_length())
+s509586409.py(5):         self.INF = (1<<31) - 1
+s509586409.py(6):         self.node = [self.INF]*2*self._N
+s509586409.py(7):         self.lazy = [None]*2*self._N
+s509586409.py(68): for _ in range(q):
+s509586409.py(69):   v = list(nm())
+ --- modulename: s509586409, funcname: <lambda>
+s509586409.py(65): nm = lambda: map(int, input().split())
+s509586409.py(70):   if v[0]:
+s509586409.py(75):   	S.update(v[1], v[2]+1, v[3])
+ --- modulename: s509586409, funcname: update
+s509586409.py(37):         *ids, = self._gindex(l, r)
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(16):         left = l + self._N; right = r + self._N
+s509586409.py(17):         lm = (left // (left & -left)) >> 1
+s509586409.py(18):         rm = (right // (right & -right)) >> 1
+s509586409.py(19):         while left < right:
+s509586409.py(20):             if right <= rm: yield right
+s509586409.py(21):             if left <= lm: yield left
+s509586409.py(22):             left >>= 1; right >>= 1
+s509586409.py(19):         while left < right:
+s509586409.py(20):             if right <= rm: yield right
+s509586409.py(21):             if left <= lm: yield left
+s509586409.py(22):             left >>= 1; right >>= 1
+s509586409.py(19):         while left < right:
+s509586409.py(23):         while left:
+s509586409.py(24):             yield left
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(25):             left >>= 1
+s509586409.py(23):         while left:
+s509586409.py(38):         self.propagates(*ids)
+ --- modulename: s509586409, funcname: propagates
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(34):         return
+s509586409.py(39):         left = l + self._N; right = r + self._N
+s509586409.py(40):         while left < right:
+s509586409.py(41):             if left & 1:
+s509586409.py(44):             if right & 1:
+s509586409.py(47):             left >>= 1; right >>= 1
+s509586409.py(40):         while left < right:
+s509586409.py(41):             if left & 1:
+s509586409.py(44):             if right & 1:
+s509586409.py(45):                 right -= 1
+s509586409.py(46):                 self.lazy[right-1] = self.node[right-1] = x
+s509586409.py(47):             left >>= 1; right >>= 1
+s509586409.py(40):         while left < right:
+s509586409.py(48):         for i in ids:
+s509586409.py(49):             self.node[i-1] = min(self.node[2*i-1], self.node[2*i])
+s509586409.py(48):         for i in ids:
+s509586409.py(68): for _ in range(q):
+s509586409.py(69):   v = list(nm())
+ --- modulename: s509586409, funcname: <lambda>
+s509586409.py(65): nm = lambda: map(int, input().split())
+s509586409.py(70):   if v[0]:
+s509586409.py(75):   	S.update(v[1], v[2]+1, v[3])
+ --- modulename: s509586409, funcname: update
+s509586409.py(37):         *ids, = self._gindex(l, r)
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(16):         left = l + self._N; right = r + self._N
+s509586409.py(17):         lm = (left // (left & -left)) >> 1
+s509586409.py(18):         rm = (right // (right & -right)) >> 1
+s509586409.py(19):         while left < right:
+s509586409.py(20):             if right <= rm: yield right
+s509586409.py(21):             if left <= lm: yield left
+s509586409.py(22):             left >>= 1; right >>= 1
+s509586409.py(19):         while left < right:
+s509586409.py(20):             if right <= rm: yield right
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(21):             if left <= lm: yield left
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(22):             left >>= 1; right >>= 1
+s509586409.py(19):         while left < right:
+s509586409.py(23):         while left:
+s509586409.py(24):             yield left
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(25):             left >>= 1
+s509586409.py(23):         while left:
+s509586409.py(38):         self.propagates(*ids)
+ --- modulename: s509586409, funcname: propagates
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(31):             self.lazy[2*i-1] = self.node[2*i-1] = v
+s509586409.py(32):             self.lazy[2*i] = self.node[2*i] = v
+s509586409.py(33):             self.lazy[i-1] = None
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(34):         return
+s509586409.py(39):         left = l + self._N; right = r + self._N
+s509586409.py(40):         while left < right:
+s509586409.py(41):             if left & 1:
+s509586409.py(42):                 self.lazy[left-1] = self.node[left-1] = x
+s509586409.py(43):                 left += 1
+s509586409.py(44):             if right & 1:
+s509586409.py(45):                 right -= 1
+s509586409.py(46):                 self.lazy[right-1] = self.node[right-1] = x
+s509586409.py(47):             left >>= 1; right >>= 1
+s509586409.py(40):         while left < right:
+s509586409.py(48):         for i in ids:
+s509586409.py(49):             self.node[i-1] = min(self.node[2*i-1], self.node[2*i])
+s509586409.py(48):         for i in ids:
+s509586409.py(49):             self.node[i-1] = min(self.node[2*i-1], self.node[2*i])
+s509586409.py(48):         for i in ids:
+s509586409.py(49):             self.node[i-1] = min(self.node[2*i-1], self.node[2*i])
+s509586409.py(48):         for i in ids:
+s509586409.py(68): for _ in range(q):
+s509586409.py(69):   v = list(nm())
+ --- modulename: s509586409, funcname: <lambda>
+s509586409.py(65): nm = lambda: map(int, input().split())
+s509586409.py(70):   if v[0]:
+s509586409.py(75):   	S.update(v[1], v[2]+1, v[3])
+ --- modulename: s509586409, funcname: update
+s509586409.py(37):         *ids, = self._gindex(l, r)
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(16):         left = l + self._N; right = r + self._N
+s509586409.py(17):         lm = (left // (left & -left)) >> 1
+s509586409.py(18):         rm = (right // (right & -right)) >> 1
+s509586409.py(19):         while left < right:
+s509586409.py(20):             if right <= rm: yield right
+s509586409.py(21):             if left <= lm: yield left
+s509586409.py(22):             left >>= 1; right >>= 1
+s509586409.py(19):         while left < right:
+s509586409.py(23):         while left:
+s509586409.py(24):             yield left
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(25):             left >>= 1
+s509586409.py(23):         while left:
+s509586409.py(24):             yield left
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(25):             left >>= 1
+s509586409.py(23):         while left:
+s509586409.py(38):         self.propagates(*ids)
+ --- modulename: s509586409, funcname: propagates
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(34):         return
+s509586409.py(39):         left = l + self._N; right = r + self._N
+s509586409.py(40):         while left < right:
+s509586409.py(41):             if left & 1:
+s509586409.py(44):             if right & 1:
+s509586409.py(45):                 right -= 1
+s509586409.py(46):                 self.lazy[right-1] = self.node[right-1] = x
+s509586409.py(47):             left >>= 1; right >>= 1
+s509586409.py(40):         while left < right:
+s509586409.py(48):         for i in ids:
+s509586409.py(49):             self.node[i-1] = min(self.node[2*i-1], self.node[2*i])
+s509586409.py(48):         for i in ids:
+s509586409.py(49):             self.node[i-1] = min(self.node[2*i-1], self.node[2*i])
+s509586409.py(48):         for i in ids:
+s509586409.py(68): for _ in range(q):
+s509586409.py(69):   v = list(nm())
+ --- modulename: s509586409, funcname: <lambda>
+s509586409.py(65): nm = lambda: map(int, input().split())
+s509586409.py(70):   if v[0]:
+s509586409.py(73):     print(S.query(v[1], v[2]+1))
+ --- modulename: s509586409, funcname: query
+s509586409.py(52):         self.propagates(*self._gindex(l, r))
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(16):         left = l + self._N; right = r + self._N
+s509586409.py(17):         lm = (left // (left & -left)) >> 1
+s509586409.py(18):         rm = (right // (right & -right)) >> 1
+s509586409.py(19):         while left < right:
+s509586409.py(20):             if right <= rm: yield right
+s509586409.py(21):             if left <= lm: yield left
+s509586409.py(22):             left >>= 1; right >>= 1
+s509586409.py(19):         while left < right:
+s509586409.py(20):             if right <= rm: yield right
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(21):             if left <= lm: yield left
+s509586409.py(22):             left >>= 1; right >>= 1
+s509586409.py(19):         while left < right:
+s509586409.py(23):         while left:
+s509586409.py(24):             yield left
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(25):             left >>= 1
+s509586409.py(23):         while left:
+ --- modulename: s509586409, funcname: propagates
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(34):         return
+s509586409.py(53):         left = l + self._N; right = r + self._N
+s509586409.py(54):         ret = self.INF
+s509586409.py(55):         while left < right:
+s509586409.py(56):             if right & 1:
+s509586409.py(57):                 right -= 1
+s509586409.py(58):                 ret = min(ret, self.node[right-1])
+s509586409.py(59):             if left & 1:
+s509586409.py(62):             left >>= 1; right >>= 1
+s509586409.py(55):         while left < right:
+s509586409.py(56):             if right & 1:
+s509586409.py(57):                 right -= 1
+s509586409.py(58):                 ret = min(ret, self.node[right-1])
+s509586409.py(59):             if left & 1:
+s509586409.py(62):             left >>= 1; right >>= 1
+s509586409.py(55):         while left < right:
+s509586409.py(63):         return ret
+1
+s509586409.py(68): for _ in range(q):
+s509586409.py(69):   v = list(nm())
+ --- modulename: s509586409, funcname: <lambda>
+s509586409.py(65): nm = lambda: map(int, input().split())
+s509586409.py(70):   if v[0]:
+s509586409.py(73):     print(S.query(v[1], v[2]+1))
+ --- modulename: s509586409, funcname: query
+s509586409.py(52):         self.propagates(*self._gindex(l, r))
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(16):         left = l + self._N; right = r + self._N
+s509586409.py(17):         lm = (left // (left & -left)) >> 1
+s509586409.py(18):         rm = (right // (right & -right)) >> 1
+s509586409.py(19):         while left < right:
+s509586409.py(20):             if right <= rm: yield right
+s509586409.py(21):             if left <= lm: yield left
+s509586409.py(22):             left >>= 1; right >>= 1
+s509586409.py(19):         while left < right:
+s509586409.py(20):             if right <= rm: yield right
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(21):             if left <= lm: yield left
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(22):             left >>= 1; right >>= 1
+s509586409.py(19):         while left < right:
+s509586409.py(23):         while left:
+s509586409.py(24):             yield left
+ --- modulename: s509586409, funcname: _gindex
+s509586409.py(25):             left >>= 1
+s509586409.py(23):         while left:
+ --- modulename: s509586409, funcname: propagates
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(29):             v = self.lazy[i-1]
+s509586409.py(30):             if v is None: continue
+s509586409.py(28):         for i in reversed(ids):
+s509586409.py(34):         return
+s509586409.py(53):         left = l + self._N; right = r + self._N
+s509586409.py(54):         ret = self.INF
+s509586409.py(55):         while left < right:
+s509586409.py(56):             if right & 1:
+s509586409.py(57):                 right -= 1
+s509586409.py(58):                 ret = min(ret, self.node[right-1])
+s509586409.py(59):             if left & 1:
+s509586409.py(60):                 ret = min(ret, self.node[left-1])
+s509586409.py(61):                 left += 1
+s509586409.py(62):             left >>= 1; right >>= 1
+s509586409.py(55):         while left < right:
+s509586409.py(63):         return ret
+2
+s509586409.py(68): for _ in range(q):
