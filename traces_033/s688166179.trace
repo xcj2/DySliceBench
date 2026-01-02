@@ -1,0 +1,420 @@
+ --- modulename: s688166179, funcname: <module>
+s688166179.py(1): import operator
+s688166179.py(2): import os
+s688166179.py(3): import sys
+s688166179.py(4): from functools import reduce
+s688166179.py(6): if os.getenv("LOCAL"):
+ --- modulename: os, funcname: getenv
+os.py(775):     return environ.get(key, default)
+ --- modulename: _collections_abc, funcname: get
+_collections_abc.py(762):         try:
+_collections_abc.py(763):             return self[key]
+ --- modulename: os, funcname: __getitem__
+os.py(675):         try:
+os.py(676):             value = self._data[self.encodekey(key)]
+ --- modulename: os, funcname: encodekey
+os.py(747):             return encode(key).upper()
+ --- modulename: os, funcname: check_str
+os.py(741):             if not isinstance(value, str):
+os.py(743):             return value
+os.py(677):         except KeyError:
+os.py(679):             raise KeyError(key) from None
+_collections_abc.py(764):         except KeyError:
+_collections_abc.py(765):             return default
+s688166179.py(9): sys.setrecursionlimit(10 ** 9)
+s688166179.py(10): INF = float("inf")
+s688166179.py(11): IINF = 10 ** 18
+s688166179.py(12): MOD = 10 ** 9 + 7
+s688166179.py(18): class LazySegmentTree:
+ --- modulename: s688166179, funcname: LazySegmentTree
+s688166179.py(18): class LazySegmentTree:
+s688166179.py(20):     def __init__(self, values, fn=operator.add):
+s688166179.py(37):     def _add(self, k, value):
+s688166179.py(43):     def add(self, l, r, value):
+s688166179.py(66):     def _update(self, p):
+s688166179.py(79):     def _eval(self, p):
+s688166179.py(92):     def get(self, l, r=None):
+s688166179.py(118): N, D, A = list(map(int, sys.stdin.buffer.readline().split()))
+s688166179.py(119): XH = [list(map(int, sys.stdin.buffer.readline().split())) for _ in range(N)]
+ --- modulename: s688166179, funcname: <listcomp>
+s688166179.py(119): XH = [list(map(int, sys.stdin.buffer.readline().split())) for _ in range(N)]
+s688166179.py(119): XH = [list(map(int, sys.stdin.buffer.readline().split())) for _ in range(N)]
+s688166179.py(119): XH = [list(map(int, sys.stdin.buffer.readline().split())) for _ in range(N)]
+s688166179.py(119): XH = [list(map(int, sys.stdin.buffer.readline().split())) for _ in range(N)]
+s688166179.py(121): XH.sort()
+s688166179.py(122): X = []
+s688166179.py(123): H = []
+s688166179.py(124): for x, h in XH:
+s688166179.py(125):     X.append(x)
+s688166179.py(126):     H.append(h)
+s688166179.py(124): for x, h in XH:
+s688166179.py(125):     X.append(x)
+s688166179.py(126):     H.append(h)
+s688166179.py(124): for x, h in XH:
+s688166179.py(125):     X.append(x)
+s688166179.py(126):     H.append(h)
+s688166179.py(124): for x, h in XH:
+s688166179.py(128): lr = []
+s688166179.py(129): r = 0
+s688166179.py(130): for l in range(N):
+s688166179.py(131):     while r < N and X[r] <= X[l] + D * 2:
+s688166179.py(132):         r += 1
+s688166179.py(131):     while r < N and X[r] <= X[l] + D * 2:
+s688166179.py(132):         r += 1
+s688166179.py(131):     while r < N and X[r] <= X[l] + D * 2:
+s688166179.py(133):     lr.append((l, r))
+s688166179.py(130): for l in range(N):
+s688166179.py(131):     while r < N and X[r] <= X[l] + D * 2:
+s688166179.py(132):         r += 1
+s688166179.py(131):     while r < N and X[r] <= X[l] + D * 2:
+s688166179.py(133):     lr.append((l, r))
+s688166179.py(130): for l in range(N):
+s688166179.py(131):     while r < N and X[r] <= X[l] + D * 2:
+s688166179.py(133):     lr.append((l, r))
+s688166179.py(130): for l in range(N):
+s688166179.py(135): st = LazySegmentTree(values=H + [0], fn=operator.add)
+ --- modulename: s688166179, funcname: __init__
+s688166179.py(26):         self._id = 0
+s688166179.py(27):         self._size = len(values)
+s688166179.py(28):         self._fn = fn
+s688166179.py(30):         tree = [self._id] * self._size * 2
+s688166179.py(31):         tree[self._size:] = values[:]
+s688166179.py(32):         for i in reversed(range(1, self._size)):
+s688166179.py(33):             tree[i] = fn(tree[i << 1], tree[i << 1 | 1])
+s688166179.py(32):         for i in reversed(range(1, self._size)):
+s688166179.py(33):             tree[i] = fn(tree[i << 1], tree[i << 1 | 1])
+s688166179.py(32):         for i in reversed(range(1, self._size)):
+s688166179.py(33):             tree[i] = fn(tree[i << 1], tree[i << 1 | 1])
+s688166179.py(32):         for i in reversed(range(1, self._size)):
+s688166179.py(34):         self._tree = tree
+s688166179.py(35):         self._delay = [self._id] * self._size * 2
+s688166179.py(136): ans = 0
+s688166179.py(137): for l, r in lr:
+s688166179.py(138):     h = st.get(l, l + 1)
+ --- modulename: s688166179, funcname: get
+s688166179.py(97):         if r is None:
+s688166179.py(100):         ret_l = []
+s688166179.py(101):         ret_r = []
+s688166179.py(102):         l += self._size
+s688166179.py(103):         r += self._size
+s688166179.py(104):         self._eval(l)
+ --- modulename: s688166179, funcname: _eval
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(105):         self._eval(r)
+ --- modulename: s688166179, funcname: _eval
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(106):         while l < r:
+s688166179.py(107):             if l & 1:
+s688166179.py(110):             if r & 1:
+s688166179.py(111):                 r -= 1
+s688166179.py(112):                 ret_r.append(self._tree[r])
+s688166179.py(113):             l >>= 1
+s688166179.py(114):             r >>= 1
+s688166179.py(106):         while l < r:
+s688166179.py(115):         return reduce(self._fn, ret_l + ret_r)
+s688166179.py(139):     if h > 0:
+s688166179.py(140):         cnt = (h + A - 1) // A
+s688166179.py(141):         st.add(l, r, -cnt * A)
+ --- modulename: s688166179, funcname: add
+s688166179.py(49):         l += self._size
+s688166179.py(50):         r += self._size
+s688166179.py(51):         l0, r0 = l, r
+s688166179.py(52):         while l < r:
+s688166179.py(53):             if l & 1:
+s688166179.py(57):             if r & 1:
+s688166179.py(61):             l >>= 1
+s688166179.py(62):             r >>= 1
+s688166179.py(52):         while l < r:
+s688166179.py(53):             if l & 1:
+s688166179.py(57):             if r & 1:
+s688166179.py(59):                 r -= 1
+s688166179.py(60):                 self._add(r, value)
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(61):             l >>= 1
+s688166179.py(62):             r >>= 1
+s688166179.py(52):         while l < r:
+s688166179.py(63):         self._update(l0)
+ --- modulename: s688166179, funcname: _update
+s688166179.py(71):         p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(74):                 self._tree[p << 1] + self._delay[p << 1],
+s688166179.py(75):                 self._tree[p << 1 | 1] + self._delay[p << 1 | 1]
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(77):             p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(74):                 self._tree[p << 1] + self._delay[p << 1],
+s688166179.py(75):                 self._tree[p << 1 | 1] + self._delay[p << 1 | 1]
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(77):             p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(64):         self._update(r0)
+ --- modulename: s688166179, funcname: _update
+s688166179.py(71):         p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(74):                 self._tree[p << 1] + self._delay[p << 1],
+s688166179.py(75):                 self._tree[p << 1 | 1] + self._delay[p << 1 | 1]
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(77):             p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(74):                 self._tree[p << 1] + self._delay[p << 1],
+s688166179.py(75):                 self._tree[p << 1 | 1] + self._delay[p << 1 | 1]
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(77):             p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(142):         ans += cnt
+s688166179.py(137): for l, r in lr:
+s688166179.py(138):     h = st.get(l, l + 1)
+ --- modulename: s688166179, funcname: get
+s688166179.py(97):         if r is None:
+s688166179.py(100):         ret_l = []
+s688166179.py(101):         ret_r = []
+s688166179.py(102):         l += self._size
+s688166179.py(103):         r += self._size
+s688166179.py(104):         self._eval(l)
+ --- modulename: s688166179, funcname: _eval
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(105):         self._eval(r)
+ --- modulename: s688166179, funcname: _eval
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(106):         while l < r:
+s688166179.py(107):             if l & 1:
+s688166179.py(108):                 ret_l.append(self._tree[l])
+s688166179.py(109):                 l += 1
+s688166179.py(110):             if r & 1:
+s688166179.py(113):             l >>= 1
+s688166179.py(114):             r >>= 1
+s688166179.py(106):         while l < r:
+s688166179.py(115):         return reduce(self._fn, ret_l + ret_r)
+s688166179.py(139):     if h > 0:
+s688166179.py(140):         cnt = (h + A - 1) // A
+s688166179.py(141):         st.add(l, r, -cnt * A)
+ --- modulename: s688166179, funcname: add
+s688166179.py(49):         l += self._size
+s688166179.py(50):         r += self._size
+s688166179.py(51):         l0, r0 = l, r
+s688166179.py(52):         while l < r:
+s688166179.py(53):             if l & 1:
+s688166179.py(55):                 self._add(l, value)
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(56):                 l += 1
+s688166179.py(57):             if r & 1:
+s688166179.py(59):                 r -= 1
+s688166179.py(60):                 self._add(r, value)
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(61):             l >>= 1
+s688166179.py(62):             r >>= 1
+s688166179.py(52):         while l < r:
+s688166179.py(63):         self._update(l0)
+ --- modulename: s688166179, funcname: _update
+s688166179.py(71):         p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(74):                 self._tree[p << 1] + self._delay[p << 1],
+s688166179.py(75):                 self._tree[p << 1 | 1] + self._delay[p << 1 | 1]
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(77):             p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(74):                 self._tree[p << 1] + self._delay[p << 1],
+s688166179.py(75):                 self._tree[p << 1 | 1] + self._delay[p << 1 | 1]
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(77):             p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(64):         self._update(r0)
+ --- modulename: s688166179, funcname: _update
+s688166179.py(71):         p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(74):                 self._tree[p << 1] + self._delay[p << 1],
+s688166179.py(75):                 self._tree[p << 1 | 1] + self._delay[p << 1 | 1]
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(77):             p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(74):                 self._tree[p << 1] + self._delay[p << 1],
+s688166179.py(75):                 self._tree[p << 1 | 1] + self._delay[p << 1 | 1]
+s688166179.py(73):             self._tree[p] = self._fn(
+s688166179.py(77):             p >>= 1
+s688166179.py(72):         while p > 0:
+s688166179.py(142):         ans += cnt
+s688166179.py(137): for l, r in lr:
+s688166179.py(138):     h = st.get(l, l + 1)
+ --- modulename: s688166179, funcname: get
+s688166179.py(97):         if r is None:
+s688166179.py(100):         ret_l = []
+s688166179.py(101):         ret_r = []
+s688166179.py(102):         l += self._size
+s688166179.py(103):         r += self._size
+s688166179.py(104):         self._eval(l)
+ --- modulename: s688166179, funcname: _eval
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(105):         self._eval(r)
+ --- modulename: s688166179, funcname: _eval
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(39):             self._delay[k] = self._delay[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(86):             k = p >> h
+s688166179.py(87):             self._tree[k] = self._tree[k] + self._delay[k]
+s688166179.py(88):             self._add(k << 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(89):             self._add(k << 1 | 1, self._delay[k])
+ --- modulename: s688166179, funcname: _add
+s688166179.py(38):         if k < self._size:
+s688166179.py(41):             self._tree[k] = self._tree[k] + value
+s688166179.py(90):             self._delay[k] = self._id
+s688166179.py(85):         for h in reversed(range(1, p.bit_length())):
+s688166179.py(106):         while l < r:
+s688166179.py(107):             if l & 1:
+s688166179.py(110):             if r & 1:
+s688166179.py(111):                 r -= 1
+s688166179.py(112):                 ret_r.append(self._tree[r])
+s688166179.py(113):             l >>= 1
+s688166179.py(114):             r >>= 1
+s688166179.py(106):         while l < r:
+s688166179.py(115):         return reduce(self._fn, ret_l + ret_r)
+s688166179.py(139):     if h > 0:
+s688166179.py(137): for l, r in lr:
+s688166179.py(143): print(ans)
+2

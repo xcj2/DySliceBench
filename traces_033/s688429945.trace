@@ -1,0 +1,137 @@
+ --- modulename: s688429945, funcname: <module>
+s688429945.py(1): import os
+s688429945.py(2): import sys
+s688429945.py(4): if os.getenv("LOCAL"):
+ --- modulename: os, funcname: getenv
+os.py(775):     return environ.get(key, default)
+ --- modulename: _collections_abc, funcname: get
+_collections_abc.py(762):         try:
+_collections_abc.py(763):             return self[key]
+ --- modulename: os, funcname: __getitem__
+os.py(675):         try:
+os.py(676):             value = self._data[self.encodekey(key)]
+ --- modulename: os, funcname: encodekey
+os.py(747):             return encode(key).upper()
+ --- modulename: os, funcname: check_str
+os.py(741):             if not isinstance(value, str):
+os.py(743):             return value
+os.py(677):         except KeyError:
+os.py(679):             raise KeyError(key) from None
+_collections_abc.py(764):         except KeyError:
+_collections_abc.py(765):             return default
+s688429945.py(7): sys.setrecursionlimit(10 ** 9)
+s688429945.py(8): INF = float("inf")
+s688429945.py(9): IINF = 10 ** 18
+s688429945.py(10): MOD = 10 ** 9 + 7
+s688429945.py(14): class RollingHash:
+ --- modulename: s688429945, funcname: RollingHash
+s688429945.py(14): class RollingHash:
+s688429945.py(16):     def __init__(self, seq, base=10 ** 9 + 7, mod=2 ** 89 - 1):
+s688429945.py(37):     def get(self, L, r):
+s688429945.py(48): N = int(sys.stdin.buffer.readline())
+s688429945.py(49): S = sys.stdin.buffer.readline().decode().rstrip()
+s688429945.py(50): rh = RollingHash(S)
+ --- modulename: s688429945, funcname: __init__
+s688429945.py(22):         if isinstance(seq, str):
+s688429945.py(23):             self._seq = seq = list(map(ord, seq))
+s688429945.py(26):         self._base = base
+s688429945.py(27):         self._mod = mod
+s688429945.py(29):         hashes = [0] * (len(seq) + 1)
+s688429945.py(30):         power = [1] * (len(seq) + 1)
+s688429945.py(31):         for i, c in enumerate(seq):
+s688429945.py(32):             hashes[i + 1] = (hashes[i] * base + c) % mod
+s688429945.py(33):             power[i + 1] = power[i] * base % mod
+s688429945.py(31):         for i, c in enumerate(seq):
+s688429945.py(32):             hashes[i + 1] = (hashes[i] * base + c) % mod
+s688429945.py(33):             power[i + 1] = power[i] * base % mod
+s688429945.py(31):         for i, c in enumerate(seq):
+s688429945.py(32):             hashes[i + 1] = (hashes[i] * base + c) % mod
+s688429945.py(33):             power[i + 1] = power[i] * base % mod
+s688429945.py(31):         for i, c in enumerate(seq):
+s688429945.py(32):             hashes[i + 1] = (hashes[i] * base + c) % mod
+s688429945.py(33):             power[i + 1] = power[i] * base % mod
+s688429945.py(31):         for i, c in enumerate(seq):
+s688429945.py(32):             hashes[i + 1] = (hashes[i] * base + c) % mod
+s688429945.py(33):             power[i + 1] = power[i] * base % mod
+s688429945.py(31):         for i, c in enumerate(seq):
+s688429945.py(34):         self._hashes = hashes
+s688429945.py(35):         self._power = power
+s688429945.py(53): def test(size):
+s688429945.py(70): ok = 0
+s688429945.py(71): ng = N
+s688429945.py(72): while abs(ok - ng) > 1:
+s688429945.py(73):     mid = (ok + ng) // 2
+s688429945.py(74):     if test(mid):
+ --- modulename: s688429945, funcname: test
+s688429945.py(54):     l = 0
+s688429945.py(55):     r = size
+s688429945.py(56):     hist = {}
+s688429945.py(57):     while r <= N:
+s688429945.py(58):         h = rh.get(l, r)
+ --- modulename: s688429945, funcname: get
+s688429945.py(43):         if L >= r:
+s688429945.py(45):         return (self._hashes[r] - self._hashes[L] * self._power[r - L]) % self._mod
+s688429945.py(59):         if h in hist:
+s688429945.py(64):             hist[h] = l, r
+s688429945.py(65):         l += 1
+s688429945.py(66):         r += 1
+s688429945.py(57):     while r <= N:
+s688429945.py(58):         h = rh.get(l, r)
+ --- modulename: s688429945, funcname: get
+s688429945.py(43):         if L >= r:
+s688429945.py(45):         return (self._hashes[r] - self._hashes[L] * self._power[r - L]) % self._mod
+s688429945.py(59):         if h in hist:
+s688429945.py(64):             hist[h] = l, r
+s688429945.py(65):         l += 1
+s688429945.py(66):         r += 1
+s688429945.py(57):     while r <= N:
+s688429945.py(58):         h = rh.get(l, r)
+ --- modulename: s688429945, funcname: get
+s688429945.py(43):         if L >= r:
+s688429945.py(45):         return (self._hashes[r] - self._hashes[L] * self._power[r - L]) % self._mod
+s688429945.py(59):         if h in hist:
+s688429945.py(60):             pl, pr = hist[h]
+s688429945.py(61):             if pr <= l:
+s688429945.py(62):                 return True
+s688429945.py(75):         ok = mid
+s688429945.py(72): while abs(ok - ng) > 1:
+s688429945.py(73):     mid = (ok + ng) // 2
+s688429945.py(74):     if test(mid):
+ --- modulename: s688429945, funcname: test
+s688429945.py(54):     l = 0
+s688429945.py(55):     r = size
+s688429945.py(56):     hist = {}
+s688429945.py(57):     while r <= N:
+s688429945.py(58):         h = rh.get(l, r)
+ --- modulename: s688429945, funcname: get
+s688429945.py(43):         if L >= r:
+s688429945.py(45):         return (self._hashes[r] - self._hashes[L] * self._power[r - L]) % self._mod
+s688429945.py(59):         if h in hist:
+s688429945.py(64):             hist[h] = l, r
+s688429945.py(65):         l += 1
+s688429945.py(66):         r += 1
+s688429945.py(57):     while r <= N:
+s688429945.py(58):         h = rh.get(l, r)
+ --- modulename: s688429945, funcname: get
+s688429945.py(43):         if L >= r:
+s688429945.py(45):         return (self._hashes[r] - self._hashes[L] * self._power[r - L]) % self._mod
+s688429945.py(59):         if h in hist:
+s688429945.py(64):             hist[h] = l, r
+s688429945.py(65):         l += 1
+s688429945.py(66):         r += 1
+s688429945.py(57):     while r <= N:
+s688429945.py(58):         h = rh.get(l, r)
+ --- modulename: s688429945, funcname: get
+s688429945.py(43):         if L >= r:
+s688429945.py(45):         return (self._hashes[r] - self._hashes[L] * self._power[r - L]) % self._mod
+s688429945.py(59):         if h in hist:
+s688429945.py(60):             pl, pr = hist[h]
+s688429945.py(61):             if pr <= l:
+s688429945.py(65):         l += 1
+s688429945.py(66):         r += 1
+s688429945.py(57):     while r <= N:
+s688429945.py(67):     return False
+s688429945.py(77):         ng = mid
+s688429945.py(72): while abs(ok - ng) > 1:
+s688429945.py(78): print(ok)
+2
