@@ -1,0 +1,37 @@
+def main():
+    cnt = 0
+    for _ in range(m):
+        x, y = map(int, input().split())
+        unite(x, y)
+    for i in range(1, n+1):
+        if same(i, p[i]):
+            cnt += 1
+    print(cnt)
+        
+def root(x):
+    if parent[x] == x:
+        return x
+    parent[x] = root(parent[x])
+    return parent[x]
+
+def same(x, y):
+    return root(x) == root(y)
+
+def unite(x, y):
+    x = root(x)
+    y = root(y)
+    if x != y:
+        if rank[x] < rank[y]:
+            parent[x] = y
+        elif rank[x] > rank[y]:
+            parent[y] = x
+        else:
+            parent[y] = x
+            rank[x] += 1
+
+if __name__ == "__main__":
+    n, m = map(int, input().split())
+    p = [0] + list(map(int, input().split()))
+    parent = list(range(n+1))
+    rank = [0]*(n+1)
+    main()
