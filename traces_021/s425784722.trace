@@ -1,0 +1,82 @@
+ --- modulename: s425784722, funcname: <module>
+s425784722.py(1): import sys
+s425784722.py(3): sys.setrecursionlimit(10 ** 6)
+s425784722.py(4): input = sys.stdin.readline
+s425784722.py(5): int1 = lambda x: int(x) - 1
+s425784722.py(6): p2D = lambda x: print(*x, sep="\n")
+s425784722.py(8): def main():
+s425784722.py(55): main()
+ --- modulename: s425784722, funcname: main
+s425784722.py(9):     def dfs(u=0):
+s425784722.py(41):     md = 10 ** 9 + 7
+s425784722.py(43):     inv2 = pow(2, md - 2, md)
+s425784722.py(44):     n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s425784722.py(45):     to = [[] for _ in range(n+1)]
+ --- modulename: s425784722, funcname: <listcomp>
+s425784722.py(45):     to = [[] for _ in range(n+1)]
+s425784722.py(45):     to = [[] for _ in range(n+1)]
+s425784722.py(45):     to = [[] for _ in range(n+1)]
+s425784722.py(45):     to = [[] for _ in range(n+1)]
+s425784722.py(46):     pp = list(map(int, input().split()))
+s425784722.py(47):     for i, p in enumerate(pp, 1):
+s425784722.py(48):         to[p].append(i)
+s425784722.py(47):     for i, p in enumerate(pp, 1):
+s425784722.py(48):         to[p].append(i)
+s425784722.py(47):     for i, p in enumerate(pp, 1):
+s425784722.py(50):     dp0 = dfs()
+ --- modulename: s425784722, funcname: dfs
+s425784722.py(10):         def merge(dpu, dpv):
+s425784722.py(21):         if len(to[u]) == 0:
+s425784722.py(24):         dpu = []
+s425784722.py(25):         mxlen=0
+s425784722.py(26):         for v in to[u]:
+s425784722.py(27):             dpv = dfs(v)
+ --- modulename: s425784722, funcname: dfs
+s425784722.py(10):         def merge(dpu, dpv):
+s425784722.py(21):         if len(to[u]) == 0:
+s425784722.py(22):             return [(inv2, inv2, 0)]
+s425784722.py(29):             if not dpu:
+s425784722.py(30):                 dpu = dpv
+s425784722.py(26):         for v in to[u]:
+s425784722.py(27):             dpv = dfs(v)
+ --- modulename: s425784722, funcname: dfs
+s425784722.py(10):         def merge(dpu, dpv):
+s425784722.py(21):         if len(to[u]) == 0:
+s425784722.py(22):             return [(inv2, inv2, 0)]
+s425784722.py(29):             if not dpu:
+s425784722.py(32):                 if len(dpu) < len(dpv): dpu, dpv = dpv, dpu
+s425784722.py(33):                 mxlen=max(mxlen,len(dpv))
+s425784722.py(34):                 merge(dpu, dpv)
+ --- modulename: s425784722, funcname: merge
+s425784722.py(11):             vn = len(dpv)
+s425784722.py(12):             for d in range(-1, -1 - vn, -1):
+s425784722.py(13):                 u0, u1, u2 = dpu[d]
+s425784722.py(14):                 v0, v1, v2 = dpv[d]
+s425784722.py(15):                 n0 = (u0 * v0) % md
+s425784722.py(16):                 n1 = (u0 * v1 + u1 * v0) % md
+s425784722.py(17):                 n2 = (u2 * (v0 + v1 + v2) + v2 * (u0 + u1) + u1 * v1) % md
+s425784722.py(18):                 dpu[d] = (n0, n1, n2)
+s425784722.py(12):             for d in range(-1, -1 - vn, -1):
+s425784722.py(26):         for v in to[u]:
+s425784722.py(35):         for d in range(-1,-1-mxlen,-1):
+s425784722.py(36):             u0,u1,u2=dpu[d]
+s425784722.py(37):             dpu[d] = (u0 + u2, u1, 0)
+s425784722.py(35):         for d in range(-1,-1-mxlen,-1):
+s425784722.py(38):         dpu.append((inv2, inv2, 0))
+s425784722.py(39):         return dpu
+s425784722.py(52):     ans = sum(u1 for _, u1, _ in dp0)
+ --- modulename: s425784722, funcname: <genexpr>
+s425784722.py(52):     ans = sum(u1 for _, u1, _ in dp0)
+ --- modulename: s425784722, funcname: <genexpr>
+s425784722.py(52):     ans = sum(u1 for _, u1, _ in dp0)
+ --- modulename: s425784722, funcname: <genexpr>
+s425784722.py(52):     ans = sum(u1 for _, u1, _ in dp0)
+s425784722.py(53):     print((ans * pow(2, n + 1, md)) % md)
+8

@@ -1,0 +1,187 @@
+ --- modulename: s426530935, funcname: <module>
+s426530935.py(3): class SegmentTree(object):
+ --- modulename: s426530935, funcname: SegmentTree
+s426530935.py(3): class SegmentTree(object):
+s426530935.py(4):     __slots__ = ["elem_size", "tree", "default", "op", "real_size"]
+s426530935.py(6):     def __init__(self, a, default, op):
+s426530935.py(21):     def get_value(self, x: int, y: int) -> int:  # 半開区間
+s426530935.py(34):     def set_value(self, i: int, value: int) -> None:
+s426530935.py(42):     def get_one_value(self, i):
+s426530935.py(45):     def debug(self):
+s426530935.py(49): from operator import itemgetter
+s426530935.py(51): N, M = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s426530935.py(52): LRC = [list(map(int, input().split())) for _ in range(M)]
+ --- modulename: s426530935, funcname: <listcomp>
+s426530935.py(52): LRC = [list(map(int, input().split())) for _ in range(M)]
+s426530935.py(52): LRC = [list(map(int, input().split())) for _ in range(M)]
+s426530935.py(52): LRC = [list(map(int, input().split())) for _ in range(M)]
+s426530935.py(52): LRC = [list(map(int, input().split())) for _ in range(M)]
+s426530935.py(53): LRC.sort(key=itemgetter(0))
+s426530935.py(55): idx_LRC = 0
+s426530935.py(56): q = []
+s426530935.py(58): seg = SegmentTree(N+1, float("inf"), min)
+ --- modulename: s426530935, funcname: __init__
+s426530935.py(7):         self.default = default
+s426530935.py(8):         self.op = op
+s426530935.py(9):         if hasattr(a, "__iter__"):
+s426530935.py(16):         elif isinstance(a, int):
+s426530935.py(17):             self.real_size = a
+s426530935.py(18):             self.elem_size = elem_size = 1 << (self.real_size-1).bit_length()
+s426530935.py(19):             self.tree = [default] * (elem_size * 2)
+s426530935.py(60): seg.set_value(1, 0)
+ --- modulename: s426530935, funcname: set_value
+s426530935.py(35):         k = self.elem_size + i
+s426530935.py(36):         op, tree = self.op, self.tree
+s426530935.py(37):         tree[k] = value
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(61): for v in range(1, N + 1):
+s426530935.py(62):     d = seg.get_value(v, N + 1)
+ --- modulename: s426530935, funcname: get_value
+s426530935.py(22):         l, r = x + self.elem_size, y + self.elem_size
+s426530935.py(23):         tree, result, op = self.tree, self.default, self.op
+s426530935.py(24):         while l < r:
+s426530935.py(25):             if l & 1:
+s426530935.py(26):                 result = op(tree[l], result)
+s426530935.py(27):                 l += 1
+s426530935.py(28):             if r & 1:
+s426530935.py(29):                 r -= 1
+s426530935.py(30):                 result = op(tree[r], result)
+s426530935.py(31):             l, r = l >> 1, r >> 1
+s426530935.py(24):         while l < r:
+s426530935.py(25):             if l & 1:
+s426530935.py(26):                 result = op(tree[l], result)
+s426530935.py(27):                 l += 1
+s426530935.py(28):             if r & 1:
+s426530935.py(31):             l, r = l >> 1, r >> 1
+s426530935.py(24):         while l < r:
+s426530935.py(32):         return result
+s426530935.py(63):     while idx_LRC < M:
+s426530935.py(64):         l, r, c = LRC[idx_LRC]
+s426530935.py(65):         if l <= v:
+s426530935.py(66):             seg.set_value(r, min(seg.tree[r + seg.elem_size], d + c))
+ --- modulename: s426530935, funcname: set_value
+s426530935.py(35):         k = self.elem_size + i
+s426530935.py(36):         op, tree = self.op, self.tree
+s426530935.py(37):         tree[k] = value
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(67):             idx_LRC += 1
+s426530935.py(63):     while idx_LRC < M:
+s426530935.py(64):         l, r, c = LRC[idx_LRC]
+s426530935.py(65):         if l <= v:
+s426530935.py(66):             seg.set_value(r, min(seg.tree[r + seg.elem_size], d + c))
+ --- modulename: s426530935, funcname: set_value
+s426530935.py(35):         k = self.elem_size + i
+s426530935.py(36):         op, tree = self.op, self.tree
+s426530935.py(37):         tree[k] = value
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(67):             idx_LRC += 1
+s426530935.py(63):     while idx_LRC < M:
+s426530935.py(64):         l, r, c = LRC[idx_LRC]
+s426530935.py(65):         if l <= v:
+s426530935.py(61): for v in range(1, N + 1):
+s426530935.py(62):     d = seg.get_value(v, N + 1)
+ --- modulename: s426530935, funcname: get_value
+s426530935.py(22):         l, r = x + self.elem_size, y + self.elem_size
+s426530935.py(23):         tree, result, op = self.tree, self.default, self.op
+s426530935.py(24):         while l < r:
+s426530935.py(25):             if l & 1:
+s426530935.py(28):             if r & 1:
+s426530935.py(29):                 r -= 1
+s426530935.py(30):                 result = op(tree[r], result)
+s426530935.py(31):             l, r = l >> 1, r >> 1
+s426530935.py(24):         while l < r:
+s426530935.py(25):             if l & 1:
+s426530935.py(26):                 result = op(tree[l], result)
+s426530935.py(27):                 l += 1
+s426530935.py(28):             if r & 1:
+s426530935.py(31):             l, r = l >> 1, r >> 1
+s426530935.py(24):         while l < r:
+s426530935.py(32):         return result
+s426530935.py(63):     while idx_LRC < M:
+s426530935.py(64):         l, r, c = LRC[idx_LRC]
+s426530935.py(65):         if l <= v:
+s426530935.py(66):             seg.set_value(r, min(seg.tree[r + seg.elem_size], d + c))
+ --- modulename: s426530935, funcname: set_value
+s426530935.py(35):         k = self.elem_size + i
+s426530935.py(36):         op, tree = self.op, self.tree
+s426530935.py(37):         tree[k] = value
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(39):             k >>= 1
+s426530935.py(40):             tree[k] = op(tree[k << 1], tree[(k << 1) + 1])
+s426530935.py(38):         while k > 1:
+s426530935.py(67):             idx_LRC += 1
+s426530935.py(63):     while idx_LRC < M:
+s426530935.py(61): for v in range(1, N + 1):
+s426530935.py(62):     d = seg.get_value(v, N + 1)
+ --- modulename: s426530935, funcname: get_value
+s426530935.py(22):         l, r = x + self.elem_size, y + self.elem_size
+s426530935.py(23):         tree, result, op = self.tree, self.default, self.op
+s426530935.py(24):         while l < r:
+s426530935.py(25):             if l & 1:
+s426530935.py(26):                 result = op(tree[l], result)
+s426530935.py(27):                 l += 1
+s426530935.py(28):             if r & 1:
+s426530935.py(29):                 r -= 1
+s426530935.py(30):                 result = op(tree[r], result)
+s426530935.py(31):             l, r = l >> 1, r >> 1
+s426530935.py(24):         while l < r:
+s426530935.py(32):         return result
+s426530935.py(63):     while idx_LRC < M:
+s426530935.py(61): for v in range(1, N + 1):
+s426530935.py(62):     d = seg.get_value(v, N + 1)
+ --- modulename: s426530935, funcname: get_value
+s426530935.py(22):         l, r = x + self.elem_size, y + self.elem_size
+s426530935.py(23):         tree, result, op = self.tree, self.default, self.op
+s426530935.py(24):         while l < r:
+s426530935.py(25):             if l & 1:
+s426530935.py(28):             if r & 1:
+s426530935.py(29):                 r -= 1
+s426530935.py(30):                 result = op(tree[r], result)
+s426530935.py(31):             l, r = l >> 1, r >> 1
+s426530935.py(24):         while l < r:
+s426530935.py(32):         return result
+s426530935.py(63):     while idx_LRC < M:
+s426530935.py(61): for v in range(1, N + 1):
+s426530935.py(70): ans = seg.tree[N + seg.elem_size]
+s426530935.py(71): print(ans if ans != float("inf") else -1)
+5
