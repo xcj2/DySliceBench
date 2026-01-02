@@ -1,0 +1,74 @@
+from copy import *
+from sys import *
+from math import *
+import queue
+from collections import defaultdict,Counter,deque
+
+setrecursionlimit(1000000)
+
+def main():
+	n=int(input())
+	l=[];t=0;flg=0
+	for i in range(1,n+1,1):
+		a,b=map(int,input().split())
+		c=(b,a)
+		l.append(c)
+	l.sort()
+	flag = True
+	for x,y in l:
+		t+=y
+		if t>x:
+			flag = False
+	if flag:print("Yes")
+	else:print("No")
+
+def zip(a):
+	mae = a[0]
+	ziparray = [mae]
+	for i in range(1,len(a)):
+		if(mae != a[i]):
+			ziparray.append(a[i])
+			mae = a[i]
+	return ziparray
+
+def base_10_to_n(X, n):
+	X_dumy = X
+	out = ''
+	while X_dumy>0:
+		out = str(X_dumy%n)+out
+		X_dumy = int(X_dumy/n)
+	if(out == ''): return '0'
+	return out
+
+def gcd(m,n):
+	x = max(m,n)
+	y = min(m,n)
+	while(x%y!=0):
+		z = x%y
+		x = y
+		y = z
+	return y
+
+class Queue():
+	#競プロ用のQueue
+	def __init__(self):
+		self.q = deque([])
+	def push(self,i):
+		self.q.append(i)
+	def pop(self):
+		return self.q.popleft()
+	def size(self):
+		return len(self.q)
+
+class Stack():
+	#怯プロ用のStack
+	def __init__(self):
+		self.q = []
+	def push(self,i):
+		self.q.append(i)
+	def pop(self):
+		return self.q.pop()
+	def size(self):
+		return len(self.q)
+
+main()
