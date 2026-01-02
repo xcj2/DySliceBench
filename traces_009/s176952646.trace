@@ -1,0 +1,144 @@
+ --- modulename: s176952646, funcname: <module>
+s176952646.py(2): import sys
+s176952646.py(4): MOD = 1000000007  # type: int
+s176952646.py(7): def solve(N: int, M: int):
+s176952646.py(25): def main():
+s176952646.py(35): def test():
+s176952646.py(40): def mod_range(mod, start, stop=None, step=1):    
+s176952646.py(46): def mod_inv(mod, n):
+s176952646.py(55): def mod_permutation(mod, n, r):
+s176952646.py(67): def mod_factorial(mod, n):
+s176952646.py(76): def mod_combination(mod, n, r):
+s176952646.py(85): class ModFactorial:
+ --- modulename: s176952646, funcname: ModFactorial
+s176952646.py(85): class ModFactorial:
+s176952646.py(86):     def __init__(self, mod, size=1):
+s176952646.py(97):     def _mod_range(self, start, stop=None, step=1):
+s176952646.py(100):     def _mod_inv(self, n):
+s176952646.py(103):     def _init_factorials(self, size):
+s176952646.py(116):     def _append_factorials(self, n):
+s176952646.py(120):     def factorial(self, n):
+s176952646.py(136):     def factorial_inv(self, n):
+s176952646.py(153):     def permutation(self, n, r):
+s176952646.py(160):     def combination(self, n, r):
+s176952646.py(168): if __name__ == '__main__':
+s176952646.py(170):     main()
+ --- modulename: s176952646, funcname: main
+s176952646.py(26):     def iterate_tokens():
+s176952646.py(30):     tokens = iterate_tokens()
+s176952646.py(31):     N = int(next(tokens))  # type: int
+ --- modulename: s176952646, funcname: iterate_tokens
+s176952646.py(27):         for line in sys.stdin:
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s176952646.py(28):             for word in line.split():
+s176952646.py(29):                 yield word
+s176952646.py(32):     M = int(next(tokens))  # type: int
+ --- modulename: s176952646, funcname: iterate_tokens
+s176952646.py(28):             for word in line.split():
+s176952646.py(29):                 yield word
+s176952646.py(33):     print(solve(N, M))
+ --- modulename: s176952646, funcname: solve
+s176952646.py(8):     factors = {}
+s176952646.py(9):     m = M
+s176952646.py(10):     for i in range(2, int(M**0.5)+1):
+s176952646.py(11):         while m % i == 0:
+s176952646.py(12):             factors[i] = factors.get(i, 0) + 1
+s176952646.py(13):             m //= i
+s176952646.py(11):         while m % i == 0:
+s176952646.py(10):     for i in range(2, int(M**0.5)+1):
+s176952646.py(15):         if m != 1:
+s176952646.py(16):             factors[m] = 1
+s176952646.py(17):     mf = ModFactorial(MOD)
+ --- modulename: s176952646, funcname: __init__
+s176952646.py(93):         assert mod > size
+s176952646.py(94):         self._mod = mod
+s176952646.py(95):         self._init_factorials(size)
+ --- modulename: s176952646, funcname: _init_factorials
+s176952646.py(110):         self._factorials = [1] * size        
+s176952646.py(111):         n = 1 # リストの参照は遅いので減らす
+s176952646.py(112):         for i, m in enumerate(self._mod_range(1, size), 1):
+ --- modulename: s176952646, funcname: _mod_range
+s176952646.py(98):         return mod_range(self._mod, start, stop, step)
+ --- modulename: s176952646, funcname: mod_range
+s176952646.py(41):     if stop == None:
+s176952646.py(44):     return map(lambda i: i % mod, range(start, stop, step))
+s176952646.py(18):     ans = 1
+s176952646.py(19):     for c in factors.values():
+s176952646.py(20):         ans = ans * mf.combination(c+N-1, c) % MOD
+ --- modulename: s176952646, funcname: combination
+s176952646.py(165):         return self.permutation(n, r) * self.factorial_inv(r) % self._mod
+ --- modulename: s176952646, funcname: permutation
+s176952646.py(158):         return self.factorial(n) * self.factorial_inv(n-r) % self._mod
+ --- modulename: s176952646, funcname: factorial
+s176952646.py(131):         assert n < self._mod
+s176952646.py(132):         if len(self._factorials) <= n:
+s176952646.py(133):             self._append_factorials(n)
+ --- modulename: s176952646, funcname: _append_factorials
+s176952646.py(117):         for m in map(lambda i: i % self._mod, range(len(self._factorials), n+1)):
+ --- modulename: s176952646, funcname: <lambda>
+s176952646.py(117):         for m in map(lambda i: i % self._mod, range(len(self._factorials), n+1)):
+s176952646.py(118):             self._factorials.append((self._factorials[-1] * m) % self._mod)
+s176952646.py(117):         for m in map(lambda i: i % self._mod, range(len(self._factorials), n+1)):
+ --- modulename: s176952646, funcname: <lambda>
+s176952646.py(117):         for m in map(lambda i: i % self._mod, range(len(self._factorials), n+1)):
+s176952646.py(118):             self._factorials.append((self._factorials[-1] * m) % self._mod)
+s176952646.py(117):         for m in map(lambda i: i % self._mod, range(len(self._factorials), n+1)):
+s176952646.py(134):         return self._factorials[n]
+ --- modulename: s176952646, funcname: factorial_inv
+s176952646.py(151):         return self._mod_inv(self.factorial(n))
+ --- modulename: s176952646, funcname: factorial
+s176952646.py(131):         assert n < self._mod
+s176952646.py(132):         if len(self._factorials) <= n:
+s176952646.py(134):         return self._factorials[n]
+ --- modulename: s176952646, funcname: _mod_inv
+s176952646.py(101):         return mod_inv(self._mod, n)
+ --- modulename: s176952646, funcname: mod_inv
+s176952646.py(53):     return pow(n, mod-2, mod)
+ --- modulename: s176952646, funcname: factorial_inv
+s176952646.py(151):         return self._mod_inv(self.factorial(n))
+ --- modulename: s176952646, funcname: factorial
+s176952646.py(131):         assert n < self._mod
+s176952646.py(132):         if len(self._factorials) <= n:
+s176952646.py(134):         return self._factorials[n]
+ --- modulename: s176952646, funcname: _mod_inv
+s176952646.py(101):         return mod_inv(self._mod, n)
+ --- modulename: s176952646, funcname: mod_inv
+s176952646.py(53):     return pow(n, mod-2, mod)
+s176952646.py(19):     for c in factors.values():
+s176952646.py(20):         ans = ans * mf.combination(c+N-1, c) % MOD
+ --- modulename: s176952646, funcname: combination
+s176952646.py(165):         return self.permutation(n, r) * self.factorial_inv(r) % self._mod
+ --- modulename: s176952646, funcname: permutation
+s176952646.py(158):         return self.factorial(n) * self.factorial_inv(n-r) % self._mod
+ --- modulename: s176952646, funcname: factorial
+s176952646.py(131):         assert n < self._mod
+s176952646.py(132):         if len(self._factorials) <= n:
+s176952646.py(134):         return self._factorials[n]
+ --- modulename: s176952646, funcname: factorial_inv
+s176952646.py(151):         return self._mod_inv(self.factorial(n))
+ --- modulename: s176952646, funcname: factorial
+s176952646.py(131):         assert n < self._mod
+s176952646.py(132):         if len(self._factorials) <= n:
+s176952646.py(134):         return self._factorials[n]
+ --- modulename: s176952646, funcname: _mod_inv
+s176952646.py(101):         return mod_inv(self._mod, n)
+ --- modulename: s176952646, funcname: mod_inv
+s176952646.py(53):     return pow(n, mod-2, mod)
+ --- modulename: s176952646, funcname: factorial_inv
+s176952646.py(151):         return self._mod_inv(self.factorial(n))
+ --- modulename: s176952646, funcname: factorial
+s176952646.py(131):         assert n < self._mod
+s176952646.py(132):         if len(self._factorials) <= n:
+s176952646.py(134):         return self._factorials[n]
+ --- modulename: s176952646, funcname: _mod_inv
+s176952646.py(101):         return mod_inv(self._mod, n)
+ --- modulename: s176952646, funcname: mod_inv
+s176952646.py(53):     return pow(n, mod-2, mod)
+s176952646.py(19):     for c in factors.values():
+s176952646.py(21):     return ans
+4
+ --- modulename: s176952646, funcname: iterate_tokens
