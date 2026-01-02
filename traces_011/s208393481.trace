@@ -1,0 +1,90 @@
+ --- modulename: s208393481, funcname: <module>
+s208393481.py(2): """
+s208393481.py(6): import sys
+s208393481.py(7): from sys import stdin
+s208393481.py(8): from heapq import heappop, heappush, heappushpop
+s208393481.py(9): input = stdin.readline
+s208393481.py(12): def prep_programs(programs, C):
+s208393481.py(37): def solve(programs, N, C):
+s208393481.py(52): def main(args):
+s208393481.py(62): if __name__ == '__main__':
+s208393481.py(63):     main(sys.argv[1:])
+ --- modulename: s208393481, funcname: main
+s208393481.py(53):     programs = []
+s208393481.py(54):     N, C = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s208393481.py(55):     for _ in range(N):
+s208393481.py(56):         s, t, c = map(int, input().split())
+s208393481.py(57):         programs.append([s, t, c])
+s208393481.py(55):     for _ in range(N):
+s208393481.py(56):         s, t, c = map(int, input().split())
+s208393481.py(57):         programs.append([s, t, c])
+s208393481.py(55):     for _ in range(N):
+s208393481.py(56):         s, t, c = map(int, input().split())
+s208393481.py(57):         programs.append([s, t, c])
+s208393481.py(55):     for _ in range(N):
+s208393481.py(58):     ans = solve(programs, N, C)
+ --- modulename: s208393481, funcname: solve
+s208393481.py(38):     P = prep_programs(programs, C)
+ --- modulename: s208393481, funcname: prep_programs
+s208393481.py(14):     channels = [[] for _ in range(C+1)]
+ --- modulename: s208393481, funcname: <listcomp>
+s208393481.py(14):     channels = [[] for _ in range(C+1)]
+s208393481.py(14):     channels = [[] for _ in range(C+1)]
+s208393481.py(14):     channels = [[] for _ in range(C+1)]
+s208393481.py(14):     channels = [[] for _ in range(C+1)]
+s208393481.py(15):     res = []
+s208393481.py(17):     programs.sort()
+s208393481.py(18):     for s, t, c in programs:    #  チャンネルごとに録画したい番組を分ける
+s208393481.py(19):         channels[c].append([s, t])
+s208393481.py(18):     for s, t, c in programs:    #  チャンネルごとに録画したい番組を分ける
+s208393481.py(19):         channels[c].append([s, t])
+s208393481.py(18):     for s, t, c in programs:    #  チャンネルごとに録画したい番組を分ける
+s208393481.py(19):         channels[c].append([s, t])
+s208393481.py(18):     for s, t, c in programs:    #  チャンネルごとに録画したい番組を分ける
+s208393481.py(21):     for i in range(1, C+1):      #  zipでずらして処理できるように、ダミーの番組を追加
+s208393481.py(22):         channels[i].append([-1, -1])
+s208393481.py(21):     for i in range(1, C+1):      #  zipでずらして処理できるように、ダミーの番組を追加
+s208393481.py(22):         channels[i].append([-1, -1])
+s208393481.py(21):     for i in range(1, C+1):      #  zipでずらして処理できるように、ダミーの番組を追加
+s208393481.py(25):     for i in range(1, C+1):
+s208393481.py(26):         prev_start = channels[i][0][0]
+s208393481.py(27):         for a, b in zip(channels[i], channels[i][1:]):
+s208393481.py(28):             if a[1] == b[0]:
+s208393481.py(29):                 pass
+s208393481.py(27):         for a, b in zip(channels[i], channels[i][1:]):
+s208393481.py(28):             if a[1] == b[0]:
+s208393481.py(31):                 res.append([prev_start, a[1], i])
+s208393481.py(32):                 prev_start = b[0]
+s208393481.py(27):         for a, b in zip(channels[i], channels[i][1:]):
+s208393481.py(25):     for i in range(1, C+1):
+s208393481.py(26):         prev_start = channels[i][0][0]
+s208393481.py(27):         for a, b in zip(channels[i], channels[i][1:]):
+s208393481.py(28):             if a[1] == b[0]:
+s208393481.py(31):                 res.append([prev_start, a[1], i])
+s208393481.py(32):                 prev_start = b[0]
+s208393481.py(27):         for a, b in zip(channels[i], channels[i][1:]):
+s208393481.py(25):     for i in range(1, C+1):
+s208393481.py(33):     res.sort()
+s208393481.py(34):     return res                  #  まとめた録画リスト
+s208393481.py(40):     max_used = 1                #  必要な録画機の台数
+s208393481.py(41):     R = []
+s208393481.py(43):     heappush(R, 0)
+s208393481.py(44):     for s, t, c in P:
+s208393481.py(45):         end_time = heappushpop(R, t)
+s208393481.py(46):         if end_time >= s:       #  番組の録画時間になった時に前の番組が終わっていない (チャンネルが違う場合は、前の録画終了と次の録画開始が同時でも2台必要)
+s208393481.py(44):     for s, t, c in P:
+s208393481.py(45):         end_time = heappushpop(R, t)
+s208393481.py(46):         if end_time >= s:       #  番組の録画時間になった時に前の番組が終わっていない (チャンネルが違う場合は、前の録画終了と次の録画開始が同時でも2台必要)
+s208393481.py(47):             heappush(R, end_time)
+s208393481.py(48):             max_used = len(R)
+s208393481.py(44):     for s, t, c in P:
+s208393481.py(49):     return max_used
+s208393481.py(59):     print(ans)
+2
