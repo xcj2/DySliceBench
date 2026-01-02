@@ -1,0 +1,183 @@
+ --- modulename: s478158318, funcname: <module>
+s478158318.py(1): import sys
+s478158318.py(2): input = sys.stdin.readline
+s478158318.py(5): def compress_coordinate(x: list, key=None, reverse=False):
+s478158318.py(14): class BIT1():
+ --- modulename: s478158318, funcname: BIT1
+s478158318.py(14): class BIT1():
+s478158318.py(15):     """
+s478158318.py(18):     def __init__(self, n):
+s478158318.py(23):     def add(self, idx, x):
+s478158318.py(31):     def sum(self, idx):
+s478158318.py(40):     def bisect_left(self, w):
+s478158318.py(55): q = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s478158318.py(56): query = []
+s478158318.py(57): coord = set()
+s478158318.py(58): for _ in range(q):
+s478158318.py(59):     s = input()
+s478158318.py(60):     if s[0] == '1':
+s478158318.py(62):         _, a, b = map(int, s.split())
+s478158318.py(63):         coord.add(a)
+s478158318.py(64):         query.append((1, a, b))
+s478158318.py(58): for _ in range(q):
+s478158318.py(59):     s = input()
+s478158318.py(60):     if s[0] == '1':
+s478158318.py(67):         query.append((2, ))
+s478158318.py(58): for _ in range(q):
+s478158318.py(59):     s = input()
+s478158318.py(60):     if s[0] == '1':
+s478158318.py(62):         _, a, b = map(int, s.split())
+s478158318.py(63):         coord.add(a)
+s478158318.py(64):         query.append((1, a, b))
+s478158318.py(58): for _ in range(q):
+s478158318.py(59):     s = input()
+s478158318.py(60):     if s[0] == '1':
+s478158318.py(67):         query.append((2, ))
+s478158318.py(58): for _ in range(q):
+s478158318.py(69): zipped, unzipped = compress_coordinate(list(coord))
+ --- modulename: s478158318, funcname: compress_coordinate
+s478158318.py(6):     zipped = {}
+s478158318.py(7):     unzipped = {}
+s478158318.py(8):     for i, xi in enumerate(sorted(x, key=None, reverse=reverse)):
+s478158318.py(9):         zipped[xi] = i + 1
+s478158318.py(10):         unzipped[i + 1] = xi
+s478158318.py(8):     for i, xi in enumerate(sorted(x, key=None, reverse=reverse)):
+s478158318.py(9):         zipped[xi] = i + 1
+s478158318.py(10):         unzipped[i + 1] = xi
+s478158318.py(8):     for i, xi in enumerate(sorted(x, key=None, reverse=reverse)):
+s478158318.py(11):     return zipped, unzipped
+s478158318.py(70): a_sum = b_sum = 0
+s478158318.py(71): bit = BIT1(len(coord))
+ --- modulename: s478158318, funcname: __init__
+s478158318.py(19):         self.n = n
+s478158318.py(20):         self.bit = [0] * (self.n + 1)
+s478158318.py(21):         self.data = [0] * (self.n + 1)
+s478158318.py(72): for i in range(q):
+s478158318.py(73):     if query[i][0] == 1:
+s478158318.py(74):         a = query[i][1]
+s478158318.py(75):         b = query[i][2]
+s478158318.py(77):         if i > 0:
+s478158318.py(86):         b_sum += b
+s478158318.py(87):         bit.add(zipped[a], 2)
+ --- modulename: s478158318, funcname: add
+s478158318.py(26):         self.data[idx] += x
+s478158318.py(27):         while idx <= self.n:
+s478158318.py(28):             self.bit[idx] += x
+s478158318.py(29):             idx += (idx & (-idx))
+s478158318.py(27):         while idx <= self.n:
+s478158318.py(72): for i in range(q):
+s478158318.py(73):     if query[i][0] == 1:
+s478158318.py(89):         n = bit.sum(len(coord))
+ --- modulename: s478158318, funcname: sum
+s478158318.py(34):         s = 0
+s478158318.py(35):         while idx:
+s478158318.py(36):             s += self.bit[idx]
+s478158318.py(37):             idx -= (idx & (-idx))
+s478158318.py(35):         while idx:
+s478158318.py(38):         return s
+s478158318.py(90):         idx1 = bit.bisect_left(n // 2)
+ --- modulename: s478158318, funcname: bisect_left
+s478158318.py(43):         if w <= 0:
+s478158318.py(45):         idx = 0  # self.bit[idx] < w
+s478158318.py(46):         k = 1 << ((self.n).bit_length() - 1)
+s478158318.py(47):         while k > 0:
+s478158318.py(48):             if idx + k <= self.n and self.bit[idx + k] < w:
+s478158318.py(51):             k = k >> 1
+s478158318.py(47):         while k > 0:
+s478158318.py(48):             if idx + k <= self.n and self.bit[idx + k] < w:
+s478158318.py(49):                 w -= self.bit[idx + k]
+s478158318.py(50):                 idx += k
+s478158318.py(51):             k = k >> 1
+s478158318.py(47):         while k > 0:
+s478158318.py(52):         return idx + 1
+s478158318.py(91):         print(unzipped[idx1], b_sum + a_sum)
+4 2
+s478158318.py(72): for i in range(q):
+s478158318.py(73):     if query[i][0] == 1:
+s478158318.py(74):         a = query[i][1]
+s478158318.py(75):         b = query[i][2]
+s478158318.py(77):         if i > 0:
+s478158318.py(78):             n = bit.sum(len(coord))
+ --- modulename: s478158318, funcname: sum
+s478158318.py(34):         s = 0
+s478158318.py(35):         while idx:
+s478158318.py(36):             s += self.bit[idx]
+s478158318.py(37):             idx -= (idx & (-idx))
+s478158318.py(35):         while idx:
+s478158318.py(38):         return s
+s478158318.py(79):             idx1 = bit.bisect_left(n // 2)
+ --- modulename: s478158318, funcname: bisect_left
+s478158318.py(43):         if w <= 0:
+s478158318.py(45):         idx = 0  # self.bit[idx] < w
+s478158318.py(46):         k = 1 << ((self.n).bit_length() - 1)
+s478158318.py(47):         while k > 0:
+s478158318.py(48):             if idx + k <= self.n and self.bit[idx + k] < w:
+s478158318.py(51):             k = k >> 1
+s478158318.py(47):         while k > 0:
+s478158318.py(48):             if idx + k <= self.n and self.bit[idx + k] < w:
+s478158318.py(49):                 w -= self.bit[idx + k]
+s478158318.py(50):                 idx += k
+s478158318.py(51):             k = k >> 1
+s478158318.py(47):         while k > 0:
+s478158318.py(52):         return idx + 1
+s478158318.py(80):             idx2 = bit.bisect_left(n // 2 + 1)
+ --- modulename: s478158318, funcname: bisect_left
+s478158318.py(43):         if w <= 0:
+s478158318.py(45):         idx = 0  # self.bit[idx] < w
+s478158318.py(46):         k = 1 << ((self.n).bit_length() - 1)
+s478158318.py(47):         while k > 0:
+s478158318.py(48):             if idx + k <= self.n and self.bit[idx + k] < w:
+s478158318.py(51):             k = k >> 1
+s478158318.py(47):         while k > 0:
+s478158318.py(48):             if idx + k <= self.n and self.bit[idx + k] < w:
+s478158318.py(49):                 w -= self.bit[idx + k]
+s478158318.py(50):                 idx += k
+s478158318.py(51):             k = k >> 1
+s478158318.py(47):         while k > 0:
+s478158318.py(52):         return idx + 1
+s478158318.py(81):             if a < unzipped[idx1]:
+s478158318.py(82):                 a_sum += unzipped[idx1] - a
+s478158318.py(86):         b_sum += b
+s478158318.py(87):         bit.add(zipped[a], 2)
+ --- modulename: s478158318, funcname: add
+s478158318.py(26):         self.data[idx] += x
+s478158318.py(27):         while idx <= self.n:
+s478158318.py(28):             self.bit[idx] += x
+s478158318.py(29):             idx += (idx & (-idx))
+s478158318.py(27):         while idx <= self.n:
+s478158318.py(28):             self.bit[idx] += x
+s478158318.py(29):             idx += (idx & (-idx))
+s478158318.py(27):         while idx <= self.n:
+s478158318.py(72): for i in range(q):
+s478158318.py(73):     if query[i][0] == 1:
+s478158318.py(89):         n = bit.sum(len(coord))
+ --- modulename: s478158318, funcname: sum
+s478158318.py(34):         s = 0
+s478158318.py(35):         while idx:
+s478158318.py(36):             s += self.bit[idx]
+s478158318.py(37):             idx -= (idx & (-idx))
+s478158318.py(35):         while idx:
+s478158318.py(38):         return s
+s478158318.py(90):         idx1 = bit.bisect_left(n // 2)
+ --- modulename: s478158318, funcname: bisect_left
+s478158318.py(43):         if w <= 0:
+s478158318.py(45):         idx = 0  # self.bit[idx] < w
+s478158318.py(46):         k = 1 << ((self.n).bit_length() - 1)
+s478158318.py(47):         while k > 0:
+s478158318.py(48):             if idx + k <= self.n and self.bit[idx + k] < w:
+s478158318.py(51):             k = k >> 1
+s478158318.py(47):         while k > 0:
+s478158318.py(48):             if idx + k <= self.n and self.bit[idx + k] < w:
+s478158318.py(51):             k = k >> 1
+s478158318.py(47):         while k > 0:
+s478158318.py(52):         return idx + 1
+s478158318.py(91):         print(unzipped[idx1], b_sum + a_sum)
+1 -3
+s478158318.py(72): for i in range(q):
