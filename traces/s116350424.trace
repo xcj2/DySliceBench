@@ -1,0 +1,131 @@
+ --- modulename: s116350424, funcname: <module>
+s116350424.py(2): import sys
+s116350424.py(4): MOD = 998244353  # type: int
+s116350424.py(7): class Factorial:
+ --- modulename: s116350424, funcname: Factorial
+s116350424.py(7): class Factorial:
+s116350424.py(8):     def __init__(self, MOD):
+s116350424.py(14):     def calc(self, n):
+s116350424.py(30):     def inv(self, n):
+s116350424.py(46):     def invFactorial(self, n):
+s116350424.py(64): class Combination:
+ --- modulename: s116350424, funcname: Combination
+s116350424.py(64): class Combination:
+s116350424.py(65):     def __init__(self, MOD):
+s116350424.py(69):     def choose_k_from_n(self, n, k):
+s116350424.py(77): def powm(a, n, m):
+s116350424.py(86): def solve(N: int, M: int, K: int):
+s116350424.py(96): def main():
+s116350424.py(107): if __name__ == '__main__':
+s116350424.py(108):     main()
+ --- modulename: s116350424, funcname: main
+s116350424.py(97):     def iterate_tokens():
+s116350424.py(101):     tokens = iterate_tokens()
+s116350424.py(102):     N = int(next(tokens))  # type: int
+ --- modulename: s116350424, funcname: iterate_tokens
+s116350424.py(98):         for line in sys.stdin:
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s116350424.py(99):             for word in line.split():
+s116350424.py(100):                 yield word
+s116350424.py(103):     M = int(next(tokens))  # type: int
+ --- modulename: s116350424, funcname: iterate_tokens
+s116350424.py(99):             for word in line.split():
+s116350424.py(100):                 yield word
+s116350424.py(104):     K = int(next(tokens))  # type: int
+ --- modulename: s116350424, funcname: iterate_tokens
+s116350424.py(99):             for word in line.split():
+s116350424.py(100):                 yield word
+s116350424.py(105):     solve(N, M, K)
+ --- modulename: s116350424, funcname: solve
+s116350424.py(87):     sum = 0
+s116350424.py(88):     C = Combination(MOD)
+ --- modulename: s116350424, funcname: __init__
+s116350424.py(66):         self.MOD = MOD
+s116350424.py(67):         self.factorial = Factorial(MOD)
+ --- modulename: s116350424, funcname: __init__
+s116350424.py(9):         self.MOD = MOD
+s116350424.py(10):         self.factorials = [1, 1]  # 階乗を求めるためのキャッシュ
+s116350424.py(11):         self.invModulos = [0, 1]  # n^-1のキャッシュ
+s116350424.py(12):         self.invFactorial_ = [1, 1]  # (n^-1)!のキャッシュ
+s116350424.py(89):     for i in range(K+1):
+s116350424.py(90):         sum = (sum+C.choose_k_from_n(N-1,i)*M*powm(M-1,N-1 - i,MOD))%MOD
+ --- modulename: s116350424, funcname: choose_k_from_n
+s116350424.py(70):         if k < 0 or n < k:
+s116350424.py(72):         k = min(k, n - k)
+s116350424.py(73):         f = self.factorial
+s116350424.py(74):         return f.calc(n) * f.invFactorial(max(n - k, k)) * f.invFactorial(min(k, n - k)) % self.MOD
+ --- modulename: s116350424, funcname: calc
+s116350424.py(15):         if n <= -1:
+s116350424.py(19):         if n < len(self.factorials):
+s116350424.py(21):         nextArr = [0] * (n + 1 - len(self.factorials))
+s116350424.py(22):         initialI = len(self.factorials)
+s116350424.py(23):         prev = self.factorials[-1]
+s116350424.py(24):         m = self.MOD
+s116350424.py(25):         for i in range(initialI, n + 1):
+s116350424.py(26):             prev = nextArr[i - initialI] = prev * i % m
+s116350424.py(25):         for i in range(initialI, n + 1):
+s116350424.py(27):         self.factorials += nextArr
+s116350424.py(28):         return self.factorials[n]
+ --- modulename: s116350424, funcname: invFactorial
+s116350424.py(47):         if n <= -1:
+s116350424.py(51):         if n < len(self.invFactorial_):
+s116350424.py(53):         self.inv(n)  # To make sure already calculated n^-1
+ --- modulename: s116350424, funcname: inv
+s116350424.py(31):         if n <= -1:
+s116350424.py(35):         p = self.MOD
+s116350424.py(36):         pi = n % p
+s116350424.py(37):         if pi < len(self.invModulos):
+s116350424.py(39):         nextArr = [0] * (n + 1 - len(self.invModulos))
+s116350424.py(40):         initialI = len(self.invModulos)
+s116350424.py(41):         for i in range(initialI, min(p, n + 1)):
+s116350424.py(42):             next = -self.invModulos[p % i] * (p // i) % p
+s116350424.py(43):             self.invModulos.append(next)
+s116350424.py(41):         for i in range(initialI, min(p, n + 1)):
+s116350424.py(44):         return self.invModulos[pi]
+s116350424.py(54):         nextArr = [0] * (n + 1 - len(self.invFactorial_))
+s116350424.py(55):         initialI = len(self.invFactorial_)
+s116350424.py(56):         prev = self.invFactorial_[-1]
+s116350424.py(57):         p = self.MOD
+s116350424.py(58):         for i in range(initialI, n + 1):
+s116350424.py(59):             prev = nextArr[i - initialI] = (prev * self.invModulos[i % p]) % p
+s116350424.py(58):         for i in range(initialI, n + 1):
+s116350424.py(60):         self.invFactorial_ += nextArr
+s116350424.py(61):         return self.invFactorial_[n]
+ --- modulename: s116350424, funcname: invFactorial
+s116350424.py(47):         if n <= -1:
+s116350424.py(51):         if n < len(self.invFactorial_):
+s116350424.py(52):             return self.invFactorial_[n]
+ --- modulename: s116350424, funcname: powm
+s116350424.py(78):     if a == 1 or n == 0:
+s116350424.py(79):         return 1
+s116350424.py(89):     for i in range(K+1):
+s116350424.py(90):         sum = (sum+C.choose_k_from_n(N-1,i)*M*powm(M-1,N-1 - i,MOD))%MOD
+ --- modulename: s116350424, funcname: choose_k_from_n
+s116350424.py(70):         if k < 0 or n < k:
+s116350424.py(72):         k = min(k, n - k)
+s116350424.py(73):         f = self.factorial
+s116350424.py(74):         return f.calc(n) * f.invFactorial(max(n - k, k)) * f.invFactorial(min(k, n - k)) % self.MOD
+ --- modulename: s116350424, funcname: calc
+s116350424.py(15):         if n <= -1:
+s116350424.py(19):         if n < len(self.factorials):
+s116350424.py(20):             return self.factorials[n]
+ --- modulename: s116350424, funcname: invFactorial
+s116350424.py(47):         if n <= -1:
+s116350424.py(51):         if n < len(self.invFactorial_):
+s116350424.py(52):             return self.invFactorial_[n]
+ --- modulename: s116350424, funcname: invFactorial
+s116350424.py(47):         if n <= -1:
+s116350424.py(51):         if n < len(self.invFactorial_):
+s116350424.py(52):             return self.invFactorial_[n]
+ --- modulename: s116350424, funcname: powm
+s116350424.py(78):     if a == 1 or n == 0:
+s116350424.py(79):         return 1
+s116350424.py(89):     for i in range(K+1):
+s116350424.py(91):     print(sum)
+6
+s116350424.py(92):     return
+ --- modulename: s116350424, funcname: iterate_tokens
