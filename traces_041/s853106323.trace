@@ -1,0 +1,461 @@
+ --- modulename: s853106323, funcname: <module>
+s853106323.py(3): class LazySegmentTree:
+ --- modulename: s853106323, funcname: LazySegmentTree
+s853106323.py(3): class LazySegmentTree:
+s853106323.py(5):     __slots__ = ["n", "data", "lazy", "me", "oe", "fmm", "fmo", "foo"]
+s853106323.py(7):     def __init__(self, monoid_data, monoid_identity, operator_identity, func_monoid_monoid, func_monoid_operator, func_operator_operator):
+s853106323.py(21):     def replace(self, index, value):
+s853106323.py(44):     def effect(self, l, r, operator):
+s853106323.py(92):     def folded(self, l, r):
+s853106323.py(131): def yosupo():
+s853106323.py(157): if __name__ == "__main__":
+s853106323.py(158):     yosupo()
+ --- modulename: s853106323, funcname: yosupo
+s853106323.py(132):     import sys
+s853106323.py(133):     input = sys.stdin.buffer.readline
+s853106323.py(135):     whitened = 0
+s853106323.py(136):     N, Q = map(int, input().split())
+s853106323.py(137):     xs = LazySegmentTree([N - 2] * (N - 2), N - 2, N - 2, min, min, min)
+ --- modulename: s853106323, funcname: __init__
+s853106323.py(8):         self.me = monoid_identity
+s853106323.py(9):         self.oe = operator_identity
+s853106323.py(10):         self.fmm = func_monoid_monoid
+s853106323.py(11):         self.fmo = func_monoid_operator
+s853106323.py(12):         self.foo = func_operator_operator
+s853106323.py(14):         self.n = len(monoid_data)
+s853106323.py(15):         self.data = monoid_data * 2
+s853106323.py(16):         for i in range(self.n-1, 0, -1):
+s853106323.py(17):             self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+s853106323.py(16):         for i in range(self.n-1, 0, -1):
+s853106323.py(17):             self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+s853106323.py(16):         for i in range(self.n-1, 0, -1):
+s853106323.py(18):         self.lazy = [self.oe] * (self.n * 2)
+s853106323.py(138):     ys = LazySegmentTree([N - 2] * (N - 2), N - 2, N - 2, min, min, min)
+ --- modulename: s853106323, funcname: __init__
+s853106323.py(8):         self.me = monoid_identity
+s853106323.py(9):         self.oe = operator_identity
+s853106323.py(10):         self.fmm = func_monoid_monoid
+s853106323.py(11):         self.fmo = func_monoid_operator
+s853106323.py(12):         self.foo = func_operator_operator
+s853106323.py(14):         self.n = len(monoid_data)
+s853106323.py(15):         self.data = monoid_data * 2
+s853106323.py(16):         for i in range(self.n-1, 0, -1):
+s853106323.py(17):             self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+s853106323.py(16):         for i in range(self.n-1, 0, -1):
+s853106323.py(17):             self.data[i] = self.fmm(self.data[2*i], self.data[2*i+1])
+s853106323.py(16):         for i in range(self.n-1, 0, -1):
+s853106323.py(18):         self.lazy = [self.oe] * (self.n * 2)
+s853106323.py(139):     for _ in range(Q):
+s853106323.py(140):         t, x = map(int, input().split())
+s853106323.py(141):         x -= 2
+s853106323.py(143):         if t == 1:
+s853106323.py(144):             tmp = xs.folded(x, x + 1)
+ --- modulename: s853106323, funcname: folded
+s853106323.py(93):         l += self.n
+s853106323.py(94):         r += self.n
+s853106323.py(95):         l0 = l
+s853106323.py(96):         r0 = r - 1
+s853106323.py(97):         while l0 % 2 == 0:
+s853106323.py(98):             l0 //= 2
+s853106323.py(97):         while l0 % 2 == 0:
+s853106323.py(98):             l0 //= 2
+s853106323.py(97):         while l0 % 2 == 0:
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(103):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(110):             i = r0 >> shift
+s853106323.py(111):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(112):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(113):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(114):             self.lazy[i] = self.oe
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(110):             i = r0 >> shift
+s853106323.py(111):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(112):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(113):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(114):             self.lazy[i] = self.oe
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(117):         left_folded = self.me
+s853106323.py(118):         right_folded = self.me
+s853106323.py(119):         while l < r:
+s853106323.py(120):             if l % 2:
+s853106323.py(123):             if r % 2:
+s853106323.py(124):                 r -= 1
+s853106323.py(125):                 right_folded = self.fmm(self.fmo(self.data[r], self.lazy[r]), right_folded)
+s853106323.py(126):             l //= 2
+s853106323.py(127):             r //= 2
+s853106323.py(119):         while l < r:
+s853106323.py(128):         return self.fmm(left_folded, right_folded)
+s853106323.py(145):             ys.effect(0, tmp, x)
+ --- modulename: s853106323, funcname: effect
+s853106323.py(45):         l += self.n
+s853106323.py(46):         r += self.n
+s853106323.py(47):         l0 = l
+s853106323.py(48):         r0 = r - 1
+s853106323.py(49):         while l0 % 2 == 0:
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(52):             r0 //= 2
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(56):             i = l0 >> shift
+s853106323.py(57):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(58):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(59):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(60):             self.lazy[i] = self.oe
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(61):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(62):             i = r0 >> shift
+s853106323.py(63):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(64):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(65):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(66):             self.lazy[i] = self.oe
+s853106323.py(61):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(69):         while l < r:
+s853106323.py(70):             if l % 2:
+s853106323.py(71):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+s853106323.py(72):                 l += 1
+s853106323.py(73):             if r % 2:
+s853106323.py(76):             l //= 2
+s853106323.py(77):             r //= 2
+s853106323.py(69):         while l < r:
+s853106323.py(70):             if l % 2:
+s853106323.py(73):             if r % 2:
+s853106323.py(74):                 r -= 1
+s853106323.py(75):                 self.lazy[r] = self.foo(self.lazy[r], operator)
+s853106323.py(76):             l //= 2
+s853106323.py(77):             r //= 2
+s853106323.py(69):         while l < r:
+s853106323.py(80):         i = l0
+s853106323.py(81):         while i > 1:
+s853106323.py(82):             i //= 2
+s853106323.py(83):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+s853106323.py(84):             self.lazy[i] = self.oe
+s853106323.py(81):         while i > 1:
+s853106323.py(85):         i = r0
+s853106323.py(86):         while i > 1:
+s853106323.py(87):             i //= 2
+s853106323.py(88):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+s853106323.py(89):             self.lazy[i] = self.oe
+s853106323.py(86):         while i > 1:
+s853106323.py(146):             whitened += tmp
+s853106323.py(139):     for _ in range(Q):
+s853106323.py(140):         t, x = map(int, input().split())
+s853106323.py(141):         x -= 2
+s853106323.py(143):         if t == 1:
+s853106323.py(148):             tmp = ys.folded(x, x + 1)
+ --- modulename: s853106323, funcname: folded
+s853106323.py(93):         l += self.n
+s853106323.py(94):         r += self.n
+s853106323.py(95):         l0 = l
+s853106323.py(96):         r0 = r - 1
+s853106323.py(97):         while l0 % 2 == 0:
+s853106323.py(98):             l0 //= 2
+s853106323.py(97):         while l0 % 2 == 0:
+s853106323.py(98):             l0 //= 2
+s853106323.py(97):         while l0 % 2 == 0:
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(103):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(110):             i = r0 >> shift
+s853106323.py(111):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(112):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(113):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(114):             self.lazy[i] = self.oe
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(110):             i = r0 >> shift
+s853106323.py(111):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(112):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(113):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(114):             self.lazy[i] = self.oe
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(117):         left_folded = self.me
+s853106323.py(118):         right_folded = self.me
+s853106323.py(119):         while l < r:
+s853106323.py(120):             if l % 2:
+s853106323.py(123):             if r % 2:
+s853106323.py(124):                 r -= 1
+s853106323.py(125):                 right_folded = self.fmm(self.fmo(self.data[r], self.lazy[r]), right_folded)
+s853106323.py(126):             l //= 2
+s853106323.py(127):             r //= 2
+s853106323.py(119):         while l < r:
+s853106323.py(128):         return self.fmm(left_folded, right_folded)
+s853106323.py(149):             xs.effect(0, tmp, x)
+ --- modulename: s853106323, funcname: effect
+s853106323.py(45):         l += self.n
+s853106323.py(46):         r += self.n
+s853106323.py(47):         l0 = l
+s853106323.py(48):         r0 = r - 1
+s853106323.py(49):         while l0 % 2 == 0:
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(52):             r0 //= 2
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(52):             r0 //= 2
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(56):             i = l0 >> shift
+s853106323.py(57):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(58):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(59):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(60):             self.lazy[i] = self.oe
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(61):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(69):         while l < r:
+s853106323.py(70):             if l % 2:
+s853106323.py(71):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+s853106323.py(72):                 l += 1
+s853106323.py(73):             if r % 2:
+s853106323.py(76):             l //= 2
+s853106323.py(77):             r //= 2
+s853106323.py(69):         while l < r:
+s853106323.py(80):         i = l0
+s853106323.py(81):         while i > 1:
+s853106323.py(82):             i //= 2
+s853106323.py(83):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+s853106323.py(84):             self.lazy[i] = self.oe
+s853106323.py(81):         while i > 1:
+s853106323.py(85):         i = r0
+s853106323.py(86):         while i > 1:
+s853106323.py(150):             whitened += tmp
+s853106323.py(139):     for _ in range(Q):
+s853106323.py(140):         t, x = map(int, input().split())
+s853106323.py(141):         x -= 2
+s853106323.py(143):         if t == 1:
+s853106323.py(144):             tmp = xs.folded(x, x + 1)
+ --- modulename: s853106323, funcname: folded
+s853106323.py(93):         l += self.n
+s853106323.py(94):         r += self.n
+s853106323.py(95):         l0 = l
+s853106323.py(96):         r0 = r - 1
+s853106323.py(97):         while l0 % 2 == 0:
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(100):             r0 //= 2
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(103):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(104):             i = l0 >> shift
+s853106323.py(105):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(106):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(107):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(108):             self.lazy[i] = self.oe
+s853106323.py(103):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(104):             i = l0 >> shift
+s853106323.py(105):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(106):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(107):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(108):             self.lazy[i] = self.oe
+s853106323.py(103):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(110):             i = r0 >> shift
+s853106323.py(111):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(112):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(113):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(114):             self.lazy[i] = self.oe
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(117):         left_folded = self.me
+s853106323.py(118):         right_folded = self.me
+s853106323.py(119):         while l < r:
+s853106323.py(120):             if l % 2:
+s853106323.py(121):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+s853106323.py(122):                 l += 1
+s853106323.py(123):             if r % 2:
+s853106323.py(126):             l //= 2
+s853106323.py(127):             r //= 2
+s853106323.py(119):         while l < r:
+s853106323.py(128):         return self.fmm(left_folded, right_folded)
+s853106323.py(145):             ys.effect(0, tmp, x)
+ --- modulename: s853106323, funcname: effect
+s853106323.py(45):         l += self.n
+s853106323.py(46):         r += self.n
+s853106323.py(47):         l0 = l
+s853106323.py(48):         r0 = r - 1
+s853106323.py(49):         while l0 % 2 == 0:
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(52):             r0 //= 2
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(56):             i = l0 >> shift
+s853106323.py(57):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(58):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(59):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(60):             self.lazy[i] = self.oe
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(61):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(62):             i = r0 >> shift
+s853106323.py(63):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(64):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(65):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(66):             self.lazy[i] = self.oe
+s853106323.py(61):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(69):         while l < r:
+s853106323.py(70):             if l % 2:
+s853106323.py(71):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+s853106323.py(72):                 l += 1
+s853106323.py(73):             if r % 2:
+s853106323.py(76):             l //= 2
+s853106323.py(77):             r //= 2
+s853106323.py(69):         while l < r:
+s853106323.py(70):             if l % 2:
+s853106323.py(73):             if r % 2:
+s853106323.py(74):                 r -= 1
+s853106323.py(75):                 self.lazy[r] = self.foo(self.lazy[r], operator)
+s853106323.py(76):             l //= 2
+s853106323.py(77):             r //= 2
+s853106323.py(69):         while l < r:
+s853106323.py(80):         i = l0
+s853106323.py(81):         while i > 1:
+s853106323.py(82):             i //= 2
+s853106323.py(83):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+s853106323.py(84):             self.lazy[i] = self.oe
+s853106323.py(81):         while i > 1:
+s853106323.py(85):         i = r0
+s853106323.py(86):         while i > 1:
+s853106323.py(87):             i //= 2
+s853106323.py(88):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+s853106323.py(89):             self.lazy[i] = self.oe
+s853106323.py(86):         while i > 1:
+s853106323.py(146):             whitened += tmp
+s853106323.py(139):     for _ in range(Q):
+s853106323.py(140):         t, x = map(int, input().split())
+s853106323.py(141):         x -= 2
+s853106323.py(143):         if t == 1:
+s853106323.py(148):             tmp = ys.folded(x, x + 1)
+ --- modulename: s853106323, funcname: folded
+s853106323.py(93):         l += self.n
+s853106323.py(94):         r += self.n
+s853106323.py(95):         l0 = l
+s853106323.py(96):         r0 = r - 1
+s853106323.py(97):         while l0 % 2 == 0:
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(100):             r0 //= 2
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(100):             r0 //= 2
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(103):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(104):             i = l0 >> shift
+s853106323.py(105):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(106):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(107):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(108):             self.lazy[i] = self.oe
+s853106323.py(103):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(117):         left_folded = self.me
+s853106323.py(118):         right_folded = self.me
+s853106323.py(119):         while l < r:
+s853106323.py(120):             if l % 2:
+s853106323.py(121):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+s853106323.py(122):                 l += 1
+s853106323.py(123):             if r % 2:
+s853106323.py(126):             l //= 2
+s853106323.py(127):             r //= 2
+s853106323.py(119):         while l < r:
+s853106323.py(128):         return self.fmm(left_folded, right_folded)
+s853106323.py(149):             xs.effect(0, tmp, x)
+ --- modulename: s853106323, funcname: effect
+s853106323.py(45):         l += self.n
+s853106323.py(46):         r += self.n
+s853106323.py(47):         l0 = l
+s853106323.py(48):         r0 = r - 1
+s853106323.py(49):         while l0 % 2 == 0:
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(52):             r0 //= 2
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(52):             r0 //= 2
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(56):             i = l0 >> shift
+s853106323.py(57):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(58):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(59):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(60):             self.lazy[i] = self.oe
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(61):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(69):         while l < r:
+s853106323.py(70):             if l % 2:
+s853106323.py(71):                 self.lazy[l] = self.foo(self.lazy[l], operator)
+s853106323.py(72):                 l += 1
+s853106323.py(73):             if r % 2:
+s853106323.py(76):             l //= 2
+s853106323.py(77):             r //= 2
+s853106323.py(69):         while l < r:
+s853106323.py(80):         i = l0
+s853106323.py(81):         while i > 1:
+s853106323.py(82):             i //= 2
+s853106323.py(83):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+s853106323.py(84):             self.lazy[i] = self.oe
+s853106323.py(81):         while i > 1:
+s853106323.py(85):         i = r0
+s853106323.py(86):         while i > 1:
+s853106323.py(150):             whitened += tmp
+s853106323.py(139):     for _ in range(Q):
+s853106323.py(140):         t, x = map(int, input().split())
+s853106323.py(141):         x -= 2
+s853106323.py(143):         if t == 1:
+s853106323.py(144):             tmp = xs.folded(x, x + 1)
+ --- modulename: s853106323, funcname: folded
+s853106323.py(93):         l += self.n
+s853106323.py(94):         r += self.n
+s853106323.py(95):         l0 = l
+s853106323.py(96):         r0 = r - 1
+s853106323.py(97):         while l0 % 2 == 0:
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(100):             r0 //= 2
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(100):             r0 //= 2
+s853106323.py(99):         while r0 % 2 == 1:
+s853106323.py(103):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(104):             i = l0 >> shift
+s853106323.py(105):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(106):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(107):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(108):             self.lazy[i] = self.oe
+s853106323.py(103):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(109):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(117):         left_folded = self.me
+s853106323.py(118):         right_folded = self.me
+s853106323.py(119):         while l < r:
+s853106323.py(120):             if l % 2:
+s853106323.py(121):                 left_folded = self.fmm(left_folded, self.fmo(self.data[l], self.lazy[l]))
+s853106323.py(122):                 l += 1
+s853106323.py(123):             if r % 2:
+s853106323.py(126):             l //= 2
+s853106323.py(127):             r //= 2
+s853106323.py(119):         while l < r:
+s853106323.py(128):         return self.fmm(left_folded, right_folded)
+s853106323.py(145):             ys.effect(0, tmp, x)
+ --- modulename: s853106323, funcname: effect
+s853106323.py(45):         l += self.n
+s853106323.py(46):         r += self.n
+s853106323.py(47):         l0 = l
+s853106323.py(48):         r0 = r - 1
+s853106323.py(49):         while l0 % 2 == 0:
+s853106323.py(51):         while r0 % 2 == 1:
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(56):             i = l0 >> shift
+s853106323.py(57):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(58):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(59):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(60):             self.lazy[i] = self.oe
+s853106323.py(55):         for shift in range(l0.bit_length()-1, 0, -1):
+s853106323.py(61):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(62):             i = r0 >> shift
+s853106323.py(63):             self.lazy[2*i]   = self.foo(self.lazy[2*i],   self.lazy[i])
+s853106323.py(64):             self.lazy[2*i+1] = self.foo(self.lazy[2*i+1], self.lazy[i])
+s853106323.py(65):             self.data[i] = self.fmo(self.data[i], self.lazy[i])
+s853106323.py(66):             self.lazy[i] = self.oe
+s853106323.py(61):         for shift in range(r0.bit_length()-1, 0, -1):
+s853106323.py(69):         while l < r:
+s853106323.py(80):         i = l0
+s853106323.py(81):         while i > 1:
+s853106323.py(82):             i //= 2
+s853106323.py(83):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+s853106323.py(84):             self.lazy[i] = self.oe
+s853106323.py(81):         while i > 1:
+s853106323.py(85):         i = r0
+s853106323.py(86):         while i > 1:
+s853106323.py(87):             i //= 2
+s853106323.py(88):             self.data[i] = self.fmm( self.fmo(self.data[2*i], self.lazy[2*i]), self.fmo(self.data[2*i+1], self.lazy[2*i+1]) )
+s853106323.py(89):             self.lazy[i] = self.oe
+s853106323.py(86):         while i > 1:
+s853106323.py(146):             whitened += tmp
+s853106323.py(139):     for _ in range(Q):
+s853106323.py(155):     print((N - 2) ** 2 - whitened)
+1
