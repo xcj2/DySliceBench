@@ -1,0 +1,282 @@
+ --- modulename: s910551558, funcname: <module>
+s910551558.py(1): class MultisetBIT:
+ --- modulename: s910551558, funcname: MultisetBIT
+s910551558.py(1): class MultisetBIT:
+s910551558.py(2):     """
+s910551558.py(11):     __slots__ = ["n", "k", "data"]
+s910551558.py(13):     def __init__(self, maxvalue, counter = None):
+s910551558.py(20):     def update(self, counter):
+s910551558.py(36):     def add(self, value):
+s910551558.py(46):     def pop(self, value):
+s910551558.py(58):     def count_le(self, value):
+s910551558.py(71):     def count(self, first, last):
+s910551558.py(87):     def __getitem__(self, index):
+s910551558.py(93):     def bisect(self, count):
+s910551558.py(107):     def lower_bound(self, value):
+s910551558.py(115):     def upper_bound(self, value):
+s910551558.py(124): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s910551558.py(125): S_list = sorted(map(int, input().split()), reverse=True)
+s910551558.py(134): ans_tree = [0] * ((2 ** N) * 2)
+s910551558.py(135): ms = MultisetBIT((2 ** N) * 2)
+ --- modulename: s910551558, funcname: __init__
+s910551558.py(14):         self.n = maxvalue + 1
+s910551558.py(15):         self.k = 1 << ((self.n + 1).bit_length() - 1)
+s910551558.py(16):         self.data = [0] * (self.n + 1)
+s910551558.py(17):         if counter is not None:
+s910551558.py(136): ms.add(1)
+ --- modulename: s910551558, funcname: add
+s910551558.py(41):         value += 1
+s910551558.py(42):         while value <= self.n:
+s910551558.py(43):             self.data[value] += 1
+s910551558.py(44):             value += value & -value
+s910551558.py(42):         while value <= self.n:
+s910551558.py(43):             self.data[value] += 1
+s910551558.py(44):             value += value & -value
+s910551558.py(42):         while value <= self.n:
+s910551558.py(43):             self.data[value] += 1
+s910551558.py(44):             value += value & -value
+s910551558.py(42):         while value <= self.n:
+s910551558.py(137): prev_S = 0
+s910551558.py(138): prev_elem = 0
+s910551558.py(139): for S in S_list:
+s910551558.py(140):     if prev_S != S:
+s910551558.py(141):         prev_elem = 0
+s910551558.py(142):     elem = ms.lower_bound(prev_elem)
+ --- modulename: s910551558, funcname: lower_bound
+s910551558.py(113):         return self.bisect(self.count_le(value - 1) + 1)
+ --- modulename: s910551558, funcname: count_le
+s910551558.py(64):         value += 1
+s910551558.py(65):         ret = 0
+s910551558.py(66):         while value > 0:
+s910551558.py(69):         return ret
+ --- modulename: s910551558, funcname: bisect
+s910551558.py(98):         ret = 0
+s910551558.py(99):         k = self.k
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(102):                 count -= self.data[ret + k]
+s910551558.py(103):                 ret += k
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(105):         return ret
+s910551558.py(143):     while elem != ((2 ** N) * 2 + 1) and ans_tree[elem // 2] == S:
+s910551558.py(146):     if elem == ((2 ** N) * 2 + 1):
+s910551558.py(150):     prev_S = S
+s910551558.py(151):     prev_elem = elem
+s910551558.py(152):     ms.pop(elem)
+ --- modulename: s910551558, funcname: pop
+s910551558.py(53):         value += 1
+s910551558.py(54):         while value <= self.n:
+s910551558.py(55):             self.data[value] -= 1
+s910551558.py(56):             value += value & -value
+s910551558.py(54):         while value <= self.n:
+s910551558.py(55):             self.data[value] -= 1
+s910551558.py(56):             value += value & -value
+s910551558.py(54):         while value <= self.n:
+s910551558.py(55):             self.data[value] -= 1
+s910551558.py(56):             value += value & -value
+s910551558.py(54):         while value <= self.n:
+s910551558.py(153):     ans_tree[elem] = S
+s910551558.py(154):     elem *= 2
+s910551558.py(155):     while elem < 2 ** N * 2:
+s910551558.py(156):         ans_tree[elem] = S
+s910551558.py(157):         ms.add(elem + 1)
+ --- modulename: s910551558, funcname: add
+s910551558.py(41):         value += 1
+s910551558.py(42):         while value <= self.n:
+s910551558.py(43):             self.data[value] += 1
+s910551558.py(44):             value += value & -value
+s910551558.py(42):         while value <= self.n:
+s910551558.py(43):             self.data[value] += 1
+s910551558.py(44):             value += value & -value
+s910551558.py(42):         while value <= self.n:
+s910551558.py(158):         elem *= 2
+s910551558.py(155):     while elem < 2 ** N * 2:
+s910551558.py(156):         ans_tree[elem] = S
+s910551558.py(157):         ms.add(elem + 1)
+ --- modulename: s910551558, funcname: add
+s910551558.py(41):         value += 1
+s910551558.py(42):         while value <= self.n:
+s910551558.py(43):             self.data[value] += 1
+s910551558.py(44):             value += value & -value
+s910551558.py(42):         while value <= self.n:
+s910551558.py(43):             self.data[value] += 1
+s910551558.py(44):             value += value & -value
+s910551558.py(42):         while value <= self.n:
+s910551558.py(158):         elem *= 2
+s910551558.py(155):     while elem < 2 ** N * 2:
+s910551558.py(139): for S in S_list:
+s910551558.py(140):     if prev_S != S:
+s910551558.py(141):         prev_elem = 0
+s910551558.py(142):     elem = ms.lower_bound(prev_elem)
+ --- modulename: s910551558, funcname: lower_bound
+s910551558.py(113):         return self.bisect(self.count_le(value - 1) + 1)
+ --- modulename: s910551558, funcname: count_le
+s910551558.py(64):         value += 1
+s910551558.py(65):         ret = 0
+s910551558.py(66):         while value > 0:
+s910551558.py(69):         return ret
+ --- modulename: s910551558, funcname: bisect
+s910551558.py(98):         ret = 0
+s910551558.py(99):         k = self.k
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(102):                 count -= self.data[ret + k]
+s910551558.py(103):                 ret += k
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(102):                 count -= self.data[ret + k]
+s910551558.py(103):                 ret += k
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(105):         return ret
+s910551558.py(143):     while elem != ((2 ** N) * 2 + 1) and ans_tree[elem // 2] == S:
+s910551558.py(146):     if elem == ((2 ** N) * 2 + 1):
+s910551558.py(150):     prev_S = S
+s910551558.py(151):     prev_elem = elem
+s910551558.py(152):     ms.pop(elem)
+ --- modulename: s910551558, funcname: pop
+s910551558.py(53):         value += 1
+s910551558.py(54):         while value <= self.n:
+s910551558.py(55):             self.data[value] -= 1
+s910551558.py(56):             value += value & -value
+s910551558.py(54):         while value <= self.n:
+s910551558.py(55):             self.data[value] -= 1
+s910551558.py(56):             value += value & -value
+s910551558.py(54):         while value <= self.n:
+s910551558.py(153):     ans_tree[elem] = S
+s910551558.py(154):     elem *= 2
+s910551558.py(155):     while elem < 2 ** N * 2:
+s910551558.py(156):         ans_tree[elem] = S
+s910551558.py(157):         ms.add(elem + 1)
+ --- modulename: s910551558, funcname: add
+s910551558.py(41):         value += 1
+s910551558.py(42):         while value <= self.n:
+s910551558.py(43):             self.data[value] += 1
+s910551558.py(44):             value += value & -value
+s910551558.py(42):         while value <= self.n:
+s910551558.py(158):         elem *= 2
+s910551558.py(155):     while elem < 2 ** N * 2:
+s910551558.py(139): for S in S_list:
+s910551558.py(140):     if prev_S != S:
+s910551558.py(141):         prev_elem = 0
+s910551558.py(142):     elem = ms.lower_bound(prev_elem)
+ --- modulename: s910551558, funcname: lower_bound
+s910551558.py(113):         return self.bisect(self.count_le(value - 1) + 1)
+ --- modulename: s910551558, funcname: count_le
+s910551558.py(64):         value += 1
+s910551558.py(65):         ret = 0
+s910551558.py(66):         while value > 0:
+s910551558.py(69):         return ret
+ --- modulename: s910551558, funcname: bisect
+s910551558.py(98):         ret = 0
+s910551558.py(99):         k = self.k
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(102):                 count -= self.data[ret + k]
+s910551558.py(103):                 ret += k
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(102):                 count -= self.data[ret + k]
+s910551558.py(103):                 ret += k
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(105):         return ret
+s910551558.py(143):     while elem != ((2 ** N) * 2 + 1) and ans_tree[elem // 2] == S:
+s910551558.py(146):     if elem == ((2 ** N) * 2 + 1):
+s910551558.py(150):     prev_S = S
+s910551558.py(151):     prev_elem = elem
+s910551558.py(152):     ms.pop(elem)
+ --- modulename: s910551558, funcname: pop
+s910551558.py(53):         value += 1
+s910551558.py(54):         while value <= self.n:
+s910551558.py(55):             self.data[value] -= 1
+s910551558.py(56):             value += value & -value
+s910551558.py(54):         while value <= self.n:
+s910551558.py(55):             self.data[value] -= 1
+s910551558.py(56):             value += value & -value
+s910551558.py(54):         while value <= self.n:
+s910551558.py(153):     ans_tree[elem] = S
+s910551558.py(154):     elem *= 2
+s910551558.py(155):     while elem < 2 ** N * 2:
+s910551558.py(139): for S in S_list:
+s910551558.py(140):     if prev_S != S:
+s910551558.py(141):         prev_elem = 0
+s910551558.py(142):     elem = ms.lower_bound(prev_elem)
+ --- modulename: s910551558, funcname: lower_bound
+s910551558.py(113):         return self.bisect(self.count_le(value - 1) + 1)
+ --- modulename: s910551558, funcname: count_le
+s910551558.py(64):         value += 1
+s910551558.py(65):         ret = 0
+s910551558.py(66):         while value > 0:
+s910551558.py(69):         return ret
+ --- modulename: s910551558, funcname: bisect
+s910551558.py(98):         ret = 0
+s910551558.py(99):         k = self.k
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(102):                 count -= self.data[ret + k]
+s910551558.py(103):                 ret += k
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(102):                 count -= self.data[ret + k]
+s910551558.py(103):                 ret += k
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(101):             if ret + k <= self.n and self.data[ret + k] < count:
+s910551558.py(102):                 count -= self.data[ret + k]
+s910551558.py(103):                 ret += k
+s910551558.py(104):             k //= 2
+s910551558.py(100):         while k > 0:
+s910551558.py(105):         return ret
+s910551558.py(143):     while elem != ((2 ** N) * 2 + 1) and ans_tree[elem // 2] == S:
+s910551558.py(146):     if elem == ((2 ** N) * 2 + 1):
+s910551558.py(150):     prev_S = S
+s910551558.py(151):     prev_elem = elem
+s910551558.py(152):     ms.pop(elem)
+ --- modulename: s910551558, funcname: pop
+s910551558.py(53):         value += 1
+s910551558.py(54):         while value <= self.n:
+s910551558.py(55):             self.data[value] -= 1
+s910551558.py(56):             value += value & -value
+s910551558.py(54):         while value <= self.n:
+s910551558.py(153):     ans_tree[elem] = S
+s910551558.py(154):     elem *= 2
+s910551558.py(155):     while elem < 2 ** N * 2:
+s910551558.py(139): for S in S_list:
+s910551558.py(161): print("Yes")
+Yes
