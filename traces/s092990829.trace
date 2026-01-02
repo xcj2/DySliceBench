@@ -1,0 +1,824 @@
+ --- modulename: s092990829, funcname: <module>
+s092990829.py(1): import sys
+s092990829.py(2): sys.setrecursionlimit(2147483647)
+s092990829.py(3): INF = float("inf")
+s092990829.py(4): MOD = 10**9 + 7 # 998244353
+s092990829.py(5): read = sys.stdin.buffer.read
+s092990829.py(6): readline = sys.stdin.buffer.readline
+s092990829.py(7): readlines = sys.stdin.buffer.readlines
+s092990829.py(9): class LazySegmentTree(object):
+ --- modulename: s092990829, funcname: LazySegmentTree
+s092990829.py(9): class LazySegmentTree(object):
+s092990829.py(10):     def __init__(self, A, dot, unit, compose, identity, act):
+s092990829.py(35):     def _fix_ancestors(self, i):
+s092990829.py(41):     def _propagate(self, i):
+s092990829.py(50):     def range_act(self, l, r, f):
+s092990829.py(71):     def sum(self, l, r):
+s092990829.py(90): from operator import add
+s092990829.py(91): def resolve():
+s092990829.py(108): resolve()
+ --- modulename: s092990829, funcname: resolve
+s092990829.py(92):     n, m = map(int, readline().split())
+s092990829.py(93):     queries = [[] for _ in range(n)]
+ --- modulename: s092990829, funcname: <listcomp>
+s092990829.py(93):     queries = [[] for _ in range(n)]
+s092990829.py(93):     queries = [[] for _ in range(n)]
+s092990829.py(93):     queries = [[] for _ in range(n)]
+s092990829.py(93):     queries = [[] for _ in range(n)]
+s092990829.py(93):     queries = [[] for _ in range(n)]
+s092990829.py(93):     queries = [[] for _ in range(n)]
+s092990829.py(94):     A = map(int, read().split())
+s092990829.py(95):     for l, r, a in zip(A, A, A):
+s092990829.py(96):         queries[l - 1].append((r, a))
+s092990829.py(95):     for l, r, a in zip(A, A, A):
+s092990829.py(96):         queries[l - 1].append((r, a))
+s092990829.py(95):     for l, r, a in zip(A, A, A):
+s092990829.py(96):         queries[l - 1].append((r, a))
+s092990829.py(95):     for l, r, a in zip(A, A, A):
+s092990829.py(99):     tree = LazySegmentTree([0] * n, max, 0, add, 0, add)
+ --- modulename: s092990829, funcname: __init__
+s092990829.py(18):         logn = (len(A) - 1).bit_length()
+s092990829.py(19):         n = 1 << logn
+s092990829.py(20):         tree = [unit] * (2 * n)
+s092990829.py(21):         for i, v in enumerate(A):
+s092990829.py(22):             tree[i + n] = v
+s092990829.py(21):         for i, v in enumerate(A):
+s092990829.py(22):             tree[i + n] = v
+s092990829.py(21):         for i, v in enumerate(A):
+s092990829.py(22):             tree[i + n] = v
+s092990829.py(21):         for i, v in enumerate(A):
+s092990829.py(22):             tree[i + n] = v
+s092990829.py(21):         for i, v in enumerate(A):
+s092990829.py(22):             tree[i + n] = v
+s092990829.py(21):         for i, v in enumerate(A):
+s092990829.py(23):         for i in range(n - 1, 0, -1):
+s092990829.py(24):             tree[i] = dot(tree[i << 1], tree[i << 1 | 1])
+s092990829.py(23):         for i in range(n - 1, 0, -1):
+s092990829.py(24):             tree[i] = dot(tree[i << 1], tree[i << 1 | 1])
+s092990829.py(23):         for i in range(n - 1, 0, -1):
+s092990829.py(24):             tree[i] = dot(tree[i << 1], tree[i << 1 | 1])
+s092990829.py(23):         for i in range(n - 1, 0, -1):
+s092990829.py(24):             tree[i] = dot(tree[i << 1], tree[i << 1 | 1])
+s092990829.py(23):         for i in range(n - 1, 0, -1):
+s092990829.py(24):             tree[i] = dot(tree[i << 1], tree[i << 1 | 1])
+s092990829.py(23):         for i in range(n - 1, 0, -1):
+s092990829.py(24):             tree[i] = dot(tree[i << 1], tree[i << 1 | 1])
+s092990829.py(23):         for i in range(n - 1, 0, -1):
+s092990829.py(24):             tree[i] = dot(tree[i << 1], tree[i << 1 | 1])
+s092990829.py(23):         for i in range(n - 1, 0, -1):
+s092990829.py(25):         self._n = n
+s092990829.py(26):         self._logn = logn
+s092990829.py(27):         self._tree = tree
+s092990829.py(28):         self._lazy = [identity] * (2 * n)
+s092990829.py(29):         self._dot = dot
+s092990829.py(30):         self._unit = unit
+s092990829.py(31):         self._compose = compose
+s092990829.py(32):         self._identity = identity
+s092990829.py(33):         self._act = act
+s092990829.py(102):     for i in range(n - 1, -1, -1):
+s092990829.py(103):         tree.range_act(i, i + 1, tree.sum(i, n)) # pointwise update
+ --- modulename: s092990829, funcname: sum
+s092990829.py(73):         l += self._n
+s092990829.py(74):         r += self._n
+s092990829.py(75):         self._propagate(l)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(76):         self._propagate(r - 1)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(77):         l_val = r_val = self._unit
+s092990829.py(78):         tree, dot = self._tree, self._dot
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(83):             if r & 1:
+s092990829.py(84):                 r -= 1
+s092990829.py(85):                 r_val = dot(tree[r], r_val)
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(88):         return dot(l_val, r_val)
+ --- modulename: s092990829, funcname: range_act
+s092990829.py(52):         l += self._n
+s092990829.py(53):         r += self._n
+s092990829.py(57):         l0, r0 = l, r
+s092990829.py(58):         tree, lazy, act, compose = self._tree, self._lazy, self._act, self._compose
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(63):             if r & 1:
+s092990829.py(64):                 r -= 1
+s092990829.py(65):                 tree[r], lazy[r] = act(f, tree[r]), compose(f, lazy[r])
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(68):         self._fix_ancestors(l0)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(69):         self._fix_ancestors(r0 - 1)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(104):         for r, a in queries[i]:
+s092990829.py(102):     for i in range(n - 1, -1, -1):
+s092990829.py(103):         tree.range_act(i, i + 1, tree.sum(i, n)) # pointwise update
+ --- modulename: s092990829, funcname: sum
+s092990829.py(73):         l += self._n
+s092990829.py(74):         r += self._n
+s092990829.py(75):         self._propagate(l)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(76):         self._propagate(r - 1)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(77):         l_val = r_val = self._unit
+s092990829.py(78):         tree, dot = self._tree, self._dot
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(81):                 l_val = dot(l_val, tree[l])
+s092990829.py(82):                 l += 1
+s092990829.py(83):             if r & 1:
+s092990829.py(84):                 r -= 1
+s092990829.py(85):                 r_val = dot(tree[r], r_val)
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(88):         return dot(l_val, r_val)
+ --- modulename: s092990829, funcname: range_act
+s092990829.py(52):         l += self._n
+s092990829.py(53):         r += self._n
+s092990829.py(57):         l0, r0 = l, r
+s092990829.py(58):         tree, lazy, act, compose = self._tree, self._lazy, self._act, self._compose
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(61):                 tree[l], lazy[l] = act(f, tree[l]), compose(f, lazy[l])
+s092990829.py(62):                 l += 1
+s092990829.py(63):             if r & 1:
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(68):         self._fix_ancestors(l0)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(69):         self._fix_ancestors(r0 - 1)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(104):         for r, a in queries[i]:
+s092990829.py(102):     for i in range(n - 1, -1, -1):
+s092990829.py(103):         tree.range_act(i, i + 1, tree.sum(i, n)) # pointwise update
+ --- modulename: s092990829, funcname: sum
+s092990829.py(73):         l += self._n
+s092990829.py(74):         r += self._n
+s092990829.py(75):         self._propagate(l)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(76):         self._propagate(r - 1)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(77):         l_val = r_val = self._unit
+s092990829.py(78):         tree, dot = self._tree, self._dot
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(83):             if r & 1:
+s092990829.py(84):                 r -= 1
+s092990829.py(85):                 r_val = dot(tree[r], r_val)
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(81):                 l_val = dot(l_val, tree[l])
+s092990829.py(82):                 l += 1
+s092990829.py(83):             if r & 1:
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(88):         return dot(l_val, r_val)
+ --- modulename: s092990829, funcname: range_act
+s092990829.py(52):         l += self._n
+s092990829.py(53):         r += self._n
+s092990829.py(57):         l0, r0 = l, r
+s092990829.py(58):         tree, lazy, act, compose = self._tree, self._lazy, self._act, self._compose
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(63):             if r & 1:
+s092990829.py(64):                 r -= 1
+s092990829.py(65):                 tree[r], lazy[r] = act(f, tree[r]), compose(f, lazy[r])
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(68):         self._fix_ancestors(l0)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(69):         self._fix_ancestors(r0 - 1)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(104):         for r, a in queries[i]:
+s092990829.py(105):             tree.range_act(i, r, a)
+ --- modulename: s092990829, funcname: range_act
+s092990829.py(52):         l += self._n
+s092990829.py(53):         r += self._n
+s092990829.py(57):         l0, r0 = l, r
+s092990829.py(58):         tree, lazy, act, compose = self._tree, self._lazy, self._act, self._compose
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(63):             if r & 1:
+s092990829.py(64):                 r -= 1
+s092990829.py(65):                 tree[r], lazy[r] = act(f, tree[r]), compose(f, lazy[r])
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(61):                 tree[l], lazy[l] = act(f, tree[l]), compose(f, lazy[l])
+s092990829.py(62):                 l += 1
+s092990829.py(63):             if r & 1:
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(68):         self._fix_ancestors(l0)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(69):         self._fix_ancestors(r0 - 1)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(104):         for r, a in queries[i]:
+s092990829.py(102):     for i in range(n - 1, -1, -1):
+s092990829.py(103):         tree.range_act(i, i + 1, tree.sum(i, n)) # pointwise update
+ --- modulename: s092990829, funcname: sum
+s092990829.py(73):         l += self._n
+s092990829.py(74):         r += self._n
+s092990829.py(75):         self._propagate(l)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(76):         self._propagate(r - 1)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(77):         l_val = r_val = self._unit
+s092990829.py(78):         tree, dot = self._tree, self._dot
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(81):                 l_val = dot(l_val, tree[l])
+s092990829.py(82):                 l += 1
+s092990829.py(83):             if r & 1:
+s092990829.py(84):                 r -= 1
+s092990829.py(85):                 r_val = dot(tree[r], r_val)
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(81):                 l_val = dot(l_val, tree[l])
+s092990829.py(82):                 l += 1
+s092990829.py(83):             if r & 1:
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(88):         return dot(l_val, r_val)
+ --- modulename: s092990829, funcname: range_act
+s092990829.py(52):         l += self._n
+s092990829.py(53):         r += self._n
+s092990829.py(57):         l0, r0 = l, r
+s092990829.py(58):         tree, lazy, act, compose = self._tree, self._lazy, self._act, self._compose
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(61):                 tree[l], lazy[l] = act(f, tree[l]), compose(f, lazy[l])
+s092990829.py(62):                 l += 1
+s092990829.py(63):             if r & 1:
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(68):         self._fix_ancestors(l0)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(69):         self._fix_ancestors(r0 - 1)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(104):         for r, a in queries[i]:
+s092990829.py(105):             tree.range_act(i, r, a)
+ --- modulename: s092990829, funcname: range_act
+s092990829.py(52):         l += self._n
+s092990829.py(53):         r += self._n
+s092990829.py(57):         l0, r0 = l, r
+s092990829.py(58):         tree, lazy, act, compose = self._tree, self._lazy, self._act, self._compose
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(61):                 tree[l], lazy[l] = act(f, tree[l]), compose(f, lazy[l])
+s092990829.py(62):                 l += 1
+s092990829.py(63):             if r & 1:
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(61):                 tree[l], lazy[l] = act(f, tree[l]), compose(f, lazy[l])
+s092990829.py(62):                 l += 1
+s092990829.py(63):             if r & 1:
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(68):         self._fix_ancestors(l0)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(69):         self._fix_ancestors(r0 - 1)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(104):         for r, a in queries[i]:
+s092990829.py(102):     for i in range(n - 1, -1, -1):
+s092990829.py(103):         tree.range_act(i, i + 1, tree.sum(i, n)) # pointwise update
+ --- modulename: s092990829, funcname: sum
+s092990829.py(73):         l += self._n
+s092990829.py(74):         r += self._n
+s092990829.py(75):         self._propagate(l)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(76):         self._propagate(r - 1)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(77):         l_val = r_val = self._unit
+s092990829.py(78):         tree, dot = self._tree, self._dot
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(83):             if r & 1:
+s092990829.py(84):                 r -= 1
+s092990829.py(85):                 r_val = dot(tree[r], r_val)
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(83):             if r & 1:
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(83):             if r & 1:
+s092990829.py(84):                 r -= 1
+s092990829.py(85):                 r_val = dot(tree[r], r_val)
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(88):         return dot(l_val, r_val)
+ --- modulename: s092990829, funcname: range_act
+s092990829.py(52):         l += self._n
+s092990829.py(53):         r += self._n
+s092990829.py(57):         l0, r0 = l, r
+s092990829.py(58):         tree, lazy, act, compose = self._tree, self._lazy, self._act, self._compose
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(63):             if r & 1:
+s092990829.py(64):                 r -= 1
+s092990829.py(65):                 tree[r], lazy[r] = act(f, tree[r]), compose(f, lazy[r])
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(68):         self._fix_ancestors(l0)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(69):         self._fix_ancestors(r0 - 1)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(104):         for r, a in queries[i]:
+s092990829.py(105):             tree.range_act(i, r, a)
+ --- modulename: s092990829, funcname: range_act
+s092990829.py(52):         l += self._n
+s092990829.py(53):         r += self._n
+s092990829.py(57):         l0, r0 = l, r
+s092990829.py(58):         tree, lazy, act, compose = self._tree, self._lazy, self._act, self._compose
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(63):             if r & 1:
+s092990829.py(64):                 r -= 1
+s092990829.py(65):                 tree[r], lazy[r] = act(f, tree[r]), compose(f, lazy[r])
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(60):             if l & 1:
+s092990829.py(63):             if r & 1:
+s092990829.py(64):                 r -= 1
+s092990829.py(65):                 tree[r], lazy[r] = act(f, tree[r]), compose(f, lazy[r])
+s092990829.py(66):             l >>= 1
+s092990829.py(67):             r >>= 1
+s092990829.py(59):         while l < r:
+s092990829.py(68):         self._fix_ancestors(l0)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(69):         self._fix_ancestors(r0 - 1)
+ --- modulename: s092990829, funcname: _fix_ancestors
+s092990829.py(36):         tree, lazy, dot, act = self._tree, self._lazy, self._dot, self._act
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(38):             i >>= 1
+s092990829.py(39):             tree[i] = act(lazy[i], dot(tree[i << 1], tree[i << 1 | 1]))
+s092990829.py(37):         while i > 1:
+s092990829.py(104):         for r, a in queries[i]:
+s092990829.py(102):     for i in range(n - 1, -1, -1):
+s092990829.py(107):     print(max(0, tree.sum(0, n)))
+ --- modulename: s092990829, funcname: sum
+s092990829.py(73):         l += self._n
+s092990829.py(74):         r += self._n
+s092990829.py(75):         self._propagate(l)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(76):         self._propagate(r - 1)
+ --- modulename: s092990829, funcname: _propagate
+s092990829.py(42):         tree, lazy, identity, compose, act = self._tree, self._lazy, self._identity, self._compose, self._act
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(44):             p = i >> k
+s092990829.py(45):             f = lazy[p]
+s092990829.py(46):             tree[p << 1], lazy[p << 1] = act(f, tree[p << 1]), compose(f, lazy[p << 1])
+s092990829.py(47):             tree[p << 1 | 1], lazy[p << 1 | 1] = act(f, tree[p << 1 | 1]), compose(f, lazy[p << 1 | 1])
+s092990829.py(48):             lazy[p] = identity
+s092990829.py(43):         for k in range(self._logn, 0, -1):
+s092990829.py(77):         l_val = r_val = self._unit
+s092990829.py(78):         tree, dot = self._tree, self._dot
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(83):             if r & 1:
+s092990829.py(84):                 r -= 1
+s092990829.py(85):                 r_val = dot(tree[r], r_val)
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(83):             if r & 1:
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(80):             if l & 1:
+s092990829.py(83):             if r & 1:
+s092990829.py(84):                 r -= 1
+s092990829.py(85):                 r_val = dot(tree[r], r_val)
+s092990829.py(86):             l >>= 1
+s092990829.py(87):             r >>= 1
+s092990829.py(79):         while l < r:
+s092990829.py(88):         return dot(l_val, r_val)
+20
