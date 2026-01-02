@@ -1,0 +1,55 @@
+import math,string,itertools,fractions,heapq,collections,re,array,bisect,sys,random,time,copy,functools
+
+sys.setrecursionlimit(10**7)
+inf = 10**20
+eps = 1.0 / 10**15
+mod = 10**9+7
+
+def LI(): return [int(x) for x in sys.stdin.readline().split()]
+def LI_(): return [int(x)-1 for x in sys.stdin.readline().split()]
+def LF(): return [float(x) for x in sys.stdin.readline().split()]
+def LS(): return sys.stdin.readline().split()
+def I(): return int(sys.stdin.readline())
+def F(): return float(sys.stdin.readline())
+def S(): return input()
+def pf(s): return print(s, flush=True)
+def M(n): return ModInt(n)
+def MI(): return M(I())
+
+
+def main():
+    s = S()
+    x,y = LI()
+    a = [len(_) for _ in s.split('T')]
+    l = len(a)
+    x -= a[0]
+    x = abs(x)
+    y = abs(y)
+
+    s = set([0])
+    for i in range(2,l,2):
+        t = set()
+        for c in s:
+            t.add(c+a[i])
+            t.add(c-a[i])
+        s = t
+    if x not in s and -x not in s:
+        return 'No'
+    s = set([0])
+    for i in range(1,l,2):
+        t = set()
+        for c in s:
+            t.add(c+a[i])
+            t.add(c-a[i])
+        s = t
+    if y not in s and -y not in s:
+        return 'No'
+
+
+    return 'Yes'
+
+
+
+print(main())
+
+
