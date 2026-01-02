@@ -1,0 +1,147 @@
+# Binary Search Tree 3
+
+import sys
+sys.setrecursionlimit(10**6)
+
+
+class Node():
+    __slots__ = ['key', 'parent', 'left', 'right']
+
+    def __init__(self, key=None, parent=None, left=None, right=None):
+        self.key = key
+        self.parent = parent
+        self.left = left
+        self.right = right
+
+    def __repr__(self):
+        k = str(self.key)
+        p = str(self.parent.key) if self.parent else 'None'
+        l = str(self.left.key) if self.left else 'None'
+        r = str(self.right.key) if self.right else 'None'
+        s = "<Node %s: parent=%s, left=%s, right=%s>" % (k, p, l, r)
+        return s
+
+
+class BinaryTree():
+    def __init__(self, n=0):
+        self.T = [Node() for _ in range(n)]
+        self.root = None
+
+    def preorder(self):
+        self.preorder_key = []
+        self.preorder_rec(self.root)
+        print('', *(self.preorder_key))
+
+    def preorder_rec(self, node):
+        if node == None:
+            return
+        self.preorder_key.append(node.key)
+        self.preorder_rec(node.left)
+        self.preorder_rec(node.right)
+
+    def inorder(self):
+        self.inorder_key = []
+        self.inorder_rec(self.root)
+        print('', *(self.inorder_key))
+
+    def inorder_rec(self, node):
+        if node == None:
+            return
+        self.inorder_rec(node.left)
+        self.inorder_key.append(node.key)
+        self.inorder_rec(node.right)
+
+    def insert(self, key):
+        node = Node(key)
+
+        y = None
+        x = self.root
+
+        while x != None:
+            y = x
+            if key < x.key:
+                x = x.left
+            else:
+                x = x.right
+
+        node.parent = y
+        if y == None:
+            self.root = node
+        elif key < y.key:
+            y.left = node
+        else:
+            y.right = node
+
+    def find(self, x, key):
+        while x != None and key != x.key:
+            if key < x.key:
+                x = x.left
+            else:
+                x = x.right
+        return x
+
+    def has(self, key):
+        if self.find(self.root, key) != None:
+            return True
+        else:
+            return False
+
+    def get_successor(self, x):
+        # 次節点
+        if x.right != None:
+            return self.get_minimum(x.right)
+
+        y = x.parent
+        while y != None and x == y.right:
+            x, y = y, y.parent
+        return y
+
+    def get_minimum(self, x):
+        # xを根とする部分木のうち最小のキーを持つノードを返す
+        while x.left != None:
+            x = x.left
+        return x
+
+    def delete(self, key):
+        # 削除
+        z = self.find(self.root, key)
+        if z.left != None and z.right != None:
+            y = self.get_successor(z)
+            z.key = y.key
+        else:
+            y = z
+
+        # 子xを決める
+        x = y.left if y.left != None else y.right
+        if x != None:
+            x.parent = y.parent
+
+        if y.parent == None:  # 根のとき
+            self.root = x
+        elif y == y.parent.left:
+            y.parent.left = x
+        else:
+            y.parent.right = x
+
+
+N = int(input())
+S = [input() for _ in range(N)]
+tree = BinaryTree()
+
+for s in S:
+    if 'print' in s:
+        tree.inorder()
+        tree.preorder()
+    else:
+        command, key = s.split()
+        key = int(key)
+
+        if 'find' in command:
+            print('yes' if tree.has(key) else 'no')
+
+        if 'delete' in command:
+            tree.delete(key)
+
+        elif 'insert' in command:
+            tree.insert(key)
+
