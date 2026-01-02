@@ -1,0 +1,101 @@
+ --- modulename: s439646817, funcname: <module>
+s439646817.py(1): import os
+s439646817.py(2): import sys
+s439646817.py(3): from io import BytesIO, IOBase
+s439646817.py(5): def main():
+s439646817.py(60): BUFSIZE = 8192
+s439646817.py(61): class FastIO(IOBase):
+ --- modulename: s439646817, funcname: FastIO
+s439646817.py(61): class FastIO(IOBase):
+s439646817.py(62):     newlines = 0
+s439646817.py(63):     def __init__(self, file):
+s439646817.py(69):     def read(self):
+s439646817.py(79):     def readline(self):
+s439646817.py(88):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s439646817.py(93): class IOWrapper(IOBase):
+ --- modulename: s439646817, funcname: IOWrapper
+s439646817.py(93): class IOWrapper(IOBase):
+s439646817.py(94):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s439646817.py(101): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s439646817, funcname: __init__
+s439646817.py(95):         self.buffer = FastIO(file)
+ --- modulename: s439646817, funcname: __init__
+s439646817.py(64):         self._fd = file.fileno()
+s439646817.py(65):         self.buffer = BytesIO()
+s439646817.py(66):         self.writable = "x" in file.mode or "r" not in file.mode
+s439646817.py(67):         self.write = self.buffer.write if self.writable else None
+s439646817.py(96):         self.flush = self.buffer.flush
+s439646817.py(97):         self.writable = self.buffer.writable
+s439646817.py(98):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s439646817.py(99):         self.read = lambda: self.buffer.read().decode("ascii")
+s439646817.py(100):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s439646817, funcname: __init__
+s439646817.py(95):         self.buffer = FastIO(file)
+ --- modulename: s439646817, funcname: __init__
+s439646817.py(64):         self._fd = file.fileno()
+s439646817.py(65):         self.buffer = BytesIO()
+s439646817.py(66):         self.writable = "x" in file.mode or "r" not in file.mode
+s439646817.py(67):         self.write = self.buffer.write if self.writable else None
+s439646817.py(96):         self.flush = self.buffer.flush
+s439646817.py(97):         self.writable = self.buffer.writable
+s439646817.py(98):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s439646817.py(99):         self.read = lambda: self.buffer.read().decode("ascii")
+s439646817.py(100):         self.readline = lambda: self.buffer.readline().decode("ascii")
+s439646817.py(102): input = lambda: sys.stdin.readline().rstrip("\r\n")
+s439646817.py(105): if __name__ == "__main__":
+s439646817.py(106):     main()
+ --- modulename: s439646817, funcname: main
+s439646817.py(6):     t = 1
+s439646817.py(7):     for _ in range(t):
+s439646817.py(9):         n, k = map(int, input().split())
+ --- modulename: s439646817, funcname: <lambda>
+s439646817.py(102): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s439646817, funcname: <lambda>
+s439646817.py(100):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s439646817, funcname: readline
+s439646817.py(80):         while self.newlines == 0:
+s439646817.py(81):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s439646817.py(82):             self.newlines = b.count(b"\n") + (not b)
+s439646817.py(83):             ptr = self.buffer.tell()
+s439646817.py(84):             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s439646817.py(80):         while self.newlines == 0:
+s439646817.py(85):         self.newlines -= 1
+s439646817.py(86):         return self.buffer.readline()
+s439646817.py(10):         nums = list(map(int, input().split()))
+ --- modulename: s439646817, funcname: <lambda>
+s439646817.py(102): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s439646817, funcname: <lambda>
+s439646817.py(100):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s439646817, funcname: readline
+s439646817.py(80):         while self.newlines == 0:
+s439646817.py(85):         self.newlines -= 1
+s439646817.py(86):         return self.buffer.readline()
+s439646817.py(12):         start = 0
+s439646817.py(13):         for ind in range(k, n):
+s439646817.py(14):             if nums[ind] > nums[start]:
+s439646817.py(15):                 print("Yes")
+ --- modulename: s439646817, funcname: <lambda>
+s439646817.py(98):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+Yes --- modulename: s439646817, funcname: <lambda>
+s439646817.py(98):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
+s439646817.py(18):             start += 1
+s439646817.py(13):         for ind in range(k, n):
+s439646817.py(14):             if nums[ind] > nums[start]:
+s439646817.py(17):                 print("No")
+ --- modulename: s439646817, funcname: <lambda>
+s439646817.py(98):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+No --- modulename: s439646817, funcname: <lambda>
+s439646817.py(98):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
+s439646817.py(18):             start += 1
+s439646817.py(13):         for ind in range(k, n):
+s439646817.py(7):     for _ in range(t):
