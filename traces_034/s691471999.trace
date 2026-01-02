@@ -1,0 +1,126 @@
+ --- modulename: s691471999, funcname: <module>
+s691471999.py(1): import sys
+s691471999.py(2): input = sys.stdin.readline
+s691471999.py(6): class SparseTable():
+ --- modulename: s691471999, funcname: SparseTable
+s691471999.py(6): class SparseTable():
+s691471999.py(7):     def __init__(self, N, A):
+s691471999.py(24):     def query_min(self, l, r):
+s691471999.py(32): import heapq as hp
+s691471999.py(33): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s691471999.py(34): A = list(map(int, input().split()))
+s691471999.py(36): def main():
+s691471999.py(84): if __name__ == "__main__":
+s691471999.py(85):     main()
+ --- modulename: s691471999, funcname: main
+s691471999.py(37):     SP1 = SparseTable((N+1)//2, A[::2])
+ --- modulename: s691471999, funcname: __init__
+s691471999.py(8):         self.N = N
+s691471999.py(9):         self.logN = N.bit_length()
+s691471999.py(10):         self.A = A
+s691471999.py(11):         self.table = [[i for i in range(N)]]
+ --- modulename: s691471999, funcname: <listcomp>
+s691471999.py(11):         self.table = [[i for i in range(N)]]
+s691471999.py(11):         self.table = [[i for i in range(N)]]
+s691471999.py(11):         self.table = [[i for i in range(N)]]
+s691471999.py(12):         for k in range(self.logN):
+s691471999.py(13):             tab = []
+s691471999.py(14):             for i in range(self.N-(1<<(k+1))+1):
+s691471999.py(15):                 ind1 = self.table[-1][i]
+s691471999.py(16):                 ind2 = self.table[-1][i+(1<<k)]
+s691471999.py(17):                 if self.A[ind1] <= self.A[ind2]:
+s691471999.py(18):                     tab.append(ind1)
+s691471999.py(14):             for i in range(self.N-(1<<(k+1))+1):
+s691471999.py(21):             self.table.append(tab)
+s691471999.py(12):         for k in range(self.logN):
+s691471999.py(13):             tab = []
+s691471999.py(14):             for i in range(self.N-(1<<(k+1))+1):
+s691471999.py(21):             self.table.append(tab)
+s691471999.py(12):         for k in range(self.logN):
+s691471999.py(38):     SP2 = SparseTable(N//2, A[1::2])
+ --- modulename: s691471999, funcname: __init__
+s691471999.py(8):         self.N = N
+s691471999.py(9):         self.logN = N.bit_length()
+s691471999.py(10):         self.A = A
+s691471999.py(11):         self.table = [[i for i in range(N)]]
+ --- modulename: s691471999, funcname: <listcomp>
+s691471999.py(11):         self.table = [[i for i in range(N)]]
+s691471999.py(11):         self.table = [[i for i in range(N)]]
+s691471999.py(11):         self.table = [[i for i in range(N)]]
+s691471999.py(12):         for k in range(self.logN):
+s691471999.py(13):             tab = []
+s691471999.py(14):             for i in range(self.N-(1<<(k+1))+1):
+s691471999.py(15):                 ind1 = self.table[-1][i]
+s691471999.py(16):                 ind2 = self.table[-1][i+(1<<k)]
+s691471999.py(17):                 if self.A[ind1] <= self.A[ind2]:
+s691471999.py(20):                     tab.append(ind2)
+s691471999.py(14):             for i in range(self.N-(1<<(k+1))+1):
+s691471999.py(21):             self.table.append(tab)
+s691471999.py(12):         for k in range(self.logN):
+s691471999.py(13):             tab = []
+s691471999.py(14):             for i in range(self.N-(1<<(k+1))+1):
+s691471999.py(21):             self.table.append(tab)
+s691471999.py(12):         for k in range(self.logN):
+s691471999.py(40):     ans = []
+s691471999.py(41):     q = []
+s691471999.py(42):     v, k = SP1.query_min(0, N//2)
+ --- modulename: s691471999, funcname: query_min
+s691471999.py(25):         k = (r-l).bit_length()-1
+s691471999.py(26):         indl = self.table[k][l]
+s691471999.py(27):         indr = self.table[k][r-(1<<k)]
+s691471999.py(28):         if self.A[indl] <= self.A[indr]:
+s691471999.py(29):             return self.A[indl], indl
+s691471999.py(43):     dic = {}
+s691471999.py(44):     dic[v] = (k, 0, N//2, True)
+s691471999.py(45):     hp.heappush(q, v)
+s691471999.py(46):     for _ in range(N//2):
+s691471999.py(47):         valuea = hp.heappop(q)
+s691471999.py(48):         ka, l, r, is1 = dic[valuea]
+s691471999.py(49):         ans.append(str(valuea))
+s691471999.py(50):         if is1:
+s691471999.py(51):             valueb, kb = SP2.query_min(ka, r)
+ --- modulename: s691471999, funcname: query_min
+s691471999.py(25):         k = (r-l).bit_length()-1
+s691471999.py(26):         indl = self.table[k][l]
+s691471999.py(27):         indr = self.table[k][r-(1<<k)]
+s691471999.py(28):         if self.A[indl] <= self.A[indr]:
+s691471999.py(29):             return self.A[indl], indl
+s691471999.py(52):             if ka < kb:
+s691471999.py(53):                 m2, nk2 = SP2.query_min(ka, kb)
+ --- modulename: s691471999, funcname: query_min
+s691471999.py(25):         k = (r-l).bit_length()-1
+s691471999.py(26):         indl = self.table[k][l]
+s691471999.py(27):         indr = self.table[k][r-(1<<k)]
+s691471999.py(28):         if self.A[indl] <= self.A[indr]:
+s691471999.py(29):             return self.A[indl], indl
+s691471999.py(54):                 hp.heappush(q, m2)
+s691471999.py(55):                 dic[m2] = (nk2, ka, kb+1, False)
+s691471999.py(56):             if l < ka:
+s691471999.py(60):             if kb+1 < r:
+s691471999.py(79):         ans.append(str(valueb))
+s691471999.py(46):     for _ in range(N//2):
+s691471999.py(47):         valuea = hp.heappop(q)
+s691471999.py(48):         ka, l, r, is1 = dic[valuea]
+s691471999.py(49):         ans.append(str(valuea))
+s691471999.py(50):         if is1:
+s691471999.py(65):             valueb, kb = SP1.query_min(ka+1, r)
+ --- modulename: s691471999, funcname: query_min
+s691471999.py(25):         k = (r-l).bit_length()-1
+s691471999.py(26):         indl = self.table[k][l]
+s691471999.py(27):         indr = self.table[k][r-(1<<k)]
+s691471999.py(28):         if self.A[indl] <= self.A[indr]:
+s691471999.py(29):             return self.A[indl], indl
+s691471999.py(66):             if ka+1 < kb:
+s691471999.py(70):             if l < ka:
+s691471999.py(74):             if kb < r-1:
+s691471999.py(79):         ans.append(str(valueb))
+s691471999.py(46):     for _ in range(N//2):
+s691471999.py(81):     print(" ".join(ans))
+3 1 2 4
