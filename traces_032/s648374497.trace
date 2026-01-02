@@ -1,0 +1,888 @@
+ --- modulename: s648374497, funcname: <module>
+s648374497.py(1): import sys
+s648374497.py(3): sys.setrecursionlimit(10**7)
+s648374497.py(4): def MI(): return map(int,sys.stdin.readline().rstrip().split())
+s648374497.py(5): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s648374497.py(8): class LazySegTree():  # モノイドに対して適用可能、Nが2冪でなくても良い
+ --- modulename: s648374497, funcname: LazySegTree
+s648374497.py(8): class LazySegTree():  # モノイドに対して適用可能、Nが2冪でなくても良い
+s648374497.py(9):     def __init__(self,N,X_func,A_func,operate,X_unit,A_unit):
+s648374497.py(20):     def build(self,init_value):  # 初期値を[N,2N)に格納
+s648374497.py(28):     def update(self,i,x):  # i番目(0-index)の値をxに変更
+s648374497.py(36):     def eval_at(self,i):  # i番目で作用を施した値を返す
+s648374497.py(39):     def eval_above(self,i):  # i番目より上の値を再計算する
+s648374497.py(45):     def propagate_at(self,i):  # i番目で作用を施し、1つ下に作用の情報を伝える
+s648374497.py(51):     def propagate_above(self,i):  # i番目より上で作用を施す
+s648374497.py(56):     def fold(self,L,R):  # [L,R)の区間取得
+s648374497.py(76):     def operate_range(self,L,R,x):  # [L,R)にxを作用
+s648374497.py(96): N,Q = MI()
+ --- modulename: s648374497, funcname: MI
+s648374497.py(4): def MI(): return map(int,sys.stdin.readline().rstrip().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s648374497.py(97): A = LI()
+ --- modulename: s648374497, funcname: LI
+s648374497.py(5): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s648374497.py(98): B = []
+s648374497.py(99): for i in range(N):
+s648374497.py(100):     if A[i] == 0:
+s648374497.py(101):         B.append((0,1,0))
+s648374497.py(99): for i in range(N):
+s648374497.py(100):     if A[i] == 0:
+s648374497.py(103):         B.append((0,0,1))
+s648374497.py(99): for i in range(N):
+s648374497.py(100):     if A[i] == 0:
+s648374497.py(101):         B.append((0,1,0))
+s648374497.py(99): for i in range(N):
+s648374497.py(100):     if A[i] == 0:
+s648374497.py(101):         B.append((0,1,0))
+s648374497.py(99): for i in range(N):
+s648374497.py(100):     if A[i] == 0:
+s648374497.py(103):         B.append((0,0,1))
+s648374497.py(99): for i in range(N):
+s648374497.py(107): def X_func(x,y):
+s648374497.py(113): def A_func(a,b):
+s648374497.py(117): def operate(x,a,r):  # 右作用
+s648374497.py(124): X_unit = (0,0,0)
+s648374497.py(125): A_unit = 0
+s648374497.py(128): LST = LazySegTree(N,X_func,A_func,operate,X_unit,A_unit)
+ --- modulename: s648374497, funcname: __init__
+s648374497.py(10):         self.N = N
+s648374497.py(11):         self.X_func = X_func
+s648374497.py(12):         self.A_func = A_func
+s648374497.py(13):         self.operate = operate
+s648374497.py(14):         self.X_unit = X_unit
+s648374497.py(15):         self.A_unit = A_unit
+s648374497.py(16):         self.X = [self.X_unit]*(2*self.N)
+s648374497.py(17):         self.A = [self.A_unit]*(2*self.N)
+s648374497.py(18):         self.size = [0]*(2*self.N)
+s648374497.py(129): LST.build(B)
+ --- modulename: s648374497, funcname: build
+s648374497.py(21):         for i in range(self.N):
+s648374497.py(22):             self.X[self.N+i] = init_value[i]
+s648374497.py(23):             self.size[self.N+i] = 1
+s648374497.py(21):         for i in range(self.N):
+s648374497.py(22):             self.X[self.N+i] = init_value[i]
+s648374497.py(23):             self.size[self.N+i] = 1
+s648374497.py(21):         for i in range(self.N):
+s648374497.py(22):             self.X[self.N+i] = init_value[i]
+s648374497.py(23):             self.size[self.N+i] = 1
+s648374497.py(21):         for i in range(self.N):
+s648374497.py(22):             self.X[self.N+i] = init_value[i]
+s648374497.py(23):             self.size[self.N+i] = 1
+s648374497.py(21):         for i in range(self.N):
+s648374497.py(22):             self.X[self.N+i] = init_value[i]
+s648374497.py(23):             self.size[self.N+i] = 1
+s648374497.py(21):         for i in range(self.N):
+s648374497.py(24):         for i in range(self.N-1,0,-1):
+s648374497.py(25):             self.X[i] = self.X_func(self.X[i << 1],self.X[i << 1 | 1])
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(26):             self.size[i] = self.size[i << 1] + self.size[i << 1 | 1]
+s648374497.py(24):         for i in range(self.N-1,0,-1):
+s648374497.py(25):             self.X[i] = self.X_func(self.X[i << 1],self.X[i << 1 | 1])
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(26):             self.size[i] = self.size[i << 1] + self.size[i << 1 | 1]
+s648374497.py(24):         for i in range(self.N-1,0,-1):
+s648374497.py(25):             self.X[i] = self.X_func(self.X[i << 1],self.X[i << 1 | 1])
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(26):             self.size[i] = self.size[i << 1] + self.size[i << 1 | 1]
+s648374497.py(24):         for i in range(self.N-1,0,-1):
+s648374497.py(25):             self.X[i] = self.X_func(self.X[i << 1],self.X[i << 1 | 1])
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(26):             self.size[i] = self.size[i << 1] + self.size[i << 1 | 1]
+s648374497.py(24):         for i in range(self.N-1,0,-1):
+s648374497.py(131): for i in range(Q):
+s648374497.py(132):     T,L,R = MI()
+ --- modulename: s648374497, funcname: MI
+s648374497.py(4): def MI(): return map(int,sys.stdin.readline().rstrip().split())
+s648374497.py(133):     if T == 1:
+s648374497.py(136):         print(LST.fold(L-1,R)[0])
+ --- modulename: s648374497, funcname: fold
+s648374497.py(57):         L += self.N
+s648374497.py(58):         R += self.N
+s648374497.py(59):         L0 = L // (L & -L)
+s648374497.py(60):         R0 = R // (R & -R) - 1
+s648374497.py(61):         self.propagate_above(L0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(62):         self.propagate_above(R0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(63):         vL = self.X_unit
+s648374497.py(64):         vR = self.X_unit
+s648374497.py(65):         while L < R:
+s648374497.py(66):             if L & 1:
+s648374497.py(67):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(68):                 L += 1
+s648374497.py(69):             if R & 1:
+s648374497.py(72):             L >>= 1
+s648374497.py(73):             R >>= 1
+s648374497.py(65):         while L < R:
+s648374497.py(66):             if L & 1:
+s648374497.py(67):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(68):                 L += 1
+s648374497.py(69):             if R & 1:
+s648374497.py(70):                 R -= 1
+s648374497.py(71):                 vR = self.X_func(self.eval_at(R),vR)
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(72):             L >>= 1
+s648374497.py(73):             R >>= 1
+s648374497.py(65):         while L < R:
+s648374497.py(74):         return self.X_func(vL,vR)
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+2
+s648374497.py(131): for i in range(Q):
+s648374497.py(132):     T,L,R = MI()
+ --- modulename: s648374497, funcname: MI
+s648374497.py(4): def MI(): return map(int,sys.stdin.readline().rstrip().split())
+s648374497.py(133):     if T == 1:
+s648374497.py(134):         LST.operate_range(L-1,R,1)
+ --- modulename: s648374497, funcname: operate_range
+s648374497.py(77):         L += self.N
+s648374497.py(78):         R += self.N
+s648374497.py(79):         L0 = L // (L & -L)
+s648374497.py(80):         R0 = R // (R & -R) - 1
+s648374497.py(81):         self.propagate_above(L0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(82):         self.propagate_above(R0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(83):         while L < R:
+s648374497.py(84):             if L & 1:
+s648374497.py(85):                 self.A[L] = self.A_func(self.A[L],x)
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(86):                 L += 1
+s648374497.py(87):             if R & 1:
+s648374497.py(88):                 R -= 1
+s648374497.py(89):                 self.A[R] = self.A_func(self.A[R],x)
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(90):             L >>= 1
+s648374497.py(91):             R >>= 1
+s648374497.py(83):         while L < R:
+s648374497.py(92):         self.eval_above(L0)
+ --- modulename: s648374497, funcname: eval_above
+s648374497.py(40):         i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(42):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(120):     x0,x1,x2 = x
+s648374497.py(121):     return (x1*x2-x0,x2,x1)
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(43):             i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(42):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(43):             i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(93):         self.eval_above(R0)
+ --- modulename: s648374497, funcname: eval_above
+s648374497.py(40):         i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(42):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(120):     x0,x1,x2 = x
+s648374497.py(121):     return (x1*x2-x0,x2,x1)
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(43):             i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(42):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(43):             i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(42):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(43):             i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(131): for i in range(Q):
+s648374497.py(132):     T,L,R = MI()
+ --- modulename: s648374497, funcname: MI
+s648374497.py(4): def MI(): return map(int,sys.stdin.readline().rstrip().split())
+s648374497.py(133):     if T == 1:
+s648374497.py(136):         print(LST.fold(L-1,R)[0])
+ --- modulename: s648374497, funcname: fold
+s648374497.py(57):         L += self.N
+s648374497.py(58):         R += self.N
+s648374497.py(59):         L0 = L // (L & -L)
+s648374497.py(60):         R0 = R // (R & -R) - 1
+s648374497.py(61):         self.propagate_above(L0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(62):         self.propagate_above(R0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(63):         vL = self.X_unit
+s648374497.py(64):         vR = self.X_unit
+s648374497.py(65):         while L < R:
+s648374497.py(66):             if L & 1:
+s648374497.py(69):             if R & 1:
+s648374497.py(72):             L >>= 1
+s648374497.py(73):             R >>= 1
+s648374497.py(65):         while L < R:
+s648374497.py(66):             if L & 1:
+s648374497.py(67):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(68):                 L += 1
+s648374497.py(69):             if R & 1:
+s648374497.py(70):                 R -= 1
+s648374497.py(71):                 vR = self.X_func(self.eval_at(R),vR)
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(72):             L >>= 1
+s648374497.py(73):             R >>= 1
+s648374497.py(65):         while L < R:
+s648374497.py(74):         return self.X_func(vL,vR)
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+0
+s648374497.py(131): for i in range(Q):
+s648374497.py(132):     T,L,R = MI()
+ --- modulename: s648374497, funcname: MI
+s648374497.py(4): def MI(): return map(int,sys.stdin.readline().rstrip().split())
+s648374497.py(133):     if T == 1:
+s648374497.py(134):         LST.operate_range(L-1,R,1)
+ --- modulename: s648374497, funcname: operate_range
+s648374497.py(77):         L += self.N
+s648374497.py(78):         R += self.N
+s648374497.py(79):         L0 = L // (L & -L)
+s648374497.py(80):         R0 = R // (R & -R) - 1
+s648374497.py(81):         self.propagate_above(L0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(82):         self.propagate_above(R0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(83):         while L < R:
+s648374497.py(84):             if L & 1:
+s648374497.py(85):                 self.A[L] = self.A_func(self.A[L],x)
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(86):                 L += 1
+s648374497.py(87):             if R & 1:
+s648374497.py(90):             L >>= 1
+s648374497.py(91):             R >>= 1
+s648374497.py(83):         while L < R:
+s648374497.py(84):             if L & 1:
+s648374497.py(85):                 self.A[L] = self.A_func(self.A[L],x)
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(86):                 L += 1
+s648374497.py(87):             if R & 1:
+s648374497.py(90):             L >>= 1
+s648374497.py(91):             R >>= 1
+s648374497.py(83):         while L < R:
+s648374497.py(92):         self.eval_above(L0)
+ --- modulename: s648374497, funcname: eval_above
+s648374497.py(40):         i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(42):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(120):     x0,x1,x2 = x
+s648374497.py(121):     return (x1*x2-x0,x2,x1)
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(43):             i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(42):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(120):     x0,x1,x2 = x
+s648374497.py(121):     return (x1*x2-x0,x2,x1)
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(43):             i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(93):         self.eval_above(R0)
+ --- modulename: s648374497, funcname: eval_above
+s648374497.py(40):         i >>= 1
+s648374497.py(41):         while i:
+s648374497.py(131): for i in range(Q):
+s648374497.py(132):     T,L,R = MI()
+ --- modulename: s648374497, funcname: MI
+s648374497.py(4): def MI(): return map(int,sys.stdin.readline().rstrip().split())
+s648374497.py(133):     if T == 1:
+s648374497.py(136):         print(LST.fold(L-1,R)[0])
+ --- modulename: s648374497, funcname: fold
+s648374497.py(57):         L += self.N
+s648374497.py(58):         R += self.N
+s648374497.py(59):         L0 = L // (L & -L)
+s648374497.py(60):         R0 = R // (R & -R) - 1
+s648374497.py(61):         self.propagate_above(L0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(62):         self.propagate_above(R0)
+ --- modulename: s648374497, funcname: propagate_above
+s648374497.py(52):         H = i.bit_length()
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(119):         return x
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(54):             self.propagate_at(i >> h)
+ --- modulename: s648374497, funcname: propagate_at
+s648374497.py(46):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(120):     x0,x1,x2 = x
+s648374497.py(121):     return (x1*x2-x0,x2,x1)
+s648374497.py(47):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(48):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s648374497, funcname: A_func
+s648374497.py(114):     return a ^ b
+s648374497.py(49):         self.A[i] = self.A_unit
+s648374497.py(53):         for h in range(H,0,-1):
+s648374497.py(63):         vL = self.X_unit
+s648374497.py(64):         vR = self.X_unit
+s648374497.py(65):         while L < R:
+s648374497.py(66):             if L & 1:
+s648374497.py(67):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(120):     x0,x1,x2 = x
+s648374497.py(121):     return (x1*x2-x0,x2,x1)
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(68):                 L += 1
+s648374497.py(69):             if R & 1:
+s648374497.py(70):                 R -= 1
+s648374497.py(71):                 vR = self.X_func(self.eval_at(R),vR)
+ --- modulename: s648374497, funcname: eval_at
+s648374497.py(37):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s648374497, funcname: operate
+s648374497.py(118):     if a == 0:
+s648374497.py(120):     x0,x1,x2 = x
+s648374497.py(121):     return (x1*x2-x0,x2,x1)
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+s648374497.py(72):             L >>= 1
+s648374497.py(73):             R >>= 1
+s648374497.py(65):         while L < R:
+s648374497.py(74):         return self.X_func(vL,vR)
+ --- modulename: s648374497, funcname: X_func
+s648374497.py(108):     x0,x1,x2 = x
+s648374497.py(109):     y0,y1,y2 = y
+s648374497.py(110):     return (x0+y0+x2*y1,x1+y1,x2+y2)
+1
+s648374497.py(131): for i in range(Q):
