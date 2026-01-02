@@ -1,0 +1,528 @@
+ --- modulename: s744341199, funcname: <module>
+s744341199.py(1): def gen_graph(input_list):
+s744341199.py(15): def get_lowest_cost_vertex(costs, processed):
+s744341199.py(26): def get_best_routes(graph, start):
+s744341199.py(74): def main(vertex_count, input_list):
+s744341199.py(106): if __name__ == "__main__":
+s744341199.py(107):     input_1 = input()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s744341199.py(108):     vertex_count, sides_count = list(map(int, input_1.split()))
+s744341199.py(109):     input_list = []
+s744341199.py(110):     for _ in range(sides_count):
+s744341199.py(111):         vertex_1, vertex_2, distance = list(map(int, input().split()))
+s744341199.py(112):         input_list.append((vertex_1, vertex_2, distance))
+s744341199.py(110):     for _ in range(sides_count):
+s744341199.py(111):         vertex_1, vertex_2, distance = list(map(int, input().split()))
+s744341199.py(112):         input_list.append((vertex_1, vertex_2, distance))
+s744341199.py(110):     for _ in range(sides_count):
+s744341199.py(111):         vertex_1, vertex_2, distance = list(map(int, input().split()))
+s744341199.py(112):         input_list.append((vertex_1, vertex_2, distance))
+s744341199.py(110):     for _ in range(sides_count):
+s744341199.py(113):     print(main(vertex_count, input_list))
+ --- modulename: s744341199, funcname: main
+s744341199.py(75):     graph = gen_graph(input_list)
+ --- modulename: s744341199, funcname: gen_graph
+s744341199.py(2):     graph = {}
+s744341199.py(4):     for item in input_list:
+s744341199.py(5):         if not item[0] in graph:
+s744341199.py(6):             graph[item[0]] = {}
+s744341199.py(7):         if not item[1] in graph:
+s744341199.py(8):             graph[item[1]] = {}
+s744341199.py(9):         graph[item[0]][item[1]] = item[2]
+s744341199.py(10):         graph[item[1]][item[0]] = item[2]
+s744341199.py(4):     for item in input_list:
+s744341199.py(5):         if not item[0] in graph:
+s744341199.py(7):         if not item[1] in graph:
+s744341199.py(8):             graph[item[1]] = {}
+s744341199.py(9):         graph[item[0]][item[1]] = item[2]
+s744341199.py(10):         graph[item[1]][item[0]] = item[2]
+s744341199.py(4):     for item in input_list:
+s744341199.py(5):         if not item[0] in graph:
+s744341199.py(7):         if not item[1] in graph:
+s744341199.py(9):         graph[item[0]][item[1]] = item[2]
+s744341199.py(10):         graph[item[1]][item[0]] = item[2]
+s744341199.py(4):     for item in input_list:
+s744341199.py(12):     return graph
+s744341199.py(77):     routes = []
+s744341199.py(78):     for start in range(1, vertex_count+1):
+s744341199.py(79):         for route in get_best_routes(graph, start):
+ --- modulename: s744341199, funcname: get_best_routes
+s744341199.py(27):     costs = {}
+s744341199.py(28):     parents = {}
+s744341199.py(29):     processed = []
+s744341199.py(31):     costs[start] = 0
+s744341199.py(32):     parents[start] = None
+s744341199.py(33):     processed.append(start)
+s744341199.py(35):     for item in graph[start].keys():
+s744341199.py(36):         costs[item] = graph[start][item]
+s744341199.py(37):         parents[item] = start
+s744341199.py(35):     for item in graph[start].keys():
+s744341199.py(36):         costs[item] = graph[start][item]
+s744341199.py(37):         parents[item] = start
+s744341199.py(35):     for item in graph[start].keys():
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(40):         if not (item in costs.keys() or item == start):
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(40):         if not (item in costs.keys() or item == start):
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(40):         if not (item in costs.keys() or item == start):
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(44):     node = get_lowest_cost_vertex(costs, processed)
+ --- modulename: s744341199, funcname: get_lowest_cost_vertex
+s744341199.py(16):     lowest_cost = float("inf")
+s744341199.py(17):     lowest_cost_node = None
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(21):             lowest_cost = cost
+s744341199.py(22):             lowest_cost_node = node
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(23):     return lowest_cost_node
+s744341199.py(46):     while node is not None:
+s744341199.py(47):         cost = costs[node]
+s744341199.py(48):         neighbors = graph[node]
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(55):         processed.append(node)
+s744341199.py(56):         node = get_lowest_cost_vertex(costs, processed)
+ --- modulename: s744341199, funcname: get_lowest_cost_vertex
+s744341199.py(16):     lowest_cost = float("inf")
+s744341199.py(17):     lowest_cost_node = None
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(21):             lowest_cost = cost
+s744341199.py(22):             lowest_cost_node = node
+s744341199.py(18):     for node in costs:
+s744341199.py(23):     return lowest_cost_node
+s744341199.py(46):     while node is not None:
+s744341199.py(47):         cost = costs[node]
+s744341199.py(48):         neighbors = graph[node]
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(55):         processed.append(node)
+s744341199.py(56):         node = get_lowest_cost_vertex(costs, processed)
+ --- modulename: s744341199, funcname: get_lowest_cost_vertex
+s744341199.py(16):     lowest_cost = float("inf")
+s744341199.py(17):     lowest_cost_node = None
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(23):     return lowest_cost_node
+s744341199.py(46):     while node is not None:
+s744341199.py(58):     routes = []
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(60):         if item != start:
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(60):         if item != start:
+s744341199.py(61):             route = []
+s744341199.py(62):             route.append(item)
+s744341199.py(63):             parent = parents[item]
+s744341199.py(65):                 route.append(parent)
+s744341199.py(66):                 if parent == start:
+s744341199.py(67):                     break
+s744341199.py(69):             route.reverse()
+s744341199.py(70):             routes.append(route)
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(60):         if item != start:
+s744341199.py(61):             route = []
+s744341199.py(62):             route.append(item)
+s744341199.py(63):             parent = parents[item]
+s744341199.py(65):                 route.append(parent)
+s744341199.py(66):                 if parent == start:
+s744341199.py(67):                     break
+s744341199.py(69):             route.reverse()
+s744341199.py(70):             routes.append(route)
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(71):     return routes
+s744341199.py(80):             routes.append(route)
+s744341199.py(79):         for route in get_best_routes(graph, start):
+s744341199.py(80):             routes.append(route)
+s744341199.py(79):         for route in get_best_routes(graph, start):
+s744341199.py(78):     for start in range(1, vertex_count+1):
+s744341199.py(79):         for route in get_best_routes(graph, start):
+ --- modulename: s744341199, funcname: get_best_routes
+s744341199.py(27):     costs = {}
+s744341199.py(28):     parents = {}
+s744341199.py(29):     processed = []
+s744341199.py(31):     costs[start] = 0
+s744341199.py(32):     parents[start] = None
+s744341199.py(33):     processed.append(start)
+s744341199.py(35):     for item in graph[start].keys():
+s744341199.py(36):         costs[item] = graph[start][item]
+s744341199.py(37):         parents[item] = start
+s744341199.py(35):     for item in graph[start].keys():
+s744341199.py(36):         costs[item] = graph[start][item]
+s744341199.py(37):         parents[item] = start
+s744341199.py(35):     for item in graph[start].keys():
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(40):         if not (item in costs.keys() or item == start):
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(40):         if not (item in costs.keys() or item == start):
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(40):         if not (item in costs.keys() or item == start):
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(44):     node = get_lowest_cost_vertex(costs, processed)
+ --- modulename: s744341199, funcname: get_lowest_cost_vertex
+s744341199.py(16):     lowest_cost = float("inf")
+s744341199.py(17):     lowest_cost_node = None
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(21):             lowest_cost = cost
+s744341199.py(22):             lowest_cost_node = node
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(23):     return lowest_cost_node
+s744341199.py(46):     while node is not None:
+s744341199.py(47):         cost = costs[node]
+s744341199.py(48):         neighbors = graph[node]
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(53):                 costs[n] = new_cost
+s744341199.py(54):                 parents[n] = node
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(55):         processed.append(node)
+s744341199.py(56):         node = get_lowest_cost_vertex(costs, processed)
+ --- modulename: s744341199, funcname: get_lowest_cost_vertex
+s744341199.py(16):     lowest_cost = float("inf")
+s744341199.py(17):     lowest_cost_node = None
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(21):             lowest_cost = cost
+s744341199.py(22):             lowest_cost_node = node
+s744341199.py(18):     for node in costs:
+s744341199.py(23):     return lowest_cost_node
+s744341199.py(46):     while node is not None:
+s744341199.py(47):         cost = costs[node]
+s744341199.py(48):         neighbors = graph[node]
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(55):         processed.append(node)
+s744341199.py(56):         node = get_lowest_cost_vertex(costs, processed)
+ --- modulename: s744341199, funcname: get_lowest_cost_vertex
+s744341199.py(16):     lowest_cost = float("inf")
+s744341199.py(17):     lowest_cost_node = None
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(23):     return lowest_cost_node
+s744341199.py(46):     while node is not None:
+s744341199.py(58):     routes = []
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(60):         if item != start:
+s744341199.py(61):             route = []
+s744341199.py(62):             route.append(item)
+s744341199.py(63):             parent = parents[item]
+s744341199.py(65):                 route.append(parent)
+s744341199.py(66):                 if parent == start:
+s744341199.py(67):                     break
+s744341199.py(69):             route.reverse()
+s744341199.py(70):             routes.append(route)
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(60):         if item != start:
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(60):         if item != start:
+s744341199.py(61):             route = []
+s744341199.py(62):             route.append(item)
+s744341199.py(63):             parent = parents[item]
+s744341199.py(65):                 route.append(parent)
+s744341199.py(66):                 if parent == start:
+s744341199.py(68):                 parent = parents[parent]
+s744341199.py(65):                 route.append(parent)
+s744341199.py(66):                 if parent == start:
+s744341199.py(67):                     break
+s744341199.py(69):             route.reverse()
+s744341199.py(70):             routes.append(route)
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(71):     return routes
+s744341199.py(80):             routes.append(route)
+s744341199.py(79):         for route in get_best_routes(graph, start):
+s744341199.py(80):             routes.append(route)
+s744341199.py(79):         for route in get_best_routes(graph, start):
+s744341199.py(78):     for start in range(1, vertex_count+1):
+s744341199.py(79):         for route in get_best_routes(graph, start):
+ --- modulename: s744341199, funcname: get_best_routes
+s744341199.py(27):     costs = {}
+s744341199.py(28):     parents = {}
+s744341199.py(29):     processed = []
+s744341199.py(31):     costs[start] = 0
+s744341199.py(32):     parents[start] = None
+s744341199.py(33):     processed.append(start)
+s744341199.py(35):     for item in graph[start].keys():
+s744341199.py(36):         costs[item] = graph[start][item]
+s744341199.py(37):         parents[item] = start
+s744341199.py(35):     for item in graph[start].keys():
+s744341199.py(36):         costs[item] = graph[start][item]
+s744341199.py(37):         parents[item] = start
+s744341199.py(35):     for item in graph[start].keys():
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(40):         if not (item in costs.keys() or item == start):
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(40):         if not (item in costs.keys() or item == start):
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(40):         if not (item in costs.keys() or item == start):
+s744341199.py(39):     for item in graph.keys():
+s744341199.py(44):     node = get_lowest_cost_vertex(costs, processed)
+ --- modulename: s744341199, funcname: get_lowest_cost_vertex
+s744341199.py(16):     lowest_cost = float("inf")
+s744341199.py(17):     lowest_cost_node = None
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(21):             lowest_cost = cost
+s744341199.py(22):             lowest_cost_node = node
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(23):     return lowest_cost_node
+s744341199.py(46):     while node is not None:
+s744341199.py(47):         cost = costs[node]
+s744341199.py(48):         neighbors = graph[node]
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(53):                 costs[n] = new_cost
+s744341199.py(54):                 parents[n] = node
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(55):         processed.append(node)
+s744341199.py(56):         node = get_lowest_cost_vertex(costs, processed)
+ --- modulename: s744341199, funcname: get_lowest_cost_vertex
+s744341199.py(16):     lowest_cost = float("inf")
+s744341199.py(17):     lowest_cost_node = None
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(21):             lowest_cost = cost
+s744341199.py(22):             lowest_cost_node = node
+s744341199.py(18):     for node in costs:
+s744341199.py(23):     return lowest_cost_node
+s744341199.py(46):     while node is not None:
+s744341199.py(47):         cost = costs[node]
+s744341199.py(48):         neighbors = graph[node]
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(51):             new_cost = cost + neighbors[n]
+s744341199.py(52):             if costs[n] > new_cost:
+s744341199.py(50):         for n in neighbors.keys():
+s744341199.py(55):         processed.append(node)
+s744341199.py(56):         node = get_lowest_cost_vertex(costs, processed)
+ --- modulename: s744341199, funcname: get_lowest_cost_vertex
+s744341199.py(16):     lowest_cost = float("inf")
+s744341199.py(17):     lowest_cost_node = None
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(19):         cost = costs[node]
+s744341199.py(20):         if cost < lowest_cost and node not in processed:
+s744341199.py(18):     for node in costs:
+s744341199.py(23):     return lowest_cost_node
+s744341199.py(46):     while node is not None:
+s744341199.py(58):     routes = []
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(60):         if item != start:
+s744341199.py(61):             route = []
+s744341199.py(62):             route.append(item)
+s744341199.py(63):             parent = parents[item]
+s744341199.py(65):                 route.append(parent)
+s744341199.py(66):                 if parent == start:
+s744341199.py(67):                     break
+s744341199.py(69):             route.reverse()
+s744341199.py(70):             routes.append(route)
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(60):         if item != start:
+s744341199.py(61):             route = []
+s744341199.py(62):             route.append(item)
+s744341199.py(63):             parent = parents[item]
+s744341199.py(65):                 route.append(parent)
+s744341199.py(66):                 if parent == start:
+s744341199.py(68):                 parent = parents[parent]
+s744341199.py(65):                 route.append(parent)
+s744341199.py(66):                 if parent == start:
+s744341199.py(67):                     break
+s744341199.py(69):             route.reverse()
+s744341199.py(70):             routes.append(route)
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(60):         if item != start:
+s744341199.py(59):     for item in graph.keys():
+s744341199.py(71):     return routes
+s744341199.py(80):             routes.append(route)
+s744341199.py(79):         for route in get_best_routes(graph, start):
+s744341199.py(80):             routes.append(route)
+s744341199.py(79):         for route in get_best_routes(graph, start):
+s744341199.py(78):     for start in range(1, vertex_count+1):
+s744341199.py(82):     route_sides = []
+s744341199.py(83):     for route in routes:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(87):             route_side = [route[i], route[i+1]]
+s744341199.py(88):             route_side_sorted = sorted(route_side)
+s744341199.py(89):             if not route_side_sorted in route_sides:
+s744341199.py(90):                 route_sides.append(route_side_sorted)
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(86):                 break
+s744341199.py(83):     for route in routes:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(87):             route_side = [route[i], route[i+1]]
+s744341199.py(88):             route_side_sorted = sorted(route_side)
+s744341199.py(89):             if not route_side_sorted in route_sides:
+s744341199.py(90):                 route_sides.append(route_side_sorted)
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(86):                 break
+s744341199.py(83):     for route in routes:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(87):             route_side = [route[i], route[i+1]]
+s744341199.py(88):             route_side_sorted = sorted(route_side)
+s744341199.py(89):             if not route_side_sorted in route_sides:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(86):                 break
+s744341199.py(83):     for route in routes:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(87):             route_side = [route[i], route[i+1]]
+s744341199.py(88):             route_side_sorted = sorted(route_side)
+s744341199.py(89):             if not route_side_sorted in route_sides:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(87):             route_side = [route[i], route[i+1]]
+s744341199.py(88):             route_side_sorted = sorted(route_side)
+s744341199.py(89):             if not route_side_sorted in route_sides:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(86):                 break
+s744341199.py(83):     for route in routes:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(87):             route_side = [route[i], route[i+1]]
+s744341199.py(88):             route_side_sorted = sorted(route_side)
+s744341199.py(89):             if not route_side_sorted in route_sides:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(86):                 break
+s744341199.py(83):     for route in routes:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(87):             route_side = [route[i], route[i+1]]
+s744341199.py(88):             route_side_sorted = sorted(route_side)
+s744341199.py(89):             if not route_side_sorted in route_sides:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(87):             route_side = [route[i], route[i+1]]
+s744341199.py(88):             route_side_sorted = sorted(route_side)
+s744341199.py(89):             if not route_side_sorted in route_sides:
+s744341199.py(84):         for i, vertex in enumerate(route):
+s744341199.py(85):             if i == len(route)-1:
+s744341199.py(86):                 break
+s744341199.py(83):     for route in routes:
+s744341199.py(92):     sides = []
+s744341199.py(93):     for item in input_list:
+s744341199.py(94):         side = [item[0], item[1]]
+s744341199.py(95):         side_sorted = sorted(side)
+s744341199.py(96):         sides.append(side_sorted)
+s744341199.py(93):     for item in input_list:
+s744341199.py(94):         side = [item[0], item[1]]
+s744341199.py(95):         side_sorted = sorted(side)
+s744341199.py(96):         sides.append(side_sorted)
+s744341199.py(93):     for item in input_list:
+s744341199.py(94):         side = [item[0], item[1]]
+s744341199.py(95):         side_sorted = sorted(side)
+s744341199.py(96):         sides.append(side_sorted)
+s744341199.py(93):     for item in input_list:
+s744341199.py(98):     count = 0
+s744341199.py(99):     for side in sides:
+s744341199.py(100):         if not side in route_sides:
+s744341199.py(99):     for side in sides:
+s744341199.py(100):         if not side in route_sides:
+s744341199.py(99):     for side in sides:
+s744341199.py(100):         if not side in route_sides:
+s744341199.py(101):             count += 1
+s744341199.py(99):     for side in sides:
+s744341199.py(103):     return count
+1
