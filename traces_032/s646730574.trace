@@ -1,0 +1,168 @@
+ --- modulename: s646730574, funcname: <module>
+s646730574.py(1): from heapq import heappop, heappush
+s646730574.py(2): from operator import itemgetter
+s646730574.py(5): def branchAndBound(N: int, M: int, V: list, W: list, R: list) -> int:
+s646730574.py(36): def main():
+s646730574.py(48): if __name__=="__main__":main()
+ --- modulename: s646730574, funcname: main
+s646730574.py(37):     N, M, *L = map(int, open(0).read().split())
+ --- modulename: _bootlocale, funcname: getpreferredencoding
+_bootlocale.py(12):         if sys.flags.utf8_mode:
+_bootlocale.py(14):         return _locale._getdefaultlocale()[1]
+ --- modulename: codecs, funcname: __init__
+codecs.py(310):         IncrementalDecoder.__init__(self, errors)
+ --- modulename: codecs, funcname: __init__
+codecs.py(268):         self.errors = errors
+codecs.py(312):         self.buffer = b""
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s646730574.py(38):     t = [(v, w, v / w) for w, v in zip(*[iter(L)] * 2)]
+ --- modulename: s646730574, funcname: <listcomp>
+s646730574.py(38):     t = [(v, w, v / w) for w, v in zip(*[iter(L)] * 2)]
+s646730574.py(38):     t = [(v, w, v / w) for w, v in zip(*[iter(L)] * 2)]
+s646730574.py(38):     t = [(v, w, v / w) for w, v in zip(*[iter(L)] * 2)]
+s646730574.py(38):     t = [(v, w, v / w) for w, v in zip(*[iter(L)] * 2)]
+s646730574.py(39):     t.sort(key=itemgetter(2), reverse=True)
+s646730574.py(40):     V, W, R = [], [], []
+s646730574.py(41):     for v, w, r in t:
+s646730574.py(42):         V += [-v]
+s646730574.py(43):         W += [-w]
+s646730574.py(44):         R += [r]
+s646730574.py(41):     for v, w, r in t:
+s646730574.py(42):         V += [-v]
+s646730574.py(43):         W += [-w]
+s646730574.py(44):         R += [r]
+s646730574.py(41):     for v, w, r in t:
+s646730574.py(42):         V += [-v]
+s646730574.py(43):         W += [-w]
+s646730574.py(44):         R += [r]
+s646730574.py(41):     for v, w, r in t:
+s646730574.py(45):     ans = branchAndBound(N, -M, V, W, R)
+ --- modulename: s646730574, funcname: branchAndBound
+s646730574.py(6):     def upperbound(w, v, i):
+s646730574.py(19):     prov, tmp = upperbound(0, 0, -1)
+ --- modulename: s646730574, funcname: upperbound
+s646730574.py(7):         rest = M - w
+s646730574.py(8):         _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(10):             if W[j] >= rest:
+s646730574.py(11):                 rest -= W[j]
+s646730574.py(12):                 v += V[j]
+s646730574.py(13):                 _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(10):             if W[j] >= rest:
+s646730574.py(15):                 _v += R[j] * rest
+s646730574.py(16):                 break
+s646730574.py(17):         return v, _v
+s646730574.py(20):     h = [(tmp, W[0], V[0] * (W[0] >= M), 0), (upperbound(0, 0, 0)[1], 0, 0, 0)]
+ --- modulename: s646730574, funcname: upperbound
+s646730574.py(7):         rest = M - w
+s646730574.py(8):         _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(10):             if W[j] >= rest:
+s646730574.py(11):                 rest -= W[j]
+s646730574.py(12):                 v += V[j]
+s646730574.py(13):                 _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(10):             if W[j] >= rest:
+s646730574.py(11):                 rest -= W[j]
+s646730574.py(12):                 v += V[j]
+s646730574.py(13):                 _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(17):         return v, _v
+s646730574.py(21):     while h:
+s646730574.py(22):         _v, w, v, cur = heappop(h)
+s646730574.py(23):         if _v > prov or cur == N - 1:
+s646730574.py(25):         nxtw, nxtv = w + W[cur + 1], v + V[cur + 1]
+s646730574.py(26):         if nxtw >= M:
+s646730574.py(28):         _prov, ub = upperbound(w, v, cur)
+ --- modulename: s646730574, funcname: upperbound
+s646730574.py(7):         rest = M - w
+s646730574.py(8):         _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(10):             if W[j] >= rest:
+s646730574.py(15):                 _v += R[j] * rest
+s646730574.py(16):                 break
+s646730574.py(17):         return v, _v
+s646730574.py(29):         if _prov < prov:
+s646730574.py(31):         if ub < prov:
+s646730574.py(32):             heappush(h, (ub, w, v, cur + 1))
+s646730574.py(21):     while h:
+s646730574.py(22):         _v, w, v, cur = heappop(h)
+s646730574.py(23):         if _v > prov or cur == N - 1:
+s646730574.py(25):         nxtw, nxtv = w + W[cur + 1], v + V[cur + 1]
+s646730574.py(26):         if nxtw >= M:
+s646730574.py(27):             heappush(h, (_v, nxtw, nxtv, cur + 1))
+s646730574.py(28):         _prov, ub = upperbound(w, v, cur)
+ --- modulename: s646730574, funcname: upperbound
+s646730574.py(7):         rest = M - w
+s646730574.py(8):         _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(10):             if W[j] >= rest:
+s646730574.py(11):                 rest -= W[j]
+s646730574.py(12):                 v += V[j]
+s646730574.py(13):                 _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(17):         return v, _v
+s646730574.py(29):         if _prov < prov:
+s646730574.py(30):             prov = _prov
+s646730574.py(31):         if ub < prov:
+s646730574.py(21):     while h:
+s646730574.py(22):         _v, w, v, cur = heappop(h)
+s646730574.py(23):         if _v > prov or cur == N - 1:
+s646730574.py(24):             continue
+s646730574.py(21):     while h:
+s646730574.py(22):         _v, w, v, cur = heappop(h)
+s646730574.py(23):         if _v > prov or cur == N - 1:
+s646730574.py(25):         nxtw, nxtv = w + W[cur + 1], v + V[cur + 1]
+s646730574.py(26):         if nxtw >= M:
+s646730574.py(27):             heappush(h, (_v, nxtw, nxtv, cur + 1))
+s646730574.py(28):         _prov, ub = upperbound(w, v, cur)
+ --- modulename: s646730574, funcname: upperbound
+s646730574.py(7):         rest = M - w
+s646730574.py(8):         _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(10):             if W[j] >= rest:
+s646730574.py(11):                 rest -= W[j]
+s646730574.py(12):                 v += V[j]
+s646730574.py(13):                 _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(10):             if W[j] >= rest:
+s646730574.py(11):                 rest -= W[j]
+s646730574.py(12):                 v += V[j]
+s646730574.py(13):                 _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(17):         return v, _v
+s646730574.py(29):         if _prov < prov:
+s646730574.py(30):             prov = _prov
+s646730574.py(31):         if ub < prov:
+s646730574.py(21):     while h:
+s646730574.py(22):         _v, w, v, cur = heappop(h)
+s646730574.py(23):         if _v > prov or cur == N - 1:
+s646730574.py(25):         nxtw, nxtv = w + W[cur + 1], v + V[cur + 1]
+s646730574.py(26):         if nxtw >= M:
+s646730574.py(27):             heappush(h, (_v, nxtw, nxtv, cur + 1))
+s646730574.py(28):         _prov, ub = upperbound(w, v, cur)
+ --- modulename: s646730574, funcname: upperbound
+s646730574.py(7):         rest = M - w
+s646730574.py(8):         _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(10):             if W[j] >= rest:
+s646730574.py(11):                 rest -= W[j]
+s646730574.py(12):                 v += V[j]
+s646730574.py(13):                 _v = v
+s646730574.py(9):         for j in range(i + 1, N):
+s646730574.py(17):         return v, _v
+s646730574.py(29):         if _prov < prov:
+s646730574.py(31):         if ub < prov:
+s646730574.py(21):     while h:
+s646730574.py(22):         _v, w, v, cur = heappop(h)
+s646730574.py(23):         if _v > prov or cur == N - 1:
+s646730574.py(24):             continue
+s646730574.py(21):     while h:
+s646730574.py(33):     return -prov
+s646730574.py(46):     print(ans)
+90
