@@ -1,0 +1,1058 @@
+ --- modulename: s267595787, funcname: <module>
+s267595787.py(1): import sys
+s267595787.py(2): input = lambda: sys.stdin.readline().rstrip()
+s267595787.py(4): class SegmentTree():
+ --- modulename: s267595787, funcname: SegmentTree
+s267595787.py(4): class SegmentTree():
+s267595787.py(5):     def __init__(self, init, unitX, unitA, f, g, h):
+s267595787.py(30):     def update(self, i, x):
+s267595787.py(37):     def calc(self, i):
+s267595787.py(40):     def calc_above(self, i):
+s267595787.py(46):     def propagate(self, i):
+s267595787.py(52):     def propagate_above(self, i):
+s267595787.py(57):     def propagate_all(self):
+s267595787.py(61):     def getrange(self, l, r):
+s267595787.py(81):     def getvalue(self, i):
+s267595787.py(86):     def operate_range(self, l, r, a):
+s267595787.py(105):     def check(self, randX, randA, maxs, rep):
+s267595787.py(180):     def debug1(self):
+s267595787.py(202):     def debug(self, k = 10):
+s267595787.py(218): P = 998244353
+s267595787.py(219): inv9 = 443664157
+s267595787.py(220): mm = (1 << 18) - 1
+s267595787.py(223): def f(x, y):
+s267595787.py(231): def g(x, a, s):
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(238): unitX = 0
+s267595787.py(239): unitA = 0
+s267595787.py(240): N, Q = map(int, input().split())
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(2): input = lambda: sys.stdin.readline().rstrip()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s267595787.py(241): x = 1
+s267595787.py(242): X = []
+s267595787.py(243): po10 = []
+s267595787.py(244): for i in range(N):
+s267595787.py(245):     X.append((x << 18) + i)
+s267595787.py(246):     po10.append(x)
+s267595787.py(247):     x = x * 10 % P
+s267595787.py(244): for i in range(N):
+s267595787.py(245):     X.append((x << 18) + i)
+s267595787.py(246):     po10.append(x)
+s267595787.py(247):     x = x * 10 % P
+s267595787.py(244): for i in range(N):
+s267595787.py(245):     X.append((x << 18) + i)
+s267595787.py(246):     po10.append(x)
+s267595787.py(247):     x = x * 10 % P
+s267595787.py(244): for i in range(N):
+s267595787.py(245):     X.append((x << 18) + i)
+s267595787.py(246):     po10.append(x)
+s267595787.py(247):     x = x * 10 % P
+s267595787.py(244): for i in range(N):
+s267595787.py(245):     X.append((x << 18) + i)
+s267595787.py(246):     po10.append(x)
+s267595787.py(247):     x = x * 10 % P
+s267595787.py(244): for i in range(N):
+s267595787.py(245):     X.append((x << 18) + i)
+s267595787.py(246):     po10.append(x)
+s267595787.py(247):     x = x * 10 % P
+s267595787.py(244): for i in range(N):
+s267595787.py(245):     X.append((x << 18) + i)
+s267595787.py(246):     po10.append(x)
+s267595787.py(247):     x = x * 10 % P
+s267595787.py(244): for i in range(N):
+s267595787.py(245):     X.append((x << 18) + i)
+s267595787.py(246):     po10.append(x)
+s267595787.py(247):     x = x * 10 % P
+s267595787.py(244): for i in range(N):
+s267595787.py(248): po10.append(x)
+s267595787.py(250): st = SegmentTree(X, unitX, unitA, f, g, h)
+ --- modulename: s267595787, funcname: __init__
+s267595787.py(6):         self.f = f # (X, X) -> X
+s267595787.py(7):         self.g = g # (X, A, size) -> X
+s267595787.py(8):         self.h = h # (A, A) -> A
+s267595787.py(9):         self.unitX = unitX
+s267595787.py(10):         self.unitA = unitA
+s267595787.py(11):         self.f = f
+s267595787.py(12):         if type(init) == int:
+s267595787.py(18):             self.n = len(init)
+s267595787.py(19):             self.n = 1 << (self.n - 1).bit_length()
+s267595787.py(20):             self.X = [unitX] * self.n + init + [unitX] * (self.n - len(init))
+s267595787.py(21):             self.size = [0] * self.n + [1] * len(init) + [0] * (self.n - len(init))
+s267595787.py(22):             for i in range(self.n-1, 0, -1):
+s267595787.py(23):                 self.X[i] = self.f(self.X[i*2], self.X[i*2|1])
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(22):             for i in range(self.n-1, 0, -1):
+s267595787.py(23):                 self.X[i] = self.f(self.X[i*2], self.X[i*2|1])
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(22):             for i in range(self.n-1, 0, -1):
+s267595787.py(23):                 self.X[i] = self.f(self.X[i*2], self.X[i*2|1])
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(22):             for i in range(self.n-1, 0, -1):
+s267595787.py(23):                 self.X[i] = self.f(self.X[i*2], self.X[i*2|1])
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(22):             for i in range(self.n-1, 0, -1):
+s267595787.py(23):                 self.X[i] = self.f(self.X[i*2], self.X[i*2|1])
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(22):             for i in range(self.n-1, 0, -1):
+s267595787.py(23):                 self.X[i] = self.f(self.X[i*2], self.X[i*2|1])
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(22):             for i in range(self.n-1, 0, -1):
+s267595787.py(23):                 self.X[i] = self.f(self.X[i*2], self.X[i*2|1])
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(22):             for i in range(self.n-1, 0, -1):
+s267595787.py(25):         for i in range(self.n - 1, 0, -1):
+s267595787.py(26):             self.size[i] = self.size[i*2] + self.size[i*2|1]
+s267595787.py(25):         for i in range(self.n - 1, 0, -1):
+s267595787.py(26):             self.size[i] = self.size[i*2] + self.size[i*2|1]
+s267595787.py(25):         for i in range(self.n - 1, 0, -1):
+s267595787.py(26):             self.size[i] = self.size[i*2] + self.size[i*2|1]
+s267595787.py(25):         for i in range(self.n - 1, 0, -1):
+s267595787.py(26):             self.size[i] = self.size[i*2] + self.size[i*2|1]
+s267595787.py(25):         for i in range(self.n - 1, 0, -1):
+s267595787.py(26):             self.size[i] = self.size[i*2] + self.size[i*2|1]
+s267595787.py(25):         for i in range(self.n - 1, 0, -1):
+s267595787.py(26):             self.size[i] = self.size[i*2] + self.size[i*2|1]
+s267595787.py(25):         for i in range(self.n - 1, 0, -1):
+s267595787.py(26):             self.size[i] = self.size[i*2] + self.size[i*2|1]
+s267595787.py(25):         for i in range(self.n - 1, 0, -1):
+s267595787.py(28):         self.A = [unitA] * (self.n * 2)
+s267595787.py(260): for _ in range(Q):
+s267595787.py(261):     l, r, d = map(int, input().split())
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(2): input = lambda: sys.stdin.readline().rstrip()
+s267595787.py(262):     l, r = N - r, N - l + 1
+s267595787.py(263):     st.operate_range(l, r, d)
+ --- modulename: s267595787, funcname: operate_range
+s267595787.py(87):         l += self.n
+s267595787.py(88):         r += self.n
+s267595787.py(89):         l0, r0 = l // (l & -l), r // (r & -r) - 1
+s267595787.py(90):         self.propagate_above(l0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(91):         self.propagate_above(r0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(96):             if r & 1:
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(94):                 self.A[l] = self.h(self.A[l], a)
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(95):                 l += 1
+s267595787.py(96):             if r & 1:
+s267595787.py(97):                 r -= 1
+s267595787.py(98):                 self.A[r] = self.h(self.A[r], a)
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(102):         self.calc_above(l0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(103):         self.calc_above(r0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(264):     print(st.X[1] >> 18)
+11222211
+s267595787.py(260): for _ in range(Q):
+s267595787.py(261):     l, r, d = map(int, input().split())
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(2): input = lambda: sys.stdin.readline().rstrip()
+s267595787.py(262):     l, r = N - r, N - l + 1
+s267595787.py(263):     st.operate_range(l, r, d)
+ --- modulename: s267595787, funcname: operate_range
+s267595787.py(87):         l += self.n
+s267595787.py(88):         r += self.n
+s267595787.py(89):         l0, r0 = l // (l & -l), r // (r & -r) - 1
+s267595787.py(90):         self.propagate_above(l0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(91):         self.propagate_above(r0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(96):             if r & 1:
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(96):             if r & 1:
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(94):                 self.A[l] = self.h(self.A[l], a)
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(95):                 l += 1
+s267595787.py(96):             if r & 1:
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(102):         self.calc_above(l0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(103):         self.calc_above(r0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(264):     print(st.X[1] >> 18)
+77772211
+s267595787.py(260): for _ in range(Q):
+s267595787.py(261):     l, r, d = map(int, input().split())
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(2): input = lambda: sys.stdin.readline().rstrip()
+s267595787.py(262):     l, r = N - r, N - l + 1
+s267595787.py(263):     st.operate_range(l, r, d)
+ --- modulename: s267595787, funcname: operate_range
+s267595787.py(87):         l += self.n
+s267595787.py(88):         r += self.n
+s267595787.py(89):         l0, r0 = l // (l & -l), r // (r & -r) - 1
+s267595787.py(90):         self.propagate_above(l0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(91):         self.propagate_above(r0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(96):             if r & 1:
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(96):             if r & 1:
+s267595787.py(97):                 r -= 1
+s267595787.py(98):                 self.A[r] = self.h(self.A[r], a)
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(96):             if r & 1:
+s267595787.py(97):                 r -= 1
+s267595787.py(98):                 self.A[r] = self.h(self.A[r], a)
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(102):         self.calc_above(l0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(103):         self.calc_above(r0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(264):     print(st.X[1] >> 18)
+77333333
+s267595787.py(260): for _ in range(Q):
+s267595787.py(261):     l, r, d = map(int, input().split())
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(2): input = lambda: sys.stdin.readline().rstrip()
+s267595787.py(262):     l, r = N - r, N - l + 1
+s267595787.py(263):     st.operate_range(l, r, d)
+ --- modulename: s267595787, funcname: operate_range
+s267595787.py(87):         l += self.n
+s267595787.py(88):         r += self.n
+s267595787.py(89):         l0, r0 = l // (l & -l), r // (r & -r) - 1
+s267595787.py(90):         self.propagate_above(l0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(91):         self.propagate_above(r0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(96):             if r & 1:
+s267595787.py(97):                 r -= 1
+s267595787.py(98):                 self.A[r] = self.h(self.A[r], a)
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(102):         self.calc_above(l0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(103):         self.calc_above(r0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(264):     print(st.X[1] >> 18)
+72333333
+s267595787.py(260): for _ in range(Q):
+s267595787.py(261):     l, r, d = map(int, input().split())
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(2): input = lambda: sys.stdin.readline().rstrip()
+s267595787.py(262):     l, r = N - r, N - l + 1
+s267595787.py(263):     st.operate_range(l, r, d)
+ --- modulename: s267595787, funcname: operate_range
+s267595787.py(87):         l += self.n
+s267595787.py(88):         r += self.n
+s267595787.py(89):         l0, r0 = l // (l & -l), r // (r & -r) - 1
+s267595787.py(90):         self.propagate_above(l0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(91):         self.propagate_above(r0)
+ --- modulename: s267595787, funcname: propagate_above
+s267595787.py(53):         H = i.bit_length()
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(55):             self.propagate(i >> h)
+ --- modulename: s267595787, funcname: propagate
+s267595787.py(47):         self.X[i] = self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+s267595787.py(48):         self.A[i*2] = self.h(self.A[i*2], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(49):         self.A[i*2|1] = self.h(self.A[i*2|1], self.A[i])
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(50):         self.A[i] = self.unitA
+s267595787.py(54):         for h in range(H, 0, -1):
+s267595787.py(92):         while l < r:
+s267595787.py(93):             if l & 1:
+s267595787.py(94):                 self.A[l] = self.h(self.A[l], a)
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(95):                 l += 1
+s267595787.py(96):             if r & 1:
+s267595787.py(97):                 r -= 1
+s267595787.py(98):                 self.A[r] = self.h(self.A[r], a)
+ --- modulename: s267595787, funcname: <lambda>
+s267595787.py(236): h = lambda a, b: b if b else a
+s267595787.py(99):             l >>= 1
+s267595787.py(100):             r >>= 1
+s267595787.py(92):         while l < r:
+s267595787.py(102):         self.calc_above(l0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(103):         self.calc_above(r0)
+ --- modulename: s267595787, funcname: calc_above
+s267595787.py(41):         i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(43):             self.X[i] = self.f(self.calc(i*2), self.calc(i*2|1))
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: calc
+s267595787.py(38):         return self.g(self.X[i], self.A[i], self.size[i])
+ --- modulename: s267595787, funcname: g
+s267595787.py(233):     l, su = x & mm, x >> 18
+s267595787.py(234):     return (((po10[s] - 1) * inv9 % P * po10[l] * a % P) << 18) + l if a else x
+ --- modulename: s267595787, funcname: f
+s267595787.py(225):     l1, su1 = x & mm, x >> 18
+s267595787.py(226):     l2, su2 = y & mm, y >> 18
+s267595787.py(228):     return (((su1 + su2) % P) << 18) + min(l1, l2)
+s267595787.py(44):             i >>= 1
+s267595787.py(42):         while i:
+s267595787.py(264):     print(st.X[1] >> 18)
+72311333
+s267595787.py(260): for _ in range(Q):
