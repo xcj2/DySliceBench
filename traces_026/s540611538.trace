@@ -1,0 +1,209 @@
+ --- modulename: s540611538, funcname: <module>
+s540611538.py(1): import sys
+s540611538.py(2): input = sys.stdin.readline
+s540611538.py(4): N,Q=map(int,input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s540611538.py(6): seg_el=1<<((N+1).bit_length()) # Segment treeの台の要素数
+s540611538.py(8): SEG=[N-2]*(2*seg_el) # 1-indexedなので、要素数2*seg_el.Segment treeの初期値で初期化
+s540611538.py(9): SEG2=[N-2]*(2*seg_el)
+s540611538.py(11): def getvalue(n,seg_el): # 一点の値を取得
+s540611538.py(24): def getvalue2(n,seg_el): # 一点の値を取得
+s540611538.py(37): def updates(l,r,x): # 区間[l,r)のminを更新.
+s540611538.py(52): def updates2(l,r,x): # 区間[l,r)のminを更新.
+s540611538.py(67): ANS=(N-2)*(N-2)
+s540611538.py(69): MINX=N
+s540611538.py(70): MINY=N
+s540611538.py(72): for queries in range(Q):
+s540611538.py(73):     t,x=map(int,input().split())
+s540611538.py(75):     if t==1:
+s540611538.py(76):         v=getvalue(x,seg_el)
+ --- modulename: s540611538, funcname: getvalue
+s540611538.py(12):     i=n+seg_el
+s540611538.py(13):     ANS=N-2
+s540611538.py(15):     ANS=min(SEG[i],ANS)
+s540611538.py(16):     i>>=1# 子ノードへ
+s540611538.py(18):     while i!=0:
+s540611538.py(19):         ANS=min(SEG[i],ANS)
+s540611538.py(20):         i>>=1
+s540611538.py(18):     while i!=0:
+s540611538.py(19):         ANS=min(SEG[i],ANS)
+s540611538.py(20):         i>>=1
+s540611538.py(18):     while i!=0:
+s540611538.py(19):         ANS=min(SEG[i],ANS)
+s540611538.py(20):         i>>=1
+s540611538.py(18):     while i!=0:
+s540611538.py(22):     return ANS
+s540611538.py(77):         ANS-=v
+s540611538.py(78):         updates2(1,MINY,x-2)
+ --- modulename: s540611538, funcname: updates2
+s540611538.py(53):     L=l+seg_el
+s540611538.py(54):     R=r+seg_el
+s540611538.py(56):     while L<R:
+s540611538.py(57):         if L & 1:
+s540611538.py(58):             SEG2[L]=min(x,SEG2[L])
+s540611538.py(59):             L+=1
+s540611538.py(61):         if R & 1:
+s540611538.py(62):             R-=1
+s540611538.py(63):             SEG2[R]=min(x,SEG2[R])
+s540611538.py(64):         L>>=1
+s540611538.py(65):         R>>=1
+s540611538.py(56):     while L<R:
+s540611538.py(57):         if L & 1:
+s540611538.py(58):             SEG2[L]=min(x,SEG2[L])
+s540611538.py(59):             L+=1
+s540611538.py(61):         if R & 1:
+s540611538.py(64):         L>>=1
+s540611538.py(65):         R>>=1
+s540611538.py(56):     while L<R:
+s540611538.py(79):         MINX=min(MINX,x)
+s540611538.py(72): for queries in range(Q):
+s540611538.py(73):     t,x=map(int,input().split())
+s540611538.py(75):     if t==1:
+s540611538.py(82):         v=getvalue2(x,seg_el)
+ --- modulename: s540611538, funcname: getvalue2
+s540611538.py(25):     i=n+seg_el
+s540611538.py(26):     ANS=N-2
+s540611538.py(28):     ANS=min(SEG2[i],ANS)
+s540611538.py(29):     i>>=1# 子ノードへ
+s540611538.py(31):     while i!=0:
+s540611538.py(32):         ANS=min(SEG2[i],ANS)
+s540611538.py(33):         i>>=1
+s540611538.py(31):     while i!=0:
+s540611538.py(32):         ANS=min(SEG2[i],ANS)
+s540611538.py(33):         i>>=1
+s540611538.py(31):     while i!=0:
+s540611538.py(32):         ANS=min(SEG2[i],ANS)
+s540611538.py(33):         i>>=1
+s540611538.py(31):     while i!=0:
+s540611538.py(35):     return ANS
+s540611538.py(83):         ANS-=v
+s540611538.py(84):         updates(1,MINX,x-2)
+ --- modulename: s540611538, funcname: updates
+s540611538.py(38):     L=l+seg_el
+s540611538.py(39):     R=r+seg_el
+s540611538.py(41):     while L<R:
+s540611538.py(42):         if L & 1:
+s540611538.py(43):             SEG[L]=min(x,SEG[L])
+s540611538.py(44):             L+=1
+s540611538.py(46):         if R & 1:
+s540611538.py(47):             R-=1
+s540611538.py(48):             SEG[R]=min(x,SEG[R])
+s540611538.py(49):         L>>=1
+s540611538.py(50):         R>>=1
+s540611538.py(41):     while L<R:
+s540611538.py(85):         MINY=min(MINY,x)
+s540611538.py(72): for queries in range(Q):
+s540611538.py(73):     t,x=map(int,input().split())
+s540611538.py(75):     if t==1:
+s540611538.py(76):         v=getvalue(x,seg_el)
+ --- modulename: s540611538, funcname: getvalue
+s540611538.py(12):     i=n+seg_el
+s540611538.py(13):     ANS=N-2
+s540611538.py(15):     ANS=min(SEG[i],ANS)
+s540611538.py(16):     i>>=1# 子ノードへ
+s540611538.py(18):     while i!=0:
+s540611538.py(19):         ANS=min(SEG[i],ANS)
+s540611538.py(20):         i>>=1
+s540611538.py(18):     while i!=0:
+s540611538.py(19):         ANS=min(SEG[i],ANS)
+s540611538.py(20):         i>>=1
+s540611538.py(18):     while i!=0:
+s540611538.py(19):         ANS=min(SEG[i],ANS)
+s540611538.py(20):         i>>=1
+s540611538.py(18):     while i!=0:
+s540611538.py(22):     return ANS
+s540611538.py(77):         ANS-=v
+s540611538.py(78):         updates2(1,MINY,x-2)
+ --- modulename: s540611538, funcname: updates2
+s540611538.py(53):     L=l+seg_el
+s540611538.py(54):     R=r+seg_el
+s540611538.py(56):     while L<R:
+s540611538.py(57):         if L & 1:
+s540611538.py(58):             SEG2[L]=min(x,SEG2[L])
+s540611538.py(59):             L+=1
+s540611538.py(61):         if R & 1:
+s540611538.py(62):             R-=1
+s540611538.py(63):             SEG2[R]=min(x,SEG2[R])
+s540611538.py(64):         L>>=1
+s540611538.py(65):         R>>=1
+s540611538.py(56):     while L<R:
+s540611538.py(79):         MINX=min(MINX,x)
+s540611538.py(72): for queries in range(Q):
+s540611538.py(73):     t,x=map(int,input().split())
+s540611538.py(75):     if t==1:
+s540611538.py(82):         v=getvalue2(x,seg_el)
+ --- modulename: s540611538, funcname: getvalue2
+s540611538.py(25):     i=n+seg_el
+s540611538.py(26):     ANS=N-2
+s540611538.py(28):     ANS=min(SEG2[i],ANS)
+s540611538.py(29):     i>>=1# 子ノードへ
+s540611538.py(31):     while i!=0:
+s540611538.py(32):         ANS=min(SEG2[i],ANS)
+s540611538.py(33):         i>>=1
+s540611538.py(31):     while i!=0:
+s540611538.py(32):         ANS=min(SEG2[i],ANS)
+s540611538.py(33):         i>>=1
+s540611538.py(31):     while i!=0:
+s540611538.py(32):         ANS=min(SEG2[i],ANS)
+s540611538.py(33):         i>>=1
+s540611538.py(31):     while i!=0:
+s540611538.py(35):     return ANS
+s540611538.py(83):         ANS-=v
+s540611538.py(84):         updates(1,MINX,x-2)
+ --- modulename: s540611538, funcname: updates
+s540611538.py(38):     L=l+seg_el
+s540611538.py(39):     R=r+seg_el
+s540611538.py(41):     while L<R:
+s540611538.py(42):         if L & 1:
+s540611538.py(43):             SEG[L]=min(x,SEG[L])
+s540611538.py(44):             L+=1
+s540611538.py(46):         if R & 1:
+s540611538.py(47):             R-=1
+s540611538.py(48):             SEG[R]=min(x,SEG[R])
+s540611538.py(49):         L>>=1
+s540611538.py(50):         R>>=1
+s540611538.py(41):     while L<R:
+s540611538.py(85):         MINY=min(MINY,x)
+s540611538.py(72): for queries in range(Q):
+s540611538.py(73):     t,x=map(int,input().split())
+s540611538.py(75):     if t==1:
+s540611538.py(76):         v=getvalue(x,seg_el)
+ --- modulename: s540611538, funcname: getvalue
+s540611538.py(12):     i=n+seg_el
+s540611538.py(13):     ANS=N-2
+s540611538.py(15):     ANS=min(SEG[i],ANS)
+s540611538.py(16):     i>>=1# 子ノードへ
+s540611538.py(18):     while i!=0:
+s540611538.py(19):         ANS=min(SEG[i],ANS)
+s540611538.py(20):         i>>=1
+s540611538.py(18):     while i!=0:
+s540611538.py(19):         ANS=min(SEG[i],ANS)
+s540611538.py(20):         i>>=1
+s540611538.py(18):     while i!=0:
+s540611538.py(19):         ANS=min(SEG[i],ANS)
+s540611538.py(20):         i>>=1
+s540611538.py(18):     while i!=0:
+s540611538.py(22):     return ANS
+s540611538.py(77):         ANS-=v
+s540611538.py(78):         updates2(1,MINY,x-2)
+ --- modulename: s540611538, funcname: updates2
+s540611538.py(53):     L=l+seg_el
+s540611538.py(54):     R=r+seg_el
+s540611538.py(56):     while L<R:
+s540611538.py(57):         if L & 1:
+s540611538.py(58):             SEG2[L]=min(x,SEG2[L])
+s540611538.py(59):             L+=1
+s540611538.py(61):         if R & 1:
+s540611538.py(64):         L>>=1
+s540611538.py(65):         R>>=1
+s540611538.py(56):     while L<R:
+s540611538.py(79):         MINX=min(MINX,x)
+s540611538.py(72): for queries in range(Q):
+s540611538.py(87): print(ANS)
+1
