@@ -1,0 +1,131 @@
+ --- modulename: s456997337, funcname: <module>
+s456997337.py(1): class SegTree:
+ --- modulename: s456997337, funcname: SegTree
+s456997337.py(1): class SegTree:
+s456997337.py(2):     def __init__(self, init_val, ide_ele, seg_func):
+s456997337.py(13):     def update(self, k, x):
+s456997337.py(21):     def query(self, p, q):
+s456997337.py(41): def bsearch(mn, mx, func):
+s456997337.py(51): import sys;input=sys.stdin.readline
+s456997337.py(52): mod = 998244353
+s456997337.py(53): N=int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s456997337.py(54): X = []
+s456997337.py(55): Y = []
+s456997337.py(56): for _ in range(N):
+s456997337.py(57):     x, d = map(int, input().split())
+s456997337.py(58):     X.append((x,d))
+s456997337.py(56): for _ in range(N):
+s456997337.py(57):     x, d = map(int, input().split())
+s456997337.py(58):     X.append((x,d))
+s456997337.py(56): for _ in range(N):
+s456997337.py(59): X.sort()
+s456997337.py(60): C = [0] * N
+s456997337.py(61): for i in range(N):
+s456997337.py(62):     x, d = X[i]
+s456997337.py(63):     k = bsearch(-1, N, lambda j: X[j][0] >= x+d)
+ --- modulename: s456997337, funcname: bsearch
+s456997337.py(43):     idx = (mx + mn)//2
+s456997337.py(44):     while mx-mn>1:
+s456997337.py(45):         if func(idx):
+ --- modulename: s456997337, funcname: <lambda>
+s456997337.py(63):     k = bsearch(-1, N, lambda j: X[j][0] >= x+d)
+s456997337.py(48):         idx, mn = (idx + mx)//2, idx
+s456997337.py(44):     while mx-mn>1:
+s456997337.py(45):         if func(idx):
+ --- modulename: s456997337, funcname: <lambda>
+s456997337.py(63):     k = bsearch(-1, N, lambda j: X[j][0] >= x+d)
+s456997337.py(48):         idx, mn = (idx + mx)//2, idx
+s456997337.py(44):     while mx-mn>1:
+s456997337.py(49):     return idx
+s456997337.py(64):     C[i] = k
+s456997337.py(61): for i in range(N):
+s456997337.py(62):     x, d = X[i]
+s456997337.py(63):     k = bsearch(-1, N, lambda j: X[j][0] >= x+d)
+ --- modulename: s456997337, funcname: bsearch
+s456997337.py(43):     idx = (mx + mn)//2
+s456997337.py(44):     while mx-mn>1:
+s456997337.py(45):         if func(idx):
+ --- modulename: s456997337, funcname: <lambda>
+s456997337.py(63):     k = bsearch(-1, N, lambda j: X[j][0] >= x+d)
+s456997337.py(48):         idx, mn = (idx + mx)//2, idx
+s456997337.py(44):     while mx-mn>1:
+s456997337.py(45):         if func(idx):
+ --- modulename: s456997337, funcname: <lambda>
+s456997337.py(63):     k = bsearch(-1, N, lambda j: X[j][0] >= x+d)
+s456997337.py(48):         idx, mn = (idx + mx)//2, idx
+s456997337.py(44):     while mx-mn>1:
+s456997337.py(49):     return idx
+s456997337.py(64):     C[i] = k
+s456997337.py(61): for i in range(N):
+s456997337.py(66): st = SegTree(C, -1, max)
+ --- modulename: s456997337, funcname: __init__
+s456997337.py(3):         self.segfunc = seg_func
+s456997337.py(4):         n = len(init_val)
+s456997337.py(5):         self.num = 2**(n-1).bit_length()
+s456997337.py(6):         self.ide_ele = ide_ele
+s456997337.py(7):         self.seg=[self.ide_ele]*2*self.num
+s456997337.py(8):         for i in range(n):
+s456997337.py(9):             self.seg[i+self.num-1]=init_val[i]    
+s456997337.py(8):         for i in range(n):
+s456997337.py(9):             self.seg[i+self.num-1]=init_val[i]    
+s456997337.py(8):         for i in range(n):
+s456997337.py(10):         for i in range(self.num-2,-1,-1) :
+s456997337.py(11):             self.seg[i]=self.segfunc(self.seg[2*i+1],self.seg[2*i+2]) 
+s456997337.py(10):         for i in range(self.num-2,-1,-1) :
+s456997337.py(67): dp = [1]*(N+1)
+s456997337.py(68): for i in range(N-1, -1, -1):
+s456997337.py(69):     y=st.query(i, C[i]+1)
+ --- modulename: s456997337, funcname: query
+s456997337.py(22):         if q<=p:
+s456997337.py(24):         p += self.num-1
+s456997337.py(25):         q += self.num-2
+s456997337.py(26):         res=self.ide_ele
+s456997337.py(27):         while q-p>1:
+s456997337.py(35):         if p == q:
+s456997337.py(36):             res = self.segfunc(res,self.seg[p])
+s456997337.py(39):         return res
+s456997337.py(70):     st.update(i, y)
+ --- modulename: s456997337, funcname: update
+s456997337.py(14):         k += self.num-1
+s456997337.py(15):         self.seg[k] = x
+s456997337.py(17):         while k+1:
+s456997337.py(18):             k = (k-1)//2
+s456997337.py(19):             self.seg[k] = self.segfunc(self.seg[k*2+1],self.seg[k*2+2])
+s456997337.py(17):         while k+1:
+s456997337.py(18):             k = (k-1)//2
+s456997337.py(19):             self.seg[k] = self.segfunc(self.seg[k*2+1],self.seg[k*2+2])
+s456997337.py(17):         while k+1:
+s456997337.py(71):     dp[i] = (dp[i+1]+dp[y+1]) % mod
+s456997337.py(68): for i in range(N-1, -1, -1):
+s456997337.py(69):     y=st.query(i, C[i]+1)
+ --- modulename: s456997337, funcname: query
+s456997337.py(22):         if q<=p:
+s456997337.py(24):         p += self.num-1
+s456997337.py(25):         q += self.num-2
+s456997337.py(26):         res=self.ide_ele
+s456997337.py(27):         while q-p>1:
+s456997337.py(35):         if p == q:
+s456997337.py(38):             res = self.segfunc(self.segfunc(res,self.seg[p]),self.seg[q])
+s456997337.py(39):         return res
+s456997337.py(70):     st.update(i, y)
+ --- modulename: s456997337, funcname: update
+s456997337.py(14):         k += self.num-1
+s456997337.py(15):         self.seg[k] = x
+s456997337.py(17):         while k+1:
+s456997337.py(18):             k = (k-1)//2
+s456997337.py(19):             self.seg[k] = self.segfunc(self.seg[k*2+1],self.seg[k*2+2])
+s456997337.py(17):         while k+1:
+s456997337.py(18):             k = (k-1)//2
+s456997337.py(19):             self.seg[k] = self.segfunc(self.seg[k*2+1],self.seg[k*2+2])
+s456997337.py(17):         while k+1:
+s456997337.py(71):     dp[i] = (dp[i+1]+dp[y+1]) % mod
+s456997337.py(68): for i in range(N-1, -1, -1):
+s456997337.py(72): print(dp[0])
+3
