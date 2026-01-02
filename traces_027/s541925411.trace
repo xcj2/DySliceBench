@@ -1,0 +1,116 @@
+ --- modulename: s541925411, funcname: <module>
+s541925411.py(1): def solve():
+s541925411.py(13): def get_lowlink(edges, edge_num):
+s541925411.py(47): if __name__ == "__main__":
+s541925411.py(48):     solve()
+ --- modulename: s541925411, funcname: solve
+s541925411.py(2):     N, M = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s541925411.py(3):     edges = [[] for _ in [0] * N]
+ --- modulename: s541925411, funcname: <listcomp>
+s541925411.py(3):     edges = [[] for _ in [0] * N]
+s541925411.py(3):     edges = [[] for _ in [0] * N]
+s541925411.py(3):     edges = [[] for _ in [0] * N]
+s541925411.py(3):     edges = [[] for _ in [0] * N]
+s541925411.py(3):     edges = [[] for _ in [0] * N]
+s541925411.py(4):     for _ in [0] * M:
+s541925411.py(5):         a, b = map(int, input().split())
+s541925411.py(6):         edges[a].append(b)
+s541925411.py(7):         edges[b].append(a)
+s541925411.py(4):     for _ in [0] * M:
+s541925411.py(5):         a, b = map(int, input().split())
+s541925411.py(6):         edges[a].append(b)
+s541925411.py(7):         edges[b].append(a)
+s541925411.py(4):     for _ in [0] * M:
+s541925411.py(5):         a, b = map(int, input().split())
+s541925411.py(6):         edges[a].append(b)
+s541925411.py(7):         edges[b].append(a)
+s541925411.py(4):     for _ in [0] * M:
+s541925411.py(5):         a, b = map(int, input().split())
+s541925411.py(6):         edges[a].append(b)
+s541925411.py(7):         edges[b].append(a)
+s541925411.py(4):     for _ in [0] * M:
+s541925411.py(8):     bridges = sorted((a, b) if a < b else (b, a) for a, b in get_lowlink(edges, M)[0])
+ --- modulename: s541925411, funcname: get_lowlink
+s541925411.py(14):     import sys
+s541925411.py(15):     sys.setrecursionlimit(10**7)
+s541925411.py(17):     n = len(edges)
+s541925411.py(18):     order = [-1] * n
+s541925411.py(19):     low = [float("inf")] * n
+s541925411.py(20):     bridges = []
+s541925411.py(21):     articulations = [0] if edge_num == n-1 and len(edges[0]) > 1 else []
+s541925411.py(22):     append_bridge, append_articulation = bridges.append, articulations.append
+s541925411.py(24):     def dfs(v, prev, k):
+s541925411.py(43):     dfs(0, 0, 0)
+ --- modulename: s541925411, funcname: dfs
+s541925411.py(25):         order[v] = low[v] = k
+s541925411.py(27):         is_articulation = False
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(29):             if order[dest] == -1:
+s541925411.py(30):                 dfs(dest, v, k + 1)
+ --- modulename: s541925411, funcname: dfs
+s541925411.py(25):         order[v] = low[v] = k
+s541925411.py(27):         is_articulation = False
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(29):             if order[dest] == -1:
+s541925411.py(37):             elif dest != prev and low[v] > order[dest]:
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(29):             if order[dest] == -1:
+s541925411.py(30):                 dfs(dest, v, k + 1)
+ --- modulename: s541925411, funcname: dfs
+s541925411.py(25):         order[v] = low[v] = k
+s541925411.py(27):         is_articulation = False
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(29):             if order[dest] == -1:
+s541925411.py(37):             elif dest != prev and low[v] > order[dest]:
+s541925411.py(38):                 low[v] = order[dest]
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(29):             if order[dest] == -1:
+s541925411.py(37):             elif dest != prev and low[v] > order[dest]:
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(29):             if order[dest] == -1:
+s541925411.py(30):                 dfs(dest, v, k + 1)
+ --- modulename: s541925411, funcname: dfs
+s541925411.py(25):         order[v] = low[v] = k
+s541925411.py(27):         is_articulation = False
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(29):             if order[dest] == -1:
+s541925411.py(37):             elif dest != prev and low[v] > order[dest]:
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(40):         if v > 0 and is_articulation:
+s541925411.py(31):                 if low[v] > low[dest]:
+s541925411.py(33):                 if order[v] < low[dest]:
+s541925411.py(34):                     append_bridge((v, dest))
+s541925411.py(35):                 is_articulation |= order[v] <= low[dest]
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(40):         if v > 0 and is_articulation:
+s541925411.py(41):             append_articulation(v)
+s541925411.py(31):                 if low[v] > low[dest]:
+s541925411.py(32):                     low[v] = low[dest]
+s541925411.py(33):                 if order[v] < low[dest]:
+s541925411.py(35):                 is_articulation |= order[v] <= low[dest]
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(40):         if v > 0 and is_articulation:
+s541925411.py(31):                 if low[v] > low[dest]:
+s541925411.py(33):                 if order[v] < low[dest]:
+s541925411.py(35):                 is_articulation |= order[v] <= low[dest]
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(29):             if order[dest] == -1:
+s541925411.py(37):             elif dest != prev and low[v] > order[dest]:
+s541925411.py(28):         for dest in edges[v]:
+s541925411.py(40):         if v > 0 and is_articulation:
+s541925411.py(44):     return bridges, articulations
+ --- modulename: s541925411, funcname: <genexpr>
+s541925411.py(8):     bridges = sorted((a, b) if a < b else (b, a) for a, b in get_lowlink(edges, M)[0])
+ --- modulename: s541925411, funcname: <genexpr>
+s541925411.py(8):     bridges = sorted((a, b) if a < b else (b, a) for a, b in get_lowlink(edges, M)[0])
+s541925411.py(9):     for a, b in bridges:
+s541925411.py(10):         print(a, b)
+2 3
+s541925411.py(9):     for a, b in bridges:

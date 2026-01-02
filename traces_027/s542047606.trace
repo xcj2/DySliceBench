@@ -1,0 +1,144 @@
+ --- modulename: s542047606, funcname: <module>
+s542047606.py(1): from collections import deque
+ --- modulename: _bootstrap, funcname: _handle_fromlist
+<frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1067): s542047606.py(3): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s542047606.py(4): vertex_neighbor_vertices = {}  # 各頂点と、その頂点に隣接する頂点リストのマップ
+s542047606.py(5): vertex_colors = {}  # 各頂点と、その頂点を端点に持つ辺に塗られた色セットのマップ
+s542047606.py(6): sides = []  # 辺情報（(a_i, b_i)のタプル形式で、順番を保持）
+s542047606.py(7): side_color = {}  # 辺とその辺に塗られた色のマップ
+s542047606.py(10): def add_neighbors(start, end):
+s542047606.py(19): def init_colors(vertex):
+s542047606.py(25): def get_unused_color(colors_of_sv, colors_of_ev, color_start):
+s542047606.py(31): for i in range(N - 1):
+s542047606.py(32):     s, e = map(int, input().split())
+s542047606.py(33):     sides.append((s, e))
+s542047606.py(34):     add_neighbors(s, e)
+ --- modulename: s542047606, funcname: add_neighbors
+s542047606.py(11):     neighbors_of_s = set()
+s542047606.py(12):     if start in vertex_neighbor_vertices:
+s542047606.py(15):         vertex_neighbor_vertices[start] = neighbors_of_s
+s542047606.py(16):     neighbors_of_s.add(end)
+s542047606.py(35):     add_neighbors(e, s)
+ --- modulename: s542047606, funcname: add_neighbors
+s542047606.py(11):     neighbors_of_s = set()
+s542047606.py(12):     if start in vertex_neighbor_vertices:
+s542047606.py(15):         vertex_neighbor_vertices[start] = neighbors_of_s
+s542047606.py(16):     neighbors_of_s.add(end)
+s542047606.py(36):     init_colors(s)
+ --- modulename: s542047606, funcname: init_colors
+s542047606.py(20):     colors = set()
+s542047606.py(21):     if vertex not in vertex_colors:
+s542047606.py(22):         vertex_colors[vertex] = colors
+s542047606.py(37):     init_colors(e)
+ --- modulename: s542047606, funcname: init_colors
+s542047606.py(20):     colors = set()
+s542047606.py(21):     if vertex not in vertex_colors:
+s542047606.py(22):         vertex_colors[vertex] = colors
+s542047606.py(31): for i in range(N - 1):
+s542047606.py(32):     s, e = map(int, input().split())
+s542047606.py(33):     sides.append((s, e))
+s542047606.py(34):     add_neighbors(s, e)
+ --- modulename: s542047606, funcname: add_neighbors
+s542047606.py(11):     neighbors_of_s = set()
+s542047606.py(12):     if start in vertex_neighbor_vertices:
+s542047606.py(13):         neighbors_of_s = vertex_neighbor_vertices[start]
+s542047606.py(16):     neighbors_of_s.add(end)
+s542047606.py(35):     add_neighbors(e, s)
+ --- modulename: s542047606, funcname: add_neighbors
+s542047606.py(11):     neighbors_of_s = set()
+s542047606.py(12):     if start in vertex_neighbor_vertices:
+s542047606.py(15):         vertex_neighbor_vertices[start] = neighbors_of_s
+s542047606.py(16):     neighbors_of_s.add(end)
+s542047606.py(36):     init_colors(s)
+ --- modulename: s542047606, funcname: init_colors
+s542047606.py(20):     colors = set()
+s542047606.py(21):     if vertex not in vertex_colors:
+s542047606.py(37):     init_colors(e)
+ --- modulename: s542047606, funcname: init_colors
+s542047606.py(20):     colors = set()
+s542047606.py(21):     if vertex not in vertex_colors:
+s542047606.py(22):         vertex_colors[vertex] = colors
+s542047606.py(31): for i in range(N - 1):
+s542047606.py(39): max_color_num = 0
+s542047606.py(40): max_neighbor_vertex = 0
+s542047606.py(41): for k, v in vertex_neighbor_vertices.items():
+s542047606.py(42):     if len(v) > max_color_num:
+s542047606.py(43):         max_color_num = len(v)
+s542047606.py(44):         max_neighbor_vertex = k
+s542047606.py(41): for k, v in vertex_neighbor_vertices.items():
+s542047606.py(42):     if len(v) > max_color_num:
+s542047606.py(43):         max_color_num = len(v)
+s542047606.py(44):         max_neighbor_vertex = k
+s542047606.py(41): for k, v in vertex_neighbor_vertices.items():
+s542047606.py(42):     if len(v) > max_color_num:
+s542047606.py(41): for k, v in vertex_neighbor_vertices.items():
+s542047606.py(46): print(max_color_num)
+2
+s542047606.py(49): visited = set()
+s542047606.py(50): q = deque([max_neighbor_vertex])
+s542047606.py(52): while q:
+s542047606.py(53):     vertex = q.popleft()
+s542047606.py(54):     visited.add(vertex)
+s542047606.py(56):     color_start = 1
+s542047606.py(57):     for neighbor in vertex_neighbor_vertices[vertex]:
+s542047606.py(58):         if neighbor in visited:
+s542047606.py(60):         q.append(neighbor)
+s542047606.py(61):         color = get_unused_color(vertex_colors[vertex], vertex_colors[neighbor], color_start)
+ --- modulename: s542047606, funcname: get_unused_color
+s542047606.py(26):     for i in range(color_start, N + 1):
+s542047606.py(27):         if (i not in colors_of_sv) and (i not in colors_of_ev):
+s542047606.py(28):             return i
+s542047606.py(62):         color_start = color + 1
+s542047606.py(63):         vertex_colors[vertex].add(color)
+s542047606.py(64):         vertex_colors[neighbor].add(color)
+s542047606.py(65):         side_color[(vertex, neighbor)] = color
+s542047606.py(57):     for neighbor in vertex_neighbor_vertices[vertex]:
+s542047606.py(58):         if neighbor in visited:
+s542047606.py(60):         q.append(neighbor)
+s542047606.py(61):         color = get_unused_color(vertex_colors[vertex], vertex_colors[neighbor], color_start)
+ --- modulename: s542047606, funcname: get_unused_color
+s542047606.py(26):     for i in range(color_start, N + 1):
+s542047606.py(27):         if (i not in colors_of_sv) and (i not in colors_of_ev):
+s542047606.py(28):             return i
+s542047606.py(62):         color_start = color + 1
+s542047606.py(63):         vertex_colors[vertex].add(color)
+s542047606.py(64):         vertex_colors[neighbor].add(color)
+s542047606.py(65):         side_color[(vertex, neighbor)] = color
+s542047606.py(57):     for neighbor in vertex_neighbor_vertices[vertex]:
+s542047606.py(52): while q:
+s542047606.py(53):     vertex = q.popleft()
+s542047606.py(54):     visited.add(vertex)
+s542047606.py(56):     color_start = 1
+s542047606.py(57):     for neighbor in vertex_neighbor_vertices[vertex]:
+s542047606.py(58):         if neighbor in visited:
+s542047606.py(59):             continue
+s542047606.py(57):     for neighbor in vertex_neighbor_vertices[vertex]:
+s542047606.py(52): while q:
+s542047606.py(53):     vertex = q.popleft()
+s542047606.py(54):     visited.add(vertex)
+s542047606.py(56):     color_start = 1
+s542047606.py(57):     for neighbor in vertex_neighbor_vertices[vertex]:
+s542047606.py(58):         if neighbor in visited:
+s542047606.py(59):             continue
+s542047606.py(57):     for neighbor in vertex_neighbor_vertices[vertex]:
+s542047606.py(52): while q:
+s542047606.py(67): for s, e in sides:
+s542047606.py(68):     color = 0
+s542047606.py(69):     if (s, e) in side_color:
+s542047606.py(72):         color = side_color[(e, s)]
+s542047606.py(73):     print(color)
+1
+s542047606.py(67): for s, e in sides:
+s542047606.py(68):     color = 0
+s542047606.py(69):     if (s, e) in side_color:
+s542047606.py(70):         color = side_color[(s, e)]
+s542047606.py(73):     print(color)
+2
+s542047606.py(67): for s, e in sides:
