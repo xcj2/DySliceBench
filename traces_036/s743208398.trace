@@ -1,0 +1,179 @@
+ --- modulename: s743208398, funcname: <module>
+s743208398.py(1): class SegmentTree:
+ --- modulename: s743208398, funcname: SegmentTree
+s743208398.py(1): class SegmentTree:
+s743208398.py(2):     def __init__(self, lst, op, e):
+s743208398.py(9):     def _build(self, lst):
+s743208398.py(17):     def __getitem__(self, i):
+s743208398.py(21):     def update(self, i, x):
+s743208398.py(29):     def query(self, l, r):
+s743208398.py(44): def coord_compress(A):
+s743208398.py(48): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s743208398.py(49): *H, = map(int, input().split())
+s743208398.py(50): *A, = map(int, input().split())
+s743208398.py(52): H = coord_compress(H)
+ --- modulename: s743208398, funcname: coord_compress
+s743208398.py(45):     B = {a: i for i, a in enumerate(sorted(set(A)))}
+ --- modulename: s743208398, funcname: <dictcomp>
+s743208398.py(45):     B = {a: i for i, a in enumerate(sorted(set(A)))}
+s743208398.py(45):     B = {a: i for i, a in enumerate(sorted(set(A)))}
+s743208398.py(45):     B = {a: i for i, a in enumerate(sorted(set(A)))}
+s743208398.py(45):     B = {a: i for i, a in enumerate(sorted(set(A)))}
+s743208398.py(45):     B = {a: i for i, a in enumerate(sorted(set(A)))}
+s743208398.py(46):     return [B[a] for a in A]
+ --- modulename: s743208398, funcname: <listcomp>
+s743208398.py(46):     return [B[a] for a in A]
+s743208398.py(46):     return [B[a] for a in A]
+s743208398.py(46):     return [B[a] for a in A]
+s743208398.py(46):     return [B[a] for a in A]
+s743208398.py(46):     return [B[a] for a in A]
+s743208398.py(53): dp = SegmentTree([0] * len(H), max, 0)
+ --- modulename: s743208398, funcname: __init__
+s743208398.py(3):         self.n = len(lst)
+s743208398.py(4):         self.N = 1 << ((self.n - 1).bit_length())
+s743208398.py(5):         self.op = op # operation
+s743208398.py(6):         self.e = e # identity element
+s743208398.py(7):         self.v = self._build(lst)
+ --- modulename: s743208398, funcname: _build
+s743208398.py(12):         tree = [self.e] * (self.N - 1) + lst + [self.e] * (self.N - self.n)
+s743208398.py(13):         for i in range(self.N - 2, -1, -1):
+s743208398.py(14):             tree[i] = self.op(tree[2*i + 1], tree[2*i + 2])
+s743208398.py(13):         for i in range(self.N - 2, -1, -1):
+s743208398.py(14):             tree[i] = self.op(tree[2*i + 1], tree[2*i + 2])
+s743208398.py(13):         for i in range(self.N - 2, -1, -1):
+s743208398.py(14):             tree[i] = self.op(tree[2*i + 1], tree[2*i + 2])
+s743208398.py(13):         for i in range(self.N - 2, -1, -1):
+s743208398.py(15):         return tree
+s743208398.py(54): for h, a in zip(H, A):
+s743208398.py(55):     dp.update(h, max(dp[h], dp.query(0, h) + a))
+ --- modulename: s743208398, funcname: __getitem__
+s743208398.py(18):         return self.v[i + self.N - 1]
+ --- modulename: s743208398, funcname: query
+s743208398.py(30):         left = l + self.N - 1
+s743208398.py(31):         right = r + self.N - 1
+s743208398.py(32):         L = self.e; R = self.e
+s743208398.py(33):         while left < right:
+s743208398.py(34):             if left & 1 == 0: # self.v[left] is the right child
+s743208398.py(37):             if right & 1 == 0: # self.v[right-1] is the left child
+s743208398.py(40):             left -= 1; left >>= 1
+s743208398.py(41):             right >>= 1
+s743208398.py(33):         while left < right:
+s743208398.py(34):             if left & 1 == 0: # self.v[left] is the right child
+s743208398.py(37):             if right & 1 == 0: # self.v[right-1] is the left child
+s743208398.py(38):                 right -= 1
+s743208398.py(39):                 R = self.op(self.v[right], R)
+s743208398.py(40):             left -= 1; left >>= 1
+s743208398.py(41):             right >>= 1
+s743208398.py(33):         while left < right:
+s743208398.py(42):         return self.op(L, R)
+ --- modulename: s743208398, funcname: update
+s743208398.py(22):         i += self.N - 1
+s743208398.py(23):         self.v[i] = x
+s743208398.py(24):         while i > 0:
+s743208398.py(25):             i -= 1; i >>= 1
+s743208398.py(26):             self.v[i] = self.op(self.v[2*i + 1], self.v[2*i + 2])
+s743208398.py(24):         while i > 0:
+s743208398.py(25):             i -= 1; i >>= 1
+s743208398.py(26):             self.v[i] = self.op(self.v[2*i + 1], self.v[2*i + 2])
+s743208398.py(24):         while i > 0:
+s743208398.py(54): for h, a in zip(H, A):
+s743208398.py(55):     dp.update(h, max(dp[h], dp.query(0, h) + a))
+ --- modulename: s743208398, funcname: __getitem__
+s743208398.py(18):         return self.v[i + self.N - 1]
+ --- modulename: s743208398, funcname: query
+s743208398.py(30):         left = l + self.N - 1
+s743208398.py(31):         right = r + self.N - 1
+s743208398.py(32):         L = self.e; R = self.e
+s743208398.py(33):         while left < right:
+s743208398.py(42):         return self.op(L, R)
+ --- modulename: s743208398, funcname: update
+s743208398.py(22):         i += self.N - 1
+s743208398.py(23):         self.v[i] = x
+s743208398.py(24):         while i > 0:
+s743208398.py(25):             i -= 1; i >>= 1
+s743208398.py(26):             self.v[i] = self.op(self.v[2*i + 1], self.v[2*i + 2])
+s743208398.py(24):         while i > 0:
+s743208398.py(25):             i -= 1; i >>= 1
+s743208398.py(26):             self.v[i] = self.op(self.v[2*i + 1], self.v[2*i + 2])
+s743208398.py(24):         while i > 0:
+s743208398.py(54): for h, a in zip(H, A):
+s743208398.py(55):     dp.update(h, max(dp[h], dp.query(0, h) + a))
+ --- modulename: s743208398, funcname: __getitem__
+s743208398.py(18):         return self.v[i + self.N - 1]
+ --- modulename: s743208398, funcname: query
+s743208398.py(30):         left = l + self.N - 1
+s743208398.py(31):         right = r + self.N - 1
+s743208398.py(32):         L = self.e; R = self.e
+s743208398.py(33):         while left < right:
+s743208398.py(34):             if left & 1 == 0: # self.v[left] is the right child
+s743208398.py(37):             if right & 1 == 0: # self.v[right-1] is the left child
+s743208398.py(38):                 right -= 1
+s743208398.py(39):                 R = self.op(self.v[right], R)
+s743208398.py(40):             left -= 1; left >>= 1
+s743208398.py(41):             right >>= 1
+s743208398.py(33):         while left < right:
+s743208398.py(34):             if left & 1 == 0: # self.v[left] is the right child
+s743208398.py(37):             if right & 1 == 0: # self.v[right-1] is the left child
+s743208398.py(38):                 right -= 1
+s743208398.py(39):                 R = self.op(self.v[right], R)
+s743208398.py(40):             left -= 1; left >>= 1
+s743208398.py(41):             right >>= 1
+s743208398.py(33):         while left < right:
+s743208398.py(42):         return self.op(L, R)
+ --- modulename: s743208398, funcname: update
+s743208398.py(22):         i += self.N - 1
+s743208398.py(23):         self.v[i] = x
+s743208398.py(24):         while i > 0:
+s743208398.py(25):             i -= 1; i >>= 1
+s743208398.py(26):             self.v[i] = self.op(self.v[2*i + 1], self.v[2*i + 2])
+s743208398.py(24):         while i > 0:
+s743208398.py(25):             i -= 1; i >>= 1
+s743208398.py(26):             self.v[i] = self.op(self.v[2*i + 1], self.v[2*i + 2])
+s743208398.py(24):         while i > 0:
+s743208398.py(54): for h, a in zip(H, A):
+s743208398.py(55):     dp.update(h, max(dp[h], dp.query(0, h) + a))
+ --- modulename: s743208398, funcname: __getitem__
+s743208398.py(18):         return self.v[i + self.N - 1]
+ --- modulename: s743208398, funcname: query
+s743208398.py(30):         left = l + self.N - 1
+s743208398.py(31):         right = r + self.N - 1
+s743208398.py(32):         L = self.e; R = self.e
+s743208398.py(33):         while left < right:
+s743208398.py(34):             if left & 1 == 0: # self.v[left] is the right child
+s743208398.py(37):             if right & 1 == 0: # self.v[right-1] is the left child
+s743208398.py(38):                 right -= 1
+s743208398.py(39):                 R = self.op(self.v[right], R)
+s743208398.py(40):             left -= 1; left >>= 1
+s743208398.py(41):             right >>= 1
+s743208398.py(33):         while left < right:
+s743208398.py(42):         return self.op(L, R)
+ --- modulename: s743208398, funcname: update
+s743208398.py(22):         i += self.N - 1
+s743208398.py(23):         self.v[i] = x
+s743208398.py(24):         while i > 0:
+s743208398.py(25):             i -= 1; i >>= 1
+s743208398.py(26):             self.v[i] = self.op(self.v[2*i + 1], self.v[2*i + 2])
+s743208398.py(24):         while i > 0:
+s743208398.py(25):             i -= 1; i >>= 1
+s743208398.py(26):             self.v[i] = self.op(self.v[2*i + 1], self.v[2*i + 2])
+s743208398.py(24):         while i > 0:
+s743208398.py(54): for h, a in zip(H, A):
+s743208398.py(56): print(max(dp))
+ --- modulename: s743208398, funcname: __getitem__
+s743208398.py(18):         return self.v[i + self.N - 1]
+ --- modulename: s743208398, funcname: __getitem__
+s743208398.py(18):         return self.v[i + self.N - 1]
+ --- modulename: s743208398, funcname: __getitem__
+s743208398.py(18):         return self.v[i + self.N - 1]
+ --- modulename: s743208398, funcname: __getitem__
+s743208398.py(18):         return self.v[i + self.N - 1]
+ --- modulename: s743208398, funcname: __getitem__
+s743208398.py(18):         return self.v[i + self.N - 1]
+60
