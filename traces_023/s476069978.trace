@@ -1,0 +1,633 @@
+ --- modulename: s476069978, funcname: <module>
+s476069978.py(1): import sys
+s476069978.py(2): readline = sys.stdin.readline
+s476069978.py(3): class Lazysegtree:
+ --- modulename: s476069978, funcname: Lazysegtree
+s476069978.py(3): class Lazysegtree:
+s476069978.py(4):     def __init__(self, A, fx, ex, fm, em, fa, initialize = True):
+s476069978.py(25):     def fa(self, ope, idx):
+s476069978.py(31):     def fm(self, x, y):
+s476069978.py(37):     def __repr__(self):
+s476069978.py(47):     def _ascend(self, k):
+s476069978.py(54):     def _descend(self, k):
+s476069978.py(69):     def query(self, l, r):
+s476069978.py(89):     def operate(self, l, r, x):
+s476069978.py(113): INF = 10**18+3
+s476069978.py(115): H, W = map(int, readline().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s476069978.py(116): T = Lazysegtree([0]*W, min, INF, None, (0, 0), None, initialize = True)
+ --- modulename: s476069978, funcname: __init__
+s476069978.py(6):         self.N = len(A)
+s476069978.py(7):         self.N0 = 2**(self.N-1).bit_length()
+s476069978.py(8):         self.dep = (self.N-1).bit_length()
+s476069978.py(9):         self.fx = fx
+s476069978.py(15):         self.ex = ex
+s476069978.py(16):         self.em = em
+s476069978.py(17):         self.lazy = [em]*(2*self.N0)
+s476069978.py(18):         if initialize:
+s476069978.py(19):             self.data = [self.ex]*self.N0 + A + [self.ex]*(self.N0 - self.N)
+s476069978.py(20):             for i in range(self.N0-1, -1, -1):
+s476069978.py(21):                 self.data[i] = self.fx(self.data[2*i], self.data[2*i+1]) 
+s476069978.py(20):             for i in range(self.N0-1, -1, -1):
+s476069978.py(21):                 self.data[i] = self.fx(self.data[2*i], self.data[2*i+1]) 
+s476069978.py(20):             for i in range(self.N0-1, -1, -1):
+s476069978.py(21):                 self.data[i] = self.fx(self.data[2*i], self.data[2*i+1]) 
+s476069978.py(20):             for i in range(self.N0-1, -1, -1):
+s476069978.py(21):                 self.data[i] = self.fx(self.data[2*i], self.data[2*i+1]) 
+s476069978.py(20):             for i in range(self.N0-1, -1, -1):
+s476069978.py(117): N0 = T.N0
+s476069978.py(118): Ans = [None]*H
+s476069978.py(119): for qu in range(H):
+s476069978.py(120):     a, b = map(int, readline().split())
+s476069978.py(121):     a -= 1
+s476069978.py(122):     if a == 0:
+s476069978.py(125):         x = T.query(a-1, a)
+ --- modulename: s476069978, funcname: query
+s476069978.py(70):         L = l+self.N0
+s476069978.py(71):         R = r+self.N0
+s476069978.py(72):         self._descend(L//(L & -L))
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(73):         self._descend(R//(R & -R)-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(75):         sl = self.ex
+s476069978.py(76):         sr = self.ex                                                                   
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(80):                 R -= 1
+s476069978.py(81):                 sr = self.fx(self.data[R], sr)
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(87):         return self.fx(sl, sr)
+s476069978.py(126):         T.operate(a, b, (1, x-a+1))
+ --- modulename: s476069978, funcname: operate
+s476069978.py(90):         L = l+self.N0
+s476069978.py(91):         R = r+self.N0
+s476069978.py(93):         Li = L//(L & -L)
+s476069978.py(94):         Ri = R//(R & -R)
+s476069978.py(95):         self._descend(Li)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(96):         self._descend(Ri-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(98):         while L < R :
+s476069978.py(99):             if R & 1:
+s476069978.py(103):             if L & 1:
+s476069978.py(104):                 self.data[L] = self.fa(x, L)
+ --- modulename: s476069978, funcname: fa
+s476069978.py(26):         if ope[0]:
+s476069978.py(27):             k = idx.bit_length()
+s476069978.py(28):             return (idx - (1<<(k-1)))*(1<<(self.dep+1-k)) + ope[1]
+s476069978.py(105):                 self.lazy[L] = self.fm(x, self.lazy[L])
+ --- modulename: s476069978, funcname: fm
+s476069978.py(32):         if x[0] == 1:
+s476069978.py(33):             return x
+s476069978.py(106):                 L += 1
+s476069978.py(107):             L >>= 1
+s476069978.py(108):             R >>= 1
+s476069978.py(98):         while L < R :
+s476069978.py(99):             if R & 1:
+s476069978.py(103):             if L & 1:
+s476069978.py(104):                 self.data[L] = self.fa(x, L)
+ --- modulename: s476069978, funcname: fa
+s476069978.py(26):         if ope[0]:
+s476069978.py(27):             k = idx.bit_length()
+s476069978.py(28):             return (idx - (1<<(k-1)))*(1<<(self.dep+1-k)) + ope[1]
+s476069978.py(105):                 self.lazy[L] = self.fm(x, self.lazy[L])
+ --- modulename: s476069978, funcname: fm
+s476069978.py(32):         if x[0] == 1:
+s476069978.py(33):             return x
+s476069978.py(106):                 L += 1
+s476069978.py(107):             L >>= 1
+s476069978.py(108):             R >>= 1
+s476069978.py(98):         while L < R :
+s476069978.py(110):         self._ascend(Li)
+ --- modulename: s476069978, funcname: _ascend
+s476069978.py(48):         k = k >> 1
+s476069978.py(49):         c = k.bit_length()
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(111):         self._ascend(Ri-1)
+ --- modulename: s476069978, funcname: _ascend
+s476069978.py(48):         k = k >> 1
+s476069978.py(49):         c = k.bit_length()
+s476069978.py(50):         for j in range(c):
+s476069978.py(127):     ans = T.query(0, N0) + qu + 1
+ --- modulename: s476069978, funcname: query
+s476069978.py(70):         L = l+self.N0
+s476069978.py(71):         R = r+self.N0
+s476069978.py(72):         self._descend(L//(L & -L))
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(73):         self._descend(R//(R & -R)-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(75):         sl = self.ex
+s476069978.py(76):         sr = self.ex                                                                   
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(83):                 sl = self.fx(sl, self.data[L])
+s476069978.py(84):                 L += 1
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(87):         return self.fx(sl, sr)
+s476069978.py(128):     if ans >= INF:
+s476069978.py(130):     Ans[qu] = ans 
+s476069978.py(119): for qu in range(H):
+s476069978.py(120):     a, b = map(int, readline().split())
+s476069978.py(121):     a -= 1
+s476069978.py(122):     if a == 0:
+s476069978.py(123):         T.operate(a, b, (1, INF))
+ --- modulename: s476069978, funcname: operate
+s476069978.py(90):         L = l+self.N0
+s476069978.py(91):         R = r+self.N0
+s476069978.py(93):         Li = L//(L & -L)
+s476069978.py(94):         Ri = R//(R & -R)
+s476069978.py(95):         self._descend(Li)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(96):         self._descend(Ri-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(98):         while L < R :
+s476069978.py(99):             if R & 1:
+s476069978.py(100):                 R -= 1
+s476069978.py(101):                 self.data[R] = self.fa(x, R)
+ --- modulename: s476069978, funcname: fa
+s476069978.py(26):         if ope[0]:
+s476069978.py(27):             k = idx.bit_length()
+s476069978.py(28):             return (idx - (1<<(k-1)))*(1<<(self.dep+1-k)) + ope[1]
+s476069978.py(102):                 self.lazy[R] = self.fm(x, self.lazy[R])
+ --- modulename: s476069978, funcname: fm
+s476069978.py(32):         if x[0] == 1:
+s476069978.py(33):             return x
+s476069978.py(103):             if L & 1:
+s476069978.py(107):             L >>= 1
+s476069978.py(108):             R >>= 1
+s476069978.py(98):         while L < R :
+s476069978.py(110):         self._ascend(Li)
+ --- modulename: s476069978, funcname: _ascend
+s476069978.py(48):         k = k >> 1
+s476069978.py(49):         c = k.bit_length()
+s476069978.py(50):         for j in range(c):
+s476069978.py(111):         self._ascend(Ri-1)
+ --- modulename: s476069978, funcname: _ascend
+s476069978.py(48):         k = k >> 1
+s476069978.py(49):         c = k.bit_length()
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(127):     ans = T.query(0, N0) + qu + 1
+ --- modulename: s476069978, funcname: query
+s476069978.py(70):         L = l+self.N0
+s476069978.py(71):         R = r+self.N0
+s476069978.py(72):         self._descend(L//(L & -L))
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(73):         self._descend(R//(R & -R)-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(75):         sl = self.ex
+s476069978.py(76):         sr = self.ex                                                                   
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(83):                 sl = self.fx(sl, self.data[L])
+s476069978.py(84):                 L += 1
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(87):         return self.fx(sl, sr)
+s476069978.py(128):     if ans >= INF:
+s476069978.py(130):     Ans[qu] = ans 
+s476069978.py(119): for qu in range(H):
+s476069978.py(120):     a, b = map(int, readline().split())
+s476069978.py(121):     a -= 1
+s476069978.py(122):     if a == 0:
+s476069978.py(125):         x = T.query(a-1, a)
+ --- modulename: s476069978, funcname: query
+s476069978.py(70):         L = l+self.N0
+s476069978.py(71):         R = r+self.N0
+s476069978.py(72):         self._descend(L//(L & -L))
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(73):         self._descend(R//(R & -R)-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(75):         sl = self.ex
+s476069978.py(76):         sr = self.ex                                                                   
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(80):                 R -= 1
+s476069978.py(81):                 sr = self.fx(self.data[R], sr)
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(87):         return self.fx(sl, sr)
+s476069978.py(126):         T.operate(a, b, (1, x-a+1))
+ --- modulename: s476069978, funcname: operate
+s476069978.py(90):         L = l+self.N0
+s476069978.py(91):         R = r+self.N0
+s476069978.py(93):         Li = L//(L & -L)
+s476069978.py(94):         Ri = R//(R & -R)
+s476069978.py(95):         self._descend(Li)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(96):         self._descend(Ri-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(62):             self.data[2*idx] = self.fa(self.lazy[idx], 2*idx) 
+ --- modulename: s476069978, funcname: fa
+s476069978.py(26):         if ope[0]:
+s476069978.py(27):             k = idx.bit_length()
+s476069978.py(28):             return (idx - (1<<(k-1)))*(1<<(self.dep+1-k)) + ope[1]
+s476069978.py(63):             self.data[2*idx+1] = self.fa(self.lazy[idx], 2*idx+1)
+ --- modulename: s476069978, funcname: fa
+s476069978.py(26):         if ope[0]:
+s476069978.py(27):             k = idx.bit_length()
+s476069978.py(28):             return (idx - (1<<(k-1)))*(1<<(self.dep+1-k)) + ope[1]
+s476069978.py(64):             self.lazy[2*idx] = self.fm(self.lazy[idx], self.lazy[2*idx])
+ --- modulename: s476069978, funcname: fm
+s476069978.py(32):         if x[0] == 1:
+s476069978.py(33):             return x
+s476069978.py(65):             self.lazy[2*idx+1] = self.fm(self.lazy[idx], self.lazy[2*idx+1])
+ --- modulename: s476069978, funcname: fm
+s476069978.py(32):         if x[0] == 1:
+s476069978.py(33):             return x
+s476069978.py(66):             self.lazy[idx] = self.em
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(98):         while L < R :
+s476069978.py(99):             if R & 1:
+s476069978.py(100):                 R -= 1
+s476069978.py(101):                 self.data[R] = self.fa(x, R)
+ --- modulename: s476069978, funcname: fa
+s476069978.py(26):         if ope[0]:
+s476069978.py(27):             k = idx.bit_length()
+s476069978.py(28):             return (idx - (1<<(k-1)))*(1<<(self.dep+1-k)) + ope[1]
+s476069978.py(102):                 self.lazy[R] = self.fm(x, self.lazy[R])
+ --- modulename: s476069978, funcname: fm
+s476069978.py(32):         if x[0] == 1:
+s476069978.py(33):             return x
+s476069978.py(103):             if L & 1:
+s476069978.py(104):                 self.data[L] = self.fa(x, L)
+ --- modulename: s476069978, funcname: fa
+s476069978.py(26):         if ope[0]:
+s476069978.py(27):             k = idx.bit_length()
+s476069978.py(28):             return (idx - (1<<(k-1)))*(1<<(self.dep+1-k)) + ope[1]
+s476069978.py(105):                 self.lazy[L] = self.fm(x, self.lazy[L])
+ --- modulename: s476069978, funcname: fm
+s476069978.py(32):         if x[0] == 1:
+s476069978.py(33):             return x
+s476069978.py(106):                 L += 1
+s476069978.py(107):             L >>= 1
+s476069978.py(108):             R >>= 1
+s476069978.py(98):         while L < R :
+s476069978.py(110):         self._ascend(Li)
+ --- modulename: s476069978, funcname: _ascend
+s476069978.py(48):         k = k >> 1
+s476069978.py(49):         c = k.bit_length()
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(111):         self._ascend(Ri-1)
+ --- modulename: s476069978, funcname: _ascend
+s476069978.py(48):         k = k >> 1
+s476069978.py(49):         c = k.bit_length()
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(127):     ans = T.query(0, N0) + qu + 1
+ --- modulename: s476069978, funcname: query
+s476069978.py(70):         L = l+self.N0
+s476069978.py(71):         R = r+self.N0
+s476069978.py(72):         self._descend(L//(L & -L))
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(73):         self._descend(R//(R & -R)-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(75):         sl = self.ex
+s476069978.py(76):         sr = self.ex                                                                   
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(83):                 sl = self.fx(sl, self.data[L])
+s476069978.py(84):                 L += 1
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(87):         return self.fx(sl, sr)
+s476069978.py(128):     if ans >= INF:
+s476069978.py(130):     Ans[qu] = ans 
+s476069978.py(119): for qu in range(H):
+s476069978.py(120):     a, b = map(int, readline().split())
+s476069978.py(121):     a -= 1
+s476069978.py(122):     if a == 0:
+s476069978.py(125):         x = T.query(a-1, a)
+ --- modulename: s476069978, funcname: query
+s476069978.py(70):         L = l+self.N0
+s476069978.py(71):         R = r+self.N0
+s476069978.py(72):         self._descend(L//(L & -L))
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(73):         self._descend(R//(R & -R)-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(75):         sl = self.ex
+s476069978.py(76):         sr = self.ex                                                                   
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(80):                 R -= 1
+s476069978.py(81):                 sr = self.fx(self.data[R], sr)
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(87):         return self.fx(sl, sr)
+s476069978.py(126):         T.operate(a, b, (1, x-a+1))
+ --- modulename: s476069978, funcname: operate
+s476069978.py(90):         L = l+self.N0
+s476069978.py(91):         R = r+self.N0
+s476069978.py(93):         Li = L//(L & -L)
+s476069978.py(94):         Ri = R//(R & -R)
+s476069978.py(95):         self._descend(Li)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(59):             idx = k >> (c - j)
+s476069978.py(60):             if self.lazy[idx] == self.em:
+s476069978.py(61):                 continue
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(96):         self._descend(Ri-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(98):         while L < R :
+s476069978.py(99):             if R & 1:
+s476069978.py(103):             if L & 1:
+s476069978.py(104):                 self.data[L] = self.fa(x, L)
+ --- modulename: s476069978, funcname: fa
+s476069978.py(26):         if ope[0]:
+s476069978.py(27):             k = idx.bit_length()
+s476069978.py(28):             return (idx - (1<<(k-1)))*(1<<(self.dep+1-k)) + ope[1]
+s476069978.py(105):                 self.lazy[L] = self.fm(x, self.lazy[L])
+ --- modulename: s476069978, funcname: fm
+s476069978.py(32):         if x[0] == 1:
+s476069978.py(33):             return x
+s476069978.py(106):                 L += 1
+s476069978.py(107):             L >>= 1
+s476069978.py(108):             R >>= 1
+s476069978.py(98):         while L < R :
+s476069978.py(99):             if R & 1:
+s476069978.py(103):             if L & 1:
+s476069978.py(104):                 self.data[L] = self.fa(x, L)
+ --- modulename: s476069978, funcname: fa
+s476069978.py(26):         if ope[0]:
+s476069978.py(27):             k = idx.bit_length()
+s476069978.py(28):             return (idx - (1<<(k-1)))*(1<<(self.dep+1-k)) + ope[1]
+s476069978.py(105):                 self.lazy[L] = self.fm(x, self.lazy[L])
+ --- modulename: s476069978, funcname: fm
+s476069978.py(32):         if x[0] == 1:
+s476069978.py(33):             return x
+s476069978.py(106):                 L += 1
+s476069978.py(107):             L >>= 1
+s476069978.py(108):             R >>= 1
+s476069978.py(98):         while L < R :
+s476069978.py(110):         self._ascend(Li)
+ --- modulename: s476069978, funcname: _ascend
+s476069978.py(48):         k = k >> 1
+s476069978.py(49):         c = k.bit_length()
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(51):             idx = k >> j
+s476069978.py(52):             self.data[idx] = self.fx(self.data[2*idx], self.data[2*idx+1])
+s476069978.py(50):         for j in range(c):
+s476069978.py(111):         self._ascend(Ri-1)
+ --- modulename: s476069978, funcname: _ascend
+s476069978.py(48):         k = k >> 1
+s476069978.py(49):         c = k.bit_length()
+s476069978.py(50):         for j in range(c):
+s476069978.py(127):     ans = T.query(0, N0) + qu + 1
+ --- modulename: s476069978, funcname: query
+s476069978.py(70):         L = l+self.N0
+s476069978.py(71):         R = r+self.N0
+s476069978.py(72):         self._descend(L//(L & -L))
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(73):         self._descend(R//(R & -R)-1)
+ --- modulename: s476069978, funcname: _descend
+s476069978.py(55):         k = k >> 1
+s476069978.py(56):         idx = 1
+s476069978.py(57):         c = k.bit_length()
+s476069978.py(58):         for j in range(1, c+1):
+s476069978.py(75):         sl = self.ex
+s476069978.py(76):         sr = self.ex                                                                   
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(79):             if R & 1:
+s476069978.py(82):             if L & 1:
+s476069978.py(83):                 sl = self.fx(sl, self.data[L])
+s476069978.py(84):                 L += 1
+s476069978.py(85):             L >>= 1
+s476069978.py(86):             R >>= 1
+s476069978.py(78):         while L < R:
+s476069978.py(87):         return self.fx(sl, sr)
+s476069978.py(128):     if ans >= INF:
+s476069978.py(129):         ans = -1
+s476069978.py(130):     Ans[qu] = ans 
+s476069978.py(119): for qu in range(H):
+s476069978.py(131): print('\n'.join(map(str, Ans)))
+1
+3
+6
+-1
