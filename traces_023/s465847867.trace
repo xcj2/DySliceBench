@@ -1,0 +1,1509 @@
+ --- modulename: s465847867, funcname: <module>
+s465847867.py(1): import sys
+s465847867.py(2): input = sys.stdin.buffer.readline
+s465847867.py(4): T = int(input())
+s465847867.py(7): def update_max(k,x):
+s465847867.py(14): def query_max(p,q):
+s465847867.py(33): def update_min(k,x):
+s465847867.py(39): def init_min(init_min_val):
+s465847867.py(46): def init_max(init_max_val):
+s465847867.py(53): def query_min(p,q):
+s465847867.py(74): ide_ele_max = -1
+s465847867.py(76): ide_ele_min = 10**10
+s465847867.py(79): dg = 10**6
+s465847867.py(81): for testcase in range(T):
+s465847867.py(82):     n = int(input())
+s465847867.py(84):     num_max =2**(n-1).bit_length()
+s465847867.py(85):     seg_max=[ide_ele_max]*2*num_max
+s465847867.py(87):     num_min =2**(n-1).bit_length()
+s465847867.py(88):     seg_min=[ide_ele_min]*2*num_min
+s465847867.py(89):     init_min(list(range(n)))
+ --- modulename: s465847867, funcname: init_min
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(90):     init_max(list(range(n)))
+ --- modulename: s465847867, funcname: init_max
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(92):     res = 0
+s465847867.py(93):     tank = []
+s465847867.py(94):     res = 0
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(104):     tank.sort(reverse = True)
+s465847867.py(105):     s = 0
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(31):         res = max(max(res,seg_max[p]),seg_max[q])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(56):     p += num_min-1
+s465847867.py(57):     q += num_min-2
+s465847867.py(58):     res=ide_ele_min
+s465847867.py(59):     while q-p>1:
+s465847867.py(67):     if p == q:
+s465847867.py(68):         res = min(res,seg_min[p])
+s465847867.py(71):     return res
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(117):                 res += pt
+s465847867.py(118):                 update_min(kk,10**19)
+ --- modulename: s465847867, funcname: update_min
+s465847867.py(34):     k += num_min-1
+s465847867.py(35):     seg_min[k] = x
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(120):     print(res)
+25
+s465847867.py(81): for testcase in range(T):
+s465847867.py(82):     n = int(input())
+s465847867.py(84):     num_max =2**(n-1).bit_length()
+s465847867.py(85):     seg_max=[ide_ele_max]*2*num_max
+s465847867.py(87):     num_min =2**(n-1).bit_length()
+s465847867.py(88):     seg_min=[ide_ele_min]*2*num_min
+s465847867.py(89):     init_min(list(range(n)))
+ --- modulename: s465847867, funcname: init_min
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(90):     init_max(list(range(n)))
+ --- modulename: s465847867, funcname: init_max
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(92):     res = 0
+s465847867.py(93):     tank = []
+s465847867.py(94):     res = 0
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(104):     tank.sort(reverse = True)
+s465847867.py(105):     s = 0
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(55):         return ide_ele_min
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(31):         res = max(max(res,seg_max[p]),seg_max[q])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(29):         res = max(res,seg_max[p])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(120):     print(res)
+221
+s465847867.py(81): for testcase in range(T):
+s465847867.py(82):     n = int(input())
+s465847867.py(84):     num_max =2**(n-1).bit_length()
+s465847867.py(85):     seg_max=[ide_ele_max]*2*num_max
+s465847867.py(87):     num_min =2**(n-1).bit_length()
+s465847867.py(88):     seg_min=[ide_ele_min]*2*num_min
+s465847867.py(89):     init_min(list(range(n)))
+ --- modulename: s465847867, funcname: init_min
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(42):         seg_min[i+num_min-1]=init_min_val[i]    
+s465847867.py(41):     for i in range(n):
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(45):         seg_min[i]=min(seg_min[2*i+1],seg_min[2*i+2])
+s465847867.py(44):     for i in range(num_min-2,-1,-1) :
+s465847867.py(90):     init_max(list(range(n)))
+ --- modulename: s465847867, funcname: init_max
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(49):         seg_max[i+num_max-1]=init_max_val[i]    
+s465847867.py(48):     for i in range(n):
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(52):         seg_max[i]=max(seg_max[2*i+1],seg_max[2*i+2]) 
+s465847867.py(51):     for i in range(num_max-2,-1,-1) :
+s465847867.py(92):     res = 0
+s465847867.py(93):     tank = []
+s465847867.py(94):     res = 0
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(102):             tank.append((L-R)*dg+K*2)
+s465847867.py(103):             res += R
+s465847867.py(95):     for i in range(n):
+s465847867.py(96):         K,L,R = map(int,input().split())
+s465847867.py(97):         K -= 1
+s465847867.py(98):         if L <= R:
+s465847867.py(99):             tank.append((R-L)*dg+K*2+1)
+s465847867.py(100):             res += L
+s465847867.py(95):     for i in range(n):
+s465847867.py(104):     tank.sort(reverse = True)
+s465847867.py(105):     s = 0
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(56):     p += num_min-1
+s465847867.py(57):     q += num_min-2
+s465847867.py(58):     res=ide_ele_min
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(61):             res = min(res,seg_min[p])
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(61):             res = min(res,seg_min[p])
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(61):             res = min(res,seg_min[p])
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(67):     if p == q:
+s465847867.py(68):         res = min(res,seg_min[p])
+s465847867.py(71):     return res
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(117):                 res += pt
+s465847867.py(118):                 update_min(kk,10**19)
+ --- modulename: s465847867, funcname: update_min
+s465847867.py(34):     k += num_min-1
+s465847867.py(35):     seg_min[k] = x
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(31):         res = max(max(res,seg_max[p]),seg_max[q])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(56):     p += num_min-1
+s465847867.py(57):     q += num_min-2
+s465847867.py(58):     res=ide_ele_min
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(67):     if p == q:
+s465847867.py(68):         res = min(res,seg_min[p])
+s465847867.py(71):     return res
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(117):                 res += pt
+s465847867.py(118):                 update_min(kk,10**19)
+ --- modulename: s465847867, funcname: update_min
+s465847867.py(34):     k += num_min-1
+s465847867.py(35):     seg_min[k] = x
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(31):         res = max(max(res,seg_max[p]),seg_max[q])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(29):         res = max(res,seg_max[p])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(56):     p += num_min-1
+s465847867.py(57):     q += num_min-2
+s465847867.py(58):     res=ide_ele_min
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(61):             res = min(res,seg_min[p])
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(67):     if p == q:
+s465847867.py(68):         res = min(res,seg_min[p])
+s465847867.py(71):     return res
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(117):                 res += pt
+s465847867.py(118):                 update_min(kk,10**19)
+ --- modulename: s465847867, funcname: update_min
+s465847867.py(34):     k += num_min-1
+s465847867.py(35):     seg_min[k] = x
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(31):         res = max(max(res,seg_max[p]),seg_max[q])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(56):     p += num_min-1
+s465847867.py(57):     q += num_min-2
+s465847867.py(58):     res=ide_ele_min
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(67):     if p == q:
+s465847867.py(68):         res = min(res,seg_min[p])
+s465847867.py(71):     return res
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(117):                 res += pt
+s465847867.py(118):                 update_min(kk,10**19)
+ --- modulename: s465847867, funcname: update_min
+s465847867.py(34):     k += num_min-1
+s465847867.py(35):     seg_min[k] = x
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(31):         res = max(max(res,seg_max[p]),seg_max[q])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(56):     p += num_min-1
+s465847867.py(57):     q += num_min-2
+s465847867.py(58):     res=ide_ele_min
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(61):             res = min(res,seg_min[p])
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(61):             res = min(res,seg_min[p])
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(67):     if p == q:
+s465847867.py(70):         res = min(min(res,seg_min[p]),seg_min[q])
+s465847867.py(71):     return res
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(117):                 res += pt
+s465847867.py(118):                 update_min(kk,10**19)
+ --- modulename: s465847867, funcname: update_min
+s465847867.py(34):     k += num_min-1
+s465847867.py(35):     seg_min[k] = x
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(56):     p += num_min-1
+s465847867.py(57):     q += num_min-2
+s465847867.py(58):     res=ide_ele_min
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(61):             res = min(res,seg_min[p])
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(67):     if p == q:
+s465847867.py(68):         res = min(res,seg_min[p])
+s465847867.py(71):     return res
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(117):                 res += pt
+s465847867.py(118):                 update_min(kk,10**19)
+ --- modulename: s465847867, funcname: update_min
+s465847867.py(34):     k += num_min-1
+s465847867.py(35):     seg_min[k] = x
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(31):         res = max(max(res,seg_max[p]),seg_max[q])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(29):         res = max(res,seg_max[p])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(31):         res = max(max(res,seg_max[p]),seg_max[q])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(55):         return ide_ele_min
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(56):     p += num_min-1
+s465847867.py(57):     q += num_min-2
+s465847867.py(58):     res=ide_ele_min
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(61):             res = min(res,seg_min[p])
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(67):     if p == q:
+s465847867.py(70):         res = min(min(res,seg_min[p]),seg_min[q])
+s465847867.py(71):     return res
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(117):                 res += pt
+s465847867.py(118):                 update_min(kk,10**19)
+ --- modulename: s465847867, funcname: update_min
+s465847867.py(34):     k += num_min-1
+s465847867.py(35):     seg_min[k] = x
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(31):         res = max(max(res,seg_max[p]),seg_max[q])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(110):             kk = query_max(0,idx+1)
+ --- modulename: s465847867, funcname: query_max
+s465847867.py(15):     if q<=p:
+s465847867.py(17):     p += num_max-1
+s465847867.py(18):     q += num_max-2
+s465847867.py(19):     res=ide_ele_max
+s465847867.py(20):     while q-p>1:
+s465847867.py(21):         if p&1 == 0:
+s465847867.py(23):         if q&1 == 1:
+s465847867.py(24):             res = max(res,seg_max[q])
+s465847867.py(25):             q -= 1
+s465847867.py(26):         p = p//2
+s465847867.py(27):         q = (q-1)//2
+s465847867.py(20):     while q-p>1:
+s465847867.py(28):     if p == q:
+s465847867.py(29):         res = max(res,seg_max[p])
+s465847867.py(32):     return res
+s465847867.py(111):             if kk != -1:
+s465847867.py(112):                 res += pt
+s465847867.py(113):                 update_max(kk,-1)
+ --- modulename: s465847867, funcname: update_max
+s465847867.py(8):     k += num_max-1
+s465847867.py(9):     seg_max[k] = x
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(11):         k = (k-1)//2
+s465847867.py(12):         seg_max[k] = max(seg_max[k*2+1],seg_max[k*2+2])
+s465847867.py(10):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(107):         pt,amari = divmod(e,dg)
+s465847867.py(108):         idx,right = divmod(amari,2)
+s465847867.py(109):         if right == 0:
+s465847867.py(115):             kk = query_min(idx+1,n)
+ --- modulename: s465847867, funcname: query_min
+s465847867.py(54):     if q<=p:
+s465847867.py(56):     p += num_min-1
+s465847867.py(57):     q += num_min-2
+s465847867.py(58):     res=ide_ele_min
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(60):         if p&1 == 0:
+s465847867.py(62):         if q&1 == 1:
+s465847867.py(63):             res = min(res,seg_min[q])
+s465847867.py(64):             q -= 1
+s465847867.py(65):         p = p//2
+s465847867.py(66):         q = (q-1)//2
+s465847867.py(59):     while q-p>1:
+s465847867.py(67):     if p == q:
+s465847867.py(68):         res = min(res,seg_min[p])
+s465847867.py(71):     return res
+s465847867.py(116):             if kk != 10**10:
+s465847867.py(117):                 res += pt
+s465847867.py(118):                 update_min(kk,10**19)
+ --- modulename: s465847867, funcname: update_min
+s465847867.py(34):     k += num_min-1
+s465847867.py(35):     seg_min[k] = x
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(37):         k = (k-1)//2
+s465847867.py(38):         seg_min[k] = min(seg_min[k*2+1],seg_min[k*2+2])
+s465847867.py(36):     while k:
+s465847867.py(106):     for e in tank:
+s465847867.py(120):     print(res)
+1354
+s465847867.py(81): for testcase in range(T):
