@@ -1,0 +1,1713 @@
+ --- modulename: s852986397, funcname: <module>
+s852986397.py(1): import sys
+s852986397.py(2): input = lambda : sys.stdin.readline().rstrip()
+s852986397.py(3): sys.setrecursionlimit(max(1000, 10**9))
+s852986397.py(4): write = lambda x: sys.stdout.write(x+"\n")
+s852986397.py(9): class LazySegmentTree:
+ --- modulename: s852986397, funcname: LazySegmentTree
+s852986397.py(9): class LazySegmentTree:
+s852986397.py(10):     def __init__(self, n, a=None):
+s852986397.py(36):     def eval(self, k):
+s852986397.py(44):     def eval_all(self):
+s852986397.py(47):     def update(self,a,b,x=None,f=None):
+s852986397.py(73):     def query(self,a,b):
+s852986397.py(94): n,q = list(map(int, input().split()))
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(2): input = lambda : sys.stdin.readline().rstrip()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s852986397.py(95): M = 998244353
+s852986397.py(96): vals = [1]
+s852986397.py(97): vals2 = [1]
+s852986397.py(98): v = 1
+s852986397.py(99): for i in range(n):
+s852986397.py(100):     v *= 10
+s852986397.py(101):     v %= M
+s852986397.py(102):     vals.append(v)
+s852986397.py(103):     vals2.append((1+vals2[-1]*10)%M)
+s852986397.py(99): for i in range(n):
+s852986397.py(100):     v *= 10
+s852986397.py(101):     v %= M
+s852986397.py(102):     vals.append(v)
+s852986397.py(103):     vals2.append((1+vals2[-1]*10)%M)
+s852986397.py(99): for i in range(n):
+s852986397.py(100):     v *= 10
+s852986397.py(101):     v %= M
+s852986397.py(102):     vals.append(v)
+s852986397.py(103):     vals2.append((1+vals2[-1]*10)%M)
+s852986397.py(99): for i in range(n):
+s852986397.py(100):     v *= 10
+s852986397.py(101):     v %= M
+s852986397.py(102):     vals.append(v)
+s852986397.py(103):     vals2.append((1+vals2[-1]*10)%M)
+s852986397.py(99): for i in range(n):
+s852986397.py(100):     v *= 10
+s852986397.py(101):     v %= M
+s852986397.py(102):     vals.append(v)
+s852986397.py(103):     vals2.append((1+vals2[-1]*10)%M)
+s852986397.py(99): for i in range(n):
+s852986397.py(100):     v *= 10
+s852986397.py(101):     v %= M
+s852986397.py(102):     vals.append(v)
+s852986397.py(103):     vals2.append((1+vals2[-1]*10)%M)
+s852986397.py(99): for i in range(n):
+s852986397.py(100):     v *= 10
+s852986397.py(101):     v %= M
+s852986397.py(102):     vals.append(v)
+s852986397.py(103):     vals2.append((1+vals2[-1]*10)%M)
+s852986397.py(99): for i in range(n):
+s852986397.py(100):     v *= 10
+s852986397.py(101):     v %= M
+s852986397.py(102):     vals.append(v)
+s852986397.py(103):     vals2.append((1+vals2[-1]*10)%M)
+s852986397.py(99): for i in range(n):
+s852986397.py(105): ninf = 0 # (転倒数, #0, #1)
+s852986397.py(106): V = (1<<32)
+s852986397.py(107): def op(x,y):
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(114): def composition(f1,f2):
+s852986397.py(125): f0 = None
+s852986397.py(126): sg = LazySegmentTree(n, [1+(1<<32)]*n)
+ --- modulename: s852986397, funcname: __init__
+s852986397.py(14):         num = 1
+s852986397.py(15):         while num<=n:
+s852986397.py(16):             num *= 2
+s852986397.py(15):         while num<=n:
+s852986397.py(16):             num *= 2
+s852986397.py(15):         while num<=n:
+s852986397.py(16):             num *= 2
+s852986397.py(15):         while num<=n:
+s852986397.py(16):             num *= 2
+s852986397.py(15):         while num<=n:
+s852986397.py(17):         self.num = num
+s852986397.py(18):         self.seg = [ninf] * (2*self.num-1)
+s852986397.py(19):         self.lazy = [f0] * (2*self.num-1)
+s852986397.py(20):         self.ls = [0]*(2*self.num-1)
+s852986397.py(21):         self.rs = [0]*(2*self.num-1)
+s852986397.py(22):         self.ls[0] = 0
+s852986397.py(23):         self.rs[0] = self.num
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(25):             self.ls[2*i+1] = self.ls[i]
+s852986397.py(26):             self.rs[2*i+1] = (self.ls[i] + self.rs[i])//2
+s852986397.py(27):             self.ls[2*i+2] = (self.ls[i] + self.rs[i])//2
+s852986397.py(28):             self.rs[2*i+2] = self.rs[i]
+s852986397.py(24):         for i in range(self.num-1):
+s852986397.py(29):         if a is not None:
+s852986397.py(31):             assert len(a)==n
+s852986397.py(32):             for i in range(n):
+s852986397.py(33):                 self.seg[num-1+i] = a[i]
+s852986397.py(32):             for i in range(n):
+s852986397.py(33):                 self.seg[num-1+i] = a[i]
+s852986397.py(32):             for i in range(n):
+s852986397.py(33):                 self.seg[num-1+i] = a[i]
+s852986397.py(32):             for i in range(n):
+s852986397.py(33):                 self.seg[num-1+i] = a[i]
+s852986397.py(32):             for i in range(n):
+s852986397.py(33):                 self.seg[num-1+i] = a[i]
+s852986397.py(32):             for i in range(n):
+s852986397.py(33):                 self.seg[num-1+i] = a[i]
+s852986397.py(32):             for i in range(n):
+s852986397.py(33):                 self.seg[num-1+i] = a[i]
+s852986397.py(32):             for i in range(n):
+s852986397.py(33):                 self.seg[num-1+i] = a[i]
+s852986397.py(32):             for i in range(n):
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(35):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(34):             for k in range(num-2, -1, -1):
+s852986397.py(127): ans = [None]*q
+s852986397.py(128): for i in range(q):
+s852986397.py(129):     l,r,d = map(int, input().split())
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(2): input = lambda : sys.stdin.readline().rstrip()
+s852986397.py(130):     l -= 1
+s852986397.py(131):     r -= 1
+s852986397.py(133):     sg.update(l,r+1,f=10*i+d)
+ --- modulename: s852986397, funcname: update
+s852986397.py(50):         if f is None:
+s852986397.py(53):         k = 0
+s852986397.py(54):         q = [k] # k>=0なら行きがけ順
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(64):                     self.lazy[k] = composition(f, self.lazy[k])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(65):                     self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(40):             self.lazy[k*2+1] = composition(self.lazy[k], self.lazy[k*2+1])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(41):             self.lazy[k*2+2] = composition(self.lazy[k], self.lazy[k*2+2])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(64):                     self.lazy[k] = composition(f, self.lazy[k])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(65):                     self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(40):             self.lazy[k*2+1] = composition(self.lazy[k], self.lazy[k*2+1])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(41):             self.lazy[k*2+2] = composition(self.lazy[k], self.lazy[k*2+2])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(134):     ans[i] = sg.query(0,n+1)%V
+ --- modulename: s852986397, funcname: query
+s852986397.py(74):         k = 0
+s852986397.py(75):         l = 0
+s852986397.py(76):         r = self.num
+s852986397.py(77):         q = [k]
+s852986397.py(78):         ans = ninf
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(92):         return ans
+s852986397.py(128): for i in range(q):
+s852986397.py(129):     l,r,d = map(int, input().split())
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(2): input = lambda : sys.stdin.readline().rstrip()
+s852986397.py(130):     l -= 1
+s852986397.py(131):     r -= 1
+s852986397.py(133):     sg.update(l,r+1,f=10*i+d)
+ --- modulename: s852986397, funcname: update
+s852986397.py(50):         if f is None:
+s852986397.py(53):         k = 0
+s852986397.py(54):         q = [k] # k>=0なら行きがけ順
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(64):                     self.lazy[k] = composition(f, self.lazy[k])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(65):                     self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(40):             self.lazy[k*2+1] = composition(self.lazy[k], self.lazy[k*2+1])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(41):             self.lazy[k*2+2] = composition(self.lazy[k], self.lazy[k*2+2])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(134):     ans[i] = sg.query(0,n+1)%V
+ --- modulename: s852986397, funcname: query
+s852986397.py(74):         k = 0
+s852986397.py(75):         l = 0
+s852986397.py(76):         r = self.num
+s852986397.py(77):         q = [k]
+s852986397.py(78):         ans = ninf
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(92):         return ans
+s852986397.py(128): for i in range(q):
+s852986397.py(129):     l,r,d = map(int, input().split())
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(2): input = lambda : sys.stdin.readline().rstrip()
+s852986397.py(130):     l -= 1
+s852986397.py(131):     r -= 1
+s852986397.py(133):     sg.update(l,r+1,f=10*i+d)
+ --- modulename: s852986397, funcname: update
+s852986397.py(50):         if f is None:
+s852986397.py(53):         k = 0
+s852986397.py(54):         q = [k] # k>=0なら行きがけ順
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(64):                     self.lazy[k] = composition(f, self.lazy[k])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(65):                     self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(40):             self.lazy[k*2+1] = composition(self.lazy[k], self.lazy[k*2+1])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(41):             self.lazy[k*2+2] = composition(self.lazy[k], self.lazy[k*2+2])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(40):             self.lazy[k*2+1] = composition(self.lazy[k], self.lazy[k*2+1])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(120):         if f1//10<f2//10:
+s852986397.py(123):             return f1
+s852986397.py(41):             self.lazy[k*2+2] = composition(self.lazy[k], self.lazy[k*2+2])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(120):         if f1//10<f2//10:
+s852986397.py(123):             return f1
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(64):                     self.lazy[k] = composition(f, self.lazy[k])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(65):                     self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(40):             self.lazy[k*2+1] = composition(self.lazy[k], self.lazy[k*2+1])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(120):         if f1//10<f2//10:
+s852986397.py(123):             return f1
+s852986397.py(41):             self.lazy[k*2+2] = composition(self.lazy[k], self.lazy[k*2+2])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(120):         if f1//10<f2//10:
+s852986397.py(123):             return f1
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(40):             self.lazy[k*2+1] = composition(self.lazy[k], self.lazy[k*2+1])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(41):             self.lazy[k*2+2] = composition(self.lazy[k], self.lazy[k*2+2])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(134):     ans[i] = sg.query(0,n+1)%V
+ --- modulename: s852986397, funcname: query
+s852986397.py(74):         k = 0
+s852986397.py(75):         l = 0
+s852986397.py(76):         r = self.num
+s852986397.py(77):         q = [k]
+s852986397.py(78):         ans = ninf
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(92):         return ans
+s852986397.py(128): for i in range(q):
+s852986397.py(129):     l,r,d = map(int, input().split())
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(2): input = lambda : sys.stdin.readline().rstrip()
+s852986397.py(130):     l -= 1
+s852986397.py(131):     r -= 1
+s852986397.py(133):     sg.update(l,r+1,f=10*i+d)
+ --- modulename: s852986397, funcname: update
+s852986397.py(50):         if f is None:
+s852986397.py(53):         k = 0
+s852986397.py(54):         q = [k] # k>=0なら行きがけ順
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(64):                     self.lazy[k] = composition(f, self.lazy[k])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(65):                     self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(134):     ans[i] = sg.query(0,n+1)%V
+ --- modulename: s852986397, funcname: query
+s852986397.py(74):         k = 0
+s852986397.py(75):         l = 0
+s852986397.py(76):         r = self.num
+s852986397.py(77):         q = [k]
+s852986397.py(78):         ans = ninf
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(92):         return ans
+s852986397.py(128): for i in range(q):
+s852986397.py(129):     l,r,d = map(int, input().split())
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(2): input = lambda : sys.stdin.readline().rstrip()
+s852986397.py(130):     l -= 1
+s852986397.py(131):     r -= 1
+s852986397.py(133):     sg.update(l,r+1,f=10*i+d)
+ --- modulename: s852986397, funcname: update
+s852986397.py(50):         if f is None:
+s852986397.py(53):         k = 0
+s852986397.py(54):         q = [k] # k>=0なら行きがけ順
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(40):             self.lazy[k*2+1] = composition(self.lazy[k], self.lazy[k*2+1])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(41):             self.lazy[k*2+2] = composition(self.lazy[k], self.lazy[k*2+2])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(40):             self.lazy[k*2+1] = composition(self.lazy[k], self.lazy[k*2+1])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(120):         if f1//10<f2//10:
+s852986397.py(123):             return f1
+s852986397.py(41):             self.lazy[k*2+2] = composition(self.lazy[k], self.lazy[k*2+2])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(120):         if f1//10<f2//10:
+s852986397.py(123):             return f1
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(62):                     continue
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(64):                     self.lazy[k] = composition(f, self.lazy[k])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(65):                     self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(67):                     q.append(~k)
+s852986397.py(68):                     q.append(2*k+1)
+s852986397.py(69):                     q.append(2*k+2)
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(63):                 elif a<=l and r<=b:
+s852986397.py(64):                     self.lazy[k] = composition(f, self.lazy[k])
+ --- modulename: s852986397, funcname: composition
+s852986397.py(115):     if f1 is None:
+s852986397.py(117):     elif f2 is None:
+s852986397.py(118):         return f1
+s852986397.py(65):                     self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(39):         if k<self.num-1:
+s852986397.py(42):         self.seg[k] = mapping(self.lazy[k], self.seg[k])
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(113): mapping = lambda f,x: x if f is None else ((f%10)*vals2[(x//V)-1])%M + (x//V)*V
+s852986397.py(43):         self.lazy[k] = f0
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(60):                 self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(61):                 if r<=a or b<=l:
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(57):             k = q.pop()
+s852986397.py(58):             l,r = self.ls[k], self.rs[k]
+s852986397.py(59):             if k>=0:
+s852986397.py(71):                 k = ~k
+s852986397.py(72):                 self.seg[k] = op(self.seg[2*k+1], self.seg[2*k+2])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(56):         while q:
+s852986397.py(134):     ans[i] = sg.query(0,n+1)%V
+ --- modulename: s852986397, funcname: query
+s852986397.py(74):         k = 0
+s852986397.py(75):         l = 0
+s852986397.py(76):         r = self.num
+s852986397.py(77):         q = [k]
+s852986397.py(78):         ans = ninf
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(89):                 q.append(2*k+2)
+s852986397.py(90):                 q.append(2*k+1)
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(86):             elif a<=l and r<=b:
+s852986397.py(87):                 ans = op(ans, self.seg[k])
+ --- modulename: s852986397, funcname: op
+s852986397.py(109):     return ((x%V)*vals[y//V] + y%V)%M + (x//V + y//V)*V
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(81):             k = q.pop()
+s852986397.py(82):             l,r = self.ls[k], self.rs[k]
+s852986397.py(83):             self.eval(k)
+ --- modulename: s852986397, funcname: eval
+s852986397.py(37):         if self.lazy[k]==f0:
+s852986397.py(38):             return 
+s852986397.py(84):             if r<=a or b<=l:
+s852986397.py(85):                 continue
+s852986397.py(80):         while q:
+s852986397.py(92):         return ans
+s852986397.py(128): for i in range(q):
+s852986397.py(135): write("\n".join(map(str, ans)))
+ --- modulename: s852986397, funcname: <lambda>
+s852986397.py(4): write = lambda x: sys.stdout.write(x+"\n")
+11222211
+77772211
+77333333
+72333333
+72311333
