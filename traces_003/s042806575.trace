@@ -1,0 +1,170 @@
+ --- modulename: s042806575, funcname: <module>
+s042806575.py(4): class SegmentTree:
+ --- modulename: s042806575, funcname: SegmentTree
+s042806575.py(4): class SegmentTree:
+s042806575.py(6):     __slots__ = ["func", "e", "original_size", "n", "data"]
+s042806575.py(8):     def __init__(self, length_or_list, func, e):
+s042806575.py(22):     def replace(self, index, value):
+s042806575.py(30):     def folded(self, l, r):
+s042806575.py(46):     def all_folded(self):
+s042806575.py(49):     def __getitem__(self, index):
+s042806575.py(52):     def max_right(self, l, f):
+s042806575.py(74):     def min_left(self, r, f):
+s042806575.py(94): def yosupo():
+s042806575.py(107): def aoj():
+s042806575.py(120): def main():
+s042806575.py(137): if __name__ == "__main__":
+s042806575.py(138):     main()
+ --- modulename: s042806575, funcname: main
+s042806575.py(121):     import sys
+s042806575.py(122):     input = sys.stdin.buffer.readline
+s042806575.py(124):     N, Q = map(int, input().split())
+s042806575.py(125):     As = list(map(int, input().split()))
+s042806575.py(126):     seg = SegmentTree(As, max, 0)
+ --- modulename: s042806575, funcname: __init__
+s042806575.py(9):         self.func = func
+s042806575.py(10):         self.e = e
+s042806575.py(11):         if isinstance(length_or_list, int):
+s042806575.py(16):             self.original_size = len(length_or_list)
+s042806575.py(17):             self.n = 1 << ((self.original_size - 1).bit_length())
+s042806575.py(18):             self.data = [self.e] * self.n + length_or_list + [self.e] * (self.n - self.original_size)
+s042806575.py(19):             for i in range(self.n-1, 0, -1):
+s042806575.py(20):                 self.data[i] = self.func(self.data[2*i], self.data[2*i+1])
+s042806575.py(19):             for i in range(self.n-1, 0, -1):
+s042806575.py(20):                 self.data[i] = self.func(self.data[2*i], self.data[2*i+1])
+s042806575.py(19):             for i in range(self.n-1, 0, -1):
+s042806575.py(20):                 self.data[i] = self.func(self.data[2*i], self.data[2*i+1])
+s042806575.py(19):             for i in range(self.n-1, 0, -1):
+s042806575.py(20):                 self.data[i] = self.func(self.data[2*i], self.data[2*i+1])
+s042806575.py(19):             for i in range(self.n-1, 0, -1):
+s042806575.py(20):                 self.data[i] = self.func(self.data[2*i], self.data[2*i+1])
+s042806575.py(19):             for i in range(self.n-1, 0, -1):
+s042806575.py(20):                 self.data[i] = self.func(self.data[2*i], self.data[2*i+1])
+s042806575.py(19):             for i in range(self.n-1, 0, -1):
+s042806575.py(20):                 self.data[i] = self.func(self.data[2*i], self.data[2*i+1])
+s042806575.py(19):             for i in range(self.n-1, 0, -1):
+s042806575.py(127):     for _ in range(Q):
+s042806575.py(128):         T, X, V = map(int, input().split())
+s042806575.py(129):         if T == 1:
+s042806575.py(131):         elif T == 2:
+s042806575.py(132):             print(seg.folded(X-1, V))
+ --- modulename: s042806575, funcname: folded
+s042806575.py(31):         left_folded = self.e
+s042806575.py(32):         right_folded = self.e
+s042806575.py(33):         l += self.n
+s042806575.py(34):         r += self.n
+s042806575.py(35):         while l < r:
+s042806575.py(36):             if l % 2:
+s042806575.py(39):             if r % 2:
+s042806575.py(40):                 r -= 1
+s042806575.py(41):                 right_folded = self.func(self.data[r], right_folded)
+s042806575.py(42):             l //= 2
+s042806575.py(43):             r //= 2
+s042806575.py(35):         while l < r:
+s042806575.py(36):             if l % 2:
+s042806575.py(39):             if r % 2:
+s042806575.py(42):             l //= 2
+s042806575.py(43):             r //= 2
+s042806575.py(35):         while l < r:
+s042806575.py(36):             if l % 2:
+s042806575.py(39):             if r % 2:
+s042806575.py(40):                 r -= 1
+s042806575.py(41):                 right_folded = self.func(self.data[r], right_folded)
+s042806575.py(42):             l //= 2
+s042806575.py(43):             r //= 2
+s042806575.py(35):         while l < r:
+s042806575.py(44):         return self.func(left_folded, right_folded)
+3
+s042806575.py(127):     for _ in range(Q):
+s042806575.py(128):         T, X, V = map(int, input().split())
+s042806575.py(129):         if T == 1:
+s042806575.py(131):         elif T == 2:
+s042806575.py(134):             print(seg.max_right(X-1, lambda a: a < V)+ 1)
+ --- modulename: s042806575, funcname: max_right
+s042806575.py(54):         if l >= self.original_size:
+s042806575.py(56):         l += self.n
+s042806575.py(57):         left_folded = self.e
+s042806575.py(59):             l //= l & -l
+s042806575.py(60):             if not f(self.func(left_folded, self.data[l])):
+ --- modulename: s042806575, funcname: <lambda>
+s042806575.py(134):             print(seg.max_right(X-1, lambda a: a < V)+ 1)
+s042806575.py(67):             left_folded = self.func(left_folded, self.data[l])
+s042806575.py(68):             l += 1
+s042806575.py(69):             if l == l & -l:
+s042806575.py(59):             l //= l & -l
+s042806575.py(60):             if not f(self.func(left_folded, self.data[l])):
+ --- modulename: s042806575, funcname: <lambda>
+s042806575.py(134):             print(seg.max_right(X-1, lambda a: a < V)+ 1)
+s042806575.py(61):                 while l < self.n:
+s042806575.py(62):                     l *= 2
+s042806575.py(63):                     if f(self.func(left_folded, self.data[l])):
+ --- modulename: s042806575, funcname: <lambda>
+s042806575.py(134):             print(seg.max_right(X-1, lambda a: a < V)+ 1)
+s042806575.py(61):                 while l < self.n:
+s042806575.py(66):                 return l - self.n
+3
+s042806575.py(127):     for _ in range(Q):
+s042806575.py(128):         T, X, V = map(int, input().split())
+s042806575.py(129):         if T == 1:
+s042806575.py(130):             seg.replace(X-1, V)
+ --- modulename: s042806575, funcname: replace
+s042806575.py(23):         index += self.n
+s042806575.py(24):         self.data[index] = value
+s042806575.py(25):         index //= 2
+s042806575.py(26):         while index > 0:
+s042806575.py(27):             self.data[index] = self.func(self.data[2*index], self.data[2*index+1])
+s042806575.py(28):             index //= 2
+s042806575.py(26):         while index > 0:
+s042806575.py(27):             self.data[index] = self.func(self.data[2*index], self.data[2*index+1])
+s042806575.py(28):             index //= 2
+s042806575.py(26):         while index > 0:
+s042806575.py(27):             self.data[index] = self.func(self.data[2*index], self.data[2*index+1])
+s042806575.py(28):             index //= 2
+s042806575.py(26):         while index > 0:
+s042806575.py(127):     for _ in range(Q):
+s042806575.py(128):         T, X, V = map(int, input().split())
+s042806575.py(129):         if T == 1:
+s042806575.py(131):         elif T == 2:
+s042806575.py(132):             print(seg.folded(X-1, V))
+ --- modulename: s042806575, funcname: folded
+s042806575.py(31):         left_folded = self.e
+s042806575.py(32):         right_folded = self.e
+s042806575.py(33):         l += self.n
+s042806575.py(34):         r += self.n
+s042806575.py(35):         while l < r:
+s042806575.py(36):             if l % 2:
+s042806575.py(37):                 left_folded = self.func(left_folded, self.data[l])
+s042806575.py(38):                 l += 1
+s042806575.py(39):             if r % 2:
+s042806575.py(42):             l //= 2
+s042806575.py(43):             r //= 2
+s042806575.py(35):         while l < r:
+s042806575.py(36):             if l % 2:
+s042806575.py(37):                 left_folded = self.func(left_folded, self.data[l])
+s042806575.py(38):                 l += 1
+s042806575.py(39):             if r % 2:
+s042806575.py(42):             l //= 2
+s042806575.py(43):             r //= 2
+s042806575.py(35):         while l < r:
+s042806575.py(44):         return self.func(left_folded, right_folded)
+2
+s042806575.py(127):     for _ in range(Q):
+s042806575.py(128):         T, X, V = map(int, input().split())
+s042806575.py(129):         if T == 1:
+s042806575.py(131):         elif T == 2:
+s042806575.py(134):             print(seg.max_right(X-1, lambda a: a < V)+ 1)
+ --- modulename: s042806575, funcname: max_right
+s042806575.py(54):         if l >= self.original_size:
+s042806575.py(56):         l += self.n
+s042806575.py(57):         left_folded = self.e
+s042806575.py(59):             l //= l & -l
+s042806575.py(60):             if not f(self.func(left_folded, self.data[l])):
+ --- modulename: s042806575, funcname: <lambda>
+s042806575.py(134):             print(seg.max_right(X-1, lambda a: a < V)+ 1)
+s042806575.py(67):             left_folded = self.func(left_folded, self.data[l])
+s042806575.py(68):             l += 1
+s042806575.py(69):             if l == l & -l:
+s042806575.py(70):                 break
+s042806575.py(71):         return self.original_size
+6
+s042806575.py(127):     for _ in range(Q):
