@@ -1,0 +1,298 @@
+ --- modulename: s893264735, funcname: <module>
+s893264735.py(1): class LazyPropSegmentTree:
+ --- modulename: s893264735, funcname: LazyPropSegmentTree
+s893264735.py(1): class LazyPropSegmentTree:
+s893264735.py(2):     def __init__(self, lst, op, apply, comp, e, identity):
+s893264735.py(14):     def __getitem__(self, i):
+s893264735.py(17):     def _build(self, lst):
+s893264735.py(24):     def _indices(self, l, r):
+s893264735.py(34):     def _propagate_topdown(self, *indices):
+s893264735.py(46):     def _propagate_bottomup(self, indices):
+s893264735.py(51):     def update(self, l, r, x):
+s893264735.py(75):     def fold(self, l, r):
+s893264735.py(93): N, Q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s893264735.py(94): op = min
+s893264735.py(95): apply = lambda x, f: f
+s893264735.py(96): comp = lambda f, g: g
+s893264735.py(97): e = 2**31 - 1
+s893264735.py(98): identity = None
+s893264735.py(99): A = [e] * N
+s893264735.py(100): lpsg = LazyPropSegmentTree(A, op, apply, comp, e, identity)
+ --- modulename: s893264735, funcname: __init__
+s893264735.py(3):         self.n = len(lst)
+s893264735.py(4):         self.depth = (self.n - 1).bit_length()
+s893264735.py(5):         self.N = 1 << self.depth
+s893264735.py(6):         self.op = op # binary operation of elements
+s893264735.py(7):         self.apply = apply # function to apply to an element
+s893264735.py(8):         self.comp = comp # composition of functions
+s893264735.py(9):         self.e = e # identity element w.r.t. op
+s893264735.py(10):         self.identity = identity # identity element w.r.t. comp
+s893264735.py(11):         self.v = self._build(lst) # self.v is set to be 1-indexed for simplicity
+ --- modulename: s893264735, funcname: _build
+s893264735.py(20):         tree = [self.e] * (self.N) + lst + [self.e] * (self.N - self.n)
+s893264735.py(21):         for i in range(self.N - 1, 0, -1): tree[i] = self.op(tree[i << 1], tree[(i << 1)|1])
+s893264735.py(21):         for i in range(self.N - 1, 0, -1): tree[i] = self.op(tree[i << 1], tree[(i << 1)|1])
+s893264735.py(21):         for i in range(self.N - 1, 0, -1): tree[i] = self.op(tree[i << 1], tree[(i << 1)|1])
+s893264735.py(21):         for i in range(self.N - 1, 0, -1): tree[i] = self.op(tree[i << 1], tree[(i << 1)|1])
+s893264735.py(22):         return tree
+s893264735.py(12):         self.lazy = [self.identity] * (2 * self.N)
+s893264735.py(101): ans = []
+s893264735.py(102): for _ in range(Q):
+s893264735.py(103):     t, *arg, = map(int, input().split())
+s893264735.py(104):     if t == 0:
+s893264735.py(105):         s, t, x = arg
+s893264735.py(106):         lpsg.update(s, t+1, x)
+ --- modulename: s893264735, funcname: update
+s893264735.py(52):         *indices, = self._indices(l, r)
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(25):         left = l + self.N; right = r + self.N
+s893264735.py(26):         left //= (left & (-left)); right //= (right & (-right))
+s893264735.py(27):         left >>= 1; right >>= 1
+s893264735.py(28):         while left != right:
+s893264735.py(29):             if left > right: yield left; left >>= 1
+s893264735.py(30):             else: yield right; right >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(28):         while left != right:
+s893264735.py(31):         while left > 0: yield left; left >>= 1
+s893264735.py(53):         self._propagate_topdown(*indices)
+ --- modulename: s893264735, funcname: _propagate_topdown
+s893264735.py(35):         identity, v, lazy, apply, comp = self.identity, self.v, self.lazy, self.apply, self.comp
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(55):         N, v, lazy, apply, comp = self.N, self.v, self.lazy, self.apply, self.comp
+s893264735.py(58):         left = l + N; right = r + N
+s893264735.py(59):         if left & 1: v[left] = apply(v[left], x); left += 1
+s893264735.py(60):         if right & 1: right -= 1; v[right] = apply(v[right], x)
+s893264735.py(61):         left >>= 1; right >>= 1
+s893264735.py(62):         while left < right:
+s893264735.py(63):             if left & 1:
+s893264735.py(67):             if right & 1:
+s893264735.py(68):                 right -= 1
+s893264735.py(69):                 lazy[right] = comp(lazy[right], x)
+ --- modulename: s893264735, funcname: <lambda>
+s893264735.py(96): comp = lambda f, g: g
+s893264735.py(70):                 v[right] = apply(v[right], x)
+ --- modulename: s893264735, funcname: <lambda>
+s893264735.py(95): apply = lambda x, f: f
+s893264735.py(71):             left >>= 1; right >>= 1
+s893264735.py(62):         while left < right:
+s893264735.py(72):         self._propagate_bottomup(indices)
+ --- modulename: s893264735, funcname: _propagate_bottomup
+s893264735.py(47):         v, op = self.v, self.op
+s893264735.py(48):         for k in indices: v[k] = op(v[k << 1], v[(k << 1)|1])
+s893264735.py(48):         for k in indices: v[k] = op(v[k << 1], v[(k << 1)|1])
+s893264735.py(102): for _ in range(Q):
+s893264735.py(103):     t, *arg, = map(int, input().split())
+s893264735.py(104):     if t == 0:
+s893264735.py(105):         s, t, x = arg
+s893264735.py(106):         lpsg.update(s, t+1, x)
+ --- modulename: s893264735, funcname: update
+s893264735.py(52):         *indices, = self._indices(l, r)
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(25):         left = l + self.N; right = r + self.N
+s893264735.py(26):         left //= (left & (-left)); right //= (right & (-right))
+s893264735.py(27):         left >>= 1; right >>= 1
+s893264735.py(28):         while left != right:
+s893264735.py(29):             if left > right: yield left; left >>= 1
+s893264735.py(30):             else: yield right; right >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(28):         while left != right:
+s893264735.py(29):             if left > right: yield left; left >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(28):         while left != right:
+s893264735.py(31):         while left > 0: yield left; left >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(31):         while left > 0: yield left; left >>= 1
+s893264735.py(53):         self._propagate_topdown(*indices)
+ --- modulename: s893264735, funcname: _propagate_topdown
+s893264735.py(35):         identity, v, lazy, apply, comp = self.identity, self.v, self.lazy, self.apply, self.comp
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(39):             lazy[k << 1] = comp(lazy[k << 1], x)
+ --- modulename: s893264735, funcname: <lambda>
+s893264735.py(96): comp = lambda f, g: g
+s893264735.py(40):             lazy[(k << 1)|1] = comp(lazy[(k << 1)|1], x)
+ --- modulename: s893264735, funcname: <lambda>
+s893264735.py(96): comp = lambda f, g: g
+s893264735.py(41):             v[k << 1] = apply(v[k << 1], x)
+ --- modulename: s893264735, funcname: <lambda>
+s893264735.py(95): apply = lambda x, f: f
+s893264735.py(42):             v[(k << 1)|1] = apply(v[(k << 1)|1], x)
+ --- modulename: s893264735, funcname: <lambda>
+s893264735.py(95): apply = lambda x, f: f
+s893264735.py(43):             lazy[k] = identity # propagated
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(55):         N, v, lazy, apply, comp = self.N, self.v, self.lazy, self.apply, self.comp
+s893264735.py(58):         left = l + N; right = r + N
+s893264735.py(59):         if left & 1: v[left] = apply(v[left], x); left += 1
+ --- modulename: s893264735, funcname: <lambda>
+s893264735.py(95): apply = lambda x, f: f
+s893264735.py(60):         if right & 1: right -= 1; v[right] = apply(v[right], x)
+ --- modulename: s893264735, funcname: <lambda>
+s893264735.py(95): apply = lambda x, f: f
+s893264735.py(61):         left >>= 1; right >>= 1
+s893264735.py(62):         while left < right:
+s893264735.py(72):         self._propagate_bottomup(indices)
+ --- modulename: s893264735, funcname: _propagate_bottomup
+s893264735.py(47):         v, op = self.v, self.op
+s893264735.py(48):         for k in indices: v[k] = op(v[k << 1], v[(k << 1)|1])
+s893264735.py(48):         for k in indices: v[k] = op(v[k << 1], v[(k << 1)|1])
+s893264735.py(48):         for k in indices: v[k] = op(v[k << 1], v[(k << 1)|1])
+s893264735.py(48):         for k in indices: v[k] = op(v[k << 1], v[(k << 1)|1])
+s893264735.py(102): for _ in range(Q):
+s893264735.py(103):     t, *arg, = map(int, input().split())
+s893264735.py(104):     if t == 0:
+s893264735.py(105):         s, t, x = arg
+s893264735.py(106):         lpsg.update(s, t+1, x)
+ --- modulename: s893264735, funcname: update
+s893264735.py(52):         *indices, = self._indices(l, r)
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(25):         left = l + self.N; right = r + self.N
+s893264735.py(26):         left //= (left & (-left)); right //= (right & (-right))
+s893264735.py(27):         left >>= 1; right >>= 1
+s893264735.py(28):         while left != right:
+s893264735.py(29):             if left > right: yield left; left >>= 1
+s893264735.py(30):             else: yield right; right >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(28):         while left != right:
+s893264735.py(31):         while left > 0: yield left; left >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(31):         while left > 0: yield left; left >>= 1
+s893264735.py(53):         self._propagate_topdown(*indices)
+ --- modulename: s893264735, funcname: _propagate_topdown
+s893264735.py(35):         identity, v, lazy, apply, comp = self.identity, self.v, self.lazy, self.apply, self.comp
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(55):         N, v, lazy, apply, comp = self.N, self.v, self.lazy, self.apply, self.comp
+s893264735.py(58):         left = l + N; right = r + N
+s893264735.py(59):         if left & 1: v[left] = apply(v[left], x); left += 1
+s893264735.py(60):         if right & 1: right -= 1; v[right] = apply(v[right], x)
+ --- modulename: s893264735, funcname: <lambda>
+s893264735.py(95): apply = lambda x, f: f
+s893264735.py(61):         left >>= 1; right >>= 1
+s893264735.py(62):         while left < right:
+s893264735.py(72):         self._propagate_bottomup(indices)
+ --- modulename: s893264735, funcname: _propagate_bottomup
+s893264735.py(47):         v, op = self.v, self.op
+s893264735.py(48):         for k in indices: v[k] = op(v[k << 1], v[(k << 1)|1])
+s893264735.py(48):         for k in indices: v[k] = op(v[k << 1], v[(k << 1)|1])
+s893264735.py(48):         for k in indices: v[k] = op(v[k << 1], v[(k << 1)|1])
+s893264735.py(102): for _ in range(Q):
+s893264735.py(103):     t, *arg, = map(int, input().split())
+s893264735.py(104):     if t == 0:
+s893264735.py(108):         s, t = arg
+s893264735.py(109):         ans.append(lpsg.fold(s, t+1))
+ --- modulename: s893264735, funcname: fold
+s893264735.py(76):         self._propagate_topdown(*self._indices(l, r))
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(25):         left = l + self.N; right = r + self.N
+s893264735.py(26):         left //= (left & (-left)); right //= (right & (-right))
+s893264735.py(27):         left >>= 1; right >>= 1
+s893264735.py(28):         while left != right:
+s893264735.py(29):             if left > right: yield left; left >>= 1
+s893264735.py(30):             else: yield right; right >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(28):         while left != right:
+s893264735.py(29):             if left > right: yield left; left >>= 1
+s893264735.py(30):             else: yield right; right >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(28):         while left != right:
+s893264735.py(31):         while left > 0: yield left; left >>= 1
+ --- modulename: s893264735, funcname: _propagate_topdown
+s893264735.py(35):         identity, v, lazy, apply, comp = self.identity, self.v, self.lazy, self.apply, self.comp
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(78):         e, N, v, op = self.e, self.N, self.v, self.op
+s893264735.py(81):         left = l + N; right = r + N
+s893264735.py(82):         L = R = e
+s893264735.py(83):         while left < right:
+s893264735.py(84):             if left & 1: # self.v[left] is the right child
+s893264735.py(87):             if right & 1: # self.v[right-1] is the left child
+s893264735.py(88):                 right -= 1
+s893264735.py(89):                 R = op(v[right], R)
+s893264735.py(90):             left >>= 1; right >>= 1
+s893264735.py(83):         while left < right:
+s893264735.py(84):             if left & 1: # self.v[left] is the right child
+s893264735.py(87):             if right & 1: # self.v[right-1] is the left child
+s893264735.py(88):                 right -= 1
+s893264735.py(89):                 R = op(v[right], R)
+s893264735.py(90):             left >>= 1; right >>= 1
+s893264735.py(83):         while left < right:
+s893264735.py(91):         return op(L, R)
+s893264735.py(102): for _ in range(Q):
+s893264735.py(103):     t, *arg, = map(int, input().split())
+s893264735.py(104):     if t == 0:
+s893264735.py(108):         s, t = arg
+s893264735.py(109):         ans.append(lpsg.fold(s, t+1))
+ --- modulename: s893264735, funcname: fold
+s893264735.py(76):         self._propagate_topdown(*self._indices(l, r))
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(25):         left = l + self.N; right = r + self.N
+s893264735.py(26):         left //= (left & (-left)); right //= (right & (-right))
+s893264735.py(27):         left >>= 1; right >>= 1
+s893264735.py(28):         while left != right:
+s893264735.py(29):             if left > right: yield left; left >>= 1
+s893264735.py(30):             else: yield right; right >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(28):         while left != right:
+s893264735.py(29):             if left > right: yield left; left >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(28):         while left != right:
+s893264735.py(31):         while left > 0: yield left; left >>= 1
+ --- modulename: s893264735, funcname: _indices
+s893264735.py(31):         while left > 0: yield left; left >>= 1
+ --- modulename: s893264735, funcname: _propagate_topdown
+s893264735.py(35):         identity, v, lazy, apply, comp = self.identity, self.v, self.lazy, self.apply, self.comp
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(37):             x = lazy[k]
+s893264735.py(38):             if x == identity: continue
+s893264735.py(36):         for k in reversed(indices):
+s893264735.py(78):         e, N, v, op = self.e, self.N, self.v, self.op
+s893264735.py(81):         left = l + N; right = r + N
+s893264735.py(82):         L = R = e
+s893264735.py(83):         while left < right:
+s893264735.py(84):             if left & 1: # self.v[left] is the right child
+s893264735.py(85):                 L = op(L, v[left])
+s893264735.py(86):                 left += 1
+s893264735.py(87):             if right & 1: # self.v[right-1] is the left child
+s893264735.py(88):                 right -= 1
+s893264735.py(89):                 R = op(v[right], R)
+s893264735.py(90):             left >>= 1; right >>= 1
+s893264735.py(83):         while left < right:
+s893264735.py(91):         return op(L, R)
+s893264735.py(102): for _ in range(Q):
+s893264735.py(110): print('\n'.join(map(str, ans)))
+1
+2

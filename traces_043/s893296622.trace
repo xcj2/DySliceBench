@@ -1,0 +1,178 @@
+ --- modulename: s893296622, funcname: <module>
+s893296622.py(1): import sys
+s893296622.py(2): read = sys.stdin.buffer.read
+s893296622.py(3): readline = sys.stdin.buffer.readline
+s893296622.py(4): readlines = sys.stdin.buffer.readlines
+s893296622.py(7): def solve(N, C, AB):
+s893296622.py(75): N = int(readline())
+s893296622.py(76): C = (0,) + tuple(map(int, readline().split()))
+s893296622.py(77): AB = tuple(map(int, read().split()))
+s893296622.py(78): answer = solve(N, C, AB)
+ --- modulename: s893296622, funcname: solve
+s893296622.py(8):     def edges_to_array(A, B, N, M):
+s893296622.py(23):     def EulerTour(head, nxt, to, root=1):
+s893296622.py(53):     head, nxt, to = edges_to_array(AB[::2], AB[1::2], N, N - 1)
+ --- modulename: s893296622, funcname: edges_to_array
+s893296622.py(9):         head = [-1] * (N + 1)
+s893296622.py(10):         nxt = [0] * (M + M)
+s893296622.py(11):         to = [0] * (M + M)
+s893296622.py(12):         for i in range(M):
+s893296622.py(13):             a = A[i]
+s893296622.py(14):             b = B[i]
+s893296622.py(15):             nxt[i << 1] = head[a]
+s893296622.py(16):             to[i << 1] = b
+s893296622.py(17):             head[a] = i << 1
+s893296622.py(18):             nxt[i << 1 | 1] = head[b]
+s893296622.py(19):             to[i << 1 | 1] = a
+s893296622.py(20):             head[b] = i << 1 | 1
+s893296622.py(12):         for i in range(M):
+s893296622.py(13):             a = A[i]
+s893296622.py(14):             b = B[i]
+s893296622.py(15):             nxt[i << 1] = head[a]
+s893296622.py(16):             to[i << 1] = b
+s893296622.py(17):             head[a] = i << 1
+s893296622.py(18):             nxt[i << 1 | 1] = head[b]
+s893296622.py(19):             to[i << 1 | 1] = a
+s893296622.py(20):             head[b] = i << 1 | 1
+s893296622.py(12):         for i in range(M):
+s893296622.py(21):         return head, nxt, to
+s893296622.py(54):     tour, ind_L, ind_R, parent = EulerTour(head, nxt, to)
+ --- modulename: s893296622, funcname: EulerTour
+s893296622.py(24):         N = len(head) - 1
+s893296622.py(25):         parent = [0] * (N + 1)
+s893296622.py(26):         ind_L = [0] * (N + 1)
+s893296622.py(27):         ind_R = [0] * (N + 1)
+s893296622.py(28):         i = -1
+s893296622.py(29):         tour = []
+s893296622.py(30):         stack = [-root, root]
+s893296622.py(31):         stack[0] = -root
+s893296622.py(32):         stack[1] = root
+s893296622.py(33):         while stack:
+s893296622.py(34):             v = stack.pop()
+s893296622.py(35):             tour.append(v)
+s893296622.py(36):             i += 1
+s893296622.py(37):             if v > 0:
+s893296622.py(38):                 ind_L[v] = i
+s893296622.py(39):                 p = parent[v]
+s893296622.py(40):                 k = head[v]
+s893296622.py(41):                 while k != -1:
+s893296622.py(42):                     w = to[k]
+s893296622.py(43):                     if w == p:
+s893296622.py(46):                     parent[w] = v
+s893296622.py(47):                     stack.append(-w)
+s893296622.py(48):                     stack.append(w)
+s893296622.py(49):                     k = nxt[k]
+s893296622.py(41):                 while k != -1:
+s893296622.py(33):         while stack:
+s893296622.py(34):             v = stack.pop()
+s893296622.py(35):             tour.append(v)
+s893296622.py(36):             i += 1
+s893296622.py(37):             if v > 0:
+s893296622.py(38):                 ind_L[v] = i
+s893296622.py(39):                 p = parent[v]
+s893296622.py(40):                 k = head[v]
+s893296622.py(41):                 while k != -1:
+s893296622.py(42):                     w = to[k]
+s893296622.py(43):                     if w == p:
+s893296622.py(46):                     parent[w] = v
+s893296622.py(47):                     stack.append(-w)
+s893296622.py(48):                     stack.append(w)
+s893296622.py(49):                     k = nxt[k]
+s893296622.py(41):                 while k != -1:
+s893296622.py(42):                     w = to[k]
+s893296622.py(43):                     if w == p:
+s893296622.py(44):                         k = nxt[k]
+s893296622.py(45):                         continue
+s893296622.py(41):                 while k != -1:
+s893296622.py(33):         while stack:
+s893296622.py(34):             v = stack.pop()
+s893296622.py(35):             tour.append(v)
+s893296622.py(36):             i += 1
+s893296622.py(37):             if v > 0:
+s893296622.py(38):                 ind_L[v] = i
+s893296622.py(39):                 p = parent[v]
+s893296622.py(40):                 k = head[v]
+s893296622.py(41):                 while k != -1:
+s893296622.py(42):                     w = to[k]
+s893296622.py(43):                     if w == p:
+s893296622.py(44):                         k = nxt[k]
+s893296622.py(45):                         continue
+s893296622.py(41):                 while k != -1:
+s893296622.py(33):         while stack:
+s893296622.py(34):             v = stack.pop()
+s893296622.py(35):             tour.append(v)
+s893296622.py(36):             i += 1
+s893296622.py(37):             if v > 0:
+s893296622.py(51):                 ind_R[-v] = i
+s893296622.py(33):         while stack:
+s893296622.py(34):             v = stack.pop()
+s893296622.py(35):             tour.append(v)
+s893296622.py(36):             i += 1
+s893296622.py(37):             if v > 0:
+s893296622.py(51):                 ind_R[-v] = i
+s893296622.py(33):         while stack:
+s893296622.py(34):             v = stack.pop()
+s893296622.py(35):             tour.append(v)
+s893296622.py(36):             i += 1
+s893296622.py(37):             if v > 0:
+s893296622.py(51):                 ind_R[-v] = i
+s893296622.py(33):         while stack:
+s893296622.py(52):         return tour, ind_L, ind_R, parent
+s893296622.py(55):     removed = [0] * (N + 1)
+s893296622.py(56):     answer = [N * (N + 1) // 2] * (N + 1)
+s893296622.py(57):     memo = [0] * (N + 1)
+s893296622.py(58):     for v in tour:
+s893296622.py(59):         if v > 0:
+s893296622.py(60):             memo[v] = removed[C[parent[v]]]
+s893296622.py(58):     for v in tour:
+s893296622.py(59):         if v > 0:
+s893296622.py(60):             memo[v] = removed[C[parent[v]]]
+s893296622.py(58):     for v in tour:
+s893296622.py(59):         if v > 0:
+s893296622.py(60):             memo[v] = removed[C[parent[v]]]
+s893296622.py(58):     for v in tour:
+s893296622.py(59):         if v > 0:
+s893296622.py(62):             v = -v
+s893296622.py(63):             removed[C[v]] += 1
+s893296622.py(64):             p = parent[v]
+s893296622.py(65):             x = (ind_R[v] - ind_L[v]) // 2 + 1  # subtree size
+s893296622.py(66):             x -= removed[C[p]] - memo[v]
+s893296622.py(67):             answer[C[p]] -= x * (x + 1) // 2
+s893296622.py(68):             removed[C[p]] += x
+s893296622.py(58):     for v in tour:
+s893296622.py(59):         if v > 0:
+s893296622.py(62):             v = -v
+s893296622.py(63):             removed[C[v]] += 1
+s893296622.py(64):             p = parent[v]
+s893296622.py(65):             x = (ind_R[v] - ind_L[v]) // 2 + 1  # subtree size
+s893296622.py(66):             x -= removed[C[p]] - memo[v]
+s893296622.py(67):             answer[C[p]] -= x * (x + 1) // 2
+s893296622.py(68):             removed[C[p]] += x
+s893296622.py(58):     for v in tour:
+s893296622.py(59):         if v > 0:
+s893296622.py(62):             v = -v
+s893296622.py(63):             removed[C[v]] += 1
+s893296622.py(64):             p = parent[v]
+s893296622.py(65):             x = (ind_R[v] - ind_L[v]) // 2 + 1  # subtree size
+s893296622.py(66):             x -= removed[C[p]] - memo[v]
+s893296622.py(67):             answer[C[p]] -= x * (x + 1) // 2
+s893296622.py(68):             removed[C[p]] += x
+s893296622.py(58):     for v in tour:
+s893296622.py(69):     for i, x in enumerate(removed):
+s893296622.py(70):         x = N - x
+s893296622.py(71):         answer[i] -= x * (x + 1) // 2
+s893296622.py(69):     for i, x in enumerate(removed):
+s893296622.py(70):         x = N - x
+s893296622.py(71):         answer[i] -= x * (x + 1) // 2
+s893296622.py(69):     for i, x in enumerate(removed):
+s893296622.py(70):         x = N - x
+s893296622.py(71):         answer[i] -= x * (x + 1) // 2
+s893296622.py(69):     for i, x in enumerate(removed):
+s893296622.py(70):         x = N - x
+s893296622.py(71):         answer[i] -= x * (x + 1) // 2
+s893296622.py(69):     for i, x in enumerate(removed):
+s893296622.py(72):     return answer
+s893296622.py(79): print('\n'.join(map(str, answer[1:])))
+5
+4
+0
