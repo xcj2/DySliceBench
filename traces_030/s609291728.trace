@@ -1,0 +1,113 @@
+ --- modulename: s609291728, funcname: <module>
+s609291728.py(1): def hightMapGenerator(text):
+s609291728.py(14): def pondChecker(text, height_map):
+s609291728.py(35): def squareCalc(text, pond_height_map):
+s609291728.py(47): def slicedPondsGenerator(text, height_map, all_ponds):
+s609291728.py(59): text = input()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s609291728.py(61): if '/' not in text:
+s609291728.py(64): elif '\\' not in text:
+s609291728.py(68):     height_map = hightMapGenerator(text)
+ --- modulename: s609291728, funcname: hightMapGenerator
+s609291728.py(2):     height_map = []
+s609291728.py(3):     current_height = 0
+s609291728.py(4):     for letter in text:
+s609291728.py(5):         if letter == '\\':
+s609291728.py(6):             current_height -= 1
+s609291728.py(11):         height_map.append(current_height)
+s609291728.py(4):     for letter in text:
+s609291728.py(5):         if letter == '\\':
+s609291728.py(6):             current_height -= 1
+s609291728.py(11):         height_map.append(current_height)
+s609291728.py(4):     for letter in text:
+s609291728.py(5):         if letter == '\\':
+s609291728.py(7):         elif letter == '/':
+s609291728.py(8):             current_height += 1
+s609291728.py(11):         height_map.append(current_height)
+s609291728.py(4):     for letter in text:
+s609291728.py(5):         if letter == '\\':
+s609291728.py(7):         elif letter == '/':
+s609291728.py(8):             current_height += 1
+s609291728.py(11):         height_map.append(current_height)
+s609291728.py(4):     for letter in text:
+s609291728.py(12):     return height_map
+s609291728.py(70):     all_ponds = pondChecker(text, height_map)
+ --- modulename: s609291728, funcname: pondChecker
+s609291728.py(16):     all_ponds = []
+s609291728.py(17):     pond = []
+s609291728.py(18):     for n, letter in enumerate(text):
+s609291728.py(19):         if pond == []: # 池オブジェクトが空の場合
+s609291728.py(20):             if letter == '\\': # かつ、文字列がa の場合
+s609291728.py(21):                 max_height = max(height_map[n:])
+s609291728.py(22):                 if height_map[n] + 1 <= max_height: # 現在地よりも、高度の高い位置があるならば
+s609291728.py(23):                     start_index = n
+s609291728.py(24):                     pond.append(start_index) # スタート位置としてインデックスする
+s609291728.py(18):     for n, letter in enumerate(text):
+s609291728.py(19):         if pond == []: # 池オブジェクトが空の場合
+s609291728.py(28):             if height_map[start_index] + 1 == height_map[n]: # スタートインデックスと同じ高さに来たら終わりをインデックスして、初期化
+s609291728.py(18):     for n, letter in enumerate(text):
+s609291728.py(19):         if pond == []: # 池オブジェクトが空の場合
+s609291728.py(28):             if height_map[start_index] + 1 == height_map[n]: # スタートインデックスと同じ高さに来たら終わりをインデックスして、初期化
+s609291728.py(18):     for n, letter in enumerate(text):
+s609291728.py(19):         if pond == []: # 池オブジェクトが空の場合
+s609291728.py(28):             if height_map[start_index] + 1 == height_map[n]: # スタートインデックスと同じ高さに来たら終わりをインデックスして、初期化
+s609291728.py(29):                 end_index = n
+s609291728.py(30):                 pond.append(end_index)
+s609291728.py(31):                 all_ponds.append(pond)
+s609291728.py(32):                 pond = []
+s609291728.py(18):     for n, letter in enumerate(text):
+s609291728.py(33):     return all_ponds
+s609291728.py(71):     if all_ponds == []:
+s609291728.py(76):         sliced_ponds_str, sliced_height_map = slicedPondsGenerator(text, height_map, all_ponds)
+ --- modulename: s609291728, funcname: slicedPondsGenerator
+s609291728.py(48):     sliced_ponds_str = []
+s609291728.py(49):     sliced_height_map = []
+s609291728.py(50):     for pond in all_ponds:
+s609291728.py(51):         start = pond[0]
+s609291728.py(52):         end = pond[1] + 1
+s609291728.py(53):         sliced_pond_str = text[start:end]
+s609291728.py(54):         sliced_height = height_map[start:end]
+s609291728.py(55):         sliced_ponds_str.append(sliced_pond_str)
+s609291728.py(56):         sliced_height_map.append(sliced_height)
+s609291728.py(50):     for pond in all_ponds:
+s609291728.py(57):     return sliced_ponds_str, sliced_height_map
+s609291728.py(79):         squares = []
+s609291728.py(80):         for n, pond_str in enumerate(sliced_ponds_str):
+s609291728.py(81):             square = squareCalc(pond_str, sliced_height_map[n])
+ --- modulename: s609291728, funcname: squareCalc
+s609291728.py(36):     square = 0
+s609291728.py(37):     current_height = max(pond_height_map)
+s609291728.py(38):     for n, letter in enumerate(text):
+s609291728.py(39):         if letter == '\\':
+s609291728.py(40):             square += current_height - pond_height_map[n] - 0.5
+s609291728.py(38):     for n, letter in enumerate(text):
+s609291728.py(39):         if letter == '\\':
+s609291728.py(40):             square += current_height - pond_height_map[n] - 0.5
+s609291728.py(38):     for n, letter in enumerate(text):
+s609291728.py(39):         if letter == '\\':
+s609291728.py(41):         elif letter == '/':
+s609291728.py(42):             square += current_height - pond_height_map[n] + 0.5
+s609291728.py(38):     for n, letter in enumerate(text):
+s609291728.py(39):         if letter == '\\':
+s609291728.py(41):         elif letter == '/':
+s609291728.py(42):             square += current_height - pond_height_map[n] + 0.5
+s609291728.py(38):     for n, letter in enumerate(text):
+s609291728.py(45):     return int(square)
+s609291728.py(82):             squares.append(square)
+s609291728.py(80):         for n, pond_str in enumerate(sliced_ponds_str):
+s609291728.py(84):         size_of_ponds = sum(squares)
+s609291728.py(85):         num_of_ponds = len(squares)
+s609291728.py(86):         output = ' '.join([str(n) for n in squares])
+ --- modulename: s609291728, funcname: <listcomp>
+s609291728.py(86):         output = ' '.join([str(n) for n in squares])
+s609291728.py(86):         output = ' '.join([str(n) for n in squares])
+s609291728.py(87):         print(size_of_ponds)
+4
+s609291728.py(88):         print(num_of_ponds,output)
+1 4
