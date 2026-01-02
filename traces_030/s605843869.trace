@@ -1,0 +1,746 @@
+ --- modulename: s605843869, funcname: <module>
+s605843869.py(2): from __future__ import division, print_function
+s605843869.py(4): import os
+s605843869.py(5): import sys
+s605843869.py(6): from io import BytesIO, IOBase
+s605843869.py(8): if sys.version_info[0] < 3:
+s605843869.py(13): def main():
+s605843869.py(33): BUFSIZE = 8192
+s605843869.py(36): class FastIO(IOBase):
+ --- modulename: s605843869, funcname: FastIO
+s605843869.py(36): class FastIO(IOBase):
+s605843869.py(37):     newlines = 0
+s605843869.py(39):     def __init__(self, file):
+s605843869.py(45):     def read(self):
+s605843869.py(55):     def readline(self):
+s605843869.py(64):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s605843869.py(70): class IOWrapper(IOBase):
+ --- modulename: s605843869, funcname: IOWrapper
+s605843869.py(70): class IOWrapper(IOBase):
+s605843869.py(71):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s605843869.py(80): def print(*args, **kwargs):
+s605843869.py(94): if sys.version_info[0] < 3:
+s605843869.py(97):     sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s605843869, funcname: __init__
+s605843869.py(72):         self.buffer = FastIO(file)
+ --- modulename: s605843869, funcname: __init__
+s605843869.py(40):         self._fd = file.fileno()
+s605843869.py(41):         self.buffer = BytesIO()
+s605843869.py(42):         self.writable = "x" in file.mode or "r" not in file.mode
+s605843869.py(43):         self.write = self.buffer.write if self.writable else None
+s605843869.py(73):         self.flush = self.buffer.flush
+s605843869.py(74):         self.writable = self.buffer.writable
+s605843869.py(75):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s605843869.py(76):         self.read = lambda: self.buffer.read().decode("ascii")
+s605843869.py(77):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s605843869, funcname: __init__
+s605843869.py(72):         self.buffer = FastIO(file)
+ --- modulename: s605843869, funcname: __init__
+s605843869.py(40):         self._fd = file.fileno()
+s605843869.py(41):         self.buffer = BytesIO()
+s605843869.py(42):         self.writable = "x" in file.mode or "r" not in file.mode
+s605843869.py(43):         self.write = self.buffer.write if self.writable else None
+s605843869.py(73):         self.flush = self.buffer.flush
+s605843869.py(74):         self.writable = self.buffer.writable
+s605843869.py(75):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s605843869.py(76):         self.read = lambda: self.buffer.read().decode("ascii")
+s605843869.py(77):         self.readline = lambda: self.buffer.readline().decode("ascii")
+s605843869.py(99): input = lambda: sys.stdin.readline().rstrip("\r\n")
+s605843869.py(103): if __name__ == "__main__":
+s605843869.py(104):     main()
+ --- modulename: s605843869, funcname: main
+s605843869.py(14):     k = int(input().strip())
+ --- modulename: s605843869, funcname: <lambda>
+s605843869.py(99): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s605843869, funcname: <lambda>
+s605843869.py(77):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s605843869, funcname: readline
+s605843869.py(56):         while self.newlines == 0:
+s605843869.py(57):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s605843869.py(58):             self.newlines = b.count(b"\n") + (not b)
+s605843869.py(59):             ptr = self.buffer.tell()
+s605843869.py(60):             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s605843869.py(56):         while self.newlines == 0:
+s605843869.py(61):         self.newlines -= 1
+s605843869.py(62):         return self.buffer.readline()
+s605843869.py(16):     def lunlun(step=9, path=0):
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(21):         prev = (path // 10 ** (step + 1)) % 10
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(20):             return
+s605843869.py(22):         for i in range(max(prev - 1, 0), min(prev + 1 if path else 9, 9) + 1):
+s605843869.py(23):             for x in lunlun(step - 1, path + i * 10 ** step):
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(17):         if step < 0:
+s605843869.py(18):             if path > 0:
+s605843869.py(19):                 yield path
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(24):                 yield x
+s605843869.py(27):         pass
+s605843869.py(26):     for _, x in zip(range(k), lunlun()):
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+ --- modulename: s605843869, funcname: lunlun
+s605843869.py(28):     print(x)
+ --- modulename: s605843869, funcname: print
+s605843869.py(82):     sep, file = kwargs.pop("sep", " "), kwargs.pop("file", sys.stdout)
+s605843869.py(83):     at_start = True
+s605843869.py(84):     for x in args:
+s605843869.py(85):         if not at_start:
+s605843869.py(87):         file.write(str(x))
+ --- modulename: s605843869, funcname: <lambda>
+s605843869.py(75):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+23s605843869.py(88):         at_start = False
+s605843869.py(84):     for x in args:
+s605843869.py(89):     file.write(kwargs.pop("end", "\n"))
+ --- modulename: s605843869, funcname: <lambda>
+s605843869.py(75):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
+s605843869.py(90):     if kwargs.pop("flush", False):
