@@ -1,0 +1,247 @@
+ --- modulename: s678311476, funcname: <module>
+s678311476.py(1): import sys
+s678311476.py(3): sys.setrecursionlimit(10 ** 5 + 5)
+s678311476.py(8): def prepare(n, MOD):
+s678311476.py(26): def nhr(factorials, invs, n, r, MOD):
+s678311476.py(30): def dfs0(links):
+s678311476.py(39): def dfs1(links, st_count_fwd, st_count_bwd, st_pattern_fwd, st_pattern_bwd):
+s678311476.py(69): def dfs2(links, st_count_fwd, st_count_bwd, st_pattern_fwd, st_pattern_bwd, ans):
+s678311476.py(96): n, *ab = map(int, sys.stdin.buffer.read().split())
+s678311476.py(97): links = [set() for _ in range(n)]
+ --- modulename: s678311476, funcname: <listcomp>
+s678311476.py(97): links = [set() for _ in range(n)]
+s678311476.py(97): links = [set() for _ in range(n)]
+s678311476.py(97): links = [set() for _ in range(n)]
+s678311476.py(97): links = [set() for _ in range(n)]
+s678311476.py(98): for a, b in zip(ab[0::2], ab[1::2]):
+s678311476.py(99):     a -= 1
+s678311476.py(100):     b -= 1
+s678311476.py(101):     links[a].add(b)
+s678311476.py(102):     links[b].add(a)
+s678311476.py(98): for a, b in zip(ab[0::2], ab[1::2]):
+s678311476.py(99):     a -= 1
+s678311476.py(100):     b -= 1
+s678311476.py(101):     links[a].add(b)
+s678311476.py(102):     links[b].add(a)
+s678311476.py(98): for a, b in zip(ab[0::2], ab[1::2]):
+s678311476.py(103): MOD = 10 ** 9 + 7
+s678311476.py(104): factorials, invs = prepare(n, MOD)
+ --- modulename: s678311476, funcname: prepare
+s678311476.py(9):     f = 1
+s678311476.py(10):     factorials = [1]  # 0!の分
+s678311476.py(11):     for m in range(1, n + 1):
+s678311476.py(12):         f *= m
+s678311476.py(13):         f %= MOD
+s678311476.py(14):         factorials.append(f)
+s678311476.py(11):     for m in range(1, n + 1):
+s678311476.py(12):         f *= m
+s678311476.py(13):         f %= MOD
+s678311476.py(14):         factorials.append(f)
+s678311476.py(11):     for m in range(1, n + 1):
+s678311476.py(12):         f *= m
+s678311476.py(13):         f %= MOD
+s678311476.py(14):         factorials.append(f)
+s678311476.py(11):     for m in range(1, n + 1):
+s678311476.py(15):     inv = pow(f, MOD - 2, MOD)
+s678311476.py(16):     invs = [1] * (n + 1)
+s678311476.py(17):     invs[n] = inv
+s678311476.py(18):     for m in range(n, 1, -1):
+s678311476.py(19):         inv *= m
+s678311476.py(20):         inv %= MOD
+s678311476.py(21):         invs[m - 1] = inv
+s678311476.py(18):     for m in range(n, 1, -1):
+s678311476.py(19):         inv *= m
+s678311476.py(20):         inv %= MOD
+s678311476.py(21):         invs[m - 1] = inv
+s678311476.py(18):     for m in range(n, 1, -1):
+s678311476.py(23):     return factorials, invs
+s678311476.py(105): st_count_fwd = [[] for _ in range(n)]
+ --- modulename: s678311476, funcname: <listcomp>
+s678311476.py(105): st_count_fwd = [[] for _ in range(n)]
+s678311476.py(105): st_count_fwd = [[] for _ in range(n)]
+s678311476.py(105): st_count_fwd = [[] for _ in range(n)]
+s678311476.py(105): st_count_fwd = [[] for _ in range(n)]
+s678311476.py(106): st_count_bwd = [[] for _ in range(n)]
+ --- modulename: s678311476, funcname: <listcomp>
+s678311476.py(106): st_count_bwd = [[] for _ in range(n)]
+s678311476.py(106): st_count_bwd = [[] for _ in range(n)]
+s678311476.py(106): st_count_bwd = [[] for _ in range(n)]
+s678311476.py(106): st_count_bwd = [[] for _ in range(n)]
+s678311476.py(107): st_pattern_fwd = [[] for _ in range(n)]
+ --- modulename: s678311476, funcname: <listcomp>
+s678311476.py(107): st_pattern_fwd = [[] for _ in range(n)]
+s678311476.py(107): st_pattern_fwd = [[] for _ in range(n)]
+s678311476.py(107): st_pattern_fwd = [[] for _ in range(n)]
+s678311476.py(107): st_pattern_fwd = [[] for _ in range(n)]
+s678311476.py(108): st_pattern_bwd = [[] for _ in range(n)]
+ --- modulename: s678311476, funcname: <listcomp>
+s678311476.py(108): st_pattern_bwd = [[] for _ in range(n)]
+s678311476.py(108): st_pattern_bwd = [[] for _ in range(n)]
+s678311476.py(108): st_pattern_bwd = [[] for _ in range(n)]
+s678311476.py(108): st_pattern_bwd = [[] for _ in range(n)]
+s678311476.py(109): ans = [0] * n
+s678311476.py(111): dfs0(links)
+ --- modulename: s678311476, funcname: dfs0
+s678311476.py(31):     q = [(0, -1)]
+s678311476.py(32):     while q:
+s678311476.py(33):         v, p = q.pop()
+s678311476.py(34):         links[v].discard(p)
+s678311476.py(35):         links[v] = list(links[v])
+s678311476.py(36):         q.extend((u, v) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(36):         q.extend((u, v) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(36):         q.extend((u, v) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(36):         q.extend((u, v) for u in links[v])
+s678311476.py(32):     while q:
+s678311476.py(33):         v, p = q.pop()
+s678311476.py(34):         links[v].discard(p)
+s678311476.py(35):         links[v] = list(links[v])
+s678311476.py(36):         q.extend((u, v) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(36):         q.extend((u, v) for u in links[v])
+s678311476.py(32):     while q:
+s678311476.py(33):         v, p = q.pop()
+s678311476.py(34):         links[v].discard(p)
+s678311476.py(35):         links[v] = list(links[v])
+s678311476.py(36):         q.extend((u, v) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(36):         q.extend((u, v) for u in links[v])
+s678311476.py(32):     while q:
+s678311476.py(112): dfs1(links, st_count_fwd, st_count_bwd, st_pattern_fwd, st_pattern_bwd)
+ --- modulename: s678311476, funcname: dfs1
+s678311476.py(40):     q = [(0, -1, 0)]
+s678311476.py(41):     while q:
+s678311476.py(42):         v, p, o = q.pop()
+s678311476.py(43):         if o == 0:
+s678311476.py(45):             q.append((v, p, 1))
+s678311476.py(46):             q.extend((u, v, 0) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(46):             q.extend((u, v, 0) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(46):             q.extend((u, v, 0) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(46):             q.extend((u, v, 0) for u in links[v])
+s678311476.py(41):     while q:
+s678311476.py(42):         v, p, o = q.pop()
+s678311476.py(43):         if o == 0:
+s678311476.py(45):             q.append((v, p, 1))
+s678311476.py(46):             q.extend((u, v, 0) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(46):             q.extend((u, v, 0) for u in links[v])
+s678311476.py(41):     while q:
+s678311476.py(42):         v, p, o = q.pop()
+s678311476.py(43):         if o == 0:
+s678311476.py(49):             curr_count = [0]
+s678311476.py(50):             curr_pattern = [1]
+s678311476.py(51):             for u in links[v]:
+s678311476.py(56):             st_count_fwd[v] = curr_count
+s678311476.py(57):             st_pattern_fwd[v] = curr_pattern
+s678311476.py(58):             curr_count = [0]
+s678311476.py(59):             curr_pattern = [1]
+s678311476.py(60):             for u in reversed(links[v]):
+s678311476.py(65):             st_count_bwd[v] = curr_count[::-1]
+s678311476.py(66):             st_pattern_bwd[v] = curr_pattern[::-1]
+s678311476.py(41):     while q:
+s678311476.py(42):         v, p, o = q.pop()
+s678311476.py(43):         if o == 0:
+s678311476.py(45):             q.append((v, p, 1))
+s678311476.py(46):             q.extend((u, v, 0) for u in links[v])
+ --- modulename: s678311476, funcname: <genexpr>
+s678311476.py(46):             q.extend((u, v, 0) for u in links[v])
+s678311476.py(41):     while q:
+s678311476.py(42):         v, p, o = q.pop()
+s678311476.py(43):         if o == 0:
+s678311476.py(49):             curr_count = [0]
+s678311476.py(50):             curr_pattern = [1]
+s678311476.py(51):             for u in links[v]:
+s678311476.py(56):             st_count_fwd[v] = curr_count
+s678311476.py(57):             st_pattern_fwd[v] = curr_pattern
+s678311476.py(58):             curr_count = [0]
+s678311476.py(59):             curr_pattern = [1]
+s678311476.py(60):             for u in reversed(links[v]):
+s678311476.py(65):             st_count_bwd[v] = curr_count[::-1]
+s678311476.py(66):             st_pattern_bwd[v] = curr_pattern[::-1]
+s678311476.py(41):     while q:
+s678311476.py(42):         v, p, o = q.pop()
+s678311476.py(43):         if o == 0:
+s678311476.py(49):             curr_count = [0]
+s678311476.py(50):             curr_pattern = [1]
+s678311476.py(51):             for u in links[v]:
+s678311476.py(52):                 stc_u = st_count_fwd[u][-1] + 1
+s678311476.py(53):                 new_pattern = factorials[curr_count[-1] + stc_u] * invs[curr_count[-1]] * invs[stc_u] % MOD
+s678311476.py(54):                 curr_pattern.append(new_pattern * curr_pattern[-1] * st_pattern_fwd[u][-1] % MOD)
+s678311476.py(55):                 curr_count.append(curr_count[-1] + stc_u)
+s678311476.py(51):             for u in links[v]:
+s678311476.py(52):                 stc_u = st_count_fwd[u][-1] + 1
+s678311476.py(53):                 new_pattern = factorials[curr_count[-1] + stc_u] * invs[curr_count[-1]] * invs[stc_u] % MOD
+s678311476.py(54):                 curr_pattern.append(new_pattern * curr_pattern[-1] * st_pattern_fwd[u][-1] % MOD)
+s678311476.py(55):                 curr_count.append(curr_count[-1] + stc_u)
+s678311476.py(51):             for u in links[v]:
+s678311476.py(56):             st_count_fwd[v] = curr_count
+s678311476.py(57):             st_pattern_fwd[v] = curr_pattern
+s678311476.py(58):             curr_count = [0]
+s678311476.py(59):             curr_pattern = [1]
+s678311476.py(60):             for u in reversed(links[v]):
+s678311476.py(61):                 stc_u = st_count_fwd[u][-1] + 1
+s678311476.py(62):                 new_pattern = factorials[curr_count[-1] + stc_u] * invs[curr_count[-1]] * invs[stc_u] % MOD
+s678311476.py(63):                 curr_pattern.append(new_pattern * curr_pattern[-1] * st_pattern_fwd[u][-1] % MOD)
+s678311476.py(64):                 curr_count.append(curr_count[-1] + stc_u)
+s678311476.py(60):             for u in reversed(links[v]):
+s678311476.py(61):                 stc_u = st_count_fwd[u][-1] + 1
+s678311476.py(62):                 new_pattern = factorials[curr_count[-1] + stc_u] * invs[curr_count[-1]] * invs[stc_u] % MOD
+s678311476.py(63):                 curr_pattern.append(new_pattern * curr_pattern[-1] * st_pattern_fwd[u][-1] % MOD)
+s678311476.py(64):                 curr_count.append(curr_count[-1] + stc_u)
+s678311476.py(60):             for u in reversed(links[v]):
+s678311476.py(65):             st_count_bwd[v] = curr_count[::-1]
+s678311476.py(66):             st_pattern_bwd[v] = curr_pattern[::-1]
+s678311476.py(41):     while q:
+s678311476.py(114): dfs2(links, st_count_fwd, st_count_bwd, st_pattern_fwd, st_pattern_bwd, ans)
+ --- modulename: s678311476, funcname: dfs2
+s678311476.py(70):     def sub(v, pc, pp):
+s678311476.py(93):     sub(0, 0, 1)
+ --- modulename: s678311476, funcname: sub
+s678311476.py(72):         if pc == 0:
+s678311476.py(73):             ans[v] = st_pattern_fwd[v][-1]
+s678311476.py(81):         for i, u in enumerate(links[v]):
+s678311476.py(82):             fc = st_count_fwd[v][i]
+s678311476.py(83):             fp = st_pattern_fwd[v][i]
+s678311476.py(84):             bc = st_count_bwd[v][i + 1]
+s678311476.py(85):             bp = st_pattern_bwd[v][i + 1]
+s678311476.py(86):             p1 = factorials[fc + bc] * invs[fc] * invs[bc] % MOD
+s678311476.py(87):             p1 = p1 * fp * bp % MOD
+s678311476.py(88):             p2 = factorials[fc + bc + pc] * invs[fc + bc] * invs[pc] % MOD
+s678311476.py(89):             p2 = p2 * p1 * pp % MOD
+s678311476.py(91):             sub(u, fc + bc + pc + 1, p2)
+ --- modulename: s678311476, funcname: sub
+s678311476.py(72):         if pc == 0:
+s678311476.py(75):             cc = st_count_fwd[v][-1]
+s678311476.py(76):             cp = st_pattern_fwd[v][-1]
+s678311476.py(77):             pattern = factorials[cc + pc] * invs[cc] * invs[pc] % MOD
+s678311476.py(78):             pattern = pattern * cp * pp % MOD
+s678311476.py(79):             ans[v] = pattern
+s678311476.py(81):         for i, u in enumerate(links[v]):
+s678311476.py(81):         for i, u in enumerate(links[v]):
+s678311476.py(82):             fc = st_count_fwd[v][i]
+s678311476.py(83):             fp = st_pattern_fwd[v][i]
+s678311476.py(84):             bc = st_count_bwd[v][i + 1]
+s678311476.py(85):             bp = st_pattern_bwd[v][i + 1]
+s678311476.py(86):             p1 = factorials[fc + bc] * invs[fc] * invs[bc] % MOD
+s678311476.py(87):             p1 = p1 * fp * bp % MOD
+s678311476.py(88):             p2 = factorials[fc + bc + pc] * invs[fc + bc] * invs[pc] % MOD
+s678311476.py(89):             p2 = p2 * p1 * pp % MOD
+s678311476.py(91):             sub(u, fc + bc + pc + 1, p2)
+ --- modulename: s678311476, funcname: sub
+s678311476.py(72):         if pc == 0:
+s678311476.py(75):             cc = st_count_fwd[v][-1]
+s678311476.py(76):             cp = st_pattern_fwd[v][-1]
+s678311476.py(77):             pattern = factorials[cc + pc] * invs[cc] * invs[pc] % MOD
+s678311476.py(78):             pattern = pattern * cp * pp % MOD
+s678311476.py(79):             ans[v] = pattern
+s678311476.py(81):         for i, u in enumerate(links[v]):
+s678311476.py(81):         for i, u in enumerate(links[v]):
+s678311476.py(115): print('\n'.join(map(str, ans)))
+2
+1
+1

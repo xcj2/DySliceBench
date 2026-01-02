@@ -1,0 +1,470 @@
+ --- modulename: s678564551, funcname: <module>
+s678564551.py(2): from __future__ import division, print_function
+s678564551.py(4): import os
+s678564551.py(5): import sys
+s678564551.py(6): from io import BytesIO, IOBase
+s678564551.py(8): if sys.version_info[0] < 3:
+s678564551.py(13): def main():
+s678564551.py(50): BUFSIZE = 8192
+s678564551.py(53): class FastIO(IOBase):
+ --- modulename: s678564551, funcname: FastIO
+s678564551.py(53): class FastIO(IOBase):
+s678564551.py(54):     newlines = 0
+s678564551.py(56):     def __init__(self, file):
+s678564551.py(62):     def read(self):
+s678564551.py(72):     def readline(self):
+s678564551.py(81):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s678564551.py(87): class IOWrapper(IOBase):
+ --- modulename: s678564551, funcname: IOWrapper
+s678564551.py(87): class IOWrapper(IOBase):
+s678564551.py(88):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s678564551.py(97): def print(*args, **kwargs):
+s678564551.py(111): if sys.version_info[0] < 3:
+s678564551.py(114):     sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s678564551, funcname: __init__
+s678564551.py(89):         self.buffer = FastIO(file)
+ --- modulename: s678564551, funcname: __init__
+s678564551.py(57):         self._fd = file.fileno()
+s678564551.py(58):         self.buffer = BytesIO()
+s678564551.py(59):         self.writable = "x" in file.mode or "r" not in file.mode
+s678564551.py(60):         self.write = self.buffer.write if self.writable else None
+s678564551.py(90):         self.flush = self.buffer.flush
+s678564551.py(91):         self.writable = self.buffer.writable
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s678564551.py(93):         self.read = lambda: self.buffer.read().decode("ascii")
+s678564551.py(94):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s678564551, funcname: __init__
+s678564551.py(89):         self.buffer = FastIO(file)
+ --- modulename: s678564551, funcname: __init__
+s678564551.py(57):         self._fd = file.fileno()
+s678564551.py(58):         self.buffer = BytesIO()
+s678564551.py(59):         self.writable = "x" in file.mode or "r" not in file.mode
+s678564551.py(60):         self.write = self.buffer.write if self.writable else None
+s678564551.py(90):         self.flush = self.buffer.flush
+s678564551.py(91):         self.writable = self.buffer.writable
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s678564551.py(93):         self.read = lambda: self.buffer.read().decode("ascii")
+s678564551.py(94):         self.readline = lambda: self.buffer.readline().decode("ascii")
+s678564551.py(116): input = lambda: sys.stdin.readline().rstrip("\r\n")
+s678564551.py(120): if __name__ == "__main__":
+s678564551.py(121):     main()
+ --- modulename: s678564551, funcname: main
+s678564551.py(14):     n, x, y = [int(s) for s in input().strip().split()]
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(116): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(94):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s678564551, funcname: readline
+s678564551.py(73):         while self.newlines == 0:
+s678564551.py(74):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s678564551.py(75):             self.newlines = b.count(b"\n") + (not b)
+s678564551.py(76):             ptr = self.buffer.tell()
+s678564551.py(77):             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s678564551.py(73):         while self.newlines == 0:
+s678564551.py(78):         self.newlines -= 1
+s678564551.py(79):         return self.buffer.readline()
+ --- modulename: s678564551, funcname: <listcomp>
+s678564551.py(14):     n, x, y = [int(s) for s in input().strip().split()]
+s678564551.py(14):     n, x, y = [int(s) for s in input().strip().split()]
+s678564551.py(14):     n, x, y = [int(s) for s in input().strip().split()]
+s678564551.py(14):     n, x, y = [int(s) for s in input().strip().split()]
+s678564551.py(16):     result = [0] * n
+s678564551.py(18):     def bfs(src):
+s678564551.py(42):     for i in range(1, n + 1):
+s678564551.py(43):         bfs(i)
+ --- modulename: s678564551, funcname: bfs
+s678564551.py(19):         seen = {src}
+s678564551.py(20):         q = [src]
+s678564551.py(21):         step = 0
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(31):                     seen.add(u + 1)
+s678564551.py(32):                     q2.append(u + 1)
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(31):                     seen.add(u + 1)
+s678564551.py(32):                     q2.append(u + 1)
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(34):                     seen.add(y)
+s678564551.py(35):                     q2.append(y)
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(31):                     seen.add(u + 1)
+s678564551.py(32):                     q2.append(u + 1)
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(42):     for i in range(1, n + 1):
+s678564551.py(43):         bfs(i)
+ --- modulename: s678564551, funcname: bfs
+s678564551.py(19):         seen = {src}
+s678564551.py(20):         q = [src]
+s678564551.py(21):         step = 0
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(28):                     seen.add(u - 1)
+s678564551.py(29):                     q2.append(u - 1)
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(31):                     seen.add(u + 1)
+s678564551.py(32):                     q2.append(u + 1)
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(34):                     seen.add(y)
+s678564551.py(35):                     q2.append(y)
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(31):                     seen.add(u + 1)
+s678564551.py(32):                     q2.append(u + 1)
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(42):     for i in range(1, n + 1):
+s678564551.py(43):         bfs(i)
+ --- modulename: s678564551, funcname: bfs
+s678564551.py(19):         seen = {src}
+s678564551.py(20):         q = [src]
+s678564551.py(21):         step = 0
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(28):                     seen.add(u - 1)
+s678564551.py(29):                     q2.append(u - 1)
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(31):                     seen.add(u + 1)
+s678564551.py(32):                     q2.append(u + 1)
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(28):                     seen.add(u - 1)
+s678564551.py(29):                     q2.append(u - 1)
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(31):                     seen.add(u + 1)
+s678564551.py(32):                     q2.append(u + 1)
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(42):     for i in range(1, n + 1):
+s678564551.py(43):         bfs(i)
+ --- modulename: s678564551, funcname: bfs
+s678564551.py(19):         seen = {src}
+s678564551.py(20):         q = [src]
+s678564551.py(21):         step = 0
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(28):                     seen.add(u - 1)
+s678564551.py(29):                     q2.append(u - 1)
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(31):                     seen.add(u + 1)
+s678564551.py(32):                     q2.append(u + 1)
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(37):                     seen.add(x)
+s678564551.py(38):                     q2.append(x)
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(26):                     result[step] += 1
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(28):                     seen.add(u - 1)
+s678564551.py(29):                     q2.append(u - 1)
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(42):     for i in range(1, n + 1):
+s678564551.py(43):         bfs(i)
+ --- modulename: s678564551, funcname: bfs
+s678564551.py(19):         seen = {src}
+s678564551.py(20):         q = [src]
+s678564551.py(21):         step = 0
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(28):                     seen.add(u - 1)
+s678564551.py(29):                     q2.append(u - 1)
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(28):                     seen.add(u - 1)
+s678564551.py(29):                     q2.append(u - 1)
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(37):                     seen.add(x)
+s678564551.py(38):                     q2.append(x)
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(28):                     seen.add(u - 1)
+s678564551.py(29):                     q2.append(u - 1)
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(23):             q2 = []
+s678564551.py(24):             for u in q:
+s678564551.py(25):                 if u > src:
+s678564551.py(27):                 if u > 1 and u - 1 not in seen:
+s678564551.py(30):                 if u < n and u + 1 not in seen:
+s678564551.py(33):                 if u == x and y not in seen:
+s678564551.py(36):                 if u == y and x not in seen:
+s678564551.py(24):             for u in q:
+s678564551.py(39):             q = q2
+s678564551.py(40):             step += 1
+s678564551.py(22):         while q:
+s678564551.py(42):     for i in range(1, n + 1):
+s678564551.py(44):     for i in range(1, n):
+s678564551.py(45):         print(result[i])
+ --- modulename: s678564551, funcname: print
+s678564551.py(99):     sep, file = kwargs.pop("sep", " "), kwargs.pop("file", sys.stdout)
+s678564551.py(100):     at_start = True
+s678564551.py(101):     for x in args:
+s678564551.py(102):         if not at_start:
+s678564551.py(104):         file.write(str(x))
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+5s678564551.py(105):         at_start = False
+s678564551.py(101):     for x in args:
+s678564551.py(106):     file.write(kwargs.pop("end", "\n"))
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
+s678564551.py(107):     if kwargs.pop("flush", False):
+s678564551.py(44):     for i in range(1, n):
+s678564551.py(45):         print(result[i])
+ --- modulename: s678564551, funcname: print
+s678564551.py(99):     sep, file = kwargs.pop("sep", " "), kwargs.pop("file", sys.stdout)
+s678564551.py(100):     at_start = True
+s678564551.py(101):     for x in args:
+s678564551.py(102):         if not at_start:
+s678564551.py(104):         file.write(str(x))
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+4s678564551.py(105):         at_start = False
+s678564551.py(101):     for x in args:
+s678564551.py(106):     file.write(kwargs.pop("end", "\n"))
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
+s678564551.py(107):     if kwargs.pop("flush", False):
+s678564551.py(44):     for i in range(1, n):
+s678564551.py(45):         print(result[i])
+ --- modulename: s678564551, funcname: print
+s678564551.py(99):     sep, file = kwargs.pop("sep", " "), kwargs.pop("file", sys.stdout)
+s678564551.py(100):     at_start = True
+s678564551.py(101):     for x in args:
+s678564551.py(102):         if not at_start:
+s678564551.py(104):         file.write(str(x))
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+1s678564551.py(105):         at_start = False
+s678564551.py(101):     for x in args:
+s678564551.py(106):     file.write(kwargs.pop("end", "\n"))
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
+s678564551.py(107):     if kwargs.pop("flush", False):
+s678564551.py(44):     for i in range(1, n):
+s678564551.py(45):         print(result[i])
+ --- modulename: s678564551, funcname: print
+s678564551.py(99):     sep, file = kwargs.pop("sep", " "), kwargs.pop("file", sys.stdout)
+s678564551.py(100):     at_start = True
+s678564551.py(101):     for x in args:
+s678564551.py(102):         if not at_start:
+s678564551.py(104):         file.write(str(x))
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+0s678564551.py(105):         at_start = False
+s678564551.py(101):     for x in args:
+s678564551.py(106):     file.write(kwargs.pop("end", "\n"))
+ --- modulename: s678564551, funcname: <lambda>
+s678564551.py(92):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
+s678564551.py(107):     if kwargs.pop("flush", False):
+s678564551.py(44):     for i in range(1, n):
