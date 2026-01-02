@@ -1,0 +1,225 @@
+ --- modulename: s638369412, funcname: <module>
+s638369412.py(2): import sys
+s638369412.py(3): sys.setrecursionlimit(10**6)
+s638369412.py(4): INF = 10 ** 9 + 1  # sys.maxsize # float("inf")
+s638369412.py(5): MOD = 10 ** 9 + 7
+s638369412.py(8): def debug(*x):
+s638369412.py(14): def set_depth(depth):
+s638369412.py(21): def set_width(width):
+s638369412.py(27): def point_set(table, pos, value, binop):
+s638369412.py(38): def range_reduce(table, left, right, binop, unity):
+s638369412.py(56): def bisect_left(table, left, right, value):
+s638369412.py(92): def full_up(table, binop):
+s638369412.py(99): def main():
+s638369412.py(121): T1 = """
+s638369412.py(130): TEST_T1 = """
+s638369412.py(140): def _test():
+s638369412.py(149): def as_input(s):
+s638369412.py(158): input = sys.stdin.buffer.readline
+s638369412.py(159): read = sys.stdin.buffer.read
+s638369412.py(161): if sys.argv[-1] == "-t":
+s638369412.py(166): main()
+ --- modulename: s638369412, funcname: main
+s638369412.py(100):     N, Q = map(int, input().split())
+s638369412.py(101):     AS = list(map(int, input().split()))
+s638369412.py(102):     set_width(N)
+ --- modulename: s638369412, funcname: set_width
+s638369412.py(23):     WIDTH = width
+s638369412.py(24):     set_depth((width - 1).bit_length() + 1)
+ --- modulename: s638369412, funcname: set_depth
+s638369412.py(16):     DEPTH = depth
+s638369412.py(17):     SEGTREE_SIZE = 1 << DEPTH
+s638369412.py(18):     NONLEAF_SIZE = 1 << (DEPTH - 1)
+s638369412.py(104):     table = [0] * SEGTREE_SIZE
+s638369412.py(105):     table[NONLEAF_SIZE:NONLEAF_SIZE + len(AS)] = AS
+s638369412.py(106):     full_up(table, max)
+ --- modulename: s638369412, funcname: full_up
+s638369412.py(93):     for i in range(NONLEAF_SIZE - 1, 0, -1):
+s638369412.py(94):         table[i] = binop(
+s638369412.py(95):             table[2 * i],
+s638369412.py(96):             table[2 * i + 1])
+s638369412.py(94):         table[i] = binop(
+s638369412.py(93):     for i in range(NONLEAF_SIZE - 1, 0, -1):
+s638369412.py(94):         table[i] = binop(
+s638369412.py(95):             table[2 * i],
+s638369412.py(96):             table[2 * i + 1])
+s638369412.py(94):         table[i] = binop(
+s638369412.py(93):     for i in range(NONLEAF_SIZE - 1, 0, -1):
+s638369412.py(94):         table[i] = binop(
+s638369412.py(95):             table[2 * i],
+s638369412.py(96):             table[2 * i + 1])
+s638369412.py(94):         table[i] = binop(
+s638369412.py(93):     for i in range(NONLEAF_SIZE - 1, 0, -1):
+s638369412.py(94):         table[i] = binop(
+s638369412.py(95):             table[2 * i],
+s638369412.py(96):             table[2 * i + 1])
+s638369412.py(94):         table[i] = binop(
+s638369412.py(93):     for i in range(NONLEAF_SIZE - 1, 0, -1):
+s638369412.py(94):         table[i] = binop(
+s638369412.py(95):             table[2 * i],
+s638369412.py(96):             table[2 * i + 1])
+s638369412.py(94):         table[i] = binop(
+s638369412.py(93):     for i in range(NONLEAF_SIZE - 1, 0, -1):
+s638369412.py(94):         table[i] = binop(
+s638369412.py(95):             table[2 * i],
+s638369412.py(96):             table[2 * i + 1])
+s638369412.py(94):         table[i] = binop(
+s638369412.py(93):     for i in range(NONLEAF_SIZE - 1, 0, -1):
+s638369412.py(94):         table[i] = binop(
+s638369412.py(95):             table[2 * i],
+s638369412.py(96):             table[2 * i + 1])
+s638369412.py(94):         table[i] = binop(
+s638369412.py(93):     for i in range(NONLEAF_SIZE - 1, 0, -1):
+s638369412.py(108):     for _q in range(Q):
+s638369412.py(109):         q, x, y = map(int, input().split())
+s638369412.py(110):         if q == 1:
+s638369412.py(113):         elif q == 2:
+s638369412.py(115):             print(range_reduce(table, x - 1, y, max, -INF))
+ --- modulename: s638369412, funcname: range_reduce
+s638369412.py(39):     ret_left = unity
+s638369412.py(40):     ret_right = unity
+s638369412.py(41):     left += SEGTREE_SIZE // 2
+s638369412.py(42):     right += SEGTREE_SIZE // 2
+s638369412.py(43):     while left < right:
+s638369412.py(44):         if left & 1:
+s638369412.py(47):         if right & 1:
+s638369412.py(48):             right -= 1
+s638369412.py(49):             ret_right = binop(table[right], ret_right)
+s638369412.py(51):         left //= 2
+s638369412.py(52):         right //= 2
+s638369412.py(43):     while left < right:
+s638369412.py(44):         if left & 1:
+s638369412.py(47):         if right & 1:
+s638369412.py(51):         left //= 2
+s638369412.py(52):         right //= 2
+s638369412.py(43):     while left < right:
+s638369412.py(44):         if left & 1:
+s638369412.py(47):         if right & 1:
+s638369412.py(48):             right -= 1
+s638369412.py(49):             ret_right = binop(table[right], ret_right)
+s638369412.py(51):         left //= 2
+s638369412.py(52):         right //= 2
+s638369412.py(43):     while left < right:
+s638369412.py(53):     return binop(ret_left, ret_right)
+3
+s638369412.py(108):     for _q in range(Q):
+s638369412.py(109):         q, x, y = map(int, input().split())
+s638369412.py(110):         if q == 1:
+s638369412.py(113):         elif q == 2:
+s638369412.py(117):             print(bisect_left(table, x - 1, N, y) + 1)
+ --- modulename: s638369412, funcname: bisect_left
+s638369412.py(57):     left += NONLEAF_SIZE
+s638369412.py(58):     right += NONLEAF_SIZE
+s638369412.py(59):     left_left = None
+s638369412.py(60):     right_left = None
+s638369412.py(61):     while left < right:
+s638369412.py(62):         if left & 1:
+s638369412.py(63):             if left_left is None and table[left] >= value:
+s638369412.py(65):             left += 1
+s638369412.py(66):         if right & 1:
+s638369412.py(67):             if table[right - 1] >= value:
+s638369412.py(69):         left >>= 1
+s638369412.py(70):         right >>= 1
+s638369412.py(61):     while left < right:
+s638369412.py(62):         if left & 1:
+s638369412.py(63):             if left_left is None and table[left] >= value:
+s638369412.py(64):                 left_left = left
+s638369412.py(65):             left += 1
+s638369412.py(66):         if right & 1:
+s638369412.py(69):         left >>= 1
+s638369412.py(70):         right >>= 1
+s638369412.py(61):     while left < right:
+s638369412.py(72):     if left_left is not None:
+s638369412.py(73):         pos = left_left
+s638369412.py(74):         while pos < NONLEAF_SIZE:
+s638369412.py(75):             if table[2 * pos] >= value:
+s638369412.py(76):                 pos = 2 * pos
+s638369412.py(74):         while pos < NONLEAF_SIZE:
+s638369412.py(79):         return pos - NONLEAF_SIZE
+3
+s638369412.py(108):     for _q in range(Q):
+s638369412.py(109):         q, x, y = map(int, input().split())
+s638369412.py(110):         if q == 1:
+s638369412.py(112):             point_set(table, x - 1, y, max)
+ --- modulename: s638369412, funcname: point_set
+s638369412.py(28):     pos = pos + NONLEAF_SIZE
+s638369412.py(29):     table[pos] = value
+s638369412.py(30):     while pos > 1:
+s638369412.py(31):         pos >>= 1
+s638369412.py(32):         table[pos] = binop(
+s638369412.py(33):             table[pos * 2],
+s638369412.py(34):             table[pos * 2 + 1],
+s638369412.py(32):         table[pos] = binop(
+s638369412.py(30):     while pos > 1:
+s638369412.py(31):         pos >>= 1
+s638369412.py(32):         table[pos] = binop(
+s638369412.py(33):             table[pos * 2],
+s638369412.py(34):             table[pos * 2 + 1],
+s638369412.py(32):         table[pos] = binop(
+s638369412.py(30):     while pos > 1:
+s638369412.py(31):         pos >>= 1
+s638369412.py(32):         table[pos] = binop(
+s638369412.py(33):             table[pos * 2],
+s638369412.py(34):             table[pos * 2 + 1],
+s638369412.py(32):         table[pos] = binop(
+s638369412.py(30):     while pos > 1:
+s638369412.py(108):     for _q in range(Q):
+s638369412.py(109):         q, x, y = map(int, input().split())
+s638369412.py(110):         if q == 1:
+s638369412.py(113):         elif q == 2:
+s638369412.py(115):             print(range_reduce(table, x - 1, y, max, -INF))
+ --- modulename: s638369412, funcname: range_reduce
+s638369412.py(39):     ret_left = unity
+s638369412.py(40):     ret_right = unity
+s638369412.py(41):     left += SEGTREE_SIZE // 2
+s638369412.py(42):     right += SEGTREE_SIZE // 2
+s638369412.py(43):     while left < right:
+s638369412.py(44):         if left & 1:
+s638369412.py(45):             ret_left = binop(ret_left, table[left])
+s638369412.py(46):             left += 1
+s638369412.py(47):         if right & 1:
+s638369412.py(51):         left //= 2
+s638369412.py(52):         right //= 2
+s638369412.py(43):     while left < right:
+s638369412.py(44):         if left & 1:
+s638369412.py(45):             ret_left = binop(ret_left, table[left])
+s638369412.py(46):             left += 1
+s638369412.py(47):         if right & 1:
+s638369412.py(51):         left //= 2
+s638369412.py(52):         right //= 2
+s638369412.py(43):     while left < right:
+s638369412.py(53):     return binop(ret_left, ret_right)
+2
+s638369412.py(108):     for _q in range(Q):
+s638369412.py(109):         q, x, y = map(int, input().split())
+s638369412.py(110):         if q == 1:
+s638369412.py(113):         elif q == 2:
+s638369412.py(117):             print(bisect_left(table, x - 1, N, y) + 1)
+ --- modulename: s638369412, funcname: bisect_left
+s638369412.py(57):     left += NONLEAF_SIZE
+s638369412.py(58):     right += NONLEAF_SIZE
+s638369412.py(59):     left_left = None
+s638369412.py(60):     right_left = None
+s638369412.py(61):     while left < right:
+s638369412.py(62):         if left & 1:
+s638369412.py(66):         if right & 1:
+s638369412.py(67):             if table[right - 1] >= value:
+s638369412.py(69):         left >>= 1
+s638369412.py(70):         right >>= 1
+s638369412.py(61):     while left < right:
+s638369412.py(62):         if left & 1:
+s638369412.py(66):         if right & 1:
+s638369412.py(69):         left >>= 1
+s638369412.py(70):         right >>= 1
+s638369412.py(61):     while left < right:
+s638369412.py(62):         if left & 1:
+s638369412.py(66):         if right & 1:
+s638369412.py(67):             if table[right - 1] >= value:
+s638369412.py(69):         left >>= 1
+s638369412.py(70):         right >>= 1
+s638369412.py(61):     while left < right:
+s638369412.py(72):     if left_left is not None:
+s638369412.py(80):     elif right_left is not None:
+s638369412.py(89):         return WIDTH
+6
+s638369412.py(108):     for _q in range(Q):
