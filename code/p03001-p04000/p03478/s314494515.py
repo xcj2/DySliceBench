@@ -1,0 +1,97 @@
+#!usr/bin/env python3
+from collections import defaultdict
+from collections import deque
+from heapq import heappush, heappop
+import sys
+import math
+import bisect
+import random
+def LI(): return list(map(int, sys.stdin.readline().split()))
+def I(): return int(sys.stdin.readline())
+def LS():return list(map(list, sys.stdin.readline().split()))
+def S(): return list(sys.stdin.readline())[:-1]
+def IR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = I()
+    return l
+def LIR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = LI()
+    return l
+def SR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = S()
+    return l
+def LSR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = SR()
+    return l
+mod = 1000000007
+
+#A
+def A():
+    a,b,c,d = LI()
+    if a+b > c+d:
+        print("Left")
+    elif a+b == c+d:
+        print("Balanced")
+    else:
+        print("Right")
+    return
+
+#B
+def B():
+    def digit_sum(n):
+        res = 0
+        m = n
+        while m:
+            res += m%10
+            m//=10
+        return res
+    n,a,b = LI()
+    ans = 0
+    for i in range(1,n+1):
+        if a <= digit_sum(i) <= b:
+            ans += i
+    print(ans)
+    return
+
+#C
+def C():
+    x,y = LI()
+    ans = 1
+    for i in range(10000000000000):
+        x *= 2
+        if x > y:break
+        ans += 1
+    print(ans)
+
+#D
+def D():
+    s = S()
+    n = len(s)
+    ans = n
+    for i in range(n-1):
+        if s[i] != s[i+1]:
+            ans = min(ans,max(i+1,n-i-1))
+    print(ans)
+
+#E
+def E():
+    return
+
+#F
+def F():
+    return
+
+#G
+def G():
+    return
+
+#H
+def H():
+    return
+
+#Solve
+if __name__ == "__main__":
+    B()
