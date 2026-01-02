@@ -1,0 +1,112 @@
+ --- modulename: s740611594, funcname: <module>
+s740611594.py(1): import sys
+s740611594.py(2): sys.setrecursionlimit(10 ** 7)
+s740611594.py(5): def resolve():
+s740611594.py(69): if __name__ == '__main__':
+s740611594.py(70):     resolve()
+ --- modulename: s740611594, funcname: resolve
+s740611594.py(6):     def dfs1(r_topo, par):
+s740611594.py(17):     def dfs2(idx, d_par, par):
+s740611594.py(37):     N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s740611594.py(38):     if N == 1:
+s740611594.py(41):     G = [[] for _ in range(N)]
+ --- modulename: s740611594, funcname: <listcomp>
+s740611594.py(41):     G = [[] for _ in range(N)]
+s740611594.py(41):     G = [[] for _ in range(N)]
+s740611594.py(41):     G = [[] for _ in range(N)]
+s740611594.py(42):     for i in range(N - 1):
+s740611594.py(43):         a, b = map(int, input().split())
+s740611594.py(44):         a -= 1
+s740611594.py(45):         b -= 1
+s740611594.py(46):         G[a].append(b)
+s740611594.py(47):         G[b].append(a)
+s740611594.py(42):     for i in range(N - 1):
+s740611594.py(49):     topo = []
+s740611594.py(50):     P = [-1] * N
+s740611594.py(51):     node = [0]
+s740611594.py(52):     while node:
+s740611594.py(53):         s = node.pop()
+s740611594.py(54):         topo.append(s)
+s740611594.py(55):         for to in G[s]:
+s740611594.py(56):             if to == P[s]:
+s740611594.py(58):             P[to] = s
+s740611594.py(59):             node.append(to)
+s740611594.py(55):         for to in G[s]:
+s740611594.py(52):     while node:
+s740611594.py(53):         s = node.pop()
+s740611594.py(54):         topo.append(s)
+s740611594.py(55):         for to in G[s]:
+s740611594.py(56):             if to == P[s]:
+s740611594.py(57):                 continue
+s740611594.py(55):         for to in G[s]:
+s740611594.py(52):     while node:
+s740611594.py(61):     dist = [0]*N
+s740611594.py(62):     ans = [0] * N
+s740611594.py(63):     dfs1(topo,P)
+ --- modulename: s740611594, funcname: dfs1
+s740611594.py(7):         for i in reversed(r_topo):
+s740611594.py(8):             stack = [i]
+s740611594.py(9):             while stack:
+s740611594.py(10):                 idx = stack.pop()
+s740611594.py(11):                 for to in G[idx]:
+s740611594.py(12):                     if to == par[i]:
+s740611594.py(13):                         continue
+s740611594.py(11):                 for to in G[idx]:
+s740611594.py(9):             while stack:
+s740611594.py(7):         for i in reversed(r_topo):
+s740611594.py(8):             stack = [i]
+s740611594.py(9):             while stack:
+s740611594.py(10):                 idx = stack.pop()
+s740611594.py(11):                 for to in G[idx]:
+s740611594.py(12):                     if to == par[i]:
+s740611594.py(14):                     dist[idx] = max(dist[idx], dist[to] + 1)
+s740611594.py(11):                 for to in G[idx]:
+s740611594.py(9):             while stack:
+s740611594.py(7):         for i in reversed(r_topo):
+s740611594.py(64):     dfs2(0, 0, -1)
+ --- modulename: s740611594, funcname: dfs2
+s740611594.py(18):         stack = [(idx,d_par, par)]
+s740611594.py(19):         while stack:
+s740611594.py(20):             idx, d_par, par = stack.pop()
+s740611594.py(21):             d_child = []
+s740611594.py(22):             d_child.append((0, -1))
+s740611594.py(23):             for to in G[idx]:
+s740611594.py(24):                 if to == par:
+s740611594.py(27):                     d_child.append((dist[to] + 1, to))
+s740611594.py(23):             for to in G[idx]:
+s740611594.py(28):             d_child.sort(reverse=True)
+s740611594.py(29):             ans[idx] = d_child[0][0]
+s740611594.py(30):             for to in G[idx]:
+s740611594.py(31):                 if to == par:
+s740611594.py(33):                 nx_d_par = d_child[d_child[0][1] == to][0]
+s740611594.py(34):                 stack.append((to, nx_d_par, idx))
+s740611594.py(30):             for to in G[idx]:
+s740611594.py(19):         while stack:
+s740611594.py(20):             idx, d_par, par = stack.pop()
+s740611594.py(21):             d_child = []
+s740611594.py(22):             d_child.append((0, -1))
+s740611594.py(23):             for to in G[idx]:
+s740611594.py(24):                 if to == par:
+s740611594.py(25):                     d_child.append((d_par + 1, to))
+s740611594.py(23):             for to in G[idx]:
+s740611594.py(28):             d_child.sort(reverse=True)
+s740611594.py(29):             ans[idx] = d_child[0][0]
+s740611594.py(30):             for to in G[idx]:
+s740611594.py(31):                 if to == par:
+s740611594.py(32):                     continue
+s740611594.py(30):             for to in G[idx]:
+s740611594.py(19):         while stack:
+s740611594.py(65):     for i in range(N):
+s740611594.py(66):         print((N - 1) * 2 - ans[i])
+1
+s740611594.py(65):     for i in range(N):
+s740611594.py(66):         print((N - 1) * 2 - ans[i])
+1
+s740611594.py(65):     for i in range(N):
