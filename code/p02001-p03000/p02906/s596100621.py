@@ -1,0 +1,90 @@
+import math,string,itertools,fractions,heapq,collections,re,array,bisect,sys,copy,functools
+import time,random
+
+sys.setrecursionlimit(10**7)
+inf = 10**20
+eps = 1.0 / 10**10
+mod = 10**9+7
+dd = [(-1,0),(0,1),(1,0),(0,-1)]
+ddn = [(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1),(-1,-1)]
+
+def LI(): return list(map(int, sys.stdin.readline().split()))
+def LLI(): return [list(map(int, l.split())) for l in sys.stdin.readlines()]
+def LI_(): return [int(x)-1 for x in sys.stdin.readline().split()]
+def LF(): return [float(x) for x in sys.stdin.readline().split()]
+def LS(): return sys.stdin.readline().split()
+def I(): return int(sys.stdin.readline())
+def F(): return float(sys.stdin.readline())
+def S(): return input()
+def pf(s): return print(s, flush=True)
+def pe(s): return print(str(s), file=sys.stderr)
+def JA(a, sep): return sep.join(map(str, a))
+def JAA(a, s, t): return s.join(t.join(map(str, b)) for b in a)
+
+
+class UnionFind:
+    def __init__(self, size):
+        self.table = [-1 for _ in range(size)]
+        self.l = size
+
+    def find(self, x):
+        if self.table[x] < 0:
+            return x
+        else:
+            self.table[x] = self.find(self.table[x])
+            return self.table[x]
+
+    def union(self, x, y):
+        s1 = self.find(x)
+        s2 = self.find(y)
+        if s1 != s2:
+            if self.table[s1] <= self.table[s2]:
+                self.table[s1] += self.table[s2]
+                self.table[s2] = s1
+            else:
+                self.table[s2] += self.table[s1]
+                self.table[s1] = s2
+            self.l -= 1
+
+            return True
+        return False
+
+    def subsetall(self):
+        a = []
+        for i in range(len(self.table)):
+            if self.table[i] < 0:
+                a.append((i, -self.table[i]))
+        return a
+
+def main():
+    n,m,q = LI()
+    aa = [LI() for _ in range(q)]
+    uf = UnionFind(n)
+    t = 0
+    cc = 0
+    for a,b,c in aa:
+        if c == 0:
+            if uf.union(a,b):
+                t += 1
+        else:
+            cc += 1
+
+    for a,b,c in aa:
+        if c == 0:
+            continue
+        if uf.find(a) == uf.find(b):
+            return 'No'
+
+    if m == n - 1:
+        if cc == 0:
+            return 'Yes'
+        return 'No'
+
+    if m <= n - uf.l + uf.l * (uf.l-1) // 2:
+        return 'Yes'
+
+    return 'No'
+
+
+print(main())
+
