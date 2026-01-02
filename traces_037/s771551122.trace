@@ -1,0 +1,39 @@
+ --- modulename: s771551122, funcname: <module>
+s771551122.py(1): from sys import stdin, setrecursionlimit
+s771551122.py(4): def initialize_cmb(m, mod=10 ** 9 + 7):
+s771551122.py(23): def cmb(n, k, fac, finv, mod=10 ** 9 + 7):
+s771551122.py(31): def main():
+s771551122.py(46): if __name__ == "__main__":
+s771551122.py(47):     setrecursionlimit(10000)
+s771551122.py(48):     main()
+ --- modulename: s771551122, funcname: main
+s771551122.py(32):     mod = 10 ** 9 + 7
+s771551122.py(33):     input = stdin.buffer.readline
+s771551122.py(34):     x, y = map(int, input().split())
+s771551122.py(36):     if (x + y) % 3 != 0 or 2 * x < y or 2 * y < x:
+s771551122.py(39):         fac, finv = initialize_cmb((x + y) // 3, mod)
+ --- modulename: s771551122, funcname: initialize_cmb
+s771551122.py(5):     fac = [1]
+s771551122.py(6):     finv = [1]
+s771551122.py(7):     inv = [0] * (m + 1)
+s771551122.py(8):     if m >= 1:
+s771551122.py(9):         fac.append(1)
+s771551122.py(10):         finv.append(1)
+s771551122.py(11):         inv[1] = 1
+s771551122.py(12):         pre_fac = 1
+s771551122.py(13):         pre_finv = 1
+s771551122.py(14):         for i in range(2, m + 1):
+s771551122.py(15):             pre_fac = pre_fac * i % mod
+s771551122.py(16):             fac.append(pre_fac)
+s771551122.py(17):             inv[i] = mod - inv[mod % i] * (mod // i) % mod
+s771551122.py(18):             pre_finv = pre_finv * inv[i] % mod
+s771551122.py(19):             finv.append(pre_finv)
+s771551122.py(14):         for i in range(2, m + 1):
+s771551122.py(20):     return fac, finv
+s771551122.py(41):         x_min = (x + y) // 3
+s771551122.py(43):         print(cmb((x + y) // 3, x - x_min, fac, finv, mod))
+ --- modulename: s771551122, funcname: cmb
+s771551122.py(24):     if n < k:
+s771551122.py(26):     if n < 0 or k < 0:
+s771551122.py(28):     return fac[n] * (finv[k] * finv[n - k] % mod) % mod
+2
