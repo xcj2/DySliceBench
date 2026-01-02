@@ -1,0 +1,48 @@
+ --- modulename: s319205717, funcname: <module>
+s319205717.py(3): import sys
+s319205717.py(5): def input(): return sys.stdin.readline().strip()
+s319205717.py(6): def list2d(a, b, c): return [[c] * b for i in range(a)]
+s319205717.py(7): def list3d(a, b, c, d): return [[[d] * c for j in range(b)] for i in range(a)]
+s319205717.py(8): def list4d(a, b, c, d, e): return [[[[e] * d for j in range(c)] for j in range(b)] for i in range(a)]
+s319205717.py(9): def ceil(x, y=1): return int(-(-x // y))
+s319205717.py(10): def INT(): return int(input())
+s319205717.py(11): def MAP(): return map(int, input().split())
+s319205717.py(12): def LIST(N=None): return list(MAP()) if N is None else [INT() for i in range(N)]
+s319205717.py(13): def Yes(): print('Yes')
+s319205717.py(14): def No(): print('No')
+s319205717.py(15): def YES(): print('YES')
+s319205717.py(16): def NO(): print('NO')
+s319205717.py(17): sys.setrecursionlimit(10 ** 9)
+s319205717.py(18): INF = 10 ** 18
+s319205717.py(19): MOD = 10 ** 9 + 7
+s319205717.py(21): S = input()
+ --- modulename: s319205717, funcname: input
+s319205717.py(5): def input(): return sys.stdin.readline().strip()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s319205717.py(22): S = S[::-1]
+s319205717.py(23): N = len(S)
+s319205717.py(25): dp0 = [INF] * (N+1)
+s319205717.py(26): dp1 = [INF] * (N+1)
+s319205717.py(27): dp0[0] = 0
+s319205717.py(28): for i, s in enumerate(S):
+s319205717.py(29):     s = int(s)
+s319205717.py(30):     dp0[i+1] = min(dp0[i+1], dp0[i] + s)
+s319205717.py(31):     dp1[i+1] = min(dp1[i+1], dp0[i] + 10-s)
+s319205717.py(32):     dp0[i+1] = min(dp0[i+1], dp1[i] + (s+1))
+s319205717.py(33):     dp1[i+1] = min(dp1[i+1], dp1[i] + 10-(s+1))
+s319205717.py(28): for i, s in enumerate(S):
+s319205717.py(29):     s = int(s)
+s319205717.py(30):     dp0[i+1] = min(dp0[i+1], dp0[i] + s)
+s319205717.py(31):     dp1[i+1] = min(dp1[i+1], dp0[i] + 10-s)
+s319205717.py(32):     dp0[i+1] = min(dp0[i+1], dp1[i] + (s+1))
+s319205717.py(33):     dp1[i+1] = min(dp1[i+1], dp1[i] + 10-(s+1))
+s319205717.py(28): for i, s in enumerate(S):
+s319205717.py(34): ans = min(dp0[N], dp1[N]+1)
+s319205717.py(35): print(ans)
+8
