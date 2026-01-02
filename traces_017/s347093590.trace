@@ -1,0 +1,100 @@
+ --- modulename: s347093590, funcname: <module>
+s347093590.py(1): from heapq import heappop, heappush
+s347093590.py(2): class MedianContainer:
+ --- modulename: s347093590, funcname: MedianContainer
+s347093590.py(2): class MedianContainer:
+s347093590.py(3):     def __init__(self):
+s347093590.py(11):     def insert(self, x):
+s347093590.py(50):     def get_med(self):
+s347093590.py(57):     def get_left_sum(self):
+s347093590.py(61):     def get_right_sum(self):
+s347093590.py(65):     def get_half_len(self):
+s347093590.py(68): q = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s347093590.py(69): const_b = 0
+s347093590.py(70): ansl = []
+s347093590.py(72): mc = MedianContainer()
+ --- modulename: s347093590, funcname: __init__
+s347093590.py(4):         self._left_q = []
+s347093590.py(5):         self._right_q = []
+s347093590.py(6):         self._left_sum = 0
+s347093590.py(7):         self._right_sum = 0
+s347093590.py(8):         self._med1, self._med2 = None, None
+s347093590.py(9):         self._med = None
+s347093590.py(73): for _ in range(q):
+s347093590.py(74):     row = list(input().split())
+s347093590.py(75):     if row[0] == '2':
+s347093590.py(90):         a,b = int(row[1]), int(row[2])
+s347093590.py(91):         const_b += b
+s347093590.py(92):         mc.insert(a)
+ --- modulename: s347093590, funcname: insert
+s347093590.py(12):         if not any([self._med, self._med1, self._med2]): # First insert
+s347093590.py(13):             self._med = x
+s347093590.py(73): for _ in range(q):
+s347093590.py(74):     row = list(input().split())
+s347093590.py(75):     if row[0] == '2':
+s347093590.py(76):         half_len = mc.get_half_len()
+ --- modulename: s347093590, funcname: get_half_len
+s347093590.py(66):         return len(self._left_q)
+s347093590.py(77):         meds = mc.get_med()
+ --- modulename: s347093590, funcname: get_med
+s347093590.py(51):         if self._med is not None:
+s347093590.py(52):             return [self._med]
+s347093590.py(78):         if len(meds) == 1:
+s347093590.py(79):             left_sum = meds[0]*half_len - mc.get_left_sum()
+ --- modulename: s347093590, funcname: get_left_sum
+s347093590.py(58):         return self._left_sum
+s347093590.py(80):             right_sum = mc.get_right_sum() - meds[0]*half_len
+ --- modulename: s347093590, funcname: get_right_sum
+s347093590.py(62):         return self._right_sum
+s347093590.py(81):             ans = left_sum + right_sum + const_b
+s347093590.py(82):             ansl.append((meds[0],ans))
+s347093590.py(73): for _ in range(q):
+s347093590.py(74):     row = list(input().split())
+s347093590.py(75):     if row[0] == '2':
+s347093590.py(90):         a,b = int(row[1]), int(row[2])
+s347093590.py(91):         const_b += b
+s347093590.py(92):         mc.insert(a)
+ --- modulename: s347093590, funcname: insert
+s347093590.py(12):         if not any([self._med, self._med1, self._med2]): # First insert
+s347093590.py(14):         elif self._med is None and self._med1 is not None and self._med2 is not None:
+s347093590.py(35):             if x <= self._med:
+s347093590.py(36):                 heappush(self._left_q, x*(-1))
+s347093590.py(37):                 self._med1 = heappop(self._left_q)*(-1)
+s347093590.py(38):                 self._left_sum += x
+s347093590.py(39):                 self._left_sum -= self._med1
+s347093590.py(40):                 self._med2 = self._med
+s347093590.py(47):             self._med = None
+s347093590.py(73): for _ in range(q):
+s347093590.py(74):     row = list(input().split())
+s347093590.py(75):     if row[0] == '2':
+s347093590.py(76):         half_len = mc.get_half_len()
+ --- modulename: s347093590, funcname: get_half_len
+s347093590.py(66):         return len(self._left_q)
+s347093590.py(77):         meds = mc.get_med()
+ --- modulename: s347093590, funcname: get_med
+s347093590.py(51):         if self._med is not None:
+s347093590.py(54):             return [self._med1, self._med2]
+s347093590.py(78):         if len(meds) == 1:
+s347093590.py(84):             left_sum = meds[0]*half_len - mc.get_left_sum()
+ --- modulename: s347093590, funcname: get_left_sum
+s347093590.py(58):         return self._left_sum
+s347093590.py(85):             right_sum = mc.get_right_sum() - meds[0]*half_len
+ --- modulename: s347093590, funcname: get_right_sum
+s347093590.py(62):         return self._right_sum
+s347093590.py(86):             ans = left_sum + right_sum + (meds[1]-meds[0]) + const_b
+s347093590.py(87):             ansl.append((meds[0],ans))
+s347093590.py(73): for _ in range(q):
+s347093590.py(95): for ax,av in ansl:
+s347093590.py(96):     print(ax,av)
+4 2
+s347093590.py(95): for ax,av in ansl:
+s347093590.py(96):     print(ax,av)
+1 -3
+s347093590.py(95): for ax,av in ansl:
