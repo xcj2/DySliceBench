@@ -1,0 +1,43 @@
+def solve():
+    N,M,K = map(int,input().split())
+    MOD = 998244353
+
+    fac, finv, inv = COMinit(N+1,MOD)
+
+    ans = 0
+    for i in range(K+1):
+        ans += M % MOD * pow(M-1,N-1-i,MOD) % MOD * COM(N-1,i,MOD,fac,finv,inv) % MOD
+    
+    print(ans%MOD)
+
+# COMの前処理
+# テーブルを作る
+# O(n)
+def COMinit(N, mod):
+    fac = [0] * N
+    finv = [0] * N
+    inv = [0] * N
+
+    fac[0] = 1
+    fac[1] = 1
+    finv[0] = 1
+    finv[1] = 1
+    inv[1] = 1
+
+    for i in range(2, N):
+        fac[i] = fac[i-1] * i % mod
+        inv[i] = mod - inv[mod%i] * (mod // i) % mod
+        finv[i] = finv[i-1] * inv[i] % mod
+    
+    return fac, finv, inv
+
+# nCrを計算 前処理としてCOMinitの実行が必要
+# O(1)
+def COM(n, r, mod, fac, finv, inv):
+    if n < r:
+        return 0
+    if n < 0 or r < 0:
+        return 0
+    return fac[n] * (finv[r] * finv[n-r] % mod) % mod
+if __name__ == '__main__':
+    solve()
