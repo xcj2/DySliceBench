@@ -1,0 +1,136 @@
+ --- modulename: s506870595, funcname: <module>
+s506870595.py(3): '''
+s506870595.py(8): import os
+s506870595.py(9): from io import BytesIO, IOBase
+s506870595.py(10): import sys
+s506870595.py(13): def main():
+s506870595.py(29): BUFSIZE = 1048576
+s506870595.py(32): class FastIO(IOBase):
+ --- modulename: s506870595, funcname: FastIO
+s506870595.py(32): class FastIO(IOBase):
+s506870595.py(33):     newlines = 0
+s506870595.py(35):     def __init__(self, file):
+s506870595.py(41):     def read(self):
+s506870595.py(51):     def readline(self):
+s506870595.py(60):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s506870595.py(66): class IOWrapper(IOBase):
+ --- modulename: s506870595, funcname: IOWrapper
+s506870595.py(66): class IOWrapper(IOBase):
+s506870595.py(67):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s506870595.py(76): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s506870595, funcname: __init__
+s506870595.py(68):         self.buffer = FastIO(file)
+ --- modulename: s506870595, funcname: __init__
+s506870595.py(36):         self._fd = file.fileno()
+s506870595.py(37):         self.buffer = BytesIO()
+s506870595.py(38):         self.writable = 'x' in file.mode or 'r' not in file.mode
+s506870595.py(39):         self.write = self.buffer.write if self.writable else None
+s506870595.py(69):         self.flush = self.buffer.flush
+s506870595.py(70):         self.writable = self.buffer.writable
+s506870595.py(71):         self.write = lambda s: self.buffer.write(s.encode('ascii'))
+s506870595.py(72):         self.read = lambda: self.buffer.read().decode('ascii')
+s506870595.py(73):         self.readline = lambda: self.buffer.readline().decode('ascii')
+ --- modulename: s506870595, funcname: __init__
+s506870595.py(68):         self.buffer = FastIO(file)
+ --- modulename: s506870595, funcname: __init__
+s506870595.py(36):         self._fd = file.fileno()
+s506870595.py(37):         self.buffer = BytesIO()
+s506870595.py(38):         self.writable = 'x' in file.mode or 'r' not in file.mode
+s506870595.py(39):         self.write = self.buffer.write if self.writable else None
+s506870595.py(69):         self.flush = self.buffer.flush
+s506870595.py(70):         self.writable = self.buffer.writable
+s506870595.py(71):         self.write = lambda s: self.buffer.write(s.encode('ascii'))
+s506870595.py(72):         self.read = lambda: self.buffer.read().decode('ascii')
+s506870595.py(73):         self.readline = lambda: self.buffer.readline().decode('ascii')
+s506870595.py(77): def input(): return sys.stdin.readline().rstrip('\r\n')
+s506870595.py(82): if __name__ == '__main__':
+s506870595.py(83):     main()
+ --- modulename: s506870595, funcname: main
+s506870595.py(14):     s = input()
+ --- modulename: s506870595, funcname: input
+s506870595.py(77): def input(): return sys.stdin.readline().rstrip('\r\n')
+ --- modulename: s506870595, funcname: <lambda>
+s506870595.py(73):         self.readline = lambda: self.buffer.readline().decode('ascii')
+ --- modulename: s506870595, funcname: readline
+s506870595.py(52):         while self.newlines == 0:
+s506870595.py(53):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s506870595.py(54):             self.newlines = b.count(b'\n') + (not b)
+s506870595.py(55):             ptr = self.buffer.tell()
+s506870595.py(56):             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s506870595.py(52):         while self.newlines == 0:
+s506870595.py(57):         self.newlines -= 1
+s506870595.py(58):         return self.buffer.readline()
+s506870595.py(15):     t = input()
+ --- modulename: s506870595, funcname: input
+s506870595.py(77): def input(): return sys.stdin.readline().rstrip('\r\n')
+ --- modulename: s506870595, funcname: <lambda>
+s506870595.py(73):         self.readline = lambda: self.buffer.readline().decode('ascii')
+ --- modulename: s506870595, funcname: readline
+s506870595.py(52):         while self.newlines == 0:
+s506870595.py(57):         self.newlines -= 1
+s506870595.py(58):         return self.buffer.readline()
+s506870595.py(16):     n,m = len(s), len(t)
+s506870595.py(17):     ans = n
+s506870595.py(18):     for i in range(n-m+1):
+s506870595.py(19):         c = 0
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(22):                 c += 1
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(22):                 c += 1
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(22):                 c += 1
+s506870595.py(20):         for j in range(m):
+s506870595.py(23):         ans = min(ans, c)
+s506870595.py(18):     for i in range(n-m+1):
+s506870595.py(19):         c = 0
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(22):                 c += 1
+s506870595.py(20):         for j in range(m):
+s506870595.py(23):         ans = min(ans, c)
+s506870595.py(18):     for i in range(n-m+1):
+s506870595.py(19):         c = 0
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(22):                 c += 1
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(22):                 c += 1
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(20):         for j in range(m):
+s506870595.py(23):         ans = min(ans, c)
+s506870595.py(18):     for i in range(n-m+1):
+s506870595.py(19):         c = 0
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(22):                 c += 1
+s506870595.py(20):         for j in range(m):
+s506870595.py(21):             if s[i+j] != t[j]:
+s506870595.py(20):         for j in range(m):
+s506870595.py(23):         ans = min(ans, c)
+s506870595.py(18):     for i in range(n-m+1):
+s506870595.py(24):     print(ans)
+ --- modulename: s506870595, funcname: <lambda>
+s506870595.py(71):         self.write = lambda s: self.buffer.write(s.encode('ascii'))
+1 --- modulename: s506870595, funcname: <lambda>
+s506870595.py(71):         self.write = lambda s: self.buffer.write(s.encode('ascii'))
+
+s506870595.py(25):     return
