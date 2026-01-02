@@ -1,0 +1,104 @@
+ --- modulename: s582806871, funcname: <module>
+s582806871.py(1): import sys
+s582806871.py(3): def remove_bit(num, i):
+s582806871.py(8): def insert_bit(num1, num2, i):
+s582806871.py(14): def solve(N, A, B):
+s582806871.py(42): def main(N, A, B):
+s582806871.py(61): if __name__ == '__main__':
+s582806871.py(62):     N, A, B = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s582806871.py(63):     main(N, A, B)
+ --- modulename: s582806871, funcname: main
+s582806871.py(43):     if (bin(A).count('1') + bin(B).count('1')) % 2 == 0:
+s582806871.py(47):     print('YES')
+YES
+s582806871.py(48):     ans_list = solve(N, A, B)
+ --- modulename: s582806871, funcname: solve
+s582806871.py(15):     if N == 1:
+s582806871.py(18):     r_bit = -1
+s582806871.py(19):     for i in range(N):
+s582806871.py(20):         if (A >> i) & 1 != (B >> i) & 1:
+s582806871.py(19):     for i in range(N):
+s582806871.py(20):         if (A >> i) & 1 != (B >> i) & 1:
+s582806871.py(21):             r_bit = i
+s582806871.py(22):             break
+s582806871.py(23):     if r_bit == -1:
+s582806871.py(26):     AA = remove_bit(A, r_bit)
+ --- modulename: s582806871, funcname: remove_bit
+s582806871.py(4):     high = (num >> (i + 1)) << i
+s582806871.py(5):     low = num & ((1 << i) - 1)
+s582806871.py(6):     return high + low
+s582806871.py(27):     BB = remove_bit(B, r_bit)
+ --- modulename: s582806871, funcname: remove_bit
+s582806871.py(4):     high = (num >> (i + 1)) << i
+s582806871.py(5):     low = num & ((1 << i) - 1)
+s582806871.py(6):     return high + low
+s582806871.py(29):     C = -1
+s582806871.py(30):     for C in range(2**(N-1)):
+s582806871.py(31):         if bin(AA ^ C).count('1') % 2 == 1 and  bin(AA ^ C).count('1') % 2 == 1:
+s582806871.py(32):             break
+s582806871.py(33):     A_list = solve(N - 1, AA, C)
+ --- modulename: s582806871, funcname: solve
+s582806871.py(15):     if N == 1:
+s582806871.py(16):         return [A, B]
+s582806871.py(34):     B_list = solve(N - 1, C, BB)
+ --- modulename: s582806871, funcname: solve
+s582806871.py(15):     if N == 1:
+s582806871.py(16):         return [A, B]
+s582806871.py(36):     A_list = list(map(lambda x: insert_bit(x, A, r_bit), A_list))
+ --- modulename: s582806871, funcname: <lambda>
+s582806871.py(36):     A_list = list(map(lambda x: insert_bit(x, A, r_bit), A_list))
+ --- modulename: s582806871, funcname: insert_bit
+s582806871.py(9):     high = num1 >> i << (i + 1)
+s582806871.py(10):     low = num1 & (-1 + (1 << i))
+s582806871.py(11):     insert = num2 & (1 << i)
+s582806871.py(12):     return high + insert + low
+ --- modulename: s582806871, funcname: <lambda>
+s582806871.py(36):     A_list = list(map(lambda x: insert_bit(x, A, r_bit), A_list))
+ --- modulename: s582806871, funcname: insert_bit
+s582806871.py(9):     high = num1 >> i << (i + 1)
+s582806871.py(10):     low = num1 & (-1 + (1 << i))
+s582806871.py(11):     insert = num2 & (1 << i)
+s582806871.py(12):     return high + insert + low
+s582806871.py(37):     B_list = list(map(lambda x: insert_bit(x, B, r_bit), B_list))
+ --- modulename: s582806871, funcname: <lambda>
+s582806871.py(37):     B_list = list(map(lambda x: insert_bit(x, B, r_bit), B_list))
+ --- modulename: s582806871, funcname: insert_bit
+s582806871.py(9):     high = num1 >> i << (i + 1)
+s582806871.py(10):     low = num1 & (-1 + (1 << i))
+s582806871.py(11):     insert = num2 & (1 << i)
+s582806871.py(12):     return high + insert + low
+ --- modulename: s582806871, funcname: <lambda>
+s582806871.py(37):     B_list = list(map(lambda x: insert_bit(x, B, r_bit), B_list))
+ --- modulename: s582806871, funcname: insert_bit
+s582806871.py(9):     high = num1 >> i << (i + 1)
+s582806871.py(10):     low = num1 & (-1 + (1 << i))
+s582806871.py(11):     insert = num2 & (1 << i)
+s582806871.py(12):     return high + insert + low
+s582806871.py(39):     return A_list + B_list
+s582806871.py(50):     assert A == ans_list[0]
+s582806871.py(51):     assert B == ans_list[-1]
+s582806871.py(52):     for i in range(len(ans_list) - 1):
+s582806871.py(53):         assert bin(ans_list[i] ^ ans_list[i+1]).count('1') == 1
+s582806871.py(52):     for i in range(len(ans_list) - 1):
+s582806871.py(53):         assert bin(ans_list[i] ^ ans_list[i+1]).count('1') == 1
+s582806871.py(52):     for i in range(len(ans_list) - 1):
+s582806871.py(53):         assert bin(ans_list[i] ^ ans_list[i+1]).count('1') == 1
+s582806871.py(52):     for i in range(len(ans_list) - 1):
+s582806871.py(55):     for num in ans_list:
+s582806871.py(56):         sys.stdout.write('%d '%num)
+1 s582806871.py(55):     for num in ans_list:
+s582806871.py(56):         sys.stdout.write('%d '%num)
+0 s582806871.py(55):     for num in ans_list:
+s582806871.py(56):         sys.stdout.write('%d '%num)
+2 s582806871.py(55):     for num in ans_list:
+s582806871.py(56):         sys.stdout.write('%d '%num)
+3 s582806871.py(55):     for num in ans_list:
+s582806871.py(57):     print()
+
