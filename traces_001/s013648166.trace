@@ -1,0 +1,389 @@
+ --- modulename: s013648166, funcname: <module>
+s013648166.py(1): import sys
+s013648166.py(2): input = sys.stdin.readline
+s013648166.py(4): N,Q=map(int,input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s013648166.py(6): seg_el=1<<(N.bit_length()) # Segment treeの台の要素数
+s013648166.py(7): SEG=[0]*(2*seg_el) # 1-indexedなので、要素数2*seg_el.Segment treeの初期値で初期化
+s013648166.py(8): LAZY=[0]*(2*seg_el) # 1-indexedなので、要素数2*seg_el.Segment treeの初期値で初期化
+s013648166.py(10): def indexes(L,R): # 遅延伝搬すべきノードのリストを返す. （つまり, updateやgetvaluesで見るノードより上にあるノードたち）
+s013648166.py(33): def adds(l,r,x): # 区間[l,r)を +x 更新
+s013648166.py(59): def getvalues(l,r): # 区間[l,r)に関するminを調べる
+s013648166.py(96): ANS=[]
+s013648166.py(98): for _ in range(Q):
+s013648166.py(99):     query=list(map(int,input().split()))
+s013648166.py(100):     if query[0]==0:
+s013648166.py(101):         adds(query[1],query[2]+1,query[3])
+ --- modulename: s013648166, funcname: adds
+s013648166.py(35):     L=l+seg_el
+s013648166.py(36):     R=r+seg_el
+s013648166.py(38):     L//=(L & (-L))
+s013648166.py(39):     R//=(R & (-R))
+s013648166.py(41):     UPIND=indexes(L,R)
+ --- modulename: s013648166, funcname: indexes
+s013648166.py(11):     INDLIST=[]
+s013648166.py(13):     R-=1
+s013648166.py(15):     L>>=1
+s013648166.py(16):     R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(20):             INDLIST.append(L)
+s013648166.py(21):             L>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(20):             INDLIST.append(L)
+s013648166.py(21):             L>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(26):     while L!=0:
+s013648166.py(27):         INDLIST.append(L)
+s013648166.py(28):         L>>=1
+s013648166.py(26):     while L!=0:
+s013648166.py(30):     return INDLIST
+s013648166.py(43):     while L!=R:
+s013648166.py(44):         if L > R:
+s013648166.py(45):             SEG[L]+=x
+s013648166.py(46):             LAZY[L]+=x
+s013648166.py(47):             L+=1
+s013648166.py(48):             L//=(L & (-L))
+s013648166.py(43):     while L!=R:
+s013648166.py(44):         if L > R:
+s013648166.py(45):             SEG[L]+=x
+s013648166.py(46):             LAZY[L]+=x
+s013648166.py(47):             L+=1
+s013648166.py(48):             L//=(L & (-L))
+s013648166.py(43):     while L!=R:
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(98): for _ in range(Q):
+s013648166.py(99):     query=list(map(int,input().split()))
+s013648166.py(100):     if query[0]==0:
+s013648166.py(101):         adds(query[1],query[2]+1,query[3])
+ --- modulename: s013648166, funcname: adds
+s013648166.py(35):     L=l+seg_el
+s013648166.py(36):     R=r+seg_el
+s013648166.py(38):     L//=(L & (-L))
+s013648166.py(39):     R//=(R & (-R))
+s013648166.py(41):     UPIND=indexes(L,R)
+ --- modulename: s013648166, funcname: indexes
+s013648166.py(11):     INDLIST=[]
+s013648166.py(13):     R-=1
+s013648166.py(15):     L>>=1
+s013648166.py(16):     R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(20):             INDLIST.append(L)
+s013648166.py(21):             L>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(26):     while L!=0:
+s013648166.py(27):         INDLIST.append(L)
+s013648166.py(28):         L>>=1
+s013648166.py(26):     while L!=0:
+s013648166.py(30):     return INDLIST
+s013648166.py(43):     while L!=R:
+s013648166.py(44):         if L > R:
+s013648166.py(51):             R-=1
+s013648166.py(52):             SEG[R]+=x
+s013648166.py(53):             LAZY[R]+=x
+s013648166.py(54):             R//=(R & (-R))
+s013648166.py(43):     while L!=R:
+s013648166.py(44):         if L > R:
+s013648166.py(45):             SEG[L]+=x
+s013648166.py(46):             LAZY[L]+=x
+s013648166.py(47):             L+=1
+s013648166.py(48):             L//=(L & (-L))
+s013648166.py(43):     while L!=R:
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(98): for _ in range(Q):
+s013648166.py(99):     query=list(map(int,input().split()))
+s013648166.py(100):     if query[0]==0:
+s013648166.py(104):         ANS.append(getvalues(query[1],query[2]+1))
+ --- modulename: s013648166, funcname: getvalues
+s013648166.py(61):     L=l+seg_el
+s013648166.py(62):     R=r+seg_el
+s013648166.py(64):     L//=(L & (-L))
+s013648166.py(65):     R//=(R & (-R))
+s013648166.py(67):     UPIND=indexes(L,R)
+ --- modulename: s013648166, funcname: indexes
+s013648166.py(11):     INDLIST=[]
+s013648166.py(13):     R-=1
+s013648166.py(15):     L>>=1
+s013648166.py(16):     R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(26):     while L!=0:
+s013648166.py(30):     return INDLIST
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(81):     ANS=1<<31
+s013648166.py(83):     while L!=R:
+s013648166.py(84):         if L > R:
+s013648166.py(90):             R-=1
+s013648166.py(91):             ANS=min(ANS , SEG[R])
+s013648166.py(92):             R//=(R & (-R))
+s013648166.py(83):     while L!=R:
+s013648166.py(84):         if L > R:
+s013648166.py(90):             R-=1
+s013648166.py(91):             ANS=min(ANS , SEG[R])
+s013648166.py(92):             R//=(R & (-R))
+s013648166.py(83):     while L!=R:
+s013648166.py(94):     return ANS
+s013648166.py(98): for _ in range(Q):
+s013648166.py(99):     query=list(map(int,input().split()))
+s013648166.py(100):     if query[0]==0:
+s013648166.py(104):         ANS.append(getvalues(query[1],query[2]+1))
+ --- modulename: s013648166, funcname: getvalues
+s013648166.py(61):     L=l+seg_el
+s013648166.py(62):     R=r+seg_el
+s013648166.py(64):     L//=(L & (-L))
+s013648166.py(65):     R//=(R & (-R))
+s013648166.py(67):     UPIND=indexes(L,R)
+ --- modulename: s013648166, funcname: indexes
+s013648166.py(11):     INDLIST=[]
+s013648166.py(13):     R-=1
+s013648166.py(15):     L>>=1
+s013648166.py(16):     R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(26):     while L!=0:
+s013648166.py(30):     return INDLIST
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(81):     ANS=1<<31
+s013648166.py(83):     while L!=R:
+s013648166.py(84):         if L > R:
+s013648166.py(90):             R-=1
+s013648166.py(91):             ANS=min(ANS , SEG[R])
+s013648166.py(92):             R//=(R & (-R))
+s013648166.py(83):     while L!=R:
+s013648166.py(94):     return ANS
+s013648166.py(98): for _ in range(Q):
+s013648166.py(99):     query=list(map(int,input().split()))
+s013648166.py(100):     if query[0]==0:
+s013648166.py(101):         adds(query[1],query[2]+1,query[3])
+ --- modulename: s013648166, funcname: adds
+s013648166.py(35):     L=l+seg_el
+s013648166.py(36):     R=r+seg_el
+s013648166.py(38):     L//=(L & (-L))
+s013648166.py(39):     R//=(R & (-R))
+s013648166.py(41):     UPIND=indexes(L,R)
+ --- modulename: s013648166, funcname: indexes
+s013648166.py(11):     INDLIST=[]
+s013648166.py(13):     R-=1
+s013648166.py(15):     L>>=1
+s013648166.py(16):     R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(20):             INDLIST.append(L)
+s013648166.py(21):             L>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(20):             INDLIST.append(L)
+s013648166.py(21):             L>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(26):     while L!=0:
+s013648166.py(27):         INDLIST.append(L)
+s013648166.py(28):         L>>=1
+s013648166.py(26):     while L!=0:
+s013648166.py(30):     return INDLIST
+s013648166.py(43):     while L!=R:
+s013648166.py(44):         if L > R:
+s013648166.py(45):             SEG[L]+=x
+s013648166.py(46):             LAZY[L]+=x
+s013648166.py(47):             L+=1
+s013648166.py(48):             L//=(L & (-L))
+s013648166.py(43):     while L!=R:
+s013648166.py(44):         if L > R:
+s013648166.py(51):             R-=1
+s013648166.py(52):             SEG[R]+=x
+s013648166.py(53):             LAZY[R]+=x
+s013648166.py(54):             R//=(R & (-R))
+s013648166.py(43):     while L!=R:
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(57):         SEG[ind]=min(SEG[ind<<1],SEG[1+(ind<<1)])+LAZY[ind]
+s013648166.py(56):     for ind in UPIND:
+s013648166.py(98): for _ in range(Q):
+s013648166.py(99):     query=list(map(int,input().split()))
+s013648166.py(100):     if query[0]==0:
+s013648166.py(104):         ANS.append(getvalues(query[1],query[2]+1))
+ --- modulename: s013648166, funcname: getvalues
+s013648166.py(61):     L=l+seg_el
+s013648166.py(62):     R=r+seg_el
+s013648166.py(64):     L//=(L & (-L))
+s013648166.py(65):     R//=(R & (-R))
+s013648166.py(67):     UPIND=indexes(L,R)
+ --- modulename: s013648166, funcname: indexes
+s013648166.py(11):     INDLIST=[]
+s013648166.py(13):     R-=1
+s013648166.py(15):     L>>=1
+s013648166.py(16):     R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(20):             INDLIST.append(L)
+s013648166.py(21):             L>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(20):             INDLIST.append(L)
+s013648166.py(21):             L>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(26):     while L!=0:
+s013648166.py(27):         INDLIST.append(L)
+s013648166.py(28):         L>>=1
+s013648166.py(26):     while L!=0:
+s013648166.py(30):     return INDLIST
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(71):             plus_lazy=LAZY[ind]
+s013648166.py(73):             SEG[ind<<1]+=plus_lazy
+s013648166.py(74):             SEG[1+(ind<<1)]+=plus_lazy
+s013648166.py(76):             LAZY[ind<<1]+=plus_lazy
+s013648166.py(77):             LAZY[1+(ind<<1)]+=plus_lazy
+s013648166.py(79):             LAZY[ind]=0
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(71):             plus_lazy=LAZY[ind]
+s013648166.py(73):             SEG[ind<<1]+=plus_lazy
+s013648166.py(74):             SEG[1+(ind<<1)]+=plus_lazy
+s013648166.py(76):             LAZY[ind<<1]+=plus_lazy
+s013648166.py(77):             LAZY[1+(ind<<1)]+=plus_lazy
+s013648166.py(79):             LAZY[ind]=0
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(81):     ANS=1<<31
+s013648166.py(83):     while L!=R:
+s013648166.py(84):         if L > R:
+s013648166.py(90):             R-=1
+s013648166.py(91):             ANS=min(ANS , SEG[R])
+s013648166.py(92):             R//=(R & (-R))
+s013648166.py(83):     while L!=R:
+s013648166.py(84):         if L > R:
+s013648166.py(85):             ANS=min(ANS , SEG[L])
+s013648166.py(86):             L+=1
+s013648166.py(87):             L//=(L & (-L))
+s013648166.py(83):     while L!=R:
+s013648166.py(94):     return ANS
+s013648166.py(98): for _ in range(Q):
+s013648166.py(99):     query=list(map(int,input().split()))
+s013648166.py(100):     if query[0]==0:
+s013648166.py(104):         ANS.append(getvalues(query[1],query[2]+1))
+ --- modulename: s013648166, funcname: getvalues
+s013648166.py(61):     L=l+seg_el
+s013648166.py(62):     R=r+seg_el
+s013648166.py(64):     L//=(L & (-L))
+s013648166.py(65):     R//=(R & (-R))
+s013648166.py(67):     UPIND=indexes(L,R)
+ --- modulename: s013648166, funcname: indexes
+s013648166.py(11):     INDLIST=[]
+s013648166.py(13):     R-=1
+s013648166.py(15):     L>>=1
+s013648166.py(16):     R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(19):         if L>R:
+s013648166.py(23):             INDLIST.append(R)
+s013648166.py(24):             R>>=1
+s013648166.py(18):     while L!=R:
+s013648166.py(26):     while L!=0:
+s013648166.py(30):     return INDLIST
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(70):         if LAZY[ind]!=0:
+s013648166.py(69):     for ind in UPIND[::-1]: # 遅延伝搬
+s013648166.py(81):     ANS=1<<31
+s013648166.py(83):     while L!=R:
+s013648166.py(84):         if L > R:
+s013648166.py(90):             R-=1
+s013648166.py(91):             ANS=min(ANS , SEG[R])
+s013648166.py(92):             R//=(R & (-R))
+s013648166.py(83):     while L!=R:
+s013648166.py(84):         if L > R:
+s013648166.py(90):             R-=1
+s013648166.py(91):             ANS=min(ANS , SEG[R])
+s013648166.py(92):             R//=(R & (-R))
+s013648166.py(83):     while L!=R:
+s013648166.py(94):     return ANS
+s013648166.py(98): for _ in range(Q):
+s013648166.py(106): print("\n".join([str(ans) for ans in ANS]))
+ --- modulename: s013648166, funcname: <listcomp>
+s013648166.py(106): print("\n".join([str(ans) for ans in ANS]))
+s013648166.py(106): print("\n".join([str(ans) for ans in ANS]))
+s013648166.py(106): print("\n".join([str(ans) for ans in ANS]))
+s013648166.py(106): print("\n".join([str(ans) for ans in ANS]))
+s013648166.py(106): print("\n".join([str(ans) for ans in ANS]))
+-2
+0
+1
+-1
