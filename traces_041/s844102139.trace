@@ -1,0 +1,61 @@
+ --- modulename: s844102139, funcname: <module>
+s844102139.py(1): """
+s844102139.py(14): def modmal(a,b,mod): #a*bをmodを法にして求める
+s844102139.py(21): def moddiv(a,b,mod): #a/bをmodを法にして求める
+s844102139.py(28): def inverse(a,mod): #aのmodを法にした逆元を返す
+s844102139.py(37): def modfac(n, MOD):
+s844102139.py(55): def modnCr(n,r,mod,fac,inv): #上で求めたfacとinvsを引数に入れるべし(上の関数で与えたnが計算できる最大のnになる)
+s844102139.py(60): mod = 10**9+7
+s844102139.py(61): N,A,B,C = map(int,input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s844102139.py(62): fac,inv = modfac(2*N,mod)
+ --- modulename: s844102139, funcname: modfac
+s844102139.py(39):     f = 1
+s844102139.py(40):     factorials = [1]
+s844102139.py(41):     for m in range(1, n + 1):
+s844102139.py(42):         f *= m
+s844102139.py(43):         f %= MOD
+s844102139.py(44):         factorials.append(f)
+s844102139.py(41):     for m in range(1, n + 1):
+s844102139.py(42):         f *= m
+s844102139.py(43):         f %= MOD
+s844102139.py(44):         factorials.append(f)
+s844102139.py(41):     for m in range(1, n + 1):
+s844102139.py(45):     inv = pow(f, MOD - 2, MOD)
+s844102139.py(46):     invs = [1] * (n + 1)
+s844102139.py(47):     invs[n] = inv
+s844102139.py(48):     for m in range(n, 1, -1):
+s844102139.py(49):         inv *= m
+s844102139.py(50):         inv %= MOD
+s844102139.py(51):         invs[m - 1] = inv
+s844102139.py(48):     for m in range(n, 1, -1):
+s844102139.py(52):     return factorials, invs
+s844102139.py(64): inv100 = inverse(100,mod)
+ --- modulename: s844102139, funcname: inverse
+s844102139.py(29):     return pow(a,mod-2,mod)
+s844102139.py(65): invAB = inverse(A+B,mod)
+ --- modulename: s844102139, funcname: inverse
+s844102139.py(29):     return pow(a,mod-2,mod)
+s844102139.py(67): ans = 0
+s844102139.py(68): for b in range(N):
+s844102139.py(70):     ans += modnCr(N+b-1,b,mod,fac,inv) * pow(B*invAB,b,mod) * pow(A*invAB,N,mod) * (N+b)
+ --- modulename: s844102139, funcname: modnCr
+s844102139.py(57):     return fac[n] * inv[n-r] * inv[r] % mod
+s844102139.py(71):     ans %= mod
+s844102139.py(68): for b in range(N):
+s844102139.py(74): for a in range(N):
+s844102139.py(76):     ans += modnCr(N+a-1,a,mod,fac,inv) * pow(A*invAB,a,mod) * pow(B*invAB,N,mod) * (N+a)
+ --- modulename: s844102139, funcname: modnCr
+s844102139.py(57):     return fac[n] * inv[n-r] * inv[r] % mod
+s844102139.py(77):     ans %= mod
+s844102139.py(74): for a in range(N):
+s844102139.py(80): print (ans * 100 * inverse(100-C,mod) % mod)
+ --- modulename: s844102139, funcname: inverse
+s844102139.py(29):     return pow(a,mod-2,mod)
+2
