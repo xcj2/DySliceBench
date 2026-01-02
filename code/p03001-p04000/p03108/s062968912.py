@@ -1,0 +1,174 @@
+from collections import defaultdict,deque
+from heapq import heappush, heappop
+from itertools import permutations
+import sys
+import math
+import bisect
+def LI(): return [int(x) for x in sys.stdin.readline().split()]
+def I(): return int(sys.stdin.readline())
+def LS():return [list(x) for x in sys.stdin.readline().split()]
+def S():
+    res = list(sys.stdin.readline())
+    if res[-1] == "\n":
+        return res[:-1]
+    return res
+def IR(n):
+    return [I() for i in range(n)]
+def LIR(n):
+    return [LI() for i in range(n)]
+def SR(n):
+    return [S() for i in range(n)]
+def LSR(n):
+    return [LS() for i in range(n)]
+
+sys.setrecursionlimit(1000000)
+mod = 1000000007
+"""
+#N,K,Mが入力
+    n,k,m=LI() 
+    #N
+    #x1 y1
+    #.  .
+    #xn ynが入力
+    N=I()
+    p=LIR(N)
+    print(n,k,m,p)
+"""
+############################## ユニオン木(union tree) ###################################
+#uf=UnionFind(n)と使う
+# print(uf.roots())
+# print(uf.all_group_members())
+class UnionFind:
+    def __init__(self, n):
+        self.n=n
+        self.par = [-1 for i in range(self.n+1)]
+        self.rank = [0 for i in range(self.n+1)]#素集合でないとrankは意味がなさそう,素集合であればrank kには少なくとも2^k要素がある。
+    
+    # 検索
+    def find(self, x):
+        # if self.par[x] == x:
+        if self.par[x] <0:
+            return x
+        else:
+            self.par[x] = self.find(self.par[x])
+            return self.par[x]
+
+    # 併合
+    def union(self, x, y):
+        x = self.find(x)
+        y = self.find(y)
+        if x==y:
+            return
+        if self.rank[x] < self.rank[y]:
+            self.par[y]+=self.par[x]
+            self.par[x] = y
+        else:
+            self.par[x]+=self.par[y]
+            self.par[y] = x
+            if self.rank[x] == self.rank[y]:
+                self.rank[x] += 1
+        
+    # 同じ集合に属するか判定
+    def same(self, x, y):
+        return self.find(x) == self.find(y)
+
+    #要素xが属するグループに属する要素をリストで返す
+    def members(self, x):
+        root = self.find(x)
+        return [i for i in range(self.n+1) if self.find(i) == root]
+
+    def size(self, x):
+        return -self.par[self.find(x)]
+
+    #すべての根の要素をリストで返す
+    def roots(self):
+        return [i for i, x in enumerate(self.par) if x<0]
+
+    #グループの数を返す
+    def group_count(self):
+        return len(self.roots())
+
+    #{ルート要素: [そのグループに含まれる要素のリスト], ...}の辞書を返す
+    def all_group_members(self):
+        return {int(r):self.members(r) for r in self.roots()}
+
+    def __str__(self):
+        return '\n'.join('{}: {}'.format(r, self.members(r)) for r in self.roots())
+   
+
+def resolve():
+    n,m=LI()
+    s=LIR(m)
+    ans=[0 for i in range(m)]
+    u=UnionFind(n-1)
+    buf=n*(n-1)//2
+    ans[0]=buf
+    for i in range(m):#後ろからiつ目までは橋が壊れていない
+        if i>0:
+            a=s[m-1-(i-1)][0]-1
+            b=s[m-1-(i-1)][1]-1
+            if(u.same(a,b)==False):
+                buf-=(u.size(a))*(u.size(b))
+                u.union(a,b)
+            ans[i]=buf
+            # print(u.all_group_members())
+        #d=u.all_group_members()
+        #roots=u.roots()
+        #lroots=len(roots)
+        #for ri in range(lroots):
+        #for rj in range(lroots):
+        #        if(ri>=rj):continue
+        #        buf+=len(d[roots[ri]])*len(d[roots[rj]])
+        #ans[m-1-i]=buf
+
+    for i in (reversed(range(m))):
+        print(ans[i])    
+
+import sys
+from io import StringIO
+import unittest
+
+class TestClass(unittest.TestCase):
+    def assertIO(self, input, output):
+        stdout, stdin = sys.stdout, sys.stdin
+        sys.stdout, sys.stdin = StringIO(), StringIO(input)
+        resolve()
+        sys.stdout.seek(0)
+        out = sys.stdout.read()[:-1]
+        sys.stdout, sys.stdin = stdout, stdin
+        self.assertEqual(out, output)
+    def test_入力例_1(self):
+        input = """4 5
+1 2
+3 4
+1 3
+2 3
+1 4"""
+        output = """0
+0
+4
+5
+6"""
+        self.assertIO(input, output)
+    def test_入力例_2(self):
+        input = """6 5
+2 3
+1 2
+5 6
+3 4
+4 5"""
+        output = """8
+9
+12
+14
+15"""
+        self.assertIO(input, output)
+    def test_入力例_3(self):
+        input = """2 1
+1 2"""
+        output = """1"""
+        self.assertIO(input, output)
+
+if __name__ == "__main__":
+    # unittest.main()
+    resolve()
