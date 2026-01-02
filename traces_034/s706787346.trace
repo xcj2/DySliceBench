@@ -1,0 +1,122 @@
+ --- modulename: s706787346, funcname: <module>
+s706787346.py(1): import os
+s706787346.py(2): import sys
+s706787346.py(4): if os.getenv("LOCAL"):
+ --- modulename: os, funcname: getenv
+os.py(775):     return environ.get(key, default)
+ --- modulename: _collections_abc, funcname: get
+_collections_abc.py(762):         try:
+_collections_abc.py(763):             return self[key]
+ --- modulename: os, funcname: __getitem__
+os.py(675):         try:
+os.py(676):             value = self._data[self.encodekey(key)]
+ --- modulename: os, funcname: encodekey
+os.py(747):             return encode(key).upper()
+ --- modulename: os, funcname: check_str
+os.py(741):             if not isinstance(value, str):
+os.py(743):             return value
+os.py(677):         except KeyError:
+os.py(679):             raise KeyError(key) from None
+_collections_abc.py(764):         except KeyError:
+_collections_abc.py(765):             return default
+s706787346.py(7): sys.setrecursionlimit(10 ** 9)
+s706787346.py(8): INF = float("inf")
+s706787346.py(9): IINF = 10 ** 18
+s706787346.py(10): MOD = 10 ** 9 + 7
+s706787346.py(16): def get_factorials(max, mod=None):
+s706787346.py(37): def mod_invs(max, mod):
+s706787346.py(49): def factorial_invs(max, mod):
+s706787346.py(63): class Combination:
+ --- modulename: s706787346, funcname: Combination
+s706787346.py(63): class Combination:
+s706787346.py(64):     def __init__(self, max, mod):
+s706787346.py(73):     def ncr(self, n, r):
+s706787346.py(90): P = int(sys.stdin.readline())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s706787346.py(91): A = list(map(int, sys.stdin.readline().split()))
+s706787346.py(109): comb = Combination(max=P - 1, mod=P)
+ --- modulename: s706787346, funcname: __init__
+s706787346.py(69):         self._factorials = get_factorials(max, mod)
+ --- modulename: s706787346, funcname: get_factorials
+s706787346.py(23):     ret = [1]
+s706787346.py(24):     n = 1
+s706787346.py(25):     if mod:
+s706787346.py(26):         for i in range(1, max + 1):
+s706787346.py(27):             n *= i
+s706787346.py(28):             n %= mod
+s706787346.py(29):             ret.append(n)
+s706787346.py(26):         for i in range(1, max + 1):
+s706787346.py(34):     return ret
+s706787346.py(70):         self._finvs = factorial_invs(max, mod)
+ --- modulename: s706787346, funcname: factorial_invs
+s706787346.py(55):     ret = []
+s706787346.py(56):     r = 1
+s706787346.py(57):     for inv in mod_invs(max, mod):
+ --- modulename: s706787346, funcname: mod_invs
+s706787346.py(43):     invs = [1] * (max + 1)
+s706787346.py(44):     for x in range(2, max + 1):
+s706787346.py(46):     return invs
+s706787346.py(58):         r = r * inv % mod
+s706787346.py(59):         ret.append(r)
+s706787346.py(57):     for inv in mod_invs(max, mod):
+s706787346.py(58):         r = r * inv % mod
+s706787346.py(59):         ret.append(r)
+s706787346.py(57):     for inv in mod_invs(max, mod):
+s706787346.py(60):     return ret
+s706787346.py(71):         self._mod = mod
+s706787346.py(110): ncr = [comb.ncr(P - 1, i) for i in range(P)]
+ --- modulename: s706787346, funcname: <listcomp>
+s706787346.py(110): ncr = [comb.ncr(P - 1, i) for i in range(P)]
+ --- modulename: s706787346, funcname: ncr
+s706787346.py(79):         if n < r:
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(83):                 * self._finvs[r]
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(84):                 % self._mod
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(85):                 * self._finvs[n - r]
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(86):                 % self._mod
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(81):         return (
+s706787346.py(110): ncr = [comb.ncr(P - 1, i) for i in range(P)]
+ --- modulename: s706787346, funcname: ncr
+s706787346.py(79):         if n < r:
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(83):                 * self._finvs[r]
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(84):                 % self._mod
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(85):                 * self._finvs[n - r]
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(86):                 % self._mod
+s706787346.py(82):                 self._factorials[n]
+s706787346.py(81):         return (
+s706787346.py(110): ncr = [comb.ncr(P - 1, i) for i in range(P)]
+s706787346.py(111): B = [0] * P
+s706787346.py(112): for j, a in enumerate(A):
+s706787346.py(113):     if a == 0:
+s706787346.py(115):     pw = 1  # pow(-j, i, P)
+s706787346.py(116):     for i in range(P):
+s706787346.py(117):         B[i] -= pw * ncr[i] % P
+s706787346.py(118):         B[i] %= P
+s706787346.py(119):         pw = (pw * -j) % P
+s706787346.py(116):     for i in range(P):
+s706787346.py(117):         B[i] -= pw * ncr[i] % P
+s706787346.py(118):         B[i] %= P
+s706787346.py(119):         pw = (pw * -j) % P
+s706787346.py(116):     for i in range(P):
+s706787346.py(120):     B[-1] += 1
+s706787346.py(121):     B[-1] %= P
+s706787346.py(112): for j, a in enumerate(A):
+s706787346.py(113):     if a == 0:
+s706787346.py(114):         continue
+s706787346.py(112): for j, a in enumerate(A):
+s706787346.py(122): print(*B[::-1])
+1 1
