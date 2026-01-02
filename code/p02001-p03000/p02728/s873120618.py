@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+import sys
+from collections import defaultdict
+from functools import lru_cache
+from collections import deque
+MOD = 1000000007  # type: int
+
+
+class Graph(object):
+    def __init__(self, N):
+        self.N = N
+        self.E = defaultdict(list)
+
+    def add_edge(self, src, dest, w=1):
+        self.E[src].append((dest, w))
+        self.E[dest].append((src, w))
+
+
+@lru_cache(maxsize=None)
+def div(a, b):
+    return (a * pow(b, MOD-2, MOD)) % MOD
+
+
+class Combination(object):
+
+    def __init__(self, N, mod=MOD):
+        fac, finv, inv = [0]*(N+1), [0]*(N+1), [0]*(N+1)
+        fac[:2] = 1, 1
+        finv[:2] = 1, 1
+        inv[1] = 1
+        for i in range(2, N+1):
+            fac[i] = fac[i-1]*i % mod
+            inv[i] = -inv[mod % i]*(mod//i) % mod
+            finv[i] = finv[i-1]*inv[i] % mod
+        self.N = N
+        self.MOD = mod
+        self.fac = fac
+        self.finv = finv
+        self.inv = inv
+
+    def __call__(self, n, k):
+        if n < k:
+            return 0
+        if n < 0 or k < 0:
+            return 0
+        b = (self.finv[k]*self.finv[n-k] % self.MOD)
+        return (self.fac[n] * b) % self.MOD
+
+
+def solve(N: int, a: "List[int]", b: "List[int]"):
+    # グラフの構築
+    g = Graph(N)
+    for aa, bb in zip(a, b):
+        g.add_edge(aa-1, bb-1)
+
+    # 組み合わせの初期化
+    cmb = Combination(N)
+
+    # BFSの入り順を構成する
+    curr = -1
+    downward = [0]
+    parent = [-1]*N
+    while len(downward) < N:
+        curr += 1
+        v = downward[curr]
+        for u, _ in g.E[v]:
+            if u == parent[v]:
+                continue
+            parent[u] = v
+            downward.append(u)
+    # print(downward)
+
+    # 節点vを根とした部分木の塗り方dp[v]
+    dp = [1]*N
+    # 節点vを根とした部分木のサイズsize[v]+1
+    size = [0]*N
+
+    # 葉から根へ向かう探索
+    for v in reversed(downward):
+        for u, _ in g.E[v]:
+            if u == parent[v]:
+                continue
+            size[v] += size[u]+1
+            dp[v] *= cmb(size[v], size[u]+1)
+            dp[v] %= MOD
+            dp[v] *= dp[u]
+            dp[v] %= MOD
+
+    # 全方位木DP
+    # 根から葉へ向かう探索
+    for v in downward:
+        for u, _ in g.E[v]:
+            if u == parent[v]:
+                continue
+            d = div(dp[v], cmb(N-1, size[u]+1))
+            d = div(d, dp[u])
+            dp[u] *= cmb(N-1, size[u])
+            dp[u] %= MOD
+            dp[u] *= d
+            dp[u] %= MOD
+
+    for v in dp:
+        print(v)
+    return
+
+
+def main():
+
+    def iterate_tokens():
+        for line in sys.stdin:
+            for word in line.split():
+                yield word
+    tokens = iterate_tokens()
+    N = int(next(tokens))  # type: int
+    a = [int()] * (N - 1)  # type: "List[int]"
+    b = [int()] * (N - 1)  # type: "List[int]"
+    for i in range(N - 1):
+        a[i] = int(next(tokens))
+        b[i] = int(next(tokens))
+    solve(N, a, b)
+
+
+if __name__ == '__main__':
+    main()
