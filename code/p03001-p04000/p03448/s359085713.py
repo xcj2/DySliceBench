@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+import sys
+
+
+def solve(A: int, B: int, C: int, X: int):
+    ret = 0
+    for i in range(A + 1):
+        for j in range(B + 1):
+            for k in range(C + 1):
+                if 500 * i + 100 * j + 50 * k == X:
+                    ret += 1
+    print(ret)
+    return
+
+
+def main():
+    def iterate_tokens():
+        for line in sys.stdin:
+            for word in line.split():
+                yield word
+    tokens = iterate_tokens()
+    A = int(next(tokens))  # type: int
+    B = int(next(tokens))  # type: int
+    C = int(next(tokens))  # type: int
+    X = int(next(tokens))  # type: int
+    solve(A, B, C, X)
+
+if __name__ == '__main__':
+    main()
