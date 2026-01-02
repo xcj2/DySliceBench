@@ -1,0 +1,65 @@
+ --- modulename: s201243208, funcname: <module>
+s201243208.py(4): class Combination:                                      # 計算量は O(n_max + log(mod))
+ --- modulename: s201243208, funcname: Combination
+s201243208.py(4): class Combination:                                      # 計算量は O(n_max + log(mod))
+s201243208.py(5):     def __init__(self, n_max, mod=10**9+7):
+s201243208.py(23):     def __call__(self, n, r):  # self.C と同じ
+s201243208.py(26):     def C(self, n, r):
+s201243208.py(30): X, Y = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s201243208.py(32): if (2*Y- X) % 3 or (2*X- Y) % 3:
+s201243208.py(36): x = (2*Y - X) // 3
+s201243208.py(37): y = (2*X - Y) // 3
+s201243208.py(39): n = x + y
+s201243208.py(40): r = x
+s201243208.py(43): mod = 10**9 + 7
+s201243208.py(44): f = 1
+s201243208.py(45): for i in range(1, n + 1):
+s201243208.py(46):     f = f*i % mod
+s201243208.py(45): for i in range(1, n + 1):
+s201243208.py(46):     f = f*i % mod
+s201243208.py(45): for i in range(1, n + 1):
+s201243208.py(47): fac = f
+s201243208.py(48): f = pow(f, mod-2, mod)
+s201243208.py(49): facinv = [f]
+s201243208.py(50): for i in range(n, 0, -1):
+s201243208.py(51):     f = f*i % mod
+s201243208.py(52):     facinv.append(f)
+s201243208.py(50): for i in range(n, 0, -1):
+s201243208.py(51):     f = f*i % mod
+s201243208.py(52):     facinv.append(f)
+s201243208.py(50): for i in range(n, 0, -1):
+s201243208.py(53): facinv.append(1)
+s201243208.py(55): comb = Combination(n)
+ --- modulename: s201243208, funcname: __init__
+s201243208.py(6):         self.mod = mod
+s201243208.py(7):         f = 1
+s201243208.py(8):         self.fac = fac = [f]
+s201243208.py(9):         for i in range(1, n_max+1):                     # 階乗(= n_max !)の逆元を生成
+s201243208.py(10):             f = f * i % mod                             # 動的計画法による階乗の高速計算
+s201243208.py(11):             fac.append(f)                               # fac は階乗のリスト
+s201243208.py(9):         for i in range(1, n_max+1):                     # 階乗(= n_max !)の逆元を生成
+s201243208.py(10):             f = f * i % mod                             # 動的計画法による階乗の高速計算
+s201243208.py(11):             fac.append(f)                               # fac は階乗のリスト
+s201243208.py(9):         for i in range(1, n_max+1):                     # 階乗(= n_max !)の逆元を生成
+s201243208.py(12):         f = pow(f, mod-2, mod)                          # 階乗から階乗の逆元を計算。フェルマーの小定理より、　a^-1 = a^(p-2) (mod p) if p = prime number and p and a are coprime
+s201243208.py(14):         self.facinv = facinv = [f]
+s201243208.py(15):         for i in range(n_max, 0, -1):                   # 上記の階乗の逆元から階乗の逆元のリストを生成（＝ facinv ）
+s201243208.py(16):             f = f * i % mod
+s201243208.py(17):             facinv.append(f)
+s201243208.py(15):         for i in range(n_max, 0, -1):                   # 上記の階乗の逆元から階乗の逆元のリストを生成（＝ facinv ）
+s201243208.py(16):             f = f * i % mod
+s201243208.py(17):             facinv.append(f)
+s201243208.py(15):         for i in range(n_max, 0, -1):                   # 上記の階乗の逆元から階乗の逆元のリストを生成（＝ facinv ）
+s201243208.py(18):         facinv.reverse()
+s201243208.py(56): print(comb.C(n,r))
+ --- modulename: s201243208, funcname: C
+s201243208.py(27):         if not 0 <= r <= n: return 0
+s201243208.py(28):         return self.fac[n] * self.facinv[r] % self.mod * self.facinv[n-r] % self.mod
+2
