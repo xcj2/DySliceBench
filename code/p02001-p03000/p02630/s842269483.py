@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+import bisect
+import collections
+import sys
+
+sys.setrecursionlimit(1000000)
+ACMOD = 1000000007
+INF = 1 << 62
+
+
+def solve(N: int, A: "List[int]", Q: int, B: "List[int]", C: "List[int]"):
+    _sum = sum(A)
+    ac = collections.Counter(A)
+    for i in range(Q):
+        b, c = B[i], C[i]
+
+        diff = ac[b] * (c - b)
+        _sum += diff
+        ac[c] += ac[b]
+        ac[b] = 0
+        print(_sum)
+    return
+
+
+def main():
+    def iterate_tokens():
+        for line in sys.stdin:
+            for word in line.split():
+                yield word
+
+    tokens = iterate_tokens()
+    N = int(next(tokens))  # type: int
+    A = [int(next(tokens)) for _ in range(N)]  # type: "List[int]"
+    Q = int(next(tokens))  # type: int
+    B = [int()] * (Q)  # type: "List[int]"
+    C = [int()] * (Q)  # type: "List[int]"
+    for i in range(Q):
+        B[i] = int(next(tokens))
+        C[i] = int(next(tokens))
+    solve(N, A, Q, B, C)
+
+
+if __name__ == '__main__':
+    main()
