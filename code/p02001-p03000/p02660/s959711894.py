@@ -1,0 +1,106 @@
+#include <CodeforcesSolutions.h>
+#include <ONLINE_JUDGE <solution.cf(contestID = "1359",problemID = "C",method = "GET")>.h>
+"""
+    Author : thekushalghosh
+    Team   : CodeDiggers
+ 
+    I prefer Python language over the C++ language :p :D
+        
+    Visit my website : thekushalghosh.github.io
+"""
+import sys,math,cmath,time,decimal
+start_time = time.time()
+##########################################################################
+################# ---- THE ACTUAL CODE STARTS BELOW ---- #################
+
+def qw(n): 
+    q = []
+    # Print the number of two's that divide n 
+    while n % 2 == 0: 
+        q.append(2)
+        n = n // 2
+          
+    # n must be odd at this point 
+    # so a skip of 2 ( i = i + 2) can be used 
+    for i in range(3,int(math.sqrt(n))+1,2): 
+          
+        # while i divides n , print i ad divide n 
+        while n % i== 0: 
+            q.append(i) 
+            n = n // i 
+              
+    # Condition if n is a prime 
+    # number greater than 2 
+    if n > 2: 
+        q.append(n)
+    return(q)
+
+def solve():
+    n = inp()
+    if n == 1:
+        print(0)
+        return
+    a = qw(n)
+    c = 0
+    q = a[0]
+    w = 0
+    qq = 0
+    for i in range(len(a)):
+        if a[i] == q:
+            c = c + 1
+            if c > w:
+                qq = qq + 1
+                w = c
+                c = 0
+        else:
+            qq = qq + 1
+            c = 0
+            w = 1
+            q = a[i]
+    print(qq)
+                
+################## ---- THE ACTUAL CODE ENDS ABOVE ---- ##################
+##########################################################################
+ 
+def main():
+    global tt
+    if not ONLINE_JUDGE:
+        sys.stdin = open("input.txt","r")
+        sys.stdout = open("output.txt","w")
+    t = 1
+    for tt in range(t):
+        solve()
+    if not ONLINE_JUDGE:
+        print("Time Elapsed :",time.time() - start_time,"seconds")
+    sys.stdout.close()
+    
+#---------------------- USER DEFINED INPUT FUNCTIONS ----------------------#
+def inp():
+    return(int(input()))
+def inlt():
+    return(list(map(int,input().split())))
+def insr():
+    return(input().strip())
+def invr():
+    return(map(float,input().split()))
+ 
+#------------------ USER DEFINED PROGRAMMING FUNCTIONS ------------------#
+def counter(a):
+    q = [0] * max(a)
+    for i in range(len(a)):
+        q[a[i] - 1] = q[a[i] - 1] + 1
+    return(q)
+ 
+def string_counter(a):
+    q = [0] * 26
+    for i in range(len(a)):
+        q[ord(a[i]) - 97] = q[ord(a[i]) - 97] + 1
+    return(q)
+ 
+ONLINE_JUDGE = __debug__
+if ONLINE_JUDGE:
+    input = sys.stdin.readline
+   
+  
+  
+main()
