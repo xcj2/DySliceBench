@@ -1,0 +1,182 @@
+ --- modulename: s161327703, funcname: <module>
+s161327703.py(1): import sys
+s161327703.py(2): sys.setrecursionlimit(10 ** 6)
+s161327703.py(5): MOD = 10 ** 9 + 7
+s161327703.py(8): def prepare(n):
+s161327703.py(23): def dfs(v):
+s161327703.py(42): def dfs2(v):
+s161327703.py(66): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s161327703.py(67): edge = [[] for _ in range(N)]
+ --- modulename: s161327703, funcname: <listcomp>
+s161327703.py(67): edge = [[] for _ in range(N)]
+s161327703.py(67): edge = [[] for _ in range(N)]
+s161327703.py(67): edge = [[] for _ in range(N)]
+s161327703.py(67): edge = [[] for _ in range(N)]
+s161327703.py(68): for s in sys.stdin.readlines():
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s161327703.py(69):     a, b = map(int, s.split())
+s161327703.py(70):     edge[a - 1].append(b - 1)
+s161327703.py(71):     edge[b - 1].append(a - 1)
+s161327703.py(68): for s in sys.stdin.readlines():
+s161327703.py(69):     a, b = map(int, s.split())
+s161327703.py(70):     edge[a - 1].append(b - 1)
+s161327703.py(71):     edge[b - 1].append(a - 1)
+s161327703.py(68): for s in sys.stdin.readlines():
+s161327703.py(73): modFacts, invs = prepare(N)
+ --- modulename: s161327703, funcname: prepare
+s161327703.py(10):     modFacts = [0] * (n + 1)
+s161327703.py(11):     modFacts[0] = 1
+s161327703.py(12):     for i in range(n):
+s161327703.py(13):         modFacts[i + 1] = (modFacts[i] * (i + 1)) % MOD
+s161327703.py(12):     for i in range(n):
+s161327703.py(13):         modFacts[i + 1] = (modFacts[i] * (i + 1)) % MOD
+s161327703.py(12):     for i in range(n):
+s161327703.py(13):         modFacts[i + 1] = (modFacts[i] * (i + 1)) % MOD
+s161327703.py(12):     for i in range(n):
+s161327703.py(15):     invs = [1] * (n + 1)
+s161327703.py(16):     invs[n] = pow(modFacts[n], MOD - 2, MOD)
+s161327703.py(17):     for i in range(n, 1, -1):
+s161327703.py(18):         invs[i - 1] = (invs[i] * i) % MOD
+s161327703.py(17):     for i in range(n, 1, -1):
+s161327703.py(18):         invs[i - 1] = (invs[i] * i) % MOD
+s161327703.py(17):     for i in range(n, 1, -1):
+s161327703.py(20):     return modFacts, invs
+s161327703.py(75): V = [{} for _ in range(N)]
+ --- modulename: s161327703, funcname: <listcomp>
+s161327703.py(75): V = [{} for _ in range(N)]
+s161327703.py(75): V = [{} for _ in range(N)]
+s161327703.py(75): V = [{} for _ in range(N)]
+s161327703.py(75): V = [{} for _ in range(N)]
+s161327703.py(76): path = [0] * N
+s161327703.py(77): dp = [0] * N
+s161327703.py(78): path[0] = 1
+s161327703.py(79): dfs(0)
+ --- modulename: s161327703, funcname: dfs
+s161327703.py(25):     childs = 0
+s161327703.py(26):     var = 1
+s161327703.py(27):     for e in edge[v]:
+s161327703.py(28):         if path[e] == 0:
+s161327703.py(29):             path[e] = 1
+s161327703.py(30):             nc, nvar = dfs(e)
+ --- modulename: s161327703, funcname: dfs
+s161327703.py(25):     childs = 0
+s161327703.py(26):     var = 1
+s161327703.py(27):     for e in edge[v]:
+s161327703.py(28):         if path[e] == 0:
+s161327703.py(27):     for e in edge[v]:
+s161327703.py(37):     var *= modFacts[childs]
+s161327703.py(38):     var %= MOD
+s161327703.py(39):     return childs + 1, var
+s161327703.py(31):             childs += nc
+s161327703.py(32):             V[v][e] = (nc, nvar)
+s161327703.py(33):             var *= nvar
+s161327703.py(34):             var %= MOD
+s161327703.py(35):             var *= invs[nc]
+s161327703.py(36):             var %= MOD
+s161327703.py(27):     for e in edge[v]:
+s161327703.py(28):         if path[e] == 0:
+s161327703.py(29):             path[e] = 1
+s161327703.py(30):             nc, nvar = dfs(e)
+ --- modulename: s161327703, funcname: dfs
+s161327703.py(25):     childs = 0
+s161327703.py(26):     var = 1
+s161327703.py(27):     for e in edge[v]:
+s161327703.py(28):         if path[e] == 0:
+s161327703.py(27):     for e in edge[v]:
+s161327703.py(37):     var *= modFacts[childs]
+s161327703.py(38):     var %= MOD
+s161327703.py(39):     return childs + 1, var
+s161327703.py(31):             childs += nc
+s161327703.py(32):             V[v][e] = (nc, nvar)
+s161327703.py(33):             var *= nvar
+s161327703.py(34):             var %= MOD
+s161327703.py(35):             var *= invs[nc]
+s161327703.py(36):             var %= MOD
+s161327703.py(27):     for e in edge[v]:
+s161327703.py(37):     var *= modFacts[childs]
+s161327703.py(38):     var %= MOD
+s161327703.py(39):     return childs + 1, var
+s161327703.py(80): dfs2(0)
+ --- modulename: s161327703, funcname: dfs2
+s161327703.py(44):     tNodes = 0
+s161327703.py(45):     tVar = 1
+s161327703.py(46):     for n, var in V[v].values():
+s161327703.py(47):         tNodes += n
+s161327703.py(48):         tVar *= var
+s161327703.py(49):         tVar %= MOD
+s161327703.py(50):         tVar *= invs[n]
+s161327703.py(51):         tVar %= MOD
+s161327703.py(46):     for n, var in V[v].values():
+s161327703.py(47):         tNodes += n
+s161327703.py(48):         tVar *= var
+s161327703.py(49):         tVar %= MOD
+s161327703.py(50):         tVar *= invs[n]
+s161327703.py(51):         tVar %= MOD
+s161327703.py(46):     for n, var in V[v].values():
+s161327703.py(52):     tVar *= modFacts[tNodes]
+s161327703.py(53):     tVar %= MOD
+s161327703.py(54):     dp[v] = tVar
+s161327703.py(56):     for e in edge[v]:
+s161327703.py(57):         if dp[e] == 0:
+s161327703.py(58):             eNodes, eVar = V[v][e]
+s161327703.py(59):             nVar = (tVar * invs[tNodes] * modFacts[eNodes] * modFacts[tNodes - eNodes]) % MOD
+s161327703.py(60):             nVar *= pow(eVar, MOD - 2, MOD)
+s161327703.py(61):             nVar %= MOD
+s161327703.py(62):             V[e][v] = (tNodes - eNodes + 1, nVar)
+s161327703.py(63):             dfs2(e)
+ --- modulename: s161327703, funcname: dfs2
+s161327703.py(44):     tNodes = 0
+s161327703.py(45):     tVar = 1
+s161327703.py(46):     for n, var in V[v].values():
+s161327703.py(47):         tNodes += n
+s161327703.py(48):         tVar *= var
+s161327703.py(49):         tVar %= MOD
+s161327703.py(50):         tVar *= invs[n]
+s161327703.py(51):         tVar %= MOD
+s161327703.py(46):     for n, var in V[v].values():
+s161327703.py(52):     tVar *= modFacts[tNodes]
+s161327703.py(53):     tVar %= MOD
+s161327703.py(54):     dp[v] = tVar
+s161327703.py(56):     for e in edge[v]:
+s161327703.py(57):         if dp[e] == 0:
+s161327703.py(56):     for e in edge[v]:
+s161327703.py(56):     for e in edge[v]:
+s161327703.py(57):         if dp[e] == 0:
+s161327703.py(58):             eNodes, eVar = V[v][e]
+s161327703.py(59):             nVar = (tVar * invs[tNodes] * modFacts[eNodes] * modFacts[tNodes - eNodes]) % MOD
+s161327703.py(60):             nVar *= pow(eVar, MOD - 2, MOD)
+s161327703.py(61):             nVar %= MOD
+s161327703.py(62):             V[e][v] = (tNodes - eNodes + 1, nVar)
+s161327703.py(63):             dfs2(e)
+ --- modulename: s161327703, funcname: dfs2
+s161327703.py(44):     tNodes = 0
+s161327703.py(45):     tVar = 1
+s161327703.py(46):     for n, var in V[v].values():
+s161327703.py(47):         tNodes += n
+s161327703.py(48):         tVar *= var
+s161327703.py(49):         tVar %= MOD
+s161327703.py(50):         tVar *= invs[n]
+s161327703.py(51):         tVar %= MOD
+s161327703.py(46):     for n, var in V[v].values():
+s161327703.py(52):     tVar *= modFacts[tNodes]
+s161327703.py(53):     tVar %= MOD
+s161327703.py(54):     dp[v] = tVar
+s161327703.py(56):     for e in edge[v]:
+s161327703.py(57):         if dp[e] == 0:
+s161327703.py(56):     for e in edge[v]:
+s161327703.py(56):     for e in edge[v]:
+s161327703.py(83): print(*dp, sep='\n')
+2
+1
+1
