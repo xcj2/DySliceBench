@@ -1,0 +1,373 @@
+ --- modulename: s403659665, funcname: <module>
+s403659665.py(5): def _gidx(l, r, treesize):
+s403659665.py(26): class SegmentTreeForRMQ:  # range minimum query
+ --- modulename: s403659665, funcname: SegmentTreeForRMQ
+s403659665.py(26): class SegmentTreeForRMQ:  # range minimum query
+s403659665.py(27):     def __init__(self, ls: list, segfunc=min, identity_element=2**63, lazy_ide=None):
+s403659665.py(47):     def _lazyprop(self, *ids):
+s403659665.py(68):     def update(self, l, r, x):
+s403659665.py(98):     def query(self, l, r):
+s403659665.py(122): n, q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s403659665.py(123): ls = [2 ** 31 - 1] * n
+s403659665.py(124): seg = SegmentTreeForRMQ(ls, identity_element=2**31 - 1)
+ --- modulename: s403659665, funcname: __init__
+s403659665.py(35):         self.ide = identity_element
+s403659665.py(36):         self.lide = lazy_ide  # lazy用単位元
+s403659665.py(37):         self.func = segfunc
+s403659665.py(38):         n = len(ls)
+s403659665.py(39):         self.num = 2 ** (n - 1).bit_length()  # n以上の最小の2のべき乗
+s403659665.py(40):         self.tree = [self.ide] * (2 * self.num)  # 関係ない値を-1においてアクセスを許すと都合が良い
+s403659665.py(41):         self.lazy = [self.lide] * (2 * self.num)  # 遅延配列
+s403659665.py(42):         for i, l in enumerate(ls):  # 木の葉に代入
+s403659665.py(43):             self.tree[i + self.num - 1] = l
+s403659665.py(42):         for i, l in enumerate(ls):  # 木の葉に代入
+s403659665.py(43):             self.tree[i + self.num - 1] = l
+s403659665.py(42):         for i, l in enumerate(ls):  # 木の葉に代入
+s403659665.py(43):             self.tree[i + self.num - 1] = l
+s403659665.py(42):         for i, l in enumerate(ls):  # 木の葉に代入
+s403659665.py(44):         for i in range(self.num - 2, -1, -1):  # 子を束ねて親を更新
+s403659665.py(45):             self.tree[i] = segfunc(self.tree[2 * i + 1], self.tree[2 * i + 2])
+s403659665.py(44):         for i in range(self.num - 2, -1, -1):  # 子を束ねて親を更新
+s403659665.py(45):             self.tree[i] = segfunc(self.tree[2 * i + 1], self.tree[2 * i + 2])
+s403659665.py(44):         for i in range(self.num - 2, -1, -1):  # 子を束ねて親を更新
+s403659665.py(45):             self.tree[i] = segfunc(self.tree[2 * i + 1], self.tree[2 * i + 2])
+s403659665.py(44):         for i in range(self.num - 2, -1, -1):  # 子を束ねて親を更新
+s403659665.py(126): for _ in range(q):
+s403659665.py(127):     cmd, *tmp = map(int, input().split())
+s403659665.py(128):     if cmd == 0:
+s403659665.py(129):         s, t, x = tmp
+s403659665.py(130):         seg.update(s, t + 1, x)
+ --- modulename: s403659665, funcname: update
+s403659665.py(73):         ids = tuple(_gidx(l, r, self.num))
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(11):     L, R = l + treesize, r + treesize
+s403659665.py(12):     lm = (L // (L & -L)) >> 1  # これで成り立つの天才か？
+s403659665.py(13):     rm = (R // (R & -R)) >> 1
+s403659665.py(14):     while L < R:
+s403659665.py(15):         if R <= rm:
+s403659665.py(17):         if L <= lm:
+s403659665.py(19):         L >>= 1
+s403659665.py(20):         R >>= 1
+s403659665.py(14):     while L < R:
+s403659665.py(15):         if R <= rm:
+s403659665.py(17):         if L <= lm:
+s403659665.py(19):         L >>= 1
+s403659665.py(20):         R >>= 1
+s403659665.py(14):     while L < R:
+s403659665.py(21):     while L:  # Rでもいいけどね
+s403659665.py(22):         yield L
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(23):         L >>= 1
+s403659665.py(21):     while L:  # Rでもいいけどね
+s403659665.py(74):         self._lazyprop(*ids)
+ --- modulename: s403659665, funcname: _lazyprop
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(76):         if r <= l:
+s403659665.py(78):         l += self.num
+s403659665.py(79):         r += self.num
+s403659665.py(80):         while l < r:
+s403659665.py(81):             if r & 1:
+s403659665.py(85):             if l & 1:
+s403659665.py(90):             l >>= 1
+s403659665.py(91):             r >>= 1
+s403659665.py(80):         while l < r:
+s403659665.py(81):             if r & 1:
+s403659665.py(82):                 r -= 1  # 一旦半開ではなくするために
+s403659665.py(83):                 self.tree[r - 1] = x
+s403659665.py(84):                 self.lazy[r - 1] = x
+s403659665.py(85):             if l & 1:
+s403659665.py(90):             l >>= 1
+s403659665.py(91):             r >>= 1
+s403659665.py(80):         while l < r:
+s403659665.py(93):         for i in ids:
+s403659665.py(94):             i -= 1  # to 0based
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(96):                 self.tree[2 * i + 1], self.tree[2 * i + 2])
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(93):         for i in ids:
+s403659665.py(126): for _ in range(q):
+s403659665.py(127):     cmd, *tmp = map(int, input().split())
+s403659665.py(128):     if cmd == 0:
+s403659665.py(129):         s, t, x = tmp
+s403659665.py(130):         seg.update(s, t + 1, x)
+ --- modulename: s403659665, funcname: update
+s403659665.py(73):         ids = tuple(_gidx(l, r, self.num))
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(11):     L, R = l + treesize, r + treesize
+s403659665.py(12):     lm = (L // (L & -L)) >> 1  # これで成り立つの天才か？
+s403659665.py(13):     rm = (R // (R & -R)) >> 1
+s403659665.py(14):     while L < R:
+s403659665.py(15):         if R <= rm:
+s403659665.py(17):         if L <= lm:
+s403659665.py(19):         L >>= 1
+s403659665.py(20):         R >>= 1
+s403659665.py(14):     while L < R:
+s403659665.py(15):         if R <= rm:
+s403659665.py(16):             yield R
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(17):         if L <= lm:
+s403659665.py(18):             yield L
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(19):         L >>= 1
+s403659665.py(20):         R >>= 1
+s403659665.py(14):     while L < R:
+s403659665.py(21):     while L:  # Rでもいいけどね
+s403659665.py(22):         yield L
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(23):         L >>= 1
+s403659665.py(21):     while L:  # Rでもいいけどね
+s403659665.py(74):         self._lazyprop(*ids)
+ --- modulename: s403659665, funcname: _lazyprop
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(62):             self.tree[2 * i + 1] = v
+s403659665.py(63):             self.tree[2 * i + 2] = v
+s403659665.py(64):             self.lazy[2 * i + 1] = v
+s403659665.py(65):             self.lazy[2 * i + 2] = v
+s403659665.py(66):             self.lazy[i] = self.lide  # 遅延配列を空に戻す
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(76):         if r <= l:
+s403659665.py(78):         l += self.num
+s403659665.py(79):         r += self.num
+s403659665.py(80):         while l < r:
+s403659665.py(81):             if r & 1:
+s403659665.py(82):                 r -= 1  # 一旦半開ではなくするために
+s403659665.py(83):                 self.tree[r - 1] = x
+s403659665.py(84):                 self.lazy[r - 1] = x
+s403659665.py(85):             if l & 1:
+s403659665.py(86):                 self.tree[l - 1] = x
+s403659665.py(87):                 self.tree[l - 1] = x  # ここのセットの仕方も問題によって変えるべし
+s403659665.py(88):                 self.lazy[l - 1] = x  # lazyの区間に値をセット
+s403659665.py(89):                 l += 1
+s403659665.py(90):             l >>= 1
+s403659665.py(91):             r >>= 1
+s403659665.py(80):         while l < r:
+s403659665.py(93):         for i in ids:
+s403659665.py(94):             i -= 1  # to 0based
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(96):                 self.tree[2 * i + 1], self.tree[2 * i + 2])
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(93):         for i in ids:
+s403659665.py(94):             i -= 1  # to 0based
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(96):                 self.tree[2 * i + 1], self.tree[2 * i + 2])
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(93):         for i in ids:
+s403659665.py(94):             i -= 1  # to 0based
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(96):                 self.tree[2 * i + 1], self.tree[2 * i + 2])
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(93):         for i in ids:
+s403659665.py(126): for _ in range(q):
+s403659665.py(127):     cmd, *tmp = map(int, input().split())
+s403659665.py(128):     if cmd == 0:
+s403659665.py(129):         s, t, x = tmp
+s403659665.py(130):         seg.update(s, t + 1, x)
+ --- modulename: s403659665, funcname: update
+s403659665.py(73):         ids = tuple(_gidx(l, r, self.num))
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(11):     L, R = l + treesize, r + treesize
+s403659665.py(12):     lm = (L // (L & -L)) >> 1  # これで成り立つの天才か？
+s403659665.py(13):     rm = (R // (R & -R)) >> 1
+s403659665.py(14):     while L < R:
+s403659665.py(15):         if R <= rm:
+s403659665.py(17):         if L <= lm:
+s403659665.py(19):         L >>= 1
+s403659665.py(20):         R >>= 1
+s403659665.py(14):     while L < R:
+s403659665.py(21):     while L:  # Rでもいいけどね
+s403659665.py(22):         yield L
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(23):         L >>= 1
+s403659665.py(21):     while L:  # Rでもいいけどね
+s403659665.py(22):         yield L
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(23):         L >>= 1
+s403659665.py(21):     while L:  # Rでもいいけどね
+s403659665.py(74):         self._lazyprop(*ids)
+ --- modulename: s403659665, funcname: _lazyprop
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(76):         if r <= l:
+s403659665.py(78):         l += self.num
+s403659665.py(79):         r += self.num
+s403659665.py(80):         while l < r:
+s403659665.py(81):             if r & 1:
+s403659665.py(82):                 r -= 1  # 一旦半開ではなくするために
+s403659665.py(83):                 self.tree[r - 1] = x
+s403659665.py(84):                 self.lazy[r - 1] = x
+s403659665.py(85):             if l & 1:
+s403659665.py(90):             l >>= 1
+s403659665.py(91):             r >>= 1
+s403659665.py(80):         while l < r:
+s403659665.py(93):         for i in ids:
+s403659665.py(94):             i -= 1  # to 0based
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(96):                 self.tree[2 * i + 1], self.tree[2 * i + 2])
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(93):         for i in ids:
+s403659665.py(94):             i -= 1  # to 0based
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(96):                 self.tree[2 * i + 1], self.tree[2 * i + 2])
+s403659665.py(95):             self.tree[i] = self.func(
+s403659665.py(93):         for i in ids:
+s403659665.py(126): for _ in range(q):
+s403659665.py(127):     cmd, *tmp = map(int, input().split())
+s403659665.py(128):     if cmd == 0:
+s403659665.py(132):         s, t = tmp
+s403659665.py(133):         print(seg.query(s, t + 1))
+ --- modulename: s403659665, funcname: query
+s403659665.py(102):         if r <= l:
+s403659665.py(105):         self._lazyprop(*_gidx(l, r, self.num))
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(11):     L, R = l + treesize, r + treesize
+s403659665.py(12):     lm = (L // (L & -L)) >> 1  # これで成り立つの天才か？
+s403659665.py(13):     rm = (R // (R & -R)) >> 1
+s403659665.py(14):     while L < R:
+s403659665.py(15):         if R <= rm:
+s403659665.py(17):         if L <= lm:
+s403659665.py(19):         L >>= 1
+s403659665.py(20):         R >>= 1
+s403659665.py(14):     while L < R:
+s403659665.py(15):         if R <= rm:
+s403659665.py(16):             yield R
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(17):         if L <= lm:
+s403659665.py(19):         L >>= 1
+s403659665.py(20):         R >>= 1
+s403659665.py(14):     while L < R:
+s403659665.py(21):     while L:  # Rでもいいけどね
+s403659665.py(22):         yield L
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(23):         L >>= 1
+s403659665.py(21):     while L:  # Rでもいいけどね
+ --- modulename: s403659665, funcname: _lazyprop
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(107):         l += self.num
+s403659665.py(108):         r += self.num
+s403659665.py(109):         res = self.ide
+s403659665.py(110):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s403659665.py(111):             if r & 1:
+s403659665.py(112):                 r -= 1
+s403659665.py(113):                 res = self.func(res, self.tree[r - 1])
+s403659665.py(114):             if l & 1:
+s403659665.py(117):             l >>= 1
+s403659665.py(118):             r >>= 1  # 親の一つ左に移動
+s403659665.py(110):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s403659665.py(111):             if r & 1:
+s403659665.py(112):                 r -= 1
+s403659665.py(113):                 res = self.func(res, self.tree[r - 1])
+s403659665.py(114):             if l & 1:
+s403659665.py(117):             l >>= 1
+s403659665.py(118):             r >>= 1  # 親の一つ左に移動
+s403659665.py(110):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s403659665.py(119):         return res
+1
+s403659665.py(126): for _ in range(q):
+s403659665.py(127):     cmd, *tmp = map(int, input().split())
+s403659665.py(128):     if cmd == 0:
+s403659665.py(132):         s, t = tmp
+s403659665.py(133):         print(seg.query(s, t + 1))
+ --- modulename: s403659665, funcname: query
+s403659665.py(102):         if r <= l:
+s403659665.py(105):         self._lazyprop(*_gidx(l, r, self.num))
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(11):     L, R = l + treesize, r + treesize
+s403659665.py(12):     lm = (L // (L & -L)) >> 1  # これで成り立つの天才か？
+s403659665.py(13):     rm = (R // (R & -R)) >> 1
+s403659665.py(14):     while L < R:
+s403659665.py(15):         if R <= rm:
+s403659665.py(17):         if L <= lm:
+s403659665.py(19):         L >>= 1
+s403659665.py(20):         R >>= 1
+s403659665.py(14):     while L < R:
+s403659665.py(15):         if R <= rm:
+s403659665.py(16):             yield R
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(17):         if L <= lm:
+s403659665.py(18):             yield L
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(19):         L >>= 1
+s403659665.py(20):         R >>= 1
+s403659665.py(14):     while L < R:
+s403659665.py(21):     while L:  # Rでもいいけどね
+s403659665.py(22):         yield L
+ --- modulename: s403659665, funcname: _gidx
+s403659665.py(23):         L >>= 1
+s403659665.py(21):     while L:  # Rでもいいけどね
+ --- modulename: s403659665, funcname: _lazyprop
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(55):             i -= 1  # 0basedindexに修正
+s403659665.py(56):             v = self.lazy[i]
+s403659665.py(57):             if v == self.lide:
+s403659665.py(58):                 continue  # 単位元ならする必要のNASA
+s403659665.py(54):         for i in reversed(ids):
+s403659665.py(107):         l += self.num
+s403659665.py(108):         r += self.num
+s403659665.py(109):         res = self.ide
+s403659665.py(110):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s403659665.py(111):             if r & 1:
+s403659665.py(112):                 r -= 1
+s403659665.py(113):                 res = self.func(res, self.tree[r - 1])
+s403659665.py(114):             if l & 1:
+s403659665.py(115):                 res = self.func(res, self.tree[l - 1])
+s403659665.py(116):                 l += 1
+s403659665.py(117):             l >>= 1
+s403659665.py(118):             r >>= 1  # 親の一つ左に移動
+s403659665.py(110):         while l < r:  # 右から寄りながら結果を結合していくイメージ
+s403659665.py(119):         return res
+2
+s403659665.py(126): for _ in range(q):
