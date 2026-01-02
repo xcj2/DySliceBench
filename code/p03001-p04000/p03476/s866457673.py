@@ -1,0 +1,106 @@
+# -*- coding: utf-8 -*-
+import bisect
+import heapq
+import math
+import random
+import sys
+from collections import Counter, defaultdict
+from decimal import ROUND_CEILING, ROUND_HALF_UP, Decimal
+from functools import lru_cache, reduce
+from itertools import combinations, combinations_with_replacement, product, permutations
+from operator import add, mul
+
+sys.setrecursionlimit(10000)
+
+
+def read_int():
+    return int(input())
+
+
+def read_int_n():
+    return list(map(int, input().split()))
+
+
+def read_float():
+    return float(input())
+
+
+def read_float_n():
+    return list(map(float, input().split()))
+
+
+def read_str():
+    return input()
+
+
+def read_str_n():
+    return list(map(str, input().split()))
+
+
+def error_print(*args):
+    print(*args, file=sys.stderr)
+
+
+def mt(f):
+    import time
+
+    def wrap(*args, **kwargs):
+        s = time.time()
+        ret = f(*args, **kwargs)
+        e = time.time()
+
+        error_print(e - s, 'sec')
+        return ret
+
+    return wrap
+
+
+def eratosthenes(n):
+    p = [1]
+    t = [True] * n
+
+    t[1] = True
+    for i in range(2, int(math.ceil(math.sqrt(n)))):
+        if t[i]:
+            p.append(i)
+            for j in range(2*i, n, i):
+                t[j] = False
+
+    for j in range(i+1, n):
+        if t[j]:
+            p.append(j)
+
+    return p
+
+
+@mt
+def slv(Q, LR):
+    N = 100000
+    p = eratosthenes(N)
+    qt = [0] * N
+    for i in range(2, N):
+        qt[i] = qt[i-1]
+        if i % 2 == 0:
+            continue
+
+        q = (i+1)//2
+        qi = bisect.bisect_left(p, q)
+        ii = bisect.bisect_left(p, i)
+        if qi != len(p) and p[qi] == q and ii != len(p) and p[ii] == i:
+            qt[i] += 1
+
+    for l, r in LR:
+        print(qt[r] - qt[l-1])
+    # ans = 0
+    # return ans
+
+
+def main():
+    Q = read_int()
+    LR = [read_int_n() for _ in range(Q)]
+    # print(slv(Q, LR))
+    slv(Q, LR)
+
+
+if __name__ == '__main__':
+    main()
