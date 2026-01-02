@@ -1,0 +1,224 @@
+ --- modulename: s075022983, funcname: <module>
+s075022983.py(7): import sys
+s075022983.py(8): read = sys.stdin.readline
+s075022983.py(11): def read_ints():
+s075022983.py(15): X, Y, Z, K = read_ints()
+ --- modulename: s075022983, funcname: read_ints
+s075022983.py(12):     return list(map(int, read().split()))
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s075022983.py(16): A = read_ints()
+ --- modulename: s075022983, funcname: read_ints
+s075022983.py(12):     return list(map(int, read().split()))
+s075022983.py(17): B = read_ints()
+ --- modulename: s075022983, funcname: read_ints
+s075022983.py(12):     return list(map(int, read().split()))
+s075022983.py(18): C = read_ints()
+ --- modulename: s075022983, funcname: read_ints
+s075022983.py(12):     return list(map(int, read().split()))
+s075022983.py(20): A.sort(reverse=True)
+s075022983.py(21): B.sort(reverse=True)
+s075022983.py(22): C.sort(reverse=True)
+s075022983.py(25): from heapq import heapify, heappop, heappush, heappushpop
+s075022983.py(28): class PriorityQueue:
+ --- modulename: s075022983, funcname: PriorityQueue
+s075022983.py(28): class PriorityQueue:
+s075022983.py(29):     def __init__(self, heap):
+s075022983.py(36):     def push(self, item):
+s075022983.py(39):     def pop(self):
+s075022983.py(42):     def pushpop(self, item):
+s075022983.py(45):     def __call__(self):
+s075022983.py(49): heap = []  # ヒープといっても順序を工夫したただのリスト
+s075022983.py(51): q = PriorityQueue(heap)
+ --- modulename: s075022983, funcname: __init__
+s075022983.py(33):         self.heap = heap
+s075022983.py(34):         heapify(self.heap)
+s075022983.py(52): q.push((-(A[0] + B[0] + C[0]), 0, 0, 0))
+ --- modulename: s075022983, funcname: push
+s075022983.py(37):         heappush(self.heap, item)
+s075022983.py(54): considered = set()
+s075022983.py(55): ans = []
+s075022983.py(56): for k_th in range(1, K+1):
+s075022983.py(57):     heap_max, i, j, k = q.pop()
+ --- modulename: s075022983, funcname: pop
+s075022983.py(40):         return heappop(self.heap)
+s075022983.py(58):     ans.append(-heap_max)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(65):         considered.add((i_new, j_new, k_new))
+s075022983.py(66):         q.push((-(A[i_new] + B[j_new] + C[k_new]), i_new, j_new, k_new))
+ --- modulename: s075022983, funcname: push
+s075022983.py(37):         heappush(self.heap, item)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(65):         considered.add((i_new, j_new, k_new))
+s075022983.py(66):         q.push((-(A[i_new] + B[j_new] + C[k_new]), i_new, j_new, k_new))
+ --- modulename: s075022983, funcname: push
+s075022983.py(37):         heappush(self.heap, item)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(65):         considered.add((i_new, j_new, k_new))
+s075022983.py(66):         q.push((-(A[i_new] + B[j_new] + C[k_new]), i_new, j_new, k_new))
+ --- modulename: s075022983, funcname: push
+s075022983.py(37):         heappush(self.heap, item)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(56): for k_th in range(1, K+1):
+s075022983.py(57):     heap_max, i, j, k = q.pop()
+ --- modulename: s075022983, funcname: pop
+s075022983.py(40):         return heappop(self.heap)
+s075022983.py(58):     ans.append(-heap_max)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(65):         considered.add((i_new, j_new, k_new))
+s075022983.py(66):         q.push((-(A[i_new] + B[j_new] + C[k_new]), i_new, j_new, k_new))
+ --- modulename: s075022983, funcname: push
+s075022983.py(37):         heappush(self.heap, item)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(65):         considered.add((i_new, j_new, k_new))
+s075022983.py(66):         q.push((-(A[i_new] + B[j_new] + C[k_new]), i_new, j_new, k_new))
+ --- modulename: s075022983, funcname: push
+s075022983.py(37):         heappush(self.heap, item)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(56): for k_th in range(1, K+1):
+s075022983.py(57):     heap_max, i, j, k = q.pop()
+ --- modulename: s075022983, funcname: pop
+s075022983.py(40):         return heappop(self.heap)
+s075022983.py(58):     ans.append(-heap_max)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(64):             continue
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(65):         considered.add((i_new, j_new, k_new))
+s075022983.py(66):         q.push((-(A[i_new] + B[j_new] + C[k_new]), i_new, j_new, k_new))
+ --- modulename: s075022983, funcname: push
+s075022983.py(37):         heappush(self.heap, item)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(56): for k_th in range(1, K+1):
+s075022983.py(57):     heap_max, i, j, k = q.pop()
+ --- modulename: s075022983, funcname: pop
+s075022983.py(40):         return heappop(self.heap)
+s075022983.py(58):     ans.append(-heap_max)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(64):             continue
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(64):             continue
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(62):             continue
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(56): for k_th in range(1, K+1):
+s075022983.py(57):     heap_max, i, j, k = q.pop()
+ --- modulename: s075022983, funcname: pop
+s075022983.py(40):         return heappop(self.heap)
+s075022983.py(58):     ans.append(-heap_max)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(65):         considered.add((i_new, j_new, k_new))
+s075022983.py(66):         q.push((-(A[i_new] + B[j_new] + C[k_new]), i_new, j_new, k_new))
+ --- modulename: s075022983, funcname: push
+s075022983.py(37):         heappush(self.heap, item)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(56): for k_th in range(1, K+1):
+s075022983.py(57):     heap_max, i, j, k = q.pop()
+ --- modulename: s075022983, funcname: pop
+s075022983.py(40):         return heappop(self.heap)
+s075022983.py(58):     ans.append(-heap_max)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(64):             continue
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(62):             continue
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(56): for k_th in range(1, K+1):
+s075022983.py(57):     heap_max, i, j, k = q.pop()
+ --- modulename: s075022983, funcname: pop
+s075022983.py(40):         return heappop(self.heap)
+s075022983.py(58):     ans.append(-heap_max)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(63):         if (i_new, j_new, k_new) in considered:
+s075022983.py(64):             continue
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(62):             continue
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(56): for k_th in range(1, K+1):
+s075022983.py(57):     heap_max, i, j, k = q.pop()
+ --- modulename: s075022983, funcname: pop
+s075022983.py(40):         return heappop(self.heap)
+s075022983.py(58):     ans.append(-heap_max)
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(60):         i_new, j_new, k_new = i + di, j + dj, k + dk
+s075022983.py(61):         if i_new >= X or j_new >= Y or k_new >= Z:
+s075022983.py(62):             continue
+s075022983.py(59):     for di, dj, dk in zip([1, 0, 0], [0, 1, 0], [0, 0, 1]):
+s075022983.py(56): for k_th in range(1, K+1):
+s075022983.py(69): print(*ans, sep='\n')
+19
+17
+15
+14
+13
+12
+10
+8
