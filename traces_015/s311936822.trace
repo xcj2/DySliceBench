@@ -1,0 +1,96 @@
+ --- modulename: s311936822, funcname: <module>
+s311936822.py(1): import itertools
+s311936822.py(2): import os
+s311936822.py(3): import sys
+s311936822.py(4): from functools import lru_cache
+s311936822.py(6): if os.getenv("LOCAL"):
+ --- modulename: os, funcname: getenv
+os.py(775):     return environ.get(key, default)
+ --- modulename: _collections_abc, funcname: get
+_collections_abc.py(762):         try:
+_collections_abc.py(763):             return self[key]
+ --- modulename: os, funcname: __getitem__
+os.py(675):         try:
+os.py(676):             value = self._data[self.encodekey(key)]
+ --- modulename: os, funcname: encodekey
+os.py(747):             return encode(key).upper()
+ --- modulename: os, funcname: check_str
+os.py(741):             if not isinstance(value, str):
+os.py(743):             return value
+os.py(677):         except KeyError:
+os.py(679):             raise KeyError(key) from None
+_collections_abc.py(764):         except KeyError:
+_collections_abc.py(765):             return default
+s311936822.py(9): sys.setrecursionlimit(2147483647)
+s311936822.py(10): INF = float("inf")
+s311936822.py(11): IINF = 10 ** 18
+s311936822.py(12): MOD = 998244353
+s311936822.py(14): N = int(sys.stdin.readline())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s311936822.py(17): @lru_cache(maxsize=None)
+ --- modulename: functools, funcname: lru_cache
+functools.py(503):     if isinstance(maxsize, int):
+functools.py(507):     elif callable(maxsize) and isinstance(typed, bool):
+functools.py(513):     elif maxsize is not None:
+functools.py(517):     def decorating_function(user_function):
+functools.py(522):     return decorating_function
+s311936822.py(19): def is_ok(s):
+ --- modulename: functools, funcname: decorating_function
+functools.py(518):         wrapper = _lru_cache_wrapper(user_function, maxsize, typed, _CacheInfo)
+functools.py(519):         wrapper.cache_parameters = lambda : {'maxsize': maxsize, 'typed': typed}
+functools.py(520):         return update_wrapper(wrapper, user_function)
+ --- modulename: functools, funcname: update_wrapper
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(57):     for attr in updated:
+functools.py(58):         getattr(wrapper, attr).update(getattr(wrapped, attr, {}))
+functools.py(57):     for attr in updated:
+functools.py(61):     wrapper.__wrapped__ = wrapped
+functools.py(63):     return wrapper
+s311936822.py(30): def test(N):
+s311936822.py(38): def mod_invs(max, mod):
+s311936822.py(56): ans = pow(3, N, MOD)
+s311936822.py(58): invs = mod_invs(max=N, mod=MOD)
+ --- modulename: s311936822, funcname: mod_invs
+s311936822.py(44):     invs = [1] * (max + 1)
+s311936822.py(45):     for x in range(2, max + 1):
+s311936822.py(46):         invs[x] = (-(mod // x) * invs[mod % x]) % mod
+s311936822.py(45):     for x in range(2, max + 1):
+s311936822.py(47):     return invs
+s311936822.py(59): ncr = 1  # NCr
+s311936822.py(60): p2r = 1  # pow(2, N - r, MOD)
+s311936822.py(61): for r in range(N, N // 2, -1):
+s311936822.py(63):     ans -= ncr * p2r * 2 % MOD
+s311936822.py(64):     ans %= MOD
+s311936822.py(65):     ncr *= r * invs[N - r + 1]
+s311936822.py(66):     ncr %= MOD
+s311936822.py(67):     p2r *= 2
+s311936822.py(68):     p2r %= MOD
+s311936822.py(61): for r in range(N, N // 2, -1):
+s311936822.py(69): print(ans)
+7
