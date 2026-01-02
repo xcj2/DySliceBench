@@ -1,0 +1,49 @@
+import cmath
+EPS = 1e-10
+
+#外積
+def OuterProduct(one, two):
+	tmp = one.conjugate() * two
+	return tmp.imag
+
+#3点が反時計回りか
+#一直線上のときの例外処理できていない→とりあえずT
+def CCW(p, q, r):
+	one, two = q-p, r-q
+	if OuterProduct(one, two) > -EPS:
+		return True
+	else:
+		return False
+
+#凸包リストを返す
+def ConvexHull(dots):
+	dots.sort(key=lambda x: (x.imag, x.real))
+	res1 = [dots[0]]
+	for d in dots[1:]:
+		if len(res1) == 1:
+			res1.append(d)
+		else:
+			while len(res1) > 1 and not CCW(res1[-2], res1[-1], d):
+				res1.pop()
+			res1.append(d)
+	dots.reverse()
+	res2 = [dots[0]]
+	for d in dots[1:]:
+		if len(res2) == 1:
+			res2.append(d)
+		else:
+			while len(res2) > 1 and not CCW(res2[-2], res2[-1], d):
+				res2.pop()
+			res2.append(d)
+	return res1[:-1] + res2[:-1]
+
+n = int(input())
+dots = []
+for _ in range(n):
+	x, y = map(int, input().split())
+	dots.append(complex(x, y))
+
+ch = ConvexHull(dots)
+print(len(ch))
+for v in ch:
+	print(round(v.real), round(v.imag))
