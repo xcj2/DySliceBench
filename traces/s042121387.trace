@@ -1,0 +1,132 @@
+ --- modulename: s042121387, funcname: <module>
+s042121387.py(1): from functools import *
+s042121387.py(2): from itertools import *
+s042121387.py(3): import sys
+s042121387.py(4): sys.setrecursionlimit(10**6)
+s042121387.py(5): input = sys.stdin.buffer.readline
+s042121387.py(7): M = 10**9+7
+s042121387.py(8): N = int(input())
+s042121387.py(10): @lru_cache(maxsize=None)
+ --- modulename: functools, funcname: lru_cache
+functools.py(503):     if isinstance(maxsize, int):
+functools.py(507):     elif callable(maxsize) and isinstance(typed, bool):
+functools.py(513):     elif maxsize is not None:
+functools.py(517):     def decorating_function(user_function):
+functools.py(522):     return decorating_function
+s042121387.py(11): def mod_inv(x):
+ --- modulename: functools, funcname: decorating_function
+functools.py(518):         wrapper = _lru_cache_wrapper(user_function, maxsize, typed, _CacheInfo)
+functools.py(519):         wrapper.cache_parameters = lambda : {'maxsize': maxsize, 'typed': typed}
+functools.py(520):         return update_wrapper(wrapper, user_function)
+ --- modulename: functools, funcname: update_wrapper
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(51):         try:
+functools.py(52):             value = getattr(wrapped, attr)
+functools.py(56):             setattr(wrapper, attr, value)
+functools.py(50):     for attr in assigned:
+functools.py(57):     for attr in updated:
+functools.py(58):         getattr(wrapper, attr).update(getattr(wrapped, attr, {}))
+functools.py(57):     for attr in updated:
+functools.py(61):     wrapper.__wrapped__ = wrapped
+functools.py(63):     return wrapper
+s042121387.py(14): Weight = [0]*(N+1)
+s042121387.py(15): Size = [0]*(N+1)
+s042121387.py(16): def calc_subtree(v):
+s042121387.py(27): Ans = [0]*(N+1)
+s042121387.py(28): def calc_ans(v, a):
+s042121387.py(34): Edge = [set() for i in range(N+1)]
+ --- modulename: s042121387, funcname: <listcomp>
+s042121387.py(34): Edge = [set() for i in range(N+1)]
+s042121387.py(34): Edge = [set() for i in range(N+1)]
+s042121387.py(34): Edge = [set() for i in range(N+1)]
+s042121387.py(34): Edge = [set() for i in range(N+1)]
+s042121387.py(34): Edge = [set() for i in range(N+1)]
+s042121387.py(35): fact = N
+s042121387.py(36): for i in range(1, N):
+s042121387.py(37):   fact = fact * i % M
+s042121387.py(38):   a, b = map(int, input().split())
+s042121387.py(39):   Edge[a].add(b)
+s042121387.py(40):   Edge[b].add(a)
+s042121387.py(36): for i in range(1, N):
+s042121387.py(37):   fact = fact * i % M
+s042121387.py(38):   a, b = map(int, input().split())
+s042121387.py(39):   Edge[a].add(b)
+s042121387.py(40):   Edge[b].add(a)
+s042121387.py(36): for i in range(1, N):
+s042121387.py(42): calc_subtree(1)
+ --- modulename: s042121387, funcname: calc_subtree
+s042121387.py(17):   W, S = 1, 1
+s042121387.py(18):   for child in Edge[v]:
+s042121387.py(19):     Edge[child].remove(v)
+s042121387.py(20):     w, s = calc_subtree(child)
+ --- modulename: s042121387, funcname: calc_subtree
+s042121387.py(17):   W, S = 1, 1
+s042121387.py(18):   for child in Edge[v]:
+s042121387.py(23):   Weight[v] = W * S % M
+s042121387.py(24):   Size[v] = S
+s042121387.py(25):   return Weight[v], Size[v]
+s042121387.py(21):     W = W * w % M
+s042121387.py(22):     S += s
+s042121387.py(18):   for child in Edge[v]:
+s042121387.py(19):     Edge[child].remove(v)
+s042121387.py(20):     w, s = calc_subtree(child)
+ --- modulename: s042121387, funcname: calc_subtree
+s042121387.py(17):   W, S = 1, 1
+s042121387.py(18):   for child in Edge[v]:
+s042121387.py(23):   Weight[v] = W * S % M
+s042121387.py(24):   Size[v] = S
+s042121387.py(25):   return Weight[v], Size[v]
+s042121387.py(21):     W = W * w % M
+s042121387.py(22):     S += s
+s042121387.py(18):   for child in Edge[v]:
+s042121387.py(23):   Weight[v] = W * S % M
+s042121387.py(24):   Size[v] = S
+s042121387.py(25):   return Weight[v], Size[v]
+s042121387.py(43): calc_ans(1, mod_inv(Weight[1]) * fact % M)
+ --- modulename: s042121387, funcname: mod_inv
+s042121387.py(12):   return 1 if x == 1 else M // x * -mod_inv(M%x) % M
+ --- modulename: s042121387, funcname: mod_inv
+s042121387.py(12):   return 1 if x == 1 else M // x * -mod_inv(M%x) % M
+ --- modulename: s042121387, funcname: mod_inv
+s042121387.py(12):   return 1 if x == 1 else M // x * -mod_inv(M%x) % M
+ --- modulename: s042121387, funcname: calc_ans
+s042121387.py(29):   Ans[v] = a
+s042121387.py(30):   for child in Edge[v]:
+s042121387.py(31):     n = Size[child]
+s042121387.py(32):     calc_ans(child, Ans[v] * n * mod_inv(N-n) % M)
+ --- modulename: s042121387, funcname: calc_ans
+s042121387.py(29):   Ans[v] = a
+s042121387.py(30):   for child in Edge[v]:
+s042121387.py(30):   for child in Edge[v]:
+s042121387.py(31):     n = Size[child]
+s042121387.py(32):     calc_ans(child, Ans[v] * n * mod_inv(N-n) % M)
+ --- modulename: s042121387, funcname: calc_ans
+s042121387.py(29):   Ans[v] = a
+s042121387.py(30):   for child in Edge[v]:
+s042121387.py(30):   for child in Edge[v]:
+s042121387.py(45): for a in islice(Ans, 1, None):
+s042121387.py(46):   print(a)
+2
+s042121387.py(45): for a in islice(Ans, 1, None):
+s042121387.py(46):   print(a)
+1
+s042121387.py(45): for a in islice(Ans, 1, None):
+s042121387.py(46):   print(a)
+1
+s042121387.py(45): for a in islice(Ans, 1, None):
