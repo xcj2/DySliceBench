@@ -1,0 +1,458 @@
+ --- modulename: s050699906, funcname: <module>
+s050699906.py(1): import sys
+s050699906.py(2): input = sys.stdin.readline
+s050699906.py(3): class LazySegTree:
+ --- modulename: s050699906, funcname: LazySegTree
+s050699906.py(3): class LazySegTree:
+s050699906.py(4):     """
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(15):                  op_e=(1<<31)-1,
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(17):                  cp=lambda a,b: a if a!=-1 else b,
+s050699906.py(18):                  ap_identity=-1):
+s050699906.py(12):     def __init__(self,
+s050699906.py(39):     def get(self, l, r):
+s050699906.py(54):     def push(self):
+s050699906.py(58):     def set(self, l, r, value):
+s050699906.py(89):     def set_one(self, i, value):
+s050699906.py(100):     def _ap(self, value, i):
+s050699906.py(106):     def _push_one(self, i):
+s050699906.py(112):     def _push(self, l, r):
+s050699906.py(148): N, Q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s050699906.py(149): tree = LazySegTree([(1<<31)-1]*N)
+ --- modulename: s050699906, funcname: __init__
+s050699906.py(27):         self.n = n = len(a)
+s050699906.py(28):         self.op, self.op_e, self.ap, self.cp, self.ap_identity = op, op_e, ap, cp, ap_identity
+s050699906.py(29):         self.val = val = [op_e] * n + a
+s050699906.py(30):         self.act = [ap_identity] * n
+s050699906.py(31):         self.length = length = [1] * (2*n)
+s050699906.py(32):         l = 2*n-2
+s050699906.py(33):         for i in range(n-1, 0, -1):
+s050699906.py(34):             r = l+1
+s050699906.py(35):             length[i] = length[l] + length[r]
+s050699906.py(36):             val[i] = op(val[l], val[r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(37):             l -= 2
+s050699906.py(33):         for i in range(n-1, 0, -1):
+s050699906.py(34):             r = l+1
+s050699906.py(35):             length[i] = length[l] + length[r]
+s050699906.py(36):             val[i] = op(val[l], val[r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(37):             l -= 2
+s050699906.py(33):         for i in range(n-1, 0, -1):
+s050699906.py(150): ans = []
+s050699906.py(151): for i in range(Q):
+s050699906.py(152):     q, *A = map(int, input().split())
+s050699906.py(153):     if q==0:
+s050699906.py(154):         s, t, x = A
+s050699906.py(155):         tree.set(s, t+1, x)
+ --- modulename: s050699906, funcname: set
+s050699906.py(60):         if l >= r:
+s050699906.py(62):         n, ap, val, op, act, cp, length = self.n, self.ap, self.val, self.op, self.act, self.cp, self.length
+s050699906.py(63):         self._push(l, r)
+ --- modulename: s050699906, funcname: _push
+s050699906.py(113):         n, act, ap_identity, ap, cp, val, length = self.n, self.act, self.ap_identity, self.ap, self.cp, self.val, self.length
+s050699906.py(114):         ln = l + n
+s050699906.py(115):         rnm1 = r + n - 1
+s050699906.py(116):         hl = ln.bit_length()-1
+s050699906.py(117):         hr = rnm1.bit_length()-1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(123):                 al_l = 2 * al
+s050699906.py(124):                 al_r = al_l + 1
+s050699906.py(125):                 act_al = act[al]
+s050699906.py(126):                 val[al_l] = ap(act_al, val[al_l], length[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(127):                 if al_l < n:
+s050699906.py(128):                     act[al_l] = cp(act_al, act[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(17):                  cp=lambda a,b: a if a!=-1 else b,
+s050699906.py(129):                 val[al_r] = ap(act_al, val[al_r], length[al_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(130):                 if al_r < n:
+s050699906.py(132):                 act[al] = ap_identity
+s050699906.py(133):             if ar != al:
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(133):             if ar != al:
+s050699906.py(135):                 ar_l = 2 * ar
+s050699906.py(136):                 ar_r = ar_l + 1
+s050699906.py(137):                 act_ar = act[ar]
+s050699906.py(138):                 val[ar_l] = ap(act_ar, val[ar_l], length[ar_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(139):                 if ar_l < n:
+s050699906.py(141):                 val[ar_r] = ap(act_ar, val[ar_r], length[ar_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(142):                 if ar_r < n:
+s050699906.py(144):                 act[ar] = ap_identity
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(64):         l = i = l + n
+s050699906.py(65):         r = j = r + n
+s050699906.py(66):         if i & 1: val[i] = ap(value, val[i], length[i])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(67):         if j & 1: j-=1; val[j] = ap(value, val[j], length[j])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(68):         i = i+1 >> 1
+s050699906.py(69):         j >>= 1
+s050699906.py(70):         while i < j:
+s050699906.py(80):         l = l // (l & -l) >> 1
+s050699906.py(81):         while l>0:
+s050699906.py(82):             val[l] = op(val[2*l], val[2*l+1])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(83):             l >>= 1
+s050699906.py(81):         while l>0:
+s050699906.py(84):         r = r // (r & -r) >> 1
+s050699906.py(85):         while r>0:
+s050699906.py(86):             val[r] = op(val[2*r], val[2*r+1])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(87):             r >>= 1
+s050699906.py(85):         while r>0:
+s050699906.py(86):             val[r] = op(val[2*r], val[2*r+1])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(87):             r >>= 1
+s050699906.py(85):         while r>0:
+s050699906.py(151): for i in range(Q):
+s050699906.py(152):     q, *A = map(int, input().split())
+s050699906.py(153):     if q==0:
+s050699906.py(154):         s, t, x = A
+s050699906.py(155):         tree.set(s, t+1, x)
+ --- modulename: s050699906, funcname: set
+s050699906.py(60):         if l >= r:
+s050699906.py(62):         n, ap, val, op, act, cp, length = self.n, self.ap, self.val, self.op, self.act, self.cp, self.length
+s050699906.py(63):         self._push(l, r)
+ --- modulename: s050699906, funcname: _push
+s050699906.py(113):         n, act, ap_identity, ap, cp, val, length = self.n, self.act, self.ap_identity, self.ap, self.cp, self.val, self.length
+s050699906.py(114):         ln = l + n
+s050699906.py(115):         rnm1 = r + n - 1
+s050699906.py(116):         hl = ln.bit_length()-1
+s050699906.py(117):         hr = rnm1.bit_length()-1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(123):                 al_l = 2 * al
+s050699906.py(124):                 al_r = al_l + 1
+s050699906.py(125):                 act_al = act[al]
+s050699906.py(126):                 val[al_l] = ap(act_al, val[al_l], length[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(127):                 if al_l < n:
+s050699906.py(128):                     act[al_l] = cp(act_al, act[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(17):                  cp=lambda a,b: a if a!=-1 else b,
+s050699906.py(129):                 val[al_r] = ap(act_al, val[al_r], length[al_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(130):                 if al_r < n:
+s050699906.py(132):                 act[al] = ap_identity
+s050699906.py(133):             if ar != al:
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(123):                 al_l = 2 * al
+s050699906.py(124):                 al_r = al_l + 1
+s050699906.py(125):                 act_al = act[al]
+s050699906.py(126):                 val[al_l] = ap(act_al, val[al_l], length[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(127):                 if al_l < n:
+s050699906.py(129):                 val[al_r] = ap(act_al, val[al_r], length[al_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(130):                 if al_r < n:
+s050699906.py(132):                 act[al] = ap_identity
+s050699906.py(133):             if ar != al:
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(64):         l = i = l + n
+s050699906.py(65):         r = j = r + n
+s050699906.py(66):         if i & 1: val[i] = ap(value, val[i], length[i])
+s050699906.py(67):         if j & 1: j-=1; val[j] = ap(value, val[j], length[j])
+s050699906.py(68):         i = i+1 >> 1
+s050699906.py(69):         j >>= 1
+s050699906.py(70):         while i < j:
+s050699906.py(71):             if i & 1:
+s050699906.py(74):             if j & 1:
+s050699906.py(75):                 j -= 1
+s050699906.py(76):                 val[j] = ap(value, val[j], length[j])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(77):                 act[j] = cp(value, act[j])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(17):                  cp=lambda a,b: a if a!=-1 else b,
+s050699906.py(78):             i = i+1 >> 1
+s050699906.py(79):             j >>= 1
+s050699906.py(70):         while i < j:
+s050699906.py(80):         l = l // (l & -l) >> 1
+s050699906.py(81):         while l>0:
+s050699906.py(84):         r = r // (r & -r) >> 1
+s050699906.py(85):         while r>0:
+s050699906.py(86):             val[r] = op(val[2*r], val[2*r+1])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(87):             r >>= 1
+s050699906.py(85):         while r>0:
+s050699906.py(151): for i in range(Q):
+s050699906.py(152):     q, *A = map(int, input().split())
+s050699906.py(153):     if q==0:
+s050699906.py(154):         s, t, x = A
+s050699906.py(155):         tree.set(s, t+1, x)
+ --- modulename: s050699906, funcname: set
+s050699906.py(60):         if l >= r:
+s050699906.py(62):         n, ap, val, op, act, cp, length = self.n, self.ap, self.val, self.op, self.act, self.cp, self.length
+s050699906.py(63):         self._push(l, r)
+ --- modulename: s050699906, funcname: _push
+s050699906.py(113):         n, act, ap_identity, ap, cp, val, length = self.n, self.act, self.ap_identity, self.ap, self.cp, self.val, self.length
+s050699906.py(114):         ln = l + n
+s050699906.py(115):         rnm1 = r + n - 1
+s050699906.py(116):         hl = ln.bit_length()-1
+s050699906.py(117):         hr = rnm1.bit_length()-1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(123):                 al_l = 2 * al
+s050699906.py(124):                 al_r = al_l + 1
+s050699906.py(125):                 act_al = act[al]
+s050699906.py(126):                 val[al_l] = ap(act_al, val[al_l], length[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(127):                 if al_l < n:
+s050699906.py(128):                     act[al_l] = cp(act_al, act[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(17):                  cp=lambda a,b: a if a!=-1 else b,
+s050699906.py(129):                 val[al_r] = ap(act_al, val[al_r], length[al_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(130):                 if al_r < n:
+s050699906.py(132):                 act[al] = ap_identity
+s050699906.py(133):             if ar != al:
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(123):                 al_l = 2 * al
+s050699906.py(124):                 al_r = al_l + 1
+s050699906.py(125):                 act_al = act[al]
+s050699906.py(126):                 val[al_l] = ap(act_al, val[al_l], length[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(127):                 if al_l < n:
+s050699906.py(129):                 val[al_r] = ap(act_al, val[al_r], length[al_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(130):                 if al_r < n:
+s050699906.py(132):                 act[al] = ap_identity
+s050699906.py(133):             if ar != al:
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(64):         l = i = l + n
+s050699906.py(65):         r = j = r + n
+s050699906.py(66):         if i & 1: val[i] = ap(value, val[i], length[i])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(67):         if j & 1: j-=1; val[j] = ap(value, val[j], length[j])
+s050699906.py(68):         i = i+1 >> 1
+s050699906.py(69):         j >>= 1
+s050699906.py(70):         while i < j:
+s050699906.py(80):         l = l // (l & -l) >> 1
+s050699906.py(81):         while l>0:
+s050699906.py(82):             val[l] = op(val[2*l], val[2*l+1])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(83):             l >>= 1
+s050699906.py(81):         while l>0:
+s050699906.py(82):             val[l] = op(val[2*l], val[2*l+1])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(83):             l >>= 1
+s050699906.py(81):         while l>0:
+s050699906.py(84):         r = r // (r & -r) >> 1
+s050699906.py(85):         while r>0:
+s050699906.py(86):             val[r] = op(val[2*r], val[2*r+1])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(87):             r >>= 1
+s050699906.py(85):         while r>0:
+s050699906.py(151): for i in range(Q):
+s050699906.py(152):     q, *A = map(int, input().split())
+s050699906.py(153):     if q==0:
+s050699906.py(157):         s, t = A
+s050699906.py(158):         ans.append(tree.get(s, t+1))
+ --- modulename: s050699906, funcname: get
+s050699906.py(40):         self._push(l, r)
+ --- modulename: s050699906, funcname: _push
+s050699906.py(113):         n, act, ap_identity, ap, cp, val, length = self.n, self.act, self.ap_identity, self.ap, self.cp, self.val, self.length
+s050699906.py(114):         ln = l + n
+s050699906.py(115):         rnm1 = r + n - 1
+s050699906.py(116):         hl = ln.bit_length()-1
+s050699906.py(117):         hr = rnm1.bit_length()-1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(123):                 al_l = 2 * al
+s050699906.py(124):                 al_r = al_l + 1
+s050699906.py(125):                 act_al = act[al]
+s050699906.py(126):                 val[al_l] = ap(act_al, val[al_l], length[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(127):                 if al_l < n:
+s050699906.py(128):                     act[al_l] = cp(act_al, act[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(17):                  cp=lambda a,b: a if a!=-1 else b,
+s050699906.py(129):                 val[al_r] = ap(act_al, val[al_r], length[al_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(130):                 if al_r < n:
+s050699906.py(132):                 act[al] = ap_identity
+s050699906.py(133):             if ar != al:
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(133):             if ar != al:
+s050699906.py(135):                 ar_l = 2 * ar
+s050699906.py(136):                 ar_r = ar_l + 1
+s050699906.py(137):                 act_ar = act[ar]
+s050699906.py(138):                 val[ar_l] = ap(act_ar, val[ar_l], length[ar_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(139):                 if ar_l < n:
+s050699906.py(141):                 val[ar_r] = ap(act_ar, val[ar_r], length[ar_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(142):                 if ar_r < n:
+s050699906.py(144):                 act[ar] = ap_identity
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(41):         res_l = res_r = self.op_e
+s050699906.py(42):         l += self.n
+s050699906.py(43):         r += self.n
+s050699906.py(44):         val, op = self.val, self.op
+s050699906.py(45):         while l < r:
+s050699906.py(46):             if l & 1:
+s050699906.py(47):                 res_l = op(res_l, val[l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(48):             if r & 1:
+s050699906.py(50):             l = l+1 >> 1
+s050699906.py(51):             r >>= 1
+s050699906.py(45):         while l < r:
+s050699906.py(46):             if l & 1:
+s050699906.py(48):             if r & 1:
+s050699906.py(49):                 res_r = op(val[r-1], res_r)
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(50):             l = l+1 >> 1
+s050699906.py(51):             r >>= 1
+s050699906.py(45):         while l < r:
+s050699906.py(52):         return op(res_l, res_r)
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(151): for i in range(Q):
+s050699906.py(152):     q, *A = map(int, input().split())
+s050699906.py(153):     if q==0:
+s050699906.py(157):         s, t = A
+s050699906.py(158):         ans.append(tree.get(s, t+1))
+ --- modulename: s050699906, funcname: get
+s050699906.py(40):         self._push(l, r)
+ --- modulename: s050699906, funcname: _push
+s050699906.py(113):         n, act, ap_identity, ap, cp, val, length = self.n, self.act, self.ap_identity, self.ap, self.cp, self.val, self.length
+s050699906.py(114):         ln = l + n
+s050699906.py(115):         rnm1 = r + n - 1
+s050699906.py(116):         hl = ln.bit_length()-1
+s050699906.py(117):         hr = rnm1.bit_length()-1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(123):                 al_l = 2 * al
+s050699906.py(124):                 al_r = al_l + 1
+s050699906.py(125):                 act_al = act[al]
+s050699906.py(126):                 val[al_l] = ap(act_al, val[al_l], length[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(127):                 if al_l < n:
+s050699906.py(128):                     act[al_l] = cp(act_al, act[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(17):                  cp=lambda a,b: a if a!=-1 else b,
+s050699906.py(129):                 val[al_r] = ap(act_al, val[al_r], length[al_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(130):                 if al_r < n:
+s050699906.py(132):                 act[al] = ap_identity
+s050699906.py(133):             if ar != al:
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(119):             al = ln >> hl
+s050699906.py(120):             ar = rnm1 >> hr
+s050699906.py(121):             if al < n:
+s050699906.py(123):                 al_l = 2 * al
+s050699906.py(124):                 al_r = al_l + 1
+s050699906.py(125):                 act_al = act[al]
+s050699906.py(126):                 val[al_l] = ap(act_al, val[al_l], length[al_l])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(127):                 if al_l < n:
+s050699906.py(129):                 val[al_r] = ap(act_al, val[al_r], length[al_r])
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(16):                  ap=lambda a,b,length: a if a!=-1 else b,
+s050699906.py(130):                 if al_r < n:
+s050699906.py(132):                 act[al] = ap_identity
+s050699906.py(133):             if ar != al:
+s050699906.py(145):             hl -= 1
+s050699906.py(118):         for hr in range(hr, 0, -1):
+s050699906.py(41):         res_l = res_r = self.op_e
+s050699906.py(42):         l += self.n
+s050699906.py(43):         r += self.n
+s050699906.py(44):         val, op = self.val, self.op
+s050699906.py(45):         while l < r:
+s050699906.py(46):             if l & 1:
+s050699906.py(48):             if r & 1:
+s050699906.py(50):             l = l+1 >> 1
+s050699906.py(51):             r >>= 1
+s050699906.py(45):         while l < r:
+s050699906.py(46):             if l & 1:
+s050699906.py(48):             if r & 1:
+s050699906.py(49):                 res_r = op(val[r-1], res_r)
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(50):             l = l+1 >> 1
+s050699906.py(51):             r >>= 1
+s050699906.py(45):         while l < r:
+s050699906.py(52):         return op(res_l, res_r)
+ --- modulename: s050699906, funcname: <lambda>
+s050699906.py(14):                  op=lambda a,b: a if a<b else b,
+s050699906.py(151): for i in range(Q):
+s050699906.py(159): print("\n".join(map(str, ans)))
+1
+2
