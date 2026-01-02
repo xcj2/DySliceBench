@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+import sys
+
+MOD = 1000000007  # type: int
+
+class ModOperator:
+    def __init__(self, MOD: int = 10 ** 9 + 7):
+        self.MOD = MOD
+
+    def mod_pow(self, x: int, n: int):
+        bi = str(format(n, "b"))
+        res = 1
+        a = x
+        for i in range(len(bi)):
+            if n >> i & 1:
+                res = (res * a) % self.MOD
+            a = (a * a) % self.MOD
+        return res
+    
+    def mod_fact(self, x: int):
+        res = 1
+        for i in range(1, x + 1):
+            res = res * i % self.MOD
+        return res % self.MOD
+    
+    def mod_partial_fact(self, x: int, y: int):
+        res = 1
+        for i in range(x - y + 1, x + 1):
+            res = res * i % self.MOD
+        return res % self.MOD
+
+    def mod_inv(self, x: int):
+        return self.mod_pow(x, self.MOD - 2)
+    
+    def mod_comb(self, n: int, k: int):
+        numerator = self.mod_partial_fact(n, k)
+        denomintator = self.mod_fact(k)
+        return numerator * self.mod_inv(denomintator) % self.MOD
+
+def main():
+    n, a, b = map(int, input().split())
+    op = ModOperator()
+    print((op.mod_pow(2, n) - op.mod_comb(n, a) - op.mod_comb(n, b) - 1) % MOD)
+
+    return
+
+
+if __name__ == '__main__':
+    main()
