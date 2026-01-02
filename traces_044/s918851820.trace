@@ -1,0 +1,1265 @@
+ --- modulename: s918851820, funcname: <module>
+s918851820.py(1): import sys
+s918851820.py(2): sys.setrecursionlimit(10**7)
+s918851820.py(3): def MI(): return map(int,sys.stdin.readline().rstrip().split())
+s918851820.py(4): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s918851820.py(7): class LazySegTree():  # モノイドに対して適用可能、Nが2冪でなくても良い
+ --- modulename: s918851820, funcname: LazySegTree
+s918851820.py(7): class LazySegTree():  # モノイドに対して適用可能、Nが2冪でなくても良い
+s918851820.py(8):     def __init__(self,N,X_func,A_func,operate,X_unit,A_unit):
+s918851820.py(19):     def build(self,init_value):  # 初期値を[N,2N)に格納
+s918851820.py(27):     def update(self,i,x):  # i番目(0-index)の値をxに変更
+s918851820.py(35):     def eval_at(self,i):  # i番目で作用を施した値を返す
+s918851820.py(38):     def eval_above(self,i):  # i番目より上の値を再計算する
+s918851820.py(44):     def propagate_at(self,i):  # i番目で作用を施し、1つ下に作用の情報を伝える
+s918851820.py(50):     def propagate_above(self,i):  # i番目より上で作用を施す
+s918851820.py(55):     def fold(self,L,R):  # [L,R)の区間取得
+s918851820.py(75):     def operate_range(self,L,R,x):  # [L,R)にxを作用
+s918851820.py(95): mod = 998244353
+s918851820.py(98): def X_func(x,y):
+s918851820.py(102): def A_func(a,b):
+s918851820.py(108): def operate(x,a,r):  # 右作用
+s918851820.py(113): X_unit = 0
+s918851820.py(114): A_unit = (1,0)
+s918851820.py(117): N,Q = MI()
+ --- modulename: s918851820, funcname: MI
+s918851820.py(3): def MI(): return map(int,sys.stdin.readline().rstrip().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s918851820.py(118): LST = LazySegTree(N,X_func,A_func,operate,X_unit,A_unit)
+ --- modulename: s918851820, funcname: __init__
+s918851820.py(9):         self.N = N
+s918851820.py(10):         self.X_func = X_func
+s918851820.py(11):         self.A_func = A_func
+s918851820.py(12):         self.operate = operate
+s918851820.py(13):         self.X_unit = X_unit
+s918851820.py(14):         self.A_unit = A_unit
+s918851820.py(15):         self.X = [self.X_unit]*(2*self.N)
+s918851820.py(16):         self.A = [self.A_unit]*(2*self.N)
+s918851820.py(17):         self.size = [0]*(2*self.N)
+s918851820.py(119): A = LI()
+ --- modulename: s918851820, funcname: LI
+s918851820.py(4): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s918851820.py(120): LST.build(A)
+ --- modulename: s918851820, funcname: build
+s918851820.py(20):         for i in range(self.N):
+s918851820.py(21):             self.X[self.N+i] = init_value[i]
+s918851820.py(22):             self.size[self.N+i] = 1
+s918851820.py(20):         for i in range(self.N):
+s918851820.py(21):             self.X[self.N+i] = init_value[i]
+s918851820.py(22):             self.size[self.N+i] = 1
+s918851820.py(20):         for i in range(self.N):
+s918851820.py(21):             self.X[self.N+i] = init_value[i]
+s918851820.py(22):             self.size[self.N+i] = 1
+s918851820.py(20):         for i in range(self.N):
+s918851820.py(21):             self.X[self.N+i] = init_value[i]
+s918851820.py(22):             self.size[self.N+i] = 1
+s918851820.py(20):         for i in range(self.N):
+s918851820.py(21):             self.X[self.N+i] = init_value[i]
+s918851820.py(22):             self.size[self.N+i] = 1
+s918851820.py(20):         for i in range(self.N):
+s918851820.py(23):         for i in range(self.N-1,0,-1):
+s918851820.py(24):             self.X[i] = self.X_func(self.X[i << 1],self.X[i << 1 | 1])
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(25):             self.size[i] = self.size[i << 1] + self.size[i << 1 | 1]
+s918851820.py(23):         for i in range(self.N-1,0,-1):
+s918851820.py(24):             self.X[i] = self.X_func(self.X[i << 1],self.X[i << 1 | 1])
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(25):             self.size[i] = self.size[i << 1] + self.size[i << 1 | 1]
+s918851820.py(23):         for i in range(self.N-1,0,-1):
+s918851820.py(24):             self.X[i] = self.X_func(self.X[i << 1],self.X[i << 1 | 1])
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(25):             self.size[i] = self.size[i << 1] + self.size[i << 1 | 1]
+s918851820.py(23):         for i in range(self.N-1,0,-1):
+s918851820.py(24):             self.X[i] = self.X_func(self.X[i << 1],self.X[i << 1 | 1])
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(25):             self.size[i] = self.size[i << 1] + self.size[i << 1 | 1]
+s918851820.py(23):         for i in range(self.N-1,0,-1):
+s918851820.py(121): for i in range(Q):
+s918851820.py(122):     X = LI()
+ --- modulename: s918851820, funcname: LI
+s918851820.py(4): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s918851820.py(123):     if X[0] == 0:
+s918851820.py(127):         l,r = X[1:]
+s918851820.py(128):         print(LST.fold(l,r))
+ --- modulename: s918851820, funcname: fold
+s918851820.py(56):         L += self.N
+s918851820.py(57):         R += self.N
+s918851820.py(58):         L0 = L // (L & -L)
+s918851820.py(59):         R0 = R // (R & -R) - 1
+s918851820.py(60):         self.propagate_above(L0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(61):         self.propagate_above(R0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(62):         vL = self.X_unit
+s918851820.py(63):         vR = self.X_unit
+s918851820.py(64):         while L < R:
+s918851820.py(65):             if L & 1:
+s918851820.py(66):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(67):                 L += 1
+s918851820.py(68):             if R & 1:
+s918851820.py(71):             L >>= 1
+s918851820.py(72):             R >>= 1
+s918851820.py(64):         while L < R:
+s918851820.py(65):             if L & 1:
+s918851820.py(66):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(67):                 L += 1
+s918851820.py(68):             if R & 1:
+s918851820.py(69):                 R -= 1
+s918851820.py(70):                 vR = self.X_func(self.eval_at(R),vR)
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(71):             L >>= 1
+s918851820.py(72):             R >>= 1
+s918851820.py(64):         while L < R:
+s918851820.py(73):         return self.X_func(vL,vR)
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+15
+s918851820.py(121): for i in range(Q):
+s918851820.py(122):     X = LI()
+ --- modulename: s918851820, funcname: LI
+s918851820.py(4): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s918851820.py(123):     if X[0] == 0:
+s918851820.py(124):         l,r,b,c = X[1:]
+s918851820.py(125):         LST.operate_range(l,r,(b,c))
+ --- modulename: s918851820, funcname: operate_range
+s918851820.py(76):         L += self.N
+s918851820.py(77):         R += self.N
+s918851820.py(78):         L0 = L // (L & -L)
+s918851820.py(79):         R0 = R // (R & -R) - 1
+s918851820.py(80):         self.propagate_above(L0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(81):         self.propagate_above(R0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(82):         while L < R:
+s918851820.py(83):             if L & 1:
+s918851820.py(84):                 self.A[L] = self.A_func(self.A[L],x)
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(85):                 L += 1
+s918851820.py(86):             if R & 1:
+s918851820.py(87):                 R -= 1
+s918851820.py(88):                 self.A[R] = self.A_func(self.A[R],x)
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(89):             L >>= 1
+s918851820.py(90):             R >>= 1
+s918851820.py(82):         while L < R:
+s918851820.py(91):         self.eval_above(L0)
+ --- modulename: s918851820, funcname: eval_above
+s918851820.py(39):         i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(92):         self.eval_above(R0)
+ --- modulename: s918851820, funcname: eval_above
+s918851820.py(39):         i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(121): for i in range(Q):
+s918851820.py(122):     X = LI()
+ --- modulename: s918851820, funcname: LI
+s918851820.py(4): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s918851820.py(123):     if X[0] == 0:
+s918851820.py(127):         l,r = X[1:]
+s918851820.py(128):         print(LST.fold(l,r))
+ --- modulename: s918851820, funcname: fold
+s918851820.py(56):         L += self.N
+s918851820.py(57):         R += self.N
+s918851820.py(58):         L0 = L // (L & -L)
+s918851820.py(59):         R0 = R // (R & -R) - 1
+s918851820.py(60):         self.propagate_above(L0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(61):         self.propagate_above(R0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(62):         vL = self.X_unit
+s918851820.py(63):         vR = self.X_unit
+s918851820.py(64):         while L < R:
+s918851820.py(65):             if L & 1:
+s918851820.py(66):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(67):                 L += 1
+s918851820.py(68):             if R & 1:
+s918851820.py(71):             L >>= 1
+s918851820.py(72):             R >>= 1
+s918851820.py(64):         while L < R:
+s918851820.py(65):             if L & 1:
+s918851820.py(66):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(67):                 L += 1
+s918851820.py(68):             if R & 1:
+s918851820.py(71):             L >>= 1
+s918851820.py(72):             R >>= 1
+s918851820.py(64):         while L < R:
+s918851820.py(73):         return self.X_func(vL,vR)
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+404
+s918851820.py(121): for i in range(Q):
+s918851820.py(122):     X = LI()
+ --- modulename: s918851820, funcname: LI
+s918851820.py(4): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s918851820.py(123):     if X[0] == 0:
+s918851820.py(124):         l,r,b,c = X[1:]
+s918851820.py(125):         LST.operate_range(l,r,(b,c))
+ --- modulename: s918851820, funcname: operate_range
+s918851820.py(76):         L += self.N
+s918851820.py(77):         R += self.N
+s918851820.py(78):         L0 = L // (L & -L)
+s918851820.py(79):         R0 = R // (R & -R) - 1
+s918851820.py(80):         self.propagate_above(L0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(81):         self.propagate_above(R0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(82):         while L < R:
+s918851820.py(83):             if L & 1:
+s918851820.py(86):             if R & 1:
+s918851820.py(89):             L >>= 1
+s918851820.py(90):             R >>= 1
+s918851820.py(82):         while L < R:
+s918851820.py(83):             if L & 1:
+s918851820.py(84):                 self.A[L] = self.A_func(self.A[L],x)
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(85):                 L += 1
+s918851820.py(86):             if R & 1:
+s918851820.py(89):             L >>= 1
+s918851820.py(90):             R >>= 1
+s918851820.py(82):         while L < R:
+s918851820.py(91):         self.eval_above(L0)
+ --- modulename: s918851820, funcname: eval_above
+s918851820.py(39):         i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(92):         self.eval_above(R0)
+ --- modulename: s918851820, funcname: eval_above
+s918851820.py(39):         i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(121): for i in range(Q):
+s918851820.py(122):     X = LI()
+ --- modulename: s918851820, funcname: LI
+s918851820.py(4): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s918851820.py(123):     if X[0] == 0:
+s918851820.py(127):         l,r = X[1:]
+s918851820.py(128):         print(LST.fold(l,r))
+ --- modulename: s918851820, funcname: fold
+s918851820.py(56):         L += self.N
+s918851820.py(57):         R += self.N
+s918851820.py(58):         L0 = L // (L & -L)
+s918851820.py(59):         R0 = R // (R & -R) - 1
+s918851820.py(60):         self.propagate_above(L0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(61):         self.propagate_above(R0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(62):         vL = self.X_unit
+s918851820.py(63):         vR = self.X_unit
+s918851820.py(64):         while L < R:
+s918851820.py(65):             if L & 1:
+s918851820.py(66):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(67):                 L += 1
+s918851820.py(68):             if R & 1:
+s918851820.py(71):             L >>= 1
+s918851820.py(72):             R >>= 1
+s918851820.py(64):         while L < R:
+s918851820.py(65):             if L & 1:
+s918851820.py(68):             if R & 1:
+s918851820.py(69):                 R -= 1
+s918851820.py(70):                 vR = self.X_func(self.eval_at(R),vR)
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(71):             L >>= 1
+s918851820.py(72):             R >>= 1
+s918851820.py(64):         while L < R:
+s918851820.py(73):         return self.X_func(vL,vR)
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+41511
+s918851820.py(121): for i in range(Q):
+s918851820.py(122):     X = LI()
+ --- modulename: s918851820, funcname: LI
+s918851820.py(4): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s918851820.py(123):     if X[0] == 0:
+s918851820.py(124):         l,r,b,c = X[1:]
+s918851820.py(125):         LST.operate_range(l,r,(b,c))
+ --- modulename: s918851820, funcname: operate_range
+s918851820.py(76):         L += self.N
+s918851820.py(77):         R += self.N
+s918851820.py(78):         L0 = L // (L & -L)
+s918851820.py(79):         R0 = R // (R & -R) - 1
+s918851820.py(80):         self.propagate_above(L0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(81):         self.propagate_above(R0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(82):         while L < R:
+s918851820.py(83):             if L & 1:
+s918851820.py(84):                 self.A[L] = self.A_func(self.A[L],x)
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(85):                 L += 1
+s918851820.py(86):             if R & 1:
+s918851820.py(89):             L >>= 1
+s918851820.py(90):             R >>= 1
+s918851820.py(82):         while L < R:
+s918851820.py(83):             if L & 1:
+s918851820.py(86):             if R & 1:
+s918851820.py(87):                 R -= 1
+s918851820.py(88):                 self.A[R] = self.A_func(self.A[R],x)
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(89):             L >>= 1
+s918851820.py(90):             R >>= 1
+s918851820.py(82):         while L < R:
+s918851820.py(91):         self.eval_above(L0)
+ --- modulename: s918851820, funcname: eval_above
+s918851820.py(39):         i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(92):         self.eval_above(R0)
+ --- modulename: s918851820, funcname: eval_above
+s918851820.py(39):         i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(41):             self.X[i] = self.X_func(self.eval_at(i << 1),self.eval_at(i << 1 | 1))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(42):             i >>= 1
+s918851820.py(40):         while i:
+s918851820.py(121): for i in range(Q):
+s918851820.py(122):     X = LI()
+ --- modulename: s918851820, funcname: LI
+s918851820.py(4): def LI(): return list(map(int,sys.stdin.readline().rstrip().split()))  #空白あり
+s918851820.py(123):     if X[0] == 0:
+s918851820.py(127):         l,r = X[1:]
+s918851820.py(128):         print(LST.fold(l,r))
+ --- modulename: s918851820, funcname: fold
+s918851820.py(56):         L += self.N
+s918851820.py(57):         R += self.N
+s918851820.py(58):         L0 = L // (L & -L)
+s918851820.py(59):         R0 = R // (R & -R) - 1
+s918851820.py(60):         self.propagate_above(L0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(61):         self.propagate_above(R0)
+ --- modulename: s918851820, funcname: propagate_above
+s918851820.py(51):         H = i.bit_length()
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(53):             self.propagate_at(i >> h)
+ --- modulename: s918851820, funcname: propagate_at
+s918851820.py(45):         self.X[i] = self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+s918851820.py(46):         self.A[i << 1] = self.A_func(self.A[i << 1],self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(47):         self.A[i << 1 | 1] = self.A_func(self.A[i << 1 | 1], self.A[i])
+ --- modulename: s918851820, funcname: A_func
+s918851820.py(103):     b0,c0 = a
+s918851820.py(104):     b1,c1 = b
+s918851820.py(105):     return ((b0*b1) % mod,(b1*c0+c1) % mod)
+s918851820.py(48):         self.A[i] = self.A_unit
+s918851820.py(52):         for h in range(H,0,-1):
+s918851820.py(62):         vL = self.X_unit
+s918851820.py(63):         vR = self.X_unit
+s918851820.py(64):         while L < R:
+s918851820.py(65):             if L & 1:
+s918851820.py(66):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(67):                 L += 1
+s918851820.py(68):             if R & 1:
+s918851820.py(71):             L >>= 1
+s918851820.py(72):             R >>= 1
+s918851820.py(64):         while L < R:
+s918851820.py(65):             if L & 1:
+s918851820.py(66):                 vL = self.X_func(vL,self.eval_at(L))
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(67):                 L += 1
+s918851820.py(68):             if R & 1:
+s918851820.py(69):                 R -= 1
+s918851820.py(70):                 vR = self.X_func(self.eval_at(R),vR)
+ --- modulename: s918851820, funcname: eval_at
+s918851820.py(36):         return self.operate(self.X[i],self.A[i],self.size[i])
+ --- modulename: s918851820, funcname: operate
+s918851820.py(109):     b,c = a
+s918851820.py(110):     return (b*x+c*r) % mod
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+s918851820.py(71):             L >>= 1
+s918851820.py(72):             R >>= 1
+s918851820.py(64):         while L < R:
+s918851820.py(73):         return self.X_func(vL,vR)
+ --- modulename: s918851820, funcname: X_func
+s918851820.py(99):     return (x+y) % mod
+4317767
+s918851820.py(121): for i in range(Q):
