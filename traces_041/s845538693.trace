@@ -1,0 +1,169 @@
+ --- modulename: s845538693, funcname: <module>
+s845538693.py(3): import os,sys
+s845538693.py(4): from io import BytesIO, IOBase
+s845538693.py(6): def main():
+s845538693.py(29): BUFSIZE = 8192
+s845538693.py(30): class FastIO(IOBase):
+ --- modulename: s845538693, funcname: FastIO
+s845538693.py(30): class FastIO(IOBase):
+s845538693.py(31):     newlines = 0
+s845538693.py(32):     def __init__(self, file):
+s845538693.py(37):     def read(self):
+s845538693.py(46):     def readline(self):
+s845538693.py(54):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s845538693.py(58): class IOWrapper(IOBase):
+ --- modulename: s845538693, funcname: IOWrapper
+s845538693.py(58): class IOWrapper(IOBase):
+s845538693.py(59):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s845538693.py(66): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s845538693, funcname: __init__
+s845538693.py(60):         self.buffer = FastIO(file)
+ --- modulename: s845538693, funcname: __init__
+s845538693.py(33):         self._fd = file.fileno()
+s845538693.py(34):         self.buffer = BytesIO()
+s845538693.py(35):         self.writable = "x" in file.mode or "r" not in file.mode
+s845538693.py(36):         self.write = self.buffer.write if self.writable else None
+s845538693.py(61):         self.flush = self.buffer.flush
+s845538693.py(62):         self.writable = self.buffer.writable
+s845538693.py(63):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s845538693.py(64):         self.read = lambda: self.buffer.read().decode("ascii")
+s845538693.py(65):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s845538693, funcname: __init__
+s845538693.py(60):         self.buffer = FastIO(file)
+ --- modulename: s845538693, funcname: __init__
+s845538693.py(33):         self._fd = file.fileno()
+s845538693.py(34):         self.buffer = BytesIO()
+s845538693.py(35):         self.writable = "x" in file.mode or "r" not in file.mode
+s845538693.py(36):         self.write = self.buffer.write if self.writable else None
+s845538693.py(61):         self.flush = self.buffer.flush
+s845538693.py(62):         self.writable = self.buffer.writable
+s845538693.py(63):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s845538693.py(64):         self.read = lambda: self.buffer.read().decode("ascii")
+s845538693.py(65):         self.readline = lambda: self.buffer.readline().decode("ascii")
+s845538693.py(67): input = lambda: sys.stdin.readline().rstrip("\r\n")
+s845538693.py(69): if __name__ == '__main__':
+s845538693.py(70):     main()
+ --- modulename: s845538693, funcname: main
+s845538693.py(7):     n,k = map(int,input().split())
+ --- modulename: s845538693, funcname: <lambda>
+s845538693.py(67): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s845538693, funcname: <lambda>
+s845538693.py(65):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s845538693, funcname: readline
+s845538693.py(47):         while self.newlines == 0:
+s845538693.py(48):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s845538693.py(49):             self.newlines = b.count(b"\n") + (not b)
+s845538693.py(50):             ptr = self.buffer.tell()
+s845538693.py(51):             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s845538693.py(47):         while self.newlines == 0:
+s845538693.py(52):         self.newlines -= 1
+s845538693.py(53):         return self.buffer.readline()
+s845538693.py(8):     p = list(map(int,input().split()))
+ --- modulename: s845538693, funcname: <lambda>
+s845538693.py(67): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s845538693, funcname: <lambda>
+s845538693.py(65):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s845538693, funcname: readline
+s845538693.py(47):         while self.newlines == 0:
+s845538693.py(52):         self.newlines -= 1
+s845538693.py(53):         return self.buffer.readline()
+s845538693.py(9):     c = list(map(int,input().split()))
+ --- modulename: s845538693, funcname: <lambda>
+s845538693.py(67): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s845538693, funcname: <lambda>
+s845538693.py(65):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s845538693, funcname: readline
+s845538693.py(47):         while self.newlines == 0:
+s845538693.py(52):         self.newlines -= 1
+s845538693.py(53):         return self.buffer.readline()
+s845538693.py(10):     ans = -10**20
+s845538693.py(11):     for i in range(1,n+1):
+s845538693.py(12):         cou = 1
+s845538693.py(13):         se = {i}
+s845538693.py(14):         ne = p[i-1]
+s845538693.py(15):         su = [c[ne-1]]
+s845538693.py(16):         maxi = c[ne-1]
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(18):             se.add(ne)
+s845538693.py(19):             ne = p[ne-1]
+s845538693.py(20):             su.append(su[-1]+c[ne-1])
+s845538693.py(21):             maxi = max(maxi,su[-1])
+s845538693.py(22):             cou += 1
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(23):         if su[-1] > 0 and cou<k:
+s845538693.py(25):         ans = max(ans,maxi)
+s845538693.py(11):     for i in range(1,n+1):
+s845538693.py(12):         cou = 1
+s845538693.py(13):         se = {i}
+s845538693.py(14):         ne = p[i-1]
+s845538693.py(15):         su = [c[ne-1]]
+s845538693.py(16):         maxi = c[ne-1]
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(18):             se.add(ne)
+s845538693.py(19):             ne = p[ne-1]
+s845538693.py(20):             su.append(su[-1]+c[ne-1])
+s845538693.py(21):             maxi = max(maxi,su[-1])
+s845538693.py(22):             cou += 1
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(23):         if su[-1] > 0 and cou<k:
+s845538693.py(25):         ans = max(ans,maxi)
+s845538693.py(11):     for i in range(1,n+1):
+s845538693.py(12):         cou = 1
+s845538693.py(13):         se = {i}
+s845538693.py(14):         ne = p[i-1]
+s845538693.py(15):         su = [c[ne-1]]
+s845538693.py(16):         maxi = c[ne-1]
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(18):             se.add(ne)
+s845538693.py(19):             ne = p[ne-1]
+s845538693.py(20):             su.append(su[-1]+c[ne-1])
+s845538693.py(21):             maxi = max(maxi,su[-1])
+s845538693.py(22):             cou += 1
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(23):         if su[-1] > 0 and cou<k:
+s845538693.py(25):         ans = max(ans,maxi)
+s845538693.py(11):     for i in range(1,n+1):
+s845538693.py(12):         cou = 1
+s845538693.py(13):         se = {i}
+s845538693.py(14):         ne = p[i-1]
+s845538693.py(15):         su = [c[ne-1]]
+s845538693.py(16):         maxi = c[ne-1]
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(18):             se.add(ne)
+s845538693.py(19):             ne = p[ne-1]
+s845538693.py(20):             su.append(su[-1]+c[ne-1])
+s845538693.py(21):             maxi = max(maxi,su[-1])
+s845538693.py(22):             cou += 1
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(23):         if su[-1] > 0 and cou<k:
+s845538693.py(25):         ans = max(ans,maxi)
+s845538693.py(11):     for i in range(1,n+1):
+s845538693.py(12):         cou = 1
+s845538693.py(13):         se = {i}
+s845538693.py(14):         ne = p[i-1]
+s845538693.py(15):         su = [c[ne-1]]
+s845538693.py(16):         maxi = c[ne-1]
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(18):             se.add(ne)
+s845538693.py(19):             ne = p[ne-1]
+s845538693.py(20):             su.append(su[-1]+c[ne-1])
+s845538693.py(21):             maxi = max(maxi,su[-1])
+s845538693.py(22):             cou += 1
+s845538693.py(17):         while ne not in se and cou < k:
+s845538693.py(23):         if su[-1] > 0 and cou<k:
+s845538693.py(25):         ans = max(ans,maxi)
+s845538693.py(11):     for i in range(1,n+1):
+s845538693.py(26):     print(ans)
+ --- modulename: s845538693, funcname: <lambda>
+s845538693.py(63):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+8 --- modulename: s845538693, funcname: <lambda>
+s845538693.py(63):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
