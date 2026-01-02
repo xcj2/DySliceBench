@@ -1,0 +1,124 @@
+ --- modulename: s591295092, funcname: <module>
+s591295092.py(1): class Rmq:
+ --- modulename: s591295092, funcname: Rmq
+s591295092.py(1): class Rmq:
+s591295092.py(4):     def __init__(self, a, sqrt_n=500):
+s591295092.py(11):     def get_min(self, l, r):
+s591295092.py(21):     def set_value(self, idx, val):
+s591295092.py(26):     def chmin(self, idx, val):
+s591295092.py(30):     def debug(self):
+s591295092.py(34):     def __getitem__(self, item):
+s591295092.py(37):     def __setitem__(self, key, value):
+s591295092.py(41): from operator import itemgetter
+s591295092.py(42): import sys
+s591295092.py(44): def main():
+s591295092.py(65): main()
+ --- modulename: s591295092, funcname: main
+s591295092.py(45):     N, M = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s591295092.py(46):     LRC = list(zip(*[iter(map(int, sys.stdin.read().split()))]*3))
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s591295092.py(47):     LRC.sort(key=itemgetter(0))
+s591295092.py(48):     idx_LRC = 0
+s591295092.py(49):     inf = 1 << 60
+s591295092.py(51):     rmq = Rmq([inf] * (N+1))
+ --- modulename: s591295092, funcname: __init__
+s591295092.py(5):         from itertools import zip_longest
+s591295092.py(6):         self.n = len(a)
+s591295092.py(7):         self.sqrt_n = sqrt_n
+s591295092.py(8):         self.layer1 = a
+s591295092.py(9):         self.layer0 = [min(values) for values in zip_longest(*[iter(a)]*sqrt_n, fillvalue=float("inf"))]
+ --- modulename: s591295092, funcname: <listcomp>
+s591295092.py(9):         self.layer0 = [min(values) for values in zip_longest(*[iter(a)]*sqrt_n, fillvalue=float("inf"))]
+s591295092.py(9):         self.layer0 = [min(values) for values in zip_longest(*[iter(a)]*sqrt_n, fillvalue=float("inf"))]
+s591295092.py(52):     rmq.set_value(1, 0)
+ --- modulename: s591295092, funcname: set_value
+s591295092.py(22):         self.layer1[idx] = val
+s591295092.py(23):         idx //= self.sqrt_n
+s591295092.py(24):         self.layer0[idx] = min(self.layer0[idx], val)
+s591295092.py(53):     for v in range(1, N+1):
+s591295092.py(54):         d = rmq.get_min(v, N+1)
+ --- modulename: s591295092, funcname: get_min
+s591295092.py(12):         sqrt_n = self.sqrt_n
+s591295092.py(13):         parent_l, parent_r = l//sqrt_n+1, (r+1)//sqrt_n
+s591295092.py(14):         if parent_l < parent_r:
+s591295092.py(19):             return min(self.layer1[l:r])
+s591295092.py(55):         while idx_LRC < M:
+s591295092.py(56):             l, r, c = LRC[idx_LRC]
+s591295092.py(57):             if l <= v:
+s591295092.py(58):                 rmq.chmin(r, d+c)
+ --- modulename: s591295092, funcname: chmin
+s591295092.py(27):         if self.layer1[idx] > val:
+s591295092.py(28):             self.set_value(idx, val)
+ --- modulename: s591295092, funcname: set_value
+s591295092.py(22):         self.layer1[idx] = val
+s591295092.py(23):         idx //= self.sqrt_n
+s591295092.py(24):         self.layer0[idx] = min(self.layer0[idx], val)
+s591295092.py(59):                 idx_LRC += 1
+s591295092.py(55):         while idx_LRC < M:
+s591295092.py(56):             l, r, c = LRC[idx_LRC]
+s591295092.py(57):             if l <= v:
+s591295092.py(58):                 rmq.chmin(r, d+c)
+ --- modulename: s591295092, funcname: chmin
+s591295092.py(27):         if self.layer1[idx] > val:
+s591295092.py(28):             self.set_value(idx, val)
+ --- modulename: s591295092, funcname: set_value
+s591295092.py(22):         self.layer1[idx] = val
+s591295092.py(23):         idx //= self.sqrt_n
+s591295092.py(24):         self.layer0[idx] = min(self.layer0[idx], val)
+s591295092.py(59):                 idx_LRC += 1
+s591295092.py(55):         while idx_LRC < M:
+s591295092.py(56):             l, r, c = LRC[idx_LRC]
+s591295092.py(57):             if l <= v:
+s591295092.py(53):     for v in range(1, N+1):
+s591295092.py(54):         d = rmq.get_min(v, N+1)
+ --- modulename: s591295092, funcname: get_min
+s591295092.py(12):         sqrt_n = self.sqrt_n
+s591295092.py(13):         parent_l, parent_r = l//sqrt_n+1, (r+1)//sqrt_n
+s591295092.py(14):         if parent_l < parent_r:
+s591295092.py(19):             return min(self.layer1[l:r])
+s591295092.py(55):         while idx_LRC < M:
+s591295092.py(56):             l, r, c = LRC[idx_LRC]
+s591295092.py(57):             if l <= v:
+s591295092.py(58):                 rmq.chmin(r, d+c)
+ --- modulename: s591295092, funcname: chmin
+s591295092.py(27):         if self.layer1[idx] > val:
+s591295092.py(28):             self.set_value(idx, val)
+ --- modulename: s591295092, funcname: set_value
+s591295092.py(22):         self.layer1[idx] = val
+s591295092.py(23):         idx //= self.sqrt_n
+s591295092.py(24):         self.layer0[idx] = min(self.layer0[idx], val)
+s591295092.py(59):                 idx_LRC += 1
+s591295092.py(55):         while idx_LRC < M:
+s591295092.py(53):     for v in range(1, N+1):
+s591295092.py(54):         d = rmq.get_min(v, N+1)
+ --- modulename: s591295092, funcname: get_min
+s591295092.py(12):         sqrt_n = self.sqrt_n
+s591295092.py(13):         parent_l, parent_r = l//sqrt_n+1, (r+1)//sqrt_n
+s591295092.py(14):         if parent_l < parent_r:
+s591295092.py(19):             return min(self.layer1[l:r])
+s591295092.py(55):         while idx_LRC < M:
+s591295092.py(53):     for v in range(1, N+1):
+s591295092.py(54):         d = rmq.get_min(v, N+1)
+ --- modulename: s591295092, funcname: get_min
+s591295092.py(12):         sqrt_n = self.sqrt_n
+s591295092.py(13):         parent_l, parent_r = l//sqrt_n+1, (r+1)//sqrt_n
+s591295092.py(14):         if parent_l < parent_r:
+s591295092.py(19):             return min(self.layer1[l:r])
+s591295092.py(55):         while idx_LRC < M:
+s591295092.py(53):     for v in range(1, N+1):
+s591295092.py(62):     ans = rmq[N]
+ --- modulename: s591295092, funcname: __getitem__
+s591295092.py(35):         return self.layer1[item]
+s591295092.py(63):     print(ans if ans < inf else -1)
+5
