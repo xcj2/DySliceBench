@@ -1,0 +1,81 @@
+ --- modulename: s195620276, funcname: <module>
+s195620276.py(1): import itertools
+s195620276.py(2): import os
+s195620276.py(3): import sys
+s195620276.py(5): sys.setrecursionlimit(2147483647)
+s195620276.py(6): INF = float('inf')
+s195620276.py(8): if os.getenv('LOCAL'):
+ --- modulename: os, funcname: getenv
+os.py(775):     return environ.get(key, default)
+ --- modulename: _collections_abc, funcname: get
+_collections_abc.py(762):         try:
+_collections_abc.py(763):             return self[key]
+ --- modulename: os, funcname: __getitem__
+os.py(675):         try:
+os.py(676):             value = self._data[self.encodekey(key)]
+ --- modulename: os, funcname: encodekey
+os.py(747):             return encode(key).upper()
+ --- modulename: os, funcname: check_str
+os.py(741):             if not isinstance(value, str):
+os.py(743):             return value
+os.py(677):         except KeyError:
+os.py(679):             raise KeyError(key) from None
+_collections_abc.py(764):         except KeyError:
+_collections_abc.py(765):             return default
+s195620276.py(12): def mod_inv(a):
+s195620276.py(22): def mod_invs(max, mod):
+s195620276.py(35): def factorials(max, mod=None):
+s195620276.py(56): MOD = 10 ** 9 + 7
+s195620276.py(57): N, A, B, C = list(map(int, sys.stdin.readline().split()))
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s195620276.py(129): fs = factorials(max=2 * N, mod=MOD)
+ --- modulename: s195620276, funcname: factorials
+s195620276.py(42):     ret = [1]
+s195620276.py(43):     n = 1
+s195620276.py(44):     if mod:
+s195620276.py(45):         for i in range(1, max + 1):
+s195620276.py(46):             n *= i
+s195620276.py(47):             n %= mod
+s195620276.py(48):             ret.append(n)
+s195620276.py(45):         for i in range(1, max + 1):
+s195620276.py(46):             n *= i
+s195620276.py(47):             n %= mod
+s195620276.py(48):             ret.append(n)
+s195620276.py(45):         for i in range(1, max + 1):
+s195620276.py(53):     return ret
+s195620276.py(130): A = A * mod_inv(100 - C) % MOD
+ --- modulename: s195620276, funcname: mod_inv
+s195620276.py(18):     return pow(a, MOD - 2, MOD)
+s195620276.py(131): B = B * mod_inv(100 - C) % MOD
+ --- modulename: s195620276, funcname: mod_inv
+s195620276.py(18):     return pow(a, MOD - 2, MOD)
+s195620276.py(132): A_powers = list(itertools.accumulate([1] * (N + 1), lambda p, _: p * A % MOD))
+ --- modulename: s195620276, funcname: <lambda>
+s195620276.py(132): A_powers = list(itertools.accumulate([1] * (N + 1), lambda p, _: p * A % MOD))
+s195620276.py(133): B_powers = list(itertools.accumulate([1] * (N + 1), lambda p, _: p * B % MOD))
+ --- modulename: s195620276, funcname: <lambda>
+s195620276.py(133): B_powers = list(itertools.accumulate([1] * (N + 1), lambda p, _: p * B % MOD))
+s195620276.py(134): ans = 0
+s195620276.py(135): for i in range(N):
+s195620276.py(136):     ans += ((A_powers[N] * B_powers[i] + B_powers[N] * A_powers[i])
+s195620276.py(137):             * fs[N + i - 1] * mod_inv(fs[N - 1] * fs[i])
+s195620276.py(136):     ans += ((A_powers[N] * B_powers[i] + B_powers[N] * A_powers[i])
+s195620276.py(137):             * fs[N + i - 1] * mod_inv(fs[N - 1] * fs[i])
+ --- modulename: s195620276, funcname: mod_inv
+s195620276.py(18):     return pow(a, MOD - 2, MOD)
+s195620276.py(136):     ans += ((A_powers[N] * B_powers[i] + B_powers[N] * A_powers[i])
+s195620276.py(138):             * (N + i))
+s195620276.py(136):     ans += ((A_powers[N] * B_powers[i] + B_powers[N] * A_powers[i])
+s195620276.py(139):     ans %= MOD
+s195620276.py(135): for i in range(N):
+s195620276.py(141): ans *= 100 * mod_inv(100 - C)
+ --- modulename: s195620276, funcname: mod_inv
+s195620276.py(18):     return pow(a, MOD - 2, MOD)
+s195620276.py(142): print(ans % MOD)
+2

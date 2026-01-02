@@ -1,0 +1,133 @@
+ --- modulename: s196118711, funcname: <module>
+s196118711.py(1): import sys
+s196118711.py(2): input = sys.stdin.readline
+s196118711.py(4): def main():
+s196118711.py(64): if __name__ == "__main__":
+s196118711.py(65):   main()
+ --- modulename: s196118711, funcname: main
+s196118711.py(5):   n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s196118711.py(6):   T = [[] for _ in range(n)]
+ --- modulename: s196118711, funcname: <listcomp>
+s196118711.py(6):   T = [[] for _ in range(n)]
+s196118711.py(6):   T = [[] for _ in range(n)]
+s196118711.py(6):   T = [[] for _ in range(n)]
+s196118711.py(6):   T = [[] for _ in range(n)]
+s196118711.py(7):   D = {}
+s196118711.py(8):   for i in range(n-1):
+s196118711.py(9):     a, b = map(int, input().split())
+s196118711.py(10):     a -= 1
+s196118711.py(11):     b -= 1
+s196118711.py(12):     T[a].append(b)
+s196118711.py(13):     T[b].append(a)
+s196118711.py(14):     D[(a, b)] = 1<<i
+s196118711.py(15):     D[(b, a)] = 1<<i
+s196118711.py(8):   for i in range(n-1):
+s196118711.py(9):     a, b = map(int, input().split())
+s196118711.py(10):     a -= 1
+s196118711.py(11):     b -= 1
+s196118711.py(12):     T[a].append(b)
+s196118711.py(13):     T[b].append(a)
+s196118711.py(14):     D[(a, b)] = 1<<i
+s196118711.py(15):     D[(b, a)] = 1<<i
+s196118711.py(8):   for i in range(n-1):
+s196118711.py(16):   m = int(input())
+s196118711.py(18):   def dfs(u, v):
+s196118711.py(36):   def popcount(n):
+s196118711.py(45):   E = [0]*m
+s196118711.py(46):   for i in range(m):
+s196118711.py(47):     u, v = map(int, input().split())
+s196118711.py(48):     u -= 1
+s196118711.py(49):     v -= 1
+s196118711.py(50):     edge = dfs(u, v)
+ --- modulename: s196118711, funcname: dfs
+s196118711.py(19):     parent = [-1]*n
+s196118711.py(20):     seen = [False]*n
+s196118711.py(21):     stack = [u]
+s196118711.py(22):     seen[u] = True
+s196118711.py(23):     while stack:
+s196118711.py(24):       nv = stack[-1]
+s196118711.py(25):       if nv == v:
+s196118711.py(27):       for i in T[nv]:
+s196118711.py(28):         if seen[i]:
+s196118711.py(30):         stack.append(i)
+s196118711.py(31):         seen[i] = True
+s196118711.py(32):         break
+s196118711.py(23):     while stack:
+s196118711.py(24):       nv = stack[-1]
+s196118711.py(25):       if nv == v:
+s196118711.py(27):       for i in T[nv]:
+s196118711.py(28):         if seen[i]:
+s196118711.py(29):           continue
+s196118711.py(27):       for i in T[nv]:
+s196118711.py(28):         if seen[i]:
+s196118711.py(30):         stack.append(i)
+s196118711.py(31):         seen[i] = True
+s196118711.py(32):         break
+s196118711.py(23):     while stack:
+s196118711.py(24):       nv = stack[-1]
+s196118711.py(25):       if nv == v:
+s196118711.py(26):         return stack
+s196118711.py(51):     for j in range(len(edge)-1):
+s196118711.py(52):       E[i] |= D[(edge[j], edge[j+1])]
+s196118711.py(51):     for j in range(len(edge)-1):
+s196118711.py(52):       E[i] |= D[(edge[j], edge[j+1])]
+s196118711.py(51):     for j in range(len(edge)-1):
+s196118711.py(46):   for i in range(m):
+s196118711.py(54):   ans = 0
+s196118711.py(55):   for i in range(2**m):
+s196118711.py(56):     s = 0
+s196118711.py(57):     for j in range(m):
+s196118711.py(58):       if i>>j & 1:
+s196118711.py(57):     for j in range(m):
+s196118711.py(60):     cnt = popcount(i) % 2
+ --- modulename: s196118711, funcname: popcount
+s196118711.py(37):     c = (n & 0x5555555555555555) + ((n>>1) & 0x5555555555555555)
+s196118711.py(38):     c = (c & 0x3333333333333333) + ((c>>2) & 0x3333333333333333)
+s196118711.py(39):     c = (c & 0x0f0f0f0f0f0f0f0f) + ((c>>4) & 0x0f0f0f0f0f0f0f0f)
+s196118711.py(40):     c = (c & 0x00ff00ff00ff00ff) + ((c>>8) & 0x00ff00ff00ff00ff)
+s196118711.py(41):     c = (c & 0x0000ffff0000ffff) + ((c>>16) & 0x0000ffff0000ffff)
+s196118711.py(42):     c = (c & 0x00000000ffffffff) + ((c>>32) & 0x00000000ffffffff)
+s196118711.py(43):     return c
+s196118711.py(61):     ans += (-1)**cnt * 2**(n-1-popcount(s))
+ --- modulename: s196118711, funcname: popcount
+s196118711.py(37):     c = (n & 0x5555555555555555) + ((n>>1) & 0x5555555555555555)
+s196118711.py(38):     c = (c & 0x3333333333333333) + ((c>>2) & 0x3333333333333333)
+s196118711.py(39):     c = (c & 0x0f0f0f0f0f0f0f0f) + ((c>>4) & 0x0f0f0f0f0f0f0f0f)
+s196118711.py(40):     c = (c & 0x00ff00ff00ff00ff) + ((c>>8) & 0x00ff00ff00ff00ff)
+s196118711.py(41):     c = (c & 0x0000ffff0000ffff) + ((c>>16) & 0x0000ffff0000ffff)
+s196118711.py(42):     c = (c & 0x00000000ffffffff) + ((c>>32) & 0x00000000ffffffff)
+s196118711.py(43):     return c
+s196118711.py(55):   for i in range(2**m):
+s196118711.py(56):     s = 0
+s196118711.py(57):     for j in range(m):
+s196118711.py(58):       if i>>j & 1:
+s196118711.py(59):         s |= E[j]
+s196118711.py(57):     for j in range(m):
+s196118711.py(60):     cnt = popcount(i) % 2
+ --- modulename: s196118711, funcname: popcount
+s196118711.py(37):     c = (n & 0x5555555555555555) + ((n>>1) & 0x5555555555555555)
+s196118711.py(38):     c = (c & 0x3333333333333333) + ((c>>2) & 0x3333333333333333)
+s196118711.py(39):     c = (c & 0x0f0f0f0f0f0f0f0f) + ((c>>4) & 0x0f0f0f0f0f0f0f0f)
+s196118711.py(40):     c = (c & 0x00ff00ff00ff00ff) + ((c>>8) & 0x00ff00ff00ff00ff)
+s196118711.py(41):     c = (c & 0x0000ffff0000ffff) + ((c>>16) & 0x0000ffff0000ffff)
+s196118711.py(42):     c = (c & 0x00000000ffffffff) + ((c>>32) & 0x00000000ffffffff)
+s196118711.py(43):     return c
+s196118711.py(61):     ans += (-1)**cnt * 2**(n-1-popcount(s))
+ --- modulename: s196118711, funcname: popcount
+s196118711.py(37):     c = (n & 0x5555555555555555) + ((n>>1) & 0x5555555555555555)
+s196118711.py(38):     c = (c & 0x3333333333333333) + ((c>>2) & 0x3333333333333333)
+s196118711.py(39):     c = (c & 0x0f0f0f0f0f0f0f0f) + ((c>>4) & 0x0f0f0f0f0f0f0f0f)
+s196118711.py(40):     c = (c & 0x00ff00ff00ff00ff) + ((c>>8) & 0x00ff00ff00ff00ff)
+s196118711.py(41):     c = (c & 0x0000ffff0000ffff) + ((c>>16) & 0x0000ffff0000ffff)
+s196118711.py(42):     c = (c & 0x00000000ffffffff) + ((c>>32) & 0x00000000ffffffff)
+s196118711.py(43):     return c
+s196118711.py(55):   for i in range(2**m):
+s196118711.py(62):   print(ans)
+3
