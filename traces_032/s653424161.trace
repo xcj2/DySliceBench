@@ -1,0 +1,2043 @@
+ --- modulename: s653424161, funcname: <module>
+s653424161.py(2): import sys
+s653424161.py(3): from heapq import heapify, heappop, heappush
+s653424161.py(5): sr = lambda: sys.stdin.readline().rstrip()
+s653424161.py(6): ir = lambda: int(sr())
+s653424161.py(7): lr = lambda: list(map(int, sr().split()))
+s653424161.py(9): H, W, K = lr()
+ --- modulename: s653424161, funcname: <lambda>
+s653424161.py(7): lr = lambda: list(map(int, sr().split()))
+ --- modulename: s653424161, funcname: <lambda>
+s653424161.py(5): sr = lambda: sys.stdin.readline().rstrip()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s653424161.py(10): SX, SY, GX, GY = lr()
+ --- modulename: s653424161, funcname: <lambda>
+s653424161.py(7): lr = lambda: list(map(int, sr().split()))
+ --- modulename: s653424161, funcname: <lambda>
+s653424161.py(5): sr = lambda: sys.stdin.readline().rstrip()
+s653424161.py(11): SX -= 1; SY -= 1; GX -= 1; GY -= 1
+s653424161.py(12): pond = [sr() for _ in range(H)]
+ --- modulename: s653424161, funcname: <listcomp>
+s653424161.py(12): pond = [sr() for _ in range(H)]
+ --- modulename: s653424161, funcname: <lambda>
+s653424161.py(5): sr = lambda: sys.stdin.readline().rstrip()
+s653424161.py(12): pond = [sr() for _ in range(H)]
+ --- modulename: s653424161, funcname: <lambda>
+s653424161.py(5): sr = lambda: sys.stdin.readline().rstrip()
+s653424161.py(12): pond = [sr() for _ in range(H)]
+ --- modulename: s653424161, funcname: <lambda>
+s653424161.py(5): sr = lambda: sys.stdin.readline().rstrip()
+s653424161.py(12): pond = [sr() for _ in range(H)]
+s653424161.py(13): INF = 10 ** 10
+s653424161.py(15): def to_ID(x, y, con):
+s653424161.py(18): def mod_ceil_K(x):
+s653424161.py(21): def push(d, id):
+s653424161.py(27): dist = [INF] * (H*W*4)
+s653424161.py(28): start = to_ID(SX, SY, 0)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(29): dist[start] = 0
+s653424161.py(30): que = [(0, start)]
+s653424161.py(31): UDLR = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+s653424161.py(32): goal = to_ID(GX, GY, 0)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(50):         continue
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(50):         continue
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(50):         continue
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(50):         continue
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(50):         continue
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(50):         continue
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(50):         continue
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(53):         dist[next_id] = d + 1
+s653424161.py(54):         push(d+1, next_id)
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(50):         continue
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(51):     next_id = to_ID(nx, ny, con)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(52):     if dist[next_id] > d + 1:
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(38):     if dist[id] < d:
+s653424161.py(40):     x = id // 4 // W
+s653424161.py(41):     y = id // 4 % W
+s653424161.py(42):     con = id % 4
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(44):         next_id = to_ID(x, y, i)
+ --- modulename: s653424161, funcname: to_ID
+s653424161.py(16):     return (x*W + y) * 4 + con
+s653424161.py(45):         if dist[next_id] > mod_ceil_K(d):
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(46):             push(mod_ceil_K(d), next_id)
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+ --- modulename: s653424161, funcname: push
+s653424161.py(22):     if dist[id] < d:
+s653424161.py(24):     dist[id] = d
+s653424161.py(25):     heappush(que, (d, id))    
+s653424161.py(43):     for i in range(4):
+s653424161.py(47):     dx = UDLR[con][0]; dy = UDLR[con][1]
+s653424161.py(48):     nx = x + dx; ny = y + dy
+s653424161.py(49):     if not (0 <= nx < H and 0 <= ny < W) or pond[nx][ny] == '@':
+s653424161.py(33): while que:
+s653424161.py(34):     d, id = heappop(que)
+s653424161.py(35):     if id == goal:
+s653424161.py(36):         answer = mod_ceil_K(d) // K
+ --- modulename: s653424161, funcname: mod_ceil_K
+s653424161.py(19):     return (x+K-1) // K * K
+s653424161.py(37):         print(answer); exit()
+5
+ --- modulename: _sitebuiltins, funcname: __call__
+_sitebuiltins.py(22):         try:
+_sitebuiltins.py(23):             sys.stdin.close()
+_sitebuiltins.py(26):         raise SystemExit(code)
