@@ -1,0 +1,152 @@
+ --- modulename: s489602205, funcname: <module>
+s489602205.py(2): import sys
+s489602205.py(3): import heapq
+s489602205.py(5): def solve(X: int, Y: int, Z: int, K: int, A: "List[int]", B: "List[int]", C: "List[int]"):
+s489602205.py(29): def main():
+s489602205.py(44): if __name__ == '__main__':
+s489602205.py(45):     main()
+ --- modulename: s489602205, funcname: main
+s489602205.py(30):     def iterate_tokens():
+s489602205.py(34):     tokens = iterate_tokens()
+s489602205.py(35):     X = int(next(tokens))  # type: int
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(31):         for line in sys.stdin:
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(36):     Y = int(next(tokens))  # type: int
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(37):     Z = int(next(tokens))  # type: int
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(38):     K = int(next(tokens))  # type: int
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(39):     A = [int(next(tokens)) for _ in range(X)]  # type: "List[int]"
+ --- modulename: s489602205, funcname: <listcomp>
+s489602205.py(39):     A = [int(next(tokens)) for _ in range(X)]  # type: "List[int]"
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(32):             for word in line.split():
+s489602205.py(31):         for line in sys.stdin:
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(39):     A = [int(next(tokens)) for _ in range(X)]  # type: "List[int]"
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(39):     A = [int(next(tokens)) for _ in range(X)]  # type: "List[int]"
+s489602205.py(40):     B = [int(next(tokens)) for _ in range(Y)]  # type: "List[int]"
+ --- modulename: s489602205, funcname: <listcomp>
+s489602205.py(40):     B = [int(next(tokens)) for _ in range(Y)]  # type: "List[int]"
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(32):             for word in line.split():
+s489602205.py(31):         for line in sys.stdin:
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(40):     B = [int(next(tokens)) for _ in range(Y)]  # type: "List[int]"
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(40):     B = [int(next(tokens)) for _ in range(Y)]  # type: "List[int]"
+s489602205.py(41):     C = [int(next(tokens)) for _ in range(Z)]  # type: "List[int]"
+ --- modulename: s489602205, funcname: <listcomp>
+s489602205.py(41):     C = [int(next(tokens)) for _ in range(Z)]  # type: "List[int]"
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(32):             for word in line.split():
+s489602205.py(31):         for line in sys.stdin:
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(41):     C = [int(next(tokens)) for _ in range(Z)]  # type: "List[int]"
+ --- modulename: s489602205, funcname: iterate_tokens
+s489602205.py(32):             for word in line.split():
+s489602205.py(33):                 yield word
+s489602205.py(41):     C = [int(next(tokens)) for _ in range(Z)]  # type: "List[int]"
+s489602205.py(42):     solve(X, Y, Z, K, A, B, C)
+ --- modulename: s489602205, funcname: solve
+s489602205.py(6):     A = sorted(A,reverse = True)
+s489602205.py(7):     B = sorted(B,reverse = True)
+s489602205.py(8):     C = sorted(C,reverse = True)
+s489602205.py(10):     d = []
+s489602205.py(11):     heapq.heappush(d, (-(A[0]+B[0]+C[0]), 0, 0, 0)) # heapqにタプルを与えると最初の要素でソートする
+s489602205.py(12):     ijk_set = set((0,0,0))
+s489602205.py(14):     for _ in range(K):
+s489602205.py(15):         tmp, i, j, k = heapq.heappop(d)
+s489602205.py(16):         print(-tmp)
+19
+s489602205.py(17):         if (i+1,j,k) not in ijk_set and i+1 <= X-1:
+s489602205.py(18):             heapq.heappush(d, (-(A[i+1]+B[j]+C[k]), i+1, j, k))
+s489602205.py(19):             ijk_set.add((i+1,j,k))
+s489602205.py(20):         if (i,j+1,k) not in ijk_set and j+1 <= Y-1:
+s489602205.py(21):             heapq.heappush(d, (-(A[i]+B[j+1]+C[k]), i, j+1, k))
+s489602205.py(22):             ijk_set.add((i,j+1,k))
+s489602205.py(23):         if (i,j,k+1) not in ijk_set and k+1 <= Z-1:
+s489602205.py(24):             heapq.heappush(d, (-(A[i]+B[j]+C[k+1]), i, j, k+1))
+s489602205.py(25):             ijk_set.add((i,j,k+1))
+s489602205.py(14):     for _ in range(K):
+s489602205.py(15):         tmp, i, j, k = heapq.heappop(d)
+s489602205.py(16):         print(-tmp)
+17
+s489602205.py(17):         if (i+1,j,k) not in ijk_set and i+1 <= X-1:
+s489602205.py(20):         if (i,j+1,k) not in ijk_set and j+1 <= Y-1:
+s489602205.py(21):             heapq.heappush(d, (-(A[i]+B[j+1]+C[k]), i, j+1, k))
+s489602205.py(22):             ijk_set.add((i,j+1,k))
+s489602205.py(23):         if (i,j,k+1) not in ijk_set and k+1 <= Z-1:
+s489602205.py(24):             heapq.heappush(d, (-(A[i]+B[j]+C[k+1]), i, j, k+1))
+s489602205.py(25):             ijk_set.add((i,j,k+1))
+s489602205.py(14):     for _ in range(K):
+s489602205.py(15):         tmp, i, j, k = heapq.heappop(d)
+s489602205.py(16):         print(-tmp)
+15
+s489602205.py(17):         if (i+1,j,k) not in ijk_set and i+1 <= X-1:
+s489602205.py(20):         if (i,j+1,k) not in ijk_set and j+1 <= Y-1:
+s489602205.py(23):         if (i,j,k+1) not in ijk_set and k+1 <= Z-1:
+s489602205.py(24):             heapq.heappush(d, (-(A[i]+B[j]+C[k+1]), i, j, k+1))
+s489602205.py(25):             ijk_set.add((i,j,k+1))
+s489602205.py(14):     for _ in range(K):
+s489602205.py(15):         tmp, i, j, k = heapq.heappop(d)
+s489602205.py(16):         print(-tmp)
+14
+s489602205.py(17):         if (i+1,j,k) not in ijk_set and i+1 <= X-1:
+s489602205.py(20):         if (i,j+1,k) not in ijk_set and j+1 <= Y-1:
+s489602205.py(23):         if (i,j,k+1) not in ijk_set and k+1 <= Z-1:
+s489602205.py(14):     for _ in range(K):
+s489602205.py(15):         tmp, i, j, k = heapq.heappop(d)
+s489602205.py(16):         print(-tmp)
+13
+s489602205.py(17):         if (i+1,j,k) not in ijk_set and i+1 <= X-1:
+s489602205.py(20):         if (i,j+1,k) not in ijk_set and j+1 <= Y-1:
+s489602205.py(23):         if (i,j,k+1) not in ijk_set and k+1 <= Z-1:
+s489602205.py(24):             heapq.heappush(d, (-(A[i]+B[j]+C[k+1]), i, j, k+1))
+s489602205.py(25):             ijk_set.add((i,j,k+1))
+s489602205.py(14):     for _ in range(K):
+s489602205.py(15):         tmp, i, j, k = heapq.heappop(d)
+s489602205.py(16):         print(-tmp)
+12
+s489602205.py(17):         if (i+1,j,k) not in ijk_set and i+1 <= X-1:
+s489602205.py(20):         if (i,j+1,k) not in ijk_set and j+1 <= Y-1:
+s489602205.py(23):         if (i,j,k+1) not in ijk_set and k+1 <= Z-1:
+s489602205.py(14):     for _ in range(K):
+s489602205.py(15):         tmp, i, j, k = heapq.heappop(d)
+s489602205.py(16):         print(-tmp)
+10
+s489602205.py(17):         if (i+1,j,k) not in ijk_set and i+1 <= X-1:
+s489602205.py(20):         if (i,j+1,k) not in ijk_set and j+1 <= Y-1:
+s489602205.py(23):         if (i,j,k+1) not in ijk_set and k+1 <= Z-1:
+s489602205.py(14):     for _ in range(K):
+s489602205.py(15):         tmp, i, j, k = heapq.heappop(d)
+s489602205.py(16):         print(-tmp)
+8
+s489602205.py(17):         if (i+1,j,k) not in ijk_set and i+1 <= X-1:
+s489602205.py(20):         if (i,j+1,k) not in ijk_set and j+1 <= Y-1:
+s489602205.py(23):         if (i,j,k+1) not in ijk_set and k+1 <= Z-1:
+s489602205.py(14):     for _ in range(K):
+s489602205.py(26):     return
+ --- modulename: s489602205, funcname: iterate_tokens
