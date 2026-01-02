@@ -1,0 +1,565 @@
+ --- modulename: s117320592, funcname: <module>
+s117320592.py(1): from heapq import *
+s117320592.py(3): class erasable_heapq:
+ --- modulename: s117320592, funcname: erasable_heapq
+s117320592.py(3): class erasable_heapq:
+s117320592.py(4):     """
+s117320592.py(12):     __slots__ = ["data", "to_delete"]
+s117320592.py(14):     def __init__(self, data, allow_data_destruction = False):
+s117320592.py(22):     def top(self):
+s117320592.py(29):     def push(self, elem):
+s117320592.py(33):     def pop(self):
+s117320592.py(40):     def pushpop(self, elem):
+s117320592.py(47):     def replace(self ,elem):
+s117320592.py(54):     def erase(self, elem):
+s117320592.py(61):     def __bool__(self):
+s117320592.py(67):     def __len__(self):
+s117320592.py(71): class MultisetBIT:
+ --- modulename: s117320592, funcname: MultisetBIT
+s117320592.py(71): class MultisetBIT:
+s117320592.py(72):     """
+s117320592.py(80):     __slots__ = ["n", "k", "data"]
+s117320592.py(82):     def __init__(self, maxvalue, counter = None):
+s117320592.py(89):     def update(self, counter):
+s117320592.py(105):     def add(self, value):
+s117320592.py(115):     def pop(self, value):
+s117320592.py(127):     def count_le(self, value):
+s117320592.py(139):     def count(self, first, last):
+s117320592.py(154):     def bisect(self, count):
+s117320592.py(169):     def lower_bound(self, value):
+s117320592.py(176):     def upper_bound(self, value):
+s117320592.py(184): H, W = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s117320592.py(186): destination = MultisetBIT(W, [1] * W)
+ --- modulename: s117320592, funcname: __init__
+s117320592.py(83):         self.n = maxvalue + 1
+s117320592.py(84):         self.k = 1 << ((self.n + 1).bit_length() - 1)
+s117320592.py(85):         self.data = [0] * (self.n + 1)
+s117320592.py(86):         if counter is not None:
+s117320592.py(87):             self.update(counter)
+ --- modulename: s117320592, funcname: update
+s117320592.py(95):         if isinstance(counter, list):
+s117320592.py(96):             self.data = [0] + counter + [0] * (self.n - len(counter))
+s117320592.py(101):         for i in range(1, self.n + 1):
+s117320592.py(102):             if i + (i & -i) <= self.n:
+s117320592.py(103):                 self.data[i + (i & -i)] += self.data[i]
+s117320592.py(101):         for i in range(1, self.n + 1):
+s117320592.py(102):             if i + (i & -i) <= self.n:
+s117320592.py(103):                 self.data[i + (i & -i)] += self.data[i]
+s117320592.py(101):         for i in range(1, self.n + 1):
+s117320592.py(102):             if i + (i & -i) <= self.n:
+s117320592.py(103):                 self.data[i + (i & -i)] += self.data[i]
+s117320592.py(101):         for i in range(1, self.n + 1):
+s117320592.py(102):             if i + (i & -i) <= self.n:
+s117320592.py(101):         for i in range(1, self.n + 1):
+s117320592.py(102):             if i + (i & -i) <= self.n:
+s117320592.py(101):         for i in range(1, self.n + 1):
+s117320592.py(188): destination_to_cost = {i:0 for i in range(W)}
+ --- modulename: s117320592, funcname: <dictcomp>
+s117320592.py(188): destination_to_cost = {i:0 for i in range(W)}
+s117320592.py(188): destination_to_cost = {i:0 for i in range(W)}
+s117320592.py(188): destination_to_cost = {i:0 for i in range(W)}
+s117320592.py(188): destination_to_cost = {i:0 for i in range(W)}
+s117320592.py(188): destination_to_cost = {i:0 for i in range(W)}
+s117320592.py(190): min_heapq = erasable_heapq([0] * W, True)
+ --- modulename: s117320592, funcname: __init__
+s117320592.py(15):         if allow_data_destruction:
+s117320592.py(16):             self.data = data
+s117320592.py(19):         heapify(self.data)
+s117320592.py(20):         self.to_delete = []
+s117320592.py(192): for k in range(H):
+s117320592.py(195):     A, B = map(int, input().split())
+s117320592.py(196):     A -= 1
+s117320592.py(197):     B -= 1
+s117320592.py(198):     start_point = destination.lower_bound(A)
+ --- modulename: s117320592, funcname: lower_bound
+s117320592.py(174):         return self.bisect(self.count_le(value - 1) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(199):     point = start_point
+s117320592.py(200):     change_dest_flg = False
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(202):         change_dest_flg = True
+s117320592.py(203):         cost = destination_to_cost.pop(point)
+s117320592.py(204):         min_heapq.erase(cost)
+ --- modulename: s117320592, funcname: erase
+s117320592.py(59):         heappush(self.to_delete, elem)
+s117320592.py(205):         if B + 1 != W:
+s117320592.py(215):         destination.pop(point)
+ --- modulename: s117320592, funcname: pop
+s117320592.py(122):         value += 1
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(216):         point = destination.upper_bound(point)
+ --- modulename: s117320592, funcname: upper_bound
+s117320592.py(181):         return self.bisect(self.count_le(value) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(202):         change_dest_flg = True
+s117320592.py(203):         cost = destination_to_cost.pop(point)
+s117320592.py(204):         min_heapq.erase(cost)
+ --- modulename: s117320592, funcname: erase
+s117320592.py(59):         heappush(self.to_delete, elem)
+s117320592.py(205):         if B + 1 != W:
+s117320592.py(215):         destination.pop(point)
+ --- modulename: s117320592, funcname: pop
+s117320592.py(122):         value += 1
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(216):         point = destination.upper_bound(point)
+ --- modulename: s117320592, funcname: upper_bound
+s117320592.py(181):         return self.bisect(self.count_le(value) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(202):         change_dest_flg = True
+s117320592.py(203):         cost = destination_to_cost.pop(point)
+s117320592.py(204):         min_heapq.erase(cost)
+ --- modulename: s117320592, funcname: erase
+s117320592.py(59):         heappush(self.to_delete, elem)
+s117320592.py(205):         if B + 1 != W:
+s117320592.py(215):         destination.pop(point)
+ --- modulename: s117320592, funcname: pop
+s117320592.py(122):         value += 1
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(216):         point = destination.upper_bound(point)
+ --- modulename: s117320592, funcname: upper_bound
+s117320592.py(181):         return self.bisect(self.count_le(value) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(218):     if min_heapq:
+ --- modulename: s117320592, funcname: __bool__
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(63):             heappop(self.to_delete)
+s117320592.py(64):             heappop(self.data)
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(63):             heappop(self.to_delete)
+s117320592.py(64):             heappop(self.data)
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(63):             heappop(self.to_delete)
+s117320592.py(64):             heappop(self.data)
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(65):         return bool(self.data)
+s117320592.py(219):         print(k + min_heapq.top() + 1)
+ --- modulename: s117320592, funcname: top
+s117320592.py(24):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(27):         return self.data[0]
+1
+s117320592.py(192): for k in range(H):
+s117320592.py(195):     A, B = map(int, input().split())
+s117320592.py(196):     A -= 1
+s117320592.py(197):     B -= 1
+s117320592.py(198):     start_point = destination.lower_bound(A)
+ --- modulename: s117320592, funcname: lower_bound
+s117320592.py(174):         return self.bisect(self.count_le(value - 1) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(199):     point = start_point
+s117320592.py(200):     change_dest_flg = False
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(202):         change_dest_flg = True
+s117320592.py(203):         cost = destination_to_cost.pop(point)
+s117320592.py(204):         min_heapq.erase(cost)
+ --- modulename: s117320592, funcname: erase
+s117320592.py(59):         heappush(self.to_delete, elem)
+s117320592.py(205):         if B + 1 != W:
+s117320592.py(206):             if (B + 1 in destination_to_cost):
+s117320592.py(212):                 destination_to_cost[B+1] = (B + 1 - point) + cost
+s117320592.py(213):                 min_heapq.push((B + 1 - point) + cost)
+ --- modulename: s117320592, funcname: push
+s117320592.py(31):         heappush(self.data, elem)
+s117320592.py(214):                 destination.add(B+1)
+ --- modulename: s117320592, funcname: add
+s117320592.py(110):         value += 1
+s117320592.py(111):         while value <= self.n:
+s117320592.py(112):             self.data[value] += 1
+s117320592.py(113):             value += value & -value
+s117320592.py(111):         while value <= self.n:
+s117320592.py(112):             self.data[value] += 1
+s117320592.py(113):             value += value & -value
+s117320592.py(111):         while value <= self.n:
+s117320592.py(215):         destination.pop(point)
+ --- modulename: s117320592, funcname: pop
+s117320592.py(122):         value += 1
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(216):         point = destination.upper_bound(point)
+ --- modulename: s117320592, funcname: upper_bound
+s117320592.py(181):         return self.bisect(self.count_le(value) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(218):     if min_heapq:
+ --- modulename: s117320592, funcname: __bool__
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(63):             heappop(self.to_delete)
+s117320592.py(64):             heappop(self.data)
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(65):         return bool(self.data)
+s117320592.py(219):         print(k + min_heapq.top() + 1)
+ --- modulename: s117320592, funcname: top
+s117320592.py(24):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(27):         return self.data[0]
+3
+s117320592.py(192): for k in range(H):
+s117320592.py(195):     A, B = map(int, input().split())
+s117320592.py(196):     A -= 1
+s117320592.py(197):     B -= 1
+s117320592.py(198):     start_point = destination.lower_bound(A)
+ --- modulename: s117320592, funcname: lower_bound
+s117320592.py(174):         return self.bisect(self.count_le(value - 1) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(199):     point = start_point
+s117320592.py(200):     change_dest_flg = False
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(202):         change_dest_flg = True
+s117320592.py(203):         cost = destination_to_cost.pop(point)
+s117320592.py(204):         min_heapq.erase(cost)
+ --- modulename: s117320592, funcname: erase
+s117320592.py(59):         heappush(self.to_delete, elem)
+s117320592.py(205):         if B + 1 != W:
+s117320592.py(206):             if (B + 1 in destination_to_cost):
+s117320592.py(212):                 destination_to_cost[B+1] = (B + 1 - point) + cost
+s117320592.py(213):                 min_heapq.push((B + 1 - point) + cost)
+ --- modulename: s117320592, funcname: push
+s117320592.py(31):         heappush(self.data, elem)
+s117320592.py(214):                 destination.add(B+1)
+ --- modulename: s117320592, funcname: add
+s117320592.py(110):         value += 1
+s117320592.py(111):         while value <= self.n:
+s117320592.py(112):             self.data[value] += 1
+s117320592.py(113):             value += value & -value
+s117320592.py(111):         while value <= self.n:
+s117320592.py(215):         destination.pop(point)
+ --- modulename: s117320592, funcname: pop
+s117320592.py(122):         value += 1
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(216):         point = destination.upper_bound(point)
+ --- modulename: s117320592, funcname: upper_bound
+s117320592.py(181):         return self.bisect(self.count_le(value) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(218):     if min_heapq:
+ --- modulename: s117320592, funcname: __bool__
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(63):             heappop(self.to_delete)
+s117320592.py(64):             heappop(self.data)
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(65):         return bool(self.data)
+s117320592.py(219):         print(k + min_heapq.top() + 1)
+ --- modulename: s117320592, funcname: top
+s117320592.py(24):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(27):         return self.data[0]
+6
+s117320592.py(192): for k in range(H):
+s117320592.py(195):     A, B = map(int, input().split())
+s117320592.py(196):     A -= 1
+s117320592.py(197):     B -= 1
+s117320592.py(198):     start_point = destination.lower_bound(A)
+ --- modulename: s117320592, funcname: lower_bound
+s117320592.py(174):         return self.bisect(self.count_le(value - 1) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(199):     point = start_point
+s117320592.py(200):     change_dest_flg = False
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(202):         change_dest_flg = True
+s117320592.py(203):         cost = destination_to_cost.pop(point)
+s117320592.py(204):         min_heapq.erase(cost)
+ --- modulename: s117320592, funcname: erase
+s117320592.py(59):         heappush(self.to_delete, elem)
+s117320592.py(205):         if B + 1 != W:
+s117320592.py(215):         destination.pop(point)
+ --- modulename: s117320592, funcname: pop
+s117320592.py(122):         value += 1
+s117320592.py(123):         while value <= self.n:
+s117320592.py(124):             self.data[value] -= 1
+s117320592.py(125):             value += value & -value
+s117320592.py(123):         while value <= self.n:
+s117320592.py(216):         point = destination.upper_bound(point)
+ --- modulename: s117320592, funcname: upper_bound
+s117320592.py(181):         return self.bisect(self.count_le(value) + 1)
+ --- modulename: s117320592, funcname: count_le
+s117320592.py(132):         value += 1
+s117320592.py(133):         ret = 0
+s117320592.py(134):         while value > 0:
+s117320592.py(135):             ret += self.data[value]
+s117320592.py(136):             value -= value & -value
+s117320592.py(134):         while value > 0:
+s117320592.py(137):         return ret
+ --- modulename: s117320592, funcname: bisect
+s117320592.py(159):         ret = 0
+s117320592.py(160):         k = self.k
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(162):             if ret + k <= self.n and self.data[ret + k] < count:
+s117320592.py(163):                 count -= self.data[ret + k]
+s117320592.py(164):                 ret += k
+s117320592.py(165):             k //= 2
+s117320592.py(161):         while k > 0:
+s117320592.py(166):         return ret
+s117320592.py(201):     while point < W and point < B + 1:
+s117320592.py(218):     if min_heapq:
+ --- modulename: s117320592, funcname: __bool__
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(63):             heappop(self.to_delete)
+s117320592.py(64):             heappop(self.data)
+s117320592.py(62):         while self.to_delete and self.to_delete[0] == self.data[0]:
+s117320592.py(65):         return bool(self.data)
+s117320592.py(221):         for _ in range(H - k):
+s117320592.py(222):             print(-1)
+-1
+s117320592.py(221):         for _ in range(H - k):
+s117320592.py(223):         exit()
+ --- modulename: _sitebuiltins, funcname: __call__
+_sitebuiltins.py(22):         try:
+_sitebuiltins.py(23):             sys.stdin.close()
+_sitebuiltins.py(26):         raise SystemExit(code)

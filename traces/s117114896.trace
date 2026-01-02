@@ -1,0 +1,102 @@
+ --- modulename: s117114896, funcname: <module>
+s117114896.py(2): from __future__ import division, print_function
+s117114896.py(4): import os
+s117114896.py(5): import sys
+s117114896.py(6): from io import BytesIO, IOBase
+s117114896.py(8): if sys.version_info[0] < 3:
+s117114896.py(13): def main():
+s117114896.py(32): BUFSIZE = 8192
+s117114896.py(35): class FastIO(IOBase):
+ --- modulename: s117114896, funcname: FastIO
+s117114896.py(35): class FastIO(IOBase):
+s117114896.py(36):     newlines = 0
+s117114896.py(38):     def __init__(self, file):
+s117114896.py(44):     def read(self):
+s117114896.py(54):     def readline(self):
+s117114896.py(63):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s117114896.py(69): class IOWrapper(IOBase):
+ --- modulename: s117114896, funcname: IOWrapper
+s117114896.py(69): class IOWrapper(IOBase):
+s117114896.py(70):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s117114896.py(79): def print(*args, **kwargs):
+s117114896.py(93): if sys.version_info[0] < 3:
+s117114896.py(96):     sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s117114896, funcname: __init__
+s117114896.py(71):         self.buffer = FastIO(file)
+ --- modulename: s117114896, funcname: __init__
+s117114896.py(39):         self._fd = file.fileno()
+s117114896.py(40):         self.buffer = BytesIO()
+s117114896.py(41):         self.writable = "x" in file.mode or "r" not in file.mode
+s117114896.py(42):         self.write = self.buffer.write if self.writable else None
+s117114896.py(72):         self.flush = self.buffer.flush
+s117114896.py(73):         self.writable = self.buffer.writable
+s117114896.py(74):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s117114896.py(75):         self.read = lambda: self.buffer.read().decode("ascii")
+s117114896.py(76):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s117114896, funcname: __init__
+s117114896.py(71):         self.buffer = FastIO(file)
+ --- modulename: s117114896, funcname: __init__
+s117114896.py(39):         self._fd = file.fileno()
+s117114896.py(40):         self.buffer = BytesIO()
+s117114896.py(41):         self.writable = "x" in file.mode or "r" not in file.mode
+s117114896.py(42):         self.write = self.buffer.write if self.writable else None
+s117114896.py(72):         self.flush = self.buffer.flush
+s117114896.py(73):         self.writable = self.buffer.writable
+s117114896.py(74):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s117114896.py(75):         self.read = lambda: self.buffer.read().decode("ascii")
+s117114896.py(76):         self.readline = lambda: self.buffer.readline().decode("ascii")
+s117114896.py(98): input = lambda: sys.stdin.readline().rstrip("\r\n")
+s117114896.py(102): if __name__ == "__main__":
+s117114896.py(103):     main()
+ --- modulename: s117114896, funcname: main
+s117114896.py(14):     n = int(input().strip())
+ --- modulename: s117114896, funcname: <lambda>
+s117114896.py(98): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s117114896, funcname: <lambda>
+s117114896.py(76):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s117114896, funcname: readline
+s117114896.py(55):         while self.newlines == 0:
+s117114896.py(56):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s117114896.py(57):             self.newlines = b.count(b"\n") + (not b)
+s117114896.py(58):             ptr = self.buffer.tell()
+s117114896.py(59):             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s117114896.py(55):         while self.newlines == 0:
+s117114896.py(60):         self.newlines -= 1
+s117114896.py(61):         return self.buffer.readline()
+s117114896.py(16):     path = []
+s117114896.py(18):     def backtrack(seen):
+s117114896.py(27):     backtrack(0)
+ --- modulename: s117114896, funcname: backtrack
+s117114896.py(19):         if len(path) == n:
+s117114896.py(22):         for i in range(seen + 1):
+s117114896.py(23):             path.append(chr(ord("a") + i))
+s117114896.py(24):             backtrack(max(seen, i + 1))
+ --- modulename: s117114896, funcname: backtrack
+s117114896.py(19):         if len(path) == n:
+s117114896.py(20):             print("".join(path))
+ --- modulename: s117114896, funcname: print
+s117114896.py(81):     sep, file = kwargs.pop("sep", " "), kwargs.pop("file", sys.stdout)
+s117114896.py(82):     at_start = True
+s117114896.py(83):     for x in args:
+s117114896.py(84):         if not at_start:
+s117114896.py(86):         file.write(str(x))
+ --- modulename: s117114896, funcname: <lambda>
+s117114896.py(74):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+as117114896.py(87):         at_start = False
+s117114896.py(83):     for x in args:
+s117114896.py(88):     file.write(kwargs.pop("end", "\n"))
+ --- modulename: s117114896, funcname: <lambda>
+s117114896.py(74):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
+s117114896.py(89):     if kwargs.pop("flush", False):
+s117114896.py(21):             return
+s117114896.py(25):             path.pop()
+s117114896.py(22):         for i in range(seen + 1):
