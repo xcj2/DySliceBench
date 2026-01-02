@@ -1,0 +1,134 @@
+ --- modulename: s583194769, funcname: <module>
+s583194769.py(1): import sys
+s583194769.py(2): readline = sys.stdin.readline
+s583194769.py(3): MOD = 998244353
+s583194769.py(5): class Segtree:
+ --- modulename: s583194769, funcname: Segtree
+s583194769.py(5): class Segtree:
+s583194769.py(6):     def __init__(self, A, intv, initialize = True, segf = max):
+s583194769.py(18):     def update(self, k, x):
+s583194769.py(25):     def query(self, l, r):
+s583194769.py(39):     def binsearch(self, l, r, check, reverse = False):
+s583194769.py(77): N = int(readline())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s583194769.py(78): XD = [tuple(map(int, readline().split())) for _ in range(N)]
+ --- modulename: s583194769, funcname: <listcomp>
+s583194769.py(78): XD = [tuple(map(int, readline().split())) for _ in range(N)]
+s583194769.py(78): XD = [tuple(map(int, readline().split())) for _ in range(N)]
+s583194769.py(78): XD = [tuple(map(int, readline().split())) for _ in range(N)]
+s583194769.py(79): XD.sort(key = lambda x: (x[0], -x[1]))
+ --- modulename: s583194769, funcname: <lambda>
+s583194769.py(79): XD.sort(key = lambda x: (x[0], -x[1]))
+ --- modulename: s583194769, funcname: <lambda>
+s583194769.py(79): XD.sort(key = lambda x: (x[0], -x[1]))
+s583194769.py(81): sXD = []
+s583194769.py(82): seen = set()
+s583194769.py(83): for x, d in XD:
+s583194769.py(84):     if x not in seen:
+s583194769.py(85):         sXD.append((x, d))
+s583194769.py(86):         seen.add(x)
+s583194769.py(83): for x, d in XD:
+s583194769.py(84):     if x not in seen:
+s583194769.py(85):         sXD.append((x, d))
+s583194769.py(86):         seen.add(x)
+s583194769.py(83): for x, d in XD:
+s583194769.py(88): N = len(sXD)
+s583194769.py(89): table = list(range(N))
+s583194769.py(90): T = Segtree(table, -1, initialize = True, segf = max)
+ --- modulename: s583194769, funcname: __init__
+s583194769.py(7):         self.N = len(A)
+s583194769.py(8):         self.N0 = 2**(self.N-1).bit_length()
+s583194769.py(9):         self.intv = intv
+s583194769.py(10):         self.segf = segf
+s583194769.py(11):         if initialize:
+s583194769.py(12):             self.data = [intv]*self.N0 + A + [intv]*(self.N0 - self.N)
+s583194769.py(13):             for i in range(self.N0-1, 0, -1):
+s583194769.py(14):                 self.data[i] = self.segf(self.data[2*i], self.data[2*i+1]) 
+s583194769.py(13):             for i in range(self.N0-1, 0, -1):
+s583194769.py(91): X, D = map(list, zip(*sXD))
+s583194769.py(92): for i in range(N-1, -1, -1):
+s583194769.py(93):     ok = i
+s583194769.py(94):     ng = N
+s583194769.py(95):     gi = X[i] + D[i]
+s583194769.py(96):     while abs(ok-ng) > 1:
+s583194769.py(102):     table[i] = T.query(i, ok+1)
+ --- modulename: s583194769, funcname: query
+s583194769.py(26):         L, R = l+self.N0, r+self.N0
+s583194769.py(27):         s = self.intv
+s583194769.py(28):         while L < R:
+s583194769.py(29):             if R & 1:
+s583194769.py(32):             if L & 1:
+s583194769.py(33):                 s = self.segf(s, self.data[L])
+s583194769.py(34):                 L += 1
+s583194769.py(35):             L >>= 1
+s583194769.py(36):             R >>= 1
+s583194769.py(28):         while L < R:
+s583194769.py(37):         return s
+s583194769.py(103):     T.update(i, table[i])
+ --- modulename: s583194769, funcname: update
+s583194769.py(19):         k += self.N0
+s583194769.py(20):         self.data[k] = x
+s583194769.py(21):         while k > 0 :
+s583194769.py(22):             k = k >> 1
+s583194769.py(23):             self.data[k] = self.segf(self.data[2*k], self.data[2*k+1])
+s583194769.py(21):         while k > 0 :
+s583194769.py(22):             k = k >> 1
+s583194769.py(23):             self.data[k] = self.segf(self.data[2*k], self.data[2*k+1])
+s583194769.py(21):         while k > 0 :
+s583194769.py(92): for i in range(N-1, -1, -1):
+s583194769.py(93):     ok = i
+s583194769.py(94):     ng = N
+s583194769.py(95):     gi = X[i] + D[i]
+s583194769.py(96):     while abs(ok-ng) > 1:
+s583194769.py(97):         med = (ok+ng)//2
+s583194769.py(98):         if X[med] < gi:
+s583194769.py(99):             ok = med
+s583194769.py(96):     while abs(ok-ng) > 1:
+s583194769.py(102):     table[i] = T.query(i, ok+1)
+ --- modulename: s583194769, funcname: query
+s583194769.py(26):         L, R = l+self.N0, r+self.N0
+s583194769.py(27):         s = self.intv
+s583194769.py(28):         while L < R:
+s583194769.py(29):             if R & 1:
+s583194769.py(32):             if L & 1:
+s583194769.py(35):             L >>= 1
+s583194769.py(36):             R >>= 1
+s583194769.py(28):         while L < R:
+s583194769.py(29):             if R & 1:
+s583194769.py(32):             if L & 1:
+s583194769.py(33):                 s = self.segf(s, self.data[L])
+s583194769.py(34):                 L += 1
+s583194769.py(35):             L >>= 1
+s583194769.py(36):             R >>= 1
+s583194769.py(28):         while L < R:
+s583194769.py(37):         return s
+s583194769.py(103):     T.update(i, table[i])
+ --- modulename: s583194769, funcname: update
+s583194769.py(19):         k += self.N0
+s583194769.py(20):         self.data[k] = x
+s583194769.py(21):         while k > 0 :
+s583194769.py(22):             k = k >> 1
+s583194769.py(23):             self.data[k] = self.segf(self.data[2*k], self.data[2*k+1])
+s583194769.py(21):         while k > 0 :
+s583194769.py(22):             k = k >> 1
+s583194769.py(23):             self.data[k] = self.segf(self.data[2*k], self.data[2*k+1])
+s583194769.py(21):         while k > 0 :
+s583194769.py(92): for i in range(N-1, -1, -1):
+s583194769.py(105): dp = [0]*(N+1)
+s583194769.py(106): dp[N] = 1
+s583194769.py(107): Dp = dp[:]
+s583194769.py(108): for i in range(N-1, -1, -1):
+s583194769.py(109):     dp[i] = Dp[table[i]+1]
+s583194769.py(110):     Dp[i] = (Dp[i+1] + dp[i])%MOD
+s583194769.py(108): for i in range(N-1, -1, -1):
+s583194769.py(109):     dp[i] = Dp[table[i]+1]
+s583194769.py(110):     Dp[i] = (Dp[i+1] + dp[i])%MOD
+s583194769.py(108): for i in range(N-1, -1, -1):
+s583194769.py(111): print(Dp[0])
+3

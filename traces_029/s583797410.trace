@@ -1,0 +1,250 @@
+ --- modulename: s583797410, funcname: <module>
+s583797410.py(2): import sys
+s583797410.py(3): def input(): return sys.stdin.readline().rstrip()
+s583797410.py(4): def mi(): return map(int, input().split())
+s583797410.py(8): from collections import defaultdict
+ --- modulename: _bootstrap, funcname: _handle_fromlist
+<frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1067): s583797410.py(9): import heapq
+s583797410.py(22): def dijkstra(s: int, n: int, graph: dict) -> list:
+s583797410.py(44): N, M = mi()
+ --- modulename: s583797410, funcname: mi
+s583797410.py(4): def mi(): return map(int, input().split())
+ --- modulename: s583797410, funcname: input
+s583797410.py(3): def input(): return sys.stdin.readline().rstrip()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s583797410.py(45): SGDs = [tuple(mi()) for _ in range(M)] #start, goal, distance
+ --- modulename: s583797410, funcname: <listcomp>
+s583797410.py(45): SGDs = [tuple(mi()) for _ in range(M)] #start, goal, distance
+ --- modulename: s583797410, funcname: mi
+s583797410.py(4): def mi(): return map(int, input().split())
+ --- modulename: s583797410, funcname: input
+s583797410.py(3): def input(): return sys.stdin.readline().rstrip()
+s583797410.py(45): SGDs = [tuple(mi()) for _ in range(M)] #start, goal, distance
+ --- modulename: s583797410, funcname: mi
+s583797410.py(4): def mi(): return map(int, input().split())
+ --- modulename: s583797410, funcname: input
+s583797410.py(3): def input(): return sys.stdin.readline().rstrip()
+s583797410.py(45): SGDs = [tuple(mi()) for _ in range(M)] #start, goal, distance
+ --- modulename: s583797410, funcname: mi
+s583797410.py(4): def mi(): return map(int, input().split())
+ --- modulename: s583797410, funcname: input
+s583797410.py(3): def input(): return sys.stdin.readline().rstrip()
+s583797410.py(45): SGDs = [tuple(mi()) for _ in range(M)] #start, goal, distance
+s583797410.py(48): Graph = defaultdict(list) #辞書をlist()で初期化
+s583797410.py(49): for s, g, d in SGDs: #start, goal, distance
+s583797410.py(50):   s, g = s-1, g-1 #入力が1スタートなので0スタートに訂正
+s583797410.py(51):   Graph[s].append((g, d)) #nodeIDがkeyになっているdict-->dict[key]（list）に(行き先番号, 距離を入れていく)
+s583797410.py(52):   Graph[g].append((s, d)) #無向グラフなので逆向きも入れる
+s583797410.py(49): for s, g, d in SGDs: #start, goal, distance
+s583797410.py(50):   s, g = s-1, g-1 #入力が1スタートなので0スタートに訂正
+s583797410.py(51):   Graph[s].append((g, d)) #nodeIDがkeyになっているdict-->dict[key]（list）に(行き先番号, 距離を入れていく)
+s583797410.py(52):   Graph[g].append((s, d)) #無向グラフなので逆向きも入れる
+s583797410.py(49): for s, g, d in SGDs: #start, goal, distance
+s583797410.py(50):   s, g = s-1, g-1 #入力が1スタートなので0スタートに訂正
+s583797410.py(51):   Graph[s].append((g, d)) #nodeIDがkeyになっているdict-->dict[key]（list）に(行き先番号, 距離を入れていく)
+s583797410.py(52):   Graph[g].append((s, d)) #無向グラフなので逆向きも入れる
+s583797410.py(49): for s, g, d in SGDs: #start, goal, distance
+s583797410.py(56): Contained_Edge = set()
+s583797410.py(57): for eachstart in range(N): #各ノードをスタート地点にする全探索
+s583797410.py(58):   routelist = dijkstra(eachstart, N, Graph)[1] #経路復元リストを得る
+ --- modulename: s583797410, funcname: dijkstra
+s583797410.py(23):   INF = 10 ** 10 #INF以上の経路が存在する可能性がある場合は注意か？？
+s583797410.py(24):   que = []    # [(最短距離, node番号)]
+s583797410.py(25):   routelist = [-1] * n # routelist[node番号] = 最短経路における1つ前のノード
+s583797410.py(26):   heapq.heappush(que, (0, s))
+s583797410.py(27):   min_dist_list = [INF] * n
+s583797410.py(28):   min_dist_list[s] = 0
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(38):         min_dist_list[to] = new_dist
+s583797410.py(39):         routelist[to] = node
+s583797410.py(40):         heapq.heappush(que, (new_dist, to))
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(38):         min_dist_list[to] = new_dist
+s583797410.py(39):         routelist[to] = node
+s583797410.py(40):         heapq.heappush(que, (new_dist, to))
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(29):   while que:
+s583797410.py(42):   return min_dist_list, routelist
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(61):     if prev+1: #prev=-1の場合は実行されない（スタート地点なので無視）
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(61):     if prev+1: #prev=-1の場合は実行されない（スタート地点なので無視）
+s583797410.py(62):       Contained_Edge.add((i,prev))
+s583797410.py(63):       Contained_Edge.add((prev,i))
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(61):     if prev+1: #prev=-1の場合は実行されない（スタート地点なので無視）
+s583797410.py(62):       Contained_Edge.add((i,prev))
+s583797410.py(63):       Contained_Edge.add((prev,i))
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(57): for eachstart in range(N): #各ノードをスタート地点にする全探索
+s583797410.py(58):   routelist = dijkstra(eachstart, N, Graph)[1] #経路復元リストを得る
+ --- modulename: s583797410, funcname: dijkstra
+s583797410.py(23):   INF = 10 ** 10 #INF以上の経路が存在する可能性がある場合は注意か？？
+s583797410.py(24):   que = []    # [(最短距離, node番号)]
+s583797410.py(25):   routelist = [-1] * n # routelist[node番号] = 最短経路における1つ前のノード
+s583797410.py(26):   heapq.heappush(que, (0, s))
+s583797410.py(27):   min_dist_list = [INF] * n
+s583797410.py(28):   min_dist_list[s] = 0
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(38):         min_dist_list[to] = new_dist
+s583797410.py(39):         routelist[to] = node
+s583797410.py(40):         heapq.heappush(que, (new_dist, to))
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(38):         min_dist_list[to] = new_dist
+s583797410.py(39):         routelist[to] = node
+s583797410.py(40):         heapq.heappush(que, (new_dist, to))
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(38):         min_dist_list[to] = new_dist
+s583797410.py(39):         routelist[to] = node
+s583797410.py(40):         heapq.heappush(que, (new_dist, to))
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(33):       continue
+s583797410.py(29):   while que:
+s583797410.py(42):   return min_dist_list, routelist
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(61):     if prev+1: #prev=-1の場合は実行されない（スタート地点なので無視）
+s583797410.py(62):       Contained_Edge.add((i,prev))
+s583797410.py(63):       Contained_Edge.add((prev,i))
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(61):     if prev+1: #prev=-1の場合は実行されない（スタート地点なので無視）
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(61):     if prev+1: #prev=-1の場合は実行されない（スタート地点なので無視）
+s583797410.py(62):       Contained_Edge.add((i,prev))
+s583797410.py(63):       Contained_Edge.add((prev,i))
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(57): for eachstart in range(N): #各ノードをスタート地点にする全探索
+s583797410.py(58):   routelist = dijkstra(eachstart, N, Graph)[1] #経路復元リストを得る
+ --- modulename: s583797410, funcname: dijkstra
+s583797410.py(23):   INF = 10 ** 10 #INF以上の経路が存在する可能性がある場合は注意か？？
+s583797410.py(24):   que = []    # [(最短距離, node番号)]
+s583797410.py(25):   routelist = [-1] * n # routelist[node番号] = 最短経路における1つ前のノード
+s583797410.py(26):   heapq.heappush(que, (0, s))
+s583797410.py(27):   min_dist_list = [INF] * n
+s583797410.py(28):   min_dist_list[s] = 0
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(38):         min_dist_list[to] = new_dist
+s583797410.py(39):         routelist[to] = node
+s583797410.py(40):         heapq.heappush(que, (new_dist, to))
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(38):         min_dist_list[to] = new_dist
+s583797410.py(39):         routelist[to] = node
+s583797410.py(40):         heapq.heappush(que, (new_dist, to))
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(38):         min_dist_list[to] = new_dist
+s583797410.py(39):         routelist[to] = node
+s583797410.py(40):         heapq.heappush(que, (new_dist, to))
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(36):       new_dist = now_dist + dist
+s583797410.py(37):       if min_dist_list[to] > new_dist:
+s583797410.py(35):     for to, dist in graph[node]:
+s583797410.py(29):   while que:
+s583797410.py(30):     now_dist, node = heapq.heappop(que)
+s583797410.py(32):     if min_dist_list[node] < now_dist:
+s583797410.py(33):       continue
+s583797410.py(29):   while que:
+s583797410.py(42):   return min_dist_list, routelist
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(61):     if prev+1: #prev=-1の場合は実行されない（スタート地点なので無視）
+s583797410.py(62):       Contained_Edge.add((i,prev))
+s583797410.py(63):       Contained_Edge.add((prev,i))
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(61):     if prev+1: #prev=-1の場合は実行されない（スタート地点なので無視）
+s583797410.py(62):       Contained_Edge.add((i,prev))
+s583797410.py(63):       Contained_Edge.add((prev,i))
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(61):     if prev+1: #prev=-1の場合は実行されない（スタート地点なので無視）
+s583797410.py(59):   for i, prev in enumerate(routelist):
+s583797410.py(57): for eachstart in range(N): #各ノードをスタート地点にする全探索
+s583797410.py(66): All_Edges = {(s-1,g-1) for s, g, d in SGDs}
+ --- modulename: s583797410, funcname: <setcomp>
+s583797410.py(66): All_Edges = {(s-1,g-1) for s, g, d in SGDs}
+s583797410.py(66): All_Edges = {(s-1,g-1) for s, g, d in SGDs}
+s583797410.py(66): All_Edges = {(s-1,g-1) for s, g, d in SGDs}
+s583797410.py(66): All_Edges = {(s-1,g-1) for s, g, d in SGDs}
+s583797410.py(71): print(len(All_Edges - Contained_Edge))
+1
