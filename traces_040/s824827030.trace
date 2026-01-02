@@ -1,0 +1,149 @@
+ --- modulename: s824827030, funcname: <module>
+s824827030.py(2): class Graph:
+ --- modulename: s824827030, funcname: Graph
+s824827030.py(2): class Graph:
+s824827030.py(3):     def __init__(self, n_vertices, edges, directed=True):
+s824827030.py(8):     @property
+s824827030.py(9):     def adj(self):
+s824827030.py(24): max2 = lambda x,y: x if x > y else y
+s824827030.py(25): min2 = lambda x,y: x if x < y else y
+s824827030.py(27): import sys
+s824827030.py(28): read = sys.stdin.buffer.read
+s824827030.py(29): readline = sys.stdin.buffer.readline
+s824827030.py(31): def solve(N, edges):
+s824827030.py(69): if __name__ == '__main__':
+s824827030.py(70):     N,M = map(int,readline().split())
+s824827030.py(71):     m = map(lambda x: int(x)-1, read().split())
+s824827030.py(72):     edges = list(zip(m,m))
+ --- modulename: s824827030, funcname: <lambda>
+s824827030.py(71):     m = map(lambda x: int(x)-1, read().split())
+ --- modulename: s824827030, funcname: <lambda>
+s824827030.py(71):     m = map(lambda x: int(x)-1, read().split())
+ --- modulename: s824827030, funcname: <lambda>
+s824827030.py(71):     m = map(lambda x: int(x)-1, read().split())
+ --- modulename: s824827030, funcname: <lambda>
+s824827030.py(71):     m = map(lambda x: int(x)-1, read().split())
+ --- modulename: s824827030, funcname: <lambda>
+s824827030.py(71):     m = map(lambda x: int(x)-1, read().split())
+ --- modulename: s824827030, funcname: <lambda>
+s824827030.py(71):     m = map(lambda x: int(x)-1, read().split())
+s824827030.py(73):     print(*solve(N,edges), sep='\n')
+ --- modulename: s824827030, funcname: solve
+s824827030.py(32):     adj = Graph(N, edges, directed=True).adj
+ --- modulename: s824827030, funcname: __init__
+s824827030.py(4):         self.n_vertices = n_vertices
+s824827030.py(5):         self.edges = edges
+s824827030.py(6):         self.directed = directed
+ --- modulename: s824827030, funcname: adj
+s824827030.py(10):         try:
+s824827030.py(11):             return self._adj
+s824827030.py(12):         except AttributeError:
+s824827030.py(13):             adj = [[] for _ in range(self.n_vertices)]
+ --- modulename: s824827030, funcname: <listcomp>
+s824827030.py(13):             adj = [[] for _ in range(self.n_vertices)]
+s824827030.py(13):             adj = [[] for _ in range(self.n_vertices)]
+s824827030.py(13):             adj = [[] for _ in range(self.n_vertices)]
+s824827030.py(13):             adj = [[] for _ in range(self.n_vertices)]
+s824827030.py(14):             if self.directed:
+s824827030.py(15):                 for u,v in self.edges:
+s824827030.py(16):                     adj[u].append(v)
+s824827030.py(15):                 for u,v in self.edges:
+s824827030.py(16):                     adj[u].append(v)
+s824827030.py(15):                 for u,v in self.edges:
+s824827030.py(16):                     adj[u].append(v)
+s824827030.py(15):                 for u,v in self.edges:
+s824827030.py(21):             self._adj = adj
+s824827030.py(22):             return adj
+s824827030.py(33):     parent = [-1]*N
+s824827030.py(36):     deg = [0]*N
+s824827030.py(37):     for u,v in edges:
+s824827030.py(38):         deg[v] += 1
+s824827030.py(37):     for u,v in edges:
+s824827030.py(38):         deg[v] += 1
+s824827030.py(37):     for u,v in edges:
+s824827030.py(38):         deg[v] += 1
+s824827030.py(37):     for u,v in edges:
+s824827030.py(40):     root = next(v for v,d in enumerate(deg) if d==0)
+ --- modulename: s824827030, funcname: <genexpr>
+s824827030.py(40):     root = next(v for v,d in enumerate(deg) if d==0)
+ --- modulename: s824827030, funcname: <genexpr>
+s824827030.py(42):     topo = [-1]*N
+s824827030.py(43):     stack = [root]
+s824827030.py(44):     for i in range(N):
+s824827030.py(45):         v = stack.pop()
+s824827030.py(46):         topo[i] = v
+s824827030.py(47):         for u in adj[v]:
+s824827030.py(48):             deg[u] -= 1
+s824827030.py(49):             if deg[u] == 0:
+s824827030.py(50):                 stack.append(u)
+s824827030.py(47):         for u in adj[v]:
+s824827030.py(48):             deg[u] -= 1
+s824827030.py(49):             if deg[u] == 0:
+s824827030.py(47):         for u in adj[v]:
+s824827030.py(44):     for i in range(N):
+s824827030.py(45):         v = stack.pop()
+s824827030.py(46):         topo[i] = v
+s824827030.py(47):         for u in adj[v]:
+s824827030.py(48):             deg[u] -= 1
+s824827030.py(49):             if deg[u] == 0:
+s824827030.py(50):                 stack.append(u)
+s824827030.py(47):         for u in adj[v]:
+s824827030.py(44):     for i in range(N):
+s824827030.py(45):         v = stack.pop()
+s824827030.py(46):         topo[i] = v
+s824827030.py(47):         for u in adj[v]:
+s824827030.py(44):     for i in range(N):
+s824827030.py(52):     dist = [0]*N
+s824827030.py(53):     for v in topo:
+s824827030.py(54):         d = dist[v]
+s824827030.py(55):         for u in adj[v]:
+s824827030.py(56):             dist[u] = max2(dist[u], d+1)
+ --- modulename: s824827030, funcname: <lambda>
+s824827030.py(24): max2 = lambda x,y: x if x > y else y
+s824827030.py(55):         for u in adj[v]:
+s824827030.py(56):             dist[u] = max2(dist[u], d+1)
+ --- modulename: s824827030, funcname: <lambda>
+s824827030.py(24): max2 = lambda x,y: x if x > y else y
+s824827030.py(55):         for u in adj[v]:
+s824827030.py(53):     for v in topo:
+s824827030.py(54):         d = dist[v]
+s824827030.py(55):         for u in adj[v]:
+s824827030.py(56):             dist[u] = max2(dist[u], d+1)
+ --- modulename: s824827030, funcname: <lambda>
+s824827030.py(24): max2 = lambda x,y: x if x > y else y
+s824827030.py(55):         for u in adj[v]:
+s824827030.py(53):     for v in topo:
+s824827030.py(54):         d = dist[v]
+s824827030.py(55):         for u in adj[v]:
+s824827030.py(53):     for v in topo:
+s824827030.py(58):     parent = [-1]*N
+s824827030.py(59):     for v,l in enumerate(adj):
+s824827030.py(60):         d = dist[v]+1
+s824827030.py(61):         for u in l:
+s824827030.py(62):             if d == dist[u]:
+s824827030.py(63):                 parent[u] = v
+s824827030.py(61):         for u in l:
+s824827030.py(62):             if d == dist[u]:
+s824827030.py(61):         for u in l:
+s824827030.py(59):     for v,l in enumerate(adj):
+s824827030.py(60):         d = dist[v]+1
+s824827030.py(61):         for u in l:
+s824827030.py(62):             if d == dist[u]:
+s824827030.py(63):                 parent[u] = v
+s824827030.py(61):         for u in l:
+s824827030.py(59):     for v,l in enumerate(adj):
+s824827030.py(60):         d = dist[v]+1
+s824827030.py(61):         for u in l:
+s824827030.py(59):     for v,l in enumerate(adj):
+s824827030.py(64):     return (p+1 for p in parent)
+ --- modulename: s824827030, funcname: <genexpr>
+s824827030.py(64):     return (p+1 for p in parent)
+ --- modulename: s824827030, funcname: <genexpr>
+s824827030.py(64):     return (p+1 for p in parent)
+ --- modulename: s824827030, funcname: <genexpr>
+s824827030.py(64):     return (p+1 for p in parent)
+ --- modulename: s824827030, funcname: <genexpr>
+s824827030.py(64):     return (p+1 for p in parent)
+0
+1
+2
