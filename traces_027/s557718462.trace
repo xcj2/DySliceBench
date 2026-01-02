@@ -1,0 +1,351 @@
+ --- modulename: s557718462, funcname: <module>
+s557718462.py(1): def analyze(points, left_static, right_static):
+s557718462.py(58): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s557718462.py(60): conv = {'R':0,'U':1,'L':2,'D':3}
+s557718462.py(61): points = [(lambda i: (int(i[0]), int(i[1]), conv[i[2]]))(input().split()) for _ in range(N)]
+ --- modulename: s557718462, funcname: <listcomp>
+s557718462.py(61): points = [(lambda i: (int(i[0]), int(i[1]), conv[i[2]]))(input().split()) for _ in range(N)]
+ --- modulename: s557718462, funcname: <lambda>
+s557718462.py(61): points = [(lambda i: (int(i[0]), int(i[1]), conv[i[2]]))(input().split()) for _ in range(N)]
+s557718462.py(61): points = [(lambda i: (int(i[0]), int(i[1]), conv[i[2]]))(input().split()) for _ in range(N)]
+ --- modulename: s557718462, funcname: <lambda>
+s557718462.py(61): points = [(lambda i: (int(i[0]), int(i[1]), conv[i[2]]))(input().split()) for _ in range(N)]
+s557718462.py(61): points = [(lambda i: (int(i[0]), int(i[1]), conv[i[2]]))(input().split()) for _ in range(N)]
+s557718462.py(64): xt, xd = analyze([(x, 1 if d == 0 else -1) for x,y,d in points if d%2==0],
+ --- modulename: s557718462, funcname: <listcomp>
+s557718462.py(64): xt, xd = analyze([(x, 1 if d == 0 else -1) for x,y,d in points if d%2==0],
+s557718462.py(64): xt, xd = analyze([(x, 1 if d == 0 else -1) for x,y,d in points if d%2==0],
+s557718462.py(64): xt, xd = analyze([(x, 1 if d == 0 else -1) for x,y,d in points if d%2==0],
+s557718462.py(65):                     min((x for x,y,d in points if d%2==1), default=10**9),
+ --- modulename: s557718462, funcname: <genexpr>
+s557718462.py(65):                     min((x for x,y,d in points if d%2==1), default=10**9),
+ --- modulename: s557718462, funcname: <genexpr>
+s557718462.py(65):                     min((x for x,y,d in points if d%2==1), default=10**9),
+s557718462.py(65):                     min((x for x,y,d in points if d%2==1), default=10**9),
+s557718462.py(66):                     max((x for x,y,d in points if d%2==1), default=-10**9))
+ --- modulename: s557718462, funcname: <genexpr>
+s557718462.py(66):                     max((x for x,y,d in points if d%2==1), default=-10**9))
+ --- modulename: s557718462, funcname: <genexpr>
+s557718462.py(66):                     max((x for x,y,d in points if d%2==1), default=-10**9))
+s557718462.py(66):                     max((x for x,y,d in points if d%2==1), default=-10**9))
+s557718462.py(64): xt, xd = analyze([(x, 1 if d == 0 else -1) for x,y,d in points if d%2==0],
+ --- modulename: s557718462, funcname: analyze
+s557718462.py(6):     rightest_neg = -10**9
+s557718462.py(7):     leftest_neg = 10**9
+s557718462.py(8):     rightest_pos = -10**9
+s557718462.py(9):     leftest_pos = 10**9
+s557718462.py(10):     for x, d in points:
+s557718462.py(11):         if d == 1:
+s557718462.py(15):             rightest_neg = max(rightest_neg, x)
+s557718462.py(16):             leftest_neg = min(leftest_neg, x)
+s557718462.py(10):     for x, d in points:
+s557718462.py(19):     max_t1 = rightest_neg - right_static
+s557718462.py(20):     max_t2 = right_static - rightest_pos
+s557718462.py(21):     if max_t1 > max_t2:
+s557718462.py(23):     max_t1 = max(0, max_t1)
+s557718462.py(24):     max_t2 = max(0, max_t2)
+s557718462.py(25):     max_x0 = max(rightest_pos, rightest_neg, right_static)
+s557718462.py(26):     max_x1 = max(rightest_pos + max_t1, rightest_neg - max_t1, right_static)
+s557718462.py(27):     def get_xmax(t):
+s557718462.py(35):     min_t1 = left_static - leftest_pos
+s557718462.py(36):     min_t2 = leftest_neg - left_static
+s557718462.py(37):     if min_t1 > min_t2:
+s557718462.py(39):     min_t1 = max(0, min_t1)
+s557718462.py(40):     min_t2 = max(0, min_t2)
+s557718462.py(41):     min_x0 = min(leftest_pos, leftest_neg, left_static)
+s557718462.py(42):     min_x1 = min(leftest_pos + min_t1, leftest_neg - min_t1, left_static)
+s557718462.py(44):     def get_xmin(t):
+s557718462.py(52):     T = sorted((max_t1, max_t2, min_t1, min_t2))
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: <listcomp>
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: get_xmax
+s557718462.py(28):         if t > max_t2:
+s557718462.py(30):         elif t > max_t1:
+s557718462.py(33):             return max_x0 - t
+ --- modulename: s557718462, funcname: get_xmin
+s557718462.py(45):         if t > min_t2:
+s557718462.py(47):         elif t > min_t1:
+s557718462.py(50):             return min_x0 + t
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: get_xmax
+s557718462.py(28):         if t > max_t2:
+s557718462.py(30):         elif t > max_t1:
+s557718462.py(33):             return max_x0 - t
+ --- modulename: s557718462, funcname: get_xmin
+s557718462.py(45):         if t > min_t2:
+s557718462.py(47):         elif t > min_t1:
+s557718462.py(48):             return min_x1
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: get_xmax
+s557718462.py(28):         if t > max_t2:
+s557718462.py(30):         elif t > max_t1:
+s557718462.py(33):             return max_x0 - t
+ --- modulename: s557718462, funcname: get_xmin
+s557718462.py(45):         if t > min_t2:
+s557718462.py(47):         elif t > min_t1:
+s557718462.py(48):             return min_x1
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: get_xmax
+s557718462.py(28):         if t > max_t2:
+s557718462.py(30):         elif t > max_t1:
+s557718462.py(31):             return max_x1
+ --- modulename: s557718462, funcname: get_xmin
+s557718462.py(45):         if t > min_t2:
+s557718462.py(46):             return min_x1 - t + min_t2
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+s557718462.py(54):     return T,D
+s557718462.py(68): yt, yd = analyze([(y, 1 if d == 1 else -1) for x,y,d in points if d%2==1],
+ --- modulename: s557718462, funcname: <listcomp>
+s557718462.py(68): yt, yd = analyze([(y, 1 if d == 1 else -1) for x,y,d in points if d%2==1],
+s557718462.py(68): yt, yd = analyze([(y, 1 if d == 1 else -1) for x,y,d in points if d%2==1],
+s557718462.py(68): yt, yd = analyze([(y, 1 if d == 1 else -1) for x,y,d in points if d%2==1],
+s557718462.py(69):                     min((y for x,y,d in points if d%2==0), default=10**9),
+ --- modulename: s557718462, funcname: <genexpr>
+s557718462.py(69):                     min((y for x,y,d in points if d%2==0), default=10**9),
+s557718462.py(69):                     min((y for x,y,d in points if d%2==0), default=10**9),
+ --- modulename: s557718462, funcname: <genexpr>
+s557718462.py(69):                     min((y for x,y,d in points if d%2==0), default=10**9),
+s557718462.py(70):                     max((y for x,y,d in points if d%2==0), default=-10**9))
+ --- modulename: s557718462, funcname: <genexpr>
+s557718462.py(70):                     max((y for x,y,d in points if d%2==0), default=-10**9))
+s557718462.py(70):                     max((y for x,y,d in points if d%2==0), default=-10**9))
+ --- modulename: s557718462, funcname: <genexpr>
+s557718462.py(70):                     max((y for x,y,d in points if d%2==0), default=-10**9))
+s557718462.py(68): yt, yd = analyze([(y, 1 if d == 1 else -1) for x,y,d in points if d%2==1],
+ --- modulename: s557718462, funcname: analyze
+s557718462.py(6):     rightest_neg = -10**9
+s557718462.py(7):     leftest_neg = 10**9
+s557718462.py(8):     rightest_pos = -10**9
+s557718462.py(9):     leftest_pos = 10**9
+s557718462.py(10):     for x, d in points:
+s557718462.py(11):         if d == 1:
+s557718462.py(15):             rightest_neg = max(rightest_neg, x)
+s557718462.py(16):             leftest_neg = min(leftest_neg, x)
+s557718462.py(10):     for x, d in points:
+s557718462.py(19):     max_t1 = rightest_neg - right_static
+s557718462.py(20):     max_t2 = right_static - rightest_pos
+s557718462.py(21):     if max_t1 > max_t2:
+s557718462.py(23):     max_t1 = max(0, max_t1)
+s557718462.py(24):     max_t2 = max(0, max_t2)
+s557718462.py(25):     max_x0 = max(rightest_pos, rightest_neg, right_static)
+s557718462.py(26):     max_x1 = max(rightest_pos + max_t1, rightest_neg - max_t1, right_static)
+s557718462.py(27):     def get_xmax(t):
+s557718462.py(35):     min_t1 = left_static - leftest_pos
+s557718462.py(36):     min_t2 = leftest_neg - left_static
+s557718462.py(37):     if min_t1 > min_t2:
+s557718462.py(39):     min_t1 = max(0, min_t1)
+s557718462.py(40):     min_t2 = max(0, min_t2)
+s557718462.py(41):     min_x0 = min(leftest_pos, leftest_neg, left_static)
+s557718462.py(42):     min_x1 = min(leftest_pos + min_t1, leftest_neg - min_t1, left_static)
+s557718462.py(44):     def get_xmin(t):
+s557718462.py(52):     T = sorted((max_t1, max_t2, min_t1, min_t2))
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: <listcomp>
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: get_xmax
+s557718462.py(28):         if t > max_t2:
+s557718462.py(30):         elif t > max_t1:
+s557718462.py(33):             return max_x0 - t
+ --- modulename: s557718462, funcname: get_xmin
+s557718462.py(45):         if t > min_t2:
+s557718462.py(47):         elif t > min_t1:
+s557718462.py(50):             return min_x0 + t
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: get_xmax
+s557718462.py(28):         if t > max_t2:
+s557718462.py(30):         elif t > max_t1:
+s557718462.py(33):             return max_x0 - t
+ --- modulename: s557718462, funcname: get_xmin
+s557718462.py(45):         if t > min_t2:
+s557718462.py(47):         elif t > min_t1:
+s557718462.py(48):             return min_x1
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: get_xmax
+s557718462.py(28):         if t > max_t2:
+s557718462.py(30):         elif t > max_t1:
+s557718462.py(33):             return max_x0 - t
+ --- modulename: s557718462, funcname: get_xmin
+s557718462.py(45):         if t > min_t2:
+s557718462.py(47):         elif t > min_t1:
+s557718462.py(48):             return min_x1
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+ --- modulename: s557718462, funcname: get_xmax
+s557718462.py(28):         if t > max_t2:
+s557718462.py(30):         elif t > max_t1:
+s557718462.py(31):             return max_x1
+ --- modulename: s557718462, funcname: get_xmin
+s557718462.py(45):         if t > min_t2:
+s557718462.py(46):             return min_x1 - t + min_t2
+s557718462.py(53):     D = [get_xmax(t)-get_xmin(t) for t in T]
+s557718462.py(54):     return T,D
+s557718462.py(72): def get_w(t):
+s557718462.py(86): def get_h(t):
+s557718462.py(100): T = sorted(xt+yt)
+s557718462.py(102): def it():
+s557718462.py(117): print(min(it())[0])
+ --- modulename: s557718462, funcname: it
+s557718462.py(103):     ne = iter(T)
+s557718462.py(104):     next(ne)
+s557718462.py(105):     for a,b in zip(T,ne):
+s557718462.py(106):         t = (a+b)/2
+s557718462.py(108):         wa, wb = get_w(t)
+ --- modulename: s557718462, funcname: get_w
+s557718462.py(73):     a,b,c,d = xt
+s557718462.py(75):     if t < a:
+s557718462.py(77):     elif t < b:
+s557718462.py(78):         return -1, xd[0] + a
+s557718462.py(109):         ha, hb = get_h(t)
+ --- modulename: s557718462, funcname: get_h
+s557718462.py(87):     a,b,c,d = yt
+s557718462.py(89):     if t < a:
+s557718462.py(91):     elif t < b:
+s557718462.py(92):         return -1, yd[0] + a
+s557718462.py(110):         if wa*ha > 0 and a < -(wb*ha+wa*hb)/(2*wa*ha) < b:
+s557718462.py(114):             yield ((wa*a+wb)*(ha*a+hb), a)
+ --- modulename: s557718462, funcname: it
+s557718462.py(115):             yield ((wa*b+wb)*(ha*b+hb), b)
+ --- modulename: s557718462, funcname: it
+s557718462.py(105):     for a,b in zip(T,ne):
+s557718462.py(106):         t = (a+b)/2
+s557718462.py(108):         wa, wb = get_w(t)
+ --- modulename: s557718462, funcname: get_w
+s557718462.py(73):     a,b,c,d = xt
+s557718462.py(75):     if t < a:
+s557718462.py(77):     elif t < b:
+s557718462.py(78):         return -1, xd[0] + a
+s557718462.py(109):         ha, hb = get_h(t)
+ --- modulename: s557718462, funcname: get_h
+s557718462.py(87):     a,b,c,d = yt
+s557718462.py(89):     if t < a:
+s557718462.py(91):     elif t < b:
+s557718462.py(92):         return -1, yd[0] + a
+s557718462.py(110):         if wa*ha > 0 and a < -(wb*ha+wa*hb)/(2*wa*ha) < b:
+s557718462.py(114):             yield ((wa*a+wb)*(ha*a+hb), a)
+ --- modulename: s557718462, funcname: it
+s557718462.py(115):             yield ((wa*b+wb)*(ha*b+hb), b)
+ --- modulename: s557718462, funcname: it
+s557718462.py(105):     for a,b in zip(T,ne):
+s557718462.py(106):         t = (a+b)/2
+s557718462.py(108):         wa, wb = get_w(t)
+ --- modulename: s557718462, funcname: get_w
+s557718462.py(73):     a,b,c,d = xt
+s557718462.py(75):     if t < a:
+s557718462.py(77):     elif t < b:
+s557718462.py(79):     elif t < c:
+s557718462.py(81):     elif t < d:
+s557718462.py(82):         return 1, xd[2] - c
+s557718462.py(109):         ha, hb = get_h(t)
+ --- modulename: s557718462, funcname: get_h
+s557718462.py(87):     a,b,c,d = yt
+s557718462.py(89):     if t < a:
+s557718462.py(91):     elif t < b:
+s557718462.py(93):     elif t < c:
+s557718462.py(95):     elif t < d:
+s557718462.py(96):         return 1, yd[2] - c
+s557718462.py(110):         if wa*ha > 0 and a < -(wb*ha+wa*hb)/(2*wa*ha) < b:
+s557718462.py(114):             yield ((wa*a+wb)*(ha*a+hb), a)
+ --- modulename: s557718462, funcname: it
+s557718462.py(115):             yield ((wa*b+wb)*(ha*b+hb), b)
+ --- modulename: s557718462, funcname: it
+s557718462.py(105):     for a,b in zip(T,ne):
+s557718462.py(106):         t = (a+b)/2
+s557718462.py(108):         wa, wb = get_w(t)
+ --- modulename: s557718462, funcname: get_w
+s557718462.py(73):     a,b,c,d = xt
+s557718462.py(75):     if t < a:
+s557718462.py(77):     elif t < b:
+s557718462.py(79):     elif t < c:
+s557718462.py(81):     elif t < d:
+s557718462.py(82):         return 1, xd[2] - c
+s557718462.py(109):         ha, hb = get_h(t)
+ --- modulename: s557718462, funcname: get_h
+s557718462.py(87):     a,b,c,d = yt
+s557718462.py(89):     if t < a:
+s557718462.py(91):     elif t < b:
+s557718462.py(93):     elif t < c:
+s557718462.py(95):     elif t < d:
+s557718462.py(96):         return 1, yd[2] - c
+s557718462.py(110):         if wa*ha > 0 and a < -(wb*ha+wa*hb)/(2*wa*ha) < b:
+s557718462.py(114):             yield ((wa*a+wb)*(ha*a+hb), a)
+ --- modulename: s557718462, funcname: it
+s557718462.py(115):             yield ((wa*b+wb)*(ha*b+hb), b)
+ --- modulename: s557718462, funcname: it
+s557718462.py(105):     for a,b in zip(T,ne):
+s557718462.py(106):         t = (a+b)/2
+s557718462.py(108):         wa, wb = get_w(t)
+ --- modulename: s557718462, funcname: get_w
+s557718462.py(73):     a,b,c,d = xt
+s557718462.py(75):     if t < a:
+s557718462.py(77):     elif t < b:
+s557718462.py(79):     elif t < c:
+s557718462.py(81):     elif t < d:
+s557718462.py(82):         return 1, xd[2] - c
+s557718462.py(109):         ha, hb = get_h(t)
+ --- modulename: s557718462, funcname: get_h
+s557718462.py(87):     a,b,c,d = yt
+s557718462.py(89):     if t < a:
+s557718462.py(91):     elif t < b:
+s557718462.py(93):     elif t < c:
+s557718462.py(95):     elif t < d:
+s557718462.py(96):         return 1, yd[2] - c
+s557718462.py(110):         if wa*ha > 0 and a < -(wb*ha+wa*hb)/(2*wa*ha) < b:
+s557718462.py(114):             yield ((wa*a+wb)*(ha*a+hb), a)
+ --- modulename: s557718462, funcname: it
+s557718462.py(115):             yield ((wa*b+wb)*(ha*b+hb), b)
+ --- modulename: s557718462, funcname: it
+s557718462.py(105):     for a,b in zip(T,ne):
+s557718462.py(106):         t = (a+b)/2
+s557718462.py(108):         wa, wb = get_w(t)
+ --- modulename: s557718462, funcname: get_w
+s557718462.py(73):     a,b,c,d = xt
+s557718462.py(75):     if t < a:
+s557718462.py(77):     elif t < b:
+s557718462.py(79):     elif t < c:
+s557718462.py(81):     elif t < d:
+s557718462.py(82):         return 1, xd[2] - c
+s557718462.py(109):         ha, hb = get_h(t)
+ --- modulename: s557718462, funcname: get_h
+s557718462.py(87):     a,b,c,d = yt
+s557718462.py(89):     if t < a:
+s557718462.py(91):     elif t < b:
+s557718462.py(93):     elif t < c:
+s557718462.py(95):     elif t < d:
+s557718462.py(96):         return 1, yd[2] - c
+s557718462.py(110):         if wa*ha > 0 and a < -(wb*ha+wa*hb)/(2*wa*ha) < b:
+s557718462.py(114):             yield ((wa*a+wb)*(ha*a+hb), a)
+ --- modulename: s557718462, funcname: it
+s557718462.py(115):             yield ((wa*b+wb)*(ha*b+hb), b)
+ --- modulename: s557718462, funcname: it
+s557718462.py(105):     for a,b in zip(T,ne):
+s557718462.py(106):         t = (a+b)/2
+s557718462.py(108):         wa, wb = get_w(t)
+ --- modulename: s557718462, funcname: get_w
+s557718462.py(73):     a,b,c,d = xt
+s557718462.py(75):     if t < a:
+s557718462.py(77):     elif t < b:
+s557718462.py(79):     elif t < c:
+s557718462.py(81):     elif t < d:
+s557718462.py(84):         return 2, xd[3] - 2*d
+s557718462.py(109):         ha, hb = get_h(t)
+ --- modulename: s557718462, funcname: get_h
+s557718462.py(87):     a,b,c,d = yt
+s557718462.py(89):     if t < a:
+s557718462.py(91):     elif t < b:
+s557718462.py(93):     elif t < c:
+s557718462.py(95):     elif t < d:
+s557718462.py(98):         return 2, yd[3] - 2*d
+s557718462.py(110):         if wa*ha > 0 and a < -(wb*ha+wa*hb)/(2*wa*ha) < b:
+s557718462.py(114):             yield ((wa*a+wb)*(ha*a+hb), a)
+ --- modulename: s557718462, funcname: it
+s557718462.py(115):             yield ((wa*b+wb)*(ha*b+hb), b)
+ --- modulename: s557718462, funcname: it
+s557718462.py(105):     for a,b in zip(T,ne):
+0

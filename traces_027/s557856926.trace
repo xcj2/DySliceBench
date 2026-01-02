@@ -1,0 +1,72 @@
+ --- modulename: s557856926, funcname: <module>
+s557856926.py(1): class Combination:
+ --- modulename: s557856926, funcname: Combination
+s557856926.py(1): class Combination:
+s557856926.py(3):     """
+s557856926.py(12):     def __init__(self, n_max, mod=10**9+7):
+s557856926.py(17):     def __call__(self, n, r):
+s557856926.py(20):     def make_factorial_list(self, n):
+s557856926.py(30):     def make_modinv_list(self, n):
+s557856926.py(40): N, M, K = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s557856926.py(41): mod = 998244353
+s557856926.py(42): comb = Combination(N, mod)
+ --- modulename: s557856926, funcname: __init__
+s557856926.py(13):         self.mod = mod
+s557856926.py(14):         self.modinv = self.make_modinv_list(n_max)
+ --- modulename: s557856926, funcname: make_modinv_list
+s557856926.py(32):         modinv = [0] * (n+1)
+s557856926.py(33):         modinv[1] = 1
+s557856926.py(34):         for i in range(2, n+1):
+s557856926.py(35):             modinv[i] = self.mod - self.mod//i * \
+s557856926.py(36):                 modinv[self.mod % i] % self.mod
+s557856926.py(35):             modinv[i] = self.mod - self.mod//i * \
+s557856926.py(36):                 modinv[self.mod % i] % self.mod
+s557856926.py(35):             modinv[i] = self.mod - self.mod//i * \
+s557856926.py(34):         for i in range(2, n+1):
+s557856926.py(35):             modinv[i] = self.mod - self.mod//i * \
+s557856926.py(36):                 modinv[self.mod % i] % self.mod
+s557856926.py(35):             modinv[i] = self.mod - self.mod//i * \
+s557856926.py(36):                 modinv[self.mod % i] % self.mod
+s557856926.py(35):             modinv[i] = self.mod - self.mod//i * \
+s557856926.py(34):         for i in range(2, n+1):
+s557856926.py(37):         return modinv
+s557856926.py(15):         self.fac, self.facinv = self.make_factorial_list(n_max)
+ --- modulename: s557856926, funcname: make_factorial_list
+s557856926.py(23):         fac = [1]
+s557856926.py(24):         facinv = [1]
+s557856926.py(25):         for i in range(1, n+1):
+s557856926.py(26):             fac.append(fac[i-1] * i % self.mod)
+s557856926.py(27):             facinv.append(facinv[i-1] * self.modinv[i] % self.mod)
+s557856926.py(25):         for i in range(1, n+1):
+s557856926.py(26):             fac.append(fac[i-1] * i % self.mod)
+s557856926.py(27):             facinv.append(facinv[i-1] * self.modinv[i] % self.mod)
+s557856926.py(25):         for i in range(1, n+1):
+s557856926.py(26):             fac.append(fac[i-1] * i % self.mod)
+s557856926.py(27):             facinv.append(facinv[i-1] * self.modinv[i] % self.mod)
+s557856926.py(25):         for i in range(1, n+1):
+s557856926.py(28):         return fac, facinv
+s557856926.py(44): ans = 0
+s557856926.py(45): for k in range(K+1):
+s557856926.py(46):     t1 = M % mod
+s557856926.py(47):     t2 = pow(M-1, N-1-k, mod)
+s557856926.py(48):     t3 = comb(N-1, k)
+ --- modulename: s557856926, funcname: __call__
+s557856926.py(18):         return self.fac[n] * self.facinv[r] % self.mod * self.facinv[n-r] % self.mod
+s557856926.py(49):     ans = (ans + t1 * t2 * t3) % mod
+s557856926.py(45): for k in range(K+1):
+s557856926.py(46):     t1 = M % mod
+s557856926.py(47):     t2 = pow(M-1, N-1-k, mod)
+s557856926.py(48):     t3 = comb(N-1, k)
+ --- modulename: s557856926, funcname: __call__
+s557856926.py(18):         return self.fac[n] * self.facinv[r] % self.mod * self.facinv[n-r] % self.mod
+s557856926.py(49):     ans = (ans + t1 * t2 * t3) % mod
+s557856926.py(45): for k in range(K+1):
+s557856926.py(51): print(ans)
+6
