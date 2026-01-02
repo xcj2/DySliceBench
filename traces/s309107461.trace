@@ -1,0 +1,182 @@
+ --- modulename: s309107461, funcname: <module>
+s309107461.py(1): import sys
+s309107461.py(2): input = sys.stdin.readline
+s309107461.py(3): sys.setrecursionlimit(10**9)
+s309107461.py(5): def solve():
+s309107461.py(77): solve()
+ --- modulename: s309107461, funcname: solve
+s309107461.py(6):     MOD = 10**9 + 7
+s309107461.py(8):     N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s309107461.py(9):     adjL = [[] for _ in range(N)]
+ --- modulename: s309107461, funcname: <listcomp>
+s309107461.py(9):     adjL = [[] for _ in range(N)]
+s309107461.py(9):     adjL = [[] for _ in range(N)]
+s309107461.py(9):     adjL = [[] for _ in range(N)]
+s309107461.py(9):     adjL = [[] for _ in range(N)]
+s309107461.py(10):     for _ in range(N-1):
+s309107461.py(11):         a, b = map(int, input().split())
+s309107461.py(12):         a, b = a-1, b-1
+s309107461.py(13):         adjL[a].append(b)
+s309107461.py(14):         adjL[b].append(a)
+s309107461.py(10):     for _ in range(N-1):
+s309107461.py(11):         a, b = map(int, input().split())
+s309107461.py(12):         a, b = a-1, b-1
+s309107461.py(13):         adjL[a].append(b)
+s309107461.py(14):         adjL[b].append(a)
+s309107461.py(10):     for _ in range(N-1):
+s309107461.py(16):     def getInvs(n, MOD):
+s309107461.py(21):     invs = getInvs(N, MOD)
+ --- modulename: s309107461, funcname: getInvs
+s309107461.py(17):         invs = [1] * (n+1)
+s309107461.py(18):         for x in range(2, n+1):
+s309107461.py(19):             invs[x] = (-(MOD//x) * invs[MOD%x]) % MOD
+s309107461.py(18):         for x in range(2, n+1):
+s309107461.py(19):             invs[x] = (-(MOD//x) * invs[MOD%x]) % MOD
+s309107461.py(18):         for x in range(2, n+1):
+s309107461.py(20):         return invs
+s309107461.py(23):     dp = [[] for _ in range(N)]
+ --- modulename: s309107461, funcname: <listcomp>
+s309107461.py(23):     dp = [[] for _ in range(N)]
+s309107461.py(23):     dp = [[] for _ in range(N)]
+s309107461.py(23):     dp = [[] for _ in range(N)]
+s309107461.py(23):     dp = [[] for _ in range(N)]
+s309107461.py(24):     outdegs = [0] * N
+s309107461.py(25):     sizes = [0] * N
+s309107461.py(26):     iPars = [-1] * N
+s309107461.py(27):     def dfsDP(v, vPar):
+s309107461.py(41):     anss = [0] * N
+s309107461.py(42):     def dfsAns(v, vPar, resPar):
+s309107461.py(62):     dfsDP(0, -1)
+ --- modulename: s309107461, funcname: dfsDP
+s309107461.py(28):         outdeg = outdegs[v] = len(adjL[v])
+s309107461.py(29):         dp[v] = [0] * outdeg
+s309107461.py(30):         res = 1
+s309107461.py(31):         sizes[v] = 1
+s309107461.py(32):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(33):             if v2 == vPar:
+s309107461.py(36):             dp[v][i] = dfsDP(v2, v)
+ --- modulename: s309107461, funcname: dfsDP
+s309107461.py(28):         outdeg = outdegs[v] = len(adjL[v])
+s309107461.py(29):         dp[v] = [0] * outdeg
+s309107461.py(30):         res = 1
+s309107461.py(31):         sizes[v] = 1
+s309107461.py(32):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(33):             if v2 == vPar:
+s309107461.py(34):                 iPars[v] = i
+s309107461.py(35):                 continue
+s309107461.py(32):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(39):         return res * invs[sizes[v]] % MOD
+s309107461.py(37):             res = res * dp[v][i] % MOD
+s309107461.py(38):             sizes[v] += sizes[v2]
+s309107461.py(32):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(33):             if v2 == vPar:
+s309107461.py(36):             dp[v][i] = dfsDP(v2, v)
+ --- modulename: s309107461, funcname: dfsDP
+s309107461.py(28):         outdeg = outdegs[v] = len(adjL[v])
+s309107461.py(29):         dp[v] = [0] * outdeg
+s309107461.py(30):         res = 1
+s309107461.py(31):         sizes[v] = 1
+s309107461.py(32):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(33):             if v2 == vPar:
+s309107461.py(34):                 iPars[v] = i
+s309107461.py(35):                 continue
+s309107461.py(32):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(39):         return res * invs[sizes[v]] % MOD
+s309107461.py(37):             res = res * dp[v][i] % MOD
+s309107461.py(38):             sizes[v] += sizes[v2]
+s309107461.py(32):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(39):         return res * invs[sizes[v]] % MOD
+s309107461.py(63):     dfsAns(0, -1, 0)
+ --- modulename: s309107461, funcname: dfsAns
+s309107461.py(43):         if vPar != -1:
+s309107461.py(46):         outdeg = outdegs[v]
+s309107461.py(47):         dpL = [1] * (outdeg+1)
+s309107461.py(48):         for i in range(outdeg):
+s309107461.py(49):             v2 = adjL[v][i]
+s309107461.py(50):             dpL[i+1] = dpL[i] * dp[v][i] % MOD
+s309107461.py(48):         for i in range(outdeg):
+s309107461.py(49):             v2 = adjL[v][i]
+s309107461.py(50):             dpL[i+1] = dpL[i] * dp[v][i] % MOD
+s309107461.py(48):         for i in range(outdeg):
+s309107461.py(51):         dpR = [1] * (outdeg+1)
+s309107461.py(52):         for i in reversed(range(outdeg)):
+s309107461.py(53):             v2 = adjL[v][i]
+s309107461.py(54):             dpR[i] = dpR[i+1] * dp[v][i] % MOD
+s309107461.py(52):         for i in reversed(range(outdeg)):
+s309107461.py(53):             v2 = adjL[v][i]
+s309107461.py(54):             dpR[i] = dpR[i+1] * dp[v][i] % MOD
+s309107461.py(52):         for i in reversed(range(outdeg)):
+s309107461.py(55):         anss[v] = dpL[-1] * invs[N]
+s309107461.py(57):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(58):             if v2 == vPar: continue
+s309107461.py(59):             dfsAns(v2, v, dpL[i] * dpR[i+1] * invs[N-sizes[v2]] % MOD)
+ --- modulename: s309107461, funcname: dfsAns
+s309107461.py(43):         if vPar != -1:
+s309107461.py(44):             dp[v][iPars[v]] = resPar
+s309107461.py(46):         outdeg = outdegs[v]
+s309107461.py(47):         dpL = [1] * (outdeg+1)
+s309107461.py(48):         for i in range(outdeg):
+s309107461.py(49):             v2 = adjL[v][i]
+s309107461.py(50):             dpL[i+1] = dpL[i] * dp[v][i] % MOD
+s309107461.py(48):         for i in range(outdeg):
+s309107461.py(51):         dpR = [1] * (outdeg+1)
+s309107461.py(52):         for i in reversed(range(outdeg)):
+s309107461.py(53):             v2 = adjL[v][i]
+s309107461.py(54):             dpR[i] = dpR[i+1] * dp[v][i] % MOD
+s309107461.py(52):         for i in reversed(range(outdeg)):
+s309107461.py(55):         anss[v] = dpL[-1] * invs[N]
+s309107461.py(57):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(58):             if v2 == vPar: continue
+s309107461.py(57):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(57):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(58):             if v2 == vPar: continue
+s309107461.py(59):             dfsAns(v2, v, dpL[i] * dpR[i+1] * invs[N-sizes[v2]] % MOD)
+ --- modulename: s309107461, funcname: dfsAns
+s309107461.py(43):         if vPar != -1:
+s309107461.py(44):             dp[v][iPars[v]] = resPar
+s309107461.py(46):         outdeg = outdegs[v]
+s309107461.py(47):         dpL = [1] * (outdeg+1)
+s309107461.py(48):         for i in range(outdeg):
+s309107461.py(49):             v2 = adjL[v][i]
+s309107461.py(50):             dpL[i+1] = dpL[i] * dp[v][i] % MOD
+s309107461.py(48):         for i in range(outdeg):
+s309107461.py(51):         dpR = [1] * (outdeg+1)
+s309107461.py(52):         for i in reversed(range(outdeg)):
+s309107461.py(53):             v2 = adjL[v][i]
+s309107461.py(54):             dpR[i] = dpR[i+1] * dp[v][i] % MOD
+s309107461.py(52):         for i in reversed(range(outdeg)):
+s309107461.py(55):         anss[v] = dpL[-1] * invs[N]
+s309107461.py(57):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(58):             if v2 == vPar: continue
+s309107461.py(57):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(57):         for i, v2 in enumerate(adjL[v]):
+s309107461.py(65):     def getFact(n, MOD):
+s309107461.py(70):     factN = getFact(N, MOD)
+ --- modulename: s309107461, funcname: getFact
+s309107461.py(66):         fact = 1
+s309107461.py(67):         for i in range(1, n+1):
+s309107461.py(68):             fact = (fact * i) % MOD
+s309107461.py(67):         for i in range(1, n+1):
+s309107461.py(68):             fact = (fact * i) % MOD
+s309107461.py(67):         for i in range(1, n+1):
+s309107461.py(68):             fact = (fact * i) % MOD
+s309107461.py(67):         for i in range(1, n+1):
+s309107461.py(69):         return fact
+s309107461.py(72):     for v in range(N):
+s309107461.py(73):         anss[v] = anss[v] * factN % MOD
+s309107461.py(72):     for v in range(N):
+s309107461.py(73):         anss[v] = anss[v] * factN % MOD
+s309107461.py(72):     for v in range(N):
+s309107461.py(73):         anss[v] = anss[v] * factN % MOD
+s309107461.py(72):     for v in range(N):
+s309107461.py(74):     print('\n'.join(map(str, anss)))
+2
+1
+1
