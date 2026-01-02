@@ -1,0 +1,236 @@
+ --- modulename: s637499723, funcname: <module>
+s637499723.py(1): import sys
+s637499723.py(2): input = sys.stdin.readline
+s637499723.py(5): class SegmentTree():
+ --- modulename: s637499723, funcname: SegmentTree
+s637499723.py(5): class SegmentTree():
+s637499723.py(6):     def __init__(self, values, default=float("inf")):
+s637499723.py(20):     def update(self, index, value):
+s637499723.py(28):     def __query(self, a, b, k, l, r):
+s637499723.py(38):     def query(self, a, b):
+s637499723.py(42): def main():
+s637499723.py(63): if __name__ == "__main__":
+s637499723.py(64):     main()
+ --- modulename: s637499723, funcname: main
+s637499723.py(43):     N, M = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s637499723.py(44):     op = [None] * M
+s637499723.py(45):     for i in range(M):
+s637499723.py(46):         L, R, C = map(int, input().split())
+s637499723.py(47):         op[i] = (L-1, R-1, C)
+s637499723.py(45):     for i in range(M):
+s637499723.py(46):         L, R, C = map(int, input().split())
+s637499723.py(47):         op[i] = (L-1, R-1, C)
+s637499723.py(45):     for i in range(M):
+s637499723.py(46):         L, R, C = map(int, input().split())
+s637499723.py(47):         op[i] = (L-1, R-1, C)
+s637499723.py(45):     for i in range(M):
+s637499723.py(48):     op.sort()
+s637499723.py(49):     tree = SegmentTree([float("inf")] * N)
+ --- modulename: s637499723, funcname: __init__
+s637499723.py(7):         n = len(values)
+s637499723.py(8):         self.size = 1
+s637499723.py(9):         self.default = default
+s637499723.py(10):         while self.size < n:
+s637499723.py(11):             self.size *= 2
+s637499723.py(10):         while self.size < n:
+s637499723.py(11):             self.size *= 2
+s637499723.py(10):         while self.size < n:
+s637499723.py(14):         self.tree = [self.default] * self.size * 2
+s637499723.py(15):         for i in range(n):
+s637499723.py(16):             self.tree[self.size + i] = values[i]
+s637499723.py(15):         for i in range(n):
+s637499723.py(16):             self.tree[self.size + i] = values[i]
+s637499723.py(15):         for i in range(n):
+s637499723.py(16):             self.tree[self.size + i] = values[i]
+s637499723.py(15):         for i in range(n):
+s637499723.py(16):             self.tree[self.size + i] = values[i]
+s637499723.py(15):         for i in range(n):
+s637499723.py(17):         for i in range(self.size-1, 0, -1):
+s637499723.py(18):             self.tree[i] = min(self.tree[i*2], self.tree[i*2+1])
+s637499723.py(17):         for i in range(self.size-1, 0, -1):
+s637499723.py(18):             self.tree[i] = min(self.tree[i*2], self.tree[i*2+1])
+s637499723.py(17):         for i in range(self.size-1, 0, -1):
+s637499723.py(18):             self.tree[i] = min(self.tree[i*2], self.tree[i*2+1])
+s637499723.py(17):         for i in range(self.size-1, 0, -1):
+s637499723.py(50):     tree.update(0, 0)
+ --- modulename: s637499723, funcname: update
+s637499723.py(21):         index += self.size
+s637499723.py(22):         self.tree[index] = value
+s637499723.py(23):         while index > 1:
+s637499723.py(24):             index //= 2
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(26):                 self.tree[index*2], self.tree[index*2+1])
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(23):         while index > 1:
+s637499723.py(24):             index //= 2
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(26):                 self.tree[index*2], self.tree[index*2+1])
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(23):         while index > 1:
+s637499723.py(51):     for l, r, c in op:
+s637499723.py(52):         mn = tree.query(l, r)
+ --- modulename: s637499723, funcname: query
+s637499723.py(39):         return self.__query(a, b, 1, 0, self.size)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(33):         left = self.__query(a, b, k*2, l, (l+r)//2)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(32):             return self.tree[k]
+s637499723.py(34):         right = self.__query(a, b, k*2+1, (l+r)//2, r)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(30):             return self.default
+s637499723.py(35):         return min(left, right)
+s637499723.py(53):         current = tree.tree[tree.size + r]
+s637499723.py(54):         if mn+c < current:
+s637499723.py(55):             tree.update(r, mn+c)
+ --- modulename: s637499723, funcname: update
+s637499723.py(21):         index += self.size
+s637499723.py(22):         self.tree[index] = value
+s637499723.py(23):         while index > 1:
+s637499723.py(24):             index //= 2
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(26):                 self.tree[index*2], self.tree[index*2+1])
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(23):         while index > 1:
+s637499723.py(24):             index //= 2
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(26):                 self.tree[index*2], self.tree[index*2+1])
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(23):         while index > 1:
+s637499723.py(51):     for l, r, c in op:
+s637499723.py(52):         mn = tree.query(l, r)
+ --- modulename: s637499723, funcname: query
+s637499723.py(39):         return self.__query(a, b, 1, 0, self.size)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(33):         left = self.__query(a, b, k*2, l, (l+r)//2)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(32):             return self.tree[k]
+s637499723.py(34):         right = self.__query(a, b, k*2+1, (l+r)//2, r)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(33):         left = self.__query(a, b, k*2, l, (l+r)//2)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(32):             return self.tree[k]
+s637499723.py(34):         right = self.__query(a, b, k*2+1, (l+r)//2, r)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(30):             return self.default
+s637499723.py(35):         return min(left, right)
+s637499723.py(35):         return min(left, right)
+s637499723.py(53):         current = tree.tree[tree.size + r]
+s637499723.py(54):         if mn+c < current:
+s637499723.py(55):             tree.update(r, mn+c)
+ --- modulename: s637499723, funcname: update
+s637499723.py(21):         index += self.size
+s637499723.py(22):         self.tree[index] = value
+s637499723.py(23):         while index > 1:
+s637499723.py(24):             index //= 2
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(26):                 self.tree[index*2], self.tree[index*2+1])
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(23):         while index > 1:
+s637499723.py(24):             index //= 2
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(26):                 self.tree[index*2], self.tree[index*2+1])
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(23):         while index > 1:
+s637499723.py(51):     for l, r, c in op:
+s637499723.py(52):         mn = tree.query(l, r)
+ --- modulename: s637499723, funcname: query
+s637499723.py(39):         return self.__query(a, b, 1, 0, self.size)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(33):         left = self.__query(a, b, k*2, l, (l+r)//2)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(33):         left = self.__query(a, b, k*2, l, (l+r)//2)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(30):             return self.default
+s637499723.py(34):         right = self.__query(a, b, k*2+1, (l+r)//2, r)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(32):             return self.tree[k]
+s637499723.py(35):         return min(left, right)
+s637499723.py(34):         right = self.__query(a, b, k*2+1, (l+r)//2, r)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(33):         left = self.__query(a, b, k*2, l, (l+r)//2)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(32):             return self.tree[k]
+s637499723.py(34):         right = self.__query(a, b, k*2+1, (l+r)//2, r)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(30):             return self.default
+s637499723.py(35):         return min(left, right)
+s637499723.py(35):         return min(left, right)
+s637499723.py(53):         current = tree.tree[tree.size + r]
+s637499723.py(54):         if mn+c < current:
+s637499723.py(55):             tree.update(r, mn+c)
+ --- modulename: s637499723, funcname: update
+s637499723.py(21):         index += self.size
+s637499723.py(22):         self.tree[index] = value
+s637499723.py(23):         while index > 1:
+s637499723.py(24):             index //= 2
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(26):                 self.tree[index*2], self.tree[index*2+1])
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(23):         while index > 1:
+s637499723.py(24):             index //= 2
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(26):                 self.tree[index*2], self.tree[index*2+1])
+s637499723.py(25):             self.tree[index] = min(
+s637499723.py(23):         while index > 1:
+s637499723.py(51):     for l, r, c in op:
+s637499723.py(56):     ans = tree.query(N-1, N)
+ --- modulename: s637499723, funcname: query
+s637499723.py(39):         return self.__query(a, b, 1, 0, self.size)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(33):         left = self.__query(a, b, k*2, l, (l+r)//2)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(30):             return self.default
+s637499723.py(34):         right = self.__query(a, b, k*2+1, (l+r)//2, r)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(33):         left = self.__query(a, b, k*2, l, (l+r)//2)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(30):             return self.default
+s637499723.py(34):         right = self.__query(a, b, k*2+1, (l+r)//2, r)
+ --- modulename: s637499723, funcname: __query
+s637499723.py(29):         if r <= a or b <= l:
+s637499723.py(31):         if a <= l and r <= b:
+s637499723.py(32):             return self.tree[k]
+s637499723.py(35):         return min(left, right)
+s637499723.py(35):         return min(left, right)
+s637499723.py(57):     if ans == float("inf"):
+s637499723.py(60):         print(ans)
+5
