@@ -1,0 +1,203 @@
+ --- modulename: s905986393, funcname: <module>
+s905986393.py(1): class Dijkstra():
+ --- modulename: s905986393, funcname: Dijkstra
+s905986393.py(1): class Dijkstra():
+s905986393.py(2):     """ ダイクストラ法
+s905986393.py(13):     class Edge():
+ --- modulename: s905986393, funcname: Edge
+s905986393.py(13):     class Edge():
+s905986393.py(14):         """ 重み付き有向辺 """
+s905986393.py(15):         def __init__(self, _to, _cost):
+s905986393.py(19):     def __init__(self, V):
+s905986393.py(30):     @property
+s905986393.py(31):     def E(self):
+s905986393.py(37):     @property
+s905986393.py(38):     def V(self):
+s905986393.py(42):     def add(self, _from, _to, _cost):
+s905986393.py(47):     def shortest_path(self, s):
+s905986393.py(74): def BellmanFord(edges,num_v,source):
+s905986393.py(89): N,M=map(int,input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s905986393.py(90): edges=[]
+s905986393.py(91): test=Dijkstra(N)
+ --- modulename: s905986393, funcname: __init__
+s905986393.py(26):         self.G = [[] for i in range(V)]  # 隣接リストG[u][i] := 頂点uのi個目の隣接辺
+ --- modulename: s905986393, funcname: <listcomp>
+s905986393.py(26):         self.G = [[] for i in range(V)]  # 隣接リストG[u][i] := 頂点uのi個目の隣接辺
+s905986393.py(26):         self.G = [[] for i in range(V)]  # 隣接リストG[u][i] := 頂点uのi個目の隣接辺
+s905986393.py(26):         self.G = [[] for i in range(V)]  # 隣接リストG[u][i] := 頂点uのi個目の隣接辺
+s905986393.py(26):         self.G = [[] for i in range(V)]  # 隣接リストG[u][i] := 頂点uのi個目の隣接辺
+s905986393.py(27):         self._E = 0  # 辺の数
+s905986393.py(28):         self._V = V  # 頂点の数
+s905986393.py(92): for i in range(0,M):
+s905986393.py(93):     a,b,c=map(int,input().split())
+s905986393.py(94):     edges.append([a,b,-c])
+s905986393.py(95):     test.add(b-1,a-1,1)
+ --- modulename: s905986393, funcname: add
+s905986393.py(44):         self.G[_from].append(self.Edge(_to, _cost))
+ --- modulename: s905986393, funcname: __init__
+s905986393.py(16):             self.to = _to
+s905986393.py(17):             self.cost = _cost
+s905986393.py(45):         self._E += 1
+s905986393.py(92): for i in range(0,M):
+s905986393.py(93):     a,b,c=map(int,input().split())
+s905986393.py(94):     edges.append([a,b,-c])
+s905986393.py(95):     test.add(b-1,a-1,1)
+ --- modulename: s905986393, funcname: add
+s905986393.py(44):         self.G[_from].append(self.Edge(_to, _cost))
+ --- modulename: s905986393, funcname: __init__
+s905986393.py(16):             self.to = _to
+s905986393.py(17):             self.cost = _cost
+s905986393.py(45):         self._E += 1
+s905986393.py(92): for i in range(0,M):
+s905986393.py(93):     a,b,c=map(int,input().split())
+s905986393.py(94):     edges.append([a,b,-c])
+s905986393.py(95):     test.add(b-1,a-1,1)
+ --- modulename: s905986393, funcname: add
+s905986393.py(44):         self.G[_from].append(self.Edge(_to, _cost))
+ --- modulename: s905986393, funcname: __init__
+s905986393.py(16):             self.to = _to
+s905986393.py(17):             self.cost = _cost
+s905986393.py(45):         self._E += 1
+s905986393.py(92): for i in range(0,M):
+s905986393.py(97): use=set([N-1])
+s905986393.py(98): for i in range(0,N-1):
+s905986393.py(99):     if test.shortest_path(N-1)[i]!=10**15:
+ --- modulename: s905986393, funcname: shortest_path
+s905986393.py(55):         import heapq
+s905986393.py(56):         que = []  # プライオリティキュー（ヒープ木）
+s905986393.py(57):         d = [10**15] * self.V
+ --- modulename: s905986393, funcname: V
+s905986393.py(40):         return self._V
+s905986393.py(58):         d[s] = 0
+s905986393.py(59):         heapq.heappush(que, (0, s))  # 始点の(最短距離, 頂点番号)をヒープに追加する
+s905986393.py(61):         while len(que) != 0:
+s905986393.py(62):             cost, v = heapq.heappop(que)
+s905986393.py(64):             if d[v] < cost: continue
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(68):                 e = self.G[v][i]  # vのi個目の隣接辺e
+s905986393.py(69):                 if d[e.to] > d[v] + e.cost:
+s905986393.py(70):                     d[e.to] = d[v] + e.cost  # dの更新
+s905986393.py(71):                     heapq.heappush(que, (d[e.to], e.to))  # キューに新たな最短経路の候補(最短距離, 頂点番号)の情報をpush
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(68):                 e = self.G[v][i]  # vのi個目の隣接辺e
+s905986393.py(69):                 if d[e.to] > d[v] + e.cost:
+s905986393.py(70):                     d[e.to] = d[v] + e.cost  # dの更新
+s905986393.py(71):                     heapq.heappush(que, (d[e.to], e.to))  # キューに新たな最短経路の候補(最短距離, 頂点番号)の情報をpush
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(61):         while len(que) != 0:
+s905986393.py(62):             cost, v = heapq.heappop(que)
+s905986393.py(64):             if d[v] < cost: continue
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(61):         while len(que) != 0:
+s905986393.py(62):             cost, v = heapq.heappop(que)
+s905986393.py(64):             if d[v] < cost: continue
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(68):                 e = self.G[v][i]  # vのi個目の隣接辺e
+s905986393.py(69):                 if d[e.to] > d[v] + e.cost:
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(61):         while len(que) != 0:
+s905986393.py(72):         return d
+s905986393.py(100):         use.add(i)
+s905986393.py(98): for i in range(0,N-1):
+s905986393.py(99):     if test.shortest_path(N-1)[i]!=10**15:
+ --- modulename: s905986393, funcname: shortest_path
+s905986393.py(55):         import heapq
+s905986393.py(56):         que = []  # プライオリティキュー（ヒープ木）
+s905986393.py(57):         d = [10**15] * self.V
+ --- modulename: s905986393, funcname: V
+s905986393.py(40):         return self._V
+s905986393.py(58):         d[s] = 0
+s905986393.py(59):         heapq.heappush(que, (0, s))  # 始点の(最短距離, 頂点番号)をヒープに追加する
+s905986393.py(61):         while len(que) != 0:
+s905986393.py(62):             cost, v = heapq.heappop(que)
+s905986393.py(64):             if d[v] < cost: continue
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(68):                 e = self.G[v][i]  # vのi個目の隣接辺e
+s905986393.py(69):                 if d[e.to] > d[v] + e.cost:
+s905986393.py(70):                     d[e.to] = d[v] + e.cost  # dの更新
+s905986393.py(71):                     heapq.heappush(que, (d[e.to], e.to))  # キューに新たな最短経路の候補(最短距離, 頂点番号)の情報をpush
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(68):                 e = self.G[v][i]  # vのi個目の隣接辺e
+s905986393.py(69):                 if d[e.to] > d[v] + e.cost:
+s905986393.py(70):                     d[e.to] = d[v] + e.cost  # dの更新
+s905986393.py(71):                     heapq.heappush(que, (d[e.to], e.to))  # キューに新たな最短経路の候補(最短距離, 頂点番号)の情報をpush
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(61):         while len(que) != 0:
+s905986393.py(62):             cost, v = heapq.heappop(que)
+s905986393.py(64):             if d[v] < cost: continue
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(61):         while len(que) != 0:
+s905986393.py(62):             cost, v = heapq.heappop(que)
+s905986393.py(64):             if d[v] < cost: continue
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(68):                 e = self.G[v][i]  # vのi個目の隣接辺e
+s905986393.py(69):                 if d[e.to] > d[v] + e.cost:
+s905986393.py(66):             for i in range(len(self.G[v])):
+s905986393.py(61):         while len(que) != 0:
+s905986393.py(72):         return d
+s905986393.py(100):         use.add(i)
+s905986393.py(98): for i in range(0,N-1):
+s905986393.py(102): useedges=[]
+s905986393.py(103): for i in range(0,M):
+s905986393.py(104):     a,b,c=edges[i]
+s905986393.py(105):     if a-1 in use and b-1 in use:
+s905986393.py(106):         useedges.append(edges[i])
+s905986393.py(103): for i in range(0,M):
+s905986393.py(104):     a,b,c=edges[i]
+s905986393.py(105):     if a-1 in use and b-1 in use:
+s905986393.py(106):         useedges.append(edges[i])
+s905986393.py(103): for i in range(0,M):
+s905986393.py(104):     a,b,c=edges[i]
+s905986393.py(105):     if a-1 in use and b-1 in use:
+s905986393.py(106):         useedges.append(edges[i])
+s905986393.py(103): for i in range(0,M):
+s905986393.py(108): ans=BellmanFord(useedges,N,1)
+ --- modulename: s905986393, funcname: BellmanFord
+s905986393.py(76):   inf=float("inf")
+s905986393.py(77):   dist=[inf for i in range(num_v)]
+ --- modulename: s905986393, funcname: <listcomp>
+s905986393.py(77):   dist=[inf for i in range(num_v)]
+s905986393.py(77):   dist=[inf for i in range(num_v)]
+s905986393.py(77):   dist=[inf for i in range(num_v)]
+s905986393.py(77):   dist=[inf for i in range(num_v)]
+s905986393.py(78):   dist[source-1]=0
+s905986393.py(81):   for i in range(num_v):
+s905986393.py(82):     for edge in edges:
+s905986393.py(83):       if edge[0] != inf and dist[edge[1]-1] > dist[edge[0]-1] + edge[2]:
+s905986393.py(84):         dist[edge[1]-1] = dist[edge[0]-1] + edge[2]
+s905986393.py(85):         if i==num_v-1: return -1
+s905986393.py(82):     for edge in edges:
+s905986393.py(83):       if edge[0] != inf and dist[edge[1]-1] > dist[edge[0]-1] + edge[2]:
+s905986393.py(84):         dist[edge[1]-1] = dist[edge[0]-1] + edge[2]
+s905986393.py(85):         if i==num_v-1: return -1
+s905986393.py(82):     for edge in edges:
+s905986393.py(83):       if edge[0] != inf and dist[edge[1]-1] > dist[edge[0]-1] + edge[2]:
+s905986393.py(82):     for edge in edges:
+s905986393.py(81):   for i in range(num_v):
+s905986393.py(82):     for edge in edges:
+s905986393.py(83):       if edge[0] != inf and dist[edge[1]-1] > dist[edge[0]-1] + edge[2]:
+s905986393.py(82):     for edge in edges:
+s905986393.py(83):       if edge[0] != inf and dist[edge[1]-1] > dist[edge[0]-1] + edge[2]:
+s905986393.py(82):     for edge in edges:
+s905986393.py(83):       if edge[0] != inf and dist[edge[1]-1] > dist[edge[0]-1] + edge[2]:
+s905986393.py(82):     for edge in edges:
+s905986393.py(81):   for i in range(num_v):
+s905986393.py(82):     for edge in edges:
+s905986393.py(83):       if edge[0] != inf and dist[edge[1]-1] > dist[edge[0]-1] + edge[2]:
+s905986393.py(82):     for edge in edges:
+s905986393.py(83):       if edge[0] != inf and dist[edge[1]-1] > dist[edge[0]-1] + edge[2]:
+s905986393.py(82):     for edge in edges:
+s905986393.py(83):       if edge[0] != inf and dist[edge[1]-1] > dist[edge[0]-1] + edge[2]:
+s905986393.py(82):     for edge in edges:
+s905986393.py(81):   for i in range(num_v):
+s905986393.py(87):   return dist
+s905986393.py(109): if ans==-1:
+s905986393.py(112):     print(-ans[N-1])
+7

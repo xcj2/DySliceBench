@@ -1,0 +1,79 @@
+ --- modulename: s905944642, funcname: <module>
+s905944642.py(1): import os
+s905944642.py(2): import sys
+s905944642.py(4): if os.getenv("LOCAL"):
+ --- modulename: os, funcname: getenv
+os.py(775):     return environ.get(key, default)
+ --- modulename: _collections_abc, funcname: get
+_collections_abc.py(762):         try:
+_collections_abc.py(763):             return self[key]
+ --- modulename: os, funcname: __getitem__
+os.py(675):         try:
+os.py(676):             value = self._data[self.encodekey(key)]
+ --- modulename: os, funcname: encodekey
+os.py(747):             return encode(key).upper()
+ --- modulename: os, funcname: check_str
+os.py(741):             if not isinstance(value, str):
+os.py(743):             return value
+os.py(677):         except KeyError:
+os.py(679):             raise KeyError(key) from None
+_collections_abc.py(764):         except KeyError:
+_collections_abc.py(765):             return default
+s905944642.py(7): sys.setrecursionlimit(2147483647)
+s905944642.py(8): INF = float("inf")
+s905944642.py(9): IINF = 10 ** 18
+s905944642.py(10): MOD = 10 ** 9 + 7
+s905944642.py(12): P = int(sys.stdin.readline())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s905944642.py(13): A = list(map(int, sys.stdin.readline().split()))
+s905944642.py(19): def mod_invs(max, mod):
+s905944642.py(31): def get_ncrs(n, mod):
+s905944642.py(47): ncr = get_ncrs(P - 1, P)
+ --- modulename: s905944642, funcname: get_ncrs
+s905944642.py(38):     invs = mod_invs(n, mod)
+ --- modulename: s905944642, funcname: mod_invs
+s905944642.py(25):     invs = [1] * (max + 1)
+s905944642.py(26):     for x in range(2, max + 1):
+s905944642.py(28):     return invs
+s905944642.py(39):     ret = [1]
+s905944642.py(40):     ncr = 1
+s905944642.py(41):     for i in range(1, n + 1):
+s905944642.py(42):         ncr = ((ncr * (n - i + 1) % mod) * invs[i]) % mod
+s905944642.py(43):         ret.append(ncr)
+s905944642.py(41):     for i in range(1, n + 1):
+s905944642.py(44):     return ret
+s905944642.py(50): def poly(j):
+s905944642.py(63): ans = [0] * P
+s905944642.py(64): for j, a in enumerate(A):
+s905944642.py(65):     if a == 1:
+s905944642.py(66):         for k, b in enumerate(poly(j)):
+ --- modulename: s905944642, funcname: poly
+s905944642.py(53):     coef = []
+s905944642.py(54):     c = 1
+s905944642.py(55):     for i in range(P):
+s905944642.py(56):         coef.append(-ncr[i] * c)
+s905944642.py(57):         c = c * -j % P
+s905944642.py(55):     for i in range(P):
+s905944642.py(56):         coef.append(-ncr[i] * c)
+s905944642.py(57):         c = c * -j % P
+s905944642.py(55):     for i in range(P):
+s905944642.py(58):     coef.reverse()
+s905944642.py(59):     coef[0] += 1
+s905944642.py(60):     return coef
+s905944642.py(67):             ans[k] += b
+s905944642.py(68):             ans[k] %= P
+s905944642.py(66):         for k, b in enumerate(poly(j)):
+s905944642.py(67):             ans[k] += b
+s905944642.py(68):             ans[k] %= P
+s905944642.py(66):         for k, b in enumerate(poly(j)):
+s905944642.py(64): for j, a in enumerate(A):
+s905944642.py(65):     if a == 1:
+s905944642.py(64): for j, a in enumerate(A):
+s905944642.py(69): print(*ans)
+1 1
