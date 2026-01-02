@@ -1,0 +1,238 @@
+ --- modulename: s622082796, funcname: <module>
+s622082796.py(1): import sys
+s622082796.py(2): sys.setrecursionlimit(10 ** 7)
+s622082796.py(3): class Tree:
+ --- modulename: s622082796, funcname: Tree
+s622082796.py(3): class Tree:
+s622082796.py(4):   C, RL = {}, {}
+s622082796.py(5):   R, N, D, S, P, T = None, None, None, None, None, None
+s622082796.py(6):   TL = None
+s622082796.py(7):   def __init__(s, num):
+s622082796.py(9):   def set(s, a, b):
+s622082796.py(14):   def makeRank(s, root):
+s622082796.py(38):   def dfs(s, x, y, r): #xからyまでの道O(M)
+s622082796.py(47):   def dist(s, x): #最遠のノード,距離
+s622082796.py(63):   def getDi(s, x = 0): #直径
+s622082796.py(67):   def getDeep(s, x): #xの子孫のうち一番深い深さ
+s622082796.py(75):   def getParent(s, x, n): #xのn世代前の親
+s622082796.py(81):   def tour(s): #オイラーツアー
+s622082796.py(90):   def tour_sub(s, x): #オイラーツアーのサブ
+s622082796.py(98):   def bottomUpDP(s):
+s622082796.py(104):   def allDP(s):
+s622082796.py(110):   def dp_init(s): #単位元で初期化
+s622082796.py(113):   def dp_sub(s, x):
+s622082796.py(119):   def dp_sub_exe(s, x, y): #ボトムアップの処理
+s622082796.py(122):   def dp_sub_exe_inv(s, x, y): #トップダウンの処理
+s622082796.py(130):   def inv(s, a, mod): #逆元
+s622082796.py(133): class comb():
+ --- modulename: s622082796, funcname: comb
+s622082796.py(133): class comb():
+s622082796.py(134):   F = [1, 1]
+s622082796.py(135):   Fi = [1, 1]
+s622082796.py(136):   I = [0, 1]
+s622082796.py(137):   def __init__(self, num, mod):
+s622082796.py(143):   def com(self, n, k):
+s622082796.py(148): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s622082796.py(149): ab = [list(map(int, input().split())) for _ in range(N - 1)]
+ --- modulename: s622082796, funcname: <listcomp>
+s622082796.py(149): ab = [list(map(int, input().split())) for _ in range(N - 1)]
+s622082796.py(149): ab = [list(map(int, input().split())) for _ in range(N - 1)]
+s622082796.py(149): ab = [list(map(int, input().split())) for _ in range(N - 1)]
+s622082796.py(151): MOD = 10 ** 9 + 7
+s622082796.py(152): com = comb(N, MOD)
+ --- modulename: s622082796, funcname: __init__
+s622082796.py(138):     self.MOD = mod
+s622082796.py(139):     for i in range(2, num + 1):
+s622082796.py(140):       self.F.append((self.F[-1] * i) % mod)
+s622082796.py(141):       self.I.append(mod - self.I[mod % i] * (mod // i) % mod)
+s622082796.py(142):       self.Fi.append(self.Fi[-1] * self.I[i] % mod)
+s622082796.py(139):     for i in range(2, num + 1):
+s622082796.py(140):       self.F.append((self.F[-1] * i) % mod)
+s622082796.py(141):       self.I.append(mod - self.I[mod % i] * (mod // i) % mod)
+s622082796.py(142):       self.Fi.append(self.Fi[-1] * self.I[i] % mod)
+s622082796.py(139):     for i in range(2, num + 1):
+s622082796.py(154): T = Tree(N)
+ --- modulename: s622082796, funcname: __init__
+s622082796.py(8):     s.N = num
+s622082796.py(155): for a, b in ab:
+s622082796.py(156):   a -= 1
+s622082796.py(157):   b -= 1
+s622082796.py(158):   T.set(a, b)
+ --- modulename: s622082796, funcname: set
+s622082796.py(10):     if a in s.C: s.C[a].append(b)
+s622082796.py(11):     else: s.C[a] = [b]
+s622082796.py(12):     if b in s.C: s.C[b].append(a)
+s622082796.py(13):     else: s.C[b] = [a]
+s622082796.py(155): for a, b in ab:
+s622082796.py(156):   a -= 1
+s622082796.py(157):   b -= 1
+s622082796.py(158):   T.set(a, b)
+ --- modulename: s622082796, funcname: set
+s622082796.py(10):     if a in s.C: s.C[a].append(b)
+s622082796.py(12):     if b in s.C: s.C[b].append(a)
+s622082796.py(13):     else: s.C[b] = [a]
+s622082796.py(155): for a, b in ab:
+s622082796.py(160): T.makeRank(0)
+ --- modulename: s622082796, funcname: makeRank
+s622082796.py(15):     s.R = [0] * s.N #各ノードのランク
+s622082796.py(16):     s.R[root] = 1
+s622082796.py(17):     s.RL[1] = [root] #各ランクのノード
+s622082796.py(18):     s.S = {} #各ノードの子ノード
+s622082796.py(19):     s.P = [-1] * s.N #各ノードの親ノード
+s622082796.py(20):     F = [root]
+s622082796.py(21):     s.D = 2
+s622082796.py(22):     while F != []:
+s622082796.py(23):       Ft = []
+s622082796.py(24):       s.RL[s.D] = []
+s622082796.py(25):       for i in F:
+s622082796.py(26):         for j in s.C[i]:
+s622082796.py(27):           if s.R[j] == 0:
+s622082796.py(28):             s.R[j] = s.D
+s622082796.py(29):             Ft.append(j)
+s622082796.py(30):             s.RL[s.D].append(j)
+s622082796.py(31):             if i not in s.S:
+s622082796.py(32):               s.S[i] = [j]
+s622082796.py(35):             s.P[j] = i
+s622082796.py(26):         for j in s.C[i]:
+s622082796.py(27):           if s.R[j] == 0:
+s622082796.py(28):             s.R[j] = s.D
+s622082796.py(29):             Ft.append(j)
+s622082796.py(30):             s.RL[s.D].append(j)
+s622082796.py(31):             if i not in s.S:
+s622082796.py(34):               s.S[i].append(j)
+s622082796.py(35):             s.P[j] = i
+s622082796.py(26):         for j in s.C[i]:
+s622082796.py(25):       for i in F:
+s622082796.py(36):       s.D += 1
+s622082796.py(37):       F = Ft
+s622082796.py(22):     while F != []:
+s622082796.py(23):       Ft = []
+s622082796.py(24):       s.RL[s.D] = []
+s622082796.py(25):       for i in F:
+s622082796.py(26):         for j in s.C[i]:
+s622082796.py(27):           if s.R[j] == 0:
+s622082796.py(26):         for j in s.C[i]:
+s622082796.py(25):       for i in F:
+s622082796.py(26):         for j in s.C[i]:
+s622082796.py(27):           if s.R[j] == 0:
+s622082796.py(26):         for j in s.C[i]:
+s622082796.py(25):       for i in F:
+s622082796.py(36):       s.D += 1
+s622082796.py(37):       F = Ft
+s622082796.py(22):     while F != []:
+s622082796.py(161): T.allDP()
+ --- modulename: s622082796, funcname: allDP
+s622082796.py(105):     bDP = s.bottomUpDP()
+ --- modulename: s622082796, funcname: bottomUpDP
+s622082796.py(99):     s.dp_init()
+ --- modulename: s622082796, funcname: dp_init
+s622082796.py(111):     s.DP = [1] * N
+s622082796.py(112):     s.sDP = [1] * N
+s622082796.py(100):     for i in range(s.D - 1, 0, -1):
+s622082796.py(101):       T = s.RL[i]
+s622082796.py(102):       for j in T:
+s622082796.py(100):     for i in range(s.D - 1, 0, -1):
+s622082796.py(101):       T = s.RL[i]
+s622082796.py(102):       for j in T:
+s622082796.py(103):         s.dp_sub(j)
+ --- modulename: s622082796, funcname: dp_sub
+s622082796.py(114):     if x not in s.S:
+s622082796.py(115):       return 0
+s622082796.py(102):       for j in T:
+s622082796.py(103):         s.dp_sub(j)
+ --- modulename: s622082796, funcname: dp_sub
+s622082796.py(114):     if x not in s.S:
+s622082796.py(115):       return 0
+s622082796.py(102):       for j in T:
+s622082796.py(100):     for i in range(s.D - 1, 0, -1):
+s622082796.py(101):       T = s.RL[i]
+s622082796.py(102):       for j in T:
+s622082796.py(103):         s.dp_sub(j)
+ --- modulename: s622082796, funcname: dp_sub
+s622082796.py(114):     if x not in s.S:
+s622082796.py(116):     T = s.S[x]
+s622082796.py(117):     for i in T:
+s622082796.py(118):       s.dp_sub_exe(x, i)
+ --- modulename: s622082796, funcname: dp_sub_exe
+s622082796.py(120):     s.sDP[x] += s.sDP[y]
+s622082796.py(121):     s.DP[x] = s.DP[x] * s.DP[y] * com.com(s.sDP[x] - 1, s.sDP[y]) % MOD
+ --- modulename: s622082796, funcname: com
+s622082796.py(144):     if n < k: return 0
+s622082796.py(145):     if n < 0 or k < 0: return 0
+s622082796.py(146):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s622082796.py(117):     for i in T:
+s622082796.py(118):       s.dp_sub_exe(x, i)
+ --- modulename: s622082796, funcname: dp_sub_exe
+s622082796.py(120):     s.sDP[x] += s.sDP[y]
+s622082796.py(121):     s.DP[x] = s.DP[x] * s.DP[y] * com.com(s.sDP[x] - 1, s.sDP[y]) % MOD
+ --- modulename: s622082796, funcname: com
+s622082796.py(144):     if n < k: return 0
+s622082796.py(145):     if n < 0 or k < 0: return 0
+s622082796.py(146):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s622082796.py(117):     for i in T:
+s622082796.py(102):       for j in T:
+s622082796.py(100):     for i in range(s.D - 1, 0, -1):
+s622082796.py(106):     for i in range(2, s.D):
+s622082796.py(107):       T = s.RL[i]
+s622082796.py(108):       for j in T:
+s622082796.py(109):         s.dp_sub_exe_inv(j, s.P[j])
+ --- modulename: s622082796, funcname: dp_sub_exe_inv
+s622082796.py(123):     t = com.com(s.sDP[y] - 1, s.sDP[x]) * s.DP[x] % MOD
+ --- modulename: s622082796, funcname: com
+s622082796.py(144):     if n < k: return 0
+s622082796.py(145):     if n < 0 or k < 0: return 0
+s622082796.py(146):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s622082796.py(124):     t = s.DP[y] * s.inv(t, MOD)
+ --- modulename: s622082796, funcname: inv
+s622082796.py(131):     return pow(a, mod - 2, mod)
+s622082796.py(125):     k = s.sDP[y] - s.sDP[x]
+s622082796.py(126):     k = com.com(s.sDP[y] - 1, k) % MOD
+ --- modulename: s622082796, funcname: com
+s622082796.py(144):     if n < k: return 0
+s622082796.py(145):     if n < 0 or k < 0: return 0
+s622082796.py(146):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s622082796.py(127):     s.sDP[x] = s.sDP[y]
+s622082796.py(128):     s.DP[x] = s.DP[x] * t * k % MOD
+s622082796.py(129):     return 
+s622082796.py(108):       for j in T:
+s622082796.py(109):         s.dp_sub_exe_inv(j, s.P[j])
+ --- modulename: s622082796, funcname: dp_sub_exe_inv
+s622082796.py(123):     t = com.com(s.sDP[y] - 1, s.sDP[x]) * s.DP[x] % MOD
+ --- modulename: s622082796, funcname: com
+s622082796.py(144):     if n < k: return 0
+s622082796.py(145):     if n < 0 or k < 0: return 0
+s622082796.py(146):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s622082796.py(124):     t = s.DP[y] * s.inv(t, MOD)
+ --- modulename: s622082796, funcname: inv
+s622082796.py(131):     return pow(a, mod - 2, mod)
+s622082796.py(125):     k = s.sDP[y] - s.sDP[x]
+s622082796.py(126):     k = com.com(s.sDP[y] - 1, k) % MOD
+ --- modulename: s622082796, funcname: com
+s622082796.py(144):     if n < k: return 0
+s622082796.py(145):     if n < 0 or k < 0: return 0
+s622082796.py(146):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s622082796.py(127):     s.sDP[x] = s.sDP[y]
+s622082796.py(128):     s.DP[x] = s.DP[x] * t * k % MOD
+s622082796.py(129):     return 
+s622082796.py(108):       for j in T:
+s622082796.py(106):     for i in range(2, s.D):
+s622082796.py(107):       T = s.RL[i]
+s622082796.py(108):       for j in T:
+s622082796.py(106):     for i in range(2, s.D):
+s622082796.py(163): for i in T.DP:
+s622082796.py(164):   print(i)
+2
+s622082796.py(163): for i in T.DP:
+s622082796.py(164):   print(i)
+1
+s622082796.py(163): for i in T.DP:
+s622082796.py(164):   print(i)
+1
+s622082796.py(163): for i in T.DP:
