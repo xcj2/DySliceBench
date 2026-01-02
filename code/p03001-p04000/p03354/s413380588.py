@@ -1,0 +1,119 @@
+#!usr/bin/env python3
+from collections import defaultdict
+from collections import deque
+from heapq import heappush, heappop
+import sys
+import math
+import bisect
+import random
+def LI(): return list(map(int, sys.stdin.readline().split()))
+def I(): return int(sys.stdin.readline())
+def LS():return list(map(list, sys.stdin.readline().split()))
+def S(): return list(sys.stdin.readline())[:-1]
+def IR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = I()
+    return l
+def LIR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = LI()
+    return l
+def SR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = S()
+    return l
+def LSR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = SR()
+    return l
+mod = 1000000007
+
+#A
+def A():
+    return
+
+#B
+def B():
+    return
+
+#C
+def C():
+    s = input()
+    k = I()
+    l = []
+    n = len(s)
+    alp = list("abcdefghijklmnopqrstuvwxyz")
+    for i in alp:
+        for j in range(n):
+            if s[j] == i:
+                l.append(s[j])
+                for m in range(j+1,min(j+k,n)):
+                    l.append(s[j:m+1])
+        l = sorted(list(set(l)))
+        if len(l) >= k:break
+    print(l[k-1])
+#D
+def D():
+    def root(x):
+        if par[x] == x:
+            return x
+        par[x] = root(par[x])
+        return par[x]
+
+    def same(x,y):
+        return root(x) == root(y)
+
+    def unite(x,y):
+        x = root(x)
+        y = root(y)
+        if rank[x] < rank[y]:
+            par[x] = y
+        else:
+            par[y] = x
+            if rank[x] == rank[y]:
+                rank[x] += 1
+
+    n,m = LI()
+    p = LI()
+    for i in range(n):
+        p[i] -= 1
+    par = [i for i in range(n)]
+    rank = [0 for i in range(n)]
+    for i in range(m):
+        x,y = LI()
+        if not same(x-1,y-1):
+            unite(x-1,y-1)
+    for i in range(n):
+        root(i)
+    g = [[] for i in range(max(par)+1)]
+    for i in range(n):
+        g[par[i]].append(i)
+        g[par[i]].append(p[i])
+    ans = 0
+    for i in g:
+        i.sort()
+        d = defaultdict(int)
+        for j in i:
+            d[j] += 1
+            if d[j] == 2:
+                ans += 1
+    print(ans)
+#E
+def E():
+    return
+
+#F
+def F():
+    return
+
+#G
+def G():
+    return
+
+#H
+def H():
+    return
+
+#Solve
+if __name__ == "__main__":
+    D()
