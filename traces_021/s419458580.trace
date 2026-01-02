@@ -1,0 +1,319 @@
+ --- modulename: s419458580, funcname: <module>
+s419458580.py(1): import sys
+s419458580.py(2): sys.setrecursionlimit(10**8)
+s419458580.py(3): input = sys.stdin.readline
+s419458580.py(4): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s419458580.py(5): C = list(map(int,input().split()))
+s419458580.py(6): AB = [tuple(map(int,input().split())) for i in range(N-1)]
+ --- modulename: s419458580, funcname: <listcomp>
+s419458580.py(6): AB = [tuple(map(int,input().split())) for i in range(N-1)]
+s419458580.py(6): AB = [tuple(map(int,input().split())) for i in range(N-1)]
+s419458580.py(6): AB = [tuple(map(int,input().split())) for i in range(N-1)]
+s419458580.py(8): es = [[] for _ in range(N)]
+ --- modulename: s419458580, funcname: <listcomp>
+s419458580.py(8): es = [[] for _ in range(N)]
+s419458580.py(8): es = [[] for _ in range(N)]
+s419458580.py(8): es = [[] for _ in range(N)]
+s419458580.py(8): es = [[] for _ in range(N)]
+s419458580.py(9): for a,b in AB:
+s419458580.py(10):     a,b = a-1,b-1
+s419458580.py(11):     es[a].append(b)
+s419458580.py(12):     es[b].append(a)
+s419458580.py(9): for a,b in AB:
+s419458580.py(10):     a,b = a-1,b-1
+s419458580.py(11):     es[a].append(b)
+s419458580.py(12):     es[b].append(a)
+s419458580.py(9): for a,b in AB:
+s419458580.py(13): cs = [[] for _ in range(N)]
+ --- modulename: s419458580, funcname: <listcomp>
+s419458580.py(13): cs = [[] for _ in range(N)]
+s419458580.py(13): cs = [[] for _ in range(N)]
+s419458580.py(13): cs = [[] for _ in range(N)]
+s419458580.py(13): cs = [[] for _ in range(N)]
+s419458580.py(14): for i,c in enumerate(C):
+s419458580.py(15):     cs[c-1].append(i)
+s419458580.py(14): for i,c in enumerate(C):
+s419458580.py(15):     cs[c-1].append(i)
+s419458580.py(14): for i,c in enumerate(C):
+s419458580.py(15):     cs[c-1].append(i)
+s419458580.py(14): for i,c in enumerate(C):
+s419458580.py(17): tin = [-1]*N
+s419458580.py(18): tout = [-1]*N
+s419458580.py(19): k = 0
+s419458580.py(20): def dfs(v,p=-1):
+s419458580.py(28): dfs(0)
+ --- modulename: s419458580, funcname: dfs
+s419458580.py(22):     tin[v] = k
+s419458580.py(23):     k += 1
+s419458580.py(24):     for to in es[v]:
+s419458580.py(25):         if to==p: continue
+s419458580.py(26):         dfs(to,v)
+ --- modulename: s419458580, funcname: dfs
+s419458580.py(22):     tin[v] = k
+s419458580.py(23):     k += 1
+s419458580.py(24):     for to in es[v]:
+s419458580.py(25):         if to==p: continue
+s419458580.py(24):     for to in es[v]:
+s419458580.py(25):         if to==p: continue
+s419458580.py(26):         dfs(to,v)
+ --- modulename: s419458580, funcname: dfs
+s419458580.py(22):     tin[v] = k
+s419458580.py(23):     k += 1
+s419458580.py(24):     for to in es[v]:
+s419458580.py(25):         if to==p: continue
+s419458580.py(24):     for to in es[v]:
+s419458580.py(27):     tout[v] = k
+s419458580.py(24):     for to in es[v]:
+s419458580.py(27):     tout[v] = k
+s419458580.py(24):     for to in es[v]:
+s419458580.py(27):     tout[v] = k
+s419458580.py(30): class BinaryIndexedTree:
+ --- modulename: s419458580, funcname: BinaryIndexedTree
+s419458580.py(30): class BinaryIndexedTree:
+s419458580.py(31):     def __init__(self,size):
+s419458580.py(34):     def add(self,x,w): # 0-indexed
+s419458580.py(39):     def _sum(self,x): # 1-indexed
+s419458580.py(45):     def sum(self,l,r): # [l,r)
+s419458580.py(47):     def __str__(self): # for debug
+s419458580.py(50): bit = BinaryIndexedTree(N)
+ --- modulename: s419458580, funcname: __init__
+s419458580.py(32):         self.N = size
+s419458580.py(33):         self.bit = [0]*(size+1)
+s419458580.py(51): for i in range(N):
+s419458580.py(52):     bit.add(i,1)
+ --- modulename: s419458580, funcname: add
+s419458580.py(35):         x += 1
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(51): for i in range(N):
+s419458580.py(52):     bit.add(i,1)
+ --- modulename: s419458580, funcname: add
+s419458580.py(35):         x += 1
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(51): for i in range(N):
+s419458580.py(52):     bit.add(i,1)
+ --- modulename: s419458580, funcname: add
+s419458580.py(35):         x += 1
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(51): for i in range(N):
+s419458580.py(54): whole = N*(N+1)//2
+s419458580.py(55): anss = []
+s419458580.py(56): for i in range(N):
+s419458580.py(57):     ans = whole
+s419458580.py(58):     cs[i].sort(key=lambda x: -tin[x])
+ --- modulename: s419458580, funcname: <lambda>
+s419458580.py(58):     cs[i].sort(key=lambda x: -tin[x])
+ --- modulename: s419458580, funcname: <lambda>
+s419458580.py(58):     cs[i].sort(key=lambda x: -tin[x])
+s419458580.py(59):     history = []
+s419458580.py(60):     for v in cs[i]:
+s419458580.py(61):         cnt = 1
+s419458580.py(62):         for to in es[v]:
+s419458580.py(63):             if tin[to] < tin[v]: continue
+s419458580.py(62):         for to in es[v]:
+s419458580.py(67):         bit.add(tin[v], -cnt)
+ --- modulename: s419458580, funcname: add
+s419458580.py(35):         x += 1
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(68):         history.append((tin[v], cnt))
+s419458580.py(60):     for v in cs[i]:
+s419458580.py(61):         cnt = 1
+s419458580.py(62):         for to in es[v]:
+s419458580.py(63):             if tin[to] < tin[v]: continue
+s419458580.py(64):             num = bit.sum(tin[to], tout[to])
+ --- modulename: s419458580, funcname: sum
+s419458580.py(46):         return self._sum(r) - self._sum(l)
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+s419458580.py(65):             ans -= num*(num+1)//2
+s419458580.py(66):             cnt += num
+s419458580.py(62):         for to in es[v]:
+s419458580.py(67):         bit.add(tin[v], -cnt)
+ --- modulename: s419458580, funcname: add
+s419458580.py(35):         x += 1
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(68):         history.append((tin[v], cnt))
+s419458580.py(60):     for v in cs[i]:
+s419458580.py(69):     pn = bit.sum(0,N)
+ --- modulename: s419458580, funcname: sum
+s419458580.py(46):         return self._sum(r) - self._sum(l)
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+s419458580.py(70):     ans -= pn*(pn+1)//2
+s419458580.py(71):     for a,b in history:
+s419458580.py(72):         bit.add(a,b)
+ --- modulename: s419458580, funcname: add
+s419458580.py(35):         x += 1
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(71):     for a,b in history:
+s419458580.py(72):         bit.add(a,b)
+ --- modulename: s419458580, funcname: add
+s419458580.py(35):         x += 1
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(71):     for a,b in history:
+s419458580.py(73):     anss.append(ans)
+s419458580.py(56): for i in range(N):
+s419458580.py(57):     ans = whole
+s419458580.py(58):     cs[i].sort(key=lambda x: -tin[x])
+ --- modulename: s419458580, funcname: <lambda>
+s419458580.py(58):     cs[i].sort(key=lambda x: -tin[x])
+s419458580.py(59):     history = []
+s419458580.py(60):     for v in cs[i]:
+s419458580.py(61):         cnt = 1
+s419458580.py(62):         for to in es[v]:
+s419458580.py(63):             if tin[to] < tin[v]: continue
+s419458580.py(62):         for to in es[v]:
+s419458580.py(63):             if tin[to] < tin[v]: continue
+s419458580.py(64):             num = bit.sum(tin[to], tout[to])
+ --- modulename: s419458580, funcname: sum
+s419458580.py(46):         return self._sum(r) - self._sum(l)
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+s419458580.py(65):             ans -= num*(num+1)//2
+s419458580.py(66):             cnt += num
+s419458580.py(62):         for to in es[v]:
+s419458580.py(67):         bit.add(tin[v], -cnt)
+ --- modulename: s419458580, funcname: add
+s419458580.py(35):         x += 1
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(68):         history.append((tin[v], cnt))
+s419458580.py(60):     for v in cs[i]:
+s419458580.py(69):     pn = bit.sum(0,N)
+ --- modulename: s419458580, funcname: sum
+s419458580.py(46):         return self._sum(r) - self._sum(l)
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+s419458580.py(70):     ans -= pn*(pn+1)//2
+s419458580.py(71):     for a,b in history:
+s419458580.py(72):         bit.add(a,b)
+ --- modulename: s419458580, funcname: add
+s419458580.py(35):         x += 1
+s419458580.py(36):         while x <= self.N:
+s419458580.py(37):             self.bit[x] += w
+s419458580.py(38):             x += (x & -x)
+s419458580.py(36):         while x <= self.N:
+s419458580.py(71):     for a,b in history:
+s419458580.py(73):     anss.append(ans)
+s419458580.py(56): for i in range(N):
+s419458580.py(57):     ans = whole
+s419458580.py(58):     cs[i].sort(key=lambda x: -tin[x])
+s419458580.py(59):     history = []
+s419458580.py(60):     for v in cs[i]:
+s419458580.py(69):     pn = bit.sum(0,N)
+ --- modulename: s419458580, funcname: sum
+s419458580.py(46):         return self._sum(r) - self._sum(l)
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(42):             ret += self.bit[x]
+s419458580.py(43):             x -= (x & -x)
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+ --- modulename: s419458580, funcname: _sum
+s419458580.py(40):         ret = 0
+s419458580.py(41):         while x > 0:
+s419458580.py(44):         return ret
+s419458580.py(70):     ans -= pn*(pn+1)//2
+s419458580.py(71):     for a,b in history:
+s419458580.py(73):     anss.append(ans)
+s419458580.py(56): for i in range(N):
+s419458580.py(74): print(*anss, sep='\n')
+5
+4
+0
