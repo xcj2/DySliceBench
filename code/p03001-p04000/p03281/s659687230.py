@@ -1,0 +1,38 @@
+def factorization(n):
+    def factor_sub(n, m):
+        c = 0
+        while n % m == 0:
+            c += 1
+            n /= m
+        return c, n
+    #
+    buff = []
+    c, m = factor_sub(n, 2)
+    if c > 0: buff.append((2, c))
+    c, m = factor_sub(m, 3)
+    if c > 0: buff.append((3, c))
+    x = 5
+    while m >= x * x:
+        c, m = factor_sub(m, x)
+        if c > 0: buff.append((x, c))
+        if x % 6 == 5:
+            x += 2
+        else:
+            x += 4
+    if m > 1: buff.append((m, 1))
+    return buff
+
+def divisor_num(n):
+    a = 1
+    for _, x in factorization(n):
+        a *= x + 1
+    return a
+
+n = int(input())
+
+cnt = 0
+for x in range(n + 1):
+    if x % 2 == 1:
+        if divisor_num(x) == 8:
+            cnt += 1
+print(cnt)
