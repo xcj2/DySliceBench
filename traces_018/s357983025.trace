@@ -1,0 +1,202 @@
+ --- modulename: s357983025, funcname: <module>
+s357983025.py(1): import sys
+s357983025.py(2): sys.setrecursionlimit(10 ** 7)
+s357983025.py(3): class Tree:
+ --- modulename: s357983025, funcname: Tree
+s357983025.py(3): class Tree:
+s357983025.py(4):   C, RL = {}, {}
+s357983025.py(5):   R, N, D, S, P, T = None, None, None, None, None, None
+s357983025.py(6):   TL = None
+s357983025.py(7):   def __init__(s, num):
+s357983025.py(9):   def set(s, a, b):
+s357983025.py(14):   def makeRank(s, root):
+s357983025.py(32):   def bottomUpDP(s):
+s357983025.py(39):   def topDownDP(s):
+s357983025.py(44):   def allDP(s):
+s357983025.py(49):   def dp_init(s): #単位元で初期化
+s357983025.py(52):   def dp_sub_exe(s, x, y): #ボトムアップの処理
+s357983025.py(55):   def dp_sub_exe_inv(s, x, y): #トップダウンの処理
+s357983025.py(62):   def inv(s, a, mod): #逆元
+s357983025.py(65): class comb():
+ --- modulename: s357983025, funcname: comb
+s357983025.py(65): class comb():
+s357983025.py(66):   F = [1, 1]
+s357983025.py(67):   Fi = [1, 1]
+s357983025.py(68):   I = [0, 1]
+s357983025.py(69):   def __init__(self, num, mod):
+s357983025.py(75):   def com(self, n, k):
+s357983025.py(80): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s357983025.py(81): ab = [list(map(int, input().split())) for _ in range(N - 1)]
+ --- modulename: s357983025, funcname: <listcomp>
+s357983025.py(81): ab = [list(map(int, input().split())) for _ in range(N - 1)]
+s357983025.py(81): ab = [list(map(int, input().split())) for _ in range(N - 1)]
+s357983025.py(81): ab = [list(map(int, input().split())) for _ in range(N - 1)]
+s357983025.py(83): MOD = 10 ** 9 + 7
+s357983025.py(84): com = comb(N, MOD)
+ --- modulename: s357983025, funcname: __init__
+s357983025.py(70):     self.MOD = mod
+s357983025.py(71):     for i in range(2, num + 1):
+s357983025.py(72):       self.F.append((self.F[-1] * i) % mod)
+s357983025.py(73):       self.I.append(mod - self.I[mod % i] * (mod // i) % mod)
+s357983025.py(74):       self.Fi.append(self.Fi[-1] * self.I[i] % mod)
+s357983025.py(71):     for i in range(2, num + 1):
+s357983025.py(72):       self.F.append((self.F[-1] * i) % mod)
+s357983025.py(73):       self.I.append(mod - self.I[mod % i] * (mod // i) % mod)
+s357983025.py(74):       self.Fi.append(self.Fi[-1] * self.I[i] % mod)
+s357983025.py(71):     for i in range(2, num + 1):
+s357983025.py(86): T = Tree(N)
+ --- modulename: s357983025, funcname: __init__
+s357983025.py(8):     s.N = num
+s357983025.py(87): for a, b in ab:
+s357983025.py(88):   a -= 1
+s357983025.py(89):   b -= 1
+s357983025.py(90):   T.set(a, b)
+ --- modulename: s357983025, funcname: set
+s357983025.py(10):     if a in s.C: s.C[a].append(b)
+s357983025.py(11):     else: s.C[a] = [b]
+s357983025.py(12):     if b in s.C: s.C[b].append(a)
+s357983025.py(13):     else: s.C[b] = [a]
+s357983025.py(87): for a, b in ab:
+s357983025.py(88):   a -= 1
+s357983025.py(89):   b -= 1
+s357983025.py(90):   T.set(a, b)
+ --- modulename: s357983025, funcname: set
+s357983025.py(10):     if a in s.C: s.C[a].append(b)
+s357983025.py(12):     if b in s.C: s.C[b].append(a)
+s357983025.py(13):     else: s.C[b] = [a]
+s357983025.py(87): for a, b in ab:
+s357983025.py(92): T.makeRank(0)
+ --- modulename: s357983025, funcname: makeRank
+s357983025.py(15):     s.R = [0] * s.N #各ノードのランク
+s357983025.py(16):     s.R[root] = 1
+s357983025.py(17):     s.RL[1] = [root] #各ランクのノード
+s357983025.py(18):     s.S = {} #各ノードの子ノード
+s357983025.py(19):     s.P = [-1] * s.N #各ノードの親ノード
+s357983025.py(20):     s.D = 1
+s357983025.py(21):     while s.RL[s.D] != []:
+s357983025.py(22):       s.D += 1
+s357983025.py(23):       s.RL[s.D] = []
+s357983025.py(24):       for i in s.RL[s.D - 1]:
+s357983025.py(25):         for j in s.C[i]:
+s357983025.py(26):           if s.R[j] == 0:
+s357983025.py(27):             s.R[j] = s.D
+s357983025.py(28):             s.RL[s.D].append(j)
+s357983025.py(29):             if i not in s.S: s.S[i] = [j]
+s357983025.py(31):             s.P[j] = i      
+s357983025.py(25):         for j in s.C[i]:
+s357983025.py(26):           if s.R[j] == 0:
+s357983025.py(27):             s.R[j] = s.D
+s357983025.py(28):             s.RL[s.D].append(j)
+s357983025.py(29):             if i not in s.S: s.S[i] = [j]
+s357983025.py(30):             else: s.S[i].append(j)
+s357983025.py(31):             s.P[j] = i      
+s357983025.py(25):         for j in s.C[i]:
+s357983025.py(24):       for i in s.RL[s.D - 1]:
+s357983025.py(21):     while s.RL[s.D] != []:
+s357983025.py(22):       s.D += 1
+s357983025.py(23):       s.RL[s.D] = []
+s357983025.py(24):       for i in s.RL[s.D - 1]:
+s357983025.py(25):         for j in s.C[i]:
+s357983025.py(26):           if s.R[j] == 0:
+s357983025.py(25):         for j in s.C[i]:
+s357983025.py(24):       for i in s.RL[s.D - 1]:
+s357983025.py(25):         for j in s.C[i]:
+s357983025.py(26):           if s.R[j] == 0:
+s357983025.py(25):         for j in s.C[i]:
+s357983025.py(24):       for i in s.RL[s.D - 1]:
+s357983025.py(21):     while s.RL[s.D] != []:
+s357983025.py(93): DP = T.allDP()
+ --- modulename: s357983025, funcname: allDP
+s357983025.py(45):     s.dp_init()
+ --- modulename: s357983025, funcname: dp_init
+s357983025.py(50):     s.DP = [1] * N
+s357983025.py(51):     s.sDP = [1] * N
+s357983025.py(46):     s.bottomUpDP()
+ --- modulename: s357983025, funcname: bottomUpDP
+s357983025.py(33):     for i in range(s.D - 2, 0, -1):
+s357983025.py(34):       T = s.RL[i]
+s357983025.py(35):       for j in T:
+s357983025.py(36):         if j not in s.S: continue
+s357983025.py(37):         for k in s.S[j]:
+s357983025.py(38):           s.dp_sub_exe(j, k)
+ --- modulename: s357983025, funcname: dp_sub_exe
+s357983025.py(53):     s.sDP[x] += s.sDP[y]
+s357983025.py(54):     s.DP[x] = s.DP[x] * s.DP[y] * com.com(s.sDP[x] - 1, s.sDP[y]) % MOD
+ --- modulename: s357983025, funcname: com
+s357983025.py(76):     if n < k: return 0
+s357983025.py(77):     if n < 0 or k < 0: return 0
+s357983025.py(78):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s357983025.py(37):         for k in s.S[j]:
+s357983025.py(38):           s.dp_sub_exe(j, k)
+ --- modulename: s357983025, funcname: dp_sub_exe
+s357983025.py(53):     s.sDP[x] += s.sDP[y]
+s357983025.py(54):     s.DP[x] = s.DP[x] * s.DP[y] * com.com(s.sDP[x] - 1, s.sDP[y]) % MOD
+ --- modulename: s357983025, funcname: com
+s357983025.py(76):     if n < k: return 0
+s357983025.py(77):     if n < 0 or k < 0: return 0
+s357983025.py(78):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s357983025.py(37):         for k in s.S[j]:
+s357983025.py(35):       for j in T:
+s357983025.py(33):     for i in range(s.D - 2, 0, -1):
+s357983025.py(47):     s.topDownDP()
+ --- modulename: s357983025, funcname: topDownDP
+s357983025.py(40):     for i in range(2, s.D):
+s357983025.py(41):       T = s.RL[i]
+s357983025.py(42):       for j in T:
+s357983025.py(43):         s.dp_sub_exe_inv(j, s.P[j])
+ --- modulename: s357983025, funcname: dp_sub_exe_inv
+s357983025.py(56):     t = com.com(s.sDP[y] - 1, s.sDP[x]) * s.DP[x] % MOD
+ --- modulename: s357983025, funcname: com
+s357983025.py(76):     if n < k: return 0
+s357983025.py(77):     if n < 0 or k < 0: return 0
+s357983025.py(78):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s357983025.py(57):     t = s.DP[y] * s.inv(t, MOD)
+ --- modulename: s357983025, funcname: inv
+s357983025.py(63):     return pow(a, mod - 2, mod)
+s357983025.py(58):     k = s.sDP[y] - s.sDP[x]
+s357983025.py(59):     k = com.com(s.sDP[y] - 1, k) % MOD
+ --- modulename: s357983025, funcname: com
+s357983025.py(76):     if n < k: return 0
+s357983025.py(77):     if n < 0 or k < 0: return 0
+s357983025.py(78):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s357983025.py(60):     s.sDP[x] = s.sDP[y]
+s357983025.py(61):     s.DP[x] = s.DP[x] * t * k % MOD
+s357983025.py(42):       for j in T:
+s357983025.py(43):         s.dp_sub_exe_inv(j, s.P[j])
+ --- modulename: s357983025, funcname: dp_sub_exe_inv
+s357983025.py(56):     t = com.com(s.sDP[y] - 1, s.sDP[x]) * s.DP[x] % MOD
+ --- modulename: s357983025, funcname: com
+s357983025.py(76):     if n < k: return 0
+s357983025.py(77):     if n < 0 or k < 0: return 0
+s357983025.py(78):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s357983025.py(57):     t = s.DP[y] * s.inv(t, MOD)
+ --- modulename: s357983025, funcname: inv
+s357983025.py(63):     return pow(a, mod - 2, mod)
+s357983025.py(58):     k = s.sDP[y] - s.sDP[x]
+s357983025.py(59):     k = com.com(s.sDP[y] - 1, k) % MOD
+ --- modulename: s357983025, funcname: com
+s357983025.py(76):     if n < k: return 0
+s357983025.py(77):     if n < 0 or k < 0: return 0
+s357983025.py(78):     return self.F[n] * (self.Fi[k] * self.Fi[n - k] % self.MOD) % self.MOD
+s357983025.py(60):     s.sDP[x] = s.sDP[y]
+s357983025.py(61):     s.DP[x] = s.DP[x] * t * k % MOD
+s357983025.py(42):       for j in T:
+s357983025.py(40):     for i in range(2, s.D):
+s357983025.py(48):     return s.DP
+s357983025.py(95): for i in DP:
+s357983025.py(96):   print(i)
+2
+s357983025.py(95): for i in DP:
+s357983025.py(96):   print(i)
+1
+s357983025.py(95): for i in DP:
+s357983025.py(96):   print(i)
+1
+s357983025.py(95): for i in DP:
