@@ -1,0 +1,651 @@
+ --- modulename: s383248733, funcname: <module>
+s383248733.py(1): mod = 998244353
+s383248733.py(2): eps = 10**-9
+s383248733.py(5): def main():
+s383248733.py(125): if __name__ == '__main__':
+s383248733.py(126):     main()
+ --- modulename: s383248733, funcname: main
+s383248733.py(6):     import sys
+s383248733.py(7):     input = sys.stdin.buffer.readline
+s383248733.py(9):     def op(a, b):
+s383248733.py(12):     e = 0
+s383248733.py(14):     mask = 2**32 - 1
+s383248733.py(15):     def mapping(a, x, seg_len):
+s383248733.py(20):     def composition(x, y):
+s383248733.py(27):     id = 1 << 32
+s383248733.py(29):     class LazySegTree:
+ --- modulename: s383248733, funcname: LazySegTree
+s383248733.py(29):     class LazySegTree:
+s383248733.py(31):         def __init__(self, A, op=op, e=e, mapping=mapping, composition=composition, id=id, initialize=True):
+s383248733.py(48):         def _ascend(self, i):
+s383248733.py(53):         def _descend(self, idx):
+s383248733.py(67):         def apply(self, l, r, x):
+s383248733.py(91):         def query(self, l, r):
+s383248733.py(108):     N, Q = map(int, input().split())
+s383248733.py(109):     A = list(map(int, input().split()))
+s383248733.py(110):     ST = LazySegTree(A)
+ --- modulename: s383248733, funcname: __init__
+s383248733.py(32):             self.N = len(A)
+s383248733.py(33):             self.LV = (self.N - 1).bit_length()
+s383248733.py(34):             self.N0 = 1 << self.LV
+s383248733.py(35):             self.op = op
+s383248733.py(36):             self.e = e
+s383248733.py(37):             self.mapping = mapping
+s383248733.py(38):             self.composition = composition
+s383248733.py(39):             self.id = id
+s383248733.py(40):             if initialize:
+s383248733.py(41):                 self.data = [self.e] * self.N0 + A + [self.e] * (self.N0 - self.N)
+s383248733.py(42):                 for i in range(self.N0 - 1, 0, -1):
+s383248733.py(43):                     self.data[i] = op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(42):                 for i in range(self.N0 - 1, 0, -1):
+s383248733.py(43):                     self.data[i] = op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(42):                 for i in range(self.N0 - 1, 0, -1):
+s383248733.py(43):                     self.data[i] = op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(42):                 for i in range(self.N0 - 1, 0, -1):
+s383248733.py(43):                     self.data[i] = op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(42):                 for i in range(self.N0 - 1, 0, -1):
+s383248733.py(43):                     self.data[i] = op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(42):                 for i in range(self.N0 - 1, 0, -1):
+s383248733.py(43):                     self.data[i] = op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(42):                 for i in range(self.N0 - 1, 0, -1):
+s383248733.py(43):                     self.data[i] = op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(42):                 for i in range(self.N0 - 1, 0, -1):
+s383248733.py(46):             self.lazy = [id] * (self.N0 * 2)
+s383248733.py(111):     for _ in range(Q):
+s383248733.py(112):         q = list(map(int, input().split()))
+s383248733.py(113):         if q[0] == 0:
+s383248733.py(119):             l, r = q[1:]
+s383248733.py(120):             l += 1
+s383248733.py(121):             r += 1
+s383248733.py(122):             print(ST.query(l, r))
+ --- modulename: s383248733, funcname: query
+s383248733.py(92):             l += self.N0 - 1
+s383248733.py(93):             r += self.N0 - 1
+s383248733.py(94):             self._descend(l // (l & -l))
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(95):             self._descend(r // (r & -r) - 1)
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(96):             ret = self.e
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(101):                 if r & 1:
+s383248733.py(102):                     ret = self.op(self.data[r - 1], ret)
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(103):                     r -= 1
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(101):                 if r & 1:
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(101):                 if r & 1:
+s383248733.py(102):                     ret = self.op(self.data[r - 1], ret)
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(103):                     r -= 1
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(106):             return ret
+15
+s383248733.py(111):     for _ in range(Q):
+s383248733.py(112):         q = list(map(int, input().split()))
+s383248733.py(113):         if q[0] == 0:
+s383248733.py(114):             l, r, b, c = q[1:]
+s383248733.py(115):             l += 1
+s383248733.py(116):             r += 1
+s383248733.py(117):             ST.apply(l, r, (b << 32) + c)
+ --- modulename: s383248733, funcname: apply
+s383248733.py(68):             l += self.N0 - 1
+s383248733.py(69):             r += self.N0 - 1
+s383248733.py(70):             self._descend(l // (l & -l))
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(71):             self._descend(r // (r & -r) - 1)
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(72):             l_ori = l
+s383248733.py(73):             r_ori = r
+s383248733.py(74):             seg_len = 1
+s383248733.py(75):             while l < r:
+s383248733.py(76):                 if l & 1:
+s383248733.py(80):                 if r & 1:
+s383248733.py(84):                 l >>= 1
+s383248733.py(85):                 r >>= 1
+s383248733.py(86):                 seg_len <<= 1
+s383248733.py(75):             while l < r:
+s383248733.py(76):                 if l & 1:
+s383248733.py(77):                     self.data[l] = self.mapping(self.data[l], x, seg_len)
+ --- modulename: s383248733, funcname: mapping
+s383248733.py(16):         b = x >> 32
+s383248733.py(17):         c = x & mask
+s383248733.py(18):         return ((a * b)%mod + (c * seg_len)%mod)%mod
+s383248733.py(78):                     self.lazy[l] = self.composition(self.lazy[l], x)
+ --- modulename: s383248733, funcname: composition
+s383248733.py(21):         b1 = x >> 32
+s383248733.py(22):         c1 = x & mask
+s383248733.py(23):         b2 = y >> 32
+s383248733.py(24):         c2 = y & mask
+s383248733.py(25):         return (((b1 * b2)%mod) << 32) + ((b2 * c1)%mod + c2)%mod
+s383248733.py(79):                     l += 1
+s383248733.py(80):                 if r & 1:
+s383248733.py(84):                 l >>= 1
+s383248733.py(85):                 r >>= 1
+s383248733.py(86):                 seg_len <<= 1
+s383248733.py(75):             while l < r:
+s383248733.py(87):             self._ascend(l_ori // (l_ori & -l_ori))
+ --- modulename: s383248733, funcname: _ascend
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(88):             self._ascend(r_ori // (r_ori & -r_ori) - 1)
+ --- modulename: s383248733, funcname: _ascend
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(111):     for _ in range(Q):
+s383248733.py(112):         q = list(map(int, input().split()))
+s383248733.py(113):         if q[0] == 0:
+s383248733.py(119):             l, r = q[1:]
+s383248733.py(120):             l += 1
+s383248733.py(121):             r += 1
+s383248733.py(122):             print(ST.query(l, r))
+ --- modulename: s383248733, funcname: query
+s383248733.py(92):             l += self.N0 - 1
+s383248733.py(93):             r += self.N0 - 1
+s383248733.py(94):             self._descend(l // (l & -l))
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(95):             self._descend(r // (r & -r) - 1)
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(60):                 self.lazy[i * 2] = self.composition(self.lazy[i * 2], x)
+ --- modulename: s383248733, funcname: composition
+s383248733.py(21):         b1 = x >> 32
+s383248733.py(22):         c1 = x & mask
+s383248733.py(23):         b2 = y >> 32
+s383248733.py(24):         c2 = y & mask
+s383248733.py(25):         return (((b1 * b2)%mod) << 32) + ((b2 * c1)%mod + c2)%mod
+s383248733.py(61):                 self.lazy[i * 2 + 1] = self.composition(self.lazy[i * 2 + 1], x)
+ --- modulename: s383248733, funcname: composition
+s383248733.py(21):         b1 = x >> 32
+s383248733.py(22):         c1 = x & mask
+s383248733.py(23):         b2 = y >> 32
+s383248733.py(24):         c2 = y & mask
+s383248733.py(25):         return (((b1 * b2)%mod) << 32) + ((b2 * c1)%mod + c2)%mod
+s383248733.py(62):                 self.lazy[i] = self.id
+s383248733.py(63):                 self.data[i * 2] = self.mapping(self.data[i * 2], x, 1 << (self.LV + j - lv))
+ --- modulename: s383248733, funcname: mapping
+s383248733.py(16):         b = x >> 32
+s383248733.py(17):         c = x & mask
+s383248733.py(18):         return ((a * b)%mod + (c * seg_len)%mod)%mod
+s383248733.py(64):                 self.data[i * 2 + 1] = self.mapping(self.data[i * 2 + 1], x, 1 << (self.LV + j - lv))
+ --- modulename: s383248733, funcname: mapping
+s383248733.py(16):         b = x >> 32
+s383248733.py(17):         c = x & mask
+s383248733.py(18):         return ((a * b)%mod + (c * seg_len)%mod)%mod
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(96):             ret = self.e
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(101):                 if r & 1:
+s383248733.py(102):                     ret = self.op(self.data[r - 1], ret)
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(103):                     r -= 1
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(101):                 if r & 1:
+s383248733.py(102):                     ret = self.op(self.data[r - 1], ret)
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(103):                     r -= 1
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(106):             return ret
+404
+s383248733.py(111):     for _ in range(Q):
+s383248733.py(112):         q = list(map(int, input().split()))
+s383248733.py(113):         if q[0] == 0:
+s383248733.py(114):             l, r, b, c = q[1:]
+s383248733.py(115):             l += 1
+s383248733.py(116):             r += 1
+s383248733.py(117):             ST.apply(l, r, (b << 32) + c)
+ --- modulename: s383248733, funcname: apply
+s383248733.py(68):             l += self.N0 - 1
+s383248733.py(69):             r += self.N0 - 1
+s383248733.py(70):             self._descend(l // (l & -l))
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(71):             self._descend(r // (r & -r) - 1)
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(72):             l_ori = l
+s383248733.py(73):             r_ori = r
+s383248733.py(74):             seg_len = 1
+s383248733.py(75):             while l < r:
+s383248733.py(76):                 if l & 1:
+s383248733.py(77):                     self.data[l] = self.mapping(self.data[l], x, seg_len)
+ --- modulename: s383248733, funcname: mapping
+s383248733.py(16):         b = x >> 32
+s383248733.py(17):         c = x & mask
+s383248733.py(18):         return ((a * b)%mod + (c * seg_len)%mod)%mod
+s383248733.py(78):                     self.lazy[l] = self.composition(self.lazy[l], x)
+ --- modulename: s383248733, funcname: composition
+s383248733.py(21):         b1 = x >> 32
+s383248733.py(22):         c1 = x & mask
+s383248733.py(23):         b2 = y >> 32
+s383248733.py(24):         c2 = y & mask
+s383248733.py(25):         return (((b1 * b2)%mod) << 32) + ((b2 * c1)%mod + c2)%mod
+s383248733.py(79):                     l += 1
+s383248733.py(80):                 if r & 1:
+s383248733.py(81):                     r -= 1
+s383248733.py(82):                     self.data[r] = self.mapping(self.data[r], x, seg_len)
+ --- modulename: s383248733, funcname: mapping
+s383248733.py(16):         b = x >> 32
+s383248733.py(17):         c = x & mask
+s383248733.py(18):         return ((a * b)%mod + (c * seg_len)%mod)%mod
+s383248733.py(83):                     self.lazy[r] = self.composition(self.lazy[r], x)
+ --- modulename: s383248733, funcname: composition
+s383248733.py(21):         b1 = x >> 32
+s383248733.py(22):         c1 = x & mask
+s383248733.py(23):         b2 = y >> 32
+s383248733.py(24):         c2 = y & mask
+s383248733.py(25):         return (((b1 * b2)%mod) << 32) + ((b2 * c1)%mod + c2)%mod
+s383248733.py(84):                 l >>= 1
+s383248733.py(85):                 r >>= 1
+s383248733.py(86):                 seg_len <<= 1
+s383248733.py(75):             while l < r:
+s383248733.py(87):             self._ascend(l_ori // (l_ori & -l_ori))
+ --- modulename: s383248733, funcname: _ascend
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(88):             self._ascend(r_ori // (r_ori & -r_ori) - 1)
+ --- modulename: s383248733, funcname: _ascend
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(111):     for _ in range(Q):
+s383248733.py(112):         q = list(map(int, input().split()))
+s383248733.py(113):         if q[0] == 0:
+s383248733.py(119):             l, r = q[1:]
+s383248733.py(120):             l += 1
+s383248733.py(121):             r += 1
+s383248733.py(122):             print(ST.query(l, r))
+ --- modulename: s383248733, funcname: query
+s383248733.py(92):             l += self.N0 - 1
+s383248733.py(93):             r += self.N0 - 1
+s383248733.py(94):             self._descend(l // (l & -l))
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(95):             self._descend(r // (r & -r) - 1)
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(96):             ret = self.e
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(101):                 if r & 1:
+s383248733.py(102):                     ret = self.op(self.data[r - 1], ret)
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(103):                     r -= 1
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(99):                     ret = self.op(ret, self.data[l])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(100):                     l += 1
+s383248733.py(101):                 if r & 1:
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(106):             return ret
+41511
+s383248733.py(111):     for _ in range(Q):
+s383248733.py(112):         q = list(map(int, input().split()))
+s383248733.py(113):         if q[0] == 0:
+s383248733.py(114):             l, r, b, c = q[1:]
+s383248733.py(115):             l += 1
+s383248733.py(116):             r += 1
+s383248733.py(117):             ST.apply(l, r, (b << 32) + c)
+ --- modulename: s383248733, funcname: apply
+s383248733.py(68):             l += self.N0 - 1
+s383248733.py(69):             r += self.N0 - 1
+s383248733.py(70):             self._descend(l // (l & -l))
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(71):             self._descend(r // (r & -r) - 1)
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(72):             l_ori = l
+s383248733.py(73):             r_ori = r
+s383248733.py(74):             seg_len = 1
+s383248733.py(75):             while l < r:
+s383248733.py(76):                 if l & 1:
+s383248733.py(80):                 if r & 1:
+s383248733.py(81):                     r -= 1
+s383248733.py(82):                     self.data[r] = self.mapping(self.data[r], x, seg_len)
+ --- modulename: s383248733, funcname: mapping
+s383248733.py(16):         b = x >> 32
+s383248733.py(17):         c = x & mask
+s383248733.py(18):         return ((a * b)%mod + (c * seg_len)%mod)%mod
+s383248733.py(83):                     self.lazy[r] = self.composition(self.lazy[r], x)
+ --- modulename: s383248733, funcname: composition
+s383248733.py(21):         b1 = x >> 32
+s383248733.py(22):         c1 = x & mask
+s383248733.py(23):         b2 = y >> 32
+s383248733.py(24):         c2 = y & mask
+s383248733.py(25):         return (((b1 * b2)%mod) << 32) + ((b2 * c1)%mod + c2)%mod
+s383248733.py(84):                 l >>= 1
+s383248733.py(85):                 r >>= 1
+s383248733.py(86):                 seg_len <<= 1
+s383248733.py(75):             while l < r:
+s383248733.py(76):                 if l & 1:
+s383248733.py(77):                     self.data[l] = self.mapping(self.data[l], x, seg_len)
+ --- modulename: s383248733, funcname: mapping
+s383248733.py(16):         b = x >> 32
+s383248733.py(17):         c = x & mask
+s383248733.py(18):         return ((a * b)%mod + (c * seg_len)%mod)%mod
+s383248733.py(78):                     self.lazy[l] = self.composition(self.lazy[l], x)
+ --- modulename: s383248733, funcname: composition
+s383248733.py(21):         b1 = x >> 32
+s383248733.py(22):         c1 = x & mask
+s383248733.py(23):         b2 = y >> 32
+s383248733.py(24):         c2 = y & mask
+s383248733.py(25):         return (((b1 * b2)%mod) << 32) + ((b2 * c1)%mod + c2)%mod
+s383248733.py(79):                     l += 1
+s383248733.py(80):                 if r & 1:
+s383248733.py(84):                 l >>= 1
+s383248733.py(85):                 r >>= 1
+s383248733.py(86):                 seg_len <<= 1
+s383248733.py(75):             while l < r:
+s383248733.py(87):             self._ascend(l_ori // (l_ori & -l_ori))
+ --- modulename: s383248733, funcname: _ascend
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(88):             self._ascend(r_ori // (r_ori & -r_ori) - 1)
+ --- modulename: s383248733, funcname: _ascend
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(50):                 i >>= 1
+s383248733.py(51):                 self.data[i] = self.op(self.data[i * 2], self.data[i * 2 + 1])
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(49):             for _ in range(i.bit_length() - 1):
+s383248733.py(111):     for _ in range(Q):
+s383248733.py(112):         q = list(map(int, input().split()))
+s383248733.py(113):         if q[0] == 0:
+s383248733.py(119):             l, r = q[1:]
+s383248733.py(120):             l += 1
+s383248733.py(121):             r += 1
+s383248733.py(122):             print(ST.query(l, r))
+ --- modulename: s383248733, funcname: query
+s383248733.py(92):             l += self.N0 - 1
+s383248733.py(93):             r += self.N0 - 1
+s383248733.py(94):             self._descend(l // (l & -l))
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(95):             self._descend(r // (r & -r) - 1)
+ --- modulename: s383248733, funcname: _descend
+s383248733.py(54):             lv = idx.bit_length()
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(56):                 i = idx >> j
+s383248733.py(57):                 x = self.lazy[i]
+s383248733.py(58):                 if x == self.id:
+s383248733.py(59):                     continue
+s383248733.py(55):             for j in range(lv - 1, 0, -1):
+s383248733.py(96):             ret = self.e
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(101):                 if r & 1:
+s383248733.py(102):                     ret = self.op(self.data[r - 1], ret)
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(103):                     r -= 1
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(101):                 if r & 1:
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(98):                 if l & 1:
+s383248733.py(101):                 if r & 1:
+s383248733.py(102):                     ret = self.op(self.data[r - 1], ret)
+ --- modulename: s383248733, funcname: op
+s383248733.py(10):         return (a + b) % mod
+s383248733.py(103):                     r -= 1
+s383248733.py(104):                 l >>= 1
+s383248733.py(105):                 r >>= 1
+s383248733.py(97):             while l < r:
+s383248733.py(106):             return ret
+4317767
+s383248733.py(111):     for _ in range(Q):
