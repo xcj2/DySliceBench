@@ -1,0 +1,127 @@
+ --- modulename: s549927751, funcname: <module>
+s549927751.py(1): S = input()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s549927751.py(5): def scan_forward(F:list, S):
+s549927751.py(35): def scan_backward(B:list, S):
+s549927751.py(64): def count_pond(FB):
+s549927751.py(87): F = []
+s549927751.py(88): scan_forward(F, S)
+ --- modulename: s549927751, funcname: scan_forward
+s549927751.py(7):     depth = 0  # 深さ（開始点を基準）
+s549927751.py(8):     start = 0  # 「池」が始まった高さ
+s549927751.py(9):     is_pond = True  # 池が始まっているか？
+s549927751.py(11):     for s in S:
+s549927751.py(12):         if s == '\\':  # 下り
+s549927751.py(13):             if not is_pond:
+s549927751.py(16):             depth -= 1
+s549927751.py(17):             F.append(2*(start - depth) - 1)
+s549927751.py(18):             continue
+s549927751.py(11):     for s in S:
+s549927751.py(12):         if s == '\\':  # 下り
+s549927751.py(13):             if not is_pond:
+s549927751.py(16):             depth -= 1
+s549927751.py(17):             F.append(2*(start - depth) - 1)
+s549927751.py(18):             continue
+s549927751.py(11):     for s in S:
+s549927751.py(12):         if s == '\\':  # 下り
+s549927751.py(20):         if s == "/":  # 上り
+s549927751.py(21):             depth += 1
+s549927751.py(22):             if start < depth:  # 池の開始位置より高くなった場合
+s549927751.py(27):                 F.append(2*(start - depth) + 1)
+s549927751.py(29):         if s == "_":
+s549927751.py(11):     for s in S:
+s549927751.py(12):         if s == '\\':  # 下り
+s549927751.py(20):         if s == "/":  # 上り
+s549927751.py(21):             depth += 1
+s549927751.py(22):             if start < depth:  # 池の開始位置より高くなった場合
+s549927751.py(27):                 F.append(2*(start - depth) + 1)
+s549927751.py(29):         if s == "_":
+s549927751.py(11):     for s in S:
+s549927751.py(90): B = []
+s549927751.py(91): scan_backward(B, reversed(S))
+ --- modulename: s549927751, funcname: scan_backward
+s549927751.py(37):     depth = 0  # 深さ（開始点を基準）
+s549927751.py(38):     start = 0  # 「池」が始まった高さ
+s549927751.py(39):     is_pond = True  # 池が始まっているか？
+s549927751.py(41):     for s in S:
+s549927751.py(42):         if s == '/':  # 下り
+s549927751.py(43):             if not is_pond:
+s549927751.py(46):             depth -= 1
+s549927751.py(47):             B.append(2*(start - depth) - 1)
+s549927751.py(48):             continue
+s549927751.py(41):     for s in S:
+s549927751.py(42):         if s == '/':  # 下り
+s549927751.py(43):             if not is_pond:
+s549927751.py(46):             depth -= 1
+s549927751.py(47):             B.append(2*(start - depth) - 1)
+s549927751.py(48):             continue
+s549927751.py(41):     for s in S:
+s549927751.py(42):         if s == '/':  # 下り
+s549927751.py(50):         if s == "\\":  # 上り
+s549927751.py(51):             depth += 1
+s549927751.py(52):             if start < depth:  # 現在地が池の開始位置より高い場合
+s549927751.py(56):             B.append(2*(start - depth) + 1)
+s549927751.py(58):         if s == "_":
+s549927751.py(41):     for s in S:
+s549927751.py(42):         if s == '/':  # 下り
+s549927751.py(50):         if s == "\\":  # 上り
+s549927751.py(51):             depth += 1
+s549927751.py(52):             if start < depth:  # 現在地が池の開始位置より高い場合
+s549927751.py(56):             B.append(2*(start - depth) + 1)
+s549927751.py(58):         if s == "_":
+s549927751.py(41):     for s in S:
+s549927751.py(92): B.reverse()
+s549927751.py(96): FB = [0]*len(F)
+s549927751.py(99): for i in range(len(F)):
+s549927751.py(100):     FB[i] = min(F[i], B[i])
+s549927751.py(99): for i in range(len(F)):
+s549927751.py(100):     FB[i] = min(F[i], B[i])
+s549927751.py(99): for i in range(len(F)):
+s549927751.py(100):     FB[i] = min(F[i], B[i])
+s549927751.py(99): for i in range(len(F)):
+s549927751.py(100):     FB[i] = min(F[i], B[i])
+s549927751.py(99): for i in range(len(F)):
+s549927751.py(105): aa, k, P = count_pond(FB)
+ --- modulename: s549927751, funcname: count_pond
+s549927751.py(66):     P = []
+s549927751.py(68):     is_pond = False
+s549927751.py(69):     count = 0
+s549927751.py(70):     amount = 0
+s549927751.py(71):     all_amount = 0
+s549927751.py(72):     for i in range(len(FB)):
+s549927751.py(73):         all_amount += FB[i]
+s549927751.py(74):         if is_pond:  # 池の途中
+s549927751.py(80):             if FB[i] == 0: continue
+s549927751.py(81):             count += 1
+s549927751.py(82):             is_pond = True
+s549927751.py(83):             amount = FB[i]
+s549927751.py(72):     for i in range(len(FB)):
+s549927751.py(73):         all_amount += FB[i]
+s549927751.py(74):         if is_pond:  # 池の途中
+s549927751.py(75):             amount += FB[i]
+s549927751.py(76):             if FB[i] == 1:
+s549927751.py(72):     for i in range(len(FB)):
+s549927751.py(73):         all_amount += FB[i]
+s549927751.py(74):         if is_pond:  # 池の途中
+s549927751.py(75):             amount += FB[i]
+s549927751.py(76):             if FB[i] == 1:
+s549927751.py(72):     for i in range(len(FB)):
+s549927751.py(73):         all_amount += FB[i]
+s549927751.py(74):         if is_pond:  # 池の途中
+s549927751.py(75):             amount += FB[i]
+s549927751.py(76):             if FB[i] == 1:
+s549927751.py(77):                 is_pond = False  # ここで一旦終了
+s549927751.py(78):                 P.append(amount//2)
+s549927751.py(72):     for i in range(len(FB)):
+s549927751.py(85):     return all_amount//2, count, P
+s549927751.py(106): print(aa)
+4
+s549927751.py(107): if k == 0:
+s549927751.py(110):     print(k, " ".join(list(map(str, P))))
+1 4
