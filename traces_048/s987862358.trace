@@ -1,0 +1,2039 @@
+ --- modulename: s987862358, funcname: <module>
+s987862358.py(2): import typing
+s987862358.py(3): import sys
+s987862358.py(4): MOD = 998244353
+s987862358.py(5): def main(N, Q, LRD):
+s987862358.py(20): class LazySegTree:
+ --- modulename: s987862358, funcname: LazySegTree
+s987862358.py(20): class LazySegTree:
+s987862358.py(23):             op: typing.Callable[[typing.Any, typing.Any], typing.Any],
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem_inner__
+typing.py(896):         args, result = params
+typing.py(897):         msg = "Callable[args, result]: result must be a type."
+typing.py(898):         result = _type_check(result, msg)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(160):         return arg
+typing.py(899):         if args is Ellipsis:
+typing.py(901):         if not isinstance(args, tuple):
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+typing.py(904):         params = args + (result,)
+typing.py(905):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+typing.py(878):                                      name=self._name, inst=self._inst)
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s987862358.py(24):             e: typing.Any,
+s987862358.py(25):             mapping: typing.Callable[[typing.Any, typing.Any], typing.Any],
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+s987862358.py(26):             composition: typing.Callable[[typing.Any, typing.Any], typing.Any],
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+s987862358.py(27):             id_: typing.Any,
+s987862358.py(28):             v: typing.Union[int, typing.List[typing.Any]]) -> None:
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(834):         if not isinstance(params, tuple):
+typing.py(835):             params = (params,)
+typing.py(836):         msg = "Parameters to generic types must be types."
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(160):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+typing.py(838):         _check_generic(self, params, self._nparams)
+ --- modulename: typing, funcname: _check_generic
+typing.py(210):     if not elen:
+typing.py(212):     alen = len(parameters)
+typing.py(213):     if alen != elen:
+typing.py(839):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+typing.py(843):                              name=self._name, inst=self._inst)
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __hash__
+typing.py(757):         return hash((self.__origin__, self.__args__))
+ --- modulename: typing, funcname: __getitem__
+typing.py(354):         return self._getitem(self, parameters)
+ --- modulename: typing, funcname: Union
+typing.py(461):     if parameters == ():
+typing.py(463):     if not isinstance(parameters, tuple):
+typing.py(465):     msg = "Union[arg, ...]: each arg must be a type."
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(157):             arg.__origin__ in invalid_generic_forms):
+typing.py(159):     if arg in (Any, NoReturn, Final):
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+ --- modulename: typing, funcname: __eq__
+typing.py(751):         if not isinstance(other, _GenericAlias):
+typing.py(752):             return NotImplemented
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(165):     if not callable(arg):
+typing.py(167):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+typing.py(467):     parameters = _remove_dups_flatten(parameters)
+ --- modulename: typing, funcname: _remove_dups_flatten
+typing.py(237):     params = []
+typing.py(238):     for p in parameters:
+typing.py(239):         if isinstance(p, _UnionGenericAlias):
+typing.py(241):         elif isinstance(p, tuple) and len(p) > 0 and p[0] is Union:
+typing.py(244):             params.append(p)
+typing.py(238):     for p in parameters:
+typing.py(239):         if isinstance(p, _UnionGenericAlias):
+typing.py(241):         elif isinstance(p, tuple) and len(p) > 0 and p[0] is Union:
+typing.py(244):             params.append(p)
+typing.py(238):     for p in parameters:
+typing.py(246):     return tuple(_deduplicate(params))
+ --- modulename: typing, funcname: _deduplicate
+typing.py(220):     all_params = set(params)
+ --- modulename: typing, funcname: __hash__
+typing.py(757):         return hash((self.__origin__, self.__args__))
+typing.py(221):     if len(all_params) < len(params):
+typing.py(229):     return params
+typing.py(468):     if len(parameters) == 1:
+typing.py(470):     return _UnionGenericAlias(self, parameters)
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(202):             tvars.extend([t for t in t.__parameters__ if t not in tvars])
+ --- modulename: typing, funcname: <listcomp>
+typing.py(202):             tvars.extend([t for t in t.__parameters__ if t not in tvars])
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+typing.py(748):             self.__module__ = origin.__module__
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+s987862358.py(21):     def __init__(
+s987862358.py(48):     def set(self, p: int, x: typing.Any) -> None:
+s987862358.py(58):     def get(self, p: int) -> typing.Any:
+s987862358.py(66):     def prod(self, left: int, right: int) -> typing.Any:
+s987862358.py(95):     def all_prod(self) -> typing.Any:
+s987862358.py(98):     def apply(self, left: int, right: typing.Optional[int] = None,
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(354):         return self._getitem(self, parameters)
+ --- modulename: typing, funcname: Optional
+typing.py(478):     arg = _type_check(parameters, f"{self} requires a single type.")
+ --- modulename: typing, funcname: __repr__
+typing.py(338):         return 'typing.' + self._name
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+typing.py(479):     return Union[arg, type(None)]
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(354):         return self._getitem(self, parameters)
+ --- modulename: typing, funcname: Union
+typing.py(461):     if parameters == ():
+typing.py(463):     if not isinstance(parameters, tuple):
+typing.py(465):     msg = "Union[arg, ...]: each arg must be a type."
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+typing.py(467):     parameters = _remove_dups_flatten(parameters)
+ --- modulename: typing, funcname: _remove_dups_flatten
+typing.py(237):     params = []
+typing.py(238):     for p in parameters:
+typing.py(239):         if isinstance(p, _UnionGenericAlias):
+typing.py(241):         elif isinstance(p, tuple) and len(p) > 0 and p[0] is Union:
+typing.py(244):             params.append(p)
+typing.py(238):     for p in parameters:
+typing.py(239):         if isinstance(p, _UnionGenericAlias):
+typing.py(241):         elif isinstance(p, tuple) and len(p) > 0 and p[0] is Union:
+typing.py(244):             params.append(p)
+typing.py(238):     for p in parameters:
+typing.py(246):     return tuple(_deduplicate(params))
+ --- modulename: typing, funcname: _deduplicate
+typing.py(220):     all_params = set(params)
+typing.py(221):     if len(all_params) < len(params):
+typing.py(229):     return params
+typing.py(468):     if len(parameters) == 1:
+typing.py(470):     return _UnionGenericAlias(self, parameters)
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+typing.py(748):             self.__module__ = origin.__module__
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+s987862358.py(99):               f: typing.Optional[typing.Any] = None):
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(354):         return self._getitem(self, parameters)
+ --- modulename: typing, funcname: Optional
+typing.py(478):     arg = _type_check(parameters, f"{self} requires a single type.")
+ --- modulename: typing, funcname: __repr__
+typing.py(338):         return 'typing.' + self._name
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(160):         return arg
+typing.py(479):     return Union[arg, type(None)]
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(354):         return self._getitem(self, parameters)
+ --- modulename: typing, funcname: Union
+typing.py(461):     if parameters == ():
+typing.py(463):     if not isinstance(parameters, tuple):
+typing.py(465):     msg = "Union[arg, ...]: each arg must be a type."
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(160):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(466):     parameters = tuple(_type_check(p, msg) for p in parameters)
+typing.py(467):     parameters = _remove_dups_flatten(parameters)
+ --- modulename: typing, funcname: _remove_dups_flatten
+typing.py(237):     params = []
+typing.py(238):     for p in parameters:
+typing.py(239):         if isinstance(p, _UnionGenericAlias):
+typing.py(241):         elif isinstance(p, tuple) and len(p) > 0 and p[0] is Union:
+typing.py(244):             params.append(p)
+typing.py(238):     for p in parameters:
+typing.py(239):         if isinstance(p, _UnionGenericAlias):
+typing.py(241):         elif isinstance(p, tuple) and len(p) > 0 and p[0] is Union:
+typing.py(244):             params.append(p)
+typing.py(238):     for p in parameters:
+typing.py(246):     return tuple(_deduplicate(params))
+ --- modulename: typing, funcname: _deduplicate
+typing.py(220):     all_params = set(params)
+typing.py(221):     if len(all_params) < len(params):
+typing.py(229):     return params
+typing.py(468):     if len(parameters) == 1:
+typing.py(470):     return _UnionGenericAlias(self, parameters)
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+typing.py(748):             self.__module__ = origin.__module__
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+s987862358.py(98):     def apply(self, left: int, right: typing.Optional[int] = None,
+s987862358.py(147):             self, left: int, g: typing.Callable[[typing.Any], bool]) -> int:
+ --- modulename: typing, funcname: __getitem__
+typing.py(881):         if not isinstance(params, tuple) or len(params) != 2:
+typing.py(884):         args, result = params
+typing.py(888):         if isinstance(args, list):
+typing.py(889):             params = (tuple(args), result)
+typing.py(892):         return self.__getitem_inner__(params)
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem_inner__
+typing.py(896):         args, result = params
+typing.py(897):         msg = "Callable[args, result]: result must be a type."
+typing.py(898):         result = _type_check(result, msg)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+typing.py(899):         if args is Ellipsis:
+typing.py(901):         if not isinstance(args, tuple):
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(903):         args = tuple(_type_convert(arg) for arg in args)
+typing.py(904):         params = args + (result,)
+typing.py(905):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+typing.py(878):                                      name=self._name, inst=self._inst)
+typing.py(877):         return _CallableGenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s987862358.py(146):     def max_right(
+s987862358.py(177):     def min_left(self, right: int, g: typing.Any) -> int:
+s987862358.py(207):     def _update(self, k: int) -> None:
+s987862358.py(210):     def _all_apply(self, k: int, f: typing.Any) -> None:
+s987862358.py(215):     def _push(self, k: int) -> None:
+s987862358.py(220): if __name__ == '__main__':
+s987862358.py(221):     input = sys.stdin.readline
+s987862358.py(222):     N, Q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s987862358.py(223):     LRD = [tuple(map(int, input().split())) for _ in range(Q)]
+ --- modulename: s987862358, funcname: <listcomp>
+s987862358.py(223):     LRD = [tuple(map(int, input().split())) for _ in range(Q)]
+s987862358.py(223):     LRD = [tuple(map(int, input().split())) for _ in range(Q)]
+s987862358.py(223):     LRD = [tuple(map(int, input().split())) for _ in range(Q)]
+s987862358.py(223):     LRD = [tuple(map(int, input().split())) for _ in range(Q)]
+s987862358.py(223):     LRD = [tuple(map(int, input().split())) for _ in range(Q)]
+s987862358.py(223):     LRD = [tuple(map(int, input().split())) for _ in range(Q)]
+s987862358.py(224):     main(N, Q, LRD)
+ --- modulename: s987862358, funcname: main
+s987862358.py(6):     inv9 = pow(9, MOD - 2, MOD)
+s987862358.py(7):     tree = LazySegTree(
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(9):         e=(0, 1),
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(12):         id_=0,
+s987862358.py(13):         v=[(1, 10)] * N)
+s987862358.py(7):     tree = LazySegTree(
+ --- modulename: s987862358, funcname: __init__
+s987862358.py(29):         self._op = op
+s987862358.py(30):         self._e = e
+s987862358.py(31):         self._mapping = mapping
+s987862358.py(32):         self._composition = composition
+s987862358.py(33):         self._id = id_
+s987862358.py(35):         if isinstance(v, int):
+s987862358.py(38):         self._n = len(v)
+s987862358.py(39):         self._log = self._n.bit_length()
+s987862358.py(40):         self._size = 1 << self._log
+s987862358.py(41):         self._d = [e] * (2 * self._size)
+s987862358.py(42):         self._lz = [self._id] * self._size
+s987862358.py(43):         for i in range(self._n):
+s987862358.py(44):             self._d[self._size + i] = v[i]
+s987862358.py(43):         for i in range(self._n):
+s987862358.py(44):             self._d[self._size + i] = v[i]
+s987862358.py(43):         for i in range(self._n):
+s987862358.py(44):             self._d[self._size + i] = v[i]
+s987862358.py(43):         for i in range(self._n):
+s987862358.py(44):             self._d[self._size + i] = v[i]
+s987862358.py(43):         for i in range(self._n):
+s987862358.py(44):             self._d[self._size + i] = v[i]
+s987862358.py(43):         for i in range(self._n):
+s987862358.py(44):             self._d[self._size + i] = v[i]
+s987862358.py(43):         for i in range(self._n):
+s987862358.py(44):             self._d[self._size + i] = v[i]
+s987862358.py(43):         for i in range(self._n):
+s987862358.py(44):             self._d[self._size + i] = v[i]
+s987862358.py(43):         for i in range(self._n):
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(46):             self._update(i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(45):         for i in range(self._size - 1, 0, -1):
+s987862358.py(15):     for l, r, d in LRD:
+s987862358.py(16):         l -= 1
+s987862358.py(17):         tree.apply(l, r, d)
+ --- modulename: s987862358, funcname: apply
+s987862358.py(100):         assert f is not None
+s987862358.py(102):         if right is None:
+s987862358.py(113):             assert 0 <= left <= right <= self._n
+s987862358.py(114):             if left == right:
+s987862358.py(117):             left += self._size
+s987862358.py(118):             right += self._size
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(126):             l2 = left
+s987862358.py(127):             r2 = right
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(132):                 if right & 1:
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(130):                     self._all_apply(left, f)
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(131):                     left += 1
+s987862358.py(132):                 if right & 1:
+s987862358.py(133):                     right -= 1
+s987862358.py(134):                     self._all_apply(right, f)
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(137):             left = l2
+s987862358.py(138):             right = r2
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(18):         print(tree.all_prod()[0])
+ --- modulename: s987862358, funcname: all_prod
+s987862358.py(96):         return self._d[1]
+11222211
+s987862358.py(15):     for l, r, d in LRD:
+s987862358.py(16):         l -= 1
+s987862358.py(17):         tree.apply(l, r, d)
+ --- modulename: s987862358, funcname: apply
+s987862358.py(100):         assert f is not None
+s987862358.py(102):         if right is None:
+s987862358.py(113):             assert 0 <= left <= right <= self._n
+s987862358.py(114):             if left == right:
+s987862358.py(117):             left += self._size
+s987862358.py(118):             right += self._size
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(126):             l2 = left
+s987862358.py(127):             r2 = right
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(132):                 if right & 1:
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(132):                 if right & 1:
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(132):                 if right & 1:
+s987862358.py(133):                     right -= 1
+s987862358.py(134):                     self._all_apply(right, f)
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(137):             left = l2
+s987862358.py(138):             right = r2
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(18):         print(tree.all_prod()[0])
+ --- modulename: s987862358, funcname: all_prod
+s987862358.py(96):         return self._d[1]
+77772211
+s987862358.py(15):     for l, r, d in LRD:
+s987862358.py(16):         l -= 1
+s987862358.py(17):         tree.apply(l, r, d)
+ --- modulename: s987862358, funcname: apply
+s987862358.py(100):         assert f is not None
+s987862358.py(102):         if right is None:
+s987862358.py(113):             assert 0 <= left <= right <= self._n
+s987862358.py(114):             if left == right:
+s987862358.py(117):             left += self._size
+s987862358.py(118):             right += self._size
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(126):             l2 = left
+s987862358.py(127):             r2 = right
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(132):                 if right & 1:
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(130):                     self._all_apply(left, f)
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(131):                     left += 1
+s987862358.py(132):                 if right & 1:
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(130):                     self._all_apply(left, f)
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(131):                     left += 1
+s987862358.py(132):                 if right & 1:
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(137):             left = l2
+s987862358.py(138):             right = r2
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(18):         print(tree.all_prod()[0])
+ --- modulename: s987862358, funcname: all_prod
+s987862358.py(96):         return self._d[1]
+77333333
+s987862358.py(15):     for l, r, d in LRD:
+s987862358.py(16):         l -= 1
+s987862358.py(17):         tree.apply(l, r, d)
+ --- modulename: s987862358, funcname: apply
+s987862358.py(100):         assert f is not None
+s987862358.py(102):         if right is None:
+s987862358.py(113):             assert 0 <= left <= right <= self._n
+s987862358.py(114):             if left == right:
+s987862358.py(117):             left += self._size
+s987862358.py(118):             right += self._size
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(126):             l2 = left
+s987862358.py(127):             r2 = right
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(130):                     self._all_apply(left, f)
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(131):                     left += 1
+s987862358.py(132):                 if right & 1:
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(137):             left = l2
+s987862358.py(138):             right = r2
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(18):         print(tree.all_prod()[0])
+ --- modulename: s987862358, funcname: all_prod
+s987862358.py(96):         return self._d[1]
+72333333
+s987862358.py(15):     for l, r, d in LRD:
+s987862358.py(16):         l -= 1
+s987862358.py(17):         tree.apply(l, r, d)
+ --- modulename: s987862358, funcname: apply
+s987862358.py(100):         assert f is not None
+s987862358.py(102):         if right is None:
+s987862358.py(113):             assert 0 <= left <= right <= self._n
+s987862358.py(114):             if left == right:
+s987862358.py(117):             left += self._size
+s987862358.py(118):             right += self._size
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(213):             self._lz[k] = self._composition(f, self._lz[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(11):         composition=lambda f, g: g if f == 0 else f,
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(121):                 if ((left >> i) << i) != left:
+s987862358.py(122):                     self._push(left >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(123):                 if ((right >> i) << i) != right:
+s987862358.py(124):                     self._push((right - 1) >> i)
+ --- modulename: s987862358, funcname: _push
+s987862358.py(216):         self._all_apply(2 * k, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(217):         self._all_apply(2 * k + 1, self._lz[k])
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(218):         self._lz[k] = self._id
+s987862358.py(120):             for i in range(self._log, 0, -1):
+s987862358.py(126):             l2 = left
+s987862358.py(127):             r2 = right
+s987862358.py(128):             while left < right:
+s987862358.py(129):                 if left & 1:
+s987862358.py(130):                     self._all_apply(left, f)
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(131):                     left += 1
+s987862358.py(132):                 if right & 1:
+s987862358.py(133):                     right -= 1
+s987862358.py(134):                     self._all_apply(right, f)
+ --- modulename: s987862358, funcname: _all_apply
+s987862358.py(211):         self._d[k] = self._mapping(f, self._d[k])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(10):         mapping=lambda f, s: s if f == 0 else (((s[1] - 1) * inv9 * f) % MOD, s[1]),
+s987862358.py(212):         if k < self._size:
+s987862358.py(135):                 left >>= 1
+s987862358.py(136):                 right >>= 1
+s987862358.py(128):             while left < right:
+s987862358.py(137):             left = l2
+s987862358.py(138):             right = r2
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(141):                 if ((left >> i) << i) != left:
+s987862358.py(142):                     self._update(left >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(143):                 if ((right >> i) << i) != right:
+s987862358.py(144):                     self._update((right - 1) >> i)
+ --- modulename: s987862358, funcname: _update
+s987862358.py(208):         self._d[k] = self._op(self._d[2 * k], self._d[2 * k + 1])
+ --- modulename: s987862358, funcname: <lambda>
+s987862358.py(8):         op=lambda x, y: (((x[0] * y[1]) % MOD + y[0]) % MOD, (x[1] * y[1]) % MOD),
+s987862358.py(140):             for i in range(1, self._log + 1):
+s987862358.py(18):         print(tree.all_prod()[0])
+ --- modulename: s987862358, funcname: all_prod
+s987862358.py(96):         return self._d[1]
+72311333
+s987862358.py(15):     for l, r, d in LRD:
