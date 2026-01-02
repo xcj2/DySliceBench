@@ -1,0 +1,173 @@
+ --- modulename: s585315023, funcname: <module>
+s585315023.py(1): import sys
+s585315023.py(2): sys.setrecursionlimit(10**6)
+s585315023.py(3): def input():
+s585315023.py(6): n, m = map(int, input().split())
+ --- modulename: s585315023, funcname: input
+s585315023.py(4): 	return sys.stdin.buffer.readline()[:-1]
+s585315023.py(7): adj = [[] for _ in range(n)]
+ --- modulename: s585315023, funcname: <listcomp>
+s585315023.py(7): adj = [[] for _ in range(n)]
+s585315023.py(7): adj = [[] for _ in range(n)]
+s585315023.py(7): adj = [[] for _ in range(n)]
+s585315023.py(7): adj = [[] for _ in range(n)]
+s585315023.py(8): for _ in range(n-1):
+s585315023.py(9): 	a, b = map(int, input().split())
+ --- modulename: s585315023, funcname: input
+s585315023.py(4): 	return sys.stdin.buffer.readline()[:-1]
+s585315023.py(10): 	adj[a-1].append(b-1)
+s585315023.py(11): 	adj[b-1].append(a-1)
+s585315023.py(8): for _ in range(n-1):
+s585315023.py(9): 	a, b = map(int, input().split())
+ --- modulename: s585315023, funcname: input
+s585315023.py(4): 	return sys.stdin.buffer.readline()[:-1]
+s585315023.py(10): 	adj[a-1].append(b-1)
+s585315023.py(11): 	adj[b-1].append(a-1)
+s585315023.py(8): for _ in range(n-1):
+s585315023.py(13): dp = [1 for _ in range(n)]
+ --- modulename: s585315023, funcname: <listcomp>
+s585315023.py(13): dp = [1 for _ in range(n)]
+s585315023.py(13): dp = [1 for _ in range(n)]
+s585315023.py(13): dp = [1 for _ in range(n)]
+s585315023.py(13): dp = [1 for _ in range(n)]
+s585315023.py(14): def dfs1(x, p):
+s585315023.py(23): dfs1(0, -1)
+ --- modulename: s585315023, funcname: dfs1
+s585315023.py(15): 	for c in adj[x]:
+s585315023.py(16): 		if c == p:
+s585315023.py(18): 		dfs1(c, x)
+ --- modulename: s585315023, funcname: dfs1
+s585315023.py(15): 	for c in adj[x]:
+s585315023.py(16): 		if c == p:
+s585315023.py(17): 			continue
+s585315023.py(15): 	for c in adj[x]:
+s585315023.py(16): 		if c == p:
+s585315023.py(18): 		dfs1(c, x)
+ --- modulename: s585315023, funcname: dfs1
+s585315023.py(15): 	for c in adj[x]:
+s585315023.py(16): 		if c == p:
+s585315023.py(17): 			continue
+s585315023.py(15): 	for c in adj[x]:
+s585315023.py(21): 	return
+s585315023.py(19): 		dp[x] *= dp[c]+1
+s585315023.py(20): 		dp[x] %= m
+s585315023.py(15): 	for c in adj[x]:
+s585315023.py(21): 	return
+s585315023.py(19): 		dp[x] *= dp[c]+1
+s585315023.py(20): 		dp[x] %= m
+s585315023.py(15): 	for c in adj[x]:
+s585315023.py(21): 	return
+s585315023.py(24): ans = [0 for _ in range(n)]
+ --- modulename: s585315023, funcname: <listcomp>
+s585315023.py(24): ans = [0 for _ in range(n)]
+s585315023.py(24): ans = [0 for _ in range(n)]
+s585315023.py(24): ans = [0 for _ in range(n)]
+s585315023.py(24): ans = [0 for _ in range(n)]
+s585315023.py(25): ans[0] = dp[0]
+s585315023.py(26): def dfs2(x, p):
+s585315023.py(48): dfs2(0, -1)
+ --- modulename: s585315023, funcname: dfs2
+s585315023.py(27): 	l = len(adj[x])
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+ --- modulename: s585315023, funcname: <listcomp>
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+ --- modulename: s585315023, funcname: <listcomp>
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(30): 	for i in range(l):
+s585315023.py(31): 		cuml[i+1] = (cuml[i] * (dp[adj[x][i]] + 1)) % m
+s585315023.py(30): 	for i in range(l):
+s585315023.py(32): 	for i in range(l-1, -1, -1):
+s585315023.py(33): 		cumr[i+1] = (cumr[i+2] * (dp[adj[x][i]] + 1)) % m
+s585315023.py(32): 	for i in range(l-1, -1, -1):
+s585315023.py(34): 	pres_x = dp[x]
+s585315023.py(35): 	for i, c in enumerate(adj[x]):
+s585315023.py(36): 		if c == p:
+s585315023.py(38): 		pres_c = dp[c]
+s585315023.py(39): 		dp[x] = (cuml[i] * cumr[i+2]) % m
+s585315023.py(40): 		dp[c] *= dp[x] + 1
+s585315023.py(41): 		dp[c] %= m
+s585315023.py(42): 		ans[c] = dp[c]
+s585315023.py(43): 		dfs2(c, x)
+ --- modulename: s585315023, funcname: dfs2
+s585315023.py(27): 	l = len(adj[x])
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+ --- modulename: s585315023, funcname: <listcomp>
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+ --- modulename: s585315023, funcname: <listcomp>
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(30): 	for i in range(l):
+s585315023.py(31): 		cuml[i+1] = (cuml[i] * (dp[adj[x][i]] + 1)) % m
+s585315023.py(30): 	for i in range(l):
+s585315023.py(31): 		cuml[i+1] = (cuml[i] * (dp[adj[x][i]] + 1)) % m
+s585315023.py(30): 	for i in range(l):
+s585315023.py(32): 	for i in range(l-1, -1, -1):
+s585315023.py(33): 		cumr[i+1] = (cumr[i+2] * (dp[adj[x][i]] + 1)) % m
+s585315023.py(32): 	for i in range(l-1, -1, -1):
+s585315023.py(33): 		cumr[i+1] = (cumr[i+2] * (dp[adj[x][i]] + 1)) % m
+s585315023.py(32): 	for i in range(l-1, -1, -1):
+s585315023.py(34): 	pres_x = dp[x]
+s585315023.py(35): 	for i, c in enumerate(adj[x]):
+s585315023.py(36): 		if c == p:
+s585315023.py(37): 			continue
+s585315023.py(35): 	for i, c in enumerate(adj[x]):
+s585315023.py(36): 		if c == p:
+s585315023.py(38): 		pres_c = dp[c]
+s585315023.py(39): 		dp[x] = (cuml[i] * cumr[i+2]) % m
+s585315023.py(40): 		dp[c] *= dp[x] + 1
+s585315023.py(41): 		dp[c] %= m
+s585315023.py(42): 		ans[c] = dp[c]
+s585315023.py(43): 		dfs2(c, x)
+ --- modulename: s585315023, funcname: dfs2
+s585315023.py(27): 	l = len(adj[x])
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+ --- modulename: s585315023, funcname: <listcomp>
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(28): 	cuml = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+ --- modulename: s585315023, funcname: <listcomp>
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(29): 	cumr = [1 for _ in range(l+2)]
+s585315023.py(30): 	for i in range(l):
+s585315023.py(31): 		cuml[i+1] = (cuml[i] * (dp[adj[x][i]] + 1)) % m
+s585315023.py(30): 	for i in range(l):
+s585315023.py(32): 	for i in range(l-1, -1, -1):
+s585315023.py(33): 		cumr[i+1] = (cumr[i+2] * (dp[adj[x][i]] + 1)) % m
+s585315023.py(32): 	for i in range(l-1, -1, -1):
+s585315023.py(34): 	pres_x = dp[x]
+s585315023.py(35): 	for i, c in enumerate(adj[x]):
+s585315023.py(36): 		if c == p:
+s585315023.py(37): 			continue
+s585315023.py(35): 	for i, c in enumerate(adj[x]):
+s585315023.py(46): 	return
+s585315023.py(44): 		dp[x] = pres_x
+s585315023.py(45): 		dp[c] = pres_c
+s585315023.py(35): 	for i, c in enumerate(adj[x]):
+s585315023.py(46): 	return
+s585315023.py(44): 		dp[x] = pres_x
+s585315023.py(45): 		dp[c] = pres_c
+s585315023.py(35): 	for i, c in enumerate(adj[x]):
+s585315023.py(46): 	return
+s585315023.py(49): print(*ans, sep="\n")
+3
+4
+3
