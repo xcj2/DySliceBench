@@ -1,0 +1,95 @@
+ --- modulename: s944743406, funcname: <module>
+s944743406.py(3): import sys
+s944743406.py(5): def input(): return sys.stdin.readline().strip()
+s944743406.py(6): def list2d(a, b, c): return [[c] * b for i in range(a)]
+s944743406.py(7): def list3d(a, b, c, d): return [[[d] * c for j in range(b)] for i in range(a)]
+s944743406.py(8): def list4d(a, b, c, d, e): return [[[[e] * d for j in range(c)] for j in range(b)] for i in range(a)]
+s944743406.py(9): def ceil(x, y=1): return int(-(-x // y))
+s944743406.py(10): def INT(): return int(input())
+s944743406.py(11): def MAP(): return map(int, input().split())
+s944743406.py(12): def LIST(N=None): return list(MAP()) if N is None else [INT() for i in range(N)]
+s944743406.py(13): def Yes(): print('Yes')
+s944743406.py(14): def No(): print('No')
+s944743406.py(15): def YES(): print('YES')
+s944743406.py(16): def NO(): print('NO')
+s944743406.py(17): sys.setrecursionlimit(10 ** 9)
+s944743406.py(18): INF = 10 ** 18
+s944743406.py(19): MOD = 10 ** 9 + 7
+s944743406.py(21): class ModTools:
+ --- modulename: s944743406, funcname: ModTools
+s944743406.py(21): class ModTools:
+s944743406.py(22):     """ 階乗たくさん使う時用のテーブル準備 """
+s944743406.py(24):     def __init__(self, MAX, MOD):
+s944743406.py(45):     def div(self, x, y):
+s944743406.py(50): N = INT()
+ --- modulename: s944743406, funcname: INT
+s944743406.py(10): def INT(): return int(input())
+ --- modulename: s944743406, funcname: input
+s944743406.py(5): def input(): return sys.stdin.readline().strip()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s944743406.py(51): A = LIST()
+ --- modulename: s944743406, funcname: LIST
+s944743406.py(12): def LIST(N=None): return list(MAP()) if N is None else [INT() for i in range(N)]
+ --- modulename: s944743406, funcname: MAP
+s944743406.py(11): def MAP(): return map(int, input().split())
+ --- modulename: s944743406, funcname: input
+s944743406.py(5): def input(): return sys.stdin.readline().strip()
+s944743406.py(52): B = [0] + [A[i+1] - A[i] for i in range(N-1)]
+ --- modulename: s944743406, funcname: <listcomp>
+s944743406.py(52): B = [0] + [A[i+1] - A[i] for i in range(N-1)]
+s944743406.py(52): B = [0] + [A[i+1] - A[i] for i in range(N-1)]
+s944743406.py(52): B = [0] + [A[i+1] - A[i] for i in range(N-1)]
+s944743406.py(54): mt = ModTools(N, MOD)
+ --- modulename: s944743406, funcname: __init__
+s944743406.py(27):         MAX += 1
+s944743406.py(28):         self.MAX = MAX
+s944743406.py(29):         self.MOD = MOD
+s944743406.py(31):         factorial = [1] * MAX
+s944743406.py(32):         factorial[0] = factorial[1] = 1
+s944743406.py(33):         for i in range(2, MAX):
+s944743406.py(34):             factorial[i] = factorial[i-1] * i % MOD
+s944743406.py(33):         for i in range(2, MAX):
+s944743406.py(34):             factorial[i] = factorial[i-1] * i % MOD
+s944743406.py(33):         for i in range(2, MAX):
+s944743406.py(36):         inverse = [1] * MAX
+s944743406.py(38):         inverse[MAX-1] = pow(factorial[MAX-1], MOD-2, MOD)
+s944743406.py(39):         for i in range(MAX-2, 0, -1):
+s944743406.py(41):             inverse[i] = inverse[i+1] * (i+1) % MOD
+s944743406.py(39):         for i in range(MAX-2, 0, -1):
+s944743406.py(41):             inverse[i] = inverse[i+1] * (i+1) % MOD
+s944743406.py(39):         for i in range(MAX-2, 0, -1):
+s944743406.py(42):         self.fact = factorial
+s944743406.py(43):         self.inv = inverse
+s944743406.py(55): add = mt.fact[N-1]
+s944743406.py(56): cnt = [0] * N
+s944743406.py(57): for i in range(1, N):
+s944743406.py(58):     cnt[i] = round(cnt[i-1] + add)
+s944743406.py(59):     cnt[i] %= MOD
+s944743406.py(60):     add *= mt.div(i , (i+1))
+ --- modulename: s944743406, funcname: div
+s944743406.py(48):         return x * pow(y, self.MOD-2, self.MOD) % self.MOD
+s944743406.py(61):     add %= MOD
+s944743406.py(57): for i in range(1, N):
+s944743406.py(58):     cnt[i] = round(cnt[i-1] + add)
+s944743406.py(59):     cnt[i] %= MOD
+s944743406.py(60):     add *= mt.div(i , (i+1))
+ --- modulename: s944743406, funcname: div
+s944743406.py(48):         return x * pow(y, self.MOD-2, self.MOD) % self.MOD
+s944743406.py(61):     add %= MOD
+s944743406.py(57): for i in range(1, N):
+s944743406.py(63): ans = 0
+s944743406.py(64): for i in range(1, N):
+s944743406.py(65):     ans += B[i] * cnt[i]
+s944743406.py(66):     ans %= MOD
+s944743406.py(64): for i in range(1, N):
+s944743406.py(65):     ans += B[i] * cnt[i]
+s944743406.py(66):     ans %= MOD
+s944743406.py(64): for i in range(1, N):
+s944743406.py(67): print(ans)
+5
