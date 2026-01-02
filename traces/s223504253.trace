@@ -1,0 +1,299 @@
+ --- modulename: s223504253, funcname: <module>
+s223504253.py(1): from collections import defaultdict
+ --- modulename: _bootstrap, funcname: _handle_fromlist
+<frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1067): s223504253.py(2): from heapq import heappop, heappush
+s223504253.py(5): class Graph(object):
+ --- modulename: s223504253, funcname: Graph
+s223504253.py(5): class Graph(object):
+s223504253.py(6):     """
+s223504253.py(10):     def __init__(self):
+s223504253.py(13):     def __len__(self):
+s223504253.py(16):     def add_edge(self, src, dst, weight=1):  # デフォルトの距離は1
+s223504253.py(19):     def get_nodes(self):
+s223504253.py(23): class Dijkstra(object):
+ --- modulename: s223504253, funcname: Dijkstra
+s223504253.py(23): class Dijkstra(object):
+s223504253.py(24):     """
+s223504253.py(29):     def __init__(self, graph, start):  # graph: Graphオブジェクト, start: 始点のIndex
+s223504253.py(56):     def shortest_distance(self, goal):
+s223504253.py(62):     def shortest_path(self, goal):
+s223504253.py(74): N, M = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s223504253.py(75): g = Graph()
+ --- modulename: s223504253, funcname: __init__
+s223504253.py(11):         self.graph = defaultdict(list)
+s223504253.py(76): visited_edges = {}
+s223504253.py(77): for _ in range(M):
+s223504253.py(78):     a, b, c = map(int, input().split())
+s223504253.py(79):     a -= 1
+s223504253.py(80):     b -= 1
+s223504253.py(81):     g.add_edge(a, b, c)
+ --- modulename: s223504253, funcname: add_edge
+s223504253.py(17):         self.graph[src].append((dst, weight))
+s223504253.py(82):     g.add_edge(b, a, c)
+ --- modulename: s223504253, funcname: add_edge
+s223504253.py(17):         self.graph[src].append((dst, weight))
+s223504253.py(83):     visited_edges[(a, b)] = False
+s223504253.py(84):     visited_edges[(b, a)] = False
+s223504253.py(77): for _ in range(M):
+s223504253.py(78):     a, b, c = map(int, input().split())
+s223504253.py(79):     a -= 1
+s223504253.py(80):     b -= 1
+s223504253.py(81):     g.add_edge(a, b, c)
+ --- modulename: s223504253, funcname: add_edge
+s223504253.py(17):         self.graph[src].append((dst, weight))
+s223504253.py(82):     g.add_edge(b, a, c)
+ --- modulename: s223504253, funcname: add_edge
+s223504253.py(17):         self.graph[src].append((dst, weight))
+s223504253.py(83):     visited_edges[(a, b)] = False
+s223504253.py(84):     visited_edges[(b, a)] = False
+s223504253.py(77): for _ in range(M):
+s223504253.py(78):     a, b, c = map(int, input().split())
+s223504253.py(79):     a -= 1
+s223504253.py(80):     b -= 1
+s223504253.py(81):     g.add_edge(a, b, c)
+ --- modulename: s223504253, funcname: add_edge
+s223504253.py(17):         self.graph[src].append((dst, weight))
+s223504253.py(82):     g.add_edge(b, a, c)
+ --- modulename: s223504253, funcname: add_edge
+s223504253.py(17):         self.graph[src].append((dst, weight))
+s223504253.py(83):     visited_edges[(a, b)] = False
+s223504253.py(84):     visited_edges[(b, a)] = False
+s223504253.py(77): for _ in range(M):
+s223504253.py(86): for i in range(N):  # 始点
+s223504253.py(87):     shortest = Dijkstra(g, i)
+ --- modulename: s223504253, funcname: __init__
+s223504253.py(30):         self.g = graph.graph
+s223504253.py(34):         self.dist = defaultdict(lambda: float('inf'))
+s223504253.py(35):         self.dist[start] = 0
+s223504253.py(38):         self.prev = defaultdict(lambda: None)
+s223504253.py(41):         self.Q = []
+s223504253.py(42):         heappush(self.Q, (self.dist[start], start))  # そのノードまでの仮の最短距離, ノードのIndex
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+ --- modulename: s223504253, funcname: <lambda>
+s223504253.py(34):         self.dist = defaultdict(lambda: float('inf'))
+s223504253.py(52):                     self.dist[v] = alt
+s223504253.py(53):                     self.prev[v] = u
+s223504253.py(54):                     heappush(self.Q, (alt, v))  # 更新された仮の距離, ノード
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+ --- modulename: s223504253, funcname: <lambda>
+s223504253.py(34):         self.dist = defaultdict(lambda: float('inf'))
+s223504253.py(52):                     self.dist[v] = alt
+s223504253.py(53):                     self.prev[v] = u
+s223504253.py(54):                     heappush(self.Q, (alt, v))  # 更新された仮の距離, ノード
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(44):         while self.Q:
+s223504253.py(88):     for j in range(i+1, N):  # 終点
+s223504253.py(89):         paths = shortest.shortest_path(j)
+ --- modulename: s223504253, funcname: shortest_path
+s223504253.py(66):         path = []
+s223504253.py(67):         node = goal
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(69):             path.append(node)
+s223504253.py(70):             node = self.prev[node]
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(69):             path.append(node)
+s223504253.py(70):             node = self.prev[node]
+ --- modulename: s223504253, funcname: <lambda>
+s223504253.py(38):         self.prev = defaultdict(lambda: None)
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(71):         return path[::-1]  # 逆順にして返す
+s223504253.py(90):         for k in range(len(paths)-1):
+s223504253.py(91):             visited_edges[(paths[k], paths[k+1])] = True
+s223504253.py(92):             visited_edges[(paths[k+1], paths[k])] = True
+s223504253.py(90):         for k in range(len(paths)-1):
+s223504253.py(88):     for j in range(i+1, N):  # 終点
+s223504253.py(89):         paths = shortest.shortest_path(j)
+ --- modulename: s223504253, funcname: shortest_path
+s223504253.py(66):         path = []
+s223504253.py(67):         node = goal
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(69):             path.append(node)
+s223504253.py(70):             node = self.prev[node]
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(69):             path.append(node)
+s223504253.py(70):             node = self.prev[node]
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(71):         return path[::-1]  # 逆順にして返す
+s223504253.py(90):         for k in range(len(paths)-1):
+s223504253.py(91):             visited_edges[(paths[k], paths[k+1])] = True
+s223504253.py(92):             visited_edges[(paths[k+1], paths[k])] = True
+s223504253.py(90):         for k in range(len(paths)-1):
+s223504253.py(88):     for j in range(i+1, N):  # 終点
+s223504253.py(86): for i in range(N):  # 始点
+s223504253.py(87):     shortest = Dijkstra(g, i)
+ --- modulename: s223504253, funcname: __init__
+s223504253.py(30):         self.g = graph.graph
+s223504253.py(34):         self.dist = defaultdict(lambda: float('inf'))
+s223504253.py(35):         self.dist[start] = 0
+s223504253.py(38):         self.prev = defaultdict(lambda: None)
+s223504253.py(41):         self.Q = []
+s223504253.py(42):         heappush(self.Q, (self.dist[start], start))  # そのノードまでの仮の最短距離, ノードのIndex
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+ --- modulename: s223504253, funcname: <lambda>
+s223504253.py(34):         self.dist = defaultdict(lambda: float('inf'))
+s223504253.py(52):                     self.dist[v] = alt
+s223504253.py(53):                     self.prev[v] = u
+s223504253.py(54):                     heappush(self.Q, (alt, v))  # 更新された仮の距離, ノード
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+ --- modulename: s223504253, funcname: <lambda>
+s223504253.py(34):         self.dist = defaultdict(lambda: float('inf'))
+s223504253.py(52):                     self.dist[v] = alt
+s223504253.py(53):                     self.prev[v] = u
+s223504253.py(54):                     heappush(self.Q, (alt, v))  # 更新された仮の距離, ノード
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(52):                     self.dist[v] = alt
+s223504253.py(53):                     self.prev[v] = u
+s223504253.py(54):                     heappush(self.Q, (alt, v))  # 更新された仮の距離, ノード
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(48):                 continue
+s223504253.py(44):         while self.Q:
+s223504253.py(88):     for j in range(i+1, N):  # 終点
+s223504253.py(89):         paths = shortest.shortest_path(j)
+ --- modulename: s223504253, funcname: shortest_path
+s223504253.py(66):         path = []
+s223504253.py(67):         node = goal
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(69):             path.append(node)
+s223504253.py(70):             node = self.prev[node]
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(69):             path.append(node)
+s223504253.py(70):             node = self.prev[node]
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(69):             path.append(node)
+s223504253.py(70):             node = self.prev[node]
+ --- modulename: s223504253, funcname: <lambda>
+s223504253.py(38):         self.prev = defaultdict(lambda: None)
+s223504253.py(68):         while node is not None:  # startノードはprevを持たないからこの条件でよい
+s223504253.py(71):         return path[::-1]  # 逆順にして返す
+s223504253.py(90):         for k in range(len(paths)-1):
+s223504253.py(91):             visited_edges[(paths[k], paths[k+1])] = True
+s223504253.py(92):             visited_edges[(paths[k+1], paths[k])] = True
+s223504253.py(90):         for k in range(len(paths)-1):
+s223504253.py(91):             visited_edges[(paths[k], paths[k+1])] = True
+s223504253.py(92):             visited_edges[(paths[k+1], paths[k])] = True
+s223504253.py(90):         for k in range(len(paths)-1):
+s223504253.py(88):     for j in range(i+1, N):  # 終点
+s223504253.py(86): for i in range(N):  # 始点
+s223504253.py(87):     shortest = Dijkstra(g, i)
+ --- modulename: s223504253, funcname: __init__
+s223504253.py(30):         self.g = graph.graph
+s223504253.py(34):         self.dist = defaultdict(lambda: float('inf'))
+s223504253.py(35):         self.dist[start] = 0
+s223504253.py(38):         self.prev = defaultdict(lambda: None)
+s223504253.py(41):         self.Q = []
+s223504253.py(42):         heappush(self.Q, (self.dist[start], start))  # そのノードまでの仮の最短距離, ノードのIndex
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+ --- modulename: s223504253, funcname: <lambda>
+s223504253.py(34):         self.dist = defaultdict(lambda: float('inf'))
+s223504253.py(52):                     self.dist[v] = alt
+s223504253.py(53):                     self.prev[v] = u
+s223504253.py(54):                     heappush(self.Q, (alt, v))  # 更新された仮の距離, ノード
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+ --- modulename: s223504253, funcname: <lambda>
+s223504253.py(34):         self.dist = defaultdict(lambda: float('inf'))
+s223504253.py(52):                     self.dist[v] = alt
+s223504253.py(53):                     self.prev[v] = u
+s223504253.py(54):                     heappush(self.Q, (alt, v))  # 更新された仮の距離, ノード
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(52):                     self.dist[v] = alt
+s223504253.py(53):                     self.prev[v] = u
+s223504253.py(54):                     heappush(self.Q, (alt, v))  # 更新された仮の距離, ノード
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(50):                 alt = dist_u + weight
+s223504253.py(51):                 if self.dist[v] > alt:
+s223504253.py(49):             for v, weight in self.g[u]:  # 対象のノードに隣接しているノードに対して操作を行う, 始点はu
+s223504253.py(44):         while self.Q:
+s223504253.py(46):             dist_u, u = heappop(self.Q)
+s223504253.py(47):             if self.dist[u] < dist_u:  # 仮の距離より短い距離が正式に求まっているならスルー
+s223504253.py(48):                 continue
+s223504253.py(44):         while self.Q:
+s223504253.py(88):     for j in range(i+1, N):  # 終点
+s223504253.py(86): for i in range(N):  # 始点
+s223504253.py(93): print(M - sum(visited_edges.values())//2)
+1
