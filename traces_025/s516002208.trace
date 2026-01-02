@@ -1,0 +1,136 @@
+ --- modulename: s516002208, funcname: <module>
+s516002208.py(1): import sys
+s516002208.py(2): read = sys.stdin.buffer.read
+s516002208.py(3): readline = sys.stdin.buffer.readline
+s516002208.py(4): readlines = sys.stdin.buffer.readlines
+s516002208.py(5): sys.setrecursionlimit(10 ** 7)
+s516002208.py(7): import itertools
+s516002208.py(9): MOD = 10**9 + 7
+s516002208.py(13): N,*A = map(int,read().split())
+s516002208.py(15): A_rev = A[::-1]
+s516002208.py(17): class BIT():
+ --- modulename: s516002208, funcname: BIT
+s516002208.py(17): class BIT():
+s516002208.py(18):     def __init__(self, max_n):
+s516002208.py(22):     def get_sum(self,i):
+s516002208.py(29):     def add(self, i, x):
+s516002208.py(34): right_zero = [0] * (N+1)
+s516002208.py(35): for i,x in enumerate(A_rev):
+s516002208.py(36):     right_zero[i+1] = right_zero[i] 
+s516002208.py(37):     if x == 0:
+s516002208.py(38):         right_zero[i+1] += 1
+s516002208.py(35): for i,x in enumerate(A_rev):
+s516002208.py(36):     right_zero[i+1] = right_zero[i] 
+s516002208.py(37):     if x == 0:
+s516002208.py(35): for i,x in enumerate(A_rev):
+s516002208.py(36):     right_zero[i+1] = right_zero[i] 
+s516002208.py(37):     if x == 0:
+s516002208.py(35): for i,x in enumerate(A_rev):
+s516002208.py(36):     right_zero[i+1] = right_zero[i] 
+s516002208.py(37):     if x == 0:
+s516002208.py(38):         right_zero[i+1] += 1
+s516002208.py(35): for i,x in enumerate(A_rev):
+s516002208.py(40): zero_cnt = right_zero[-1]
+s516002208.py(41): inv = pow(zero_cnt,MOD-2,MOD)
+s516002208.py(43): rest_smaller = [1] * (N+1)
+s516002208.py(44): for x in A:
+s516002208.py(45):     rest_smaller[x] = 0
+s516002208.py(44): for x in A:
+s516002208.py(45):     rest_smaller[x] = 0
+s516002208.py(44): for x in A:
+s516002208.py(45):     rest_smaller[x] = 0
+s516002208.py(44): for x in A:
+s516002208.py(45):     rest_smaller[x] = 0
+s516002208.py(44): for x in A:
+s516002208.py(46): rest_smaller = list(itertools.accumulate(rest_smaller))
+s516002208.py(48): right_smaller_prob = [(MOD+1)//2] * N
+s516002208.py(49): for i,x in enumerate(A_rev):
+s516002208.py(50):     if x != 0:
+s516002208.py(49): for i,x in enumerate(A_rev):
+s516002208.py(50):     if x != 0:
+s516002208.py(51):         right_smaller_prob[i] = rest_smaller[x] * inv
+s516002208.py(49): for i,x in enumerate(A_rev):
+s516002208.py(50):     if x != 0:
+s516002208.py(51):         right_smaller_prob[i] = rest_smaller[x] * inv
+s516002208.py(49): for i,x in enumerate(A_rev):
+s516002208.py(50):     if x != 0:
+s516002208.py(49): for i,x in enumerate(A_rev):
+s516002208.py(53): right_smaller_filled = [0] * N
+s516002208.py(54): bit = BIT(max_n = N)
+ --- modulename: s516002208, funcname: __init__
+s516002208.py(19):         self.size = max_n + 1
+s516002208.py(20):         self.tree = [0] * self.size
+s516002208.py(55): p = 0
+s516002208.py(56): for i,x in enumerate(A_rev):
+s516002208.py(57):     if x != 0:
+s516002208.py(62):         right_smaller_filled[i] = p * inv
+s516002208.py(56): for i,x in enumerate(A_rev):
+s516002208.py(57):     if x != 0:
+s516002208.py(58):         right_smaller_filled[i] = bit.get_sum(x)
+ --- modulename: s516002208, funcname: get_sum
+s516002208.py(23):         s = 0
+s516002208.py(24):         while i:
+s516002208.py(25):             s += self.tree[i]
+s516002208.py(26):             i -= i & -i
+s516002208.py(24):         while i:
+s516002208.py(25):             s += self.tree[i]
+s516002208.py(26):             i -= i & -i
+s516002208.py(24):         while i:
+s516002208.py(27):         return s
+s516002208.py(59):         bit.add(x,1)
+ --- modulename: s516002208, funcname: add
+s516002208.py(30):         while i < self.size:
+s516002208.py(31):             self.tree[i] += x
+s516002208.py(32):             i += i & -i
+s516002208.py(30):         while i < self.size:
+s516002208.py(31):             self.tree[i] += x
+s516002208.py(32):             i += i & -i
+s516002208.py(30):         while i < self.size:
+s516002208.py(60):         p += zero_cnt-rest_smaller[x]
+s516002208.py(56): for i,x in enumerate(A_rev):
+s516002208.py(57):     if x != 0:
+s516002208.py(58):         right_smaller_filled[i] = bit.get_sum(x)
+ --- modulename: s516002208, funcname: get_sum
+s516002208.py(23):         s = 0
+s516002208.py(24):         while i:
+s516002208.py(25):             s += self.tree[i]
+s516002208.py(26):             i -= i & -i
+s516002208.py(24):         while i:
+s516002208.py(27):         return s
+s516002208.py(59):         bit.add(x,1)
+ --- modulename: s516002208, funcname: add
+s516002208.py(30):         while i < self.size:
+s516002208.py(31):             self.tree[i] += x
+s516002208.py(32):             i += i & -i
+s516002208.py(30):         while i < self.size:
+s516002208.py(31):             self.tree[i] += x
+s516002208.py(32):             i += i & -i
+s516002208.py(30):         while i < self.size:
+s516002208.py(60):         p += zero_cnt-rest_smaller[x]
+s516002208.py(56): for i,x in enumerate(A_rev):
+s516002208.py(57):     if x != 0:
+s516002208.py(62):         right_smaller_filled[i] = p * inv
+s516002208.py(56): for i,x in enumerate(A_rev):
+s516002208.py(64): fact = [1] * (N+1)
+s516002208.py(65): for n in range(1,N+1):
+s516002208.py(66):     fact[n] = fact[n-1] * n % MOD
+s516002208.py(65): for n in range(1,N+1):
+s516002208.py(66):     fact[n] = fact[n-1] * n % MOD
+s516002208.py(65): for n in range(1,N+1):
+s516002208.py(66):     fact[n] = fact[n-1] * n % MOD
+s516002208.py(65): for n in range(1,N+1):
+s516002208.py(66):     fact[n] = fact[n-1] * n % MOD
+s516002208.py(65): for n in range(1,N+1):
+s516002208.py(68): answer = (1+sum(y*(x*p+z) for x,p,y,z in zip(right_zero,right_smaller_prob,fact,right_smaller_filled))) * fact[zero_cnt] % MOD
+ --- modulename: s516002208, funcname: <genexpr>
+s516002208.py(68): answer = (1+sum(y*(x*p+z) for x,p,y,z in zip(right_zero,right_smaller_prob,fact,right_smaller_filled))) * fact[zero_cnt] % MOD
+ --- modulename: s516002208, funcname: <genexpr>
+s516002208.py(68): answer = (1+sum(y*(x*p+z) for x,p,y,z in zip(right_zero,right_smaller_prob,fact,right_smaller_filled))) * fact[zero_cnt] % MOD
+ --- modulename: s516002208, funcname: <genexpr>
+s516002208.py(68): answer = (1+sum(y*(x*p+z) for x,p,y,z in zip(right_zero,right_smaller_prob,fact,right_smaller_filled))) * fact[zero_cnt] % MOD
+ --- modulename: s516002208, funcname: <genexpr>
+s516002208.py(68): answer = (1+sum(y*(x*p+z) for x,p,y,z in zip(right_zero,right_smaller_prob,fact,right_smaller_filled))) * fact[zero_cnt] % MOD
+ --- modulename: s516002208, funcname: <genexpr>
+s516002208.py(68): answer = (1+sum(y*(x*p+z) for x,p,y,z in zip(right_zero,right_smaller_prob,fact,right_smaller_filled))) * fact[zero_cnt] % MOD
+s516002208.py(69): print(answer)
+23

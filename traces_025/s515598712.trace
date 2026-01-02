@@ -1,0 +1,544 @@
+ --- modulename: s515598712, funcname: <module>
+s515598712.py(3): import sys
+s515598712.py(4): from operator import add
+s515598712.py(6): def input(): return sys.stdin.readline().strip()
+s515598712.py(7): def list2d(a, b, c): return [[c] * b for i in range(a)]
+s515598712.py(8): def list3d(a, b, c, d): return [[[d] * c for j in range(b)] for i in range(a)]
+s515598712.py(9): def list4d(a, b, c, d, e): return [[[[e] * d for j in range(c)] for j in range(b)] for i in range(a)]
+s515598712.py(10): def ceil(x, y=1): return int(-(-x // y))
+s515598712.py(11): def INT(): return int(input())
+s515598712.py(12): def MAP(): return map(int, input().split())
+s515598712.py(13): def LIST(N=None): return list(MAP()) if N is None else [INT() for i in range(N)]
+s515598712.py(14): def Yes(): print('Yes')
+s515598712.py(15): def No(): print('No')
+s515598712.py(16): def YES(): print('YES')
+s515598712.py(17): def NO(): print('NO')
+s515598712.py(18): sys.setrecursionlimit(10 ** 9)
+s515598712.py(19): INF = 2 ** 31 - 1
+s515598712.py(20): MOD = 10 ** 9 + 7
+s515598712.py(22): class SegTreeLazy:
+ --- modulename: s515598712, funcname: SegTreeLazy
+s515598712.py(22): class SegTreeLazy:
+s515598712.py(23):     """ 遅延評価セグメント木(区間更新、区間合計取得) """
+s515598712.py(25):     def __init__(self, N, func, intv):
+s515598712.py(34):     def gindex(self, l, r):
+s515598712.py(47):     def propagates(self, *ids):
+s515598712.py(56):     def update(self, l, r, x):
+s515598712.py(77):     def query(self, l, r):
+s515598712.py(96): N, Q = MAP()
+ --- modulename: s515598712, funcname: MAP
+s515598712.py(12): def MAP(): return map(int, input().split())
+ --- modulename: s515598712, funcname: input
+s515598712.py(6): def input(): return sys.stdin.readline().strip()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s515598712.py(97): stl = SegTreeLazy(N+1, add, 0)
+ --- modulename: s515598712, funcname: __init__
+s515598712.py(26):         self.intv = intv
+s515598712.py(27):         self.func = func
+s515598712.py(28):         self.LV = (N-1).bit_length()
+s515598712.py(29):         self.N0 = 2**self.LV
+s515598712.py(30):         self.data = [intv]*(2*self.N0)
+s515598712.py(31):         self.lazy = [None]*(2*self.N0)
+s515598712.py(99): ans = []
+s515598712.py(100): for i in range(Q):
+s515598712.py(101):     cmd, *arg = MAP()
+ --- modulename: s515598712, funcname: MAP
+s515598712.py(12): def MAP(): return map(int, input().split())
+ --- modulename: s515598712, funcname: input
+s515598712.py(6): def input(): return sys.stdin.readline().strip()
+s515598712.py(102):     if cmd == 0:
+s515598712.py(103):         s, t, x = arg
+s515598712.py(104):         stl.update(s, t+1, x)
+ --- modulename: s515598712, funcname: update
+s515598712.py(59):         *ids, = self.gindex(l, r)
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(35):         L = (l + self.N0) >> 1; R = (r + self.N0) >> 1
+s515598712.py(36):         lc = 0 if l & 1 else (L & -L).bit_length()
+s515598712.py(37):         rc = 0 if r & 1 else (R & -R).bit_length()
+s515598712.py(38):         v = 2
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(43):                 yield L
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(43):                 yield L
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(61):         self.propagates(*ids)
+ --- modulename: s515598712, funcname: propagates
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(63):         L = self.N0 + l; R = self.N0 + r
+s515598712.py(64):         v = x
+s515598712.py(65):         while L < R:
+s515598712.py(66):             if R & 1:
+s515598712.py(69):             if L & 1:
+s515598712.py(70):                 self.lazy[L-1] = self.data[L-1] = v
+s515598712.py(71):                 L += 1
+s515598712.py(72):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(65):         while L < R:
+s515598712.py(66):             if R & 1:
+s515598712.py(69):             if L & 1:
+s515598712.py(70):                 self.lazy[L-1] = self.data[L-1] = v
+s515598712.py(71):                 L += 1
+s515598712.py(72):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(65):         while L < R:
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(100): for i in range(Q):
+s515598712.py(101):     cmd, *arg = MAP()
+ --- modulename: s515598712, funcname: MAP
+s515598712.py(12): def MAP(): return map(int, input().split())
+ --- modulename: s515598712, funcname: input
+s515598712.py(6): def input(): return sys.stdin.readline().strip()
+s515598712.py(102):     if cmd == 0:
+s515598712.py(103):         s, t, x = arg
+s515598712.py(104):         stl.update(s, t+1, x)
+ --- modulename: s515598712, funcname: update
+s515598712.py(59):         *ids, = self.gindex(l, r)
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(35):         L = (l + self.N0) >> 1; R = (r + self.N0) >> 1
+s515598712.py(36):         lc = 0 if l & 1 else (L & -L).bit_length()
+s515598712.py(37):         rc = 0 if r & 1 else (R & -R).bit_length()
+s515598712.py(38):         v = 2
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(43):                 yield L
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(61):         self.propagates(*ids)
+ --- modulename: s515598712, funcname: propagates
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(63):         L = self.N0 + l; R = self.N0 + r
+s515598712.py(64):         v = x
+s515598712.py(65):         while L < R:
+s515598712.py(66):             if R & 1:
+s515598712.py(67):                 R -= 1
+s515598712.py(68):                 self.lazy[R-1] = self.data[R-1] = v
+s515598712.py(69):             if L & 1:
+s515598712.py(72):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(65):         while L < R:
+s515598712.py(66):             if R & 1:
+s515598712.py(69):             if L & 1:
+s515598712.py(70):                 self.lazy[L-1] = self.data[L-1] = v
+s515598712.py(71):                 L += 1
+s515598712.py(72):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(65):         while L < R:
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(100): for i in range(Q):
+s515598712.py(101):     cmd, *arg = MAP()
+ --- modulename: s515598712, funcname: MAP
+s515598712.py(12): def MAP(): return map(int, input().split())
+ --- modulename: s515598712, funcname: input
+s515598712.py(6): def input(): return sys.stdin.readline().strip()
+s515598712.py(102):     if cmd == 0:
+s515598712.py(106):         s, t = arg
+s515598712.py(107):         ans.append(str(stl.query(s, t+1)))
+ --- modulename: s515598712, funcname: query
+s515598712.py(81):         self.propagates(*self.gindex(l, r))
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(35):         L = (l + self.N0) >> 1; R = (r + self.N0) >> 1
+s515598712.py(36):         lc = 0 if l & 1 else (L & -L).bit_length()
+s515598712.py(37):         rc = 0 if r & 1 else (R & -R).bit_length()
+s515598712.py(38):         v = 2
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+ --- modulename: s515598712, funcname: propagates
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(82):         L = self.N0 + l; R = self.N0 + r
+s515598712.py(85):         s = self.intv
+s515598712.py(86):         while L < R:
+s515598712.py(87):             if R & 1:
+s515598712.py(90):             if L & 1:
+s515598712.py(93):             L >>= 1; R >>= 1
+s515598712.py(86):         while L < R:
+s515598712.py(87):             if R & 1:
+s515598712.py(88):                 R -= 1
+s515598712.py(89):                 s = self.func(s, self.data[R-1])
+s515598712.py(90):             if L & 1:
+s515598712.py(93):             L >>= 1; R >>= 1
+s515598712.py(86):         while L < R:
+s515598712.py(87):             if R & 1:
+s515598712.py(88):                 R -= 1
+s515598712.py(89):                 s = self.func(s, self.data[R-1])
+s515598712.py(90):             if L & 1:
+s515598712.py(93):             L >>= 1; R >>= 1
+s515598712.py(86):         while L < R:
+s515598712.py(94):         return s
+s515598712.py(100): for i in range(Q):
+s515598712.py(101):     cmd, *arg = MAP()
+ --- modulename: s515598712, funcname: MAP
+s515598712.py(12): def MAP(): return map(int, input().split())
+ --- modulename: s515598712, funcname: input
+s515598712.py(6): def input(): return sys.stdin.readline().strip()
+s515598712.py(102):     if cmd == 0:
+s515598712.py(106):         s, t = arg
+s515598712.py(107):         ans.append(str(stl.query(s, t+1)))
+ --- modulename: s515598712, funcname: query
+s515598712.py(81):         self.propagates(*self.gindex(l, r))
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(35):         L = (l + self.N0) >> 1; R = (r + self.N0) >> 1
+s515598712.py(36):         lc = 0 if l & 1 else (L & -L).bit_length()
+s515598712.py(37):         rc = 0 if r & 1 else (R & -R).bit_length()
+s515598712.py(38):         v = 2
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+ --- modulename: s515598712, funcname: propagates
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(82):         L = self.N0 + l; R = self.N0 + r
+s515598712.py(85):         s = self.intv
+s515598712.py(86):         while L < R:
+s515598712.py(87):             if R & 1:
+s515598712.py(90):             if L & 1:
+s515598712.py(93):             L >>= 1; R >>= 1
+s515598712.py(86):         while L < R:
+s515598712.py(87):             if R & 1:
+s515598712.py(88):                 R -= 1
+s515598712.py(89):                 s = self.func(s, self.data[R-1])
+s515598712.py(90):             if L & 1:
+s515598712.py(93):             L >>= 1; R >>= 1
+s515598712.py(86):         while L < R:
+s515598712.py(94):         return s
+s515598712.py(100): for i in range(Q):
+s515598712.py(101):     cmd, *arg = MAP()
+ --- modulename: s515598712, funcname: MAP
+s515598712.py(12): def MAP(): return map(int, input().split())
+ --- modulename: s515598712, funcname: input
+s515598712.py(6): def input(): return sys.stdin.readline().strip()
+s515598712.py(102):     if cmd == 0:
+s515598712.py(103):         s, t, x = arg
+s515598712.py(104):         stl.update(s, t+1, x)
+ --- modulename: s515598712, funcname: update
+s515598712.py(59):         *ids, = self.gindex(l, r)
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(35):         L = (l + self.N0) >> 1; R = (r + self.N0) >> 1
+s515598712.py(36):         lc = 0 if l & 1 else (L & -L).bit_length()
+s515598712.py(37):         rc = 0 if r & 1 else (R & -R).bit_length()
+s515598712.py(38):         v = 2
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(43):                 yield L
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(43):                 yield L
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(61):         self.propagates(*ids)
+ --- modulename: s515598712, funcname: propagates
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(53):             self.lazy[2*i-1] = self.data[2*i-1] = self.lazy[2*i] = self.data[2*i] = v >> 1
+s515598712.py(54):             self.lazy[i-1] = None
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(63):         L = self.N0 + l; R = self.N0 + r
+s515598712.py(64):         v = x
+s515598712.py(65):         while L < R:
+s515598712.py(66):             if R & 1:
+s515598712.py(69):             if L & 1:
+s515598712.py(70):                 self.lazy[L-1] = self.data[L-1] = v
+s515598712.py(71):                 L += 1
+s515598712.py(72):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(65):         while L < R:
+s515598712.py(66):             if R & 1:
+s515598712.py(67):                 R -= 1
+s515598712.py(68):                 self.lazy[R-1] = self.data[R-1] = v
+s515598712.py(69):             if L & 1:
+s515598712.py(72):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(65):         while L < R:
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(75):             self.data[i-1] = self.func(self.data[2*i-1], self.data[2*i])
+s515598712.py(74):         for i in ids:
+s515598712.py(100): for i in range(Q):
+s515598712.py(101):     cmd, *arg = MAP()
+ --- modulename: s515598712, funcname: MAP
+s515598712.py(12): def MAP(): return map(int, input().split())
+ --- modulename: s515598712, funcname: input
+s515598712.py(6): def input(): return sys.stdin.readline().strip()
+s515598712.py(102):     if cmd == 0:
+s515598712.py(106):         s, t = arg
+s515598712.py(107):         ans.append(str(stl.query(s, t+1)))
+ --- modulename: s515598712, funcname: query
+s515598712.py(81):         self.propagates(*self.gindex(l, r))
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(35):         L = (l + self.N0) >> 1; R = (r + self.N0) >> 1
+s515598712.py(36):         lc = 0 if l & 1 else (L & -L).bit_length()
+s515598712.py(37):         rc = 0 if r & 1 else (R & -R).bit_length()
+s515598712.py(38):         v = 2
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(43):                 yield L
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(43):                 yield L
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+ --- modulename: s515598712, funcname: propagates
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(53):             self.lazy[2*i-1] = self.data[2*i-1] = self.lazy[2*i] = self.data[2*i] = v >> 1
+s515598712.py(54):             self.lazy[i-1] = None
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(82):         L = self.N0 + l; R = self.N0 + r
+s515598712.py(85):         s = self.intv
+s515598712.py(86):         while L < R:
+s515598712.py(87):             if R & 1:
+s515598712.py(88):                 R -= 1
+s515598712.py(89):                 s = self.func(s, self.data[R-1])
+s515598712.py(90):             if L & 1:
+s515598712.py(91):                 s = self.func(s, self.data[L-1])
+s515598712.py(92):                 L += 1
+s515598712.py(93):             L >>= 1; R >>= 1
+s515598712.py(86):         while L < R:
+s515598712.py(94):         return s
+s515598712.py(100): for i in range(Q):
+s515598712.py(101):     cmd, *arg = MAP()
+ --- modulename: s515598712, funcname: MAP
+s515598712.py(12): def MAP(): return map(int, input().split())
+ --- modulename: s515598712, funcname: input
+s515598712.py(6): def input(): return sys.stdin.readline().strip()
+s515598712.py(102):     if cmd == 0:
+s515598712.py(106):         s, t = arg
+s515598712.py(107):         ans.append(str(stl.query(s, t+1)))
+ --- modulename: s515598712, funcname: query
+s515598712.py(81):         self.propagates(*self.gindex(l, r))
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(35):         L = (l + self.N0) >> 1; R = (r + self.N0) >> 1
+s515598712.py(36):         lc = 0 if l & 1 else (L & -L).bit_length()
+s515598712.py(37):         rc = 0 if r & 1 else (R & -R).bit_length()
+s515598712.py(38):         v = 2
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+s515598712.py(40):             if rc <= i:
+s515598712.py(41):                 yield R
+ --- modulename: s515598712, funcname: gindex
+s515598712.py(42):             if L < R and lc <= i:
+s515598712.py(44):             L >>= 1; R >>= 1; v <<= 1
+s515598712.py(39):         for i in range(self.LV):
+ --- modulename: s515598712, funcname: propagates
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(50):             v = self.lazy[i-1]
+s515598712.py(51):             if v is None:
+s515598712.py(52):                 continue
+s515598712.py(49):         for i in reversed(ids):
+s515598712.py(82):         L = self.N0 + l; R = self.N0 + r
+s515598712.py(85):         s = self.intv
+s515598712.py(86):         while L < R:
+s515598712.py(87):             if R & 1:
+s515598712.py(90):             if L & 1:
+s515598712.py(93):             L >>= 1; R >>= 1
+s515598712.py(86):         while L < R:
+s515598712.py(87):             if R & 1:
+s515598712.py(88):                 R -= 1
+s515598712.py(89):                 s = self.func(s, self.data[R-1])
+s515598712.py(90):             if L & 1:
+s515598712.py(93):             L >>= 1; R >>= 1
+s515598712.py(86):         while L < R:
+s515598712.py(87):             if R & 1:
+s515598712.py(88):                 R -= 1
+s515598712.py(89):                 s = self.func(s, self.data[R-1])
+s515598712.py(90):             if L & 1:
+s515598712.py(93):             L >>= 1; R >>= 1
+s515598712.py(86):         while L < R:
+s515598712.py(94):         return s
+s515598712.py(100): for i in range(Q):
+s515598712.py(108): print('\n'.join(ans))
+-5
+1
+6
+8
