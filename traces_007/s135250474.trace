@@ -1,0 +1,1895 @@
+ --- modulename: s135250474, funcname: <module>
+s135250474.py(2): class SegmentTree:
+ --- modulename: s135250474, funcname: SegmentTree
+s135250474.py(2): class SegmentTree:
+s135250474.py(3):     """
+s135250474.py(7):     @classmethod
+s135250474.py(8):     def all_identity(cls, operator, identity, size):
+s135250474.py(11):     @classmethod
+s135250474.py(12):     def from_initial_data(cls, operator, identity, data):
+s135250474.py(23):     def __init__(self, operator, identity, data):
+s135250474.py(29):     def _interval(self, a, b):
+s135250474.py(48):     def __getitem__(self, i):
+s135250474.py(56):     def __setitem__(self, i, v):
+s135250474.py(65):     def __iter__(self):
+s135250474.py(68): import sys
+s135250474.py(69): read = sys.stdin.buffer.read
+s135250474.py(70): readline = sys.stdin.buffer.readline
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+s135250474.py(75): L = 300000
+s135250474.py(76): N,K = map(int,readline().split())
+s135250474.py(77): seg = SegmentTree.all_identity(max2, 0, L+1)
+ --- modulename: s135250474, funcname: all_identity
+s135250474.py(9):         return cls(operator, identity, [identity]*(2 << (size-1).bit_length()))
+ --- modulename: s135250474, funcname: __init__
+s135250474.py(24):         self.op = operator
+s135250474.py(25):         self.id = identity
+s135250474.py(26):         self.data = data
+s135250474.py(27):         self.size = len(data)//2
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(42):                 b -= 1
+s135250474.py(43):                 rb = op(data[b],rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(80):     seg[a] = seg[max2(0,a-K):min2(L,a+K)+1]+1
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(73): min2 = lambda x,y: x if x < y else y
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+ --- modulename: s135250474, funcname: __setitem__
+s135250474.py(57):         i += self.size
+s135250474.py(58):         data = self.data
+s135250474.py(59):         op = self.op
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(61):             data[i] = v
+s135250474.py(62):             v = op(data[i^1],v) if i & 1 else op(v,data[i^1])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(63):             i >>= 1
+s135250474.py(60):         while i:
+s135250474.py(79): for a in map(int,read().split()):
+s135250474.py(82): print(seg[:])
+ --- modulename: s135250474, funcname: __getitem__
+s135250474.py(49):         if isinstance(i, slice):
+s135250474.py(50):             return self._interval(
+s135250474.py(51):                                     0 if i.start is None else i.start,
+s135250474.py(52):                                     self.size if i.stop is None else i.stop)
+s135250474.py(50):             return self._interval(
+ --- modulename: s135250474, funcname: _interval
+s135250474.py(30):         a += self.size
+s135250474.py(31):         b += self.size
+s135250474.py(32):         ra = self.id
+s135250474.py(33):         rb = self.id
+s135250474.py(35):         data = self.data
+s135250474.py(36):         op = self.op
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(38):             if a & 1:
+s135250474.py(39):                 ra = op(ra,data[a])
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+s135250474.py(40):                 a += 1
+s135250474.py(41):             if b & 1:
+s135250474.py(44):             a >>= 1
+s135250474.py(45):             b >>= 1
+s135250474.py(37):         while a < b:
+s135250474.py(46):         return op(ra,rb)
+ --- modulename: s135250474, funcname: <lambda>
+s135250474.py(72): max2 = lambda x,y: x if x > y else y
+7
