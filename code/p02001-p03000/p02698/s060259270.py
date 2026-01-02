@@ -1,0 +1,80 @@
+# 木によってLISを作り、dfsで抜けるときにLISをその前の状態まで復元する
+
+import sys
+sys.setrecursionlimit(1 << 25)
+read = sys.stdin.readline
+ra = range
+enu = enumerate
+
+
+def mina1(x):
+    return int(x) - 1
+
+
+def read_ints(mina=False):
+    if mina:
+        return list(map(mina1, read().split()))
+    else:
+        return list(map(int, read().split()))
+
+
+def read_a_int():
+    return int(read())
+
+
+from bisect import bisect_left, bisect_right
+
+####################
+# dp = []
+# for a in A:
+#     print(dp)
+#     idx = bisect_left(dp, a)  # 初めて真に大きい要素になるidx
+#     if idx == len(dp):
+#         dp.append(a)
+#     else:
+#         dp[idx] = a  # aに更新
+# print(dp)
+# print(len(dp))
+####################
+
+from collections import defaultdict
+N = read_a_int()
+A = read_ints()
+tree = defaultdict(lambda: [])
+for _ in ra(N - 1):
+    u, v = read_ints(mina=True)
+    tree[u].append(v)
+    tree[v].append(u)
+
+LIS = []
+ans = [0] * N  # 各ノードのlen(LIS)を記録
+
+
+def dfs(now, p):  # 現在のノード、親
+    # 終了条件# 子が無いとき
+
+    # LISの更新
+    idx = bisect_left(LIS, A[now])
+    is_append = False
+    if idx == len(LIS):
+        LIS.append(A[now])
+        is_append = True
+    else:
+        old = LIS[idx]   # なんの値だったか持っておく
+        LIS[idx] = A[now]  # aに更新
+    ans[now] = len(LIS)  # 答えを記録
+
+    # 次のノードを探索
+    for to in tree[now]:
+        if to == p:
+            continue
+        dfs(to, now)
+    # 抜けるときにLISを復元
+    if is_append:
+        del LIS[idx]
+    else:
+        LIS[idx] = old
+
+
+dfs(0, -1)
+print(*ans, sep='\n')
