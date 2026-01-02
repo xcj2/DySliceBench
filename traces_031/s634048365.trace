@@ -1,0 +1,77 @@
+ --- modulename: s634048365, funcname: <module>
+s634048365.py(2): import os
+s634048365.py(3): import sys
+s634048365.py(4): from io import BytesIO, IOBase
+s634048365.py(5): def main():
+s634048365.py(14): BUFSIZE = 8192
+s634048365.py(17): class FastIO(IOBase):
+ --- modulename: s634048365, funcname: FastIO
+s634048365.py(17): class FastIO(IOBase):
+s634048365.py(18):     newlines = 0
+s634048365.py(20):     def __init__(self, file):
+s634048365.py(26):     def read(self):
+s634048365.py(36):     def readline(self):
+s634048365.py(45):     def flush(self):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s634048365.py(51): class IOWrapper(IOBase):
+ --- modulename: s634048365, funcname: IOWrapper
+s634048365.py(51): class IOWrapper(IOBase):
+s634048365.py(52):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s634048365.py(61): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s634048365, funcname: __init__
+s634048365.py(53):         self.buffer = FastIO(file)
+ --- modulename: s634048365, funcname: __init__
+s634048365.py(21):         self._fd = file.fileno()
+s634048365.py(22):         self.buffer = BytesIO()
+s634048365.py(23):         self.writable = "x" in file.mode or "r" not in file.mode
+s634048365.py(24):         self.write = self.buffer.write if self.writable else None
+s634048365.py(54):         self.flush = self.buffer.flush
+s634048365.py(55):         self.writable = self.buffer.writable
+s634048365.py(56):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s634048365.py(57):         self.read = lambda: self.buffer.read().decode("ascii")
+s634048365.py(58):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s634048365, funcname: __init__
+s634048365.py(53):         self.buffer = FastIO(file)
+ --- modulename: s634048365, funcname: __init__
+s634048365.py(21):         self._fd = file.fileno()
+s634048365.py(22):         self.buffer = BytesIO()
+s634048365.py(23):         self.writable = "x" in file.mode or "r" not in file.mode
+s634048365.py(24):         self.write = self.buffer.write if self.writable else None
+s634048365.py(54):         self.flush = self.buffer.flush
+s634048365.py(55):         self.writable = self.buffer.writable
+s634048365.py(56):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s634048365.py(57):         self.read = lambda: self.buffer.read().decode("ascii")
+s634048365.py(58):         self.readline = lambda: self.buffer.readline().decode("ascii")
+s634048365.py(62): input = lambda: sys.stdin.readline().rstrip("\r\n")
+s634048365.py(66): if __name__ == "__main__":
+s634048365.py(67):     main()
+ --- modulename: s634048365, funcname: main
+s634048365.py(6):     startHour, startMin, endHour, endMin, studyTime = map(int, input().rstrip().split())
+ --- modulename: s634048365, funcname: <lambda>
+s634048365.py(62): input = lambda: sys.stdin.readline().rstrip("\r\n")
+ --- modulename: s634048365, funcname: <lambda>
+s634048365.py(58):         self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s634048365, funcname: readline
+s634048365.py(37):         while self.newlines == 0:
+s634048365.py(38):             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s634048365.py(39):             self.newlines = b.count(b"\n") + (not b)
+s634048365.py(40):             ptr = self.buffer.tell()
+s634048365.py(41):             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+s634048365.py(37):         while self.newlines == 0:
+s634048365.py(42):         self.newlines -= 1
+s634048365.py(43):         return self.buffer.readline()
+s634048365.py(7):     diff = (endHour-startHour)*60 - startMin + endMin
+s634048365.py(8):     if diff <= studyTime:
+s634048365.py(11):         print(diff-studyTime)
+ --- modulename: s634048365, funcname: <lambda>
+s634048365.py(56):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+270 --- modulename: s634048365, funcname: <lambda>
+s634048365.py(56):         self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
