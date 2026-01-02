@@ -1,0 +1,175 @@
+ --- modulename: s826479852, funcname: <module>
+s826479852.py(2): def poly_divide(f, g):
+s826479852.py(13): def poly_product(f, g):
+s826479852.py(21): def assign(f, x):
+s826479852.py(31): def c_mul(c, f):
+s826479852.py(37): def poly_add(f, g):
+s826479852.py(45): p = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s826479852.py(46): a = list(map(int, input().split()))
+s826479852.py(47): inv = [0]*p
+s826479852.py(48): P = [1]
+s826479852.py(49): for i in range(p):
+s826479852.py(50):     inv[i] = pow(i, p-2, p)
+s826479852.py(49): for i in range(p):
+s826479852.py(50):     inv[i] = pow(i, p-2, p)
+s826479852.py(49): for i in range(p):
+s826479852.py(51): for i in range(p):
+s826479852.py(52):     b = [-i, 1]
+s826479852.py(53):     P = poly_product(b, P)
+ --- modulename: s826479852, funcname: poly_product
+s826479852.py(14):     n, m = len(f), len(g)
+s826479852.py(15):     res = [0]*(n+m-1)
+s826479852.py(16):     for i in range(n):
+s826479852.py(17):         for j in range(m):
+s826479852.py(18):             res[i+j]+=g[j]*f[i]
+s826479852.py(19):             res[i+j]%=p
+s826479852.py(17):         for j in range(m):
+s826479852.py(16):     for i in range(n):
+s826479852.py(17):         for j in range(m):
+s826479852.py(18):             res[i+j]+=g[j]*f[i]
+s826479852.py(19):             res[i+j]%=p
+s826479852.py(17):         for j in range(m):
+s826479852.py(16):     for i in range(n):
+s826479852.py(20):     return res
+s826479852.py(51): for i in range(p):
+s826479852.py(52):     b = [-i, 1]
+s826479852.py(53):     P = poly_product(b, P)
+ --- modulename: s826479852, funcname: poly_product
+s826479852.py(14):     n, m = len(f), len(g)
+s826479852.py(15):     res = [0]*(n+m-1)
+s826479852.py(16):     for i in range(n):
+s826479852.py(17):         for j in range(m):
+s826479852.py(18):             res[i+j]+=g[j]*f[i]
+s826479852.py(19):             res[i+j]%=p
+s826479852.py(17):         for j in range(m):
+s826479852.py(18):             res[i+j]+=g[j]*f[i]
+s826479852.py(19):             res[i+j]%=p
+s826479852.py(17):         for j in range(m):
+s826479852.py(16):     for i in range(n):
+s826479852.py(17):         for j in range(m):
+s826479852.py(18):             res[i+j]+=g[j]*f[i]
+s826479852.py(19):             res[i+j]%=p
+s826479852.py(17):         for j in range(m):
+s826479852.py(18):             res[i+j]+=g[j]*f[i]
+s826479852.py(19):             res[i+j]%=p
+s826479852.py(17):         for j in range(m):
+s826479852.py(16):     for i in range(n):
+s826479852.py(20):     return res
+s826479852.py(51): for i in range(p):
+s826479852.py(54): R = [0]*p
+s826479852.py(55): for i in range(p):
+s826479852.py(56):     b = [-i, 1]
+s826479852.py(57):     Q, _ = poly_divide(b, P)
+ --- modulename: s826479852, funcname: poly_divide
+s826479852.py(3):     n = len(g)
+s826479852.py(4):     a, b = f
+s826479852.py(5):     q = [0]*(n-1)
+s826479852.py(6):     r = 0
+s826479852.py(7):     q[-1] = g[-1]*inv[b%p]%p
+s826479852.py(8):     for i in range(n-2)[::-1]:
+s826479852.py(9):         q[i] = (g[i+1]-q[i+1]*a)*inv[b%p]%p
+s826479852.py(8):     for i in range(n-2)[::-1]:
+s826479852.py(10):     r = g[0]-q[0]
+s826479852.py(11):     return q, r
+s826479852.py(58):     v = assign(Q, i)
+ --- modulename: s826479852, funcname: assign
+s826479852.py(22):     tmp = 1
+s826479852.py(23):     res = 0
+s826479852.py(24):     n = len(f)
+s826479852.py(25):     for i in range(n):
+s826479852.py(26):         res+=f[i]*tmp
+s826479852.py(27):         tmp*=x
+s826479852.py(28):         tmp%=p
+s826479852.py(29):         res%=p
+s826479852.py(25):     for i in range(n):
+s826479852.py(26):         res+=f[i]*tmp
+s826479852.py(27):         tmp*=x
+s826479852.py(28):         tmp%=p
+s826479852.py(29):         res%=p
+s826479852.py(25):     for i in range(n):
+s826479852.py(30):     return res
+s826479852.py(59):     Q=c_mul(inv[v%p]*a[i], Q)
+ --- modulename: s826479852, funcname: c_mul
+s826479852.py(32):     n = len(f)
+s826479852.py(33):     for i in range(n):
+s826479852.py(34):         f[i]*=c
+s826479852.py(35):         f[i]%=p
+s826479852.py(33):     for i in range(n):
+s826479852.py(34):         f[i]*=c
+s826479852.py(35):         f[i]%=p
+s826479852.py(33):     for i in range(n):
+s826479852.py(36):     return f
+s826479852.py(60):     R = poly_add(R, Q)
+ --- modulename: s826479852, funcname: poly_add
+s826479852.py(38):     n = len(g)
+s826479852.py(39):     for i in range(n):
+s826479852.py(40):         f[i]+=g[i]
+s826479852.py(41):         f[i]%=p
+s826479852.py(39):     for i in range(n):
+s826479852.py(40):         f[i]+=g[i]
+s826479852.py(41):         f[i]%=p
+s826479852.py(39):     for i in range(n):
+s826479852.py(42):     return f
+s826479852.py(55): for i in range(p):
+s826479852.py(56):     b = [-i, 1]
+s826479852.py(57):     Q, _ = poly_divide(b, P)
+ --- modulename: s826479852, funcname: poly_divide
+s826479852.py(3):     n = len(g)
+s826479852.py(4):     a, b = f
+s826479852.py(5):     q = [0]*(n-1)
+s826479852.py(6):     r = 0
+s826479852.py(7):     q[-1] = g[-1]*inv[b%p]%p
+s826479852.py(8):     for i in range(n-2)[::-1]:
+s826479852.py(9):         q[i] = (g[i+1]-q[i+1]*a)*inv[b%p]%p
+s826479852.py(8):     for i in range(n-2)[::-1]:
+s826479852.py(10):     r = g[0]-q[0]
+s826479852.py(11):     return q, r
+s826479852.py(58):     v = assign(Q, i)
+ --- modulename: s826479852, funcname: assign
+s826479852.py(22):     tmp = 1
+s826479852.py(23):     res = 0
+s826479852.py(24):     n = len(f)
+s826479852.py(25):     for i in range(n):
+s826479852.py(26):         res+=f[i]*tmp
+s826479852.py(27):         tmp*=x
+s826479852.py(28):         tmp%=p
+s826479852.py(29):         res%=p
+s826479852.py(25):     for i in range(n):
+s826479852.py(26):         res+=f[i]*tmp
+s826479852.py(27):         tmp*=x
+s826479852.py(28):         tmp%=p
+s826479852.py(29):         res%=p
+s826479852.py(25):     for i in range(n):
+s826479852.py(30):     return res
+s826479852.py(59):     Q=c_mul(inv[v%p]*a[i], Q)
+ --- modulename: s826479852, funcname: c_mul
+s826479852.py(32):     n = len(f)
+s826479852.py(33):     for i in range(n):
+s826479852.py(34):         f[i]*=c
+s826479852.py(35):         f[i]%=p
+s826479852.py(33):     for i in range(n):
+s826479852.py(34):         f[i]*=c
+s826479852.py(35):         f[i]%=p
+s826479852.py(33):     for i in range(n):
+s826479852.py(36):     return f
+s826479852.py(60):     R = poly_add(R, Q)
+ --- modulename: s826479852, funcname: poly_add
+s826479852.py(38):     n = len(g)
+s826479852.py(39):     for i in range(n):
+s826479852.py(40):         f[i]+=g[i]
+s826479852.py(41):         f[i]%=p
+s826479852.py(39):     for i in range(n):
+s826479852.py(40):         f[i]+=g[i]
+s826479852.py(41):         f[i]%=p
+s826479852.py(39):     for i in range(n):
+s826479852.py(42):     return f
+s826479852.py(55): for i in range(p):
+s826479852.py(61): print(*R)
+1 1
