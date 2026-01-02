@@ -1,0 +1,812 @@
+ --- modulename: s776937809, funcname: <module>
+s776937809.py(1): from operator import add
+s776937809.py(2): import sys
+s776937809.py(3): input = sys.stdin.buffer.readline
+s776937809.py(4): sys.setrecursionlimit(10 ** 7)
+s776937809.py(7): class LazySegmetTree:
+ --- modulename: s776937809, funcname: LazySegmetTree
+s776937809.py(7): class LazySegmetTree:
+s776937809.py(8):     def __init__(self, size, op_data, u_data, op_lazy, u_lazy, op_merge):
+s776937809.py(25):     def initialize(self, arr):
+s776937809.py(32):     def _propagate_top_down(self, L):
+s776937809.py(46):     def _propagate_bottom_up(self, i):
+s776937809.py(54):     def fold(self, L, R):
+s776937809.py(75):     def update(self, i, val):  # 未調整
+s776937809.py(84):     def range_update(self, L, R, val):
+s776937809.py(105): def main():
+s776937809.py(130): if __name__ == "__main__":
+s776937809.py(131):     main()
+ --- modulename: s776937809, funcname: main
+s776937809.py(106):     N, M = map(int, input().split())
+s776937809.py(107):     LRA = list(tuple(map(int, input().split())) for _ in range(M))
+ --- modulename: s776937809, funcname: <genexpr>
+s776937809.py(107):     LRA = list(tuple(map(int, input().split())) for _ in range(M))
+ --- modulename: s776937809, funcname: <genexpr>
+s776937809.py(107):     LRA = list(tuple(map(int, input().split())) for _ in range(M))
+ --- modulename: s776937809, funcname: <genexpr>
+s776937809.py(107):     LRA = list(tuple(map(int, input().split())) for _ in range(M))
+ --- modulename: s776937809, funcname: <genexpr>
+s776937809.py(107):     LRA = list(tuple(map(int, input().split())) for _ in range(M))
+s776937809.py(108):     LRA.sort(key=lambda x: x[1])
+ --- modulename: s776937809, funcname: <lambda>
+s776937809.py(108):     LRA.sort(key=lambda x: x[1])
+ --- modulename: s776937809, funcname: <lambda>
+s776937809.py(108):     LRA.sort(key=lambda x: x[1])
+ --- modulename: s776937809, funcname: <lambda>
+s776937809.py(108):     LRA.sort(key=lambda x: x[1])
+s776937809.py(110):     op_data = max
+s776937809.py(111):     unit_data = -10 ** 18
+s776937809.py(112):     op_lazy = add
+s776937809.py(113):     unit_lazy = 0
+s776937809.py(114):     op_merge = add
+s776937809.py(115):     seg = LazySegmetTree(N + 1, op_data, unit_data,
+s776937809.py(116):                          op_lazy, unit_lazy, op_merge)
+s776937809.py(115):     seg = LazySegmetTree(N + 1, op_data, unit_data,
+ --- modulename: s776937809, funcname: __init__
+s776937809.py(15):         self.N = size
+s776937809.py(16):         self.op_data = op_data
+s776937809.py(17):         self.op_lazy = op_lazy
+s776937809.py(18):         self.op_merge = op_merge
+s776937809.py(19):         self.u_data = u_data
+s776937809.py(20):         self.u_lazy = u_lazy
+s776937809.py(22):         self.data = [0] * (2 * self.N)
+s776937809.py(23):         self.lazy = [u_lazy] * (2 * self.N)
+s776937809.py(118):     p = 0
+s776937809.py(119):     for i in range(N):
+s776937809.py(120):         val = seg.fold(0, i + 1)
+ --- modulename: s776937809, funcname: fold
+s776937809.py(55):         res = self.u_data
+s776937809.py(56):         op = self.op_data
+s776937809.py(57):         merge = self.op_merge
+s776937809.py(58):         L += self.N
+s776937809.py(59):         R += self.N
+s776937809.py(60):         L0 = L // (L & -L)
+s776937809.py(61):         R0 = R // (R & -R) - 1
+s776937809.py(62):         self._propagate_top_down(L0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(63):         self._propagate_top_down(R0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(68):             if R & 1:
+s776937809.py(69):                 R -= 1
+s776937809.py(70):                 res = op(res, merge(self.data[R], self.lazy[R]))
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(73):         return res
+s776937809.py(121):         seg.update(i + 1, val)
+ --- modulename: s776937809, funcname: update
+s776937809.py(76):         i += self.N
+s776937809.py(77):         i0 = i // (i & -i)
+s776937809.py(78):         self._propagate_top_down(i0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(79):         self.data[i] = self.op_merge(self.data[i], self.lazy[i])
+s776937809.py(80):         self.data[i] = self.op_data(val, self.data[i])
+s776937809.py(81):         self.lazy[i] = self.u_lazy
+s776937809.py(82):         self._propagate_bottom_up(i0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(122):         while p < M and LRA[p][1] <= i + 1:
+s776937809.py(119):     for i in range(N):
+s776937809.py(120):         val = seg.fold(0, i + 1)
+ --- modulename: s776937809, funcname: fold
+s776937809.py(55):         res = self.u_data
+s776937809.py(56):         op = self.op_data
+s776937809.py(57):         merge = self.op_merge
+s776937809.py(58):         L += self.N
+s776937809.py(59):         R += self.N
+s776937809.py(60):         L0 = L // (L & -L)
+s776937809.py(61):         R0 = R // (R & -R) - 1
+s776937809.py(62):         self._propagate_top_down(L0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(63):         self._propagate_top_down(R0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(68):             if R & 1:
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(66):                 res = op(res, merge(self.data[L], self.lazy[L]))
+s776937809.py(67):                 L += 1
+s776937809.py(68):             if R & 1:
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(73):         return res
+s776937809.py(121):         seg.update(i + 1, val)
+ --- modulename: s776937809, funcname: update
+s776937809.py(76):         i += self.N
+s776937809.py(77):         i0 = i // (i & -i)
+s776937809.py(78):         self._propagate_top_down(i0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(79):         self.data[i] = self.op_merge(self.data[i], self.lazy[i])
+s776937809.py(80):         self.data[i] = self.op_data(val, self.data[i])
+s776937809.py(81):         self.lazy[i] = self.u_lazy
+s776937809.py(82):         self._propagate_bottom_up(i0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(122):         while p < M and LRA[p][1] <= i + 1:
+s776937809.py(119):     for i in range(N):
+s776937809.py(120):         val = seg.fold(0, i + 1)
+ --- modulename: s776937809, funcname: fold
+s776937809.py(55):         res = self.u_data
+s776937809.py(56):         op = self.op_data
+s776937809.py(57):         merge = self.op_merge
+s776937809.py(58):         L += self.N
+s776937809.py(59):         R += self.N
+s776937809.py(60):         L0 = L // (L & -L)
+s776937809.py(61):         R0 = R // (R & -R) - 1
+s776937809.py(62):         self._propagate_top_down(L0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(63):         self._propagate_top_down(R0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(68):             if R & 1:
+s776937809.py(69):                 R -= 1
+s776937809.py(70):                 res = op(res, merge(self.data[R], self.lazy[R]))
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(66):                 res = op(res, merge(self.data[L], self.lazy[L]))
+s776937809.py(67):                 L += 1
+s776937809.py(68):             if R & 1:
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(73):         return res
+s776937809.py(121):         seg.update(i + 1, val)
+ --- modulename: s776937809, funcname: update
+s776937809.py(76):         i += self.N
+s776937809.py(77):         i0 = i // (i & -i)
+s776937809.py(78):         self._propagate_top_down(i0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(79):         self.data[i] = self.op_merge(self.data[i], self.lazy[i])
+s776937809.py(80):         self.data[i] = self.op_data(val, self.data[i])
+s776937809.py(81):         self.lazy[i] = self.u_lazy
+s776937809.py(82):         self._propagate_bottom_up(i0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(122):         while p < M and LRA[p][1] <= i + 1:
+s776937809.py(123):             l, r, a = LRA[p]
+s776937809.py(124):             p += 1
+s776937809.py(125):             seg.range_update(l, r + 1, a)
+ --- modulename: s776937809, funcname: range_update
+s776937809.py(85):         op = self.op_lazy
+s776937809.py(86):         L += self.N
+s776937809.py(87):         R += self.N
+s776937809.py(88):         L0 = L // (L & -L)
+s776937809.py(89):         R0 = R // (R & -R) - 1
+s776937809.py(90):         self._propagate_top_down(L0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(91):         self._propagate_top_down(R0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(92):         while L < R:
+s776937809.py(93):             if L & 1:
+s776937809.py(94):                 self.lazy[L] = op(val, self.lazy[L])
+s776937809.py(95):                 L += 1
+s776937809.py(96):             if R & 1:
+s776937809.py(99):             L >>= 1
+s776937809.py(100):             R >>= 1
+s776937809.py(92):         while L < R:
+s776937809.py(93):             if L & 1:
+s776937809.py(96):             if R & 1:
+s776937809.py(97):                 R -= 1
+s776937809.py(98):                 self.lazy[R] = op(val, self.lazy[R])
+s776937809.py(99):             L >>= 1
+s776937809.py(100):             R >>= 1
+s776937809.py(92):         while L < R:
+s776937809.py(101):         self._propagate_bottom_up(L0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(102):         self._propagate_bottom_up(R0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(122):         while p < M and LRA[p][1] <= i + 1:
+s776937809.py(119):     for i in range(N):
+s776937809.py(120):         val = seg.fold(0, i + 1)
+ --- modulename: s776937809, funcname: fold
+s776937809.py(55):         res = self.u_data
+s776937809.py(56):         op = self.op_data
+s776937809.py(57):         merge = self.op_merge
+s776937809.py(58):         L += self.N
+s776937809.py(59):         R += self.N
+s776937809.py(60):         L0 = L // (L & -L)
+s776937809.py(61):         R0 = R // (R & -R) - 1
+s776937809.py(62):         self._propagate_top_down(L0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(63):         self._propagate_top_down(R0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(68):             if R & 1:
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(66):                 res = op(res, merge(self.data[L], self.lazy[L]))
+s776937809.py(67):                 L += 1
+s776937809.py(68):             if R & 1:
+s776937809.py(69):                 R -= 1
+s776937809.py(70):                 res = op(res, merge(self.data[R], self.lazy[R]))
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(73):         return res
+s776937809.py(121):         seg.update(i + 1, val)
+ --- modulename: s776937809, funcname: update
+s776937809.py(76):         i += self.N
+s776937809.py(77):         i0 = i // (i & -i)
+s776937809.py(78):         self._propagate_top_down(i0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(79):         self.data[i] = self.op_merge(self.data[i], self.lazy[i])
+s776937809.py(80):         self.data[i] = self.op_data(val, self.data[i])
+s776937809.py(81):         self.lazy[i] = self.u_lazy
+s776937809.py(82):         self._propagate_bottom_up(i0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(122):         while p < M and LRA[p][1] <= i + 1:
+s776937809.py(123):             l, r, a = LRA[p]
+s776937809.py(124):             p += 1
+s776937809.py(125):             seg.range_update(l, r + 1, a)
+ --- modulename: s776937809, funcname: range_update
+s776937809.py(85):         op = self.op_lazy
+s776937809.py(86):         L += self.N
+s776937809.py(87):         R += self.N
+s776937809.py(88):         L0 = L // (L & -L)
+s776937809.py(89):         R0 = R // (R & -R) - 1
+s776937809.py(90):         self._propagate_top_down(L0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(91):         self._propagate_top_down(R0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(92):         while L < R:
+s776937809.py(93):             if L & 1:
+s776937809.py(96):             if R & 1:
+s776937809.py(97):                 R -= 1
+s776937809.py(98):                 self.lazy[R] = op(val, self.lazy[R])
+s776937809.py(99):             L >>= 1
+s776937809.py(100):             R >>= 1
+s776937809.py(92):         while L < R:
+s776937809.py(93):             if L & 1:
+s776937809.py(96):             if R & 1:
+s776937809.py(97):                 R -= 1
+s776937809.py(98):                 self.lazy[R] = op(val, self.lazy[R])
+s776937809.py(99):             L >>= 1
+s776937809.py(100):             R >>= 1
+s776937809.py(92):         while L < R:
+s776937809.py(101):         self._propagate_bottom_up(L0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(102):         self._propagate_bottom_up(R0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(122):         while p < M and LRA[p][1] <= i + 1:
+s776937809.py(119):     for i in range(N):
+s776937809.py(120):         val = seg.fold(0, i + 1)
+ --- modulename: s776937809, funcname: fold
+s776937809.py(55):         res = self.u_data
+s776937809.py(56):         op = self.op_data
+s776937809.py(57):         merge = self.op_merge
+s776937809.py(58):         L += self.N
+s776937809.py(59):         R += self.N
+s776937809.py(60):         L0 = L // (L & -L)
+s776937809.py(61):         R0 = R // (R & -R) - 1
+s776937809.py(62):         self._propagate_top_down(L0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(63):         self._propagate_top_down(R0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(68):             if R & 1:
+s776937809.py(69):                 R -= 1
+s776937809.py(70):                 res = op(res, merge(self.data[R], self.lazy[R]))
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(66):                 res = op(res, merge(self.data[L], self.lazy[L]))
+s776937809.py(67):                 L += 1
+s776937809.py(68):             if R & 1:
+s776937809.py(69):                 R -= 1
+s776937809.py(70):                 res = op(res, merge(self.data[R], self.lazy[R]))
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(73):         return res
+s776937809.py(121):         seg.update(i + 1, val)
+ --- modulename: s776937809, funcname: update
+s776937809.py(76):         i += self.N
+s776937809.py(77):         i0 = i // (i & -i)
+s776937809.py(78):         self._propagate_top_down(i0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(79):         self.data[i] = self.op_merge(self.data[i], self.lazy[i])
+s776937809.py(80):         self.data[i] = self.op_data(val, self.data[i])
+s776937809.py(81):         self.lazy[i] = self.u_lazy
+s776937809.py(82):         self._propagate_bottom_up(i0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(122):         while p < M and LRA[p][1] <= i + 1:
+s776937809.py(123):             l, r, a = LRA[p]
+s776937809.py(124):             p += 1
+s776937809.py(125):             seg.range_update(l, r + 1, a)
+ --- modulename: s776937809, funcname: range_update
+s776937809.py(85):         op = self.op_lazy
+s776937809.py(86):         L += self.N
+s776937809.py(87):         R += self.N
+s776937809.py(88):         L0 = L // (L & -L)
+s776937809.py(89):         R0 = R // (R & -R) - 1
+s776937809.py(90):         self._propagate_top_down(L0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(91):         self._propagate_top_down(R0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(92):         while L < R:
+s776937809.py(93):             if L & 1:
+s776937809.py(94):                 self.lazy[L] = op(val, self.lazy[L])
+s776937809.py(95):                 L += 1
+s776937809.py(96):             if R & 1:
+s776937809.py(99):             L >>= 1
+s776937809.py(100):             R >>= 1
+s776937809.py(92):         while L < R:
+s776937809.py(93):             if L & 1:
+s776937809.py(94):                 self.lazy[L] = op(val, self.lazy[L])
+s776937809.py(95):                 L += 1
+s776937809.py(96):             if R & 1:
+s776937809.py(99):             L >>= 1
+s776937809.py(100):             R >>= 1
+s776937809.py(92):         while L < R:
+s776937809.py(101):         self._propagate_bottom_up(L0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(102):         self._propagate_bottom_up(R0)
+ --- modulename: s776937809, funcname: _propagate_bottom_up
+s776937809.py(47):         merge = self.op_merge
+s776937809.py(48):         op = self.op_data
+s776937809.py(49):         while i > 1:
+s776937809.py(50):             i >>= 1
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(52):                               merge(self.data[i << 1 | 1], self.lazy[i << 1 | 1]))
+s776937809.py(51):             self.data[i] = op(merge(self.data[i << 1], self.lazy[i << 1]),
+s776937809.py(49):         while i > 1:
+s776937809.py(122):         while p < M and LRA[p][1] <= i + 1:
+s776937809.py(119):     for i in range(N):
+s776937809.py(127):     print(seg.fold(0, N + 1))
+ --- modulename: s776937809, funcname: fold
+s776937809.py(55):         res = self.u_data
+s776937809.py(56):         op = self.op_data
+s776937809.py(57):         merge = self.op_merge
+s776937809.py(58):         L += self.N
+s776937809.py(59):         R += self.N
+s776937809.py(60):         L0 = L // (L & -L)
+s776937809.py(61):         R0 = R // (R & -R) - 1
+s776937809.py(62):         self._propagate_top_down(L0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(63):         self._propagate_top_down(R0)
+ --- modulename: s776937809, funcname: _propagate_top_down
+s776937809.py(33):         op = self.op_lazy
+s776937809.py(34):         merge = self.op_merge
+s776937809.py(35):         unit = self.u_lazy
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(37):             i = L >> i
+s776937809.py(38):             v = self.lazy[i]
+s776937809.py(39):             if v == unit:
+s776937809.py(40):                 continue
+s776937809.py(36):         for i in reversed(range(1, L.bit_length())):
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(68):             if R & 1:
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(66):                 res = op(res, merge(self.data[L], self.lazy[L]))
+s776937809.py(67):                 L += 1
+s776937809.py(68):             if R & 1:
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(65):             if L & 1:
+s776937809.py(68):             if R & 1:
+s776937809.py(69):                 R -= 1
+s776937809.py(70):                 res = op(res, merge(self.data[R], self.lazy[R]))
+s776937809.py(71):             L >>= 1
+s776937809.py(72):             R >>= 1
+s776937809.py(64):         while L < R:
+s776937809.py(73):         return res
+20
