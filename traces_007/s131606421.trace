@@ -1,0 +1,1443 @@
+ --- modulename: s131606421, funcname: <module>
+s131606421.py(1): import heapq
+s131606421.py(3): class mcf_graph:
+ --- modulename: s131606421, funcname: mcf_graph
+s131606421.py(3): class mcf_graph:
+s131606421.py(6):     def __init__(self, n):
+s131606421.py(12):     def add_edge(self, from_, to, cap, cost):
+s131606421.py(22):     class edge:
+ --- modulename: s131606421, funcname: edge
+s131606421.py(22):     class edge:
+s131606421.py(23):         def __init__(self, from_, to, cap, flow, cost):
+s131606421.py(31):     def get_edge(self, i):
+s131606421.py(37):     def edges(self):
+s131606421.py(46):     def slope(self, s, t, flow_limit=float('inf')):
+s131606421.py(121):     def flow(self, s, t, flow_limit=float('inf')):
+s131606421.py(125):     class _edge:
+ --- modulename: s131606421, funcname: _edge
+s131606421.py(125):     class _edge:
+s131606421.py(126):         def __init__(self, to, rev, cap, cost):
+s131606421.py(133): BIG = 10 ** 9
+s131606421.py(135): import sys
+s131606421.py(136): input = sys.stdin.readline
+s131606421.py(138): N, K = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s131606421.py(140): g = mcf_graph(2 * N + 2)
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(7):         self.n = n
+s131606421.py(8):         self.pos = []
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+ --- modulename: s131606421, funcname: <listcomp>
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+s131606421.py(9):         self.g = [[] for _ in range(n)]
+s131606421.py(141): s = 2 * N
+s131606421.py(142): t = 2 * N + 1
+s131606421.py(144): g.add_edge(s, t, N * K, BIG)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(145): for i in range(N):
+s131606421.py(146):     g.add_edge(s, i, K, 0)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(147):     g.add_edge(N + i, t, K, 0)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(145): for i in range(N):
+s131606421.py(146):     g.add_edge(s, i, K, 0)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(147):     g.add_edge(N + i, t, K, 0)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(145): for i in range(N):
+s131606421.py(146):     g.add_edge(s, i, K, 0)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(147):     g.add_edge(N + i, t, K, 0)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(145): for i in range(N):
+s131606421.py(149): for i in range(N):
+s131606421.py(150):     As = map(int, input().split())
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(152):         g.add_edge(i, N + j, 1, BIG - A)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(152):         g.add_edge(i, N + j, 1, BIG - A)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(152):         g.add_edge(i, N + j, 1, BIG - A)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(149): for i in range(N):
+s131606421.py(150):     As = map(int, input().split())
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(152):         g.add_edge(i, N + j, 1, BIG - A)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(152):         g.add_edge(i, N + j, 1, BIG - A)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(152):         g.add_edge(i, N + j, 1, BIG - A)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(149): for i in range(N):
+s131606421.py(150):     As = map(int, input().split())
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(152):         g.add_edge(i, N + j, 1, BIG - A)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(152):         g.add_edge(i, N + j, 1, BIG - A)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(152):         g.add_edge(i, N + j, 1, BIG - A)
+ --- modulename: s131606421, funcname: add_edge
+s131606421.py(13):         assert 0 <= from_ < self.n
+s131606421.py(14):         assert 0 <= to < self.n
+s131606421.py(15):         m = len(self.pos)
+s131606421.py(16):         self.pos.append((from_, len(self.g[from_])))
+s131606421.py(17):         self.g[from_].append(self.__class__._edge(to, len(self.g[to]), cap, cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(18):         self.g[to].append(self.__class__._edge(from_, len(self.g[from_]) - 1, 0, -cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(127):             self.to = to
+s131606421.py(128):             self.rev = rev
+s131606421.py(129):             self.cap = cap
+s131606421.py(130):             self.cost = cost
+s131606421.py(19):         return m
+s131606421.py(151):     for j, A in enumerate(As):
+s131606421.py(149): for i in range(N):
+s131606421.py(154): result = g.flow(s, t, N * K)
+ --- modulename: s131606421, funcname: flow
+s131606421.py(122):         return self.slope(s, t, flow_limit)[-1]
+ --- modulename: s131606421, funcname: slope
+s131606421.py(47):         assert 0 <= s < self.n
+s131606421.py(48):         assert 0 <= t < self.n
+s131606421.py(49):         assert s != t
+s131606421.py(51):         dual = [0] * self.n
+s131606421.py(52):         dist = [float('inf')] * self.n
+s131606421.py(53):         pv = [-1] * self.n
+s131606421.py(54):         pe = [-1] * self.n
+s131606421.py(55):         vis = [False] * self.n
+s131606421.py(57):         def _dual_ref():
+s131606421.py(93):         flow = 0
+s131606421.py(94):         cost = 0
+s131606421.py(95):         prev_cost = -1
+s131606421.py(96):         result = [(flow, cost)]
+s131606421.py(97):         while flow < flow_limit:
+s131606421.py(98):             if not _dual_ref():
+ --- modulename: s131606421, funcname: _dual_ref
+s131606421.py(59):             dist = [float('inf')] * self.n
+s131606421.py(60):             pv = [-1] * self.n
+s131606421.py(61):             pe = [-1] * self.n
+s131606421.py(62):             vis = [False] * self.n
+s131606421.py(64):             que = [(0, s)]
+s131606421.py(65):             dist[s] = 0
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(72):                     break
+s131606421.py(83):             if not vis[t]:
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(88):                     continue
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(88):                     continue
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(91):             return True
+s131606421.py(100):             c = flow_limit - flow
+s131606421.py(101):             v = t
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(105):             v = t
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(111):             d = -dual[s]
+s131606421.py(112):             flow += c
+s131606421.py(113):             cost += c * d
+s131606421.py(114):             if prev_cost == d:
+s131606421.py(116):             result.append((flow, cost))
+s131606421.py(117):             prev_cost = cost
+s131606421.py(97):         while flow < flow_limit:
+s131606421.py(98):             if not _dual_ref():
+ --- modulename: s131606421, funcname: _dual_ref
+s131606421.py(59):             dist = [float('inf')] * self.n
+s131606421.py(60):             pv = [-1] * self.n
+s131606421.py(61):             pe = [-1] * self.n
+s131606421.py(62):             vis = [False] * self.n
+s131606421.py(64):             que = [(0, s)]
+s131606421.py(65):             dist[s] = 0
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(76):                         continue
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(76):                         continue
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(72):                     break
+s131606421.py(83):             if not vis[t]:
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(88):                     continue
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(91):             return True
+s131606421.py(100):             c = flow_limit - flow
+s131606421.py(101):             v = t
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(105):             v = t
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(111):             d = -dual[s]
+s131606421.py(112):             flow += c
+s131606421.py(113):             cost += c * d
+s131606421.py(114):             if prev_cost == d:
+s131606421.py(116):             result.append((flow, cost))
+s131606421.py(117):             prev_cost = cost
+s131606421.py(97):         while flow < flow_limit:
+s131606421.py(98):             if not _dual_ref():
+ --- modulename: s131606421, funcname: _dual_ref
+s131606421.py(59):             dist = [float('inf')] * self.n
+s131606421.py(60):             pv = [-1] * self.n
+s131606421.py(61):             pe = [-1] * self.n
+s131606421.py(62):             vis = [False] * self.n
+s131606421.py(64):             que = [(0, s)]
+s131606421.py(65):             dist[s] = 0
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(76):                         continue
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(76):                         continue
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(76):                         continue
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(76):                         continue
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(76):                         continue
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(77):                     cost = e.cost - dual[e.to] + dual[v]
+s131606421.py(78):                     if dist[e.to] > dist[v] + cost:
+s131606421.py(79):                         dist[e.to] = dist[v] + cost
+s131606421.py(80):                         pv[e.to] = v
+s131606421.py(81):                         pe[e.to] = i
+s131606421.py(82):                         heapq.heappush(que, (dist[e.to], e.to))
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(74):                     e = self.g[v][i]
+s131606421.py(75):                     if vis[e.to] or e.cap == 0:
+s131606421.py(73):                 for i in range(len(self.g[v])):
+s131606421.py(66):             while que:
+s131606421.py(67):                 _, v = heapq.heappop(que)
+s131606421.py(68):                 if vis[v]:
+s131606421.py(70):                 vis[v] = True
+s131606421.py(71):                 if v == t:
+s131606421.py(72):                     break
+s131606421.py(83):             if not vis[t]:
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(87):                 if not vis[v]:
+s131606421.py(89):                 dual[v] -= dist[t] - dist[v]
+s131606421.py(86):             for v in range(self.n):
+s131606421.py(91):             return True
+s131606421.py(100):             c = flow_limit - flow
+s131606421.py(101):             v = t
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(103):                 c = min(c, self.g[pv[v]][pe[v]].cap)
+s131606421.py(104):                 v = pv[v]
+s131606421.py(102):             while v != s:
+s131606421.py(105):             v = t
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(107):                 e = self.g[pv[v]][pe[v]]
+s131606421.py(108):                 e.cap -= c
+s131606421.py(109):                 self.g[v][e.rev].cap += c
+s131606421.py(110):                 v = pv[v]
+s131606421.py(106):             while v != s:
+s131606421.py(111):             d = -dual[s]
+s131606421.py(112):             flow += c
+s131606421.py(113):             cost += c * d
+s131606421.py(114):             if prev_cost == d:
+s131606421.py(116):             result.append((flow, cost))
+s131606421.py(117):             prev_cost = cost
+s131606421.py(97):         while flow < flow_limit:
+s131606421.py(118):         return result
+s131606421.py(156): print(N * K * BIG - result[1])
+19
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+ --- modulename: s131606421, funcname: <listcomp>
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+ --- modulename: s131606421, funcname: <listcomp>
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+ --- modulename: s131606421, funcname: <listcomp>
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+ --- modulename: s131606421, funcname: <listcomp>
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(158): grid = [['.' for _ in range(N)] for _ in range(N)]
+s131606421.py(159): edges = g.edges()
+ --- modulename: s131606421, funcname: edges
+s131606421.py(38):         ret = []
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(40):             _e = self.g[self.pos[i][0]][self.pos[i][1]]
+s131606421.py(41):             _re = self.g[_e.to][_e.rev]
+s131606421.py(42):             ret.append(self.__class__.edge(self.pos[i][0], _e.to, _e.cap + _re.cap, _re.cap, _e.cost))
+ --- modulename: s131606421, funcname: __init__
+s131606421.py(24):             self.from_ = from_
+s131606421.py(25):             self.to = to
+s131606421.py(26):             self.cap = cap
+s131606421.py(27):             self.flow = flow
+s131606421.py(28):             self.cost = cost
+s131606421.py(39):         for i in range(len(self.pos)):
+s131606421.py(43):         return ret
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(163):     grid[e.from_][e.to - N] = 'X'
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(162):         continue
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(162):         continue
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(162):         continue
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(162):         continue
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(163):     grid[e.from_][e.to - N] = 'X'
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(162):         continue
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(163):     grid[e.from_][e.to - N] = 'X'
+s131606421.py(160): for e in edges:
+s131606421.py(161):     if e.from_ == s or e.to == t or e.flow == 0:
+s131606421.py(162):         continue
+s131606421.py(160): for e in edges:
+s131606421.py(165): for row in grid:
+s131606421.py(166):     print(''.join(row))
+X..
+s131606421.py(165): for row in grid:
+s131606421.py(166):     print(''.join(row))
+..X
+s131606421.py(165): for row in grid:
+s131606421.py(166):     print(''.join(row))
+.X.
+s131606421.py(165): for row in grid:
