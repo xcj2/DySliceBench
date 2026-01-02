@@ -1,0 +1,57 @@
+cards_num = input()                                                                                                                                                                                         
+cards_str = input()                                                                                                                                                                                         
+cards_words_list = cards_str.split(' ')                                                                                                                                                                     
+cards_numbers_list = [cards_words_list[idx_num][1] for idx_num in range(0, int(cards_num))]                                                                                                                 
+val_list1 = cards_words_list[:], cards_numbers_list[:]                                                                                                                                                      
+val_list2 = cards_words_list[:], cards_numbers_list[:]                                                                                                                                                      
+                                                                                                                                                                                                            
+def Bubble_Sort(list_size, val_list):                                                                                                                                                                       
+    def swap(first_idx, second_idx, val_list):                                                                                                                                                              
+        val = val_list[first_idx]                                                                                                                                                                           
+        val_list[first_idx] = val_list[second_idx]                                                                                                                                                          
+        val_list[second_idx] = val                                                                                                                                                                          
+                                                                                                                                                                                                            
+    swap_counter = 0                                                                                                                                                                                        
+    while(True):                                                                                                                                                                                            
+        finish = True                                                                                                                                                                                       
+        for idx_num in range(0, int(list_size) - 1):                                                                                                                                                        
+            if val_list[1][idx_num + 1] < val_list[1][idx_num]:                                                                                                                                             
+                swap(idx_num, idx_num + 1, val_list[1])                                                                                                                                                     
+                swap(idx_num, idx_num + 1, val_list[0])                                                                                                                                                     
+                finish = False                                                                                                                                                                              
+                swap_counter += 1                                                                                                                                                                           
+        if finish == True: break                                                                                                                                                                            
+                                                                                                                                                                                                            
+def Selection_Sort(list_size, val_list):                                                                                                                                                                    
+    def where_is_the_first_lowest_val(List): return List.index(min(List))                                                                                                                                   
+                                                                                                                                                                                                            
+    def swap(idx_num, lowest_val_index, List):                                                                                                                                                              
+        val = List[idx_num]                                                                                                                                                                                 
+        List[idx_num] = List[lowest_val_index + idx_num]                                                                                                                                                    
+        List[lowest_val_index + idx_num] = val                                                                                                                                                              
+                                                                                                                                                                                                            
+    swap_num = 0                                                                                                                                                                                            
+    for idx_num in range(0, int(list_size) - 1):                                                                                                                                                            
+        unsorted_list = val_list[1][idx_num : int(list_size)]                                                                                                                                               
+        lowest_val_index = where_is_the_first_lowest_val(unsorted_list)                                                                                                                                     
+        if val_list[1][idx_num] != val_list[1][lowest_val_index + idx_num]:                                                                                                                                 
+            swap(idx_num, lowest_val_index, val_list[1])                                                                                                                                                    
+            swap(idx_num, lowest_val_index, val_list[0])                                                                                                                                                    
+            swap_num += 1                                                                                                                                                                                   
+                                                                                                                                                                                                            
+def show(List):                                                                                                                                                                                             
+    print_list = ','.join(list(map(str, List)))                                                                                                                                                             
+    print_list = print_list.replace(',', ' ')                                                                                                                                                               
+    print(print_list)                                                                                                                                                                                       
+                                                                                                                                                                                                            
+def Is_stable(list1, list2): return list1 == list2                                                                                                                                                          
+                                                                                                                                                                                                            
+Bubble_Sort(cards_num, val_list1)                                                                                                                                                                           
+show(val_list1[0])                                                                                                                                                                                          
+print('Stable')                                                                                                                                                                                             
+Selection_Sort(cards_num, val_list2)                                                                                                                                                                        
+show(val_list2[0])                                                                                                                                                                                          
+if Is_stable(val_list1, val_list2) == False:                                                                                                                                                                
+    print('Not stable')                                                                                                                                                                                     
+else:                                                                                                                                                                                                       
+    print('Stable')       
