@@ -1,0 +1,941 @@
+ --- modulename: s086428983, funcname: <module>
+s086428983.py(2): from typing import List
+s086428983.py(3): from heapq import heappush, heappop, heapify
+s086428983.py(4): import sys
+s086428983.py(5): from collections import defaultdict
+ --- modulename: _bootstrap, funcname: _handle_fromlist
+<frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1044): <frozen importlib._bootstrap>(1051): <frozen importlib._bootstrap>(1055): <frozen importlib._bootstrap>(1043): <frozen importlib._bootstrap>(1067): s086428983.py(6): INF = 10**6
+s086428983.py(7): def main(H, W, AB):
+s086428983.py(29): class RemovableHeapq:
+ --- modulename: s086428983, funcname: RemovableHeapq
+s086428983.py(29): class RemovableHeapq:
+s086428983.py(30):     def __init__(self, l: List[int]):
+ --- modulename: typing, funcname: inner
+typing.py(273):             try:
+typing.py(274):                 return cached(*args, **kwds)
+ --- modulename: typing, funcname: __getitem__
+typing.py(834):         if not isinstance(params, tuple):
+typing.py(835):             params = (params,)
+typing.py(836):         msg = "Parameters to generic types must be types."
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+ --- modulename: typing, funcname: _type_check
+typing.py(149):     invalid_generic_forms = (Generic, Protocol)
+typing.py(150):     if not allow_special_forms:
+typing.py(151):         invalid_generic_forms += (ClassVar,)
+typing.py(152):         if is_argument:
+typing.py(153):             invalid_generic_forms += (Final,)
+typing.py(155):     arg = _type_convert(arg, module=module, allow_special_forms=allow_special_forms)
+ --- modulename: typing, funcname: _type_convert
+typing.py(130):     if arg is None:
+typing.py(132):     if isinstance(arg, str):
+typing.py(134):     return arg
+typing.py(156):     if (isinstance(arg, _GenericAlias) and
+typing.py(159):     if arg in (Any, NoReturn, Final):
+typing.py(161):     if isinstance(arg, _SpecialForm) or arg in (Generic, Protocol):
+typing.py(163):     if isinstance(arg, (type, TypeVar, ForwardRef)):
+typing.py(164):         return arg
+ --- modulename: typing, funcname: <genexpr>
+typing.py(837):         params = tuple(_type_check(p, msg) for p in params)
+typing.py(838):         _check_generic(self, params, self._nparams)
+ --- modulename: typing, funcname: _check_generic
+typing.py(210):     if not elen:
+typing.py(212):     alen = len(parameters)
+typing.py(213):     if alen != elen:
+typing.py(839):         return self.copy_with(params)
+ --- modulename: typing, funcname: copy_with
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+typing.py(843):                              name=self._name, inst=self._inst)
+typing.py(842):         return _GenericAlias(self.__origin__, params,
+ --- modulename: typing, funcname: __init__
+typing.py(740):         super().__init__(origin, inst=inst, name=name)
+ --- modulename: typing, funcname: __init__
+typing.py(678):         self._inst = inst
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(679):         self._name = name
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(680):         self.__origin__ = origin
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(681):         self.__slots__ = None  # This is not documented.
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(741):         if not isinstance(params, tuple):
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(745):                               a for a in params)
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+typing.py(744):                               () if a is _TypingEmpty else
+typing.py(745):                               a for a in params)
+ --- modulename: typing, funcname: <genexpr>
+typing.py(743):         self.__args__ = tuple(... if a is _TypingEllipsis else
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(746):         self.__parameters__ = _collect_type_vars(params)
+ --- modulename: typing, funcname: _collect_type_vars
+typing.py(197):     tvars = []
+typing.py(198):     for t in types:
+typing.py(199):         if isinstance(t, TypeVar) and t not in tvars:
+typing.py(201):         if isinstance(t, (_GenericAlias, GenericAlias)):
+typing.py(198):     for t in types:
+typing.py(203):     return tuple(tvars)
+ --- modulename: typing, funcname: __setattr__
+typing.py(714):         if _is_dunder(attr) or attr in ('_name', '_inst', '_nparams'):
+ --- modulename: typing, funcname: _is_dunder
+typing.py(666):     return attr.startswith('__') and attr.endswith('__')
+typing.py(715):             super().__setattr__(attr, val)
+typing.py(747):         if not name:
+s086428983.py(38):     def push(self, item: int):
+s086428983.py(42):     def remove(self, item: int) -> bool:
+s086428983.py(49):     def get_min(self) -> int:
+s086428983.py(58):     def is_empty(self) -> bool:
+s086428983.py(67): class BinaryIndexedTree:
+ --- modulename: s086428983, funcname: BinaryIndexedTree
+s086428983.py(67): class BinaryIndexedTree:
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(76):     def add(self, i, v):
+s086428983.py(83):     def query(self, r):
+s086428983.py(91):     def bisect(self, func):
+s086428983.py(101): if __name__ == '__main__':
+s086428983.py(102):     input = sys.stdin.readline
+s086428983.py(103):     H, W = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s086428983.py(104):     AB = [tuple(map(int, input().split())) for _ in range(H)]
+ --- modulename: s086428983, funcname: <listcomp>
+s086428983.py(104):     AB = [tuple(map(int, input().split())) for _ in range(H)]
+s086428983.py(104):     AB = [tuple(map(int, input().split())) for _ in range(H)]
+s086428983.py(104):     AB = [tuple(map(int, input().split())) for _ in range(H)]
+s086428983.py(104):     AB = [tuple(map(int, input().split())) for _ in range(H)]
+s086428983.py(104):     AB = [tuple(map(int, input().split())) for _ in range(H)]
+s086428983.py(105):     main(H, W, AB)
+ --- modulename: s086428983, funcname: main
+s086428983.py(8):     cur = list(range(W))
+s086428983.py(9):     cur_f = BinaryIndexedTree(initial_values=[1] * W)
+ --- modulename: s086428983, funcname: __init__
+s086428983.py(69):         assert(n or initial_values)
+s086428983.py(70):         self.__f, self.__id, = f, identity
+s086428983.py(71):         self.__n = len(initial_values) if initial_values else n
+s086428983.py(72):         self.__d = [identity] * (self.__n + 1)
+s086428983.py(73):         if initial_values:
+s086428983.py(74):             for i, v in enumerate(initial_values): self.add(i, v)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(74):             for i, v in enumerate(initial_values): self.add(i, v)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(74):             for i, v in enumerate(initial_values): self.add(i, v)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(74):             for i, v in enumerate(initial_values): self.add(i, v)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(74):             for i, v in enumerate(initial_values): self.add(i, v)
+s086428983.py(10):     rt = RemovableHeapq([0] * W)
+ --- modulename: s086428983, funcname: __init__
+s086428983.py(31):         h = l[:]
+s086428983.py(32):         heapify(h)
+s086428983.py(33):         d = defaultdict(int)
+s086428983.py(34):         for e in l:
+s086428983.py(35):             d[e] += 1
+s086428983.py(34):         for e in l:
+s086428983.py(35):             d[e] += 1
+s086428983.py(34):         for e in l:
+s086428983.py(35):             d[e] += 1
+s086428983.py(34):         for e in l:
+s086428983.py(35):             d[e] += 1
+s086428983.py(34):         for e in l:
+s086428983.py(36):         self.h, self.d = l, d
+s086428983.py(11):     for i, (a, b) in enumerate(AB):
+s086428983.py(12):         a -= 1
+s086428983.py(13):         mr = -1
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(17):             mr = cur[j]
+s086428983.py(18):             cur_f.add(j, -1)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(19):             rt.remove(j - cur[j])
+ --- modulename: s086428983, funcname: remove
+s086428983.py(43):         d = self.d
+s086428983.py(44):         if d[item] > 0:
+s086428983.py(45):             d[item] -= 1
+s086428983.py(46):             return True
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(17):             mr = cur[j]
+s086428983.py(18):             cur_f.add(j, -1)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(19):             rt.remove(j - cur[j])
+ --- modulename: s086428983, funcname: remove
+s086428983.py(43):         d = self.d
+s086428983.py(44):         if d[item] > 0:
+s086428983.py(45):             d[item] -= 1
+s086428983.py(46):             return True
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(17):             mr = cur[j]
+s086428983.py(18):             cur_f.add(j, -1)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(19):             rt.remove(j - cur[j])
+ --- modulename: s086428983, funcname: remove
+s086428983.py(43):         d = self.d
+s086428983.py(44):         if d[item] > 0:
+s086428983.py(45):             d[item] -= 1
+s086428983.py(46):             return True
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(20):         if mr >= 0 and b < W:
+s086428983.py(24):         ans = -1
+s086428983.py(25):         if not rt.is_empty():
+ --- modulename: s086428983, funcname: is_empty
+s086428983.py(59):         h, d = self.h, self.d
+s086428983.py(60):         while h:
+s086428983.py(61):             if d[h[0]] == 0:
+s086428983.py(65):         return len(h) == 0
+s086428983.py(26):             ans = rt.get_min() + i + 1
+ --- modulename: s086428983, funcname: get_min
+s086428983.py(50):         h, d = self.h, self.d
+s086428983.py(52):             m = h[0]
+s086428983.py(53):             if d[m] == 0:
+s086428983.py(56):                 return m
+s086428983.py(27):         print(ans)
+1
+s086428983.py(11):     for i, (a, b) in enumerate(AB):
+s086428983.py(12):         a -= 1
+s086428983.py(13):         mr = -1
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(17):             mr = cur[j]
+s086428983.py(18):             cur_f.add(j, -1)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(19):             rt.remove(j - cur[j])
+ --- modulename: s086428983, funcname: remove
+s086428983.py(43):         d = self.d
+s086428983.py(44):         if d[item] > 0:
+s086428983.py(45):             d[item] -= 1
+s086428983.py(46):             return True
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(20):         if mr >= 0 and b < W:
+s086428983.py(21):             cur_f.add(b, 1)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(22):             cur[b] = mr
+s086428983.py(23):             rt.push(b - mr)
+ --- modulename: s086428983, funcname: push
+s086428983.py(39):         heappush(self.h, item)
+s086428983.py(40):         self.d[item] += 1
+s086428983.py(24):         ans = -1
+s086428983.py(25):         if not rt.is_empty():
+ --- modulename: s086428983, funcname: is_empty
+s086428983.py(59):         h, d = self.h, self.d
+s086428983.py(60):         while h:
+s086428983.py(61):             if d[h[0]] == 0:
+s086428983.py(62):                 heappop(h)
+s086428983.py(60):         while h:
+s086428983.py(61):             if d[h[0]] == 0:
+s086428983.py(62):                 heappop(h)
+s086428983.py(60):         while h:
+s086428983.py(61):             if d[h[0]] == 0:
+s086428983.py(62):                 heappop(h)
+s086428983.py(60):         while h:
+s086428983.py(61):             if d[h[0]] == 0:
+s086428983.py(62):                 heappop(h)
+s086428983.py(60):         while h:
+s086428983.py(61):             if d[h[0]] == 0:
+s086428983.py(65):         return len(h) == 0
+s086428983.py(26):             ans = rt.get_min() + i + 1
+ --- modulename: s086428983, funcname: get_min
+s086428983.py(50):         h, d = self.h, self.d
+s086428983.py(52):             m = h[0]
+s086428983.py(53):             if d[m] == 0:
+s086428983.py(56):                 return m
+s086428983.py(27):         print(ans)
+3
+s086428983.py(11):     for i, (a, b) in enumerate(AB):
+s086428983.py(12):         a -= 1
+s086428983.py(13):         mr = -1
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(17):             mr = cur[j]
+s086428983.py(18):             cur_f.add(j, -1)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(19):             rt.remove(j - cur[j])
+ --- modulename: s086428983, funcname: remove
+s086428983.py(43):         d = self.d
+s086428983.py(44):         if d[item] > 0:
+s086428983.py(45):             d[item] -= 1
+s086428983.py(46):             return True
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(20):         if mr >= 0 and b < W:
+s086428983.py(21):             cur_f.add(b, 1)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(22):             cur[b] = mr
+s086428983.py(23):             rt.push(b - mr)
+ --- modulename: s086428983, funcname: push
+s086428983.py(39):         heappush(self.h, item)
+s086428983.py(40):         self.d[item] += 1
+s086428983.py(24):         ans = -1
+s086428983.py(25):         if not rt.is_empty():
+ --- modulename: s086428983, funcname: is_empty
+s086428983.py(59):         h, d = self.h, self.d
+s086428983.py(60):         while h:
+s086428983.py(61):             if d[h[0]] == 0:
+s086428983.py(62):                 heappop(h)
+s086428983.py(60):         while h:
+s086428983.py(61):             if d[h[0]] == 0:
+s086428983.py(65):         return len(h) == 0
+s086428983.py(26):             ans = rt.get_min() + i + 1
+ --- modulename: s086428983, funcname: get_min
+s086428983.py(50):         h, d = self.h, self.d
+s086428983.py(52):             m = h[0]
+s086428983.py(53):             if d[m] == 0:
+s086428983.py(56):                 return m
+s086428983.py(27):         print(ans)
+6
+s086428983.py(11):     for i, (a, b) in enumerate(AB):
+s086428983.py(12):         a -= 1
+s086428983.py(13):         mr = -1
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(17):             mr = cur[j]
+s086428983.py(18):             cur_f.add(j, -1)
+ --- modulename: s086428983, funcname: add
+s086428983.py(77):         n, f, d = self.__n, self.__f, self.__d
+s086428983.py(78):         i += 1
+s086428983.py(79):         while i <= n:
+s086428983.py(80):             d[i] = f(d[i], v)
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(81):             i += -i & i
+s086428983.py(79):         while i <= n:
+s086428983.py(19):             rt.remove(j - cur[j])
+ --- modulename: s086428983, funcname: remove
+s086428983.py(43):         d = self.d
+s086428983.py(44):         if d[item] > 0:
+s086428983.py(45):             d[item] -= 1
+s086428983.py(46):             return True
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: bisect
+s086428983.py(94):         n, f, d, v = self.__n, self.__f, self.__d, self.__id
+s086428983.py(95):         x, i = 0, 1 << (n.bit_length() - 1)
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(15):             j = cur_f.bisect(lambda x: x <= cur_f.query(a - 1))
+ --- modulename: s086428983, funcname: query
+s086428983.py(84):         res, f, d = self.__id, self.__f, self.__d
+s086428983.py(85):         r += 1
+s086428983.py(86):         while r:
+s086428983.py(87):             res = f(res, d[r])
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(88):             r -= -r & r
+s086428983.py(86):         while r:
+s086428983.py(89):         return res
+ --- modulename: s086428983, funcname: <lambda>
+s086428983.py(68):     def __init__(self, n=None, f=lambda x, y: x + y, identity=0, initial_values=None):
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(97):             if x + i <= n and func(f(v, d[x + i])): v, x = f(v, d[x + i]), x + i
+s086428983.py(98):             i >>= 1
+s086428983.py(96):         while i > 0:
+s086428983.py(99):         return x
+s086428983.py(16):             if j >= W or j > b: break
+s086428983.py(20):         if mr >= 0 and b < W:
+s086428983.py(24):         ans = -1
+s086428983.py(25):         if not rt.is_empty():
+ --- modulename: s086428983, funcname: is_empty
+s086428983.py(59):         h, d = self.h, self.d
+s086428983.py(60):         while h:
+s086428983.py(61):             if d[h[0]] == 0:
+s086428983.py(62):                 heappop(h)
+s086428983.py(60):         while h:
+s086428983.py(65):         return len(h) == 0
+s086428983.py(27):         print(ans)
+-1
+s086428983.py(11):     for i, (a, b) in enumerate(AB):
