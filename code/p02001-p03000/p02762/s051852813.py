@@ -1,0 +1,166 @@
+# -*- coding: utf-8 -*-
+import bisect
+import heapq
+import math
+import random
+import sys
+from collections import Counter, defaultdict, deque
+from decimal import ROUND_CEILING, ROUND_HALF_UP, Decimal
+from functools import lru_cache, reduce
+from itertools import combinations, combinations_with_replacement, product, permutations
+from operator import add, mul, sub
+
+sys.setrecursionlimit(100000)
+input = sys.stdin.readline
+INF = 2**62-1
+
+def read_int():
+    return int(input())
+
+
+def read_int_n():
+    return list(map(int, input().split()))
+
+
+def read_float():
+    return float(input())
+
+
+def read_float_n():
+    return list(map(float, input().split()))
+
+
+def read_str():
+    return input().strip()
+
+
+def read_str_n():
+    return list(map(str, input().split()))
+
+
+def error_print(*args):
+    print(*args, file=sys.stderr)
+
+
+def mt(f):
+    import time
+
+    def wrap(*args, **kwargs):
+        s = time.time()
+        ret = f(*args, **kwargs)
+        e = time.time()
+
+        error_print(e - s, 'sec')
+        return ret
+
+    return wrap
+
+
+class UnionFind():
+    def __init__(self):
+        self.__table = {}
+        self.__size = defaultdict(lambda: 1)
+
+    def __root(self, x):
+        if x not in self.__table:
+            self.__table[x] = x
+        elif x != self.__table[x]:
+            self.__table[x] = self.__root(self.__table[x])
+        return self.__table[x]
+
+    def root(self, x):
+        return self.__table[x]
+
+    def same(self, x, y):
+        return self.__root(x) == self.__root(y)
+
+    def union(self, x, y):
+        x = self.__root(x)
+        y = self.__root(y)
+        if x != y:
+            self.__size[y] += self.__size[x]
+            self.__table[x] = y
+
+    def size(self, x):
+        return self.__size[self.__root(x)]
+
+    def num_of_group(self):
+        g = 0
+        for k, v in self.__table.items():
+            if k == v:
+                g += 1
+        return g
+
+@mt
+def slv(N, M, K, AB, CD):
+    g = defaultdict(set)
+    for a, b in AB:
+        g[a].add(b)
+        g[b].add(a)
+
+    def dfs(u):
+        s = [u]
+        done = set(s)
+        while s:
+            u = s.pop()
+            for v in g[u]:
+                if v not in done:
+                    s.append(v)
+                    done.add(v)
+        return done
+
+    group = dict()
+    done = set()
+    parent = [-1] * (N+1)
+    for i in range(1, N+1):
+        if i not in done:
+            j = dfs(i)
+            done |= j
+            for k in j:
+                parent[k] = i
+            group[i] = j
+
+    error_print('1')
+
+    direct = defaultdict(int)
+    for a, b in AB:
+        direct[a] += 1
+        direct[b] += 1
+    block = defaultdict(set)
+    for c, d in CD:
+        block[c].add(d)
+        block[d].add(c)
+
+    error_print('2')
+
+    ans = []
+    for i in range(1, N+1):
+        e = group[parent[i]]
+        cand = len(group[parent[i]])
+        for b in block[i]:
+            if b in e:
+                cand -= 1
+        cand -= direct[i]
+        cand -= 1
+        ans.append(cand)
+    error_print('3')
+    return ans
+
+
+
+def main():
+    N, M, K = read_int_n()
+    AB = [read_int_n() for _ in range(M)]
+    CD = [read_int_n() for _ in range(K)]
+    print(*slv(N, M, K, AB, CD))
+
+    # N = 10**5
+    # M = 10**5
+    # K = 10**5
+    # AB = [[random.randint(1, N), random.randint(1, N)] for _ in range(M)]
+    # CD = [[random.randint(1, N), random.randint(1, N)] for _ in range(K)]
+    # print(*slv(N, M, K, AB, CD))
+
+
+if __name__ == '__main__':
+    main()
