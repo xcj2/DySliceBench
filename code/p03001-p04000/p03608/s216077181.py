@@ -1,0 +1,53 @@
+from collections import defaultdict, Counter
+from itertools import product, groupby, count, permutations, combinations
+from math import pi, sqrt, factorial
+from collections import deque
+from bisect import bisect, bisect_left, bisect_right
+from string import ascii_lowercase
+from functools import lru_cache
+import sys
+sys.setrecursionlimit(10000)
+INF = float("inf")
+YES, Yes, yes, NO, No, no = "YES", "Yes", "yes", "NO", "No", "no"
+dy4, dx4 = [0, 1, 0, -1], [1, 0, -1, 0]
+dy8, dx8 = [0, -1, 0, 1, 1, -1, -1, 1], [1, 0, -1, 0, 1, 1, -1, -1]
+
+def inside(y, x, H, W):
+    return 0 <= y < H and 0 <= x < W
+
+
+def ceil(a, b):
+    return (a + b - 1) // b
+
+
+def main():
+    N, M, R = map(int, input().split())
+    R = list(map(lambda x: int(x) - 1, input().split()))
+
+    matrix = [[INF] * N for _ in range(N)]
+    for _ in range(M):
+        a, b, c = map(int, input().split())
+        matrix[a - 1][b - 1] = c
+        matrix[b - 1][a - 1] = c
+
+    for i in range(N):
+        matrix[i][i] = 0
+
+    for m in range(N):
+        for s in range(N):
+            for e in range(N):
+                if matrix[s][m] != INF and matrix[m][e] != INF:
+                    matrix[s][e] = min(matrix[s][e], matrix[s][m] + matrix[m][e])
+
+    ans = INF
+    for r in permutations(R):
+        tmp = 0
+        for i in range(len(r) - 1):
+            tmp += matrix[r[i]][r[i + 1]]
+        ans = min(ans, tmp)
+
+    print(ans)
+
+
+if __name__ == '__main__':
+    main()
