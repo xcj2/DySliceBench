@@ -1,0 +1,289 @@
+ --- modulename: s267843518, funcname: <module>
+s267843518.py(1): from itertools import product
+s267843518.py(2): import sys
+s267843518.py(3): input = sys.stdin.buffer.readline
+s267843518.py(4): sys.setrecursionlimit(10 ** 7)
+s267843518.py(5): mod = 998244353
+s267843518.py(8): class BinaryIndexTree:  # 1-indexed
+ --- modulename: s267843518, funcname: BinaryIndexTree
+s267843518.py(8): class BinaryIndexTree:  # 1-indexed
+s267843518.py(9):     def __init__(self, N):
+s267843518.py(29):     def _init(self):
+s267843518.py(36):     def add(self, i, x):
+s267843518.py(42):     def sum(self, i):
+s267843518.py(49):     def lower_bound(self, val):
+s267843518.py(62): def F(a, b, c, d):
+s267843518.py(78): N = int(input())
+s267843518.py(79): XY = sorted(tuple(map(int, input().split())) for _ in range(N))
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(79): XY = sorted(tuple(map(int, input().split())) for _ in range(N))
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(79): XY = sorted(tuple(map(int, input().split())) for _ in range(N))
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(79): XY = sorted(tuple(map(int, input().split())) for _ in range(N))
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(79): XY = sorted(tuple(map(int, input().split())) for _ in range(N))
+s267843518.py(80): _, Y = zip(*XY)
+s267843518.py(81): ytoi = {y: i for i, y in enumerate(sorted(set(Y)), 1)}
+ --- modulename: s267843518, funcname: <dictcomp>
+s267843518.py(81): ytoi = {y: i for i, y in enumerate(sorted(set(Y)), 1)}
+s267843518.py(81): ytoi = {y: i for i, y in enumerate(sorted(set(Y)), 1)}
+s267843518.py(81): ytoi = {y: i for i, y in enumerate(sorted(set(Y)), 1)}
+s267843518.py(81): ytoi = {y: i for i, y in enumerate(sorted(set(Y)), 1)}
+s267843518.py(83): bit_R = BinaryIndexTree([1] * N)
+ --- modulename: s267843518, funcname: __init__
+s267843518.py(15):         if isinstance(N, int):
+s267843518.py(20):         elif isinstance(N, list):
+s267843518.py(21):             self.N = len(N)
+s267843518.py(22):             self.depth = self.N.bit_length()
+s267843518.py(23):             self.tree = [0] + N
+s267843518.py(24):             self.elem = [0] + N
+s267843518.py(25):             self._init()
+ --- modulename: s267843518, funcname: _init
+s267843518.py(30):         size = self.N
+s267843518.py(31):         for i in range(1, self.N):
+s267843518.py(32):             if i + (i & -i) > size:
+s267843518.py(34):             self.tree[i + (i & -i)] += self.tree[i]
+s267843518.py(31):         for i in range(1, self.N):
+s267843518.py(32):             if i + (i & -i) > size:
+s267843518.py(33):                 continue
+s267843518.py(31):         for i in range(1, self.N):
+s267843518.py(84): bit_L = BinaryIndexTree(N)
+ --- modulename: s267843518, funcname: __init__
+s267843518.py(15):         if isinstance(N, int):
+s267843518.py(16):             self.N = N
+s267843518.py(17):             self.depth = N.bit_length()
+s267843518.py(18):             self.tree = [0] * (N + 1)
+s267843518.py(19):             self.elem = [0] * (N + 1)
+s267843518.py(86): ans = 0
+s267843518.py(87): for i, y in enumerate(Y, 1):
+s267843518.py(88):     R = N - i
+s267843518.py(89):     L = i - 1
+s267843518.py(90):     y = ytoi[y]
+s267843518.py(91):     bit_R.add(y, -1)
+ --- modulename: s267843518, funcname: add
+s267843518.py(37):         self.elem[i] += x
+s267843518.py(38):         while i <= self.N:
+s267843518.py(39):             self.tree[i] += x
+s267843518.py(40):             i += i & -i
+s267843518.py(38):         while i <= self.N:
+s267843518.py(94):     c4 = bit_R.sum(y)
+ --- modulename: s267843518, funcname: sum
+s267843518.py(43):         res = 0
+s267843518.py(44):         while i > 0:
+s267843518.py(45):             res += self.tree[i]
+s267843518.py(46):             i -= i & -i
+s267843518.py(44):         while i > 0:
+s267843518.py(45):             res += self.tree[i]
+s267843518.py(46):             i -= i & -i
+s267843518.py(44):         while i > 0:
+s267843518.py(47):         return res
+s267843518.py(95):     c1 = R - c4
+s267843518.py(96):     c3 = bit_L.sum(y)
+ --- modulename: s267843518, funcname: sum
+s267843518.py(43):         res = 0
+s267843518.py(44):         while i > 0:
+s267843518.py(45):             res += self.tree[i]
+s267843518.py(46):             i -= i & -i
+s267843518.py(44):         while i > 0:
+s267843518.py(45):             res += self.tree[i]
+s267843518.py(46):             i -= i & -i
+s267843518.py(44):         while i > 0:
+s267843518.py(47):         return res
+s267843518.py(97):     c2 = L - c3
+s267843518.py(99):     ans += F(c1, c2, c3, c4)
+ --- modulename: s267843518, funcname: F
+s267843518.py(63):     res = 0
+s267843518.py(64):     nums = (a, b, c, d)
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+s267843518.py(67):     res += ox[0] * o[1] * ox[2] * o[3]
+s267843518.py(68):     res %= mod
+s267843518.py(69):     res += o[0] * ox[1] * o[2] * ox[3]
+s267843518.py(70):     res %= mod
+s267843518.py(71):     res -= o[0] * o[1] * o[2] * o[3]
+s267843518.py(72):     res %= mod
+s267843518.py(73):     res += ox[0] * ox[1] * ox[2] * ox[3]
+s267843518.py(74):     res %= mod
+s267843518.py(75):     return res
+s267843518.py(100):     ans %= mod
+s267843518.py(102):     bit_L.add(y, 1)
+ --- modulename: s267843518, funcname: add
+s267843518.py(37):         self.elem[i] += x
+s267843518.py(38):         while i <= self.N:
+s267843518.py(39):             self.tree[i] += x
+s267843518.py(40):             i += i & -i
+s267843518.py(38):         while i <= self.N:
+s267843518.py(87): for i, y in enumerate(Y, 1):
+s267843518.py(88):     R = N - i
+s267843518.py(89):     L = i - 1
+s267843518.py(90):     y = ytoi[y]
+s267843518.py(91):     bit_R.add(y, -1)
+ --- modulename: s267843518, funcname: add
+s267843518.py(37):         self.elem[i] += x
+s267843518.py(38):         while i <= self.N:
+s267843518.py(39):             self.tree[i] += x
+s267843518.py(40):             i += i & -i
+s267843518.py(38):         while i <= self.N:
+s267843518.py(94):     c4 = bit_R.sum(y)
+ --- modulename: s267843518, funcname: sum
+s267843518.py(43):         res = 0
+s267843518.py(44):         while i > 0:
+s267843518.py(45):             res += self.tree[i]
+s267843518.py(46):             i -= i & -i
+s267843518.py(44):         while i > 0:
+s267843518.py(47):         return res
+s267843518.py(95):     c1 = R - c4
+s267843518.py(96):     c3 = bit_L.sum(y)
+ --- modulename: s267843518, funcname: sum
+s267843518.py(43):         res = 0
+s267843518.py(44):         while i > 0:
+s267843518.py(45):             res += self.tree[i]
+s267843518.py(46):             i -= i & -i
+s267843518.py(44):         while i > 0:
+s267843518.py(47):         return res
+s267843518.py(97):     c2 = L - c3
+s267843518.py(99):     ans += F(c1, c2, c3, c4)
+ --- modulename: s267843518, funcname: F
+s267843518.py(63):     res = 0
+s267843518.py(64):     nums = (a, b, c, d)
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+s267843518.py(67):     res += ox[0] * o[1] * ox[2] * o[3]
+s267843518.py(68):     res %= mod
+s267843518.py(69):     res += o[0] * ox[1] * o[2] * ox[3]
+s267843518.py(70):     res %= mod
+s267843518.py(71):     res -= o[0] * o[1] * o[2] * o[3]
+s267843518.py(72):     res %= mod
+s267843518.py(73):     res += ox[0] * ox[1] * ox[2] * ox[3]
+s267843518.py(74):     res %= mod
+s267843518.py(75):     return res
+s267843518.py(100):     ans %= mod
+s267843518.py(102):     bit_L.add(y, 1)
+ --- modulename: s267843518, funcname: add
+s267843518.py(37):         self.elem[i] += x
+s267843518.py(38):         while i <= self.N:
+s267843518.py(39):             self.tree[i] += x
+s267843518.py(40):             i += i & -i
+s267843518.py(38):         while i <= self.N:
+s267843518.py(87): for i, y in enumerate(Y, 1):
+s267843518.py(88):     R = N - i
+s267843518.py(89):     L = i - 1
+s267843518.py(90):     y = ytoi[y]
+s267843518.py(91):     bit_R.add(y, -1)
+ --- modulename: s267843518, funcname: add
+s267843518.py(37):         self.elem[i] += x
+s267843518.py(38):         while i <= self.N:
+s267843518.py(39):             self.tree[i] += x
+s267843518.py(40):             i += i & -i
+s267843518.py(38):         while i <= self.N:
+s267843518.py(39):             self.tree[i] += x
+s267843518.py(40):             i += i & -i
+s267843518.py(38):         while i <= self.N:
+s267843518.py(94):     c4 = bit_R.sum(y)
+ --- modulename: s267843518, funcname: sum
+s267843518.py(43):         res = 0
+s267843518.py(44):         while i > 0:
+s267843518.py(45):             res += self.tree[i]
+s267843518.py(46):             i -= i & -i
+s267843518.py(44):         while i > 0:
+s267843518.py(47):         return res
+s267843518.py(95):     c1 = R - c4
+s267843518.py(96):     c3 = bit_L.sum(y)
+ --- modulename: s267843518, funcname: sum
+s267843518.py(43):         res = 0
+s267843518.py(44):         while i > 0:
+s267843518.py(45):             res += self.tree[i]
+s267843518.py(46):             i -= i & -i
+s267843518.py(44):         while i > 0:
+s267843518.py(47):         return res
+s267843518.py(97):     c2 = L - c3
+s267843518.py(99):     ans += F(c1, c2, c3, c4)
+ --- modulename: s267843518, funcname: F
+s267843518.py(63):     res = 0
+s267843518.py(64):     nums = (a, b, c, d)
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(65):     ox = tuple(pow(2, i, mod) for i in nums)
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+ --- modulename: s267843518, funcname: <genexpr>
+s267843518.py(66):     o = tuple(i-1 for i in ox)
+s267843518.py(67):     res += ox[0] * o[1] * ox[2] * o[3]
+s267843518.py(68):     res %= mod
+s267843518.py(69):     res += o[0] * ox[1] * o[2] * ox[3]
+s267843518.py(70):     res %= mod
+s267843518.py(71):     res -= o[0] * o[1] * o[2] * o[3]
+s267843518.py(72):     res %= mod
+s267843518.py(73):     res += ox[0] * ox[1] * ox[2] * ox[3]
+s267843518.py(74):     res %= mod
+s267843518.py(75):     return res
+s267843518.py(100):     ans %= mod
+s267843518.py(102):     bit_L.add(y, 1)
+ --- modulename: s267843518, funcname: add
+s267843518.py(37):         self.elem[i] += x
+s267843518.py(38):         while i <= self.N:
+s267843518.py(39):             self.tree[i] += x
+s267843518.py(40):             i += i & -i
+s267843518.py(38):         while i <= self.N:
+s267843518.py(39):             self.tree[i] += x
+s267843518.py(40):             i += i & -i
+s267843518.py(38):         while i <= self.N:
+s267843518.py(87): for i, y in enumerate(Y, 1):
+s267843518.py(104): print(ans)
+13
