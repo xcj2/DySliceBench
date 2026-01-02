@@ -1,0 +1,94 @@
+ --- modulename: s579071339, funcname: <module>
+s579071339.py(1): import sys
+s579071339.py(2): stdin = sys.stdin
+s579071339.py(4): sys.setrecursionlimit(10 ** 7)
+s579071339.py(6): def li(): return map(int, stdin.readline().split())
+s579071339.py(7): def li_(): return map(lambda x: int(x) - 1, stdin.readline().split())
+s579071339.py(8): def lf(): return map(float, stdin.readline().split())
+s579071339.py(9): def ls(): return stdin.readline().split()
+s579071339.py(10): def ns(): return stdin.readline().rstrip()
+s579071339.py(11): def lc(): return list(ns())
+s579071339.py(12): def ni(): return int(stdin.readline())
+s579071339.py(13): def nf(): return float(stdin.readline())
+s579071339.py(17): def inv_mod(n: int, mod: int) -> list:
+s579071339.py(25): def fact(n: int, mod: int) -> list:
+s579071339.py(35): def fact_inv(n: int, inv: list, mod: int) -> list:
+s579071339.py(43): def nCr(n: int, r: int, mod: int, fac: list, facInv: list) -> int:
+s579071339.py(50): def get_gates(h, w, a, b):
+s579071339.py(60): h, w, a, b = li()
+ --- modulename: s579071339, funcname: li
+s579071339.py(6): def li(): return map(int, stdin.readline().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s579071339.py(61): MOD = 10**9 + 7
+s579071339.py(63): gates = get_gates(h,w,a,b)
+ --- modulename: s579071339, funcname: get_gates
+s579071339.py(51):     i = 0
+s579071339.py(52):     gates = []
+s579071339.py(53):     while h-a-1-i >= 0 and b+i < w:
+s579071339.py(54):         gates.append((h-a-1-i, b+i))
+s579071339.py(55):         i += 1
+s579071339.py(53):     while h-a-1-i >= 0 and b+i < w:
+s579071339.py(57):     return gates
+s579071339.py(65): inv = inv_mod(h+w, MOD)
+ --- modulename: s579071339, funcname: inv_mod
+s579071339.py(18):     inv = [0, 1]
+s579071339.py(19):     for i in range(2, n + 1):
+s579071339.py(20):         inv.append(mod - ((mod // i) * inv[mod % i]) % mod)
+s579071339.py(19):     for i in range(2, n + 1):
+s579071339.py(20):         inv.append(mod - ((mod // i) * inv[mod % i]) % mod)
+s579071339.py(19):     for i in range(2, n + 1):
+s579071339.py(20):         inv.append(mod - ((mod // i) * inv[mod % i]) % mod)
+s579071339.py(19):     for i in range(2, n + 1):
+s579071339.py(20):         inv.append(mod - ((mod // i) * inv[mod % i]) % mod)
+s579071339.py(19):     for i in range(2, n + 1):
+s579071339.py(21):     return inv
+s579071339.py(66): fac = fact(h+w, MOD)
+ --- modulename: s579071339, funcname: fact
+s579071339.py(26):     fac = [1, 1]
+s579071339.py(27):     res = 1
+s579071339.py(28):     for i in range(2, n + 1):
+s579071339.py(29):         res = res * i % mod
+s579071339.py(30):         fac.append(res)
+s579071339.py(28):     for i in range(2, n + 1):
+s579071339.py(29):         res = res * i % mod
+s579071339.py(30):         fac.append(res)
+s579071339.py(28):     for i in range(2, n + 1):
+s579071339.py(29):         res = res * i % mod
+s579071339.py(30):         fac.append(res)
+s579071339.py(28):     for i in range(2, n + 1):
+s579071339.py(29):         res = res * i % mod
+s579071339.py(30):         fac.append(res)
+s579071339.py(28):     for i in range(2, n + 1):
+s579071339.py(31):     return fac
+s579071339.py(67): facInv = fact_inv(h+w, inv, MOD)
+ --- modulename: s579071339, funcname: fact_inv
+s579071339.py(36):     facInv = [1, 1]
+s579071339.py(37):     for i in range(2, n + 1):
+s579071339.py(38):         facInv.append(facInv[i - 1] * inv[i] % mod)
+s579071339.py(37):     for i in range(2, n + 1):
+s579071339.py(38):         facInv.append(facInv[i - 1] * inv[i] % mod)
+s579071339.py(37):     for i in range(2, n + 1):
+s579071339.py(38):         facInv.append(facInv[i - 1] * inv[i] % mod)
+s579071339.py(37):     for i in range(2, n + 1):
+s579071339.py(38):         facInv.append(facInv[i - 1] * inv[i] % mod)
+s579071339.py(37):     for i in range(2, n + 1):
+s579071339.py(39):     return facInv
+s579071339.py(69): ans = 0
+s579071339.py(70): for ri, ci in gates:
+s579071339.py(71):     ans += nCr(ri+ci, ci , MOD, fac, facInv) * nCr(h+w-2-(ri+ci), w-1-ci, MOD, fac, facInv)
+ --- modulename: s579071339, funcname: nCr
+s579071339.py(44):     if not (0 <= r and r <= n):
+s579071339.py(47):     return ((fac[n] * facInv[r]) % mod) * facInv[n - r] % mod
+ --- modulename: s579071339, funcname: nCr
+s579071339.py(44):     if not (0 <= r and r <= n):
+s579071339.py(47):     return ((fac[n] * facInv[r]) % mod) * facInv[n - r] % mod
+s579071339.py(72):     ans %= MOD
+s579071339.py(70): for ri, ci in gates:
+s579071339.py(74): print(ans)
+2
