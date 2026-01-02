@@ -1,0 +1,1171 @@
+ --- modulename: s099924252, funcname: <module>
+s099924252.py(1): from heapq import heappop, heappush
+s099924252.py(4): class MinCostFlow:
+ --- modulename: s099924252, funcname: MinCostFlow
+s099924252.py(4): class MinCostFlow:
+s099924252.py(5):     def __init__(self, n):
+s099924252.py(13):     def add_edge(self, fr, to, cap, cost):
+s099924252.py(20):     def get_edge(self, idx):
+s099924252.py(25):     def edges(self):
+s099924252.py(29):     def dual_ref(self, s, t):
+s099924252.py(62):     def flow(self, s, t):
+s099924252.py(65):     def flow_with_limit(self, s, t, limit):
+s099924252.py(68):     def slope(self, s, t):
+s099924252.py(71):     def slope_with_limit(self, s, t, limit):
+s099924252.py(101): N, K = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s099924252.py(102): A = [list(map(int, input().split())) for _ in range(N)]
+ --- modulename: s099924252, funcname: <listcomp>
+s099924252.py(102): A = [list(map(int, input().split())) for _ in range(N)]
+s099924252.py(102): A = [list(map(int, input().split())) for _ in range(N)]
+s099924252.py(102): A = [list(map(int, input().split())) for _ in range(N)]
+s099924252.py(102): A = [list(map(int, input().split())) for _ in range(N)]
+s099924252.py(104): mcf = MinCostFlow(2 * N + 2)
+ --- modulename: s099924252, funcname: __init__
+s099924252.py(6):         self.n = n
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+ --- modulename: s099924252, funcname: <listcomp>
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+s099924252.py(7):         self.graph = [[] for _ in range(n)]
+s099924252.py(8):         self.pos = []
+s099924252.py(9):         self.pv = []
+s099924252.py(10):         self.pe = []
+s099924252.py(11):         self.dual = []
+s099924252.py(105): start = 2 * N
+s099924252.py(106): end = 2 * N + 1
+s099924252.py(108): MAX = 10 ** 9
+s099924252.py(110): mcf.add_edge(start, end, N * K, MAX)
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(112): for i in range(N):
+s099924252.py(113):     mcf.add_edge(start, i, K, 0)
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(114):     mcf.add_edge(N + i, end, K, 0)
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(117):         mcf.add_edge(i, N + j, 1, MAX - A[i][j])
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(117):         mcf.add_edge(i, N + j, 1, MAX - A[i][j])
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(117):         mcf.add_edge(i, N + j, 1, MAX - A[i][j])
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(112): for i in range(N):
+s099924252.py(113):     mcf.add_edge(start, i, K, 0)
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(114):     mcf.add_edge(N + i, end, K, 0)
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(117):         mcf.add_edge(i, N + j, 1, MAX - A[i][j])
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(117):         mcf.add_edge(i, N + j, 1, MAX - A[i][j])
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(117):         mcf.add_edge(i, N + j, 1, MAX - A[i][j])
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(112): for i in range(N):
+s099924252.py(113):     mcf.add_edge(start, i, K, 0)
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(114):     mcf.add_edge(N + i, end, K, 0)
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(117):         mcf.add_edge(i, N + j, 1, MAX - A[i][j])
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(117):         mcf.add_edge(i, N + j, 1, MAX - A[i][j])
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(117):         mcf.add_edge(i, N + j, 1, MAX - A[i][j])
+ --- modulename: s099924252, funcname: add_edge
+s099924252.py(14):         m = len(self.pos)
+s099924252.py(15):         self.pos.append((fr, len(self.graph[fr])))
+s099924252.py(16):         self.graph[fr].append([to, len(self.graph[to]), cap, cost])
+s099924252.py(17):         self.graph[to].append([fr, len(self.graph[fr]) - 1, 0, -cost])
+s099924252.py(18):         return m
+s099924252.py(116):     for j in range(N):
+s099924252.py(112): for i in range(N):
+s099924252.py(119): print(N * K * MAX - mcf.flow_with_limit(start, end, N * K)[1])
+ --- modulename: s099924252, funcname: flow_with_limit
+s099924252.py(66):         return self.slope_with_limit(s, t, limit)[-1]
+ --- modulename: s099924252, funcname: slope_with_limit
+s099924252.py(72):         flow = 0
+s099924252.py(73):         cost = 0
+s099924252.py(74):         prev_cost = -1
+s099924252.py(75):         res = [(flow, cost)]
+s099924252.py(76):         self.dual = [0] * self.n
+s099924252.py(77):         while flow < limit:
+s099924252.py(78):             if not self.dual_ref(s, t):
+ --- modulename: s099924252, funcname: dual_ref
+s099924252.py(30):         dist = [2 ** 63 - 1] * self.n
+s099924252.py(31):         dist[s] = 0
+s099924252.py(32):         vis = [0] * self.n
+s099924252.py(33):         self.pv = [-1] * self.n
+s099924252.py(34):         self.pe = [-1] * self.n
+s099924252.py(35):         queue = []
+s099924252.py(36):         heappush(queue, (0, s))
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(43):                 break
+s099924252.py(54):         if not vis[t]:
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(58):                 continue
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(58):                 continue
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(60):         return True
+s099924252.py(80):             c = limit - flow
+s099924252.py(81):             v = t
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(85):             v = t
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(91):             d = -self.dual[s]
+s099924252.py(92):             flow += c
+s099924252.py(93):             cost += c * d
+s099924252.py(94):             if prev_cost == d:
+s099924252.py(96):             res.append((flow, cost))
+s099924252.py(97):             prev_cost = cost
+s099924252.py(77):         while flow < limit:
+s099924252.py(78):             if not self.dual_ref(s, t):
+ --- modulename: s099924252, funcname: dual_ref
+s099924252.py(30):         dist = [2 ** 63 - 1] * self.n
+s099924252.py(31):         dist[s] = 0
+s099924252.py(32):         vis = [0] * self.n
+s099924252.py(33):         self.pv = [-1] * self.n
+s099924252.py(34):         self.pe = [-1] * self.n
+s099924252.py(35):         queue = []
+s099924252.py(36):         heappush(queue, (0, s))
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(47):                     continue
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(47):                     continue
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(43):                 break
+s099924252.py(54):         if not vis[t]:
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(58):                 continue
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(60):         return True
+s099924252.py(80):             c = limit - flow
+s099924252.py(81):             v = t
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(85):             v = t
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(91):             d = -self.dual[s]
+s099924252.py(92):             flow += c
+s099924252.py(93):             cost += c * d
+s099924252.py(94):             if prev_cost == d:
+s099924252.py(96):             res.append((flow, cost))
+s099924252.py(97):             prev_cost = cost
+s099924252.py(77):         while flow < limit:
+s099924252.py(78):             if not self.dual_ref(s, t):
+ --- modulename: s099924252, funcname: dual_ref
+s099924252.py(30):         dist = [2 ** 63 - 1] * self.n
+s099924252.py(31):         dist[s] = 0
+s099924252.py(32):         vis = [0] * self.n
+s099924252.py(33):         self.pv = [-1] * self.n
+s099924252.py(34):         self.pe = [-1] * self.n
+s099924252.py(35):         queue = []
+s099924252.py(36):         heappush(queue, (0, s))
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(47):                     continue
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(47):                     continue
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(47):                     continue
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(47):                     continue
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(47):                     continue
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(48):                 cost += self.dual[v] - self.dual[to]
+s099924252.py(49):                 if dist[to] - dist[v] > cost:
+s099924252.py(50):                     dist[to] = dist[v] + cost
+s099924252.py(51):                     self.pv[to] = v
+s099924252.py(52):                     self.pe[to] = i
+s099924252.py(53):                     heappush(queue, (dist[to], to))
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(45):                 to, rev, cap, cost = self.graph[v][i]
+s099924252.py(46):                 if vis[to] or cap == 0:
+s099924252.py(44):             for i in range(len(self.graph[v])):
+s099924252.py(37):         while queue:
+s099924252.py(38):             k, v = heappop(queue)
+s099924252.py(39):             if vis[v]:
+s099924252.py(41):             vis[v] = True
+s099924252.py(42):             if v == t:
+s099924252.py(43):                 break
+s099924252.py(54):         if not vis[t]:
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(57):             if not vis[v]:
+s099924252.py(59):             self.dual[v] -= dist[t] - dist[v]
+s099924252.py(56):         for v in range(self.n):
+s099924252.py(60):         return True
+s099924252.py(80):             c = limit - flow
+s099924252.py(81):             v = t
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(83):                 c = min(c, self.graph[self.pv[v]][self.pe[v]][2])
+s099924252.py(84):                 v = self.pv[v]
+s099924252.py(82):             while v != s:
+s099924252.py(85):             v = t
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(87):                 to, rev, cap, _ = self.graph[self.pv[v]][self.pe[v]]
+s099924252.py(88):                 self.graph[self.pv[v]][self.pe[v]][2] -= c
+s099924252.py(89):                 self.graph[v][rev][2] += c
+s099924252.py(90):                 v = self.pv[v]
+s099924252.py(86):             while v != s:
+s099924252.py(91):             d = -self.dual[s]
+s099924252.py(92):             flow += c
+s099924252.py(93):             cost += c * d
+s099924252.py(94):             if prev_cost == d:
+s099924252.py(96):             res.append((flow, cost))
+s099924252.py(97):             prev_cost = cost
+s099924252.py(77):         while flow < limit:
+s099924252.py(98):         return res
+19
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(123):         continue
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(124):     A[fr][to-N] = 'X' if flow == 1 else '.'
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(124):     A[fr][to-N] = 'X' if flow == 1 else '.'
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(124):     A[fr][to-N] = 'X' if flow == 1 else '.'
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(123):         continue
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(124):     A[fr][to-N] = 'X' if flow == 1 else '.'
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(124):     A[fr][to-N] = 'X' if flow == 1 else '.'
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(124):     A[fr][to-N] = 'X' if flow == 1 else '.'
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(123):         continue
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(124):     A[fr][to-N] = 'X' if flow == 1 else '.'
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(124):     A[fr][to-N] = 'X' if flow == 1 else '.'
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(27):             yield self.get_edge(i)
+ --- modulename: s099924252, funcname: get_edge
+s099924252.py(21):         to, rev, cap, cost = self.graph[self.pos[idx][0]][self.pos[idx][1]]
+s099924252.py(22):         rev_to, rev_rev, rev_cap, rev_cost = self.graph[to][rev]
+s099924252.py(23):         return self.pos[idx][0], to, cap + rev_cap, rev_cap, cost
+s099924252.py(122):     if fr == start or to == end:
+s099924252.py(124):     A[fr][to-N] = 'X' if flow == 1 else '.'
+s099924252.py(121): for fr, to, cap, flow, cost in mcf.edges():
+ --- modulename: s099924252, funcname: edges
+s099924252.py(26):         for i in range(len(self.pos)):
+s099924252.py(126): for r in A:
+s099924252.py(127):     print(''.join(r))
+X..
+s099924252.py(126): for r in A:
+s099924252.py(127):     print(''.join(r))
+..X
+s099924252.py(126): for r in A:
+s099924252.py(127):     print(''.join(r))
+.X.
+s099924252.py(126): for r in A:

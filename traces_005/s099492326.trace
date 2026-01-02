@@ -1,0 +1,552 @@
+ --- modulename: s099492326, funcname: <module>
+s099492326.py(1): import sys
+s099492326.py(2): input = sys.stdin.readline
+s099492326.py(4): N,M=map(int,input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s099492326.py(6): end=[[] for i in range(N+2)]
+ --- modulename: s099492326, funcname: <listcomp>
+s099492326.py(6): end=[[] for i in range(N+2)]
+s099492326.py(6): end=[[] for i in range(N+2)]
+s099492326.py(6): end=[[] for i in range(N+2)]
+s099492326.py(6): end=[[] for i in range(N+2)]
+s099492326.py(6): end=[[] for i in range(N+2)]
+s099492326.py(6): end=[[] for i in range(N+2)]
+s099492326.py(6): end=[[] for i in range(N+2)]
+s099492326.py(6): end=[[] for i in range(N+2)]
+s099492326.py(8): for i in [0]*M:
+s099492326.py(9):     l,r,a=map(int,input().split())
+s099492326.py(10):     end[r+1].append((l,a))
+s099492326.py(8): for i in [0]*M:
+s099492326.py(9):     l,r,a=map(int,input().split())
+s099492326.py(10):     end[r+1].append((l,a))
+s099492326.py(8): for i in [0]*M:
+s099492326.py(9):     l,r,a=map(int,input().split())
+s099492326.py(10):     end[r+1].append((l,a))
+s099492326.py(8): for i in [0]*M:
+s099492326.py(13): seg_el=1<<18#Segment treeの台の要素数
+s099492326.py(15): SEG=[0]*(2*seg_el-1)#Segment tree.色々考えると0で初期化してOKそう
+s099492326.py(16): ADD=[0]*(2*seg_el-1)#加算用Segment tree,SEG[k]+ADD[k]がkにおける本当の最大値
+s099492326.py(17): seg_el_list=[524286, 262142, 131070, 65534, 32766, 16382, 8190, 4094, 2046, 1022, 510, 254, 126, 62, 30, 14, 6, 2, 0]
+s099492326.py(19): def update(k):#SEGのkより上のノードを更新（反映）
+s099492326.py(26): def to_seg(a):#aが終点となる区間をSegment treeの座標へ変換  
+s099492326.py(30): def add(a,b,x):#区間(a,b]にxを加算
+s099492326.py(42): for i in range(N+2):
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(46):     SEG[i+seg_el-1]=SEG[0]
+s099492326.py(47):     update(i+seg_el-1)
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(42): for i in range(N+2):
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(46):     SEG[i+seg_el-1]=SEG[0]
+s099492326.py(47):     update(i+seg_el-1)
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(42): for i in range(N+2):
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(46):     SEG[i+seg_el-1]=SEG[0]
+s099492326.py(47):     update(i+seg_el-1)
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(42): for i in range(N+2):
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(46):     SEG[i+seg_el-1]=SEG[0]
+s099492326.py(47):     update(i+seg_el-1)
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(42): for i in range(N+2):
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(44):         add(b,i,k)#点数がもらえる区間から出たときにその分を加算
+ --- modulename: s099492326, funcname: add
+s099492326.py(32):     while b!=0:
+s099492326.py(33):         ADD[to_seg(b)]+=x
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+s099492326.py(34):         update(to_seg(b))
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(35):         b-=(b&(-b))
+s099492326.py(32):     while b!=0:
+s099492326.py(37):     while a!=0:
+s099492326.py(38):         ADD[to_seg(a)]+=-x
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+s099492326.py(39):         update(to_seg(a))
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(40):         a-=(a&(-a))
+s099492326.py(37):     while a!=0:
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(46):     SEG[i+seg_el-1]=SEG[0]
+s099492326.py(47):     update(i+seg_el-1)
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(42): for i in range(N+2):
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(44):         add(b,i,k)#点数がもらえる区間から出たときにその分を加算
+ --- modulename: s099492326, funcname: add
+s099492326.py(32):     while b!=0:
+s099492326.py(33):         ADD[to_seg(b)]+=x
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+s099492326.py(34):         update(to_seg(b))
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(35):         b-=(b&(-b))
+s099492326.py(32):     while b!=0:
+s099492326.py(33):         ADD[to_seg(b)]+=x
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+s099492326.py(34):         update(to_seg(b))
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(35):         b-=(b&(-b))
+s099492326.py(32):     while b!=0:
+s099492326.py(37):     while a!=0:
+s099492326.py(38):         ADD[to_seg(a)]+=-x
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+s099492326.py(39):         update(to_seg(a))
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(40):         a-=(a&(-a))
+s099492326.py(37):     while a!=0:
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(46):     SEG[i+seg_el-1]=SEG[0]
+s099492326.py(47):     update(i+seg_el-1)
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(42): for i in range(N+2):
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(44):         add(b,i,k)#点数がもらえる区間から出たときにその分を加算
+ --- modulename: s099492326, funcname: add
+s099492326.py(32):     while b!=0:
+s099492326.py(33):         ADD[to_seg(b)]+=x
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+s099492326.py(34):         update(to_seg(b))
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(35):         b-=(b&(-b))
+s099492326.py(32):     while b!=0:
+s099492326.py(33):         ADD[to_seg(b)]+=x
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+s099492326.py(34):         update(to_seg(b))
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(35):         b-=(b&(-b))
+s099492326.py(32):     while b!=0:
+s099492326.py(37):     while a!=0:
+s099492326.py(38):         ADD[to_seg(a)]+=-x
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+s099492326.py(39):         update(to_seg(a))
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(40):         a-=(a&(-a))
+s099492326.py(37):     while a!=0:
+s099492326.py(38):         ADD[to_seg(a)]+=-x
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+s099492326.py(39):         update(to_seg(a))
+ --- modulename: s099492326, funcname: to_seg
+s099492326.py(27):     b=(a&(-a)).bit_length()
+s099492326.py(28):     return seg_el_list[b]+a//(1<<(b-1))
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(40):         a-=(a&(-a))
+s099492326.py(37):     while a!=0:
+s099492326.py(43):     for b,k in end[i]:
+s099492326.py(46):     SEG[i+seg_el-1]=SEG[0]
+s099492326.py(47):     update(i+seg_el-1)
+ --- modulename: s099492326, funcname: update
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(24):         SEG[k]=max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2])
+s099492326.py(20):     while k>=0:
+s099492326.py(21):         k=(k-1)//2
+s099492326.py(22):         if SEG[k]==max(SEG[k*2+1]+ADD[k*2+1],SEG[k*2+2]+ADD[k*2+2]):
+s099492326.py(23):             break
+s099492326.py(42): for i in range(N+2):
+s099492326.py(49): print(SEG[0])
+20
