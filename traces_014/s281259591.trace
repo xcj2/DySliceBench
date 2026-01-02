@@ -1,0 +1,312 @@
+ --- modulename: s281259591, funcname: <module>
+s281259591.py(1): import sys
+s281259591.py(2): input = sys.stdin.readline
+s281259591.py(4): def I(): return int(input())
+s281259591.py(5): def MI(): return map(int, input().split())
+s281259591.py(6): def LI(): return list(map(int, input().split()))
+s281259591.py(8): def main():
+s281259591.py(155): main()
+ --- modulename: s281259591, funcname: main
+s281259591.py(10):     import sys
+s281259591.py(11):     class Lazysegtree():
+ --- modulename: s281259591, funcname: Lazysegtree
+s281259591.py(11):     class Lazysegtree():
+s281259591.py(12):         """RAQ
+s281259591.py(16):         def __init__(self, A, intv, initialize = True, segf = min):
+s281259591.py(34):         def _ascend(self, k):
+s281259591.py(42):         def _descend(self, k):
+s281259591.py(57):         def update(self, k, x):
+s281259591.py(63):         def query(self, l, r):
+s281259591.py(84):         def add(self, l, r, x):
+s281259591.py(110):     mod=10**9+7
+s281259591.py(111):     N=I()
+ --- modulename: s281259591, funcname: I
+s281259591.py(4): def I(): return int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s281259591.py(112):     A=LI()
+ --- modulename: s281259591, funcname: LI
+s281259591.py(6): def LI(): return list(map(int, input().split()))
+s281259591.py(113):     A[-1]-=1
+s281259591.py(114):     if A[0]!=0:
+s281259591.py(118):         ans=N+1
+s281259591.py(119):         now=0#キャパがある最上位
+s281259591.py(120):         seg=Lazysegtree([1]*(N+1), 10**10, True, min)
+ --- modulename: s281259591, funcname: __init__
+s281259591.py(22):             self.N = len(A)
+s281259591.py(23):             self.N0 = 2**(self.N-1).bit_length()
+s281259591.py(24):             self.intv = intv
+s281259591.py(25):             self.segf = segf
+s281259591.py(26):             self.lazy = [0]*(2*self.N0)
+s281259591.py(27):             if initialize:
+s281259591.py(28):                 self.data = [intv]*self.N0 + A + [intv]*(self.N0 - self.N)
+s281259591.py(29):                 for i in range(self.N0-1, 0, -1):
+s281259591.py(30):                     self.data[i] = self.segf(self.data[2*i], self.data[2*i+1]) 
+s281259591.py(29):                 for i in range(self.N0-1, 0, -1):
+s281259591.py(30):                     self.data[i] = self.segf(self.data[2*i], self.data[2*i+1]) 
+s281259591.py(29):                 for i in range(self.N0-1, 0, -1):
+s281259591.py(30):                     self.data[i] = self.segf(self.data[2*i], self.data[2*i+1]) 
+s281259591.py(29):                 for i in range(self.N0-1, 0, -1):
+s281259591.py(121):         for i in range(1,N+1):
+s281259591.py(122):             a=A[i]
+s281259591.py(123):             if ans==-1:
+s281259591.py(125):             while a>0:
+s281259591.py(126):                 if now==i:
+s281259591.py(130):                 cap=seg.query(now,now+1)
+ --- modulename: s281259591, funcname: query
+s281259591.py(65):             L = l+self.N0
+s281259591.py(66):             R = r+self.N0
+s281259591.py(67):             Li = L//(L & -L)
+s281259591.py(68):             Ri = R//(R & -R)
+s281259591.py(69):             self._descend(Li)
+ --- modulename: s281259591, funcname: _descend
+s281259591.py(43):             k = k >> 1
+s281259591.py(44):             idx = 1
+s281259591.py(45):             c = k.bit_length()
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(70):             self._descend(Ri - 1)
+ --- modulename: s281259591, funcname: _descend
+s281259591.py(43):             k = k >> 1
+s281259591.py(44):             idx = 1
+s281259591.py(45):             c = k.bit_length()
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(47):                 idx = k >> (c - j)
+s281259591.py(48):                 ax = self.lazy[idx]
+s281259591.py(49):                 if not ax:
+s281259591.py(50):                     continue
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(47):                 idx = k >> (c - j)
+s281259591.py(48):                 ax = self.lazy[idx]
+s281259591.py(49):                 if not ax:
+s281259591.py(50):                     continue
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(72):             s = self.intv                                                              
+s281259591.py(73):             while L < R:
+s281259591.py(74):                 if R & 1:
+s281259591.py(75):                     R -= 1
+s281259591.py(76):                     s = self.segf(s, self.data[R])
+s281259591.py(77):                 if L & 1:
+s281259591.py(80):                 L >>= 1
+s281259591.py(81):                 R >>= 1
+s281259591.py(73):             while L < R:
+s281259591.py(82):             return s
+s281259591.py(132):                 if a>=cap:
+s281259591.py(133):                     a-=cap
+s281259591.py(135):                     seg.add(now+1,i,cap)
+ --- modulename: s281259591, funcname: add
+s281259591.py(86):             L = l+self.N0
+s281259591.py(87):             R = r+self.N0
+s281259591.py(89):             Li = L//(L & -L)
+s281259591.py(90):             Ri = R//(R & -R)
+s281259591.py(92):             while L < R :
+s281259591.py(104):             self._ascend(Li)
+ --- modulename: s281259591, funcname: _ascend
+s281259591.py(35):             k = k >> 1
+s281259591.py(36):             c = k.bit_length()
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(105):             self._ascend(Ri-1)
+ --- modulename: s281259591, funcname: _ascend
+s281259591.py(35):             k = k >> 1
+s281259591.py(36):             c = k.bit_length()
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(136):                     ans+=(i-now)*cap
+s281259591.py(137):                     now+=1
+s281259591.py(125):             while a>0:
+s281259591.py(121):         for i in range(1,N+1):
+s281259591.py(122):             a=A[i]
+s281259591.py(123):             if ans==-1:
+s281259591.py(125):             while a>0:
+s281259591.py(126):                 if now==i:
+s281259591.py(130):                 cap=seg.query(now,now+1)
+ --- modulename: s281259591, funcname: query
+s281259591.py(65):             L = l+self.N0
+s281259591.py(66):             R = r+self.N0
+s281259591.py(67):             Li = L//(L & -L)
+s281259591.py(68):             Ri = R//(R & -R)
+s281259591.py(69):             self._descend(Li)
+ --- modulename: s281259591, funcname: _descend
+s281259591.py(43):             k = k >> 1
+s281259591.py(44):             idx = 1
+s281259591.py(45):             c = k.bit_length()
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(47):                 idx = k >> (c - j)
+s281259591.py(48):                 ax = self.lazy[idx]
+s281259591.py(49):                 if not ax:
+s281259591.py(50):                     continue
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(47):                 idx = k >> (c - j)
+s281259591.py(48):                 ax = self.lazy[idx]
+s281259591.py(49):                 if not ax:
+s281259591.py(50):                     continue
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(70):             self._descend(Ri - 1)
+ --- modulename: s281259591, funcname: _descend
+s281259591.py(43):             k = k >> 1
+s281259591.py(44):             idx = 1
+s281259591.py(45):             c = k.bit_length()
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(47):                 idx = k >> (c - j)
+s281259591.py(48):                 ax = self.lazy[idx]
+s281259591.py(49):                 if not ax:
+s281259591.py(50):                     continue
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(72):             s = self.intv                                                              
+s281259591.py(73):             while L < R:
+s281259591.py(74):                 if R & 1:
+s281259591.py(77):                 if L & 1:
+s281259591.py(78):                     s = self.segf(s, self.data[L])
+s281259591.py(79):                     L += 1
+s281259591.py(80):                 L >>= 1
+s281259591.py(81):                 R >>= 1
+s281259591.py(73):             while L < R:
+s281259591.py(82):             return s
+s281259591.py(132):                 if a>=cap:
+s281259591.py(133):                     a-=cap
+s281259591.py(135):                     seg.add(now+1,i,cap)
+ --- modulename: s281259591, funcname: add
+s281259591.py(86):             L = l+self.N0
+s281259591.py(87):             R = r+self.N0
+s281259591.py(89):             Li = L//(L & -L)
+s281259591.py(90):             Ri = R//(R & -R)
+s281259591.py(92):             while L < R :
+s281259591.py(104):             self._ascend(Li)
+ --- modulename: s281259591, funcname: _ascend
+s281259591.py(35):             k = k >> 1
+s281259591.py(36):             c = k.bit_length()
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(105):             self._ascend(Ri-1)
+ --- modulename: s281259591, funcname: _ascend
+s281259591.py(35):             k = k >> 1
+s281259591.py(36):             c = k.bit_length()
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(136):                     ans+=(i-now)*cap
+s281259591.py(137):                     now+=1
+s281259591.py(125):             while a>0:
+s281259591.py(121):         for i in range(1,N+1):
+s281259591.py(122):             a=A[i]
+s281259591.py(123):             if ans==-1:
+s281259591.py(125):             while a>0:
+s281259591.py(126):                 if now==i:
+s281259591.py(130):                 cap=seg.query(now,now+1)
+ --- modulename: s281259591, funcname: query
+s281259591.py(65):             L = l+self.N0
+s281259591.py(66):             R = r+self.N0
+s281259591.py(67):             Li = L//(L & -L)
+s281259591.py(68):             Ri = R//(R & -R)
+s281259591.py(69):             self._descend(Li)
+ --- modulename: s281259591, funcname: _descend
+s281259591.py(43):             k = k >> 1
+s281259591.py(44):             idx = 1
+s281259591.py(45):             c = k.bit_length()
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(47):                 idx = k >> (c - j)
+s281259591.py(48):                 ax = self.lazy[idx]
+s281259591.py(49):                 if not ax:
+s281259591.py(50):                     continue
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(70):             self._descend(Ri - 1)
+ --- modulename: s281259591, funcname: _descend
+s281259591.py(43):             k = k >> 1
+s281259591.py(44):             idx = 1
+s281259591.py(45):             c = k.bit_length()
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(47):                 idx = k >> (c - j)
+s281259591.py(48):                 ax = self.lazy[idx]
+s281259591.py(49):                 if not ax:
+s281259591.py(50):                     continue
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(47):                 idx = k >> (c - j)
+s281259591.py(48):                 ax = self.lazy[idx]
+s281259591.py(49):                 if not ax:
+s281259591.py(50):                     continue
+s281259591.py(46):             for j in range(1, c+1):
+s281259591.py(72):             s = self.intv                                                              
+s281259591.py(73):             while L < R:
+s281259591.py(74):                 if R & 1:
+s281259591.py(75):                     R -= 1
+s281259591.py(76):                     s = self.segf(s, self.data[R])
+s281259591.py(77):                 if L & 1:
+s281259591.py(80):                 L >>= 1
+s281259591.py(81):                 R >>= 1
+s281259591.py(73):             while L < R:
+s281259591.py(82):             return s
+s281259591.py(132):                 if a>=cap:
+s281259591.py(133):                     a-=cap
+s281259591.py(135):                     seg.add(now+1,i,cap)
+ --- modulename: s281259591, funcname: add
+s281259591.py(86):             L = l+self.N0
+s281259591.py(87):             R = r+self.N0
+s281259591.py(89):             Li = L//(L & -L)
+s281259591.py(90):             Ri = R//(R & -R)
+s281259591.py(92):             while L < R :
+s281259591.py(104):             self._ascend(Li)
+ --- modulename: s281259591, funcname: _ascend
+s281259591.py(35):             k = k >> 1
+s281259591.py(36):             c = k.bit_length()
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(105):             self._ascend(Ri-1)
+ --- modulename: s281259591, funcname: _ascend
+s281259591.py(35):             k = k >> 1
+s281259591.py(36):             c = k.bit_length()
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(38):                 idx = k >> j
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(40):                 + self.lazy[idx]
+s281259591.py(39):                 self.data[idx] = self.segf(self.data[2*idx], self.data[2*idx+1]) \
+s281259591.py(37):             for j in range(c):
+s281259591.py(136):                     ans+=(i-now)*cap
+s281259591.py(137):                     now+=1
+s281259591.py(125):             while a>0:
+s281259591.py(121):         for i in range(1,N+1):
+s281259591.py(152):     print(ans)
+7
