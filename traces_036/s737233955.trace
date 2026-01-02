@@ -1,0 +1,119 @@
+ --- modulename: s737233955, funcname: <module>
+s737233955.py(1): import sys
+s737233955.py(2): input = sys.stdin.buffer.readline
+s737233955.py(4): N = int(input())
+s737233955.py(5): AB = [list(map(int, input().split())) for _ in range(N - 1)]
+ --- modulename: s737233955, funcname: <listcomp>
+s737233955.py(5): AB = [list(map(int, input().split())) for _ in range(N - 1)]
+s737233955.py(5): AB = [list(map(int, input().split())) for _ in range(N - 1)]
+s737233955.py(5): AB = [list(map(int, input().split())) for _ in range(N - 1)]
+s737233955.py(6): M = int(input())
+s737233955.py(7): UV = [list(map(int, input().split())) for _ in range(M)]
+ --- modulename: s737233955, funcname: <listcomp>
+s737233955.py(7): UV = [list(map(int, input().split())) for _ in range(M)]
+s737233955.py(7): UV = [list(map(int, input().split())) for _ in range(M)]
+s737233955.py(9): def popcnt(n):
+s737233955.py(18): graph = [[] for _ in range(N + 1)]
+ --- modulename: s737233955, funcname: <listcomp>
+s737233955.py(18): graph = [[] for _ in range(N + 1)]
+s737233955.py(18): graph = [[] for _ in range(N + 1)]
+s737233955.py(18): graph = [[] for _ in range(N + 1)]
+s737233955.py(18): graph = [[] for _ in range(N + 1)]
+s737233955.py(18): graph = [[] for _ in range(N + 1)]
+s737233955.py(19): for a, b in AB:
+s737233955.py(20):   graph[a].append(b)
+s737233955.py(21):   graph[b].append(a)
+s737233955.py(19): for a, b in AB:
+s737233955.py(20):   graph[a].append(b)
+s737233955.py(21):   graph[b].append(a)
+s737233955.py(19): for a, b in AB:
+s737233955.py(23): def make_tree(graph, root) -> (list, list):
+s737233955.py(39): def lca(u, v, dist, parent):
+s737233955.py(51): dist, parent = make_tree(graph, 1)
+ --- modulename: s737233955, funcname: make_tree
+s737233955.py(24):   INF = 10 ** 15
+s737233955.py(25):   dist = [INF] * len(graph)
+s737233955.py(26):   parent = [-1] * len(graph)
+s737233955.py(27):   stack = [root]
+s737233955.py(28):   dist[root] = 0
+s737233955.py(29):   parent[root] = root
+s737233955.py(30):   while stack:
+s737233955.py(31):     s = stack.pop()
+s737233955.py(32):     for g in graph[s]:
+s737233955.py(33):       if dist[g] > dist[s] + 1:
+s737233955.py(34):         dist[g] = dist[s] + 1
+s737233955.py(35):         parent[g] = s
+s737233955.py(36):         stack.append(g)
+s737233955.py(32):     for g in graph[s]:
+s737233955.py(30):   while stack:
+s737233955.py(31):     s = stack.pop()
+s737233955.py(32):     for g in graph[s]:
+s737233955.py(33):       if dist[g] > dist[s] + 1:
+s737233955.py(32):     for g in graph[s]:
+s737233955.py(33):       if dist[g] > dist[s] + 1:
+s737233955.py(34):         dist[g] = dist[s] + 1
+s737233955.py(35):         parent[g] = s
+s737233955.py(36):         stack.append(g)
+s737233955.py(32):     for g in graph[s]:
+s737233955.py(30):   while stack:
+s737233955.py(31):     s = stack.pop()
+s737233955.py(32):     for g in graph[s]:
+s737233955.py(33):       if dist[g] > dist[s] + 1:
+s737233955.py(32):     for g in graph[s]:
+s737233955.py(30):   while stack:
+s737233955.py(37):   return dist, parent
+s737233955.py(53): tree_lca = []
+s737233955.py(54): for i in range(M):
+s737233955.py(55):     tmp = 0
+s737233955.py(56):     u, v = UV[i]
+s737233955.py(57):     l = lca(u, v, dist, parent)
+ --- modulename: s737233955, funcname: lca
+s737233955.py(40):   distu, distv = dist[u], dist[v]
+s737233955.py(41):   if distu > distv:
+s737233955.py(44):   if distv > distu:
+s737233955.py(45):     for _ in range(distv - distu):
+s737233955.py(46):       v = parent[v]
+s737233955.py(45):     for _ in range(distv - distu):
+s737233955.py(46):       v = parent[v]
+s737233955.py(45):     for _ in range(distv - distu):
+s737233955.py(47):   while u != v:
+s737233955.py(49):   return u
+s737233955.py(58):     while u != l:
+s737233955.py(61):     while v != l:
+s737233955.py(62):         tmp |= 1 << v
+s737233955.py(63):         v = parent[v]
+s737233955.py(61):     while v != l:
+s737233955.py(62):         tmp |= 1 << v
+s737233955.py(63):         v = parent[v]
+s737233955.py(61):     while v != l:
+s737233955.py(64):     tree_lca.append(tmp)
+s737233955.py(54): for i in range(M):
+s737233955.py(66): answer = 2 ** (N - 1)
+s737233955.py(67): for i in range(1, 2 ** M):
+s737233955.py(68):     tmp = 0
+s737233955.py(69):     for j in range(M):
+s737233955.py(70):         if (i >> j) & 1:
+s737233955.py(71):             tmp |= tree_lca[j]
+s737233955.py(69):     for j in range(M):
+s737233955.py(72):     cnt = popcnt(tmp)
+ --- modulename: s737233955, funcname: popcnt
+s737233955.py(10):     c = (n & 0x5555555555555555) + ((n >> 1) & 0x5555555555555555)
+s737233955.py(11):     c = (c & 0x3333333333333333) + ((c >> 2) & 0x3333333333333333)
+s737233955.py(12):     c = (c & 0x0f0f0f0f0f0f0f0f) + ((c >> 4) & 0x0f0f0f0f0f0f0f0f)
+s737233955.py(13):     c = (c & 0x00ff00ff00ff00ff) + ((c >> 8) & 0x00ff00ff00ff00ff)
+s737233955.py(14):     c = (c & 0x0000ffff0000ffff) + ((c >> 16) & 0x0000ffff0000ffff)
+s737233955.py(15):     c = (c & 0x00000000ffffffff) + ((c >> 32) & 0x00000000ffffffff)
+s737233955.py(16):     return c
+s737233955.py(74):     if popcnt(i) % 2 == 1:
+ --- modulename: s737233955, funcname: popcnt
+s737233955.py(10):     c = (n & 0x5555555555555555) + ((n >> 1) & 0x5555555555555555)
+s737233955.py(11):     c = (c & 0x3333333333333333) + ((c >> 2) & 0x3333333333333333)
+s737233955.py(12):     c = (c & 0x0f0f0f0f0f0f0f0f) + ((c >> 4) & 0x0f0f0f0f0f0f0f0f)
+s737233955.py(13):     c = (c & 0x00ff00ff00ff00ff) + ((c >> 8) & 0x00ff00ff00ff00ff)
+s737233955.py(14):     c = (c & 0x0000ffff0000ffff) + ((c >> 16) & 0x0000ffff0000ffff)
+s737233955.py(15):     c = (c & 0x00000000ffffffff) + ((c >> 32) & 0x00000000ffffffff)
+s737233955.py(16):     return c
+s737233955.py(75):         answer -= 2 ** (N - 1 - cnt) 
+s737233955.py(67): for i in range(1, 2 ** M):
+s737233955.py(79): print(answer)
+3
