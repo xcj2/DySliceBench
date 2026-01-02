@@ -1,0 +1,212 @@
+ --- modulename: s079087557, funcname: <module>
+s079087557.py(5): def SegmentTreeClosure(init_val, segfunc, ide_ele) -> 'update,query':
+s079087557.py(53): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s079087557.py(54): h = tuple(map(int, input().split()))
+s079087557.py(55): a = tuple(map(int, input().split()))
+s079087557.py(57): dp = [0] * (n + 1)
+s079087557.py(60): update, query = SegmentTreeClosure(init_val=dp, segfunc=max, ide_ele=0)
+ --- modulename: s079087557, funcname: SegmentTreeClosure
+s079087557.py(6):     size = 1 << (len(init_val) - 1).bit_length()
+s079087557.py(9):     tree = [ide_ele] * (size * 2 - 1)
+s079087557.py(10):     for idx, val in enumerate(init_val, size - 1):  # set
+s079087557.py(12):         tree[idx] = val
+s079087557.py(10):     for idx, val in enumerate(init_val, size - 1):  # set
+s079087557.py(12):         tree[idx] = val
+s079087557.py(10):     for idx, val in enumerate(init_val, size - 1):  # set
+s079087557.py(12):         tree[idx] = val
+s079087557.py(10):     for idx, val in enumerate(init_val, size - 1):  # set
+s079087557.py(12):         tree[idx] = val
+s079087557.py(10):     for idx, val in enumerate(init_val, size - 1):  # set
+s079087557.py(12):         tree[idx] = val
+s079087557.py(10):     for idx, val in enumerate(init_val, size - 1):  # set
+s079087557.py(13):     for idx in range(size - 2, -1, -1):  # build
+s079087557.py(14):         tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(13):     for idx in range(size - 2, -1, -1):  # build
+s079087557.py(14):         tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(13):     for idx in range(size - 2, -1, -1):  # build
+s079087557.py(14):         tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(13):     for idx in range(size - 2, -1, -1):  # build
+s079087557.py(14):         tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(13):     for idx in range(size - 2, -1, -1):  # build
+s079087557.py(14):         tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(13):     for idx in range(size - 2, -1, -1):  # build
+s079087557.py(14):         tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(13):     for idx in range(size - 2, -1, -1):  # build
+s079087557.py(14):         tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(13):     for idx in range(size - 2, -1, -1):  # build
+s079087557.py(17):     def update(idx: int, val) -> None:
+s079087557.py(30):     def query(left: int, right: int) -> 'result':
+s079087557.py(50):     return update, query
+s079087557.py(61): for h_, a_ in zip(h, a):
+s079087557.py(63):     max_ = query(0, h_) + a_
+ --- modulename: s079087557, funcname: query
+s079087557.py(35):         left += size
+s079087557.py(36):         right += size
+s079087557.py(37):         ret = ide_ele  # left >= right: return ide_ele
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(43):                 right -= 1
+s079087557.py(44):                 ret = segfunc(ret, tree[right - 1])
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(43):                 right -= 1
+s079087557.py(44):                 ret = segfunc(ret, tree[right - 1])
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(48):         return ret
+s079087557.py(64):     update(h_, max_)
+ --- modulename: s079087557, funcname: update
+s079087557.py(22):         idx += size - 1
+s079087557.py(24):         tree[idx] = val
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(61): for h_, a_ in zip(h, a):
+s079087557.py(63):     max_ = query(0, h_) + a_
+ --- modulename: s079087557, funcname: query
+s079087557.py(35):         left += size
+s079087557.py(36):         right += size
+s079087557.py(37):         ret = ide_ele  # left >= right: return ide_ele
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(43):                 right -= 1
+s079087557.py(44):                 ret = segfunc(ret, tree[right - 1])
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(48):         return ret
+s079087557.py(64):     update(h_, max_)
+ --- modulename: s079087557, funcname: update
+s079087557.py(22):         idx += size - 1
+s079087557.py(24):         tree[idx] = val
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(61): for h_, a_ in zip(h, a):
+s079087557.py(63):     max_ = query(0, h_) + a_
+ --- modulename: s079087557, funcname: query
+s079087557.py(35):         left += size
+s079087557.py(36):         right += size
+s079087557.py(37):         ret = ide_ele  # left >= right: return ide_ele
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(43):                 right -= 1
+s079087557.py(44):                 ret = segfunc(ret, tree[right - 1])
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(48):         return ret
+s079087557.py(64):     update(h_, max_)
+ --- modulename: s079087557, funcname: update
+s079087557.py(22):         idx += size - 1
+s079087557.py(24):         tree[idx] = val
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(61): for h_, a_ in zip(h, a):
+s079087557.py(63):     max_ = query(0, h_) + a_
+ --- modulename: s079087557, funcname: query
+s079087557.py(35):         left += size
+s079087557.py(36):         right += size
+s079087557.py(37):         ret = ide_ele  # left >= right: return ide_ele
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(43):                 right -= 1
+s079087557.py(44):                 ret = segfunc(ret, tree[right - 1])
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(48):         return ret
+s079087557.py(64):     update(h_, max_)
+ --- modulename: s079087557, funcname: update
+s079087557.py(22):         idx += size - 1
+s079087557.py(24):         tree[idx] = val
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(26):             idx = (idx - 1) // 2
+s079087557.py(27):             tree[idx] = segfunc(tree[idx * 2 + 1], tree[idx * 2 + 2])
+s079087557.py(25):         while idx > 0:
+s079087557.py(61): for h_, a_ in zip(h, a):
+s079087557.py(65): print(query(0, n + 1))
+ --- modulename: s079087557, funcname: query
+s079087557.py(35):         left += size
+s079087557.py(36):         right += size
+s079087557.py(37):         ret = ide_ele  # left >= right: return ide_ele
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(43):                 right -= 1
+s079087557.py(44):                 ret = segfunc(ret, tree[right - 1])
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(39):             if left % 2:  # odd
+s079087557.py(42):             if right % 2:  # odd
+s079087557.py(43):                 right -= 1
+s079087557.py(44):                 ret = segfunc(ret, tree[right - 1])
+s079087557.py(45):             left //= 2
+s079087557.py(46):             right //= 2
+s079087557.py(38):         while left < right:  # どの段も奇偶...順
+s079087557.py(48):         return ret
+60
