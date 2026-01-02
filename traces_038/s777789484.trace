@@ -1,0 +1,1259 @@
+ --- modulename: s777789484, funcname: <module>
+s777789484.py(11): import sys
+s777789484.py(12): import os
+s777789484.py(13): from io import IOBase, BytesIO
+s777789484.py(16): def main():
+s777789484.py(35): BUFSIZE = 8192
+s777789484.py(38): class FastIO(BytesIO):
+ --- modulename: s777789484, funcname: FastIO
+s777789484.py(38): class FastIO(BytesIO):
+s777789484.py(39):     newlines = 0
+s777789484.py(41):     def __init__(self, file):
+s777789484.py(47):     def _fill(self):
+s777789484.py(52):     def read(self):
+s777789484.py(57):     def readline(self):
+s777789484.py(64):     def flush(self):
+s777789484.py(70): class IOWrapper(IOBase):
+ --- modulename: s777789484, funcname: IOWrapper
+s777789484.py(70): class IOWrapper(IOBase):
+s777789484.py(71):     def __init__(self, file):
+ --- modulename: abc, funcname: __new__
+abc.py(106):             cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+abc.py(107):             _abc_init(cls)
+abc.py(108):             return cls
+s777789484.py(86): sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+ --- modulename: s777789484, funcname: __init__
+s777789484.py(72):         py2 = round(0.5)
+s777789484.py(73):         self.buffer = FastIO(file)
+ --- modulename: s777789484, funcname: __init__
+s777789484.py(42):         self._file = file
+s777789484.py(43):         self._fd = file.fileno()
+s777789484.py(44):         self.writable = "x" in file.mode or "w" in file.mode
+s777789484.py(45):         self.write = super(FastIO, self).write if self.writable else None
+s777789484.py(74):         self.flush = self.buffer.flush
+s777789484.py(75):         self.writable = self.buffer.writable
+s777789484.py(76):         if py2 == 1:
+s777789484.py(81):             self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s777789484.py(82):             self.read = lambda: self.buffer.read().decode("ascii")
+s777789484.py(83):             self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s777789484, funcname: __init__
+s777789484.py(72):         py2 = round(0.5)
+s777789484.py(73):         self.buffer = FastIO(file)
+ --- modulename: s777789484, funcname: __init__
+s777789484.py(42):         self._file = file
+s777789484.py(43):         self._fd = file.fileno()
+s777789484.py(44):         self.writable = "x" in file.mode or "w" in file.mode
+s777789484.py(45):         self.write = super(FastIO, self).write if self.writable else None
+s777789484.py(74):         self.flush = self.buffer.flush
+s777789484.py(75):         self.writable = self.buffer.writable
+s777789484.py(76):         if py2 == 1:
+s777789484.py(81):             self.write = lambda s: self.buffer.write(s.encode("ascii"))
+s777789484.py(82):             self.read = lambda: self.buffer.read().decode("ascii")
+s777789484.py(83):             self.readline = lambda: self.buffer.readline().decode("ascii")
+s777789484.py(89): def get_array(): return list(map(int, sys.stdin.readline().split()))
+s777789484.py(92): def get_ints(): return map(int, sys.stdin.readline().split())
+s777789484.py(95): def input(): return sys.stdin.readline().strip()
+s777789484.py(98): if __name__ == "__main__":
+s777789484.py(99):     main()
+ --- modulename: s777789484, funcname: main
+s777789484.py(17):     l, r = get_ints()
+ --- modulename: s777789484, funcname: get_ints
+s777789484.py(92): def get_ints(): return map(int, sys.stdin.readline().split())
+ --- modulename: s777789484, funcname: <lambda>
+s777789484.py(83):             self.readline = lambda: self.buffer.readline().decode("ascii")
+ --- modulename: s777789484, funcname: readline
+s777789484.py(58):         while self.newlines == 0:
+s777789484.py(59):             s = self._fill()
+ --- modulename: s777789484, funcname: _fill
+s777789484.py(48):         s = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+s777789484.py(49):         self.seek((self.tell(), self.seek(0, 2), super(FastIO, self).write(s))[0])
+s777789484.py(50):         return s
+s777789484.py(60):             self.newlines = s.count(b"\n") + (not s)
+s777789484.py(58):         while self.newlines == 0:
+s777789484.py(61):         self.newlines -= 1
+s777789484.py(62):         return super(FastIO, self).readline()
+s777789484.py(18):     ans = float("inf")
+s777789484.py(19):     x = set()
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(27):             _y = j % 2019
+s777789484.py(28):             if _y in y:
+s777789484.py(30):             y.add(_y)
+s777789484.py(31):             ans = min(ans, (_x * _y) % 2019)
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(21):         _x = i % 2019
+s777789484.py(22):         if _x in x:
+s777789484.py(24):         x.add(_x)
+s777789484.py(25):         y = set()
+s777789484.py(26):         for j in range(i + 1, r + 1):
+s777789484.py(20):     for i in range(l, r + 1):
+s777789484.py(32):     print(ans)
+ --- modulename: s777789484, funcname: <lambda>
+s777789484.py(81):             self.write = lambda s: self.buffer.write(s.encode("ascii"))
+2 --- modulename: s777789484, funcname: <lambda>
+s777789484.py(81):             self.write = lambda s: self.buffer.write(s.encode("ascii"))
+
