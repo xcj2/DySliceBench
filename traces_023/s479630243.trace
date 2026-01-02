@@ -1,0 +1,136 @@
+ --- modulename: s479630243, funcname: <module>
+s479630243.py(1): from operator import itemgetter
+s479630243.py(4): class UnionFindTree():
+ --- modulename: s479630243, funcname: UnionFindTree
+s479630243.py(4): class UnionFindTree():
+s479630243.py(5):     def __init__(self, N):
+s479630243.py(10):     def __root(self, value):
+s479630243.py(17):     def unite(self, a, b):
+s479630243.py(30):     def is_same(self, a, b):
+s479630243.py(33):     def size(self, a):
+s479630243.py(36):     def groups(self):
+s479630243.py(46): def main():
+s479630243.py(73): if __name__ == "__main__":
+s479630243.py(74):     main()
+ --- modulename: s479630243, funcname: main
+s479630243.py(47):     N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s479630243.py(48):     X = [None] * N
+s479630243.py(49):     Y = [None] * N
+s479630243.py(50):     for i in range(N):
+s479630243.py(51):         x, y = map(int, input().split())
+s479630243.py(52):         X[i] = (x, i)
+s479630243.py(53):         Y[i] = (y, i)
+s479630243.py(50):     for i in range(N):
+s479630243.py(51):         x, y = map(int, input().split())
+s479630243.py(52):         X[i] = (x, i)
+s479630243.py(53):         Y[i] = (y, i)
+s479630243.py(50):     for i in range(N):
+s479630243.py(51):         x, y = map(int, input().split())
+s479630243.py(52):         X[i] = (x, i)
+s479630243.py(53):         Y[i] = (y, i)
+s479630243.py(50):     for i in range(N):
+s479630243.py(54):     X.sort(key=itemgetter(0))
+s479630243.py(55):     Y.sort(key=itemgetter(0))
+s479630243.py(56):     adj = [None] * (2*N - 2)
+s479630243.py(57):     for i in range(N-1):
+s479630243.py(58):         adj[2*i] = (X[i+1][0] - X[i][0], X[i][1], X[i+1][1])
+s479630243.py(59):         adj[2*i+1] = (Y[i+1][0] - Y[i][0], Y[i][1], Y[i+1][1])
+s479630243.py(57):     for i in range(N-1):
+s479630243.py(58):         adj[2*i] = (X[i+1][0] - X[i][0], X[i][1], X[i+1][1])
+s479630243.py(59):         adj[2*i+1] = (Y[i+1][0] - Y[i][0], Y[i][1], Y[i+1][1])
+s479630243.py(57):     for i in range(N-1):
+s479630243.py(60):     adj.sort(key=itemgetter(0))
+s479630243.py(61):     uft = UnionFindTree(N)
+ --- modulename: s479630243, funcname: __init__
+s479630243.py(6):         self.__parent_of = [None] * N
+s479630243.py(7):         self.__rank_of = [0] * N
+s479630243.py(8):         self.__size = [1] * N
+s479630243.py(62):     ans = 0
+s479630243.py(63):     for pair in adj:
+s479630243.py(64):         cost, a, b = pair
+s479630243.py(65):         if not uft.is_same(a, b):
+ --- modulename: s479630243, funcname: is_same
+s479630243.py(31):         return self.__root(a) == self.__root(b)
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+s479630243.py(66):             uft.unite(a, b)
+ --- modulename: s479630243, funcname: unite
+s479630243.py(18):         r1 = self.__root(a)
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+s479630243.py(19):         r2 = self.__root(b)
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+s479630243.py(20):         if r1 != r2:
+s479630243.py(21):             if self.__rank_of[r1] < self.__rank_of[r2]:
+s479630243.py(25):                 self.__parent_of[r2] = r1
+s479630243.py(26):                 self.__size[r1] += self.__size[r2]
+s479630243.py(27):                 if self.__rank_of[r1] == self.__rank_of[r2]:
+s479630243.py(28):                     self.__rank_of[r1] += 1
+s479630243.py(67):             ans += cost
+s479630243.py(68):         if uft.size(a) == N:
+ --- modulename: s479630243, funcname: size
+s479630243.py(34):         return self.__size[self.__root(a)]
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+s479630243.py(63):     for pair in adj:
+s479630243.py(64):         cost, a, b = pair
+s479630243.py(65):         if not uft.is_same(a, b):
+ --- modulename: s479630243, funcname: is_same
+s479630243.py(31):         return self.__root(a) == self.__root(b)
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(14):             self.__parent_of[value] = self.__root(self.__parent_of[value])
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+s479630243.py(15):             return self.__parent_of[value]
+s479630243.py(66):             uft.unite(a, b)
+ --- modulename: s479630243, funcname: unite
+s479630243.py(18):         r1 = self.__root(a)
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+s479630243.py(19):         r2 = self.__root(b)
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(14):             self.__parent_of[value] = self.__root(self.__parent_of[value])
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+s479630243.py(15):             return self.__parent_of[value]
+s479630243.py(20):         if r1 != r2:
+s479630243.py(21):             if self.__rank_of[r1] < self.__rank_of[r2]:
+s479630243.py(22):                 self.__parent_of[r1] = r2
+s479630243.py(23):                 self.__size[r2] += self.__size[r1]
+s479630243.py(67):             ans += cost
+s479630243.py(68):         if uft.size(a) == N:
+ --- modulename: s479630243, funcname: size
+s479630243.py(34):         return self.__size[self.__root(a)]
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(14):             self.__parent_of[value] = self.__root(self.__parent_of[value])
+ --- modulename: s479630243, funcname: __root
+s479630243.py(11):         if self.__parent_of[value] is None:
+s479630243.py(12):             return value
+s479630243.py(15):             return self.__parent_of[value]
+s479630243.py(69):             break
+s479630243.py(70):     print(ans)
+3
