@@ -1,0 +1,803 @@
+ --- modulename: s358818947, funcname: <module>
+s358818947.py(1): class Tree():
+ --- modulename: s358818947, funcname: Tree
+s358818947.py(1): class Tree():
+s358818947.py(2):     def __init__(self, n, decrement=1):
+s358818947.py(13):     def add_edge(self, u, v):
+s358818947.py(18):     def add_edges(self, edges):
+s358818947.py(26):     def set_root(self, root):
+s358818947.py(48):     def heavy_light_decomposition(self):
+s358818947.py(81):     def lca(self, u, v):
+s358818947.py(91):     def distance(self, u, v):
+s358818947.py(97):     def find(self, u, v, x):
+s358818947.py(100):     def path_to_list(self, u, v, edge_query=False):
+s358818947.py(116):     def point(self, u):
+s358818947.py(119): class SegmentTree:
+ --- modulename: s358818947, funcname: SegmentTree
+s358818947.py(119): class SegmentTree:
+s358818947.py(121):     def __init__(self, n, op, e):
+s358818947.py(133):     def built(self, array):
+s358818947.py(140):     def update(self, i, x):
+s358818947.py(148):     def get(self, l, r):
+s358818947.py(165):     def max_right(self, l, f):
+s358818947.py(188):     def min_left(self, r, f):
+s358818947.py(211):     def __iter__(self):
+s358818947.py(215):     def __str__(self):
+s358818947.py(219): import sys
+s358818947.py(220): input = sys.stdin.readline
+s358818947.py(222): N, Q = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s358818947.py(223): tree = Tree(N)
+ --- modulename: s358818947, funcname: __init__
+s358818947.py(3):         self.n = n
+s358818947.py(4):         self.edges = [[] for _ in range(n)]
+ --- modulename: s358818947, funcname: <listcomp>
+s358818947.py(4):         self.edges = [[] for _ in range(n)]
+s358818947.py(4):         self.edges = [[] for _ in range(n)]
+s358818947.py(4):         self.edges = [[] for _ in range(n)]
+s358818947.py(4):         self.edges = [[] for _ in range(n)]
+s358818947.py(4):         self.edges = [[] for _ in range(n)]
+s358818947.py(4):         self.edges = [[] for _ in range(n)]
+s358818947.py(5):         self.edges2 = [[] for _ in range(n)]
+ --- modulename: s358818947, funcname: <listcomp>
+s358818947.py(5):         self.edges2 = [[] for _ in range(n)]
+s358818947.py(5):         self.edges2 = [[] for _ in range(n)]
+s358818947.py(5):         self.edges2 = [[] for _ in range(n)]
+s358818947.py(5):         self.edges2 = [[] for _ in range(n)]
+s358818947.py(5):         self.edges2 = [[] for _ in range(n)]
+s358818947.py(5):         self.edges2 = [[] for _ in range(n)]
+s358818947.py(6):         self.root = None
+s358818947.py(7):         self.depth = [-1]*n
+s358818947.py(8):         self.size = [1]*n       # 部分木のノードの数
+s358818947.py(9):         self.color = [[] for _ in range(n)]
+ --- modulename: s358818947, funcname: <listcomp>
+s358818947.py(9):         self.color = [[] for _ in range(n)]
+s358818947.py(9):         self.color = [[] for _ in range(n)]
+s358818947.py(9):         self.color = [[] for _ in range(n)]
+s358818947.py(9):         self.color = [[] for _ in range(n)]
+s358818947.py(9):         self.color = [[] for _ in range(n)]
+s358818947.py(9):         self.color = [[] for _ in range(n)]
+s358818947.py(10):         self.cost = [0]*n
+s358818947.py(11):         self.decrement = decrement
+s358818947.py(224): edges, query = [], [[] for _ in range(N)]
+ --- modulename: s358818947, funcname: <listcomp>
+s358818947.py(224): edges, query = [], [[] for _ in range(N)]
+s358818947.py(224): edges, query = [], [[] for _ in range(N)]
+s358818947.py(224): edges, query = [], [[] for _ in range(N)]
+s358818947.py(224): edges, query = [], [[] for _ in range(N)]
+s358818947.py(224): edges, query = [], [[] for _ in range(N)]
+s358818947.py(224): edges, query = [], [[] for _ in range(N)]
+s358818947.py(225): for _ in range(N-1):
+s358818947.py(226):     a, b, c, d = map(int, input().split())
+s358818947.py(227):     edges.append((a, b, c-1, d))
+s358818947.py(225): for _ in range(N-1):
+s358818947.py(226):     a, b, c, d = map(int, input().split())
+s358818947.py(227):     edges.append((a, b, c-1, d))
+s358818947.py(225): for _ in range(N-1):
+s358818947.py(226):     a, b, c, d = map(int, input().split())
+s358818947.py(227):     edges.append((a, b, c-1, d))
+s358818947.py(225): for _ in range(N-1):
+s358818947.py(226):     a, b, c, d = map(int, input().split())
+s358818947.py(227):     edges.append((a, b, c-1, d))
+s358818947.py(225): for _ in range(N-1):
+s358818947.py(228): for i in range(Q):
+s358818947.py(229):     c, y, u, v = map(int, input().split())
+s358818947.py(230):     query[c-1].append((y, u, v, i))
+s358818947.py(228): for i in range(Q):
+s358818947.py(229):     c, y, u, v = map(int, input().split())
+s358818947.py(230):     query[c-1].append((y, u, v, i))
+s358818947.py(228): for i in range(Q):
+s358818947.py(229):     c, y, u, v = map(int, input().split())
+s358818947.py(230):     query[c-1].append((y, u, v, i))
+s358818947.py(228): for i in range(Q):
+s358818947.py(231): tree.add_edges(edges)
+ --- modulename: s358818947, funcname: add_edges
+s358818947.py(19):         for u, v, c, d in edges:
+s358818947.py(20):             u, v = u-self.decrement, v-self.decrement
+s358818947.py(21):             self.edges[u].append(v)
+s358818947.py(22):             self.edges[v].append(u)
+s358818947.py(23):             self.edges2[u].append((v, c, d))
+s358818947.py(24):             self.edges2[v].append((u, c, d))
+s358818947.py(19):         for u, v, c, d in edges:
+s358818947.py(20):             u, v = u-self.decrement, v-self.decrement
+s358818947.py(21):             self.edges[u].append(v)
+s358818947.py(22):             self.edges[v].append(u)
+s358818947.py(23):             self.edges2[u].append((v, c, d))
+s358818947.py(24):             self.edges2[v].append((u, c, d))
+s358818947.py(19):         for u, v, c, d in edges:
+s358818947.py(20):             u, v = u-self.decrement, v-self.decrement
+s358818947.py(21):             self.edges[u].append(v)
+s358818947.py(22):             self.edges[v].append(u)
+s358818947.py(23):             self.edges2[u].append((v, c, d))
+s358818947.py(24):             self.edges2[v].append((u, c, d))
+s358818947.py(19):         for u, v, c, d in edges:
+s358818947.py(20):             u, v = u-self.decrement, v-self.decrement
+s358818947.py(21):             self.edges[u].append(v)
+s358818947.py(22):             self.edges[v].append(u)
+s358818947.py(23):             self.edges2[u].append((v, c, d))
+s358818947.py(24):             self.edges2[v].append((u, c, d))
+s358818947.py(19):         for u, v, c, d in edges:
+s358818947.py(232): tree.set_root(1)
+ --- modulename: s358818947, funcname: set_root
+s358818947.py(27):         root -= self.decrement
+s358818947.py(28):         self.root = root
+s358818947.py(29):         self.par = [-1]*self.n
+s358818947.py(30):         self.depth[root] = 0
+s358818947.py(31):         self.order = [root]     # 帰りがけに使う
+s358818947.py(32):         next_set = [root]
+s358818947.py(33):         while next_set:
+s358818947.py(34):             p = next_set.pop()
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(36):                 if self.depth[q] != -1: continue
+s358818947.py(37):                 self.par[q] = p
+s358818947.py(38):                 self.color[c].append(q)
+s358818947.py(39):                 self.cost[q] = d
+s358818947.py(40):                 self.depth[q] = self.depth[p]+1
+s358818947.py(41):                 self.order.append(q)
+s358818947.py(42):                 next_set.append(q)
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(36):                 if self.depth[q] != -1: continue
+s358818947.py(37):                 self.par[q] = p
+s358818947.py(38):                 self.color[c].append(q)
+s358818947.py(39):                 self.cost[q] = d
+s358818947.py(40):                 self.depth[q] = self.depth[p]+1
+s358818947.py(41):                 self.order.append(q)
+s358818947.py(42):                 next_set.append(q)
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(33):         while next_set:
+s358818947.py(34):             p = next_set.pop()
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(36):                 if self.depth[q] != -1: continue
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(33):         while next_set:
+s358818947.py(34):             p = next_set.pop()
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(36):                 if self.depth[q] != -1: continue
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(36):                 if self.depth[q] != -1: continue
+s358818947.py(37):                 self.par[q] = p
+s358818947.py(38):                 self.color[c].append(q)
+s358818947.py(39):                 self.cost[q] = d
+s358818947.py(40):                 self.depth[q] = self.depth[p]+1
+s358818947.py(41):                 self.order.append(q)
+s358818947.py(42):                 next_set.append(q)
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(36):                 if self.depth[q] != -1: continue
+s358818947.py(37):                 self.par[q] = p
+s358818947.py(38):                 self.color[c].append(q)
+s358818947.py(39):                 self.cost[q] = d
+s358818947.py(40):                 self.depth[q] = self.depth[p]+1
+s358818947.py(41):                 self.order.append(q)
+s358818947.py(42):                 next_set.append(q)
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(33):         while next_set:
+s358818947.py(34):             p = next_set.pop()
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(36):                 if self.depth[q] != -1: continue
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(33):         while next_set:
+s358818947.py(34):             p = next_set.pop()
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(36):                 if self.depth[q] != -1: continue
+s358818947.py(35):             for q, c, d in self.edges2[p]:
+s358818947.py(33):         while next_set:
+s358818947.py(43):         for p in self.order[::-1]:
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(45):                 if self.par[p] == q: continue
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(43):         for p in self.order[::-1]:
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(45):                 if self.par[p] == q: continue
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(43):         for p in self.order[::-1]:
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(45):                 if self.par[p] == q: continue
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(43):         for p in self.order[::-1]:
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(45):                 if self.par[p] == q: continue
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(45):                 if self.par[p] == q: continue
+s358818947.py(46):                 self.size[p] += self.size[q]
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(45):                 if self.par[p] == q: continue
+s358818947.py(46):                 self.size[p] += self.size[q]
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(43):         for p in self.order[::-1]:
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(45):                 if self.par[p] == q: continue
+s358818947.py(46):                 self.size[p] += self.size[q]
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(45):                 if self.par[p] == q: continue
+s358818947.py(46):                 self.size[p] += self.size[q]
+s358818947.py(44):             for q in self.edges[p]:
+s358818947.py(43):         for p in self.order[::-1]:
+s358818947.py(233): hld = tree.heavy_light_decomposition()
+ --- modulename: s358818947, funcname: heavy_light_decomposition
+s358818947.py(53):         self.vid = [-1]*self.n
+s358818947.py(54):         self.hld = [-1]*self.n
+s358818947.py(55):         self.head = [-1]*self.n
+s358818947.py(56):         self.head[self.root] = self.root
+s358818947.py(57):         self.heavy_node = [-1]*self.n
+s358818947.py(58):         next_set = [self.root]
+s358818947.py(59):         for i in range(self.n):
+s358818947.py(61):             p = next_set.pop()
+s358818947.py(62):             self.vid[p] = i
+s358818947.py(63):             self.hld[i] = p+self.decrement
+s358818947.py(64):             maxs = 0
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(67):                 if self.par[p] == q: continue
+s358818947.py(68):                 if maxs < self.size[q]:
+s358818947.py(69):                     maxs = self.size[q]
+s358818947.py(70):                     self.heavy_node[p] = q
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(67):                 if self.par[p] == q: continue
+s358818947.py(68):                 if maxs < self.size[q]:
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(73):                 if self.par[p] == q or self.heavy_node[p] == q: continue
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(73):                 if self.par[p] == q or self.heavy_node[p] == q: continue
+s358818947.py(74):                 self.head[q] = q
+s358818947.py(75):                 next_set.append(q)
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(76):             if self.heavy_node[p] != -1:
+s358818947.py(77):                 self.head[self.heavy_node[p]] = self.head[p]
+s358818947.py(78):                 next_set.append(self.heavy_node[p])
+s358818947.py(59):         for i in range(self.n):
+s358818947.py(61):             p = next_set.pop()
+s358818947.py(62):             self.vid[p] = i
+s358818947.py(63):             self.hld[i] = p+self.decrement
+s358818947.py(64):             maxs = 0
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(67):                 if self.par[p] == q: continue
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(67):                 if self.par[p] == q: continue
+s358818947.py(68):                 if maxs < self.size[q]:
+s358818947.py(69):                     maxs = self.size[q]
+s358818947.py(70):                     self.heavy_node[p] = q
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(67):                 if self.par[p] == q: continue
+s358818947.py(68):                 if maxs < self.size[q]:
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(73):                 if self.par[p] == q or self.heavy_node[p] == q: continue
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(73):                 if self.par[p] == q or self.heavy_node[p] == q: continue
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(73):                 if self.par[p] == q or self.heavy_node[p] == q: continue
+s358818947.py(74):                 self.head[q] = q
+s358818947.py(75):                 next_set.append(q)
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(76):             if self.heavy_node[p] != -1:
+s358818947.py(77):                 self.head[self.heavy_node[p]] = self.head[p]
+s358818947.py(78):                 next_set.append(self.heavy_node[p])
+s358818947.py(59):         for i in range(self.n):
+s358818947.py(61):             p = next_set.pop()
+s358818947.py(62):             self.vid[p] = i
+s358818947.py(63):             self.hld[i] = p+self.decrement
+s358818947.py(64):             maxs = 0
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(67):                 if self.par[p] == q: continue
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(73):                 if self.par[p] == q or self.heavy_node[p] == q: continue
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(76):             if self.heavy_node[p] != -1:
+s358818947.py(59):         for i in range(self.n):
+s358818947.py(61):             p = next_set.pop()
+s358818947.py(62):             self.vid[p] = i
+s358818947.py(63):             self.hld[i] = p+self.decrement
+s358818947.py(64):             maxs = 0
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(67):                 if self.par[p] == q: continue
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(73):                 if self.par[p] == q or self.heavy_node[p] == q: continue
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(76):             if self.heavy_node[p] != -1:
+s358818947.py(59):         for i in range(self.n):
+s358818947.py(61):             p = next_set.pop()
+s358818947.py(62):             self.vid[p] = i
+s358818947.py(63):             self.hld[i] = p+self.decrement
+s358818947.py(64):             maxs = 0
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(67):                 if self.par[p] == q: continue
+s358818947.py(65):             for q in self.edges[p]:
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(73):                 if self.par[p] == q or self.heavy_node[p] == q: continue
+s358818947.py(71):             for q in self.edges[p]:
+s358818947.py(76):             if self.heavy_node[p] != -1:
+s358818947.py(59):         for i in range(self.n):
+s358818947.py(79):         return self.hld
+s358818947.py(235): e = (0, 0)
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(237): st = SegmentTree(N, op, e)
+ --- modulename: s358818947, funcname: __init__
+s358818947.py(127):         self.n = n
+s358818947.py(128):         self.op = op
+s358818947.py(129):         self.e = e
+s358818947.py(130):         self.size = 1 << (self.n - 1).bit_length()      # st[self.size + i] = array[i]
+s358818947.py(131):         self.tree = [self.e] * (self.size << 1)
+s358818947.py(238): res = [0]*Q
+s358818947.py(239): for p in range(N):
+s358818947.py(240):     st.update(tree.point(p+1), (tree.cost[p],0))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(239): for p in range(N):
+s358818947.py(240):     st.update(tree.point(p+1), (tree.cost[p],0))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(239): for p in range(N):
+s358818947.py(240):     st.update(tree.point(p+1), (tree.cost[p],0))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(239): for p in range(N):
+s358818947.py(240):     st.update(tree.point(p+1), (tree.cost[p],0))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(239): for p in range(N):
+s358818947.py(240):     st.update(tree.point(p+1), (tree.cost[p],0))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(239): for p in range(N):
+s358818947.py(241): for c in range(N):
+s358818947.py(242):     for p in tree.color[c]:
+s358818947.py(243):         st.update(tree.point(p+1), (0,1))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(242):     for p in tree.color[c]:
+s358818947.py(243):         st.update(tree.point(p+1), (0,1))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(242):     for p in tree.color[c]:
+s358818947.py(244):     for y, u, v, i in query[c]:
+s358818947.py(245):         for l, r in tree.path_to_list(u, v, True):
+ --- modulename: s358818947, funcname: path_to_list
+s358818947.py(106):         u, v = u-self.decrement, v-self.decrement
+s358818947.py(108):             if self.vid[u] > self.vid[v]: u, v = v, u
+s358818947.py(109):             if self.head[u] != self.head[v]:
+s358818947.py(113):                 yield self.vid[u] + edge_query, self.vid[v] + 1
+s358818947.py(246):             cost, cnt = st.get(l, r)
+ --- modulename: s358818947, funcname: get
+s358818947.py(150):         l += self.size
+s358818947.py(151):         r += self.size
+s358818947.py(152):         res_l = self.e
+s358818947.py(153):         res_r = self.e
+s358818947.py(154):         while l < r:
+s358818947.py(155):             if l & 1:
+s358818947.py(156):                 res_l = self.op(res_l, self.tree[l])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(157):                 l += 1
+s358818947.py(158):             if r & 1:
+s358818947.py(159):                 r -= 1
+s358818947.py(160):                 res_r = self.op(self.tree[r], res_r)
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(161):             l >>= 1
+s358818947.py(162):             r >>= 1
+s358818947.py(154):         while l < r:
+s358818947.py(163):         return self.op(res_l, res_r)
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(247):             res[i] += cost + cnt*y
+s358818947.py(245):         for l, r in tree.path_to_list(u, v, True):
+ --- modulename: s358818947, funcname: path_to_list
+s358818947.py(114):                 return
+s358818947.py(244):     for y, u, v, i in query[c]:
+s358818947.py(245):         for l, r in tree.path_to_list(u, v, True):
+ --- modulename: s358818947, funcname: path_to_list
+s358818947.py(106):         u, v = u-self.decrement, v-self.decrement
+s358818947.py(108):             if self.vid[u] > self.vid[v]: u, v = v, u
+s358818947.py(109):             if self.head[u] != self.head[v]:
+s358818947.py(110):                 yield self.vid[self.head[v]], self.vid[v] + 1
+s358818947.py(246):             cost, cnt = st.get(l, r)
+ --- modulename: s358818947, funcname: get
+s358818947.py(150):         l += self.size
+s358818947.py(151):         r += self.size
+s358818947.py(152):         res_l = self.e
+s358818947.py(153):         res_r = self.e
+s358818947.py(154):         while l < r:
+s358818947.py(155):             if l & 1:
+s358818947.py(156):                 res_l = self.op(res_l, self.tree[l])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(157):                 l += 1
+s358818947.py(158):             if r & 1:
+s358818947.py(161):             l >>= 1
+s358818947.py(162):             r >>= 1
+s358818947.py(154):         while l < r:
+s358818947.py(163):         return self.op(res_l, res_r)
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(247):             res[i] += cost + cnt*y
+s358818947.py(245):         for l, r in tree.path_to_list(u, v, True):
+ --- modulename: s358818947, funcname: path_to_list
+s358818947.py(111):                 v = self.par[self.head[v]]
+s358818947.py(108):             if self.vid[u] > self.vid[v]: u, v = v, u
+s358818947.py(109):             if self.head[u] != self.head[v]:
+s358818947.py(113):                 yield self.vid[u] + edge_query, self.vid[v] + 1
+s358818947.py(246):             cost, cnt = st.get(l, r)
+ --- modulename: s358818947, funcname: get
+s358818947.py(150):         l += self.size
+s358818947.py(151):         r += self.size
+s358818947.py(152):         res_l = self.e
+s358818947.py(153):         res_r = self.e
+s358818947.py(154):         while l < r:
+s358818947.py(155):             if l & 1:
+s358818947.py(156):                 res_l = self.op(res_l, self.tree[l])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(157):                 l += 1
+s358818947.py(158):             if r & 1:
+s358818947.py(161):             l >>= 1
+s358818947.py(162):             r >>= 1
+s358818947.py(154):         while l < r:
+s358818947.py(163):         return self.op(res_l, res_r)
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(247):             res[i] += cost + cnt*y
+s358818947.py(245):         for l, r in tree.path_to_list(u, v, True):
+ --- modulename: s358818947, funcname: path_to_list
+s358818947.py(114):                 return
+s358818947.py(244):     for y, u, v, i in query[c]:
+s358818947.py(248):     for p in tree.color[c]:
+s358818947.py(249):         st.update(tree.point(p+1), (tree.cost[p],0))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(248):     for p in tree.color[c]:
+s358818947.py(249):         st.update(tree.point(p+1), (tree.cost[p],0))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(248):     for p in tree.color[c]:
+s358818947.py(241): for c in range(N):
+s358818947.py(242):     for p in tree.color[c]:
+s358818947.py(243):         st.update(tree.point(p+1), (0,1))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(242):     for p in tree.color[c]:
+s358818947.py(244):     for y, u, v, i in query[c]:
+s358818947.py(248):     for p in tree.color[c]:
+s358818947.py(249):         st.update(tree.point(p+1), (tree.cost[p],0))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(248):     for p in tree.color[c]:
+s358818947.py(241): for c in range(N):
+s358818947.py(242):     for p in tree.color[c]:
+s358818947.py(244):     for y, u, v, i in query[c]:
+s358818947.py(245):         for l, r in tree.path_to_list(u, v, True):
+ --- modulename: s358818947, funcname: path_to_list
+s358818947.py(106):         u, v = u-self.decrement, v-self.decrement
+s358818947.py(108):             if self.vid[u] > self.vid[v]: u, v = v, u
+s358818947.py(109):             if self.head[u] != self.head[v]:
+s358818947.py(110):                 yield self.vid[self.head[v]], self.vid[v] + 1
+s358818947.py(246):             cost, cnt = st.get(l, r)
+ --- modulename: s358818947, funcname: get
+s358818947.py(150):         l += self.size
+s358818947.py(151):         r += self.size
+s358818947.py(152):         res_l = self.e
+s358818947.py(153):         res_r = self.e
+s358818947.py(154):         while l < r:
+s358818947.py(155):             if l & 1:
+s358818947.py(158):             if r & 1:
+s358818947.py(159):                 r -= 1
+s358818947.py(160):                 res_r = self.op(self.tree[r], res_r)
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(161):             l >>= 1
+s358818947.py(162):             r >>= 1
+s358818947.py(154):         while l < r:
+s358818947.py(163):         return self.op(res_l, res_r)
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(247):             res[i] += cost + cnt*y
+s358818947.py(245):         for l, r in tree.path_to_list(u, v, True):
+ --- modulename: s358818947, funcname: path_to_list
+s358818947.py(111):                 v = self.par[self.head[v]]
+s358818947.py(108):             if self.vid[u] > self.vid[v]: u, v = v, u
+s358818947.py(109):             if self.head[u] != self.head[v]:
+s358818947.py(113):                 yield self.vid[u] + edge_query, self.vid[v] + 1
+s358818947.py(246):             cost, cnt = st.get(l, r)
+ --- modulename: s358818947, funcname: get
+s358818947.py(150):         l += self.size
+s358818947.py(151):         r += self.size
+s358818947.py(152):         res_l = self.e
+s358818947.py(153):         res_r = self.e
+s358818947.py(154):         while l < r:
+s358818947.py(155):             if l & 1:
+s358818947.py(156):                 res_l = self.op(res_l, self.tree[l])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(157):                 l += 1
+s358818947.py(158):             if r & 1:
+s358818947.py(159):                 r -= 1
+s358818947.py(160):                 res_r = self.op(self.tree[r], res_r)
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(161):             l >>= 1
+s358818947.py(162):             r >>= 1
+s358818947.py(154):         while l < r:
+s358818947.py(163):         return self.op(res_l, res_r)
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(247):             res[i] += cost + cnt*y
+s358818947.py(245):         for l, r in tree.path_to_list(u, v, True):
+ --- modulename: s358818947, funcname: path_to_list
+s358818947.py(114):                 return
+s358818947.py(244):     for y, u, v, i in query[c]:
+s358818947.py(248):     for p in tree.color[c]:
+s358818947.py(241): for c in range(N):
+s358818947.py(242):     for p in tree.color[c]:
+s358818947.py(243):         st.update(tree.point(p+1), (0,1))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(242):     for p in tree.color[c]:
+s358818947.py(244):     for y, u, v, i in query[c]:
+s358818947.py(248):     for p in tree.color[c]:
+s358818947.py(249):         st.update(tree.point(p+1), (tree.cost[p],0))
+ --- modulename: s358818947, funcname: point
+s358818947.py(117):         return self.vid[u-self.decrement]
+ --- modulename: s358818947, funcname: update
+s358818947.py(142):         i += self.size
+s358818947.py(143):         self.tree[i] = x
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(145):             i >>= 1
+s358818947.py(146):             self.tree[i] = self.op(self.tree[i<<1], self.tree[(i<<1)|1])
+ --- modulename: s358818947, funcname: <lambda>
+s358818947.py(236): op = lambda x, y: (x[0]+y[0], x[1]+y[1])
+s358818947.py(144):         while i > 1:
+s358818947.py(248):     for p in tree.color[c]:
+s358818947.py(241): for c in range(N):
+s358818947.py(242):     for p in tree.color[c]:
+s358818947.py(244):     for y, u, v, i in query[c]:
+s358818947.py(248):     for p in tree.color[c]:
+s358818947.py(241): for c in range(N):
+s358818947.py(251): print(*res, sep="\n")
+130
+200
+60
