@@ -1,0 +1,66 @@
+ --- modulename: s959593122, funcname: <module>
+s959593122.py(1): import sys
+s959593122.py(3): sys.setrecursionlimit(10 ** 6)
+s959593122.py(4): int1 = lambda x: int(x) - 1
+s959593122.py(5): p2D = lambda x: print(*x, sep="\n")
+s959593122.py(7): def main():
+s959593122.py(47): main()
+ --- modulename: s959593122, funcname: main
+s959593122.py(8):     def parity_onebit(x):
+s959593122.py(11):     def make_route(s, g, state):
+s959593122.py(38):     n, s, g = map(int, input().split())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s959593122.py(39):     if parity_onebit(s) == parity_onebit(g):
+ --- modulename: s959593122, funcname: parity_onebit
+s959593122.py(9):         return bin(x).count("1") & 1
+ --- modulename: s959593122, funcname: parity_onebit
+s959593122.py(9):         return bin(x).count("1") & 1
+s959593122.py(42):     ans=make_route(s, g, [-1] * n)
+ --- modulename: s959593122, funcname: make_route
+s959593122.py(12):         if state.count(-1) == 1:
+s959593122.py(14):         sep_dig = bin(s ^ g)[::-1].find("1")
+s959593122.py(15):         s_bit = (s >> sep_dig) & 1
+s959593122.py(16):         Lstate = state[:]
+s959593122.py(17):         Rstate = state[:]
+s959593122.py(18):         Lstate[sep_dig] = s_bit
+s959593122.py(19):         Rstate[sep_dig] = 1 - s_bit
+s959593122.py(20):         for i in range(16):
+s959593122.py(21):             ng = 0
+s959593122.py(22):             i_copy = i
+s959593122.py(23):             for sk in Lstate[::-1]:
+s959593122.py(24):                 ng <<= 1
+s959593122.py(25):                 if sk == -1:
+s959593122.py(29):                     ng += sk
+s959593122.py(23):             for sk in Lstate[::-1]:
+s959593122.py(24):                 ng <<= 1
+s959593122.py(25):                 if sk == -1:
+s959593122.py(26):                     ng += i_copy & 1
+s959593122.py(27):                     i_copy >>= 1
+s959593122.py(23):             for sk in Lstate[::-1]:
+s959593122.py(30):             ns = ng ^ (1 << sep_dig)
+s959593122.py(31):             if ng != s and parity_onebit(ng) != parity_onebit(s) and ns != g:
+ --- modulename: s959593122, funcname: parity_onebit
+s959593122.py(9):         return bin(x).count("1") & 1
+ --- modulename: s959593122, funcname: parity_onebit
+s959593122.py(9):         return bin(x).count("1") & 1
+s959593122.py(32):                 break
+s959593122.py(33):         res = make_route(s, ng, Lstate)
+ --- modulename: s959593122, funcname: make_route
+s959593122.py(12):         if state.count(-1) == 1:
+s959593122.py(13):             return [s, g]
+s959593122.py(34):         state[sep_dig] = 1 - s_bit
+s959593122.py(35):         res += make_route(ns, g, Rstate)
+ --- modulename: s959593122, funcname: make_route
+s959593122.py(12):         if state.count(-1) == 1:
+s959593122.py(13):             return [s, g]
+s959593122.py(36):         return res
+s959593122.py(43):     print("YES")
+YES
+s959593122.py(44):     print(*ans)
+1 0 2 3
