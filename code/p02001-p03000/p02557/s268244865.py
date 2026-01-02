@@ -1,0 +1,131 @@
+def LI():return list(map(int,input().split()))
+def II():return int(input())
+def yes():return print("Yes")
+def no():return print("No")
+INF=float("inf")
+from collections import deque, Counter
+from heapq import heappop, heappush
+from itertools import product, combinations
+from functools import reduce, lru_cache
+from math import pi, gcd
+from decimal import Decimal
+
+# class Combination:
+#     """
+#     O(n)の前計算を1回行うことで，O(1)でnCr mod mを求められる
+#     n_max = 10**6のとき前処理は約950ms (PyPyなら約340ms, 10**7で約1800ms)
+#     使用例：
+#     comb = Combination(1000000)
+#     print(comb(5, 3))  # 10
+#     """
+#     def __init__(self, n_max, mod=10**9+7):
+#         self.mod = mod
+#         self.modinv = self.make_modinv_list(n_max)
+#         self.fac, self.facinv = self.make_factorial_list(n_max)
+
+#     def __call__(self, n, r):
+#         return self.fac[n] * self.facinv[r] % self.mod * self.facinv[n-r] % self.mod
+
+#     def make_factorial_list(self, n):
+#         # 階乗のリストと階乗のmod逆元のリストを返す O(n)
+#         # self.make_modinv_list()が先に実行されている必要がある
+#         fac = [1]
+#         facinv = [1]
+#         for i in range(1, n+1):
+#             fac.append(fac[i-1] * i % self.mod)
+#             facinv.append(facinv[i-1] * self.modinv[i] % self.mod)
+#         return fac, facinv
+
+#     def make_modinv_list(self, n):
+#         # 0からnまでのmod逆元のリストを返す O(n)
+#         modinv = [0] * (n+1)
+#         modinv[1] = 1
+#         for i in range(2, n+1):
+#             modinv[i] = self.mod - self.mod//i * modinv[self.mod%i] % self.mod
+#         return modinv
+
+# class Unionfind:
+#     def __init__(self, N):
+#         self.p = list(range(N))
+#         self.rank = [0] * N
+#         self.size = [1] * N
+
+#     def root(self, x):
+#         if self.p[x] != x:
+#             self.p[x] = self.root(self.p[x])
+
+#         return self.p[x]
+
+#     def same(self, x, y):
+#         return self.root(x) == self.root(y)
+
+#     def unite(self, x, y):
+#         u = self.root(x)
+#         v = self.root(y)
+
+#         if u == v: return
+
+#         if self.rank[u] < self.rank[v]:
+#             self.p[u] = v
+#             self.size[v] += self.size[u]
+#             self.size[u] = 0
+#         else:
+#             self.p[v] = u
+#             self.size[u] += self.size[v]
+#             self.size[v] = 0
+
+#             if self.rank[u] == self.rank[v]:
+#                 self.rank[u] += 1
+
+#     def count(self, x):
+#         return self.size[self.root(x)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n=II()
+a=LI()
+b=LI()
+c=b[::-1]
+bb=deque(b)
+ac=Counter(a)
+bc=Counter(b)
+
+for i in range(n):
+    if ac[i]+bc[i]>n:
+        print("No")
+        exit()
+
+import time
+# import random
+t1=time.time()
+for i in range(10000000):
+    if time.time()-t1>1.5:
+        print("No")
+        exit()        
+    tmp=bb.popleft()
+    bb.append(tmp)
+    if any(d==e for d,e in zip(a,bb)):
+        continue
+    print("Yes")
+    print(*bb)
+    exit()
