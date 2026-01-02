@@ -1,0 +1,187 @@
+ --- modulename: s371222434, funcname: <module>
+s371222434.py(1): import sys
+s371222434.py(2): sys.setrecursionlimit(1<<30)
+s371222434.py(3): mod = 10**9+7
+s371222434.py(4): def inv(x):
+s371222434.py(6): def dfs_size(x):
+s371222434.py(14): def dfs_dp(x):
+s371222434.py(26): def dfs_ans(x):
+s371222434.py(50): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s371222434.py(51): edges = [[] for _ in range(N+1)]
+ --- modulename: s371222434, funcname: <listcomp>
+s371222434.py(51): edges = [[] for _ in range(N+1)]
+s371222434.py(51): edges = [[] for _ in range(N+1)]
+s371222434.py(51): edges = [[] for _ in range(N+1)]
+s371222434.py(51): edges = [[] for _ in range(N+1)]
+s371222434.py(51): edges = [[] for _ in range(N+1)]
+s371222434.py(52): for i in range(N-1):
+s371222434.py(53):     a,b = map(int,input().split())
+s371222434.py(54):     edges[a].append(b)
+s371222434.py(55):     edges[b].append(a)
+s371222434.py(52): for i in range(N-1):
+s371222434.py(53):     a,b = map(int,input().split())
+s371222434.py(54):     edges[a].append(b)
+s371222434.py(55):     edges[b].append(a)
+s371222434.py(52): for i in range(N-1):
+s371222434.py(56): size = [0]*(N+1)
+s371222434.py(57): parent = [0]*(N+1)
+s371222434.py(58): dfs_size(1)
+ --- modulename: s371222434, funcname: dfs_size
+s371222434.py(7):     sizex = 1
+s371222434.py(8):     for y in edges[x]:
+s371222434.py(9):         if y != parent[x]:
+s371222434.py(10):             parent[y] = x
+s371222434.py(11):             sizex += dfs_size(y)
+ --- modulename: s371222434, funcname: dfs_size
+s371222434.py(7):     sizex = 1
+s371222434.py(8):     for y in edges[x]:
+s371222434.py(9):         if y != parent[x]:
+s371222434.py(8):     for y in edges[x]:
+s371222434.py(12):     size[x] = sizex
+s371222434.py(13):     return sizex
+s371222434.py(8):     for y in edges[x]:
+s371222434.py(9):         if y != parent[x]:
+s371222434.py(10):             parent[y] = x
+s371222434.py(11):             sizex += dfs_size(y)
+ --- modulename: s371222434, funcname: dfs_size
+s371222434.py(7):     sizex = 1
+s371222434.py(8):     for y in edges[x]:
+s371222434.py(9):         if y != parent[x]:
+s371222434.py(8):     for y in edges[x]:
+s371222434.py(12):     size[x] = sizex
+s371222434.py(13):     return sizex
+s371222434.py(8):     for y in edges[x]:
+s371222434.py(12):     size[x] = sizex
+s371222434.py(13):     return sizex
+s371222434.py(59): fac = [1]
+s371222434.py(60): for i in range(1,N+1):
+s371222434.py(61):     fac.append(fac[-1]*i % mod)
+s371222434.py(60): for i in range(1,N+1):
+s371222434.py(61):     fac.append(fac[-1]*i % mod)
+s371222434.py(60): for i in range(1,N+1):
+s371222434.py(61):     fac.append(fac[-1]*i % mod)
+s371222434.py(60): for i in range(1,N+1):
+s371222434.py(62): inv_fac = [inv(fac[N])]
+ --- modulename: s371222434, funcname: inv
+s371222434.py(5):     return pow(x,mod-2,mod)
+s371222434.py(63): for i in range(1,N+1)[::-1]:
+s371222434.py(64):     inv_fac.append(inv_fac[-1]*i % mod)
+s371222434.py(63): for i in range(1,N+1)[::-1]:
+s371222434.py(64):     inv_fac.append(inv_fac[-1]*i % mod)
+s371222434.py(63): for i in range(1,N+1)[::-1]:
+s371222434.py(64):     inv_fac.append(inv_fac[-1]*i % mod)
+s371222434.py(63): for i in range(1,N+1)[::-1]:
+s371222434.py(65): inv_fac = inv_fac[::-1]
+s371222434.py(66): dp = [0]*(N+1)
+s371222434.py(67): dfs_dp(1)
+ --- modulename: s371222434, funcname: dfs_dp
+s371222434.py(15):     dpx = 1
+s371222434.py(16):     for y in edges[x]:
+s371222434.py(17):         if y != parent[x]:
+s371222434.py(18):             dpx *= dfs_dp(y)
+ --- modulename: s371222434, funcname: dfs_dp
+s371222434.py(15):     dpx = 1
+s371222434.py(16):     for y in edges[x]:
+s371222434.py(17):         if y != parent[x]:
+s371222434.py(16):     for y in edges[x]:
+s371222434.py(21):     dpx *= fac[size[x]-1]
+s371222434.py(22):     dpx %= mod
+s371222434.py(23):     dp[x] = dpx
+s371222434.py(24):     return dpx
+s371222434.py(19):             dpx *= inv_fac[size[y]]
+s371222434.py(20):             dpx %= mod
+s371222434.py(16):     for y in edges[x]:
+s371222434.py(17):         if y != parent[x]:
+s371222434.py(18):             dpx *= dfs_dp(y)
+ --- modulename: s371222434, funcname: dfs_dp
+s371222434.py(15):     dpx = 1
+s371222434.py(16):     for y in edges[x]:
+s371222434.py(17):         if y != parent[x]:
+s371222434.py(16):     for y in edges[x]:
+s371222434.py(21):     dpx *= fac[size[x]-1]
+s371222434.py(22):     dpx %= mod
+s371222434.py(23):     dp[x] = dpx
+s371222434.py(24):     return dpx
+s371222434.py(19):             dpx *= inv_fac[size[y]]
+s371222434.py(20):             dpx %= mod
+s371222434.py(16):     for y in edges[x]:
+s371222434.py(21):     dpx *= fac[size[x]-1]
+s371222434.py(22):     dpx %= mod
+s371222434.py(23):     dp[x] = dpx
+s371222434.py(24):     return dpx
+s371222434.py(68): ans = [0]*(N+1)
+s371222434.py(69): ans[1] = dp[1]
+s371222434.py(70): dfs_ans(1)
+ --- modulename: s371222434, funcname: dfs_ans
+s371222434.py(27):     ansx = 1
+s371222434.py(28):     if x != 1:
+s371222434.py(47):     for y in edges[x]:
+s371222434.py(48):         if y != parent[x]:
+s371222434.py(49):             dfs_ans(y)
+ --- modulename: s371222434, funcname: dfs_ans
+s371222434.py(27):     ansx = 1
+s371222434.py(28):     if x != 1:
+s371222434.py(29):         for y in edges[x]:
+s371222434.py(30):             if y != parent[x]:
+s371222434.py(35):                 dpy = ans[y]
+s371222434.py(36):                 dpy *= inv_fac[N-1]
+s371222434.py(37):                 dpy *= fac[size[x]]
+s371222434.py(38):                 dpy *= fac[N-size[x]-1]
+s371222434.py(39):                 dpy *= inv(dp[x])
+ --- modulename: s371222434, funcname: inv
+s371222434.py(5):     return pow(x,mod-2,mod)
+s371222434.py(40):                 dpy %= mod
+s371222434.py(41):                 ansx *= dpy
+s371222434.py(42):                 ansx *= inv_fac[N-size[x]]
+s371222434.py(43):                 ansx %= mod
+s371222434.py(29):         for y in edges[x]:
+s371222434.py(44):         ansx *= fac[N-1]
+s371222434.py(45):         ansx %= mod
+s371222434.py(46):         ans[x] = ansx
+s371222434.py(47):     for y in edges[x]:
+s371222434.py(48):         if y != parent[x]:
+s371222434.py(47):     for y in edges[x]:
+s371222434.py(47):     for y in edges[x]:
+s371222434.py(48):         if y != parent[x]:
+s371222434.py(49):             dfs_ans(y)
+ --- modulename: s371222434, funcname: dfs_ans
+s371222434.py(27):     ansx = 1
+s371222434.py(28):     if x != 1:
+s371222434.py(29):         for y in edges[x]:
+s371222434.py(30):             if y != parent[x]:
+s371222434.py(35):                 dpy = ans[y]
+s371222434.py(36):                 dpy *= inv_fac[N-1]
+s371222434.py(37):                 dpy *= fac[size[x]]
+s371222434.py(38):                 dpy *= fac[N-size[x]-1]
+s371222434.py(39):                 dpy *= inv(dp[x])
+ --- modulename: s371222434, funcname: inv
+s371222434.py(5):     return pow(x,mod-2,mod)
+s371222434.py(40):                 dpy %= mod
+s371222434.py(41):                 ansx *= dpy
+s371222434.py(42):                 ansx *= inv_fac[N-size[x]]
+s371222434.py(43):                 ansx %= mod
+s371222434.py(29):         for y in edges[x]:
+s371222434.py(44):         ansx *= fac[N-1]
+s371222434.py(45):         ansx %= mod
+s371222434.py(46):         ans[x] = ansx
+s371222434.py(47):     for y in edges[x]:
+s371222434.py(48):         if y != parent[x]:
+s371222434.py(47):     for y in edges[x]:
+s371222434.py(47):     for y in edges[x]:
+s371222434.py(71): for i in ans[1:]:
+s371222434.py(72):     print(i)
+2
+s371222434.py(71): for i in ans[1:]:
+s371222434.py(72):     print(i)
+1
+s371222434.py(71): for i in ans[1:]:
+s371222434.py(72):     print(i)
+1
+s371222434.py(71): for i in ans[1:]:
