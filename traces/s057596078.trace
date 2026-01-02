@@ -1,0 +1,397 @@
+ --- modulename: s057596078, funcname: <module>
+s057596078.py(2): import sys
+s057596078.py(3): from itertools import chain
+s057596078.py(6): def get_completed_board(height, width):
+s057596078.py(10): def serialize_board(board):
+s057596078.py(14): def get_empty_pos(board, width, height):
+s057596078.py(20): def get_all_possible_next_boards(board, height, width, empty_pos=None):
+s057596078.py(57): def resolve(board, height, width):
+s057596078.py(109): def main():
+s057596078.py(120): if __name__ == '__main__':
+s057596078.py(121):     main()
+ --- modulename: s057596078, funcname: main
+s057596078.py(110):     inputStr = sys.stdin.read()
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s057596078.py(111):     lines = inputStr.split("\n")
+s057596078.py(112):     lines = filter(lambda line: line, lines)
+s057596078.py(113):     board = list(map(lambda line: line.split(" "), lines))
+ --- modulename: s057596078, funcname: <lambda>
+s057596078.py(112):     lines = filter(lambda line: line, lines)
+ --- modulename: s057596078, funcname: <lambda>
+s057596078.py(113):     board = list(map(lambda line: line.split(" "), lines))
+ --- modulename: s057596078, funcname: <lambda>
+s057596078.py(112):     lines = filter(lambda line: line, lines)
+ --- modulename: s057596078, funcname: <lambda>
+s057596078.py(113):     board = list(map(lambda line: line.split(" "), lines))
+ --- modulename: s057596078, funcname: <lambda>
+s057596078.py(112):     lines = filter(lambda line: line, lines)
+ --- modulename: s057596078, funcname: <lambda>
+s057596078.py(113):     board = list(map(lambda line: line.split(" "), lines))
+ --- modulename: s057596078, funcname: <lambda>
+s057596078.py(112):     lines = filter(lambda line: line, lines)
+s057596078.py(114):     height = len(board)
+s057596078.py(115):     width = len(board[0])
+s057596078.py(116):     board = list(chain.from_iterable(board))
+s057596078.py(117):     print(resolve(board, height, width))
+ --- modulename: s057596078, funcname: resolve
+s057596078.py(59):     known_serialized_boards = set([serialize_board(board)])
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(61):     completed_board = get_completed_board(width, height)
+ --- modulename: s057596078, funcname: get_completed_board
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+ --- modulename: s057596078, funcname: <listcomp>
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(62):     known_serialized_completed_boards = set([serialize_board(completed_board)])
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(63):     if known_serialized_boards & known_serialized_completed_boards:
+s057596078.py(65):     current_boards = [(board, None)]
+s057596078.py(66):     current_completed_boards = [(get_completed_board(width, height), None)]
+ --- modulename: s057596078, funcname: get_completed_board
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+ --- modulename: s057596078, funcname: <listcomp>
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(7):     return [str((i + 1) % (width * height)) for i in range(width * height)]
+s057596078.py(67):     step_count = 1
+s057596078.py(68):     while step_count <= 45:
+s057596078.py(70):         next_boards = []
+s057596078.py(71):         for board, empty_pos in current_boards:
+s057596078.py(73):             tmp_next_boards = get_all_possible_next_boards(board, height, width, empty_pos)
+ --- modulename: s057596078, funcname: get_all_possible_next_boards
+s057596078.py(21):     if empty_pos is None:
+s057596078.py(22):         empty_pos = get_empty_pos(board, height, width)
+ --- modulename: s057596078, funcname: get_empty_pos
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(17):             return i
+s057596078.py(23):     next_boards = []
+s057596078.py(24):     x, y = empty_pos % width, empty_pos // height
+s057596078.py(26):     if x > 0:
+s057596078.py(27):         next_board = []
+s057596078.py(28):         next_board.extend(board)
+s057596078.py(29):         dest_pos = empty_pos - 1
+s057596078.py(30):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(31):         next_boards.append((next_board, dest_pos))
+s057596078.py(33):     if x < width - 1:
+s057596078.py(40):     if y > 0:
+s057596078.py(47):     if y < height - 1:
+s057596078.py(48):         next_board = []
+s057596078.py(49):         next_board.extend(board)
+s057596078.py(50):         dest_pos = empty_pos + height
+s057596078.py(51):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(52):         next_boards.append((next_board, dest_pos))
+s057596078.py(54):     return next_boards
+s057596078.py(74):             filtered_next_board = []
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(76):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(77):                 if serialized_board not in known_serialized_boards:
+s057596078.py(78):                     known_serialized_boards.add(serialized_board)
+s057596078.py(79):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(76):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(77):                 if serialized_board not in known_serialized_boards:
+s057596078.py(78):                     known_serialized_boards.add(serialized_board)
+s057596078.py(79):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(80):             next_boards.extend(filtered_next_board)
+s057596078.py(71):         for board, empty_pos in current_boards:
+s057596078.py(82):         if known_serialized_boards & known_serialized_completed_boards:
+s057596078.py(85):         step_count = step_count + 1
+s057596078.py(86):         current_boards = next_boards
+s057596078.py(89):         next_completed_boards = []
+s057596078.py(90):         for board, empty_pos in current_completed_boards:
+s057596078.py(92):             tmp_next_boards = get_all_possible_next_boards(board, height, width, empty_pos)
+ --- modulename: s057596078, funcname: get_all_possible_next_boards
+s057596078.py(21):     if empty_pos is None:
+s057596078.py(22):         empty_pos = get_empty_pos(board, height, width)
+ --- modulename: s057596078, funcname: get_empty_pos
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(15):     for i, cell in enumerate(board):
+s057596078.py(16):         if cell == "0":
+s057596078.py(17):             return i
+s057596078.py(23):     next_boards = []
+s057596078.py(24):     x, y = empty_pos % width, empty_pos // height
+s057596078.py(26):     if x > 0:
+s057596078.py(27):         next_board = []
+s057596078.py(28):         next_board.extend(board)
+s057596078.py(29):         dest_pos = empty_pos - 1
+s057596078.py(30):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(31):         next_boards.append((next_board, dest_pos))
+s057596078.py(33):     if x < width - 1:
+s057596078.py(40):     if y > 0:
+s057596078.py(41):         next_board = []
+s057596078.py(42):         next_board.extend(board)
+s057596078.py(43):         dest_pos = empty_pos - height
+s057596078.py(44):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(45):         next_boards.append((next_board, dest_pos))
+s057596078.py(47):     if y < height - 1:
+s057596078.py(54):     return next_boards
+s057596078.py(93):             filtered_next_board = []
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(95):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(96):                 if serialized_board not in known_serialized_completed_boards:
+s057596078.py(97):                     known_serialized_completed_boards.add(serialized_board)
+s057596078.py(98):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(95):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(96):                 if serialized_board not in known_serialized_completed_boards:
+s057596078.py(97):                     known_serialized_completed_boards.add(serialized_board)
+s057596078.py(98):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(99):             next_completed_boards.extend(filtered_next_board)
+s057596078.py(90):         for board, empty_pos in current_completed_boards:
+s057596078.py(101):         if known_serialized_boards & known_serialized_completed_boards:
+s057596078.py(103):         step_count = step_count + 1
+s057596078.py(104):         current_completed_boards = next_completed_boards
+s057596078.py(68):     while step_count <= 45:
+s057596078.py(70):         next_boards = []
+s057596078.py(71):         for board, empty_pos in current_boards:
+s057596078.py(73):             tmp_next_boards = get_all_possible_next_boards(board, height, width, empty_pos)
+ --- modulename: s057596078, funcname: get_all_possible_next_boards
+s057596078.py(21):     if empty_pos is None:
+s057596078.py(23):     next_boards = []
+s057596078.py(24):     x, y = empty_pos % width, empty_pos // height
+s057596078.py(26):     if x > 0:
+s057596078.py(27):         next_board = []
+s057596078.py(28):         next_board.extend(board)
+s057596078.py(29):         dest_pos = empty_pos - 1
+s057596078.py(30):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(31):         next_boards.append((next_board, dest_pos))
+s057596078.py(33):     if x < width - 1:
+s057596078.py(34):         next_board = []
+s057596078.py(35):         next_board.extend(board)
+s057596078.py(36):         dest_pos = empty_pos + 1
+s057596078.py(37):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(38):         next_boards.append((next_board, dest_pos))
+s057596078.py(40):     if y > 0:
+s057596078.py(47):     if y < height - 1:
+s057596078.py(48):         next_board = []
+s057596078.py(49):         next_board.extend(board)
+s057596078.py(50):         dest_pos = empty_pos + height
+s057596078.py(51):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(52):         next_boards.append((next_board, dest_pos))
+s057596078.py(54):     return next_boards
+s057596078.py(74):             filtered_next_board = []
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(76):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(77):                 if serialized_board not in known_serialized_boards:
+s057596078.py(78):                     known_serialized_boards.add(serialized_board)
+s057596078.py(79):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(76):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(77):                 if serialized_board not in known_serialized_boards:
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(76):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(77):                 if serialized_board not in known_serialized_boards:
+s057596078.py(78):                     known_serialized_boards.add(serialized_board)
+s057596078.py(79):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(80):             next_boards.extend(filtered_next_board)
+s057596078.py(71):         for board, empty_pos in current_boards:
+s057596078.py(73):             tmp_next_boards = get_all_possible_next_boards(board, height, width, empty_pos)
+ --- modulename: s057596078, funcname: get_all_possible_next_boards
+s057596078.py(21):     if empty_pos is None:
+s057596078.py(23):     next_boards = []
+s057596078.py(24):     x, y = empty_pos % width, empty_pos // height
+s057596078.py(26):     if x > 0:
+s057596078.py(27):         next_board = []
+s057596078.py(28):         next_board.extend(board)
+s057596078.py(29):         dest_pos = empty_pos - 1
+s057596078.py(30):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(31):         next_boards.append((next_board, dest_pos))
+s057596078.py(33):     if x < width - 1:
+s057596078.py(40):     if y > 0:
+s057596078.py(41):         next_board = []
+s057596078.py(42):         next_board.extend(board)
+s057596078.py(43):         dest_pos = empty_pos - height
+s057596078.py(44):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(45):         next_boards.append((next_board, dest_pos))
+s057596078.py(47):     if y < height - 1:
+s057596078.py(48):         next_board = []
+s057596078.py(49):         next_board.extend(board)
+s057596078.py(50):         dest_pos = empty_pos + height
+s057596078.py(51):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(52):         next_boards.append((next_board, dest_pos))
+s057596078.py(54):     return next_boards
+s057596078.py(74):             filtered_next_board = []
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(76):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(77):                 if serialized_board not in known_serialized_boards:
+s057596078.py(78):                     known_serialized_boards.add(serialized_board)
+s057596078.py(79):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(76):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(77):                 if serialized_board not in known_serialized_boards:
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(76):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(77):                 if serialized_board not in known_serialized_boards:
+s057596078.py(78):                     known_serialized_boards.add(serialized_board)
+s057596078.py(79):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(75):             for board, empty_pos in tmp_next_boards:
+s057596078.py(80):             next_boards.extend(filtered_next_board)
+s057596078.py(71):         for board, empty_pos in current_boards:
+s057596078.py(82):         if known_serialized_boards & known_serialized_completed_boards:
+s057596078.py(85):         step_count = step_count + 1
+s057596078.py(86):         current_boards = next_boards
+s057596078.py(89):         next_completed_boards = []
+s057596078.py(90):         for board, empty_pos in current_completed_boards:
+s057596078.py(92):             tmp_next_boards = get_all_possible_next_boards(board, height, width, empty_pos)
+ --- modulename: s057596078, funcname: get_all_possible_next_boards
+s057596078.py(21):     if empty_pos is None:
+s057596078.py(23):     next_boards = []
+s057596078.py(24):     x, y = empty_pos % width, empty_pos // height
+s057596078.py(26):     if x > 0:
+s057596078.py(27):         next_board = []
+s057596078.py(28):         next_board.extend(board)
+s057596078.py(29):         dest_pos = empty_pos - 1
+s057596078.py(30):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(31):         next_boards.append((next_board, dest_pos))
+s057596078.py(33):     if x < width - 1:
+s057596078.py(34):         next_board = []
+s057596078.py(35):         next_board.extend(board)
+s057596078.py(36):         dest_pos = empty_pos + 1
+s057596078.py(37):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(38):         next_boards.append((next_board, dest_pos))
+s057596078.py(40):     if y > 0:
+s057596078.py(41):         next_board = []
+s057596078.py(42):         next_board.extend(board)
+s057596078.py(43):         dest_pos = empty_pos - height
+s057596078.py(44):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(45):         next_boards.append((next_board, dest_pos))
+s057596078.py(47):     if y < height - 1:
+s057596078.py(54):     return next_boards
+s057596078.py(93):             filtered_next_board = []
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(95):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(96):                 if serialized_board not in known_serialized_completed_boards:
+s057596078.py(97):                     known_serialized_completed_boards.add(serialized_board)
+s057596078.py(98):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(95):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(96):                 if serialized_board not in known_serialized_completed_boards:
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(95):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(96):                 if serialized_board not in known_serialized_completed_boards:
+s057596078.py(97):                     known_serialized_completed_boards.add(serialized_board)
+s057596078.py(98):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(99):             next_completed_boards.extend(filtered_next_board)
+s057596078.py(90):         for board, empty_pos in current_completed_boards:
+s057596078.py(92):             tmp_next_boards = get_all_possible_next_boards(board, height, width, empty_pos)
+ --- modulename: s057596078, funcname: get_all_possible_next_boards
+s057596078.py(21):     if empty_pos is None:
+s057596078.py(23):     next_boards = []
+s057596078.py(24):     x, y = empty_pos % width, empty_pos // height
+s057596078.py(26):     if x > 0:
+s057596078.py(27):         next_board = []
+s057596078.py(28):         next_board.extend(board)
+s057596078.py(29):         dest_pos = empty_pos - 1
+s057596078.py(30):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(31):         next_boards.append((next_board, dest_pos))
+s057596078.py(33):     if x < width - 1:
+s057596078.py(40):     if y > 0:
+s057596078.py(41):         next_board = []
+s057596078.py(42):         next_board.extend(board)
+s057596078.py(43):         dest_pos = empty_pos - height
+s057596078.py(44):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(45):         next_boards.append((next_board, dest_pos))
+s057596078.py(47):     if y < height - 1:
+s057596078.py(48):         next_board = []
+s057596078.py(49):         next_board.extend(board)
+s057596078.py(50):         dest_pos = empty_pos + height
+s057596078.py(51):         next_board[empty_pos], next_board[dest_pos] = next_board[dest_pos], next_board[empty_pos]
+s057596078.py(52):         next_boards.append((next_board, dest_pos))
+s057596078.py(54):     return next_boards
+s057596078.py(93):             filtered_next_board = []
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(95):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(96):                 if serialized_board not in known_serialized_completed_boards:
+s057596078.py(97):                     known_serialized_completed_boards.add(serialized_board)
+s057596078.py(98):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(95):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(96):                 if serialized_board not in known_serialized_completed_boards:
+s057596078.py(97):                     known_serialized_completed_boards.add(serialized_board)
+s057596078.py(98):                     filtered_next_board.append((board, empty_pos))
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(95):                 serialized_board = serialize_board(board)
+ --- modulename: s057596078, funcname: serialize_board
+s057596078.py(11):     return ":".join(board)
+s057596078.py(96):                 if serialized_board not in known_serialized_completed_boards:
+s057596078.py(94):             for board, empty_pos in tmp_next_boards:
+s057596078.py(99):             next_completed_boards.extend(filtered_next_board)
+s057596078.py(90):         for board, empty_pos in current_completed_boards:
+s057596078.py(101):         if known_serialized_boards & known_serialized_completed_boards:
+s057596078.py(102):             return step_count
+4
