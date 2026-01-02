@@ -1,0 +1,66 @@
+ --- modulename: s888448842, funcname: <module>
+s888448842.py(1): import sys
+s888448842.py(2): read = sys.stdin.readline
+s888448842.py(5): def read_ints():
+s888448842.py(9): def read_a_int():
+s888448842.py(13): def read_matrix(H):
+s888448842.py(20): def read_map(H):
+s888448842.py(28): def read_col(H, n_cols):
+s888448842.py(44): N, K = read_ints()
+ --- modulename: s888448842, funcname: read_ints
+s888448842.py(6):     return list(map(int, read().split()))
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s888448842.py(45): S = read()[:-1]
+s888448842.py(49): num_cnts = []
+s888448842.py(50): now = '1'  # 0から考慮する
+s888448842.py(51): cnt = 0
+s888448842.py(52): for s in S:
+s888448842.py(53):     if s == now:
+s888448842.py(55):     if s != now:  # もしいまカウントしている文字と異なったらカウントを格納して、カウントをリセットする。
+s888448842.py(56):         num_cnts.append(cnt)
+s888448842.py(57):         now = s
+s888448842.py(58):         cnt = 1
+s888448842.py(52): for s in S:
+s888448842.py(53):     if s == now:
+s888448842.py(54):         cnt += 1
+s888448842.py(55):     if s != now:  # もしいまカウントしている文字と異なったらカウントを格納して、カウントをリセットする。
+s888448842.py(52): for s in S:
+s888448842.py(53):     if s == now:
+s888448842.py(54):         cnt += 1
+s888448842.py(55):     if s != now:  # もしいまカウントしている文字と異なったらカウントを格納して、カウントをリセットする。
+s888448842.py(52): for s in S:
+s888448842.py(53):     if s == now:
+s888448842.py(55):     if s != now:  # もしいまカウントしている文字と異なったらカウントを格納して、カウントをリセットする。
+s888448842.py(56):         num_cnts.append(cnt)
+s888448842.py(57):         now = s
+s888448842.py(58):         cnt = 1
+s888448842.py(52): for s in S:
+s888448842.py(53):     if s == now:
+s888448842.py(55):     if s != now:  # もしいまカウントしている文字と異なったらカウントを格納して、カウントをリセットする。
+s888448842.py(56):         num_cnts.append(cnt)
+s888448842.py(57):         now = s
+s888448842.py(58):         cnt = 1
+s888448842.py(52): for s in S:
+s888448842.py(59): num_cnts.append(cnt)
+s888448842.py(61): if S[-1] == '0':
+s888448842.py(62):     num_cnts.append(0)
+s888448842.py(64): assert len(num_cnts) % 2 == 1, '奇数個じゃない！'
+s888448842.py(67): from itertools import accumulate
+s888448842.py(68): num_accums = [0]+list(accumulate(num_cnts))
+s888448842.py(71): add = min(2*K+1, len(num_cnts))  # Kで指定するよりも短い場合はそっちに合わせる
+s888448842.py(72): ans = 1
+s888448842.py(75): for left in range(0, len(num_cnts) - add+1, 2):
+s888448842.py(76):     right = left + add
+s888448842.py(77):     ans = max(ans, num_accums[right] - num_accums[left])
+s888448842.py(75): for left in range(0, len(num_cnts) - add+1, 2):
+s888448842.py(76):     right = left + add
+s888448842.py(77):     ans = max(ans, num_accums[right] - num_accums[left])
+s888448842.py(75): for left in range(0, len(num_cnts) - add+1, 2):
+s888448842.py(80): print(ans)
+4
