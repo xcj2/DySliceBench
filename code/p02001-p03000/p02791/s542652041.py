@@ -1,0 +1,78 @@
+import sys
+import math
+import bisect
+from collections import defaultdict, deque, Counter
+from heapq import heappush, heappop
+
+
+def LI(): return [int(x) for x in sys.stdin.readline().split()]
+
+
+def I(): return int(sys.stdin.readline())
+
+
+def S():
+    res = list(sys.stdin.readline())
+    if res[-1] == "\n":
+        return res[:-1]
+    return res
+
+
+def IR(n):
+    return [I() for i in range(n)]
+
+
+# A
+def A():
+    n, m = LI()
+    if n == m:
+        print("Yes")
+    else:
+        print("No")
+
+    return
+
+
+# B
+def B():
+    a, b = LI()
+    if a <= b:
+        ans = str(a) * b
+    else:
+        ans = str(b) * a
+    print(ans)
+    return
+
+
+# C
+def C():
+    n = I()
+    p = LI()
+    n_min = n + 1
+    ans = 0
+    for num in p:
+        if num < n_min:
+            ans += 1
+            n_min = num
+    print(ans)
+    return
+
+
+# D
+def D():
+    return
+
+
+# E
+def E():
+    return
+
+
+# F
+def F():
+    return
+
+
+# Solve
+if __name__ == "__main__":
+    C()
