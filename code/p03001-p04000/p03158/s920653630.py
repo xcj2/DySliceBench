@@ -1,0 +1,73 @@
+from collections import defaultdict, Counter
+from itertools import product, groupby, count, permutations, combinations
+from math import pi, sqrt
+from collections import deque
+from bisect import bisect, bisect_left, bisect_right
+from string import ascii_lowercase
+from functools import lru_cache
+import sys
+sys.setrecursionlimit(10000)
+INF = float("inf")
+YES, Yes, yes, NO, No, no = "YES", "Yes", "yes", "NO", "No", "no"
+dy4, dx4 = [0, 1, 0, -1], [1, 0, -1, 0]
+dy8, dx8 = [0, -1, 0, 1, 1, -1, -1, 1], [1, 0, -1, 0, 1, 1, -1, -1]
+
+
+def inside(y, x, H, W):
+    return 0 <= y < H and 0 <= x < W
+
+
+def ceil(a, b):
+    return (a + b - 1) // b
+
+
+# aとbの最大公約数
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+
+
+# aとbの最小公倍数
+def lcm(a, b):
+    g = gcd(a, b)
+    return a / g * b
+
+
+def solve(A, Q):
+    N = len(A)
+    A = A[::-1]
+
+    s, es = [0] * (N + 1), [0] * (N + 1)
+    for i in range(N):
+        s[i + 1] = s[i] + A[i]
+        es[i + 1] = es[i] + (A[i] if i % 2 == 0 else 0)
+
+    ths, vals = [], []
+    for i in range((N - 1) // 2):
+        th = (A[i + 1] + A[i * 2 + 2]) // 2 + 1
+        val = (s[i + 1] - s[0]) + (es[N] - es[i * 2 + 2])
+        ths.append(th)
+        vals.append(val)
+
+    ths = ths[::-1]
+    vals = vals[::-1]
+
+    for _ in range(Q):
+        x = int(input())
+        p = bisect_right(ths, x)
+        if p == 0:
+            print(s[(N + 1) // 2] - s[0])
+        else:
+            print(vals[p - 1])
+
+
+def main():
+    N, Q = map(int, input().split())
+    A = list(map(int, input().split()))
+
+    solve(A, Q)
+
+
+if __name__ == '__main__':
+    main()
