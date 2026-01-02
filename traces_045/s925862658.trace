@@ -1,0 +1,417 @@
+ --- modulename: s925862658, funcname: <module>
+s925862658.py(1): import sys
+s925862658.py(3): def input(): return sys.stdin.readline().strip()
+s925862658.py(4): def list2d(a, b, c): return [[c for j in range(b)] for i in range(a)]
+s925862658.py(5): def list3d(a, b, c, d): return [[[d for k in range(c)] for j in range(b)] for i in range(a)]
+s925862658.py(6): def list4d(a, b, c, d, e): return [[[[e for l in range(d)] for k in range(c)] for j in range(b)] for i in range(a)]
+s925862658.py(7): def ceil(x, y=1): return int(-(-x // y))
+s925862658.py(8): def INT(): return int(input())
+s925862658.py(9): def MAP(): return map(int, input().split())
+s925862658.py(10): def LIST(N=None): return list(MAP()) if N is None else [INT() for i in range(N)]
+s925862658.py(11): def Yes(): print('Yes')
+s925862658.py(12): def No(): print('No')
+s925862658.py(13): def YES(): print('YES')
+s925862658.py(14): def NO(): print('NO')
+s925862658.py(15): sys.setrecursionlimit(10**9)
+s925862658.py(16): INF = 10**19
+s925862658.py(17): MOD = 998244353
+s925862658.py(18): EPS = 10**-10
+s925862658.py(20): class BIT:
+ --- modulename: s925862658, funcname: BIT
+s925862658.py(20): class BIT:
+s925862658.py(21):     """ Binary Indexed Tree """
+s925862658.py(23):     def __init__(self, n):
+s925862658.py(33):     def sum(self, i):
+s925862658.py(43):     def add(self, i, x):
+s925862658.py(51):     def query(self, l, r):
+s925862658.py(55):     def get(self, i):
+s925862658.py(59):     def update(self, i, x):
+s925862658.py(63):     def print(self):
+s925862658.py(68): N, K = MAP()
+ --- modulename: s925862658, funcname: MAP
+s925862658.py(9): def MAP(): return map(int, input().split())
+ --- modulename: s925862658, funcname: input
+s925862658.py(3): def input(): return sys.stdin.readline().strip()
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s925862658.py(69): LR = []
+s925862658.py(70): for i in range(K):
+s925862658.py(71):     l, r = MAP()
+ --- modulename: s925862658, funcname: MAP
+s925862658.py(9): def MAP(): return map(int, input().split())
+ --- modulename: s925862658, funcname: input
+s925862658.py(3): def input(): return sys.stdin.readline().strip()
+s925862658.py(72):     LR.append((l, r))
+s925862658.py(70): for i in range(K):
+s925862658.py(71):     l, r = MAP()
+ --- modulename: s925862658, funcname: MAP
+s925862658.py(9): def MAP(): return map(int, input().split())
+ --- modulename: s925862658, funcname: input
+s925862658.py(3): def input(): return sys.stdin.readline().strip()
+s925862658.py(72):     LR.append((l, r))
+s925862658.py(70): for i in range(K):
+s925862658.py(74): dp = BIT(N+1)
+ --- modulename: s925862658, funcname: __init__
+s925862658.py(24):         self.n = n
+s925862658.py(26):         n += 1
+s925862658.py(27):         nv = 1
+s925862658.py(28):         while nv < n:
+s925862658.py(29):             nv *= 2
+s925862658.py(28):         while nv < n:
+s925862658.py(29):             nv *= 2
+s925862658.py(28):         while nv < n:
+s925862658.py(29):             nv *= 2
+s925862658.py(28):         while nv < n:
+s925862658.py(30):         self.size = nv
+s925862658.py(31):         self.tree = [0] * nv
+s925862658.py(75): dp.add(1, 1)
+ --- modulename: s925862658, funcname: add
+s925862658.py(45):         i += 1
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(76): for i in range(2, N+1):
+s925862658.py(77):     for l, r in LR:
+s925862658.py(78):         cnt = dp.query(max(i-r, 0), max(i-l+1, 0))
+ --- modulename: s925862658, funcname: query
+s925862658.py(53):         return (self.sum(r-1) - self.sum(l-1)) % MOD
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+s925862658.py(79):         dp.add(i, cnt)
+ --- modulename: s925862658, funcname: add
+s925862658.py(45):         i += 1
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(77):     for l, r in LR:
+s925862658.py(78):         cnt = dp.query(max(i-r, 0), max(i-l+1, 0))
+ --- modulename: s925862658, funcname: query
+s925862658.py(53):         return (self.sum(r-1) - self.sum(l-1)) % MOD
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+s925862658.py(79):         dp.add(i, cnt)
+ --- modulename: s925862658, funcname: add
+s925862658.py(45):         i += 1
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(77):     for l, r in LR:
+s925862658.py(76): for i in range(2, N+1):
+s925862658.py(77):     for l, r in LR:
+s925862658.py(78):         cnt = dp.query(max(i-r, 0), max(i-l+1, 0))
+ --- modulename: s925862658, funcname: query
+s925862658.py(53):         return (self.sum(r-1) - self.sum(l-1)) % MOD
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+s925862658.py(79):         dp.add(i, cnt)
+ --- modulename: s925862658, funcname: add
+s925862658.py(45):         i += 1
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(77):     for l, r in LR:
+s925862658.py(78):         cnt = dp.query(max(i-r, 0), max(i-l+1, 0))
+ --- modulename: s925862658, funcname: query
+s925862658.py(53):         return (self.sum(r-1) - self.sum(l-1)) % MOD
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+s925862658.py(79):         dp.add(i, cnt)
+ --- modulename: s925862658, funcname: add
+s925862658.py(45):         i += 1
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(77):     for l, r in LR:
+s925862658.py(76): for i in range(2, N+1):
+s925862658.py(77):     for l, r in LR:
+s925862658.py(78):         cnt = dp.query(max(i-r, 0), max(i-l+1, 0))
+ --- modulename: s925862658, funcname: query
+s925862658.py(53):         return (self.sum(r-1) - self.sum(l-1)) % MOD
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+s925862658.py(79):         dp.add(i, cnt)
+ --- modulename: s925862658, funcname: add
+s925862658.py(45):         i += 1
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(77):     for l, r in LR:
+s925862658.py(78):         cnt = dp.query(max(i-r, 0), max(i-l+1, 0))
+ --- modulename: s925862658, funcname: query
+s925862658.py(53):         return (self.sum(r-1) - self.sum(l-1)) % MOD
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+s925862658.py(79):         dp.add(i, cnt)
+ --- modulename: s925862658, funcname: add
+s925862658.py(45):         i += 1
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(77):     for l, r in LR:
+s925862658.py(76): for i in range(2, N+1):
+s925862658.py(77):     for l, r in LR:
+s925862658.py(78):         cnt = dp.query(max(i-r, 0), max(i-l+1, 0))
+ --- modulename: s925862658, funcname: query
+s925862658.py(53):         return (self.sum(r-1) - self.sum(l-1)) % MOD
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+s925862658.py(79):         dp.add(i, cnt)
+ --- modulename: s925862658, funcname: add
+s925862658.py(45):         i += 1
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(77):     for l, r in LR:
+s925862658.py(78):         cnt = dp.query(max(i-r, 0), max(i-l+1, 0))
+ --- modulename: s925862658, funcname: query
+s925862658.py(53):         return (self.sum(r-1) - self.sum(l-1)) % MOD
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+s925862658.py(79):         dp.add(i, cnt)
+ --- modulename: s925862658, funcname: add
+s925862658.py(45):         i += 1
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(47):             self.tree[i-1] += x
+s925862658.py(48):             self.tree[i-1] %= MOD
+s925862658.py(49):             i += i & -i
+s925862658.py(46):         while i <= self.size:
+s925862658.py(77):     for l, r in LR:
+s925862658.py(76): for i in range(2, N+1):
+s925862658.py(80): ans = dp.get(N)
+ --- modulename: s925862658, funcname: get
+s925862658.py(57):         return self.query(i, i+1)
+ --- modulename: s925862658, funcname: query
+s925862658.py(53):         return (self.sum(r-1) - self.sum(l-1)) % MOD
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+ --- modulename: s925862658, funcname: sum
+s925862658.py(35):         s = 0
+s925862658.py(36):         i += 1
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(38):             s += self.tree[i-1]
+s925862658.py(39):             s %= MOD
+s925862658.py(40):             i -= i & -i
+s925862658.py(37):         while i > 0:
+s925862658.py(41):         return s
+s925862658.py(81): print(ans)
+4
