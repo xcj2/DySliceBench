@@ -1,0 +1,203 @@
+ --- modulename: s430334236, funcname: <module>
+s430334236.py(1): from functools import reduce
+s430334236.py(3): def extended_euclid(a, b):
+s430334236.py(11): def modular_inverse(a, mod):
+s430334236.py(18): class Combinatorics:
+ --- modulename: s430334236, funcname: Combinatorics
+s430334236.py(18): class Combinatorics:
+s430334236.py(19):     def __init__(self, N, mod):
+s430334236.py(42):     def perm(self, n, r):
+s430334236.py(49):     def binom(self, n, r):
+s430334236.py(56):     def multinom(self, R):
+s430334236.py(63):     def hom(self, n, r):
+s430334236.py(74): MOD = 10**9 + 7
+s430334236.py(75): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s430334236.py(76): com = Combinatorics(N, MOD)
+ --- modulename: s430334236, funcname: __init__
+s430334236.py(27):         self.mod = mod
+s430334236.py(28):         self.fact = [0] * (N+1)           # n!
+s430334236.py(29):         self.inverse = [None] + [0] * N   # inverse of n in the field Z/(MOD)Z
+s430334236.py(30):         self.fact_inverse = [0] * (N+1)   # inverse of n! in the field Z/(MOD)Z
+s430334236.py(33):         self.fact[0] = self.fact[1] = 1
+s430334236.py(34):         self.fact_inverse[0] = self.fact_inverse[1] = 1
+s430334236.py(35):         self.inverse[1] = 1
+s430334236.py(36):         for i in range(2, N+1):
+s430334236.py(37):             self.fact[i] = i * self.fact[i-1] % self.mod
+s430334236.py(38):             q, r = divmod(self.mod, i)
+s430334236.py(39):             self.inverse[i] = (- (q % self.mod) * self.inverse[r]) % self.mod
+s430334236.py(40):             self.fact_inverse[i] = self.inverse[i] * self.fact_inverse[i-1] % self.mod
+s430334236.py(36):         for i in range(2, N+1):
+s430334236.py(37):             self.fact[i] = i * self.fact[i-1] % self.mod
+s430334236.py(38):             q, r = divmod(self.mod, i)
+s430334236.py(39):             self.inverse[i] = (- (q % self.mod) * self.inverse[r]) % self.mod
+s430334236.py(40):             self.fact_inverse[i] = self.inverse[i] * self.fact_inverse[i-1] % self.mod
+s430334236.py(36):         for i in range(2, N+1):
+s430334236.py(77): T = [[] for _ in range(N)]
+ --- modulename: s430334236, funcname: <listcomp>
+s430334236.py(77): T = [[] for _ in range(N)]
+s430334236.py(77): T = [[] for _ in range(N)]
+s430334236.py(77): T = [[] for _ in range(N)]
+s430334236.py(77): T = [[] for _ in range(N)]
+s430334236.py(78): for _ in range(N-1):
+s430334236.py(79):     a, b = map(int, input().split())
+s430334236.py(80):     T[a-1].append(b-1); T[b-1].append(a-1)
+s430334236.py(78): for _ in range(N-1):
+s430334236.py(79):     a, b = map(int, input().split())
+s430334236.py(80):     T[a-1].append(b-1); T[b-1].append(a-1)
+s430334236.py(78): for _ in range(N-1):
+s430334236.py(83): downward = [1] * N
+s430334236.py(84): upward = [1] * N
+s430334236.py(85): n_descs = [1] * N
+s430334236.py(86): children_n_descs = [[] for _ in range(N)]
+ --- modulename: s430334236, funcname: <listcomp>
+s430334236.py(86): children_n_descs = [[] for _ in range(N)]
+s430334236.py(86): children_n_descs = [[] for _ in range(N)]
+s430334236.py(86): children_n_descs = [[] for _ in range(N)]
+s430334236.py(86): children_n_descs = [[] for _ in range(N)]
+s430334236.py(87): ans = [-1] * N
+s430334236.py(89): def dfs1(r):
+s430334236.py(114): def dfs2(r):
+s430334236.py(127): dfs1(0)
+ --- modulename: s430334236, funcname: dfs1
+s430334236.py(90):     stack = [(r, -1, 0)] # (vertex, parent, status)
+s430334236.py(91):     while stack:
+s430334236.py(92):         v, p, st = stack.pop()
+s430334236.py(93):         if st == 0: # visited v for the first time
+s430334236.py(94):             n_children = 0
+s430334236.py(95):             for u in T[v]:
+s430334236.py(96):                 if u == p: continue
+s430334236.py(97):                 if n_children == 0:
+s430334236.py(98):                     stack += [(v, p, 2), (u, v, 0)]
+s430334236.py(99):                     n_children += 1
+s430334236.py(95):             for u in T[v]:
+s430334236.py(96):                 if u == p: continue
+s430334236.py(97):                 if n_children == 0:
+s430334236.py(101):                     stack += [(v, p, 1), (u, v, 0)]
+s430334236.py(102):                     n_children += 1
+s430334236.py(95):             for u in T[v]:
+s430334236.py(103):             if n_children == 0: # v is a leaf
+s430334236.py(91):     while stack:
+s430334236.py(92):         v, p, st = stack.pop()
+s430334236.py(93):         if st == 0: # visited v for the first time
+s430334236.py(94):             n_children = 0
+s430334236.py(95):             for u in T[v]:
+s430334236.py(96):                 if u == p: continue
+s430334236.py(95):             for u in T[v]:
+s430334236.py(103):             if n_children == 0: # v is a leaf
+s430334236.py(104):                 stack += [(v, p, 2)]
+s430334236.py(91):     while stack:
+s430334236.py(92):         v, p, st = stack.pop()
+s430334236.py(93):         if st == 0: # visited v for the first time
+s430334236.py(105):         elif st == 1: # now searching
+s430334236.py(108):             n = n_descs[v]
+s430334236.py(109):             downward[v] = (downward[v] * com.fact[n-1]) % MOD
+s430334236.py(110):             if p != -1:
+s430334236.py(111):                 n_descs[p] += n
+s430334236.py(112):                 downward[p] = ((downward[p] * downward[v]) % MOD * com.fact_inverse[n]) % MOD
+s430334236.py(91):     while stack:
+s430334236.py(92):         v, p, st = stack.pop()
+s430334236.py(93):         if st == 0: # visited v for the first time
+s430334236.py(105):         elif st == 1: # now searching
+s430334236.py(106):             continue
+s430334236.py(91):     while stack:
+s430334236.py(92):         v, p, st = stack.pop()
+s430334236.py(93):         if st == 0: # visited v for the first time
+s430334236.py(94):             n_children = 0
+s430334236.py(95):             for u in T[v]:
+s430334236.py(96):                 if u == p: continue
+s430334236.py(95):             for u in T[v]:
+s430334236.py(103):             if n_children == 0: # v is a leaf
+s430334236.py(104):                 stack += [(v, p, 2)]
+s430334236.py(91):     while stack:
+s430334236.py(92):         v, p, st = stack.pop()
+s430334236.py(93):         if st == 0: # visited v for the first time
+s430334236.py(105):         elif st == 1: # now searching
+s430334236.py(108):             n = n_descs[v]
+s430334236.py(109):             downward[v] = (downward[v] * com.fact[n-1]) % MOD
+s430334236.py(110):             if p != -1:
+s430334236.py(111):                 n_descs[p] += n
+s430334236.py(112):                 downward[p] = ((downward[p] * downward[v]) % MOD * com.fact_inverse[n]) % MOD
+s430334236.py(91):     while stack:
+s430334236.py(92):         v, p, st = stack.pop()
+s430334236.py(93):         if st == 0: # visited v for the first time
+s430334236.py(105):         elif st == 1: # now searching
+s430334236.py(108):             n = n_descs[v]
+s430334236.py(109):             downward[v] = (downward[v] * com.fact[n-1]) % MOD
+s430334236.py(110):             if p != -1:
+s430334236.py(91):     while stack:
+s430334236.py(128): dfs2(0)
+ --- modulename: s430334236, funcname: dfs2
+s430334236.py(115):     f_n1, f_n1_inv = com.fact[N-1], com.fact_inverse[N-1]
+s430334236.py(116):     stack = [(r, -1)] # (vertex, parent)
+s430334236.py(117):     while stack:
+s430334236.py(118):         v, p = stack.pop()
+s430334236.py(119):         n_v = n_descs[v]
+s430334236.py(120):         dw_v = downward[v]
+s430334236.py(121):         if p == -1: upward[v] = 1
+s430334236.py(123):         ans[v] = upward[v] * downward[v] % MOD * f_n1 % MOD * com.fact_inverse[N-n_v] % MOD * com.fact_inverse[n_v-1] % MOD
+s430334236.py(124):         for u in T[v]:
+s430334236.py(125):             if u == p: continue
+s430334236.py(126):             stack += [(u, v)]
+s430334236.py(124):         for u in T[v]:
+s430334236.py(125):             if u == p: continue
+s430334236.py(126):             stack += [(u, v)]
+s430334236.py(124):         for u in T[v]:
+s430334236.py(117):     while stack:
+s430334236.py(118):         v, p = stack.pop()
+s430334236.py(119):         n_v = n_descs[v]
+s430334236.py(120):         dw_v = downward[v]
+s430334236.py(121):         if p == -1: upward[v] = 1
+s430334236.py(122):         else: upward[v] = ans[p] * com.fact[N-1-n_v] % MOD * com.fact[n_v] % MOD * modular_inverse(dw_v, MOD) % MOD * f_n1_inv % MOD
+ --- modulename: s430334236, funcname: modular_inverse
+s430334236.py(12):     x, _, g = extended_euclid(a, mod)
+ --- modulename: s430334236, funcname: extended_euclid
+s430334236.py(4):     x1, y1, m = 1, 0, a
+s430334236.py(5):     x2, y2, n = 0, 1, b
+s430334236.py(6):     while m % n != 0:
+s430334236.py(7):         q, r = divmod(m, n)
+s430334236.py(8):         x1, y1, m, x2, y2, n = x2, y2, n, x1 - q * x2, y1 - q * y2, r
+s430334236.py(6):     while m % n != 0:
+s430334236.py(9):     return x2, y2, n
+s430334236.py(13):     if g != 1:
+s430334236.py(16):         return x % mod
+s430334236.py(123):         ans[v] = upward[v] * downward[v] % MOD * f_n1 % MOD * com.fact_inverse[N-n_v] % MOD * com.fact_inverse[n_v-1] % MOD
+s430334236.py(124):         for u in T[v]:
+s430334236.py(125):             if u == p: continue
+s430334236.py(124):         for u in T[v]:
+s430334236.py(117):     while stack:
+s430334236.py(118):         v, p = stack.pop()
+s430334236.py(119):         n_v = n_descs[v]
+s430334236.py(120):         dw_v = downward[v]
+s430334236.py(121):         if p == -1: upward[v] = 1
+s430334236.py(122):         else: upward[v] = ans[p] * com.fact[N-1-n_v] % MOD * com.fact[n_v] % MOD * modular_inverse(dw_v, MOD) % MOD * f_n1_inv % MOD
+ --- modulename: s430334236, funcname: modular_inverse
+s430334236.py(12):     x, _, g = extended_euclid(a, mod)
+ --- modulename: s430334236, funcname: extended_euclid
+s430334236.py(4):     x1, y1, m = 1, 0, a
+s430334236.py(5):     x2, y2, n = 0, 1, b
+s430334236.py(6):     while m % n != 0:
+s430334236.py(7):         q, r = divmod(m, n)
+s430334236.py(8):         x1, y1, m, x2, y2, n = x2, y2, n, x1 - q * x2, y1 - q * y2, r
+s430334236.py(6):     while m % n != 0:
+s430334236.py(9):     return x2, y2, n
+s430334236.py(13):     if g != 1:
+s430334236.py(16):         return x % mod
+s430334236.py(123):         ans[v] = upward[v] * downward[v] % MOD * f_n1 % MOD * com.fact_inverse[N-n_v] % MOD * com.fact_inverse[n_v-1] % MOD
+s430334236.py(124):         for u in T[v]:
+s430334236.py(125):             if u == p: continue
+s430334236.py(124):         for u in T[v]:
+s430334236.py(117):     while stack:
+s430334236.py(129): for a in ans: print(a)
+2
+s430334236.py(129): for a in ans: print(a)
+1
+s430334236.py(129): for a in ans: print(a)
+1
+s430334236.py(129): for a in ans: print(a)
