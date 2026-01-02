@@ -1,0 +1,256 @@
+ --- modulename: s806412902, funcname: <module>
+s806412902.py(1): class Tree():
+ --- modulename: s806412902, funcname: Tree
+s806412902.py(1): class Tree():
+s806412902.py(2):     def __init__(self, n):
+s806412902.py(9):     def add_edges(self, e, idx=1):
+s806412902.py(14):     def add_edge(self, u, v, idx=1):
+s806412902.py(18):     def set_root(self, r):
+s806412902.py(38):     def diam(self):
+s806412902.py(60):     def rerooting(self, op, e, merge, id):
+s806412902.py(84):     def heavylight_decomposition(self):
+s806412902.py(110):     def lca(self, u, v):
+s806412902.py(118):     def range_query(self, u, v, edge_query=False):
+s806412902.py(128):     def subtree_query(self, u):
+s806412902.py(131): def build_factorial(n):
+s806412902.py(142): import sys
+s806412902.py(143): input = sys.stdin.buffer.readline
+s806412902.py(145): MOD = 1000000007
+s806412902.py(147): N = int(input())
+s806412902.py(149): fct, ifct = build_factorial(N + 1)
+ --- modulename: s806412902, funcname: build_factorial
+s806412902.py(132):     fct = [0] * (n + 1)
+s806412902.py(133):     ifct = [0] * (n + 1)
+s806412902.py(134):     fct[0] = ifct[0] = 1
+s806412902.py(135):     for i in range(n):
+s806412902.py(136):         fct[i + 1] = fct[i] * (i + 1) % MOD
+s806412902.py(135):     for i in range(n):
+s806412902.py(136):         fct[i + 1] = fct[i] * (i + 1) % MOD
+s806412902.py(135):     for i in range(n):
+s806412902.py(136):         fct[i + 1] = fct[i] * (i + 1) % MOD
+s806412902.py(135):     for i in range(n):
+s806412902.py(136):         fct[i + 1] = fct[i] * (i + 1) % MOD
+s806412902.py(135):     for i in range(n):
+s806412902.py(137):     ifct[n] = pow(fct[n], MOD - 2, MOD)
+s806412902.py(138):     for i in range(n)[::-1]:
+s806412902.py(139):         ifct[i] = ifct[i + 1] * (i + 1) % MOD
+s806412902.py(138):     for i in range(n)[::-1]:
+s806412902.py(139):         ifct[i] = ifct[i + 1] * (i + 1) % MOD
+s806412902.py(138):     for i in range(n)[::-1]:
+s806412902.py(139):         ifct[i] = ifct[i + 1] * (i + 1) % MOD
+s806412902.py(138):     for i in range(n)[::-1]:
+s806412902.py(139):         ifct[i] = ifct[i + 1] * (i + 1) % MOD
+s806412902.py(138):     for i in range(n)[::-1]:
+s806412902.py(140):     return fct, ifct
+s806412902.py(150): tree = Tree(N)
+ --- modulename: s806412902, funcname: __init__
+s806412902.py(3):         self.n = n
+s806412902.py(4):         self.tree = [[] for _ in range(n)]
+ --- modulename: s806412902, funcname: <listcomp>
+s806412902.py(4):         self.tree = [[] for _ in range(n)]
+s806412902.py(4):         self.tree = [[] for _ in range(n)]
+s806412902.py(4):         self.tree = [[] for _ in range(n)]
+s806412902.py(4):         self.tree = [[] for _ in range(n)]
+s806412902.py(5):         self.root = None
+s806412902.py(6):         self.dep = [None] * n
+s806412902.py(7):         self.size = [1] * n
+s806412902.py(152): for _ in range(N - 1):
+s806412902.py(153):     u, v = map(int, input().split())
+s806412902.py(154):     tree.add_edge(u, v, 1)
+ --- modulename: s806412902, funcname: add_edge
+s806412902.py(15):         self.tree[u - idx].append(v - idx)
+s806412902.py(16):         self.tree[v - idx].append(u - idx)
+s806412902.py(152): for _ in range(N - 1):
+s806412902.py(153):     u, v = map(int, input().split())
+s806412902.py(154):     tree.add_edge(u, v, 1)
+ --- modulename: s806412902, funcname: add_edge
+s806412902.py(15):         self.tree[u - idx].append(v - idx)
+s806412902.py(16):         self.tree[v - idx].append(u - idx)
+s806412902.py(152): for _ in range(N - 1):
+s806412902.py(156): tree.set_root(0)
+ --- modulename: s806412902, funcname: set_root
+s806412902.py(19):         self.root = r
+s806412902.py(20):         self.par = [None] * self.n
+s806412902.py(21):         self.par[r] = -1
+s806412902.py(22):         self.dep[r] = 0
+s806412902.py(23):         self.ord = [r]
+s806412902.py(24):         stack = [r]
+s806412902.py(25):         while stack:
+s806412902.py(26):             v = stack.pop()
+s806412902.py(27):             for adj in self.tree[v]:
+s806412902.py(28):                 if self.par[adj] is not None: continue
+s806412902.py(29):                 self.par[adj] = v
+s806412902.py(30):                 self.dep[adj] = self.dep[v] + 1
+s806412902.py(31):                 self.ord.append(adj)
+s806412902.py(32):                 stack.append(adj)
+s806412902.py(27):             for adj in self.tree[v]:
+s806412902.py(28):                 if self.par[adj] is not None: continue
+s806412902.py(29):                 self.par[adj] = v
+s806412902.py(30):                 self.dep[adj] = self.dep[v] + 1
+s806412902.py(31):                 self.ord.append(adj)
+s806412902.py(32):                 stack.append(adj)
+s806412902.py(27):             for adj in self.tree[v]:
+s806412902.py(25):         while stack:
+s806412902.py(26):             v = stack.pop()
+s806412902.py(27):             for adj in self.tree[v]:
+s806412902.py(28):                 if self.par[adj] is not None: continue
+s806412902.py(27):             for adj in self.tree[v]:
+s806412902.py(25):         while stack:
+s806412902.py(26):             v = stack.pop()
+s806412902.py(27):             for adj in self.tree[v]:
+s806412902.py(28):                 if self.par[adj] is not None: continue
+s806412902.py(27):             for adj in self.tree[v]:
+s806412902.py(25):         while stack:
+s806412902.py(33):         for v in self.ord[::-1]:
+s806412902.py(34):             for adj in self.tree[v]:
+s806412902.py(35):                 if self.par[v] == adj: continue
+s806412902.py(34):             for adj in self.tree[v]:
+s806412902.py(33):         for v in self.ord[::-1]:
+s806412902.py(34):             for adj in self.tree[v]:
+s806412902.py(35):                 if self.par[v] == adj: continue
+s806412902.py(34):             for adj in self.tree[v]:
+s806412902.py(33):         for v in self.ord[::-1]:
+s806412902.py(34):             for adj in self.tree[v]:
+s806412902.py(35):                 if self.par[v] == adj: continue
+s806412902.py(36):                 self.size[v] += self.size[adj]
+s806412902.py(34):             for adj in self.tree[v]:
+s806412902.py(35):                 if self.par[v] == adj: continue
+s806412902.py(36):                 self.size[v] += self.size[adj]
+s806412902.py(34):             for adj in self.tree[v]:
+s806412902.py(33):         for v in self.ord[::-1]:
+s806412902.py(158): def merge(lt, rt):
+s806412902.py(165): def op(v, ad):
+s806412902.py(172): e = (1, 1)
+s806412902.py(173): id = (1, 0)
+s806412902.py(175): d = tree.rerooting(op, e, merge, id)
+ --- modulename: s806412902, funcname: rerooting
+s806412902.py(62):         dp = [e] * self.n
+s806412902.py(63):         lt = [id] * self.n
+s806412902.py(64):         rt = [id] * self.n
+s806412902.py(65):         inv = [id] * self.n
+s806412902.py(66):         for v in self.ord[::-1]:
+s806412902.py(67):             tl = tr = e
+s806412902.py(68):             for adj in self.tree[v]:
+s806412902.py(69):                 if self.par[v] == adj: continue
+s806412902.py(68):             for adj in self.tree[v]:
+s806412902.py(72):             for adj in self.tree[v][::-1]:
+s806412902.py(73):                 if self.par[v] == adj: continue
+s806412902.py(72):             for adj in self.tree[v][::-1]:
+s806412902.py(76):             dp[v] = tr
+s806412902.py(66):         for v in self.ord[::-1]:
+s806412902.py(67):             tl = tr = e
+s806412902.py(68):             for adj in self.tree[v]:
+s806412902.py(69):                 if self.par[v] == adj: continue
+s806412902.py(68):             for adj in self.tree[v]:
+s806412902.py(72):             for adj in self.tree[v][::-1]:
+s806412902.py(73):                 if self.par[v] == adj: continue
+s806412902.py(72):             for adj in self.tree[v][::-1]:
+s806412902.py(76):             dp[v] = tr
+s806412902.py(66):         for v in self.ord[::-1]:
+s806412902.py(67):             tl = tr = e
+s806412902.py(68):             for adj in self.tree[v]:
+s806412902.py(69):                 if self.par[v] == adj: continue
+s806412902.py(70):                 lt[adj] = tl
+s806412902.py(71):                 tl = op(tl, dp[adj])
+ --- modulename: s806412902, funcname: op
+s806412902.py(166):     vc, vs = v
+s806412902.py(167):     adc, ads = ad
+s806412902.py(168):     size = vs + ads
+s806412902.py(169):     cnt = vc * adc * ifct[ads] * fct[size - 1] * ifct[vs - 1] % MOD
+s806412902.py(170):     return cnt, size
+s806412902.py(68):             for adj in self.tree[v]:
+s806412902.py(69):                 if self.par[v] == adj: continue
+s806412902.py(70):                 lt[adj] = tl
+s806412902.py(71):                 tl = op(tl, dp[adj])
+ --- modulename: s806412902, funcname: op
+s806412902.py(166):     vc, vs = v
+s806412902.py(167):     adc, ads = ad
+s806412902.py(168):     size = vs + ads
+s806412902.py(169):     cnt = vc * adc * ifct[ads] * fct[size - 1] * ifct[vs - 1] % MOD
+s806412902.py(170):     return cnt, size
+s806412902.py(68):             for adj in self.tree[v]:
+s806412902.py(72):             for adj in self.tree[v][::-1]:
+s806412902.py(73):                 if self.par[v] == adj: continue
+s806412902.py(74):                 rt[adj] = tr
+s806412902.py(75):                 tr = op(tr, dp[adj])
+ --- modulename: s806412902, funcname: op
+s806412902.py(166):     vc, vs = v
+s806412902.py(167):     adc, ads = ad
+s806412902.py(168):     size = vs + ads
+s806412902.py(169):     cnt = vc * adc * ifct[ads] * fct[size - 1] * ifct[vs - 1] % MOD
+s806412902.py(170):     return cnt, size
+s806412902.py(72):             for adj in self.tree[v][::-1]:
+s806412902.py(73):                 if self.par[v] == adj: continue
+s806412902.py(74):                 rt[adj] = tr
+s806412902.py(75):                 tr = op(tr, dp[adj])
+ --- modulename: s806412902, funcname: op
+s806412902.py(166):     vc, vs = v
+s806412902.py(167):     adc, ads = ad
+s806412902.py(168):     size = vs + ads
+s806412902.py(169):     cnt = vc * adc * ifct[ads] * fct[size - 1] * ifct[vs - 1] % MOD
+s806412902.py(170):     return cnt, size
+s806412902.py(72):             for adj in self.tree[v][::-1]:
+s806412902.py(76):             dp[v] = tr
+s806412902.py(66):         for v in self.ord[::-1]:
+s806412902.py(77):         for v in self.ord:
+s806412902.py(78):             if v == self.root: continue
+s806412902.py(77):         for v in self.ord:
+s806412902.py(78):             if v == self.root: continue
+s806412902.py(79):             p = self.par[v]
+s806412902.py(80):             inv[v] = op(merge(lt[v], rt[v]), inv[p])
+ --- modulename: s806412902, funcname: merge
+s806412902.py(159):     lc, ls = lt
+s806412902.py(160):     rc, rs = rt
+s806412902.py(161):     size = ls + rs - 1
+s806412902.py(162):     cnt = lc * rc * ifct[ls - 1] * ifct[rs - 1] * fct[size - 1] % MOD
+s806412902.py(163):     return cnt, size
+ --- modulename: s806412902, funcname: op
+s806412902.py(166):     vc, vs = v
+s806412902.py(167):     adc, ads = ad
+s806412902.py(168):     size = vs + ads
+s806412902.py(169):     cnt = vc * adc * ifct[ads] * fct[size - 1] * ifct[vs - 1] % MOD
+s806412902.py(170):     return cnt, size
+s806412902.py(81):             dp[v] = op(dp[v], inv[v])
+ --- modulename: s806412902, funcname: op
+s806412902.py(166):     vc, vs = v
+s806412902.py(167):     adc, ads = ad
+s806412902.py(168):     size = vs + ads
+s806412902.py(169):     cnt = vc * adc * ifct[ads] * fct[size - 1] * ifct[vs - 1] % MOD
+s806412902.py(170):     return cnt, size
+s806412902.py(77):         for v in self.ord:
+s806412902.py(78):             if v == self.root: continue
+s806412902.py(79):             p = self.par[v]
+s806412902.py(80):             inv[v] = op(merge(lt[v], rt[v]), inv[p])
+ --- modulename: s806412902, funcname: merge
+s806412902.py(159):     lc, ls = lt
+s806412902.py(160):     rc, rs = rt
+s806412902.py(161):     size = ls + rs - 1
+s806412902.py(162):     cnt = lc * rc * ifct[ls - 1] * ifct[rs - 1] * fct[size - 1] % MOD
+s806412902.py(163):     return cnt, size
+ --- modulename: s806412902, funcname: op
+s806412902.py(166):     vc, vs = v
+s806412902.py(167):     adc, ads = ad
+s806412902.py(168):     size = vs + ads
+s806412902.py(169):     cnt = vc * adc * ifct[ads] * fct[size - 1] * ifct[vs - 1] % MOD
+s806412902.py(170):     return cnt, size
+s806412902.py(81):             dp[v] = op(dp[v], inv[v])
+ --- modulename: s806412902, funcname: op
+s806412902.py(166):     vc, vs = v
+s806412902.py(167):     adc, ads = ad
+s806412902.py(168):     size = vs + ads
+s806412902.py(169):     cnt = vc * adc * ifct[ads] * fct[size - 1] * ifct[vs - 1] % MOD
+s806412902.py(170):     return cnt, size
+s806412902.py(77):         for v in self.ord:
+s806412902.py(82):         return dp
+s806412902.py(176): res = []
+s806412902.py(178): for cnt, size in d:
+s806412902.py(179):     res.append(cnt)
+s806412902.py(178): for cnt, size in d:
+s806412902.py(179):     res.append(cnt)
+s806412902.py(178): for cnt, size in d:
+s806412902.py(179):     res.append(cnt)
+s806412902.py(178): for cnt, size in d:
+s806412902.py(181): print('\n'.join(map(str, res)))
+2
+1
+1

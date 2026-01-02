@@ -1,0 +1,419 @@
+ --- modulename: s806643320, funcname: <module>
+s806643320.py(1): N = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s806643320.py(2): P = [int(a)-1 for a in input().split()]
+ --- modulename: s806643320, funcname: <listcomp>
+s806643320.py(2): P = [int(a)-1 for a in input().split()]
+s806643320.py(2): P = [int(a)-1 for a in input().split()]
+s806643320.py(2): P = [int(a)-1 for a in input().split()]
+s806643320.py(2): P = [int(a)-1 for a in input().split()]
+s806643320.py(3): INV = [0] * N
+s806643320.py(4): for i in range(N):
+s806643320.py(5):     INV[P[i]] = i
+s806643320.py(4): for i in range(N):
+s806643320.py(5):     INV[P[i]] = i
+s806643320.py(4): for i in range(N):
+s806643320.py(5):     INV[P[i]] = i
+s806643320.py(4): for i in range(N):
+s806643320.py(7): NN = 17
+s806643320.py(8): MA = [-1] * ((1<<NN+1)-1)
+s806643320.py(9): MI = [N] * ((1<<NN+1)-1)
+s806643320.py(11): def update(a, x):
+s806643320.py(22): def rangemin(a, b):
+s806643320.py(36): def rangemax(a, b):
+s806643320.py(50): ans = 0
+s806643320.py(51): for i in INV[::-1]:
+s806643320.py(52):     l1 = rangemax(0, i)
+ --- modulename: s806643320, funcname: rangemax
+s806643320.py(37):     l = a + (1<<NN)
+s806643320.py(38):     r = b + (1<<NN)
+s806643320.py(39):     ma = -1
+s806643320.py(40):     while l < r:
+s806643320.py(41):         if l%2:
+s806643320.py(44):         if r%2:
+s806643320.py(45):             r -= 1
+s806643320.py(46):             ma = max(ma, MA[r-1])
+s806643320.py(47):         l >>= 1
+s806643320.py(48):         r >>= 1
+s806643320.py(40):     while l < r:
+s806643320.py(49):     return ma
+s806643320.py(53):     l2 = rangemax(0, l1)
+ --- modulename: s806643320, funcname: rangemax
+s806643320.py(37):     l = a + (1<<NN)
+s806643320.py(38):     r = b + (1<<NN)
+s806643320.py(39):     ma = -1
+s806643320.py(40):     while l < r:
+s806643320.py(49):     return ma
+s806643320.py(54):     r1 = rangemin(i+1, N+1)
+ --- modulename: s806643320, funcname: rangemin
+s806643320.py(23):     l = a + (1<<NN)
+s806643320.py(24):     r = b + (1<<NN)
+s806643320.py(25):     mi = N
+s806643320.py(26):     while l < r:
+s806643320.py(27):         if l%2:
+s806643320.py(30):         if r%2:
+s806643320.py(33):         l >>= 1
+s806643320.py(34):         r >>= 1
+s806643320.py(26):     while l < r:
+s806643320.py(27):         if l%2:
+s806643320.py(28):             mi = min(mi, MI[l-1])
+s806643320.py(29):             l += 1
+s806643320.py(30):         if r%2:
+s806643320.py(33):         l >>= 1
+s806643320.py(34):         r >>= 1
+s806643320.py(26):     while l < r:
+s806643320.py(35):     return mi
+s806643320.py(55):     r2 = rangemin(r1+1,N+1)
+ --- modulename: s806643320, funcname: rangemin
+s806643320.py(23):     l = a + (1<<NN)
+s806643320.py(24):     r = b + (1<<NN)
+s806643320.py(25):     mi = N
+s806643320.py(26):     while l < r:
+s806643320.py(35):     return mi
+s806643320.py(56):     pre = ans
+s806643320.py(57):     ans += (P[i]+1) * ((i-l1) * (r2-r1) + (l1-l2) * (r1-i))
+s806643320.py(58):     update(i, i)
+ --- modulename: s806643320, funcname: update
+s806643320.py(12):     i = (1<<NN) - 1 + a
+s806643320.py(13):     MI[i] = x
+s806643320.py(14):     MA[i] = x
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(20):             break
+s806643320.py(51): for i in INV[::-1]:
+s806643320.py(52):     l1 = rangemax(0, i)
+ --- modulename: s806643320, funcname: rangemax
+s806643320.py(37):     l = a + (1<<NN)
+s806643320.py(38):     r = b + (1<<NN)
+s806643320.py(39):     ma = -1
+s806643320.py(40):     while l < r:
+s806643320.py(49):     return ma
+s806643320.py(53):     l2 = rangemax(0, l1)
+ --- modulename: s806643320, funcname: rangemax
+s806643320.py(37):     l = a + (1<<NN)
+s806643320.py(38):     r = b + (1<<NN)
+s806643320.py(39):     ma = -1
+s806643320.py(40):     while l < r:
+s806643320.py(49):     return ma
+s806643320.py(54):     r1 = rangemin(i+1, N+1)
+ --- modulename: s806643320, funcname: rangemin
+s806643320.py(23):     l = a + (1<<NN)
+s806643320.py(24):     r = b + (1<<NN)
+s806643320.py(25):     mi = N
+s806643320.py(26):     while l < r:
+s806643320.py(27):         if l%2:
+s806643320.py(28):             mi = min(mi, MI[l-1])
+s806643320.py(29):             l += 1
+s806643320.py(30):         if r%2:
+s806643320.py(33):         l >>= 1
+s806643320.py(34):         r >>= 1
+s806643320.py(26):     while l < r:
+s806643320.py(27):         if l%2:
+s806643320.py(28):             mi = min(mi, MI[l-1])
+s806643320.py(29):             l += 1
+s806643320.py(30):         if r%2:
+s806643320.py(33):         l >>= 1
+s806643320.py(34):         r >>= 1
+s806643320.py(26):     while l < r:
+s806643320.py(35):     return mi
+s806643320.py(55):     r2 = rangemin(r1+1,N+1)
+ --- modulename: s806643320, funcname: rangemin
+s806643320.py(23):     l = a + (1<<NN)
+s806643320.py(24):     r = b + (1<<NN)
+s806643320.py(25):     mi = N
+s806643320.py(26):     while l < r:
+s806643320.py(27):         if l%2:
+s806643320.py(30):         if r%2:
+s806643320.py(33):         l >>= 1
+s806643320.py(34):         r >>= 1
+s806643320.py(26):     while l < r:
+s806643320.py(27):         if l%2:
+s806643320.py(28):             mi = min(mi, MI[l-1])
+s806643320.py(29):             l += 1
+s806643320.py(30):         if r%2:
+s806643320.py(33):         l >>= 1
+s806643320.py(34):         r >>= 1
+s806643320.py(26):     while l < r:
+s806643320.py(35):     return mi
+s806643320.py(56):     pre = ans
+s806643320.py(57):     ans += (P[i]+1) * ((i-l1) * (r2-r1) + (l1-l2) * (r1-i))
+s806643320.py(58):     update(i, i)
+ --- modulename: s806643320, funcname: update
+s806643320.py(12):     i = (1<<NN) - 1 + a
+s806643320.py(13):     MI[i] = x
+s806643320.py(14):     MA[i] = x
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(20):             break
+s806643320.py(51): for i in INV[::-1]:
+s806643320.py(52):     l1 = rangemax(0, i)
+ --- modulename: s806643320, funcname: rangemax
+s806643320.py(37):     l = a + (1<<NN)
+s806643320.py(38):     r = b + (1<<NN)
+s806643320.py(39):     ma = -1
+s806643320.py(40):     while l < r:
+s806643320.py(41):         if l%2:
+s806643320.py(44):         if r%2:
+s806643320.py(47):         l >>= 1
+s806643320.py(48):         r >>= 1
+s806643320.py(40):     while l < r:
+s806643320.py(41):         if l%2:
+s806643320.py(44):         if r%2:
+s806643320.py(45):             r -= 1
+s806643320.py(46):             ma = max(ma, MA[r-1])
+s806643320.py(47):         l >>= 1
+s806643320.py(48):         r >>= 1
+s806643320.py(40):     while l < r:
+s806643320.py(49):     return ma
+s806643320.py(53):     l2 = rangemax(0, l1)
+ --- modulename: s806643320, funcname: rangemax
+s806643320.py(37):     l = a + (1<<NN)
+s806643320.py(38):     r = b + (1<<NN)
+s806643320.py(39):     ma = -1
+s806643320.py(40):     while l < r:
+s806643320.py(41):         if l%2:
+s806643320.py(44):         if r%2:
+s806643320.py(45):             r -= 1
+s806643320.py(46):             ma = max(ma, MA[r-1])
+s806643320.py(47):         l >>= 1
+s806643320.py(48):         r >>= 1
+s806643320.py(40):     while l < r:
+s806643320.py(49):     return ma
+s806643320.py(54):     r1 = rangemin(i+1, N+1)
+ --- modulename: s806643320, funcname: rangemin
+s806643320.py(23):     l = a + (1<<NN)
+s806643320.py(24):     r = b + (1<<NN)
+s806643320.py(25):     mi = N
+s806643320.py(26):     while l < r:
+s806643320.py(27):         if l%2:
+s806643320.py(28):             mi = min(mi, MI[l-1])
+s806643320.py(29):             l += 1
+s806643320.py(30):         if r%2:
+s806643320.py(33):         l >>= 1
+s806643320.py(34):         r >>= 1
+s806643320.py(26):     while l < r:
+s806643320.py(35):     return mi
+s806643320.py(55):     r2 = rangemin(r1+1,N+1)
+ --- modulename: s806643320, funcname: rangemin
+s806643320.py(23):     l = a + (1<<NN)
+s806643320.py(24):     r = b + (1<<NN)
+s806643320.py(25):     mi = N
+s806643320.py(26):     while l < r:
+s806643320.py(35):     return mi
+s806643320.py(56):     pre = ans
+s806643320.py(57):     ans += (P[i]+1) * ((i-l1) * (r2-r1) + (l1-l2) * (r1-i))
+s806643320.py(58):     update(i, i)
+ --- modulename: s806643320, funcname: update
+s806643320.py(12):     i = (1<<NN) - 1 + a
+s806643320.py(13):     MI[i] = x
+s806643320.py(14):     MA[i] = x
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(16):         i = (i-1) // 2
+s806643320.py(17):         MI[i] = min(MI[2*i+1], MI[2*i+2])
+s806643320.py(18):         MA[i] = max(MA[2*i+1], MA[2*i+2])
+s806643320.py(19):         if i == 0:
+s806643320.py(20):             break
+s806643320.py(51): for i in INV[::-1]:
+s806643320.py(60): print(ans)
+5
