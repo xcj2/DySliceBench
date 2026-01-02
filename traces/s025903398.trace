@@ -1,0 +1,109 @@
+ --- modulename: s025903398, funcname: <module>
+s025903398.py(16): from heapq import heapify, heappop, heappush, heappushpop
+s025903398.py(17): import sys
+s025903398.py(18): read = sys.stdin.readline
+s025903398.py(21): def read_ints():
+s025903398.py(25): def read_tuple(H):
+s025903398.py(35): class PriorityQueue:
+ --- modulename: s025903398, funcname: PriorityQueue
+s025903398.py(35): class PriorityQueue:
+s025903398.py(36):     def __init__(self, heap):
+s025903398.py(43):     def push(self, item):
+s025903398.py(46):     def pop(self):
+s025903398.py(49):     def pushpop(self, item):
+s025903398.py(52):     def __call__(self):
+s025903398.py(55):     def __len__(self):
+s025903398.py(59): N, M = read_ints()
+ --- modulename: s025903398, funcname: read_ints
+s025903398.py(22):     return list(map(int, read().split()))
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s025903398.py(60): AB = read_tuple(N)
+ --- modulename: s025903398, funcname: read_tuple
+s025903398.py(29):     ret = []
+s025903398.py(30):     for _ in range(H):
+s025903398.py(31):         ret.append(tuple(map(int, read().split())))
+s025903398.py(30):     for _ in range(H):
+s025903398.py(31):         ret.append(tuple(map(int, read().split())))
+s025903398.py(30):     for _ in range(H):
+s025903398.py(31):         ret.append(tuple(map(int, read().split())))
+s025903398.py(30):     for _ in range(H):
+s025903398.py(32):     return ret
+s025903398.py(61): AB.sort()
+s025903398.py(63): q = PriorityQueue([])
+ --- modulename: s025903398, funcname: __init__
+s025903398.py(40):         self.heap = heap
+s025903398.py(41):         heapify(self.heap)
+s025903398.py(64): l = 0  # ABのindex
+s025903398.py(65): ans = 0
+s025903398.py(67): for i in range(1, M + 1):
+s025903398.py(68):     for j in range(l, N):
+s025903398.py(69):         a, b = AB[j]
+s025903398.py(70):         if j == N - 1:
+s025903398.py(72):         if a > i:  # i日以内に支払われない # こういう書き方はbugの原因になるから控えよう
+s025903398.py(73):             l = j
+s025903398.py(74):             break
+s025903398.py(76):     if q:  # qが空のときはしょうがないのでskip
+ --- modulename: s025903398, funcname: __len__
+s025903398.py(56):         return len(self.heap)
+s025903398.py(67): for i in range(1, M + 1):
+s025903398.py(68):     for j in range(l, N):
+s025903398.py(69):         a, b = AB[j]
+s025903398.py(70):         if j == N - 1:
+s025903398.py(72):         if a > i:  # i日以内に支払われない # こういう書き方はbugの原因になるから控えよう
+s025903398.py(75):         q.push(-b)  # pythonでは最小ヒープのため
+ --- modulename: s025903398, funcname: push
+s025903398.py(44):         heappush(self.heap, item)
+s025903398.py(68):     for j in range(l, N):
+s025903398.py(69):         a, b = AB[j]
+s025903398.py(70):         if j == N - 1:
+s025903398.py(72):         if a > i:  # i日以内に支払われない # こういう書き方はbugの原因になるから控えよう
+s025903398.py(73):             l = j
+s025903398.py(74):             break
+s025903398.py(76):     if q:  # qが空のときはしょうがないのでskip
+ --- modulename: s025903398, funcname: __len__
+s025903398.py(56):         return len(self.heap)
+s025903398.py(77):         ans -= q.pop()
+ --- modulename: s025903398, funcname: pop
+s025903398.py(47):         return heappop(self.heap)
+s025903398.py(67): for i in range(1, M + 1):
+s025903398.py(68):     for j in range(l, N):
+s025903398.py(69):         a, b = AB[j]
+s025903398.py(70):         if j == N - 1:
+s025903398.py(72):         if a > i:  # i日以内に支払われない # こういう書き方はbugの原因になるから控えよう
+s025903398.py(73):             l = j
+s025903398.py(74):             break
+s025903398.py(76):     if q:  # qが空のときはしょうがないのでskip
+ --- modulename: s025903398, funcname: __len__
+s025903398.py(56):         return len(self.heap)
+s025903398.py(67): for i in range(1, M + 1):
+s025903398.py(68):     for j in range(l, N):
+s025903398.py(69):         a, b = AB[j]
+s025903398.py(70):         if j == N - 1:
+s025903398.py(72):         if a > i:  # i日以内に支払われない # こういう書き方はbugの原因になるから控えよう
+s025903398.py(75):         q.push(-b)  # pythonでは最小ヒープのため
+ --- modulename: s025903398, funcname: push
+s025903398.py(44):         heappush(self.heap, item)
+s025903398.py(68):     for j in range(l, N):
+s025903398.py(69):         a, b = AB[j]
+s025903398.py(70):         if j == N - 1:
+s025903398.py(71):             l = N
+s025903398.py(72):         if a > i:  # i日以内に支払われない # こういう書き方はbugの原因になるから控えよう
+s025903398.py(75):         q.push(-b)  # pythonでは最小ヒープのため
+ --- modulename: s025903398, funcname: push
+s025903398.py(44):         heappush(self.heap, item)
+s025903398.py(68):     for j in range(l, N):
+s025903398.py(76):     if q:  # qが空のときはしょうがないのでskip
+ --- modulename: s025903398, funcname: __len__
+s025903398.py(56):         return len(self.heap)
+s025903398.py(77):         ans -= q.pop()
+ --- modulename: s025903398, funcname: pop
+s025903398.py(47):         return heappop(self.heap)
+s025903398.py(67): for i in range(1, M + 1):
+s025903398.py(91): print(ans)
+5
