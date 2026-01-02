@@ -1,0 +1,45 @@
+def i1():
+ return int(input())
+def i2():
+ return [int(i) for i in input().split()]
+[n,m]=i2()
+p=i2()
+
+import sys
+sys.setrecursionlimit(10000)
+
+par=[i for i in range(n)]
+rank=[0 for i in range(n)]
+
+def rt(x):
+ if par[x]==x:
+    return x
+ else:
+    par[x]=rt(par[x])
+    return par[x]
+
+def un(x,y):
+    x=rt(x)
+    y=rt(y)
+    if x==y:
+       return
+    else:
+       if rank[x]<rank[y]:
+          par[x]=y
+       else:
+          par[y]=x
+          if rank[x]==rank[y]:
+             rank[x]+=1
+xy=[]
+for i in range(m):
+ xy.append(i2())
+ 
+for i,j in xy:
+ un(i-1,j-1)
+for i,j in xy:
+ un(i-1,j-1)
+s=0
+for i in range(n):
+ if par[i]==par[p[i]-1]:
+   s+=1
+print(s)
