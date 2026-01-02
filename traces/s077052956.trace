@@ -1,0 +1,207 @@
+ --- modulename: s077052956, funcname: <module>
+s077052956.py(1): from heapq import heappush, heappop
+s077052956.py(2): import sys
+s077052956.py(3): from operator import itemgetter
+s077052956.py(4): input = sys.stdin.readline
+s077052956.py(5): sys.setrecursionlimit(10**9)
+s077052956.py(6): class UnionFind():
+ --- modulename: s077052956, funcname: UnionFind
+s077052956.py(6): class UnionFind():
+s077052956.py(7):     def __init__(self, n):
+s077052956.py(10):     def root(self, x):
+s077052956.py(17):     def unite(self, x, y):
+s077052956.py(25):     def same(self, x, y):
+s077052956.py(28):     def size(self, x):
+s077052956.py(31): n = int(input())
+ --- modulename: codecs, funcname: getstate
+codecs.py(333):         return (self.buffer, 0)
+ --- modulename: codecs, funcname: decode
+codecs.py(321):         data = self.buffer + input
+codecs.py(322):         (result, consumed) = self._buffer_decode(data, self.errors, final)
+codecs.py(324):         self.buffer = data[consumed:]
+codecs.py(325):         return result
+s077052956.py(32): points = []
+s077052956.py(33): for i in range(n):
+s077052956.py(34):     x, y = map(int, input().split())
+s077052956.py(35):     points.append([x, y, i])
+s077052956.py(33): for i in range(n):
+s077052956.py(34):     x, y = map(int, input().split())
+s077052956.py(35):     points.append([x, y, i])
+s077052956.py(33): for i in range(n):
+s077052956.py(34):     x, y = map(int, input().split())
+s077052956.py(35):     points.append([x, y, i])
+s077052956.py(33): for i in range(n):
+s077052956.py(37): edge = []
+s077052956.py(38): points.sort(key=itemgetter(0))
+s077052956.py(39): for i in range(1, n):
+s077052956.py(40):     dist = points[i][0] - points[i-1][0]
+s077052956.py(41):     edge.append((points[i][2], points[i-1][2], dist))
+s077052956.py(42):     edge.append((points[i-1][2], points[i][2], dist))
+s077052956.py(39): for i in range(1, n):
+s077052956.py(40):     dist = points[i][0] - points[i-1][0]
+s077052956.py(41):     edge.append((points[i][2], points[i-1][2], dist))
+s077052956.py(42):     edge.append((points[i-1][2], points[i][2], dist))
+s077052956.py(39): for i in range(1, n):
+s077052956.py(44): points.sort(key=itemgetter(1))
+s077052956.py(45): for i in range(1, n):
+s077052956.py(46):     dist = points[i][1] - points[i-1][1]
+s077052956.py(47):     edge.append((points[i][2], points[i-1][2], dist))
+s077052956.py(48):     edge.append((points[i-1][2], points[i][2], dist))
+s077052956.py(45): for i in range(1, n):
+s077052956.py(46):     dist = points[i][1] - points[i-1][1]
+s077052956.py(47):     edge.append((points[i][2], points[i-1][2], dist))
+s077052956.py(48):     edge.append((points[i-1][2], points[i][2], dist))
+s077052956.py(45): for i in range(1, n):
+s077052956.py(51): edge.sort(key=itemgetter(2))
+s077052956.py(52): uf = UnionFind(n)
+ --- modulename: s077052956, funcname: __init__
+s077052956.py(8):         self.par = [-1 for i in range(n)]
+ --- modulename: s077052956, funcname: <listcomp>
+s077052956.py(8):         self.par = [-1 for i in range(n)]
+s077052956.py(8):         self.par = [-1 for i in range(n)]
+s077052956.py(8):         self.par = [-1 for i in range(n)]
+s077052956.py(8):         self.par = [-1 for i in range(n)]
+s077052956.py(53): ans = 0
+s077052956.py(54): for u, v, cost in edge:
+s077052956.py(55):     if not uf.same(u, v):
+ --- modulename: s077052956, funcname: same
+s077052956.py(26):         return self.root(x) == self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(56):         ans += cost
+s077052956.py(57):         uf.unite(u, v)
+ --- modulename: s077052956, funcname: unite
+s077052956.py(18):         x, y = self.root(x), self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(19):         if x != y:
+s077052956.py(20):             if self.par[x] > self.par[y]: # merge technique
+s077052956.py(22):             self.par[x] += self.par[y]
+s077052956.py(23):             self.par[y] = x
+s077052956.py(54): for u, v, cost in edge:
+s077052956.py(55):     if not uf.same(u, v):
+ --- modulename: s077052956, funcname: same
+s077052956.py(26):         return self.root(x) == self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(14):             self.par[x] = self.root(self.par[x]) # contraction
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(15):             return self.par[x]
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(54): for u, v, cost in edge:
+s077052956.py(55):     if not uf.same(u, v):
+ --- modulename: s077052956, funcname: same
+s077052956.py(26):         return self.root(x) == self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(56):         ans += cost
+s077052956.py(57):         uf.unite(u, v)
+ --- modulename: s077052956, funcname: unite
+s077052956.py(18):         x, y = self.root(x), self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(19):         if x != y:
+s077052956.py(20):             if self.par[x] > self.par[y]: # merge technique
+s077052956.py(22):             self.par[x] += self.par[y]
+s077052956.py(23):             self.par[y] = x
+s077052956.py(54): for u, v, cost in edge:
+s077052956.py(55):     if not uf.same(u, v):
+ --- modulename: s077052956, funcname: same
+s077052956.py(26):         return self.root(x) == self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(14):             self.par[x] = self.root(self.par[x]) # contraction
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(15):             return self.par[x]
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(54): for u, v, cost in edge:
+s077052956.py(55):     if not uf.same(u, v):
+ --- modulename: s077052956, funcname: same
+s077052956.py(26):         return self.root(x) == self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(14):             self.par[x] = self.root(self.par[x]) # contraction
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(15):             return self.par[x]
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(14):             self.par[x] = self.root(self.par[x]) # contraction
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(15):             return self.par[x]
+s077052956.py(54): for u, v, cost in edge:
+s077052956.py(55):     if not uf.same(u, v):
+ --- modulename: s077052956, funcname: same
+s077052956.py(26):         return self.root(x) == self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(14):             self.par[x] = self.root(self.par[x]) # contraction
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(15):             return self.par[x]
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(14):             self.par[x] = self.root(self.par[x]) # contraction
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(15):             return self.par[x]
+s077052956.py(54): for u, v, cost in edge:
+s077052956.py(55):     if not uf.same(u, v):
+ --- modulename: s077052956, funcname: same
+s077052956.py(26):         return self.root(x) == self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(14):             self.par[x] = self.root(self.par[x]) # contraction
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(15):             return self.par[x]
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(54): for u, v, cost in edge:
+s077052956.py(55):     if not uf.same(u, v):
+ --- modulename: s077052956, funcname: same
+s077052956.py(26):         return self.root(x) == self.root(y)
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(14):             self.par[x] = self.root(self.par[x]) # contraction
+ --- modulename: s077052956, funcname: root
+s077052956.py(11):         if self.par[x] < 0:
+s077052956.py(12):             return x
+s077052956.py(15):             return self.par[x]
+s077052956.py(54): for u, v, cost in edge:
+s077052956.py(58): print(ans)
+3
