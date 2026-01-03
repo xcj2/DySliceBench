@@ -1,0 +1,57 @@
+import sys
+
+# sys.stdin = open('d1.in')
+
+
+def read_int_list():
+    return list(map(int, input().split()))
+
+
+def read_str_list():
+    return input().split()
+
+
+def read_int():
+    return int(input())
+
+
+def read_str():
+    return input()
+
+
+M = 10 ** 9 + 7
+
+
+def main():
+    n = read_int()
+    a = [read_str(), read_str()]
+    res = 1
+    last_vertical = None
+    i = 0
+    while i < n:
+
+        vertical = a[0][i] == a[1][i]
+        if i == 0:
+            if vertical:
+                res = 3
+            else:
+                res = 6
+        else:
+            if vertical:
+                if last_vertical:
+                    res *= 2
+            else:
+                if last_vertical:
+                    res *= 2
+                else:
+                    res *= 3
+        last_vertical = vertical
+        if vertical:
+            i += 1
+        else:
+            i += 2
+        res %= M
+    print(res)
+
+
+main()
