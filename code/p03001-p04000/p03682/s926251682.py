@@ -1,0 +1,64 @@
+from operator import itemgetter
+import sys
+input = sys.stdin.buffer.readline
+sys.setrecursionlimit(10 ** 7)
+
+
+class UF_tree:
+    def __init__(self, n):
+        self.root = [-1] * (n + 1)  # -1ならそのノードが根,で絶対値が木の要素数
+        self.rank = [0] * (n + 1)
+
+    def find(self, x):  # xの根となる要素番号を返す
+        if self.root[x] < 0:
+            return x
+        else:
+            self.root[x] = self.find(self.root[x])
+            return self.root[x]
+
+    def isSame(self, x, y):
+        return self.find(x) == self.find(y)
+
+    def unite(self, x, y):
+        x = self.find(x)
+        y = self.find(y)
+        if x == y:
+            return
+        elif self.rank[x] < self.rank[y]:
+            self.root[y] += self.root[x]
+            self.root[x] = y
+        else:
+            self.root[x] += self.root[y]
+            self.root[y] = x
+            if self.rank[x] == self.rank[y]:
+                self.rank[x] += 1
+
+    def getNodeLen(self, x):
+        return -self.root[self.find(x)]
+
+
+if __name__ == "__main__":
+    N = int(input())
+    XY = []
+    for i in range(N):
+        x, y = map(int, input().split())
+        XY.append((x, y, i))
+
+    edge = []
+    XY.sort()
+    for (x1, _, i), (x2, _, j) in zip(XY[:-1], XY[1:]):
+        edge.append((x2 - x1, i, j))
+
+    XY.sort(key=itemgetter(1))
+    for (_, x1, i), (_, x2, j) in zip(XY[:-1], XY[1:]):
+        edge.append((x2 - x1, i, j))
+
+    uf = UF_tree(N + 10)
+    edge.sort()
+    ans = 0
+    for cost, x, y in edge:
+        if uf.isSame(x, y):
+            continue
+        uf.unite(x, y)
+        ans += cost
+    print(ans)
