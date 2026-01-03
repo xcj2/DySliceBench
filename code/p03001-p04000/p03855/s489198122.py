@@ -1,0 +1,59 @@
+# 参考URL
+# https://note.nkmk.me/python-union-find/
+class UnionFind():
+    def __init__(self, n):
+        self.n = n
+        self.parents = [-1] * n
+
+    def find(self, x):
+        if self.parents[x] < 0:
+            return x
+        else:
+            self.parents[x] = self.find(self.parents[x])
+            return self.parents[x]
+
+    def union(self, x, y):
+        x = self.find(x)
+        y = self.find(y)
+
+        if x == y:
+            return
+
+        if self.parents[x] > self.parents[y]:
+            x, y = y, x
+
+        self.parents[x] += self.parents[y]
+        self.parents[y] = x
+
+    def same(self, x, y):
+        return self.find(x) == self.find(y)
+
+    def members(self, x):
+        root = self.find(x)
+        return [i for i in range(self.n) if self.find(i) == root]
+
+
+N, K, L = map(int, input().split())
+
+uf_road = UnionFind(N)
+uf_train = UnionFind(N)
+
+for _ in range(K):
+    a, b = map(int, input().split())
+    uf_road.union(a-1, b-1)
+    
+for _ in range(L):
+    a, b = map(int, input().split())
+    uf_train.union(a-1, b-1)
+
+from collections import defaultdict
+
+d = defaultdict(int)
+for i in range(N):
+    d[(uf_road.find(i), uf_train.find(i))]+=1
+    
+ans = []
+for i in range(N):
+    ans.append(d[(uf_road.find(i), uf_train.find(i))])
+
+print(' '.join(map(str, ans)))
