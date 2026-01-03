@@ -1,0 +1,102 @@
+#!usr/bin/env python3
+from collections import defaultdict
+from collections import deque
+from heapq import heappush, heappop
+import sys
+import math
+import bisect
+import random
+def LI(): return list(map(int, sys.stdin.readline().split()))
+def I(): return int(sys.stdin.readline())
+def LS():return list(map(list, sys.stdin.readline().split()))
+def S(): return list(sys.stdin.readline())[:-1]
+def IR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = I()
+    return l
+def LIR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = LI()
+    return l
+def SR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = S()
+    return l
+def LSR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = LS()
+    return l
+sys.setrecursionlimit(1000000)
+mod = 1000000007
+
+#A
+def A():
+    return
+
+#B
+def B():
+    return
+
+#C
+def C():
+    return
+
+#D
+def D():
+    n = I()
+    a = LI()
+    f = defaultdict(int)
+    for i in a:
+        f[i-1] += 1
+        f[i] += 1
+        f[i+1] += 1
+    print(max(f.values()))
+    return
+
+#E
+def E():
+    n = I()
+    a = LI()
+    f = defaultdict(int)
+    f[0] = 4
+    for i in a:
+        f[i] += 1
+    f = list(map(list, f.items()))
+    f.sort(key = lambda x:-x[0])
+    ans = 1
+    k = 0
+    for i,j in f:
+        if j >= 4 and k == 0:
+            print(i*i)
+            quit()
+        if j >= 2:
+            k += 1
+            ans *= i
+        if k == 2:
+            print(ans)
+            quit()
+    return
+
+#F
+def F():
+    return
+
+#G
+def G():
+    return
+
+#H
+def H():
+    return
+
+#I
+def I_():
+    return
+
+#J
+def J():
+    return
+
+#Solve
+if __name__ == "__main__":
+    E()
