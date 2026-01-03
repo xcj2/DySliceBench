@@ -1,0 +1,203 @@
+import sys
+import math
+import copy
+from heapq import heappush, heappop, heapify
+from functools import cmp_to_key
+from bisect import bisect_left, bisect_right
+from collections import defaultdict, deque, Counter
+# sys.setrecursionlimit(1000000)
+
+# input aliases
+input = sys.stdin.readline
+getS = lambda: input().strip()
+getN = lambda: int(input())
+getList = lambda: list(map(int, input().split()))
+getZList = lambda: [int(x) - 1 for x in input().split()]
+
+INF = float("inf")
+MOD = 10**9 + 7
+divide = lambda x: pow(x, MOD-2, MOD)
+
+def nck(n, k, kaijyo):
+    return (npk(n, k, kaijyo) * divide(kaijyo[k])) % MOD
+
+def npk(n, k, kaijyo):
+    if k == 0 or k == n:
+        return n % MOD
+    return (kaijyo[n] * divide(kaijyo[n-k])) % MOD
+
+def fact_and_inv(SIZE):
+    inv = [0] * SIZE  # inv[j] = j^{-1} mod MOD
+    fac = [0] * SIZE  # fac[j] = j! mod MOD
+    finv = [0] * SIZE  # finv[j] = (j!)^{-1} mod MOD
+    inv[1] = 1
+    fac[0] = fac[1] = 1
+    finv[0] = finv[1] = 1
+    for i in range(2, SIZE):
+        inv[i] = MOD - (MOD // i) * inv[MOD % i] % MOD
+        fac[i] = fac[i - 1] * i % MOD
+        finv[i] = finv[i - 1] * inv[i] % MOD
+
+    return fac, finv
+
+def renritsu(A, Y):
+    # example 2x + y = 3, x + 3y = 4
+    # A = [[2,1], [1,3]])
+    # Y = [[3],[4]] または [3,4]
+    A = np.matrix(A)
+    Y = np.matrix(Y)
+    Y = np.reshape(Y, (-1, 1))
+    X = np.linalg.solve(A, Y)
+
+    # [1.0, 1.0]
+    return X.flatten().tolist()[0]
+
+class TwoDimGrid:
+    # 2次元座標 -> 1次元
+    def __init__(self, h, w, wall="#"):
+        self.h = h
+        self.w = w
+        self.size = (h+2) * (w+2)
+        self.wall = wall
+        self.get_grid()
+        self.init_cost()
+
+    def get_grid(self):
+        grid = [self.wall * (self.w + 2)]
+        for i in range(self.h):
+            grid.append(self.wall + getS() + self.wall)
+
+        grid.append(self.wall * (self.w + 2))
+        self.grid = grid
+    def init_cost(self):
+        self.cost = [INF] * self.size
+
+    def pos(self, x, y):
+        # 壁も含めて0-indexed 元々の座標だけ考えると1-indexed
+        return y * (self.w + 2) + x
+    def getgrid(self, x, y):
+        return self.grid[y][x]
+    def get(self, x, y):
+        return self.cost[self.pos(x, y)]
+    def set(self, x, y, v):
+        self.cost[self.pos(x, y)] = v
+        return
+    def show(self):
+        for i in range(self.h+2):
+            print(self.cost[(self.w + 2) * i:(self.w + 2) * (i+1)])
+    def showsome(self, tgt):
+        for t in tgt:
+            print(t)
+        return
+    def showsomejoin(self, tgt):
+        for t in tgt:
+            print("".join(t))
+        return
+
+    def search(self, start, goal):
+        grid = self.grid
+        cy, cx = start
+        move = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        warp = []
+        for i in range(-2, 3):
+            for j in range(-2, 3):
+                if (i, j) not in move and (i != 0 or j != 0):
+                    warp.append((i, j))
+        # print(warp)
+        d = deque()
+        wd = deque()
+        self.set(start[1], start[0], 0)
+        d.append((0, cx, cy))
+        while (d or wd):
+            # print(len(d), len(wd))
+            if d:
+                cc, cx, cy = d.popleft()
+            else:
+                cc, cx, cy = wd.popleft()
+            # print(cc, cx, cy)
+            if self.get(cx, cy) < cc:
+                continue
+            for dx, dy in move:
+
+                nx, ny = dx + cx, dy + cy
+                if self.getgrid(nx, ny) == "#":
+                    continue
+                if self.get(nx, ny) > cc:
+                    self.set(nx, ny, cc)
+                    d.append((cc, nx, ny))
+
+            for dx, dy in warp:
+                nx, ny = dx + cx, dy + cy
+                if nx < 0 or nx > self.w + 1 or ny < 0 or ny > self.h + 1:
+                    continue
+                if self.getgrid(nx, ny) == "#":
+                    continue
+                if self.get(nx, ny) > cc + 1:
+                    self.set(nx, ny, cc + 1)
+                    wd.append((cc + 1, nx, ny))
+        # print(warp)
+        # self.show()
+        # self.showsomejoin(self.grid)
+        ans = self.get(goal[1], goal[0])
+        if ans == INF:
+            print(-1)
+            return
+        else:
+            print(ans)
+            return
+
+def solve():
+    n = getN()
+    anums = getList()
+    bnums = getList()
+    if n == 1:
+        if anums[0] == bnums[0]:
+            print(1)
+        else:
+            print(0)
+        return
+    fixed = [0 for i in range(n)]
+    ans = [INF for i in range(n)]
+    fixed[0] = 1
+    fixed[-1] = 1
+    ans[0] = anums[0]
+    ans[-1] = bnums[-1]
+    for i in range(n-1):
+        if anums[i] != anums[i+1]:
+            if fixed[i+1] and ans[i+1] != anums[i+1]:
+                print(0)
+                return
+            if ans[i+1] < anums[i+1]:
+                print(0)
+                return
+            fixed[i+1] = 1
+        ans[i+1] = min(ans[i+1], anums[i+1])
+
+    for i in range(n-1):
+        if bnums[i] != bnums[i+1]:
+            if fixed[i] and ans[i] != bnums[i]:
+                print(0)
+                return
+            if ans[i] < bnums[i]:
+                print(0)
+                return
+            fixed[i] = 1
+        ans[i] = min(ans[i], bnums[i])
+
+    a = 1
+    for i in range(n):
+        if not fixed[i]:
+            a *= ans[i]
+            a %= MOD
+
+    print(a)
+
+def main():
+    n = getN()
+    for _ in range(n):
+        solve()
+
+    return
+if __name__ == "__main__":
+    # main()
+    solve()
