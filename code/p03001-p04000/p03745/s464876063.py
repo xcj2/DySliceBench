@@ -1,0 +1,56 @@
+import sys
+from functools import lru_cache, cmp_to_key
+from heapq import merge, heapify, heappop, heappush
+from math import *
+# import math
+from collections import defaultdict as dd, deque, Counter as C
+from itertools import combinations as comb, permutations as perm
+from bisect import bisect_left as bl, bisect_right as br, bisect
+from time import perf_counter
+from fractions import Fraction
+# sys.setrecursionlimit(int(pow(10, 2)))
+#sys.stdin = open("input.txt", "r")
+#sys.stdout = open("output.txt", "w")
+mod = int(pow(10, 9) + 7)
+mod2 = 998244353
+def data(): return sys.stdin.readline().strip()
+def out(*var, end="\n"): sys.stdout.write(' '.join(map(str, var))+end)
+def l(): return list(sp())
+def sl(): return list(ssp())
+def sp(): return map(int, data().split())
+def ssp(): return map(str, data().split())
+def l1d(n, val=0): return [val for i in range(n)]
+def l2d(n, m, val=0): return [l1d(n, val) for j in range(m)]
+
+
+
+
+
+# @lru_cache(None)
+
+# def seive():
+#     prime=[1 for i in range(10**6+1)]
+#     prime[0]=0
+#     prime[1]=0
+#     for i in range(10**6+1):
+#         if(prime[i]):
+#             for j in range(2*i,10**6+1,i):
+#                 prime[j]=0
+
+
+n=int(input())
+a=list(map(int,input().split()))
+ans=1
+temp=0
+for i in range(1,n):
+  if a[i-1]<a[i] and temp==0:
+    temp=1
+  elif a[i-1]>a[i] and temp==0:
+    temp=2
+  elif a[i-1]>a[i] and temp==1:
+    temp=0
+    ans=ans+1
+  elif a[i-1]<a[i] and temp==2:
+    temp=0
+    ans=ans+1
+print(ans)
