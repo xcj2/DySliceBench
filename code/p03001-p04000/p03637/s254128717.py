@@ -1,0 +1,41 @@
+#dpでできないかな？
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(10**7)
+from collections import Counter, deque
+from collections import defaultdict
+from itertools import combinations, permutations, accumulate, groupby, product
+from bisect import bisect_left,bisect_right
+from heapq import heapify, heappop, heappush
+from math import floor, ceil,pi
+from operator import itemgetter
+def I(): return int(input())
+def MI(): return map(int, input().split())
+def LI(): return list(map(int, input().split()))
+def LI2(): return [int(input()) for i in range(n)]
+def MXI(): return [[LI()]for i in range(n)]
+def SI(): return input().rstrip()
+def printns(x): print('\n'.join(x))
+def printni(x): print('\n'.join(list(map(str,x))))
+inf = 10**17
+mod = 10**9 + 7
+
+n=I()
+lis=LI()
+cou1=0
+cou2=0
+cou4=0
+for i in range(n):
+    if lis[i]%4==0:
+        cou4+=1
+    elif lis[i]%2==0:
+        cou2+=1
+    else:
+        cou1+=1
+if cou4>=cou1:
+    print("Yes")
+elif cou4+1==cou1 and cou2==0:
+    print("Yes")
+else:
+    print("No")
+        
