@@ -1,0 +1,99 @@
+from collections import Counter,defaultdict,deque
+import sys
+import bisect
+import math
+import itertools
+import string
+import queue
+import copy
+from heapq import heappop, heappush
+input = sys.stdin.readline
+sys.setrecursionlimit(10**8)
+mod = 10**9+7
+
+def inp(): # n=1
+    return int(input())
+def inpm(): # x=1,y=2
+    return map(int,input().split())
+def inpl(): # a=[1,2,3,4,5,...,n]
+    return list(map(int, input().split()))
+def inpls(): # a=['1','2','3',...,'n']
+    return list(input().split())
+def inplm(n): # x=[] 複数行
+    return list(int(input()) for _ in range(n))
+def inpll(n): # [[1,1,1,1],[2,2,2,2],[3,3,3,3]]
+    return sorted([list(map(int, input().split())) for _ in range(n)])
+def sortx(x,n,k):
+    if k == 0:x.sort(key=lambda y:y[1,n])
+    else:x.sort(reversed=True, key=lambda y:y[1,n])
+def graph():
+    n=inp()
+    g=[[] for _ in range(n)]
+    for i in range(n):
+        a=inp()
+        a-=1
+        g[i].append(a)
+        g[a].append(i)
+    return n,g
+def graphm():
+    n,m=inpm()
+    g=[[] for _ in range(n)]
+    for _ in range(m):
+        a,b,w=inpm()
+        a-=1
+        b-=1
+        g[a].append((b,w))
+        g[b].append((a,w))
+    return n,m,g
+
+def dijkstra(s,n,g): # sからの最短距離 頂点数n
+    s -= 1
+    que = []
+    d = [10**15 for _ in range(n)]
+    d[s] = 0
+    heappush( que,(0,s) )
+    while len(que)>0:
+        p =  heappop(que)
+        v = p[1]
+        if d[v] < p[0]:
+            continue
+        for i in range(len(g[v])):
+            edge = g[v][i]
+            if d[edge[0]] > d[v] + edge[1]:
+                d[edge[0]] = d[v] + edge[1]
+                heappush( que,(d[edge[0]] , edge[0]) )
+    return d
+
+def main():
+    n=inp()
+    a=inpl()
+    a.sort()
+    if a[n-1]-a[0]>1 or a[n-1]>=n or a[0]<1:
+        print("No")
+        return
+    cnt=1
+    for i in range(n-1):
+        if a[i+1]==a[i]:
+            cnt+=1
+        else:
+            break
+    if cnt==n:
+        if a[0]==n-1 or n//a[n-1]>=2:
+            print("Yes")
+            return
+        else:
+            print("No")
+            return
+    if cnt>a[0]:
+        print("No")
+        return
+    if (a[n-1]-(n%a[n-1]))>cnt:        
+        print("No")
+        return
+    print("Yes")    
+
+
+if __name__ == "__main__":
+    main()
+
+
