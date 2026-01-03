@@ -1,0 +1,84 @@
+#!usr/bin/env python3
+from collections import defaultdict
+from collections import deque
+from heapq import heappush, heappop
+import sys
+import math
+import bisect
+import random
+def LI(): return list(map(int, sys.stdin.readline().split()))
+def I(): return int(sys.stdin.readline())
+def LS():return list(map(list, sys.stdin.readline().split()))
+def S(): return list(sys.stdin.readline())[:-1]
+def IR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = I()
+    return l
+def LIR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = LI()
+    return l
+def SR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = S()
+    return l
+def LSR(n):
+    l = [None for i in range(n)]
+    for i in range(n):l[i] = SR()
+    return l
+mod = 1000000007
+
+#A
+def A():
+    n = I()
+    print(n*800-200*(n//15))
+
+#B
+def B():
+    k = I()
+    ans = 0
+    for i in range(1,k):
+        for j in range(i+1,k+1):
+            if (i%2)^(j%2):
+                ans += 1
+    print(ans)
+
+#C
+def C():
+    x,t = LI()
+    print(max(0,x-t))
+
+#D
+def D():
+    n = I()
+    ans = 1
+    for i in range(1,n+1):
+        ans *= i
+        ans %= mod
+    print(ans)
+
+#E
+def E():
+    return
+
+#F
+def F():
+    return
+
+#G
+def G():
+    return
+
+#H
+def H():
+    return
+
+def J():
+    return
+
+def K():
+    return
+
+#Solve
+if __name__ == "__main__":
+    D()
