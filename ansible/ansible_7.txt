@@ -1,0 +1,121 @@
+test/units/modules/network/eos/eos_module.py:28:fixture_path = os.path.join(os.path.dirname(__file__), 'fixtures')
+test/units/modules/network/eos/eos_module.py:29:fixture_data = {}
+test/units/modules/network/eos/test_eos_vlans.py:16:    module = eos_vlans
+test/units/modules/network/eos/test_eos_vlans.py:18:    def setUp(self):
+test/units/modules/network/eos/test_eos_vlans.py:19:        super(TestEosVlansModule, self).setUp()
+test/units/modules/network/eos/test_eos_vlans.py:21:        self.mock_get_config = patch('ansible.module_utils.network.common.network.Config.get_config')
+test/units/modules/network/eos/test_eos_vlans.py:24:        self.mock_load_config = patch('ansible.module_utils.network.common.network.Config.load_config')
+test/units/modules/network/eos/test_eos_vlans.py:27:        self.mock_get_resource_connection_config = patch('ansible.module_utils.network.common.cfg.base.get_resource_connection')
+test/units/modules/network/eos/test_eos_vlans.py:30:        self.mock_get_resource_connection_facts = patch('ansible.module_utils.network.common.facts.facts.get_resource_connection')
+test/units/modules/network/eos/test_eos_vlans.py:33:        self.mock_edit_config = patch('ansible.module_utils.network.eos.providers.providers.CliProvider.edit_config')
+test/units/modules/network/eos/test_eos_vlans.py:34:        self.edit_config = self.mock_edit_config.start()
+test/units/modules/network/eos/test_eos_vlans.py:36:        self.mock_execute_show_command = patch('ansible.module_utils.network.eos.config.vlans.vlans.Vlans.get_vlans_facts')
+test/units/modules/network/eos/test_eos_vlans.py:101:    def test_eos_vlan_replaced(self):
+test/units/modules/network/eos/test_eos_vlans.py:103:        set_module_args(dict(
+test/units/modules/network/eos/test_eos_vlans.py:110:        commands = ['vlan 30', 'name thirty', 'state suspend']
+test/units/modules/network/eos/test_eos_vlans.py:111:        self.execute_module(changed=True, commands=commands)
+test/units/modules/network/eos/eos_module.py:52:    def execute_module(self, failed=False, changed=False, commands=None, inputs=None, sort=True, defaults=False, transport='cli'):
+test/units/modules/network/eos/eos_module.py:54:        self.load_fixtures(commands, transport=transport)
+test/units/modules/network/eos/test_eos_vlans.py:48:    def load_fixtures(self, commands=None, transport='cli'):
+test/units/modules/network/eos/eos_module.py:32:def load_fixture(name):
+test/units/modules/network/eos/eos_module.py:33:    path = os.path.join(fixture_path, name)
+test/units/modules/network/eos/eos_module.py:35:    if path in fixture_data:
+test/units/modules/network/eos/eos_module.py:38:    with open(path) as f:
+test/units/modules/network/eos/eos_module.py:39:        data = f.read()
+test/units/modules/network/eos/eos_module.py:41:    try:
+test/units/modules/network/eos/eos_module.py:43:    except Exception:
+test/units/modules/network/eos/eos_module.py:46:    fixture_data[path] = data
+test/units/modules/network/eos/eos_module.py:47:    return data
+test/units/modules/network/eos/test_eos_vlans.py:49:        file_cmd = load_fixture('eos_vlan_config.cfg').split()
+test/units/modules/network/eos/test_eos_vlans.py:50:        file_cmd_dict = {}
+test/units/modules/network/eos/test_eos_vlans.py:51:        for i in range(0, len(file_cmd), 2):
+test/units/modules/network/eos/test_eos_vlans.py:52:            if file_cmd[i] == 'vlan_id':
+test/units/modules/network/eos/test_eos_vlans.py:53:                y = int(file_cmd[i + 1])
+test/units/modules/network/eos/test_eos_vlans.py:56:            file_cmd_dict.update({file_cmd[i]: y})
+test/units/modules/network/eos/test_eos_vlans.py:51:        for i in range(0, len(file_cmd), 2):
+test/units/modules/network/eos/test_eos_vlans.py:52:            if file_cmd[i] == 'vlan_id':
+test/units/modules/network/eos/test_eos_vlans.py:55:                y = file_cmd[i + 1]
+test/units/modules/network/eos/test_eos_vlans.py:55:                y = file_cmd[i + 1]
+test/units/modules/network/eos/test_eos_vlans.py:56:            file_cmd_dict.update({file_cmd[i]: y})
+test/units/modules/network/eos/eos_module.py:56:        if failed:
+test/units/modules/network/eos/eos_module.py:60:            result = self.changed(changed)
+test/units/modules/network/eos/eos_module.py:93:    def changed(self, changed=False):
+test/units/modules/network/eos/eos_module.py:94:        with self.assertRaises(AnsibleExitJson) as exc:
+test/units/modules/network/eos/eos_module.py:95:            self.module.main()
+lib/ansible/modules/network/eos/eos_vlans.py:226:def main():
+lib/ansible/modules/network/eos/eos_vlans.py:232:    module = AnsibleModule(argument_spec=VlansArgs.argument_spec,
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:47:    def execute_module(self):
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:53:        result = {'changed': False}
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:54:        warnings = list()
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:55:        commands = list()
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:57:        existing_vlans_facts = self.get_vlans_facts()
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:58:        commands.extend(self.set_config(existing_vlans_facts))
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:74:    def set_config(self, existing_vlans_facts):
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:82:        want = self._module.params['config']
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:83:        have = existing_vlans_facts
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:87:    def set_state(self, want, have):
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:96:        state = self._module.params['state']
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:97:        want = param_list_to_dict(want, "vlan_id", remove_key=False)
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:98:        have = param_list_to_dict(have, "vlan_id", remove_key=False)
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:99:        if state == 'overridden':
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:101:        elif state == 'deleted':
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:103:        elif state == 'merged':
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:105:        elif state == 'replaced':
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:110:    def _state_replaced(want, have):
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:117:        commands = []
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:118:        for vlan_id, desired in want.items():
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:119:            if vlan_id in have:
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:122:                extant = dict()
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:122:                extant = dict()
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:124:            add_config = dict_diff(extant, desired)
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:125:            del_config = dict_diff(desired, extant)
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:127:            commands.extend(generate_commands(vlan_id, add_config, del_config))
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:206:def generate_commands(vlan_id, to_set, to_remove):
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:207:    commands = []
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:208:    if "vlan_id" in to_remove:
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:211:    for key, value in to_set.items():
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:212:        if key == "vlan_id" or value is None:
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:215:        commands.append("{0} {1}".format(key, value))
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:211:    for key, value in to_set.items():
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:212:        if key == "vlan_id" or value is None:
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:215:        commands.append("{0} {1}".format(key, value))
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:211:    for key, value in to_set.items():
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:212:        if key == "vlan_id" or value is None:
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:220:    if commands:
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:221:        commands.insert(0, "vlan {0}".format(vlan_id))
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:223:    return commands
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:129:        return commands
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:106:            commands = self._state_replaced(want, have)
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:107:        return commands
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:84:        resp = self.set_state(want, have)
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:85:        return to_list(resp)
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:59:        if commands:
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:60:            if not self._module.check_mode:
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:61:                self._connection.edit_config(commands)
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:62:            result['changed'] = True
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:63:        result['commands'] = commands
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:65:        changed_vlans_facts = self.get_vlans_facts()
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:67:        result['before'] = existing_vlans_facts
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:68:        if result['changed']:
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:69:            result['after'] = changed_vlans_facts
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:71:        result['warnings'] = warnings
+lib/ansible/module_utils/network/eos/config/vlans/vlans.py:72:        return result
+lib/ansible/modules/network/eos/eos_vlans.py:235:    result = Vlans(module).execute_module()
+test/units/modules/network/eos/eos_module.py:97:        result = exc.exception.args[0]
+test/units/modules/network/eos/eos_module.py:98:        self.assertEqual(result['changed'], changed, result)
+test/units/modules/network/eos/eos_module.py:99:        return result
+test/units/modules/network/eos/eos_module.py:60:            result = self.changed(changed)
+test/units/modules/network/eos/eos_module.py:61:            self.assertEqual(result['changed'], changed, result)
+test/units/modules/network/eos/eos_module.py:63:        if commands is not None:
+test/units/modules/network/eos/eos_module.py:64:            if transport == 'eapi':
+test/units/modules/network/eos/eos_module.py:78:                if sort:
+test/units/modules/network/eos/eos_module.py:79:                    self.assertEqual(sorted(commands), sorted(result['commands']), result['commands'])
+test/units/modules/network/eos/eos_module.py:83:        return result
+test/units/modules/network/eos/test_eos_vlans.py:39:    def tearDown(self):
+test/units/modules/network/eos/test_eos_vlans.py:40:        super(TestEosVlansModule, self).tearDown()
+test/units/modules/network/eos/test_eos_vlans.py:41:        self.mock_get_resource_connection_config.stop()
+test/units/modules/network/eos/test_eos_vlans.py:42:        self.mock_get_resource_connection_facts.stop()
+test/units/modules/network/eos/test_eos_vlans.py:43:        self.mock_edit_config.stop()
+test/units/modules/network/eos/test_eos_vlans.py:44:        self.mock_get_config.stop()
+test/units/modules/network/eos/test_eos_vlans.py:45:        self.mock_load_config.stop()
+test/units/modules/network/eos/test_eos_vlans.py:46:        self.mock_execute_show_command.stop()
