@@ -1,0 +1,196 @@
+black.py:63:if TYPE_CHECKING:
+black.py:69:CACHE_DIR = Path(user_cache_dir("black", version=__version__))
+black.py:82:StringID = int
+black.py:84:Index = int
+black.py:86:Transformer = Callable[["Line", Collection["Feature"]], Iterator["Line"]]
+black.py:87:Timestamp = float
+black.py:88:FileSize = int
+black.py:89:CacheInfo = Tuple[Timestamp, FileSize]
+black.py:90:Cache = Dict[Path, CacheInfo]
+black.py:92:err = partial(click.secho, fg="red", err=True)
+black.py:94:pygram.initialize(CACHE_DIR)
+black.py:95:syms = pygram.python_symbols
+black.py:114:T = TypeVar("T")
+black.py:115:E = TypeVar("E", bound=Exception)
+black.py:137:Result = Union[Ok[T], Err[E]]
+black.py:138:TResult = Result[T, CannotTransform]  # (T)ransform Result
+black.py:144:    YES = 1
+black.py:145:    DIFF = 2
+black.py:165:    YES = 2
+black.py:173:    PY36 = 6
+black.py:174:    PY37 = 7
+black.py:175:    PY38 = 8
+black.py:262:FileMode = Mode
+black.py:1097:token.tok_name[STANDALONE_COMMENT] = "STANDALONE_COMMENT"
+black.py:2064:BRACKET = {token.LPAR: token.RPAR, token.LSQB: token.RSQB, token.LBRACE: token.RBRACE}
+black.py:2065:OPENING_BRACKETS = set(BRACKET.keys())
+black.py:2066:CLOSING_BRACKETS = set(BRACKET.values())
+black.py:4265:    LPAR = 6
+black.py:4266:    RPAR = 7
+black.py:4810:def dont_increase_indentation(split_func: Transformer) -> Transformer:
+black.py:4822:    return split_wrapper
+black.py:4810:def dont_increase_indentation(split_func: Transformer) -> Transformer:
+black.py:4822:    return split_wrapper
+black.py:6375:if __name__ == "__main__":
+tests/test_black.py:23:try:
+tests/test_black.py:36:THIS_FILE = Path(__file__)
+tests/test_black.py:37:THIS_DIR = THIS_FILE.parent
+tests/test_black.py:43:T = TypeVar("T")
+tests/test_black.py:1931:if __name__ == "__main__":
+tests/test_black.py:1277:    def test_works_in_mono_process_only_environment(self, mock_executor) -> None:
+tests/test_black.py:1278:        mock_executor.side_effect = OSError()
+tests/test_black.py:1279:        mode = black.FileMode()
+tests/test_black.py:1280:        with cache_dir() as workspace:
+tests/test_black.py:75:def cache_dir(exists: bool = True) -> Iterator[Path]:
+tests/test_black.py:76:    with TemporaryDirectory() as workspace:
+tests/test_black.py:77:        cache_dir = Path(workspace)
+tests/test_black.py:78:        if not exists:
+tests/test_black.py:80:        with patch("black.CACHE_DIR", cache_dir):
+tests/test_black.py:1281:            one = (workspace / "one.py").resolve()
+tests/test_black.py:1282:            with one.open("w") as fobj:
+tests/test_black.py:1283:                fobj.write("print('hello')")
+tests/test_black.py:1284:            two = (workspace / "two.py").resolve()
+tests/test_black.py:1285:            with two.open("w") as fobj:
+tests/test_black.py:1286:                fobj.write("print('hello')")
+tests/test_black.py:1287:            black.write_cache({}, [one], mode)
+black.py:6307:def write_cache(cache: Cache, sources: Iterable[Path], mode: Mode) -> None:
+black.py:6263:def get_cache_file(mode: Mode) -> Path:
+black.py:244:    def get_cache_key(self) -> str:
+black.py:245:        if self.target_versions:
+black.py:252:        parts = [
+black.py:258:        return ".".join(parts)
+black.py:6264:    return CACHE_DIR / f"cache.{mode.get_cache_key()}.pickle"
+black.py:244:    def get_cache_key(self) -> str:
+black.py:245:        if self.target_versions:
+black.py:252:        parts = [
+black.py:258:        return ".".join(parts)
+black.py:6309:    cache_file = get_cache_file(mode)
+black.py:6310:    try:
+black.py:6311:        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+black.py:6285:def get_cache_info(path: Path) -> CacheInfo:
+black.py:6287:    stat = path.stat()
+black.py:6288:    return stat.st_mtime, stat.st_size
+black.py:6314:            pickle.dump(new_cache, f, protocol=4)
+black.py:6315:        os.replace(f.name, cache_file)
+tests/test_black.py:1288:            self.invokeBlack([str(workspace)])
+tests/test_black.py:155:    def invokeBlack(
+tests/test_black.py:113:    def __init__(self) -> None:
+tests/test_black.py:114:        self.stderrbuf = BytesIO()
+tests/test_black.py:117:        self.stderr_bytes = b""
+tests/test_black.py:118:        super().__init__()
+tests/test_black.py:158:        runner = BlackRunner()
+tests/test_black.py:159:        if ignore_config:
+tests/test_black.py:160:            args = ["--config", str(THIS_DIR / "empty.toml"), *args]
+tests/test_black.py:121:    def isolation(self, *args: Any, **kwargs: Any) -> Generator[BinaryIO, None, None]:
+tests/test_black.py:122:        with super().isolation(*args, **kwargs) as output:
+tests/test_black.py:123:            try:
+tests/test_black.py:124:                hold_stderr = sys.stderr
+tests/test_black.py:125:                sys.stderr = TextIOWrapper(self.stderrbuf, encoding=self.charset)
+black.py:286:def read_pyproject_toml(
+black.py:294:    if not value:
+black.py:299:    try:
+black.py:276:def parse_pyproject_toml(path_config: str) -> Dict[str, Any]:
+black.py:281:    pyproject_toml = toml.load(path_config)
+black.py:282:    config = pyproject_toml.get("tool", {}).get("black", {})
+black.py:283:    return {k.replace("--", "").replace("-", "_"): v for k, v in config.items()}
+black.py:300:        config = parse_pyproject_toml(value)
+black.py:306:    if not config:
+black.py:307:        return None
+black.py:324:def target_version_option_callback(
+black.py:332:    return [TargetVersion[val.upper()] for val in v]
+black.py:469:def main(
+black.py:150:    def from_configuration(
+black.py:153:        if check and not diff:
+black.py:156:        if diff and color:
+black.py:159:        return cls.DIFF if diff else cls.YES
+black.py:490:    if target_version:
+black.py:1:import ast
+black.py:496:    elif py36:
+black.py:505:    mode = Mode(
+black.py:511:    if config and verbose:
+black.py:513:    if code is not None:
+black.py:516:    try:
+black.py:6083:def re_compile_maybe_verbose(regex: str) -> Pattern[str]:
+black.py:6088:    if "\n" in regex:
+black.py:6091:    return compiled
+black.py:521:    try:
+black.py:6083:def re_compile_maybe_verbose(regex: str) -> Pattern[str]:
+black.py:6088:    if "\n" in regex:
+black.py:6091:    return compiled
+black.py:5754:def find_project_root(srcs: Iterable[str]) -> Path:
+black.py:5763:    if not srcs:
+black.py:5766:    common_base = min(Path(src).resolve() for src in srcs)
+black.py:5767:    if common_base.is_dir():
+black.py:5769:        common_base /= "fake-file"
+black.py:5770:    for directory in common_base.parents:
+black.py:5771:        if (directory / ".git").exists():
+black.py:5774:        if (directory / ".hg").is_dir():
+black.py:5777:        if (directory / "pyproject.toml").is_file():
+black.py:5770:    for directory in common_base.parents:
+black.py:5771:        if (directory / ".git").exists():
+black.py:5774:        if (directory / ".hg").is_dir():
+black.py:5777:        if (directory / "pyproject.toml").is_file():
+black.py:5770:    for directory in common_base.parents:
+black.py:5771:        if (directory / ".git").exists():
+black.py:5774:        if (directory / ".hg").is_dir():
+black.py:5777:        if (directory / "pyproject.toml").is_file():
+black.py:5780:    return directory
+black.py:527:    root = find_project_root(src)
+black.py:529:    path_empty(src, quiet, verbose, ctx)
+black.py:567:def path_empty(
+black.py:573:    if not src:
+black.py:530:    for s in src:
+black.py:531:        p = Path(s)
+black.py:532:        if p.is_dir():
+black.py:533:            sources.update(
+black.py:5686:def get_gitignore(root: Path) -> PathSpec:
+black.py:5688:    gitignore = root / ".gitignore"
+black.py:5690:    if gitignore.is_file():
+black.py:5693:    return PathSpec.from_lines("gitwildmatch", lines)
+black.py:5696:def gen_python_files_in_dir(
+black.py:5711:    assert root.is_absolute(), f"INTERNAL ERROR: `root` must be absolute but is {root}"
+black.py:5712:    for child in path.iterdir():
+black.py:5714:        if gitignore.match_file(child.as_posix()):
+black.py:5719:        try:
+black.py:5720:            normalized_path = "/" + child.resolve().relative_to(root).as_posix()
+black.py:5734:        if child.is_dir():
+black.py:5737:        exclude_match = exclude.search(normalized_path)
+black.py:5738:        if exclude_match and exclude_match.group(0):
+black.py:5742:        if child.is_dir():
+black.py:1:import ast
+black.py:5747:        elif child.is_file():
+black.py:5748:            include_match = include.search(normalized_path)
+black.py:5749:            if include_match:
+black.py:5712:    for child in path.iterdir():
+black.py:5714:        if gitignore.match_file(child.as_posix()):
+black.py:5719:        try:
+black.py:5720:            normalized_path = "/" + child.resolve().relative_to(root).as_posix()
+black.py:5734:        if child.is_dir():
+black.py:5737:        exclude_match = exclude.search(normalized_path)
+black.py:5738:        if exclude_match and exclude_match.group(0):
+black.py:5742:        if child.is_dir():
+black.py:1:import ast
+black.py:5747:        elif child.is_file():
+black.py:5748:            include_match = include.search(normalized_path)
+black.py:5749:            if include_match:
+black.py:5712:    for child in path.iterdir():
+black.py:5714:        if gitignore.match_file(child.as_posix()):
+black.py:5719:        try:
+black.py:5720:            normalized_path = "/" + child.resolve().relative_to(root).as_posix()
+black.py:5734:        if child.is_dir():
+black.py:5737:        exclude_match = exclude.search(normalized_path)
+black.py:5738:        if exclude_match and exclude_match.group(0):
+black.py:5742:        if child.is_dir():
+black.py:1:import ast
+black.py:5747:        elif child.is_file():
+black.py:5748:            include_match = include.search(normalized_path)
+black.py:5749:            if include_match:
+black.py:543:    if len(sources) == 0:
+black.py:548:    if len(sources) == 1:
+black.py:1:import ast
+black.py:557:        reformat_many(
+black.py:612:def reformat_many(
+black.py:618:    if sys.platform == "win32":
+tests/test_black.py:129:                self.stderr_bytes = sys.stderr.buffer.getvalue()  # type: ignore
+tests/test_black.py:130:                sys.stderr = hold_stderr
+tests/test_black.py:162:        self.assertEqual(result.exit_code, exit_code, msg=runner.stderr_bytes.decode())

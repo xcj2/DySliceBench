@@ -1,0 +1,582 @@
+blib2to3/pgen2/driver.py:222:if __name__ == "__main__":
+black.py:51:__version__ = "18.9b0"
+black.py:57:CACHE_DIR = Path(user_cache_dir("black", version=__version__))
+black.py:70:SplitFunc = Callable[["Line", bool], Iterator["Line"]]
+black.py:71:Timestamp = float
+black.py:72:FileSize = int
+black.py:73:CacheInfo = Tuple[Timestamp, FileSize]
+black.py:76:err = partial(click.secho, fg="red", err=True)
+black.py:78:pygram.initialize(CACHE_DIR)
+blib2to3/pgen2/driver.py:188:def load_packaged_grammar(package, grammar_source, cache_dir=None):
+blib2to3/pgen2/driver.py:199:    if os.path.isfile(grammar_source):
+blib2to3/pgen2/driver.py:147:def _generate_pickle_name(gt, cache_dir=None):
+blib2to3/pgen2/driver.py:148:    head, tail = os.path.splitext(gt)
+blib2to3/pgen2/driver.py:149:    if tail == ".txt":
+blib2to3/pgen2/driver.py:150:        tail = ""
+blib2to3/pgen2/driver.py:151:    name = head + tail + ".".join(map(str, sys.version_info)) + ".pickle"
+blib2to3/pgen2/driver.py:152:    if cache_dir:
+blib2to3/pgen2/driver.py:153:        return os.path.join(cache_dir, os.path.basename(name))
+blib2to3/pgen2/driver.py:200:        gp = _generate_pickle_name(grammar_source, cache_dir) if cache_dir else None
+blib2to3/pgen2/driver.py:158:def load_grammar(gt="Grammar.txt", gp=None,
+blib2to3/pgen2/driver.py:161:    if logger is None:
+blib2to3/pgen2/driver.py:162:        logger = logging.getLogger()
+blib2to3/pgen2/driver.py:163:    gp = _generate_pickle_name(gt) if gp is None else gp
+blib2to3/pgen2/driver.py:164:    if force or not _newer(gp, gt):
+blib2to3/pgen2/driver.py:179:def _newer(a, b):
+blib2to3/pgen2/driver.py:181:    if not os.path.exists(a):
+blib2to3/pgen2/driver.py:182:        return False
+blib2to3/pgen2/driver.py:165:        logger.info("Generating grammar tables from %s", gt)
+blib2to3/pgen2/driver.py:166:        g = pgen.generate_grammar(gt)
+blib2to3/pgen2/driver.py:167:        if save:
+blib2to3/pgen2/driver.py:168:            logger.info("Writing grammar tables to %s", gp)
+blib2to3/pgen2/driver.py:169:            try:
+blib2to3/pgen2/driver.py:170:                g.dump(gp)
+blib2to3/pgen2/driver.py:171:            except OSError as e:
+blib2to3/pgen2/driver.py:172:                logger.info("Writing failed: %s", e)
+blib2to3/pgen2/driver.py:176:    return g
+blib2to3/pgen2/driver.py:201:        return load_grammar(grammar_source, gp=gp)
+blib2to3/pgen2/driver.py:158:def load_grammar(gt="Grammar.txt", gp=None,
+blib2to3/pgen2/driver.py:161:    if logger is None:
+blib2to3/pgen2/driver.py:162:        logger = logging.getLogger()
+blib2to3/pgen2/driver.py:163:    gp = _generate_pickle_name(gt) if gp is None else gp
+blib2to3/pgen2/driver.py:164:    if force or not _newer(gp, gt):
+blib2to3/pgen2/driver.py:179:def _newer(a, b):
+blib2to3/pgen2/driver.py:181:    if not os.path.exists(a):
+blib2to3/pgen2/driver.py:182:        return False
+blib2to3/pgen2/driver.py:165:        logger.info("Generating grammar tables from %s", gt)
+blib2to3/pgen2/driver.py:166:        g = pgen.generate_grammar(gt)
+blib2to3/pgen2/driver.py:167:        if save:
+blib2to3/pgen2/driver.py:168:            logger.info("Writing grammar tables to %s", gp)
+blib2to3/pgen2/driver.py:169:            try:
+blib2to3/pgen2/driver.py:170:                g.dump(gp)
+blib2to3/pgen2/driver.py:171:            except OSError as e:
+blib2to3/pgen2/driver.py:172:                logger.info("Writing failed: %s", e)
+blib2to3/pgen2/driver.py:176:    return g
+blib2to3/pgen2/driver.py:188:def load_packaged_grammar(package, grammar_source, cache_dir=None):
+blib2to3/pgen2/driver.py:199:    if os.path.isfile(grammar_source):
+blib2to3/pgen2/driver.py:147:def _generate_pickle_name(gt, cache_dir=None):
+blib2to3/pgen2/driver.py:148:    head, tail = os.path.splitext(gt)
+blib2to3/pgen2/driver.py:149:    if tail == ".txt":
+blib2to3/pgen2/driver.py:150:        tail = ""
+blib2to3/pgen2/driver.py:151:    name = head + tail + ".".join(map(str, sys.version_info)) + ".pickle"
+blib2to3/pgen2/driver.py:152:    if cache_dir:
+blib2to3/pgen2/driver.py:153:        return os.path.join(cache_dir, os.path.basename(name))
+blib2to3/pgen2/driver.py:200:        gp = _generate_pickle_name(grammar_source, cache_dir) if cache_dir else None
+blib2to3/pgen2/driver.py:158:def load_grammar(gt="Grammar.txt", gp=None,
+blib2to3/pgen2/driver.py:161:    if logger is None:
+blib2to3/pgen2/driver.py:162:        logger = logging.getLogger()
+blib2to3/pgen2/driver.py:163:    gp = _generate_pickle_name(gt) if gp is None else gp
+blib2to3/pgen2/driver.py:164:    if force or not _newer(gp, gt):
+blib2to3/pgen2/driver.py:179:def _newer(a, b):
+blib2to3/pgen2/driver.py:181:    if not os.path.exists(a):
+blib2to3/pgen2/driver.py:182:        return False
+blib2to3/pgen2/driver.py:165:        logger.info("Generating grammar tables from %s", gt)
+blib2to3/pgen2/driver.py:166:        g = pgen.generate_grammar(gt)
+blib2to3/pgen2/driver.py:167:        if save:
+blib2to3/pgen2/driver.py:168:            logger.info("Writing grammar tables to %s", gp)
+blib2to3/pgen2/driver.py:169:            try:
+blib2to3/pgen2/driver.py:170:                g.dump(gp)
+blib2to3/pgen2/driver.py:171:            except OSError as e:
+blib2to3/pgen2/driver.py:172:                logger.info("Writing failed: %s", e)
+blib2to3/pgen2/driver.py:176:    return g
+blib2to3/pgen2/driver.py:201:        return load_grammar(grammar_source, gp=gp)
+blib2to3/pgen2/driver.py:158:def load_grammar(gt="Grammar.txt", gp=None,
+blib2to3/pgen2/driver.py:161:    if logger is None:
+blib2to3/pgen2/driver.py:162:        logger = logging.getLogger()
+blib2to3/pgen2/driver.py:163:    gp = _generate_pickle_name(gt) if gp is None else gp
+blib2to3/pgen2/driver.py:164:    if force or not _newer(gp, gt):
+blib2to3/pgen2/driver.py:179:def _newer(a, b):
+blib2to3/pgen2/driver.py:181:    if not os.path.exists(a):
+blib2to3/pgen2/driver.py:182:        return False
+blib2to3/pgen2/driver.py:165:        logger.info("Generating grammar tables from %s", gt)
+blib2to3/pgen2/driver.py:166:        g = pgen.generate_grammar(gt)
+blib2to3/pgen2/driver.py:167:        if save:
+blib2to3/pgen2/driver.py:168:            logger.info("Writing grammar tables to %s", gp)
+blib2to3/pgen2/driver.py:169:            try:
+blib2to3/pgen2/driver.py:170:                g.dump(gp)
+blib2to3/pgen2/driver.py:171:            except OSError as e:
+blib2to3/pgen2/driver.py:172:                logger.info("Writing failed: %s", e)
+blib2to3/pgen2/driver.py:176:    return g
+black.py:79:syms = pygram.python_symbols
+black.py:676:GRAMMARS = [
+black.py:791:STANDALONE_COMMENT = 153
+black.py:792:token.tok_name[STANDALONE_COMMENT] = "STANDALONE_COMMENT"
+black.py:1602:BRACKET = {token.LPAR: token.RPAR, token.LSQB: token.RSQB, token.LBRACE: token.RBRACE}
+black.py:1603:OPENING_BRACKETS = set(BRACKET.keys())
+black.py:1604:CLOSING_BRACKETS = set(BRACKET.values())
+black.py:2352:def dont_increase_indentation(split_func: SplitFunc) -> SplitFunc:
+black.py:2364:    return split_wrapper
+black.py:2352:def dont_increase_indentation(split_func: SplitFunc) -> SplitFunc:
+black.py:2364:    return split_wrapper
+black.py:3688:if __name__ == "__main__":
+tests/test_black.py:31:try:
+tests/test_black.py:40:ll = 88
+tests/test_black.py:42:fs = partial(black.format_str, line_length=ll)
+tests/test_black.py:43:THIS_FILE = Path(__file__)
+tests/test_black.py:47:R = TypeVar("R")
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:102:def async_test(f: Callable[..., Coroutine[Any, None, R]]) -> Callable[..., None]:
+tests/test_black.py:108:    return wrapper
+tests/test_black.py:1520:if __name__ == "__main__":
+tests/test_black.py:512:    def test_comment_indentation(self) -> None:
+tests/test_black.py:514:        contents_spc = "if 1:\n    if 2:\n        pass\n    # comment\n    pass\n"
+tests/test_black.py:516:        self.assertFormatEqual(fs(contents_spc), contents_spc)
+black.py:624:def format_str(
+black.py:683:def lib2to3_parse(src_txt: str) -> Node:
+black.py:685:    if src_txt[-1:] != "\n":
+black.py:687:    for grammar in GRAMMARS:
+blib2to3/pgen2/driver.py:32:    def __init__(self, grammar, convert=None, logger=None):
+blib2to3/pgen2/driver.py:33:        self.grammar = grammar
+blib2to3/pgen2/driver.py:34:        if logger is None:
+blib2to3/pgen2/driver.py:35:            logger = logging.getLogger()
+blib2to3/pgen2/driver.py:36:        self.logger = logger
+blib2to3/pgen2/driver.py:37:        self.convert = convert
+black.py:689:        try:
+blib2to3/pgen2/driver.py:112:    def parse_string(self, text, debug=False):
+blib2to3/pgen2/driver.py:114:        tokens = tokenize.generate_tokens(io.StringIO(text).readline)
+blib2to3/pgen2/driver.py:39:    def parse_tokens(self, tokens, debug=False):
+blib2to3/pgen2/driver.py:42:        p = parse.Parser(self.grammar, self.convert)
+blib2to3/pgen2/driver.py:43:        p.setup()
+blib2to3/pgen2/driver.py:44:        lineno = 1
+blib2to3/pgen2/driver.py:45:        column = 0
+blib2to3/pgen2/driver.py:46:        indent_columns = []
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:48:        prefix = ""
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:52:                assert (lineno, column) <= start, ((lineno, column), start)
+blib2to3/pgen2/driver.py:53:                s_lineno, s_column = start
+blib2to3/pgen2/driver.py:54:                if lineno < s_lineno:
+blib2to3/pgen2/driver.py:58:                if column < s_column:
+blib2to3/pgen2/driver.py:59:                    prefix += line_text[column:s_column]
+blib2to3/pgen2/driver.py:60:                    column = s_column
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:69:                type = grammar.opmap[value]
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:90:                lineno += 1
+blib2to3/pgen2/driver.py:91:                column = 0
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:74:                indent_columns.append(len(value))
+blib2to3/pgen2/driver.py:75:                _prefix = prefix + value
+blib2to3/pgen2/driver.py:76:                prefix = ""
+blib2to3/pgen2/driver.py:77:                value = ""
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:87:                prefix = _prefix
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:52:                assert (lineno, column) <= start, ((lineno, column), start)
+blib2to3/pgen2/driver.py:53:                s_lineno, s_column = start
+blib2to3/pgen2/driver.py:54:                if lineno < s_lineno:
+blib2to3/pgen2/driver.py:58:                if column < s_column:
+blib2to3/pgen2/driver.py:59:                    prefix += line_text[column:s_column]
+blib2to3/pgen2/driver.py:60:                    column = s_column
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:69:                type = grammar.opmap[value]
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:90:                lineno += 1
+blib2to3/pgen2/driver.py:91:                column = 0
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:74:                indent_columns.append(len(value))
+blib2to3/pgen2/driver.py:75:                _prefix = prefix + value
+blib2to3/pgen2/driver.py:76:                prefix = ""
+blib2to3/pgen2/driver.py:77:                value = ""
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:87:                prefix = _prefix
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:90:                lineno += 1
+blib2to3/pgen2/driver.py:91:                column = 0
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:52:                assert (lineno, column) <= start, ((lineno, column), start)
+blib2to3/pgen2/driver.py:53:                s_lineno, s_column = start
+blib2to3/pgen2/driver.py:54:                if lineno < s_lineno:
+blib2to3/pgen2/driver.py:58:                if column < s_column:
+blib2to3/pgen2/driver.py:59:                    prefix += line_text[column:s_column]
+blib2to3/pgen2/driver.py:60:                    column = s_column
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:62:                prefix += value
+blib2to3/pgen2/driver.py:63:                lineno, column = end
+blib2to3/pgen2/driver.py:64:                if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:62:                prefix += value
+blib2to3/pgen2/driver.py:63:                lineno, column = end
+blib2to3/pgen2/driver.py:64:                if value.endswith("\n"):
+blib2to3/pgen2/driver.py:65:                    lineno += 1
+blib2to3/pgen2/driver.py:66:                    column = 0
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:52:                assert (lineno, column) <= start, ((lineno, column), start)
+blib2to3/pgen2/driver.py:53:                s_lineno, s_column = start
+blib2to3/pgen2/driver.py:54:                if lineno < s_lineno:
+blib2to3/pgen2/driver.py:58:                if column < s_column:
+blib2to3/pgen2/driver.py:59:                    prefix += line_text[column:s_column]
+blib2to3/pgen2/driver.py:60:                    column = s_column
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:79:                _indent_col = indent_columns.pop()
+blib2to3/pgen2/driver.py:117:    def _partially_consume_prefix(self, prefix, column):
+blib2to3/pgen2/driver.py:118:        lines = []
+blib2to3/pgen2/driver.py:119:        current_line = ""
+blib2to3/pgen2/driver.py:120:        current_column = 0
+blib2to3/pgen2/driver.py:121:        wait_for_nl = False
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:134:            elif char == ' ':
+blib2to3/pgen2/driver.py:135:                current_column += 1
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:134:            elif char == ' ':
+blib2to3/pgen2/driver.py:135:                current_column += 1
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:134:            elif char == ' ':
+blib2to3/pgen2/driver.py:135:                current_column += 1
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:134:            elif char == ' ':
+blib2to3/pgen2/driver.py:135:                current_column += 1
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:134:            elif char == ' ':
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:136:            elif char == '\t':
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:138:            elif char == '\n':
+blib2to3/pgen2/driver.py:143:                wait_for_nl = True
+blib2to3/pgen2/driver.py:143:                wait_for_nl = True
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:125:                if char == '\n':
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:125:                if char == '\n':
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:125:                if char == '\n':
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:125:                if char == '\n':
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:125:                if char == '\n':
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:125:                if char == '\n':
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:125:                if char == '\n':
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:125:                if char == '\n':
+blib2to3/pgen2/driver.py:122:        for char in prefix:
+blib2to3/pgen2/driver.py:123:            current_line += char
+blib2to3/pgen2/driver.py:124:            if wait_for_nl:
+blib2to3/pgen2/driver.py:125:                if char == '\n':
+blib2to3/pgen2/driver.py:126:                    if current_line.strip() and current_column < column:
+blib2to3/pgen2/driver.py:127:                        res = ''.join(lines)
+blib2to3/pgen2/driver.py:128:                        return res, prefix[len(res):]
+blib2to3/pgen2/driver.py:80:                prefix, _prefix = self._partially_consume_prefix(prefix, _indent_col)
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:87:                prefix = _prefix
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:90:                lineno += 1
+blib2to3/pgen2/driver.py:91:                column = 0
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:79:                _indent_col = indent_columns.pop()
+blib2to3/pgen2/driver.py:117:    def _partially_consume_prefix(self, prefix, column):
+blib2to3/pgen2/driver.py:118:        lines = []
+blib2to3/pgen2/driver.py:119:        current_line = ""
+blib2to3/pgen2/driver.py:120:        current_column = 0
+blib2to3/pgen2/driver.py:121:        wait_for_nl = False
+blib2to3/pgen2/driver.py:144:        return ''.join(lines), current_line
+blib2to3/pgen2/driver.py:80:                prefix, _prefix = self._partially_consume_prefix(prefix, _indent_col)
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:85:            prefix = ""
+blib2to3/pgen2/driver.py:86:            if type in {token.INDENT, token.DEDENT}:
+blib2to3/pgen2/driver.py:87:                prefix = _prefix
+blib2to3/pgen2/driver.py:88:            lineno, column = end
+blib2to3/pgen2/driver.py:89:            if value.endswith("\n"):
+blib2to3/pgen2/driver.py:49:        for quintuple in tokens:
+blib2to3/pgen2/driver.py:50:            type, value, start, end, line_text = quintuple
+blib2to3/pgen2/driver.py:51:            if start != (lineno, column):
+blib2to3/pgen2/driver.py:61:            if type in (tokenize.COMMENT, tokenize.NL):
+blib2to3/pgen2/driver.py:68:            if type == token.OP:
+blib2to3/pgen2/driver.py:70:            if debug:
+blib2to3/pgen2/driver.py:71:                self.logger.debug("%s %r (prefix=%r)",
+blib2to3/pgen2/driver.py:73:            if type == token.INDENT:
+blib2to3/pgen2/driver.py:1:# Copyright 2004-2005 Elemental Security, Inc. All Rights Reserved.
+blib2to3/pgen2/driver.py:78:            elif type == token.DEDENT:
+blib2to3/pgen2/driver.py:81:            if p.addtoken(type, value, (prefix, start)):
+blib2to3/pgen2/driver.py:82:                if debug:
+blib2to3/pgen2/driver.py:83:                    self.logger.debug("Stop.")
+blib2to3/pgen2/driver.py:96:        return p.rootnode
+blib2to3/pgen2/driver.py:115:        return self.parse_tokens(tokens, debug)
+blib2to3/pgen2/driver.py:39:    def parse_tokens(self, tokens, debug=False):
+blib2to3/pgen2/driver.py:42:        p = parse.Parser(self.grammar, self.convert)
+blib2to3/pgen2/driver.py:43:        p.setup()
+blib2to3/pgen2/driver.py:44:        lineno = 1
+blib2to3/pgen2/driver.py:45:        column = 0
+blib2to3/pgen2/driver.py:46:        indent_columns = []
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:47:        type = value = start = end = line_text = None
+blib2to3/pgen2/driver.py:48:        prefix = ""
+black.py:693:        except ParseError as pe:

@@ -1,0 +1,3564 @@
+black.py:46:__version__ = "18.4a2"
+black.py:49:syms = pygram.python_symbols
+black.py:50:FileContent = str
+black.py:53:NodeType = int
+black.py:57:LN = Union[Leaf, Node]
+black.py:58:SplitFunc = Callable[["Line", bool], Iterator["Line"]]
+black.py:59:Timestamp = float
+black.py:60:FileSize = int
+black.py:61:CacheInfo = Tuple[Timestamp, FileSize]
+black.py:64:err = partial(click.secho, fg="red", err=True)
+black.py:108:    NO = 0
+black.py:114:    NO = 0
+black.py:428:GRAMMARS = [
+black.py:469:T = TypeVar("T")
+black.py:533:WHITESPACE = {token.DEDENT, token.INDENT, token.NEWLINE}
+black.py:535:STATEMENT = {
+black.py:545:STANDALONE_COMMENT = 153
+black.py:546:LOGIC_OPERATORS = {"and", "or"}
+black.py:547:COMPARATORS = {
+black.py:570:STARS = {token.STAR, token.DOUBLESTAR}
+black.py:571:VARARGS_PARENTS = {
+black.py:578:UNPACKING_PARENTS = {
+black.py:1301:BRACKET = {token.LPAR: token.RPAR, token.LSQB: token.RSQB, token.LBRACE: token.RBRACE}
+black.py:1302:OPENING_BRACKETS = set(BRACKET.keys())
+black.py:1303:CLOSING_BRACKETS = set(BRACKET.values())
+black.py:1304:BRACKETS = OPENING_BRACKETS | CLOSING_BRACKETS
+black.py:1305:ALWAYS_NO_SPACE = CLOSING_BRACKETS | {token.COMMA, STANDALONE_COMMENT}
+black.py:1869:def dont_increase_indentation(split_func: SplitFunc) -> SplitFunc:
+black.py:1881:    return split_wrapper
+black.py:1869:def dont_increase_indentation(split_func: SplitFunc) -> SplitFunc:
+black.py:1881:    return split_wrapper
+black.py:2469:CACHE_DIR = Path(user_cache_dir("black", version=__version__))
+black.py:2526:if __name__ == "__main__":
+tests/test_black.py:20:ll = 88
+tests/test_black.py:22:fs = partial(black.format_str, line_length=ll)
+tests/test_black.py:23:THIS_FILE = Path(__file__)
+tests/test_black.py:25:EMPTY_LINE = "# EMPTY LINE WITH WHITESPACE" + " (this comment will be removed)"
+tests/test_black.py:638:if __name__ == "__main__":
+tests/test_black.py:630:    def test_comment_in_decorator(self) -> None:
+tests/test_black.py:32:def read_data(name: str) -> Tuple[str, str]:
+tests/test_black.py:34:    if not name.endswith((".py", ".out", ".diff")):
+tests/test_black.py:35:        name += ".py"
+tests/test_black.py:38:    with open(THIS_DIR / name, "r", encoding="utf8") as test:
+tests/test_black.py:39:        lines = test.readlines()
+tests/test_black.py:40:    result = _input
+tests/test_black.py:41:    for line in lines:
+tests/test_black.py:42:        line = line.replace(EMPTY_LINE, "")
+tests/test_black.py:43:        if line.rstrip() == "# output":
+tests/test_black.py:47:        result.append(line)
+tests/test_black.py:41:    for line in lines:
+tests/test_black.py:42:        line = line.replace(EMPTY_LINE, "")
+tests/test_black.py:43:        if line.rstrip() == "# output":
+tests/test_black.py:47:        result.append(line)
+tests/test_black.py:41:    for line in lines:
+tests/test_black.py:42:        line = line.replace(EMPTY_LINE, "")
+tests/test_black.py:43:        if line.rstrip() == "# output":
+tests/test_black.py:47:        result.append(line)
+tests/test_black.py:41:    for line in lines:
+tests/test_black.py:42:        line = line.replace(EMPTY_LINE, "")
+tests/test_black.py:43:        if line.rstrip() == "# output":
+tests/test_black.py:47:        result.append(line)
+tests/test_black.py:41:    for line in lines:
+tests/test_black.py:42:        line = line.replace(EMPTY_LINE, "")
+tests/test_black.py:43:        if line.rstrip() == "# output":
+tests/test_black.py:47:        result.append(line)
+tests/test_black.py:41:    for line in lines:
+tests/test_black.py:42:        line = line.replace(EMPTY_LINE, "")
+tests/test_black.py:43:        if line.rstrip() == "# output":
+tests/test_black.py:47:        result.append(line)
+tests/test_black.py:41:    for line in lines:
+tests/test_black.py:42:        line = line.replace(EMPTY_LINE, "")
+tests/test_black.py:43:        if line.rstrip() == "# output":
+tests/test_black.py:47:        result.append(line)
+tests/test_black.py:41:    for line in lines:
+tests/test_black.py:42:        line = line.replace(EMPTY_LINE, "")
+tests/test_black.py:43:        if line.rstrip() == "# output":
+tests/test_black.py:47:        result.append(line)
+tests/test_black.py:48:    if _input and not _output:
+tests/test_black.py:50:        _output = _input[:]
+tests/test_black.py:51:    return "".join(_input).strip() + "\n", "".join(_output).strip() + "\n"
+tests/test_black.py:631:        source, expected = read_data("comments6")
+black.py:405:def format_str(src_contents: str, line_length: int) -> FileContent:
+black.py:435:def lib2to3_parse(src_txt: str) -> Node:
+black.py:437:    grammar = pygram.python_grammar_no_print_statement
+black.py:438:    if src_txt[-1] != "\n":
+black.py:441:    for grammar in GRAMMARS:
+black.py:442:        drv = driver.Driver(grammar, pytree.convert)
+black.py:443:        try:
+black.py:444:            result = drv.parse_string(src_txt, True)
+black.py:458:    if isinstance(result, Leaf):
+black.py:460:    return result
+black.py:410:    src_node = lib2to3_parse(src_contents)
+black.py:411:    dst_contents = ""
+black.py:1281:    def __attrs_post_init__(self) -> None:
+black.py:1283:        v = self.visit_stmt
+black.py:412:    lines = LineGenerator()
+black.py:413:    elt = EmptyLineTracker()
+black.py:2202:def is_python36(node: Node) -> bool:
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2209:    for n in node.pre_order():
+black.py:2210:        if n.type == token.STRING:
+black.py:1:#!/usr/bin/env python3
+black.py:2215:        elif (
+black.py:2224:    return False
+black.py:414:    py36 = is_python36(src_node)
+black.py:415:    empty_line = Line()
+black.py:416:    after = 0
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1222:    def visit_decorators(self, node: Node) -> Iterator[Line]:
+black.py:1224:        for child in node.children:
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1091:            if self.current_line.__class__ == type:
+black.py:1092:                self.current_line.depth += indent
+black.py:1095:            return  # Line is empty, don't emit. Creating a new one unnecessary.
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1222:    def visit_decorators(self, node: Node) -> Iterator[Line]:
+black.py:1224:        for child in node.children:
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1091:            if self.current_line.__class__ == type:
+black.py:1092:                self.current_line.depth += indent
+black.py:1095:            return  # Line is empty, don't emit. Creating a new one unnecessary.
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:1308:def whitespace(leaf: Leaf) -> str:  # noqa C901
+black.py:1310:    NO = ""
+black.py:1311:    SPACE = " "
+black.py:1313:    t = leaf.type
+black.py:1314:    p = leaf.parent
+black.py:1315:    v = leaf.value
+black.py:1316:    if t in ALWAYS_NO_SPACE:
+black.py:1319:    if t == token.COMMENT:
+black.py:1322:    assert p is not None, f"INTERNAL ERROR: hand-made leaf without parent: {leaf!r}"
+black.py:1323:    if t == token.COLON and p.type not in {syms.subscript, syms.subscriptlist}:
+black.py:1326:    prev = leaf.prev_sibling
+black.py:1327:    if not prev:
+black.py:1:#!/usr/bin/env python3
+black.py:1374:    elif prev.type in OPENING_BRACKETS:
+black.py:1377:    if p.type in {syms.parameters, syms.arglist}:
+black.py:1:#!/usr/bin/env python3
+black.py:1382:    elif p.type == syms.varargslist:
+black.py:1:#!/usr/bin/env python3
+black.py:1387:    elif p.type == syms.typedargslist:
+black.py:1:#!/usr/bin/env python3
+black.py:1404:    elif p.type == syms.tname:
+black.py:1:#!/usr/bin/env python3
+black.py:1411:    elif p.type == syms.trailer:
+black.py:1:#!/usr/bin/env python3
+black.py:1428:    elif p.type == syms.argument:
+black.py:1:#!/usr/bin/env python3
+black.py:1441:    elif p.type == syms.decorator:
+black.py:1443:        return NO
+black.py:727:            leaf.prefix += whitespace(leaf)
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:1224:        for child in node.children:
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1097:        complete_line = self.current_line
+black.py:1098:        self.current_line = type(depth=complete_line.depth + indent)
+black.py:417:    for current_line in lines.visit(src_node):
+black.py:1003:    def maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1010:        if isinstance(current_line, UnformattedLines):
+black.py:1019:    def _maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1020:        max_allowed = 1
+black.py:1021:        if current_line.depth == 0:
+black.py:1022:            max_allowed = 2
+black.py:1023:        if current_line.leaves:
+black.py:1025:            first_leaf = current_line.leaves[0]
+black.py:1026:            before = first_leaf.prefix.count("\n")
+black.py:1027:            before = min(before, max_allowed)
+black.py:1028:            first_leaf.prefix = ""
+black.py:1031:        depth = current_line.depth
+black.py:1032:        while self.previous_defs and self.previous_defs[-1] >= depth:
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1035:        is_decorator = current_line.is_decorator
+black.py:1036:        if is_decorator or current_line.is_def or current_line.is_class:
+black.py:1037:            if not is_decorator:
+black.py:1039:            if self.previous_line is None:
+black.py:1041:                return 0, 0
+black.py:1013:        before, after = self._maybe_empty_lines(current_line)
+black.py:1014:        before -= self.previous_after
+black.py:1015:        self.previous_after = after
+black.py:1016:        self.previous_line = current_line
+black.py:1017:        return before, after
+black.py:420:        before, after = elt.maybe_empty_lines(current_line)
+black.py:1681:def split_line(
+black.py:1694:    if isinstance(line, UnformattedLines) or line.is_comment:
+black.py:753:    def is_comment(self) -> bool:
+black.py:755:        return len(self.leaves) == 1 and self.leaves[0].type == STANDALONE_COMMENT
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:934:        return res + "\n"
+black.py:1699:    if (
+black.py:819:    def contains_standalone_comments(self, depth_limit: int = sys.maxsize) -> bool:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:826:        return False
+black.py:423:        for line in split_line(current_line, line_length=line_length, py36=py36):
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:934:        return res + "\n"
+black.py:424:            dst_contents += str(line)
+black.py:1705:        return
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1628:    if "#" not in p:
+black.py:1633:    for index, line in enumerate(p.split("\n")):
+black.py:1635:        line = line.lstrip()
+black.py:1636:        if not line:
+black.py:1638:        if not line.startswith("#"):
+black.py:1641:        if index == 0 and leaf.type != token.ENDMARKER:
+black.py:1662:def make_comment(content: str) -> str:
+black.py:1670:    content = content.rstrip()
+black.py:1671:    if not content:
+black.py:1674:    if content[0] == "#":
+black.py:1675:        content = content[1:]
+black.py:1676:    if content and content[0] not in " !:#":
+black.py:1678:    return "#" + content
+black.py:1645:        comment = make_comment(line)
+black.py:1118:                for comment in generate_comments(node):
+black.py:1119:                    if any_open_brackets:
+black.py:1:#!/usr/bin/env python3
+black.py:1122:                    elif comment.type == token.COMMENT:
+black.py:1124:                        self.current_line.append(comment)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:619:            return
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:889:        after = len(self.leaves) - 1
+black.py:890:        if after == -1:
+black.py:891:            comment.type = STANDALONE_COMMENT
+black.py:892:            comment.prefix = ""
+black.py:893:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1097:        complete_line = self.current_line
+black.py:1098:        self.current_line = type(depth=complete_line.depth + indent)
+black.py:417:    for current_line in lines.visit(src_node):
+black.py:1003:    def maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1010:        if isinstance(current_line, UnformattedLines):
+black.py:1019:    def _maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1020:        max_allowed = 1
+black.py:1021:        if current_line.depth == 0:
+black.py:1022:            max_allowed = 2
+black.py:1023:        if current_line.leaves:
+black.py:1025:            first_leaf = current_line.leaves[0]
+black.py:1026:            before = first_leaf.prefix.count("\n")
+black.py:1027:            before = min(before, max_allowed)
+black.py:1028:            first_leaf.prefix = ""
+black.py:1031:        depth = current_line.depth
+black.py:1032:        while self.previous_defs and self.previous_defs[-1] >= depth:
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1035:        is_decorator = current_line.is_decorator
+black.py:1036:        if is_decorator or current_line.is_def or current_line.is_class:
+black.py:777:    def is_def(self) -> bool:
+black.py:779:        try:
+black.py:780:            first_leaf = self.leaves[0]
+black.py:784:        try:
+black.py:786:        except IndexError:
+black.py:788:        return (
+black.py:768:    def is_class(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:770:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1052:        if current_line.is_flow_control:
+black.py:799:    def is_flow_control(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:804:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1055:        if (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:763:    def is_import(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1976:def is_import(leaf: Leaf) -> bool:
+black.py:1978:    p = leaf.parent
+black.py:1979:    t = leaf.type
+black.py:1980:    v = leaf.value
+black.py:1981:    return bool(
+black.py:765:        return bool(self) and is_import(self.leaves[0])
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1976:def is_import(leaf: Leaf) -> bool:
+black.py:1978:    p = leaf.parent
+black.py:1979:    t = leaf.type
+black.py:1980:    v = leaf.value
+black.py:1981:    return bool(
+black.py:1063:        if (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:811:    def is_yield(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:813:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1070:        return before, 0
+black.py:1013:        before, after = self._maybe_empty_lines(current_line)
+black.py:1014:        before -= self.previous_after
+black.py:1015:        self.previous_after = after
+black.py:1016:        self.previous_line = current_line
+black.py:1017:        return before, after
+black.py:420:        before, after = elt.maybe_empty_lines(current_line)
+black.py:1681:def split_line(
+black.py:1694:    if isinstance(line, UnformattedLines) or line.is_comment:
+black.py:753:    def is_comment(self) -> bool:
+black.py:755:        return len(self.leaves) == 1 and self.leaves[0].type == STANDALONE_COMMENT
+black.py:423:        for line in split_line(current_line, line_length=line_length, py36=py36):
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:934:        return res + "\n"
+black.py:424:            dst_contents += str(line)
+black.py:1696:        return
+black.py:1648:        if comment in {"# fmt: on", "# yapf: enable"}:
+black.py:1651:        if comment in {"# fmt: off", "# yapf: disable"}:
+black.py:1633:    for index, line in enumerate(p.split("\n")):
+black.py:1635:        line = line.lstrip()
+black.py:1636:        if not line:
+black.py:1638:        if not line.startswith("#"):
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2001:                nl_count -= 1
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:1308:def whitespace(leaf: Leaf) -> str:  # noqa C901
+black.py:1310:    NO = ""
+black.py:1311:    SPACE = " "
+black.py:1313:    t = leaf.type
+black.py:1314:    p = leaf.parent
+black.py:1315:    v = leaf.value
+black.py:1316:    if t in ALWAYS_NO_SPACE:
+black.py:1319:    if t == token.COMMENT:
+black.py:1322:    assert p is not None, f"INTERNAL ERROR: hand-made leaf without parent: {leaf!r}"
+black.py:1323:    if t == token.COLON and p.type not in {syms.subscript, syms.subscriptlist}:
+black.py:1326:    prev = leaf.prev_sibling
+black.py:1327:    if not prev:
+black.py:1:#!/usr/bin/env python3
+black.py:1374:    elif prev.type in OPENING_BRACKETS:
+black.py:1377:    if p.type in {syms.parameters, syms.arglist}:
+black.py:1:#!/usr/bin/env python3
+black.py:1382:    elif p.type == syms.varargslist:
+black.py:1:#!/usr/bin/env python3
+black.py:1387:    elif p.type == syms.typedargslist:
+black.py:1:#!/usr/bin/env python3
+black.py:1404:    elif p.type == syms.tname:
+black.py:1:#!/usr/bin/env python3
+black.py:1411:    elif p.type == syms.trailer:
+black.py:1:#!/usr/bin/env python3
+black.py:1428:    elif p.type == syms.argument:
+black.py:1:#!/usr/bin/env python3
+black.py:1441:    elif p.type == syms.decorator:
+black.py:1443:        return NO
+black.py:727:            leaf.prefix += whitespace(leaf)
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:1224:        for child in node.children:
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1097:        complete_line = self.current_line
+black.py:1098:        self.current_line = type(depth=complete_line.depth + indent)
+black.py:417:    for current_line in lines.visit(src_node):
+black.py:1003:    def maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1010:        if isinstance(current_line, UnformattedLines):
+black.py:1019:    def _maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1020:        max_allowed = 1
+black.py:1021:        if current_line.depth == 0:
+black.py:1022:            max_allowed = 2
+black.py:1023:        if current_line.leaves:
+black.py:1025:            first_leaf = current_line.leaves[0]
+black.py:1026:            before = first_leaf.prefix.count("\n")
+black.py:1027:            before = min(before, max_allowed)
+black.py:1028:            first_leaf.prefix = ""
+black.py:1031:        depth = current_line.depth
+black.py:1032:        while self.previous_defs and self.previous_defs[-1] >= depth:
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1035:        is_decorator = current_line.is_decorator
+black.py:1036:        if is_decorator or current_line.is_def or current_line.is_class:
+black.py:1037:            if not is_decorator:
+black.py:1039:            if self.previous_line is None:
+black.py:1043:            if self.previous_line and self.previous_line.is_decorator:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1047:            newlines = 2
+black.py:1048:            if current_line.depth:
+black.py:1050:            return newlines, 0
+black.py:1013:        before, after = self._maybe_empty_lines(current_line)
+black.py:1014:        before -= self.previous_after
+black.py:1015:        self.previous_after = after
+black.py:1016:        self.previous_line = current_line
+black.py:1017:        return before, after
+black.py:420:        before, after = elt.maybe_empty_lines(current_line)
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:924:            return "\n"
+black.py:422:            dst_contents += str(empty_line)
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:924:            return "\n"
+black.py:422:            dst_contents += str(empty_line)
+black.py:1681:def split_line(
+black.py:1694:    if isinstance(line, UnformattedLines) or line.is_comment:
+black.py:753:    def is_comment(self) -> bool:
+black.py:755:        return len(self.leaves) == 1 and self.leaves[0].type == STANDALONE_COMMENT
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:934:        return res + "\n"
+black.py:1699:    if (
+black.py:819:    def contains_standalone_comments(self, depth_limit: int = sys.maxsize) -> bool:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:826:        return False
+black.py:423:        for line in split_line(current_line, line_length=line_length, py36=py36):
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:934:        return res + "\n"
+black.py:424:            dst_contents += str(line)
+black.py:1705:        return
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1628:    if "#" not in p:
+black.py:1633:    for index, line in enumerate(p.split("\n")):
+black.py:1635:        line = line.lstrip()
+black.py:1636:        if not line:
+black.py:1638:        if not line.startswith("#"):
+black.py:1641:        if index == 0 and leaf.type != token.ENDMARKER:
+black.py:1662:def make_comment(content: str) -> str:
+black.py:1670:    content = content.rstrip()
+black.py:1671:    if not content:
+black.py:1674:    if content[0] == "#":
+black.py:1675:        content = content[1:]
+black.py:1676:    if content and content[0] not in " !:#":
+black.py:1678:    return "#" + content
+black.py:1645:        comment = make_comment(line)
+black.py:1118:                for comment in generate_comments(node):
+black.py:1119:                    if any_open_brackets:
+black.py:1:#!/usr/bin/env python3
+black.py:1122:                    elif comment.type == token.COMMENT:
+black.py:1124:                        self.current_line.append(comment)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:619:            return
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:889:        after = len(self.leaves) - 1
+black.py:890:        if after == -1:
+black.py:891:            comment.type = STANDALONE_COMMENT
+black.py:892:            comment.prefix = ""
+black.py:893:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1097:        complete_line = self.current_line
+black.py:1098:        self.current_line = type(depth=complete_line.depth + indent)
+black.py:417:    for current_line in lines.visit(src_node):
+black.py:1003:    def maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1010:        if isinstance(current_line, UnformattedLines):
+black.py:1019:    def _maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1020:        max_allowed = 1
+black.py:1021:        if current_line.depth == 0:
+black.py:1022:            max_allowed = 2
+black.py:1023:        if current_line.leaves:
+black.py:1025:            first_leaf = current_line.leaves[0]
+black.py:1026:            before = first_leaf.prefix.count("\n")
+black.py:1027:            before = min(before, max_allowed)
+black.py:1028:            first_leaf.prefix = ""
+black.py:1031:        depth = current_line.depth
+black.py:1032:        while self.previous_defs and self.previous_defs[-1] >= depth:
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1035:        is_decorator = current_line.is_decorator
+black.py:1036:        if is_decorator or current_line.is_def or current_line.is_class:
+black.py:777:    def is_def(self) -> bool:
+black.py:779:        try:
+black.py:780:            first_leaf = self.leaves[0]
+black.py:784:        try:
+black.py:786:        except IndexError:
+black.py:788:        return (
+black.py:768:    def is_class(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:770:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1052:        if current_line.is_flow_control:
+black.py:799:    def is_flow_control(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:804:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1055:        if (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:763:    def is_import(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1976:def is_import(leaf: Leaf) -> bool:
+black.py:1978:    p = leaf.parent
+black.py:1979:    t = leaf.type
+black.py:1980:    v = leaf.value
+black.py:1981:    return bool(
+black.py:765:        return bool(self) and is_import(self.leaves[0])
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1976:def is_import(leaf: Leaf) -> bool:
+black.py:1978:    p = leaf.parent
+black.py:1979:    t = leaf.type
+black.py:1980:    v = leaf.value
+black.py:1981:    return bool(
+black.py:1063:        if (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:811:    def is_yield(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:813:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1070:        return before, 0
+black.py:1013:        before, after = self._maybe_empty_lines(current_line)
+black.py:1014:        before -= self.previous_after
+black.py:1015:        self.previous_after = after
+black.py:1016:        self.previous_line = current_line
+black.py:1017:        return before, after
+black.py:420:        before, after = elt.maybe_empty_lines(current_line)
+black.py:1681:def split_line(
+black.py:1694:    if isinstance(line, UnformattedLines) or line.is_comment:
+black.py:753:    def is_comment(self) -> bool:
+black.py:755:        return len(self.leaves) == 1 and self.leaves[0].type == STANDALONE_COMMENT
+black.py:423:        for line in split_line(current_line, line_length=line_length, py36=py36):
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:934:        return res + "\n"
+black.py:424:            dst_contents += str(line)
+black.py:1696:        return
+black.py:1648:        if comment in {"# fmt: on", "# yapf: enable"}:
+black.py:1651:        if comment in {"# fmt: off", "# yapf: disable"}:
+black.py:1633:    for index, line in enumerate(p.split("\n")):
+black.py:1635:        line = line.lstrip()
+black.py:1636:        if not line:
+black.py:1638:        if not line.startswith("#"):
+black.py:1641:        if index == 0 and leaf.type != token.ENDMARKER:
+black.py:1662:def make_comment(content: str) -> str:
+black.py:1670:    content = content.rstrip()
+black.py:1671:    if not content:
+black.py:1674:    if content[0] == "#":
+black.py:1675:        content = content[1:]
+black.py:1676:    if content and content[0] not in " !:#":
+black.py:1678:    return "#" + content
+black.py:1645:        comment = make_comment(line)
+black.py:1118:                for comment in generate_comments(node):
+black.py:1119:                    if any_open_brackets:
+black.py:1:#!/usr/bin/env python3
+black.py:1122:                    elif comment.type == token.COMMENT:
+black.py:1129:                        yield from self.line()
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1091:            if self.current_line.__class__ == type:
+black.py:1092:                self.current_line.depth += indent
+black.py:1095:            return  # Line is empty, don't emit. Creating a new one unnecessary.
+black.py:1131:                        self.current_line.append(comment)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1097:        complete_line = self.current_line
+black.py:1098:        self.current_line = type(depth=complete_line.depth + indent)
+black.py:417:    for current_line in lines.visit(src_node):
+black.py:1003:    def maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1010:        if isinstance(current_line, UnformattedLines):
+black.py:1019:    def _maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1020:        max_allowed = 1
+black.py:1021:        if current_line.depth == 0:
+black.py:1022:            max_allowed = 2
+black.py:1023:        if current_line.leaves:
+black.py:1025:            first_leaf = current_line.leaves[0]
+black.py:1026:            before = first_leaf.prefix.count("\n")
+black.py:1027:            before = min(before, max_allowed)
+black.py:1028:            first_leaf.prefix = ""
+black.py:1031:        depth = current_line.depth
+black.py:1032:        while self.previous_defs and self.previous_defs[-1] >= depth:
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1035:        is_decorator = current_line.is_decorator
+black.py:1036:        if is_decorator or current_line.is_def or current_line.is_class:
+black.py:777:    def is_def(self) -> bool:
+black.py:779:        try:
+black.py:780:            first_leaf = self.leaves[0]
+black.py:784:        try:
+black.py:786:        except IndexError:
+black.py:788:        return (
+black.py:768:    def is_class(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:770:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1052:        if current_line.is_flow_control:
+black.py:799:    def is_flow_control(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:804:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1055:        if (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:763:    def is_import(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1976:def is_import(leaf: Leaf) -> bool:
+black.py:1978:    p = leaf.parent
+black.py:1979:    t = leaf.type
+black.py:1980:    v = leaf.value
+black.py:1981:    return bool(
+black.py:765:        return bool(self) and is_import(self.leaves[0])
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1976:def is_import(leaf: Leaf) -> bool:
+black.py:1978:    p = leaf.parent
+black.py:1979:    t = leaf.type
+black.py:1980:    v = leaf.value
+black.py:1981:    return bool(
+black.py:1063:        if (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:811:    def is_yield(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:813:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1070:        return before, 0
+black.py:1013:        before, after = self._maybe_empty_lines(current_line)
+black.py:1014:        before -= self.previous_after
+black.py:1015:        self.previous_after = after
+black.py:1016:        self.previous_line = current_line
+black.py:1017:        return before, after
+black.py:420:        before, after = elt.maybe_empty_lines(current_line)
+black.py:1681:def split_line(
+black.py:1694:    if isinstance(line, UnformattedLines) or line.is_comment:
+black.py:753:    def is_comment(self) -> bool:
+black.py:755:        return len(self.leaves) == 1 and self.leaves[0].type == STANDALONE_COMMENT
+black.py:423:        for line in split_line(current_line, line_length=line_length, py36=py36):
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:934:        return res + "\n"
+black.py:424:            dst_contents += str(line)
+black.py:1696:        return
+black.py:1648:        if comment in {"# fmt: on", "# yapf: enable"}:
+black.py:1651:        if comment in {"# fmt: off", "# yapf: disable"}:
+black.py:1633:    for index, line in enumerate(p.split("\n")):
+black.py:1635:        line = line.lstrip()
+black.py:1636:        if not line:
+black.py:1638:        if not line.startswith("#"):
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2001:                nl_count -= 1
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:1308:def whitespace(leaf: Leaf) -> str:  # noqa C901
+black.py:1310:    NO = ""
+black.py:1311:    SPACE = " "
+black.py:1313:    t = leaf.type
+black.py:1314:    p = leaf.parent
+black.py:1315:    v = leaf.value
+black.py:1316:    if t in ALWAYS_NO_SPACE:
+black.py:1319:    if t == token.COMMENT:
+black.py:1322:    assert p is not None, f"INTERNAL ERROR: hand-made leaf without parent: {leaf!r}"
+black.py:1323:    if t == token.COLON and p.type not in {syms.subscript, syms.subscriptlist}:
+black.py:1326:    prev = leaf.prev_sibling
+black.py:1327:    if not prev:
+black.py:1:#!/usr/bin/env python3
+black.py:1374:    elif prev.type in OPENING_BRACKETS:
+black.py:1377:    if p.type in {syms.parameters, syms.arglist}:
+black.py:1:#!/usr/bin/env python3
+black.py:1382:    elif p.type == syms.varargslist:
+black.py:1:#!/usr/bin/env python3
+black.py:1387:    elif p.type == syms.typedargslist:
+black.py:1:#!/usr/bin/env python3
+black.py:1404:    elif p.type == syms.tname:
+black.py:1:#!/usr/bin/env python3
+black.py:1411:    elif p.type == syms.trailer:
+black.py:1:#!/usr/bin/env python3
+black.py:1428:    elif p.type == syms.argument:
+black.py:1:#!/usr/bin/env python3
+black.py:1441:    elif p.type == syms.decorator:
+black.py:1443:        return NO
+black.py:727:            leaf.prefix += whitespace(leaf)
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:1224:        for child in node.children:
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1097:        complete_line = self.current_line
+black.py:1098:        self.current_line = type(depth=complete_line.depth + indent)
+black.py:417:    for current_line in lines.visit(src_node):
+black.py:1003:    def maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1010:        if isinstance(current_line, UnformattedLines):
+black.py:1019:    def _maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1020:        max_allowed = 1
+black.py:1021:        if current_line.depth == 0:
+black.py:1022:            max_allowed = 2
+black.py:1023:        if current_line.leaves:
+black.py:1025:            first_leaf = current_line.leaves[0]
+black.py:1026:            before = first_leaf.prefix.count("\n")
+black.py:1027:            before = min(before, max_allowed)
+black.py:1028:            first_leaf.prefix = ""
+black.py:1031:        depth = current_line.depth
+black.py:1032:        while self.previous_defs and self.previous_defs[-1] >= depth:
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1035:        is_decorator = current_line.is_decorator
+black.py:1036:        if is_decorator or current_line.is_def or current_line.is_class:
+black.py:1037:            if not is_decorator:
+black.py:1039:            if self.previous_line is None:
+black.py:1043:            if self.previous_line and self.previous_line.is_decorator:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1047:            newlines = 2
+black.py:1048:            if current_line.depth:
+black.py:1050:            return newlines, 0
+black.py:1013:        before, after = self._maybe_empty_lines(current_line)
+black.py:1014:        before -= self.previous_after
+black.py:1015:        self.previous_after = after
+black.py:1016:        self.previous_line = current_line
+black.py:1017:        return before, after
+black.py:420:        before, after = elt.maybe_empty_lines(current_line)
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:924:            return "\n"
+black.py:422:            dst_contents += str(empty_line)
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:924:            return "\n"
+black.py:422:            dst_contents += str(empty_line)
+black.py:1681:def split_line(
+black.py:1694:    if isinstance(line, UnformattedLines) or line.is_comment:
+black.py:753:    def is_comment(self) -> bool:
+black.py:755:        return len(self.leaves) == 1 and self.leaves[0].type == STANDALONE_COMMENT
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:934:        return res + "\n"
+black.py:1699:    if (
+black.py:819:    def contains_standalone_comments(self, depth_limit: int = sys.maxsize) -> bool:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:826:        return False
+black.py:423:        for line in split_line(current_line, line_length=line_length, py36=py36):
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:934:        return res + "\n"
+black.py:424:            dst_contents += str(line)
+black.py:1705:        return
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1173:    def visit_stmt(
+black.py:1188:        normalize_invisible_parens(node, parens_after=parens)
+black.py:2069:def normalize_invisible_parens(node: Node, parens_after: Set[str]) -> None:
+black.py:2075:    check_lpar = False
+black.py:2076:    for child in list(node.children):
+black.py:2077:        if check_lpar:
+black.py:2103:        check_lpar = isinstance(child, Leaf) and child.value in parens_after
+black.py:2076:    for child in list(node.children):
+black.py:2077:        if check_lpar:
+black.py:2103:        check_lpar = isinstance(child, Leaf) and child.value in parens_after
+black.py:2076:    for child in list(node.children):
+black.py:2077:        if check_lpar:
+black.py:2103:        check_lpar = isinstance(child, Leaf) and child.value in parens_after
+black.py:2076:    for child in list(node.children):
+black.py:2077:        if check_lpar:
+black.py:2103:        check_lpar = isinstance(child, Leaf) and child.value in parens_after
+black.py:2076:    for child in list(node.children):
+black.py:2077:        if check_lpar:
+black.py:2103:        check_lpar = isinstance(child, Leaf) and child.value in parens_after
+black.py:1189:        for child in node.children:
+black.py:1190:            if child.type == token.NAME and child.value in keywords:  # type: ignore
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1091:            if self.current_line.__class__ == type:
+black.py:1092:                self.current_line.depth += indent
+black.py:1095:            return  # Line is empty, don't emit. Creating a new one unnecessary.
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:1189:        for child in node.children:
+black.py:1190:            if child.type == token.NAME and child.value in keywords:  # type: ignore
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1628:    if "#" not in p:
+black.py:1629:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:1308:def whitespace(leaf: Leaf) -> str:  # noqa C901
+black.py:1310:    NO = ""
+black.py:1311:    SPACE = " "
+black.py:1313:    t = leaf.type
+black.py:1314:    p = leaf.parent
+black.py:1315:    v = leaf.value
+black.py:1316:    if t in ALWAYS_NO_SPACE:
+black.py:1319:    if t == token.COMMENT:
+black.py:1322:    assert p is not None, f"INTERNAL ERROR: hand-made leaf without parent: {leaf!r}"
+black.py:1323:    if t == token.COLON and p.type not in {syms.subscript, syms.subscriptlist}:
+black.py:1326:    prev = leaf.prev_sibling
+black.py:1327:    if not prev:
+black.py:1:#!/usr/bin/env python3
+black.py:1374:    elif prev.type in OPENING_BRACKETS:
+black.py:1377:    if p.type in {syms.parameters, syms.arglist}:
+black.py:1:#!/usr/bin/env python3
+black.py:1382:    elif p.type == syms.varargslist:
+black.py:1:#!/usr/bin/env python3
+black.py:1387:    elif p.type == syms.typedargslist:
+black.py:1:#!/usr/bin/env python3
+black.py:1404:    elif p.type == syms.tname:
+black.py:1:#!/usr/bin/env python3
+black.py:1411:    elif p.type == syms.trailer:
+black.py:1:#!/usr/bin/env python3
+black.py:1428:    elif p.type == syms.argument:
+black.py:1:#!/usr/bin/env python3
+black.py:1441:    elif p.type == syms.decorator:
+black.py:1:#!/usr/bin/env python3
+black.py:1445:    elif p.type == syms.dotted_name:
+black.py:1:#!/usr/bin/env python3
+black.py:1453:    elif p.type == syms.classdef:
+black.py:1:#!/usr/bin/env python3
+black.py:1460:    elif p.type == syms.subscript:
+black.py:1:#!/usr/bin/env python3
+black.py:1472:    elif p.type == syms.atom:
+black.py:1:#!/usr/bin/env python3
+black.py:1477:    elif p.type == syms.dictsetmaker:
+black.py:1:#!/usr/bin/env python3
+black.py:1482:    elif p.type in {syms.factor, syms.star_expr}:
+black.py:1:#!/usr/bin/env python3
+black.py:1503:    elif p.type == syms.import_from:
+black.py:1:#!/usr/bin/env python3
+black.py:1515:    elif p.type == syms.sliceop:
+black.py:1518:    return SPACE
+black.py:727:            leaf.prefix += whitespace(leaf)
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:1189:        for child in node.children:
+black.py:1190:            if child.type == token.NAME and child.value in keywords:  # type: ignore
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:1308:def whitespace(leaf: Leaf) -> str:  # noqa C901
+black.py:1310:    NO = ""
+black.py:1311:    SPACE = " "
+black.py:1313:    t = leaf.type
+black.py:1314:    p = leaf.parent
+black.py:1315:    v = leaf.value
+black.py:1316:    if t in ALWAYS_NO_SPACE:
+black.py:1319:    if t == token.COMMENT:
+black.py:1322:    assert p is not None, f"INTERNAL ERROR: hand-made leaf without parent: {leaf!r}"
+black.py:1323:    if t == token.COLON and p.type not in {syms.subscript, syms.subscriptlist}:
+black.py:1326:    prev = leaf.prev_sibling
+black.py:1327:    if not prev:
+black.py:1521:def preceding_leaf(node: Optional[LN]) -> Optional[Leaf]:
+black.py:1523:    while node:
+black.py:1523:    while node:
+black.py:1524:        res = node.prev_sibling
+black.py:1525:        if res:
+black.py:1526:            if isinstance(res, Leaf):
+black.py:1527:                return res
+black.py:1328:        prevp = preceding_leaf(p)
+black.py:1329:        if not prevp or prevp.type in OPENING_BRACKETS:
+black.py:1332:        if t == token.COLON:
+black.py:1335:        if prevp.type == token.EQUAL:
+black.py:1:#!/usr/bin/env python3
+black.py:1348:        elif prevp.type in STARS:
+black.py:1:#!/usr/bin/env python3
+black.py:1352:        elif prevp.type == token.COLON:
+black.py:1:#!/usr/bin/env python3
+black.py:1356:        elif (
+black.py:1:#!/usr/bin/env python3
+black.py:1363:        elif (
+black.py:1377:    if p.type in {syms.parameters, syms.arglist}:
+black.py:1379:        if not prev or prev.type != token.COMMA:
+black.py:1380:            return NO
+black.py:727:            leaf.prefix += whitespace(leaf)
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:637:            self.bracket_match[self.depth, BRACKET[leaf.type]] = leaf
+black.py:638:            self.depth += 1
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:2005:    leaf.prefix = ""
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:1308:def whitespace(leaf: Leaf) -> str:  # noqa C901
+black.py:1310:    NO = ""
+black.py:1311:    SPACE = " "
+black.py:1313:    t = leaf.type
+black.py:1314:    p = leaf.parent
+black.py:1315:    v = leaf.value
+black.py:1316:    if t in ALWAYS_NO_SPACE:
+black.py:1317:        return NO
+black.py:727:            leaf.prefix += whitespace(leaf)
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:624:            self.depth -= 1
+black.py:625:            opening_bracket = self.bracket_match.pop((self.depth, leaf.type))
+black.py:626:            leaf.opening_bracket = opening_bracket
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:1189:        for child in node.children:
+black.py:1190:            if child.type == token.NAME and child.value in keywords:  # type: ignore
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:1308:def whitespace(leaf: Leaf) -> str:  # noqa C901
+black.py:1310:    NO = ""
+black.py:1311:    SPACE = " "
+black.py:1313:    t = leaf.type
+black.py:1314:    p = leaf.parent
+black.py:1315:    v = leaf.value
+black.py:1316:    if t in ALWAYS_NO_SPACE:
+black.py:1319:    if t == token.COMMENT:
+black.py:1322:    assert p is not None, f"INTERNAL ERROR: hand-made leaf without parent: {leaf!r}"
+black.py:1323:    if t == token.COLON and p.type not in {syms.subscript, syms.subscriptlist}:
+black.py:1324:        return NO
+black.py:727:            leaf.prefix += whitespace(leaf)
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:1189:        for child in node.children:
+black.py:1190:            if child.type == token.NAME and child.value in keywords:  # type: ignore
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1153:    def visit_INDENT(self, node: Node) -> Iterator[Line]:
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1097:        complete_line = self.current_line
+black.py:1098:        self.current_line = type(depth=complete_line.depth + indent)
+black.py:417:    for current_line in lines.visit(src_node):
+black.py:1003:    def maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1010:        if isinstance(current_line, UnformattedLines):
+black.py:1019:    def _maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1020:        max_allowed = 1
+black.py:1021:        if current_line.depth == 0:
+black.py:1022:            max_allowed = 2
+black.py:1023:        if current_line.leaves:
+black.py:1025:            first_leaf = current_line.leaves[0]
+black.py:1026:            before = first_leaf.prefix.count("\n")
+black.py:1027:            before = min(before, max_allowed)
+black.py:1028:            first_leaf.prefix = ""
+black.py:1031:        depth = current_line.depth
+black.py:1032:        while self.previous_defs and self.previous_defs[-1] >= depth:
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1035:        is_decorator = current_line.is_decorator
+black.py:1036:        if is_decorator or current_line.is_def or current_line.is_class:
+black.py:777:    def is_def(self) -> bool:
+black.py:779:        try:
+black.py:780:            first_leaf = self.leaves[0]
+black.py:784:        try:
+black.py:788:        return (
+black.py:1037:            if not is_decorator:
+black.py:1038:                self.previous_defs.append(depth)
+black.py:1039:            if self.previous_line is None:
+black.py:1043:            if self.previous_line and self.previous_line.is_decorator:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1045:                return 0, 0
+black.py:1013:        before, after = self._maybe_empty_lines(current_line)
+black.py:1014:        before -= self.previous_after
+black.py:1015:        self.previous_after = after
+black.py:1016:        self.previous_line = current_line
+black.py:1017:        return before, after
+black.py:420:        before, after = elt.maybe_empty_lines(current_line)
+black.py:1681:def split_line(
+black.py:1694:    if isinstance(line, UnformattedLines) or line.is_comment:
+black.py:753:    def is_comment(self) -> bool:
+black.py:755:        return len(self.leaves) == 1 and self.leaves[0].type == STANDALONE_COMMENT
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:934:        return res + "\n"
+black.py:1699:    if (
+black.py:819:    def contains_standalone_comments(self, depth_limit: int = sys.maxsize) -> bool:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:826:        return False
+black.py:423:        for line in split_line(current_line, line_length=line_length, py36=py36):
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:930:        for leaf in leaves:
+black.py:931:            res += str(leaf)
+black.py:934:        return res + "\n"
+black.py:424:            dst_contents += str(line)
+black.py:1705:        return
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:1195:    def visit_simple_stmt(self, node: Node) -> Iterator[Line]:
+black.py:1197:        is_suite_like = node.parent and node.parent.type in STATEMENT
+black.py:1198:        if is_suite_like:
+black.py:1204:            yield from self.line()
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1091:            if self.current_line.__class__ == type:
+black.py:1092:                self.current_line.depth += indent
+black.py:1095:            return  # Line is empty, don't emit. Creating a new one unnecessary.
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:724:        if self.leaves and not preformatted:
+black.py:728:        if self.inside_brackets or not preformatted:
+black.py:729:            self.bracket_tracker.mark(leaf)
+black.py:603:    def mark(self, leaf: Leaf) -> None:
+black.py:618:        if leaf.type == token.COMMENT:
+black.py:621:        self.maybe_decrement_after_for_loop_variable(leaf)
+black.py:668:    def maybe_decrement_after_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:670:        if self._for_loop_variable and leaf.type == token.NAME and leaf.value == "in":
+black.py:675:        return False
+black.py:622:        self.maybe_decrement_after_lambda_arguments(leaf)
+black.py:690:    def maybe_decrement_after_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:692:        if self._lambda_arguments and leaf.type == token.COLON:
+black.py:697:        return False
+black.py:623:        if leaf.type in CLOSING_BRACKETS:
+black.py:627:        leaf.bracket_depth = self.depth
+black.py:628:        if self.depth == 0:
+black.py:1553:def is_split_before_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1561:    if is_vararg(leaf, within=VARARGS_PARENTS | UNPACKING_PARENTS):
+black.py:2139:def is_vararg(leaf: Leaf, within: Set[NodeType]) -> bool:
+black.py:2147:    if leaf.type not in STARS or not leaf.parent:
+black.py:2148:        return False
+black.py:1566:    if (
+black.py:1573:    if leaf.type in COMPARATORS:
+black.py:1576:    if (
+black.py:1583:    if (
+black.py:1591:    if (
+black.py:1599:    if leaf.type == token.NAME and leaf.value in LOGIC_OPERATORS and leaf.parent:
+black.py:1602:    return 0
+black.py:629:            delim = is_split_before_delimiter(leaf, self.previous)
+black.py:630:            if delim and self.previous is not None:
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:1539:def is_split_after_delimiter(leaf: Leaf, previous: Leaf = None) -> int:
+black.py:1547:    if leaf.type == token.COMMA:
+black.py:1550:    return 0
+black.py:633:                delim = is_split_after_delimiter(leaf, self.previous)
+black.py:634:                if delim:
+black.py:636:        if leaf.type in OPENING_BRACKETS:
+black.py:639:        self.previous = leaf
+black.py:640:        self.maybe_increment_lambda_arguments(leaf)
+black.py:677:    def maybe_increment_lambda_arguments(self, leaf: Leaf) -> bool:
+black.py:683:        if leaf.type == token.NAME and leaf.value == "lambda":
+black.py:688:        return False
+black.py:641:        self.maybe_increment_for_loop_variable(leaf)
+black.py:655:    def maybe_increment_for_loop_variable(self, leaf: Leaf) -> bool:
+black.py:661:        if leaf.type == token.NAME and leaf.value == "for":
+black.py:666:        return False
+black.py:730:            self.maybe_remove_trailing_comma(leaf)
+black.py:828:    def maybe_remove_trailing_comma(self, closing: Leaf) -> bool:
+black.py:830:        if not (
+black.py:835:            return False
+black.py:732:        if not self.append_comment(leaf):
+black.py:877:    def append_comment(self, comment: Leaf) -> bool:
+black.py:879:        if (
+black.py:886:        if comment.type != token.COMMENT:
+black.py:887:            return False
+black.py:733:            self.leaves.append(leaf)
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1159:    def visit_DEDENT(self, node: Node) -> Iterator[Line]:
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1097:        complete_line = self.current_line
+black.py:1098:        self.current_line = type(depth=complete_line.depth + indent)
+black.py:417:    for current_line in lines.visit(src_node):
+black.py:1003:    def maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1010:        if isinstance(current_line, UnformattedLines):
+black.py:1019:    def _maybe_empty_lines(self, current_line: Line) -> Tuple[int, int]:
+black.py:1020:        max_allowed = 1
+black.py:1021:        if current_line.depth == 0:
+black.py:1023:        if current_line.leaves:
+black.py:1025:            first_leaf = current_line.leaves[0]
+black.py:1026:            before = first_leaf.prefix.count("\n")
+black.py:1027:            before = min(before, max_allowed)
+black.py:1028:            first_leaf.prefix = ""
+black.py:1031:        depth = current_line.depth
+black.py:1032:        while self.previous_defs and self.previous_defs[-1] >= depth:
+black.py:758:    def is_decorator(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:760:        return bool(self) and self.leaves[0].type == token.AT
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1035:        is_decorator = current_line.is_decorator
+black.py:1036:        if is_decorator or current_line.is_def or current_line.is_class:
+black.py:777:    def is_def(self) -> bool:
+black.py:779:        try:
+black.py:780:            first_leaf = self.leaves[0]
+black.py:784:        try:
+black.py:786:        except IndexError:
+black.py:788:        return (
+black.py:768:    def is_class(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:770:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1052:        if current_line.is_flow_control:
+black.py:799:    def is_flow_control(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:804:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1055:        if (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:763:    def is_import(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1976:def is_import(leaf: Leaf) -> bool:
+black.py:1978:    p = leaf.parent
+black.py:1979:    t = leaf.type
+black.py:1980:    v = leaf.value
+black.py:1981:    return bool(
+black.py:765:        return bool(self) and is_import(self.leaves[0])
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1976:def is_import(leaf: Leaf) -> bool:
+black.py:1978:    p = leaf.parent
+black.py:1979:    t = leaf.type
+black.py:1980:    v = leaf.value
+black.py:1981:    return bool(
+black.py:1063:        if (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:811:    def is_yield(self) -> bool:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:813:        return (
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1070:        return before, 0
+black.py:1013:        before, after = self._maybe_empty_lines(current_line)
+black.py:1014:        before -= self.previous_after
+black.py:1015:        self.previous_after = after
+black.py:1016:        self.previous_line = current_line
+black.py:1017:        return before, after
+black.py:420:        before, after = elt.maybe_empty_lines(current_line)
+black.py:1681:def split_line(
+black.py:1694:    if isinstance(line, UnformattedLines) or line.is_comment:
+black.py:753:    def is_comment(self) -> bool:
+black.py:755:        return len(self.leaves) == 1 and self.leaves[0].type == STANDALONE_COMMENT
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:934:        return res + "\n"
+black.py:1699:    if (
+black.py:819:    def contains_standalone_comments(self, depth_limit: int = sys.maxsize) -> bool:
+black.py:821:        for leaf in self.leaves:
+black.py:822:            if leaf.type == STANDALONE_COMMENT:
+black.py:826:        return False
+black.py:423:        for line in split_line(current_line, line_length=line_length, py36=py36):
+black.py:921:    def __str__(self) -> str:
+black.py:923:        if not self:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:926:        indent = "    " * self.depth
+black.py:927:        leaves = iter(self.leaves)
+black.py:929:        res = f"{first.prefix}{indent}{first.value}"
+black.py:934:        return res + "\n"
+black.py:424:            dst_contents += str(line)
+black.py:1705:        return
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1091:            if self.current_line.__class__ == type:
+black.py:1092:                self.current_line.depth += indent
+black.py:1095:            return  # Line is empty, don't emit. Creating a new one unnecessary.
+black.py:494:            for child in node.children:
+black.py:1101:    def visit(self, node: LN) -> Iterator[Line]:
+black.py:1106:        if isinstance(self.current_line, UnformattedLines):
+black.py:1111:            yield from super().visit(node)
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:1258:    def visit_ENDMARKER(self, leaf: Leaf) -> Iterator[Line]:
+black.py:1113:    def visit_default(self, node: LN) -> Iterator[Line]:
+black.py:1115:        if isinstance(node, Leaf):
+black.py:643:    def any_open_brackets(self) -> bool:
+black.py:645:        return bool(self.bracket_match)
+black.py:1116:            any_open_brackets = self.current_line.bracket_tracker.any_open_brackets()
+black.py:1117:            try:
+black.py:1605:def generate_comments(leaf: Leaf) -> Iterator[Leaf]:
+black.py:1624:    p = leaf.prefix
+black.py:1625:    if not p:
+black.py:1626:        return
+black.py:1:#!/usr/bin/env python3
+black.py:1146:                normalize_prefix(node, inside_brackets=any_open_brackets)
+black.py:1990:def normalize_prefix(leaf: Leaf, *, inside_brackets: bool) -> None:
+black.py:1996:    if not inside_brackets:
+black.py:1997:        spl = leaf.prefix.split("#")
+black.py:1998:        if "\\" not in spl[0]:
+black.py:1999:            nl_count = spl[-1].count("\n")
+black.py:2000:            if len(spl) > 1:
+black.py:2002:            leaf.prefix = "\n" * nl_count
+black.py:2003:            return
+black.py:1147:                if node.type == token.STRING:
+black.py:1149:                if node.type not in WHITESPACE:
+black.py:1150:                    self.current_line.append(node)
+black.py:710:    def append(self, leaf: Leaf, preformatted: bool = False) -> None:
+black.py:720:        has_value = leaf.type in BRACKETS or bool(leaf.value.strip())
+black.py:721:        if not has_value:
+black.py:722:            return
+black.py:491:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:493:        if isinstance(node, Node):
+black.py:1082:    def line(self, indent: int = 0, type: Type[Line] = Line) -> Iterator[Line]:
+black.py:1090:        if not self.current_line:
+black.py:936:    def __bool__(self) -> bool:
+black.py:938:        return bool(self.leaves or self.comments)
+black.py:1091:            if self.current_line.__class__ == type:
+black.py:1092:                self.current_line.depth += indent
+black.py:1095:            return  # Line is empty, don't emit. Creating a new one unnecessary.
+black.py:425:    return dst_contents
+tests/test_black.py:632:        actual = fs(source)
+tests/test_black.py:633:        self.assertFormatEqual(expected, actual)
+tests/test_black.py:83:    def assertFormatEqual(self, expected: str, actual: str) -> None:
+tests/test_black.py:84:        if actual != expected and not os.environ.get("SKIP_AST_PRINT"):
+tests/test_black.py:86:            black.out("Expected tree:", fg="green")
+tests/test_black.py:87:            try:
+black.py:435:def lib2to3_parse(src_txt: str) -> Node:
+black.py:437:    grammar = pygram.python_grammar_no_print_statement
+black.py:438:    if src_txt[-1] != "\n":
+black.py:441:    for grammar in GRAMMARS:
+black.py:442:        drv = driver.Driver(grammar, pytree.convert)
+black.py:443:        try:
+black.py:444:            result = drv.parse_string(src_txt, True)
+black.py:458:    if isinstance(result, Leaf):
+black.py:460:    return result
+tests/test_black.py:88:                exp_node = black.lib2to3_parse(expected)
+tests/test_black.py:89:                bdv = black.DebugVisitor()
+tests/test_black.py:90:                list(bdv.visit(exp_node))
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:519:                out(f" {node.prefix!r}", fg="green", bold=False, nl=False)
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:519:                out(f" {node.prefix!r}", fg="green", bold=False, nl=False)
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:519:                out(f" {node.prefix!r}", fg="green", bold=False, nl=False)
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+tests/test_black.py:93:            black.out("Actual tree:", fg="red")
+tests/test_black.py:94:            try:
+black.py:435:def lib2to3_parse(src_txt: str) -> Node:
+black.py:437:    grammar = pygram.python_grammar_no_print_statement
+black.py:438:    if src_txt[-1] != "\n":
+black.py:441:    for grammar in GRAMMARS:
+black.py:442:        drv = driver.Driver(grammar, pytree.convert)
+black.py:443:        try:
+black.py:444:            result = drv.parse_string(src_txt, True)
+black.py:458:    if isinstance(result, Leaf):
+black.py:460:    return result
+tests/test_black.py:95:                exp_node = black.lib2to3_parse(actual)
+tests/test_black.py:96:                bdv = black.DebugVisitor()
+tests/test_black.py:97:                list(bdv.visit(exp_node))
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:519:                out(f" {node.prefix!r}", fg="green", bold=False, nl=False)
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:519:                out(f" {node.prefix!r}", fg="green", bold=False, nl=False)
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:519:                out(f" {node.prefix!r}", fg="green", bold=False, nl=False)
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:488:            name = type_repr(node.type)
+black.py:488:            name = type_repr(node.type)
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:506:            out(f"{indent}{_type}", fg="yellow")
+black.py:507:            self.tree_depth += 1
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+black.py:508:            for child in node.children:
+black.py:475:    def visit(self, node: LN) -> Iterator[T]:
+black.py:485:        if node.type < 256:
+black.py:486:            name = token.tok_name[node.type]
+black.py:502:    def visit_default(self, node: LN) -> Iterator[T]:
+black.py:503:        indent = " " * (2 * self.tree_depth)
+black.py:504:        if isinstance(node, Node):
+black.py:515:            out(f"{indent}{_type}", fg="blue", nl=False)
+black.py:516:            if node.prefix:
+black.py:520:            out(f" {node.value!r}", fg="blue", bold=False)
+black.py:511:            self.tree_depth -= 1
+black.py:512:            out(f"{indent}/{_type}", fg="yellow", bold=False)
+tests/test_black.py:100:        self.assertEqual(expected, actual)

@@ -1,0 +1,184 @@
+cookiecutter/utils.py:12:logger = logging.getLogger(__name__)
+cookiecutter/hooks.py:13:logger = logging.getLogger(__name__)
+cookiecutter/hooks.py:15:_HOOKS = [
+cookiecutter/hooks.py:19:EXIT_SUCCESS = 0
+tests/test_hooks.py:76:    repo_path = 'tests/test-hooks'
+tests/test_hooks.py:116:    repo_path = os.path.abspath('tests/test-hooks/')
+tests/test_hooks.py:119:    def setup_method(self, method):
+tests/test_hooks.py:12:def make_test_repo(name, multiple_hooks=False):
+tests/test_hooks.py:14:    hook_dir = os.path.join(name, 'hooks')
+tests/test_hooks.py:15:    template = os.path.join(name, 'input{{hooks}}')
+tests/test_hooks.py:16:    os.mkdir(name)
+tests/test_hooks.py:17:    os.mkdir(hook_dir)
+tests/test_hooks.py:18:    os.mkdir(template)
+tests/test_hooks.py:20:    with open(os.path.join(template, 'README.rst'), 'w') as f:
+tests/test_hooks.py:21:        f.write("foo\n===\n\nbar\n")
+tests/test_hooks.py:23:    with open(os.path.join(hook_dir, 'pre_gen_project.py'), 'w') as f:
+tests/test_hooks.py:24:        f.write("#!/usr/bin/env python\n")
+tests/test_hooks.py:25:        f.write("# -*- coding: utf-8 -*-\n")
+tests/test_hooks.py:26:        f.write("from __future__ import print_function\n")
+tests/test_hooks.py:27:        f.write("\n")
+tests/test_hooks.py:28:        f.write("print('pre generation hook')\n")
+tests/test_hooks.py:29:        f.write("f = open('python_pre.txt', 'w')\n")
+tests/test_hooks.py:30:        f.write("f.close()\n")
+tests/test_hooks.py:32:    if sys.platform.startswith('win'):
+tests/test_hooks.py:40:        post = 'post_gen_project.sh'
+tests/test_hooks.py:40:        post = 'post_gen_project.sh'
+tests/test_hooks.py:41:        filename = os.path.join(hook_dir, post)
+tests/test_hooks.py:42:        with open(filename, 'w') as f:
+tests/test_hooks.py:43:            f.write("#!/bin/bash\n")
+tests/test_hooks.py:44:            f.write("\n")
+tests/test_hooks.py:45:            f.write("echo 'post generation hook';\n")
+tests/test_hooks.py:46:            f.write("touch 'shell_post.txt'\n")
+tests/test_hooks.py:48:        os.chmod(filename, os.stat(filename).st_mode | stat.S_IXUSR)
+tests/test_hooks.py:51:    if multiple_hooks:
+tests/test_hooks.py:52:        if sys.platform.startswith('win'):
+tests/test_hooks.py:60:            pre = 'pre_gen_project.sh'
+tests/test_hooks.py:60:            pre = 'pre_gen_project.sh'
+tests/test_hooks.py:61:            filename = os.path.join(hook_dir, pre)
+tests/test_hooks.py:62:            with open(filename, 'w') as f:
+tests/test_hooks.py:63:                f.write("#!/bin/bash\n")
+tests/test_hooks.py:64:                f.write("\n")
+tests/test_hooks.py:65:                f.write("echo 'post generation hook';\n")
+tests/test_hooks.py:66:                f.write("touch 'shell_pre.txt'\n")
+tests/test_hooks.py:68:            os.chmod(filename, os.stat(filename).st_mode | stat.S_IXUSR)
+tests/test_hooks.py:70:    return post
+tests/test_hooks.py:181:    def test_run_hook(self):
+tests/test_hooks.py:184:        tests_dir = os.path.join(self.repo_path, 'input{{hooks}}')
+tests/test_hooks.py:185:        with utils.work_in(self.repo_path):
+cookiecutter/utils.py:49:def work_in(dirname=None):
+cookiecutter/utils.py:54:    curdir = os.getcwd()
+cookiecutter/utils.py:55:    try:
+cookiecutter/utils.py:56:        if dirname is not None:
+cookiecutter/utils.py:57:            os.chdir(dirname)
+tests/test_hooks.py:186:            hooks.run_hook('pre_gen_project', tests_dir, {})
+cookiecutter/hooks.py:114:def run_hook(hook_name, project_dir, context):
+cookiecutter/hooks.py:39:def find_hook(hook_name, hooks_dir='hooks'):
+cookiecutter/hooks.py:51:    logger.debug('hooks_dir is %s', os.path.abspath(hooks_dir))
+cookiecutter/hooks.py:53:    if not os.path.isdir(hooks_dir):
+cookiecutter/hooks.py:57:    for hook_file in os.listdir(hooks_dir):
+cookiecutter/hooks.py:58:        if valid_hook(hook_file, hook_name):
+cookiecutter/hooks.py:22:def valid_hook(hook_file, hook_name):
+cookiecutter/hooks.py:29:    filename = os.path.basename(hook_file)
+cookiecutter/hooks.py:30:    basename = os.path.splitext(filename)[0]
+cookiecutter/hooks.py:32:    matching_hook = basename == hook_name
+cookiecutter/hooks.py:33:    supported_hook = basename in _HOOKS
+cookiecutter/hooks.py:34:    backup_file = filename.endswith('~')
+cookiecutter/hooks.py:36:    return matching_hook and supported_hook and not backup_file
+cookiecutter/hooks.py:57:    for hook_file in os.listdir(hooks_dir):
+cookiecutter/hooks.py:58:        if valid_hook(hook_file, hook_name):
+cookiecutter/hooks.py:22:def valid_hook(hook_file, hook_name):
+cookiecutter/hooks.py:29:    filename = os.path.basename(hook_file)
+cookiecutter/hooks.py:30:    basename = os.path.splitext(filename)[0]
+cookiecutter/hooks.py:32:    matching_hook = basename == hook_name
+cookiecutter/hooks.py:33:    supported_hook = basename in _HOOKS
+cookiecutter/hooks.py:34:    backup_file = filename.endswith('~')
+cookiecutter/hooks.py:36:    return matching_hook and supported_hook and not backup_file
+cookiecutter/hooks.py:59:            return os.path.abspath(os.path.join(hooks_dir, hook_file))
+cookiecutter/hooks.py:122:    script = find_hook(hook_name)
+cookiecutter/hooks.py:123:    if script is None:
+cookiecutter/hooks.py:126:    logger.debug('Running hook %s', hook_name)
+cookiecutter/hooks.py:127:    run_script_with_context(script, project_dir, context)
+cookiecutter/hooks.py:93:def run_script_with_context(script_path, cwd, context):
+cookiecutter/hooks.py:100:    _, extension = os.path.splitext(script_path)
+cookiecutter/hooks.py:102:    with open(script_path, 'r', encoding='utf-8') as file:
+cookiecutter/hooks.py:103:        contents = file.read()
+cookiecutter/hooks.py:106:        env = StrictEnvironment(context=context, keep_trailing_newline=True)
+cookiecutter/hooks.py:107:        template = env.from_string(contents)
+cookiecutter/hooks.py:108:        output = template.render(**context)
+cookiecutter/hooks.py:109:        temp.write(output.encode('utf-8'))
+cookiecutter/hooks.py:111:    run_script(temp.name, cwd)
+cookiecutter/hooks.py:64:def run_script(script_path, cwd='.'):
+cookiecutter/hooks.py:70:    run_thru_shell = sys.platform.startswith('win')
+cookiecutter/hooks.py:71:    if script_path.endswith('.py'):
+cookiecutter/hooks.py:74:        script_command = [script_path]
+cookiecutter/hooks.py:74:        script_command = [script_path]
+cookiecutter/hooks.py:76:    utils.make_executable(script_path)
+cookiecutter/utils.py:63:def make_executable(script_path):
+cookiecutter/utils.py:68:    status = os.stat(script_path)
+cookiecutter/utils.py:69:    os.chmod(script_path, status.st_mode | stat.S_IEXEC)
+cookiecutter/hooks.py:78:    try:
+cookiecutter/hooks.py:79:        proc = subprocess.Popen(script_command, shell=run_thru_shell, cwd=cwd)
+cookiecutter/hooks.py:80:        exit_status = proc.wait()
+cookiecutter/hooks.py:81:        if exit_status != EXIT_SUCCESS:
+tests/test_hooks.py:187:            assert os.path.isfile(os.path.join(tests_dir, 'python_pre.txt'))
+cookiecutter/utils.py:1:"""Helper functions used throughout Cookiecutter."""
+cookiecutter/utils.py:60:        os.chdir(curdir)
+tests/test_hooks.py:123:    def teardown_method(self, method):
+tests/test_hooks.py:125:        utils.rmtree(self.repo_path)
+cookiecutter/utils.py:25:def rmtree(path):
+cookiecutter/utils.py:30:    shutil.rmtree(path, onerror=force_delete)
+tests/test_hooks.py:127:        if os.path.exists('python_pre.txt'):
+tests/test_hooks.py:129:        if os.path.exists('shell_post.txt'):
+tests/test_hooks.py:131:        if os.path.exists('shell_pre.txt'):
+tests/test_hooks.py:133:        if os.path.exists('tests/shell_post.txt'):
+tests/test_hooks.py:135:        if os.path.exists('tests/test-hooks/input{{hooks}}/python_pre.txt'):
+tests/test_hooks.py:137:        if os.path.exists('tests/test-hooks/input{{hooks}}/shell_post.txt'):
+tests/test_hooks.py:139:        if os.path.exists('tests/context_post.txt'):
+cookiecutter/utils.py:12:logger = logging.getLogger(__name__)
+cookiecutter/hooks.py:13:logger = logging.getLogger(__name__)
+cookiecutter/hooks.py:15:_HOOKS = [
+cookiecutter/hooks.py:19:EXIT_SUCCESS = 0
+tests/test_hooks.py:76:    repo_path = 'tests/test-hooks'
+tests/test_hooks.py:116:    repo_path = os.path.abspath('tests/test-hooks/')
+tests/test_hooks.py:78:    def setup_method(self, method):
+tests/test_hooks.py:12:def make_test_repo(name, multiple_hooks=False):
+tests/test_hooks.py:14:    hook_dir = os.path.join(name, 'hooks')
+tests/test_hooks.py:15:    template = os.path.join(name, 'input{{hooks}}')
+tests/test_hooks.py:16:    os.mkdir(name)
+tests/test_hooks.py:17:    os.mkdir(hook_dir)
+tests/test_hooks.py:18:    os.mkdir(template)
+tests/test_hooks.py:20:    with open(os.path.join(template, 'README.rst'), 'w') as f:
+tests/test_hooks.py:21:        f.write("foo\n===\n\nbar\n")
+tests/test_hooks.py:23:    with open(os.path.join(hook_dir, 'pre_gen_project.py'), 'w') as f:
+tests/test_hooks.py:24:        f.write("#!/usr/bin/env python\n")
+tests/test_hooks.py:25:        f.write("# -*- coding: utf-8 -*-\n")
+tests/test_hooks.py:26:        f.write("from __future__ import print_function\n")
+tests/test_hooks.py:27:        f.write("\n")
+tests/test_hooks.py:28:        f.write("print('pre generation hook')\n")
+tests/test_hooks.py:29:        f.write("f = open('python_pre.txt', 'w')\n")
+tests/test_hooks.py:30:        f.write("f.close()\n")
+tests/test_hooks.py:32:    if sys.platform.startswith('win'):
+tests/test_hooks.py:40:        post = 'post_gen_project.sh'
+tests/test_hooks.py:40:        post = 'post_gen_project.sh'
+tests/test_hooks.py:41:        filename = os.path.join(hook_dir, post)
+tests/test_hooks.py:42:        with open(filename, 'w') as f:
+tests/test_hooks.py:43:            f.write("#!/bin/bash\n")
+tests/test_hooks.py:44:            f.write("\n")
+tests/test_hooks.py:45:            f.write("echo 'post generation hook';\n")
+tests/test_hooks.py:46:            f.write("touch 'shell_post.txt'\n")
+tests/test_hooks.py:48:        os.chmod(filename, os.stat(filename).st_mode | stat.S_IXUSR)
+tests/test_hooks.py:51:    if multiple_hooks:
+tests/test_hooks.py:70:    return post
+tests/test_hooks.py:86:    def test_find_hook(self):
+tests/test_hooks.py:88:        with utils.work_in(self.repo_path):
+cookiecutter/utils.py:49:def work_in(dirname=None):
+cookiecutter/utils.py:54:    curdir = os.getcwd()
+cookiecutter/utils.py:55:    try:
+cookiecutter/utils.py:56:        if dirname is not None:
+cookiecutter/utils.py:57:            os.chdir(dirname)
+tests/test_hooks.py:89:            expected_pre = os.path.abspath('hooks/pre_gen_project.py')
+cookiecutter/hooks.py:39:def find_hook(hook_name, hooks_dir='hooks'):
+cookiecutter/hooks.py:51:    logger.debug('hooks_dir is %s', os.path.abspath(hooks_dir))
+cookiecutter/hooks.py:53:    if not os.path.isdir(hooks_dir):
+cookiecutter/hooks.py:57:    for hook_file in os.listdir(hooks_dir):
+cookiecutter/hooks.py:58:        if valid_hook(hook_file, hook_name):
+cookiecutter/hooks.py:22:def valid_hook(hook_file, hook_name):
+cookiecutter/hooks.py:29:    filename = os.path.basename(hook_file)
+cookiecutter/hooks.py:30:    basename = os.path.splitext(filename)[0]
+cookiecutter/hooks.py:32:    matching_hook = basename == hook_name
+cookiecutter/hooks.py:33:    supported_hook = basename in _HOOKS
+cookiecutter/hooks.py:34:    backup_file = filename.endswith('~')
+cookiecutter/hooks.py:36:    return matching_hook and supported_hook and not backup_file
+cookiecutter/hooks.py:57:    for hook_file in os.listdir(hooks_dir):
+cookiecutter/hooks.py:58:        if valid_hook(hook_file, hook_name):
+cookiecutter/hooks.py:22:def valid_hook(hook_file, hook_name):
+cookiecutter/hooks.py:29:    filename = os.path.basename(hook_file)
+cookiecutter/hooks.py:30:    basename = os.path.splitext(filename)[0]
+cookiecutter/hooks.py:32:    matching_hook = basename == hook_name
+cookiecutter/hooks.py:33:    supported_hook = basename in _HOOKS
+cookiecutter/hooks.py:34:    backup_file = filename.endswith('~')
+cookiecutter/hooks.py:36:    return matching_hook and supported_hook and not backup_file
+cookiecutter/hooks.py:59:            return os.path.abspath(os.path.join(hooks_dir, hook_file))
+tests/test_hooks.py:90:            actual_hook_path = hooks.find_hook('pre_gen_project')
+tests/test_hooks.py:91:            assert expected_pre == actual_hook_path[0]

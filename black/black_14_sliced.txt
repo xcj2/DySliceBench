@@ -1,0 +1,259 @@
+black.py:49:__version__ = "18.6b4"
+black.py:55:CACHE_DIR = Path(user_cache_dir("black", version=__version__))
+black.py:68:SplitFunc = Callable[["Line", bool], Iterator["Line"]]
+black.py:69:Timestamp = float
+black.py:70:FileSize = int
+black.py:71:CacheInfo = Tuple[Timestamp, FileSize]
+black.py:74:err = partial(click.secho, fg="red", err=True)
+black.py:76:pygram.initialize(CACHE_DIR)
+black.py:77:syms = pygram.python_symbols
+black.py:639:GRAMMARS = [
+black.py:757:STANDALONE_COMMENT = 153
+black.py:758:token.tok_name[STANDALONE_COMMENT] = "STANDALONE_COMMENT"
+black.py:1574:BRACKET = {token.LPAR: token.RPAR, token.LSQB: token.RSQB, token.LBRACE: token.RBRACE}
+black.py:1575:OPENING_BRACKETS = set(BRACKET.keys())
+black.py:1576:CLOSING_BRACKETS = set(BRACKET.values())
+black.py:2284:def dont_increase_indentation(split_func: SplitFunc) -> SplitFunc:
+black.py:2296:    return split_wrapper
+black.py:2284:def dont_increase_indentation(split_func: SplitFunc) -> SplitFunc:
+black.py:2296:    return split_wrapper
+black.py:3509:if __name__ == "__main__":
+tests/test_black.py:22:ll = 88
+tests/test_black.py:25:THIS_FILE = Path(__file__)
+tests/test_black.py:1233:if __name__ == "__main__":
+tests/test_black.py:717:    def test_get_future_imports(self) -> None:
+black.py:646:def lib2to3_parse(src_txt: str) -> Node:
+black.py:648:    grammar = pygram.python_grammar_no_print_statement
+black.py:649:    if src_txt[-1:] != "\n":
+black.py:651:    for grammar in GRAMMARS:
+black.py:652:        drv = driver.Driver(grammar, pytree.convert)
+black.py:653:        try:
+black.py:654:            result = drv.parse_string(src_txt, True)
+black.py:668:    if isinstance(result, Leaf):
+black.py:669:        result = Node(syms.file_input, [result])
+black.py:670:    return result
+tests/test_black.py:718:        node = black.lib2to3_parse("\n")
+tests/test_black.py:719:        self.assertEqual(set(), black.get_future_imports(node))
+black.py:2911:def get_future_imports(node: Node) -> Set[str]:
+black.py:2913:    imports = set()
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2943:    return imports
+black.py:646:def lib2to3_parse(src_txt: str) -> Node:
+black.py:648:    grammar = pygram.python_grammar_no_print_statement
+black.py:649:    if src_txt[-1:] != "\n":
+black.py:651:    for grammar in GRAMMARS:
+black.py:652:        drv = driver.Driver(grammar, pytree.convert)
+black.py:653:        try:
+black.py:654:            result = drv.parse_string(src_txt, True)
+black.py:668:    if isinstance(result, Leaf):
+black.py:670:    return result
+tests/test_black.py:720:        node = black.lib2to3_parse("from __future__ import black\n")
+tests/test_black.py:721:        self.assertEqual({"black"}, black.get_future_imports(node))
+black.py:2911:def get_future_imports(node: Node) -> Set[str]:
+black.py:2913:    imports = set()
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2917:        first_child = child.children[0]
+black.py:2918:        if isinstance(first_child, Leaf):
+black.py:1:import asyncio
+black.py:2928:        elif first_child.type == syms.import_from:
+black.py:2929:            module_name = first_child.children[1]
+black.py:2930:            if not isinstance(module_name, Leaf) or module_name.value != "__future__":
+black.py:2932:            for import_from_child in first_child.children[3:]:
+black.py:2933:                if isinstance(import_from_child, Leaf):
+black.py:2934:                    if import_from_child.type == token.NAME:
+black.py:2935:                        imports.add(import_from_child.value)
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2943:    return imports
+black.py:646:def lib2to3_parse(src_txt: str) -> Node:
+black.py:648:    grammar = pygram.python_grammar_no_print_statement
+black.py:649:    if src_txt[-1:] != "\n":
+black.py:651:    for grammar in GRAMMARS:
+black.py:652:        drv = driver.Driver(grammar, pytree.convert)
+black.py:653:        try:
+black.py:654:            result = drv.parse_string(src_txt, True)
+black.py:668:    if isinstance(result, Leaf):
+black.py:670:    return result
+tests/test_black.py:722:        node = black.lib2to3_parse("from __future__ import multiple, imports\n")
+tests/test_black.py:723:        self.assertEqual({"multiple", "imports"}, black.get_future_imports(node))
+black.py:2911:def get_future_imports(node: Node) -> Set[str]:
+black.py:2913:    imports = set()
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2917:        first_child = child.children[0]
+black.py:2918:        if isinstance(first_child, Leaf):
+black.py:1:import asyncio
+black.py:2928:        elif first_child.type == syms.import_from:
+black.py:2929:            module_name = first_child.children[1]
+black.py:2930:            if not isinstance(module_name, Leaf) or module_name.value != "__future__":
+black.py:2932:            for import_from_child in first_child.children[3:]:
+black.py:2933:                if isinstance(import_from_child, Leaf):
+black.py:1:import asyncio
+black.py:2937:                    assert import_from_child.type == syms.import_as_names
+black.py:2938:                    for leaf in import_from_child.children:
+black.py:2939:                        if isinstance(leaf, Leaf) and leaf.type == token.NAME:
+black.py:2940:                            imports.add(leaf.value)
+black.py:2938:                    for leaf in import_from_child.children:
+black.py:2939:                        if isinstance(leaf, Leaf) and leaf.type == token.NAME:
+black.py:2938:                    for leaf in import_from_child.children:
+black.py:2939:                        if isinstance(leaf, Leaf) and leaf.type == token.NAME:
+black.py:2940:                            imports.add(leaf.value)
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2943:    return imports
+black.py:646:def lib2to3_parse(src_txt: str) -> Node:
+black.py:648:    grammar = pygram.python_grammar_no_print_statement
+black.py:649:    if src_txt[-1:] != "\n":
+black.py:651:    for grammar in GRAMMARS:
+black.py:652:        drv = driver.Driver(grammar, pytree.convert)
+black.py:653:        try:
+black.py:654:            result = drv.parse_string(src_txt, True)
+black.py:668:    if isinstance(result, Leaf):
+black.py:670:    return result
+tests/test_black.py:724:        node = black.lib2to3_parse("from __future__ import (parenthesized, imports)\n")
+tests/test_black.py:725:        self.assertEqual({"parenthesized", "imports"}, black.get_future_imports(node))
+black.py:2911:def get_future_imports(node: Node) -> Set[str]:
+black.py:2913:    imports = set()
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2917:        first_child = child.children[0]
+black.py:2918:        if isinstance(first_child, Leaf):
+black.py:1:import asyncio
+black.py:2928:        elif first_child.type == syms.import_from:
+black.py:2929:            module_name = first_child.children[1]
+black.py:2930:            if not isinstance(module_name, Leaf) or module_name.value != "__future__":
+black.py:2932:            for import_from_child in first_child.children[3:]:
+black.py:2933:                if isinstance(import_from_child, Leaf):
+black.py:2934:                    if import_from_child.type == token.NAME:
+black.py:2932:            for import_from_child in first_child.children[3:]:
+black.py:2933:                if isinstance(import_from_child, Leaf):
+black.py:1:import asyncio
+black.py:2937:                    assert import_from_child.type == syms.import_as_names
+black.py:2938:                    for leaf in import_from_child.children:
+black.py:2939:                        if isinstance(leaf, Leaf) and leaf.type == token.NAME:
+black.py:2940:                            imports.add(leaf.value)
+black.py:2938:                    for leaf in import_from_child.children:
+black.py:2939:                        if isinstance(leaf, Leaf) and leaf.type == token.NAME:
+black.py:2938:                    for leaf in import_from_child.children:
+black.py:2939:                        if isinstance(leaf, Leaf) and leaf.type == token.NAME:
+black.py:2940:                            imports.add(leaf.value)
+black.py:2932:            for import_from_child in first_child.children[3:]:
+black.py:2933:                if isinstance(import_from_child, Leaf):
+black.py:2934:                    if import_from_child.type == token.NAME:
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2943:    return imports
+black.py:646:def lib2to3_parse(src_txt: str) -> Node:
+black.py:648:    grammar = pygram.python_grammar_no_print_statement
+black.py:649:    if src_txt[-1:] != "\n":
+black.py:651:    for grammar in GRAMMARS:
+black.py:652:        drv = driver.Driver(grammar, pytree.convert)
+black.py:653:        try:
+black.py:654:            result = drv.parse_string(src_txt, True)
+black.py:668:    if isinstance(result, Leaf):
+black.py:670:    return result
+tests/test_black.py:726:        node = black.lib2to3_parse(
+tests/test_black.py:729:        self.assertEqual({"multiple", "imports"}, black.get_future_imports(node))
+black.py:2911:def get_future_imports(node: Node) -> Set[str]:
+black.py:2913:    imports = set()
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2917:        first_child = child.children[0]
+black.py:2918:        if isinstance(first_child, Leaf):
+black.py:1:import asyncio
+black.py:2928:        elif first_child.type == syms.import_from:
+black.py:2929:            module_name = first_child.children[1]
+black.py:2930:            if not isinstance(module_name, Leaf) or module_name.value != "__future__":
+black.py:2932:            for import_from_child in first_child.children[3:]:
+black.py:2933:                if isinstance(import_from_child, Leaf):
+black.py:2934:                    if import_from_child.type == token.NAME:
+black.py:2935:                        imports.add(import_from_child.value)
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2917:        first_child = child.children[0]
+black.py:2918:        if isinstance(first_child, Leaf):
+black.py:1:import asyncio
+black.py:2928:        elif first_child.type == syms.import_from:
+black.py:2929:            module_name = first_child.children[1]
+black.py:2930:            if not isinstance(module_name, Leaf) or module_name.value != "__future__":
+black.py:2932:            for import_from_child in first_child.children[3:]:
+black.py:2933:                if isinstance(import_from_child, Leaf):
+black.py:2934:                    if import_from_child.type == token.NAME:
+black.py:2935:                        imports.add(import_from_child.value)
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2943:    return imports
+black.py:646:def lib2to3_parse(src_txt: str) -> Node:
+black.py:648:    grammar = pygram.python_grammar_no_print_statement
+black.py:649:    if src_txt[-1:] != "\n":
+black.py:651:    for grammar in GRAMMARS:
+black.py:652:        drv = driver.Driver(grammar, pytree.convert)
+black.py:653:        try:
+black.py:654:            result = drv.parse_string(src_txt, True)
+black.py:668:    if isinstance(result, Leaf):
+black.py:670:    return result
+tests/test_black.py:730:        node = black.lib2to3_parse("# comment\nfrom __future__ import black\n")
+tests/test_black.py:731:        self.assertEqual({"black"}, black.get_future_imports(node))
+black.py:2911:def get_future_imports(node: Node) -> Set[str]:
+black.py:2913:    imports = set()
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2917:        first_child = child.children[0]
+black.py:2918:        if isinstance(first_child, Leaf):
+black.py:1:import asyncio
+black.py:2928:        elif first_child.type == syms.import_from:
+black.py:2929:            module_name = first_child.children[1]
+black.py:2930:            if not isinstance(module_name, Leaf) or module_name.value != "__future__":
+black.py:2932:            for import_from_child in first_child.children[3:]:
+black.py:2933:                if isinstance(import_from_child, Leaf):
+black.py:2934:                    if import_from_child.type == token.NAME:
+black.py:2935:                        imports.add(import_from_child.value)
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2943:    return imports
+black.py:646:def lib2to3_parse(src_txt: str) -> Node:
+black.py:648:    grammar = pygram.python_grammar_no_print_statement
+black.py:649:    if src_txt[-1:] != "\n":
+black.py:651:    for grammar in GRAMMARS:
+black.py:652:        drv = driver.Driver(grammar, pytree.convert)
+black.py:653:        try:
+black.py:654:            result = drv.parse_string(src_txt, True)
+black.py:668:    if isinstance(result, Leaf):
+black.py:670:    return result
+tests/test_black.py:732:        node = black.lib2to3_parse('"""docstring"""\nfrom __future__ import black\n')
+tests/test_black.py:733:        self.assertEqual({"black"}, black.get_future_imports(node))
+black.py:2911:def get_future_imports(node: Node) -> Set[str]:
+black.py:2913:    imports = set()
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2917:        first_child = child.children[0]
+black.py:2918:        if isinstance(first_child, Leaf):
+black.py:2920:            if (
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2917:        first_child = child.children[0]
+black.py:2918:        if isinstance(first_child, Leaf):
+black.py:1:import asyncio
+black.py:2928:        elif first_child.type == syms.import_from:
+black.py:2929:            module_name = first_child.children[1]
+black.py:2930:            if not isinstance(module_name, Leaf) or module_name.value != "__future__":
+black.py:2932:            for import_from_child in first_child.children[3:]:
+black.py:2933:                if isinstance(import_from_child, Leaf):
+black.py:2934:                    if import_from_child.type == token.NAME:
+black.py:2935:                        imports.add(import_from_child.value)
+black.py:2914:    for child in node.children:
+black.py:2915:        if child.type != syms.simple_stmt:
+black.py:2943:    return imports
+black.py:646:def lib2to3_parse(src_txt: str) -> Node:
+black.py:648:    grammar = pygram.python_grammar_no_print_statement
+black.py:649:    if src_txt[-1:] != "\n":
+black.py:651:    for grammar in GRAMMARS:
+black.py:652:        drv = driver.Driver(grammar, pytree.convert)
+black.py:653:        try:
+black.py:654:            result = drv.parse_string(src_txt, True)
+black.py:668:    if isinstance(result, Leaf):
+black.py:670:    return result
+tests/test_black.py:734:        node = black.lib2to3_parse("some(other, code)\nfrom __future__ import black\n")
+tests/test_black.py:735:        self.assertEqual(set(), black.get_future_imports(node))
