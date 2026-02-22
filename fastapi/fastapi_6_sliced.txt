@@ -1,38 +1,1076 @@
+tests/test_forms_from_non_typing_sequences.py:1:from fastapi import FastAPI, Form
+fastapi/__init__.py:5:from starlette.background import BackgroundTasks
+fastapi/__init__.py:7:from .applications import FastAPI
+fastapi/applications.py:1:from typing import Any, Callable, Dict, List, Optional, Sequence, Type, Union
+fastapi/applications.py:3:from fastapi import routing
+fastapi/routing.py:1:import asyncio
+fastapi/routing.py:2:import inspect
+fastapi/routing.py:3:from typing import Any, Callable, Dict, List, Optional, Sequence, Set, Type, Union
+fastapi/routing.py:5:from fastapi import params
+fastapi/params.py:1:from enum import Enum
+fastapi/params.py:2:from typing import Any, Callable, Sequence
+fastapi/params.py:4:try:
+fastapi/params.py:5:    from pydantic.fields import FieldInfo
+fastapi/params.py:11:class ParamTypes(Enum):
+fastapi/params.py:12:    query = "query"
+fastapi/params.py:13:    header = "header"
+fastapi/params.py:14:    path = "path"
+fastapi/params.py:15:    cookie = "cookie"
+fastapi/params.py:18:class Param(FieldInfo):
+fastapi/params.py:55:class Path(Param):
+fastapi/params.py:93:class Query(Param):
+fastapi/params.py:130:class Header(Param):
+fastapi/params.py:169:class Cookie(Param):
+fastapi/params.py:206:class Body(FieldInfo):
+fastapi/params.py:243:class Form(Body):
+fastapi/params.py:279:class File(Form):
+fastapi/params.py:314:class Depends:
+fastapi/params.py:320:class Security(Depends):
+fastapi/routing.py:6:from fastapi.dependencies.models import Dependant
+fastapi/dependencies/models.py:1:from typing import Callable, List, Sequence
+fastapi/dependencies/models.py:3:from fastapi.security.base import SecurityBase
+fastapi/security/__init__.py:1:from .api_key import APIKeyCookie, APIKeyHeader, APIKeyQuery
+fastapi/security/api_key.py:1:from typing import Optional
+fastapi/security/api_key.py:3:from fastapi.openapi.models import APIKey, APIKeyIn
+fastapi/openapi/models.py:1:from enum import Enum
+fastapi/openapi/models.py:2:from typing import Any, Dict, List, Optional, Union
+fastapi/openapi/models.py:4:from fastapi.logger import logger
+fastapi/logger.py:1:import logging
+fastapi/logger.py:3:logger = logging.getLogger("fastapi")
+fastapi/openapi/models.py:5:from pydantic import BaseModel
+fastapi/openapi/models.py:7:try:
+fastapi/openapi/models.py:8:    from pydantic import AnyUrl, Field
+fastapi/openapi/models.py:14:try:
+fastapi/openapi/models.py:15:    import email_validator
+fastapi/openapi/models.py:17:    assert email_validator  # make autoflake ignore the unused import
+fastapi/openapi/models.py:18:    try:
+fastapi/openapi/models.py:19:        from pydantic import EmailStr
+fastapi/openapi/models.py:33:class Contact(BaseModel):
+fastapi/openapi/models.py:39:class License(BaseModel):
+fastapi/openapi/models.py:44:class Info(BaseModel):
+fastapi/openapi/models.py:53:class ServerVariable(BaseModel):
+fastapi/openapi/models.py:59:class Server(BaseModel):
+fastapi/openapi/models.py:65:class Reference(BaseModel):
+fastapi/openapi/models.py:69:class Discriminator(BaseModel):
+fastapi/openapi/models.py:74:class XML(BaseModel):
+fastapi/openapi/models.py:82:class ExternalDocumentation(BaseModel):
+fastapi/openapi/models.py:87:class SchemaBase(BaseModel):
+fastapi/openapi/models.py:126:class Schema(SchemaBase):
+fastapi/openapi/models.py:136:class Example(BaseModel):
+fastapi/openapi/models.py:143:class ParameterInType(Enum):
+fastapi/openapi/models.py:144:    query = "query"
+fastapi/openapi/models.py:145:    header = "header"
+fastapi/openapi/models.py:146:    path = "path"
+fastapi/openapi/models.py:147:    cookie = "cookie"
+fastapi/openapi/models.py:150:class Encoding(BaseModel):
+fastapi/openapi/models.py:159:class MediaType(BaseModel):
+fastapi/openapi/models.py:166:class ParameterBase(BaseModel):
+fastapi/openapi/models.py:181:class Parameter(ParameterBase):
+fastapi/openapi/models.py:186:class Header(ParameterBase):
+fastapi/openapi/models.py:191:class EncodingWithHeaders(Encoding):
+fastapi/openapi/models.py:195:class RequestBody(BaseModel):
+fastapi/openapi/models.py:201:class Link(BaseModel):
+fastapi/openapi/models.py:210:class Response(BaseModel):
+fastapi/openapi/models.py:217:class Operation(BaseModel):
+fastapi/openapi/models.py:233:class PathItem(BaseModel):
+fastapi/openapi/models.py:250:class OperationWithCallbacks(BaseModel):
+fastapi/openapi/models.py:254:class SecuritySchemeType(Enum):
+fastapi/openapi/models.py:255:    apiKey = "apiKey"
+fastapi/openapi/models.py:256:    http = "http"
+fastapi/openapi/models.py:257:    oauth2 = "oauth2"
+fastapi/openapi/models.py:258:    openIdConnect = "openIdConnect"
+fastapi/openapi/models.py:261:class SecurityBase(BaseModel):
+fastapi/openapi/models.py:266:class APIKeyIn(Enum):
+fastapi/openapi/models.py:267:    query = "query"
+fastapi/openapi/models.py:268:    header = "header"
+fastapi/openapi/models.py:269:    cookie = "cookie"
+fastapi/openapi/models.py:272:class APIKey(SecurityBase):
+fastapi/openapi/models.py:273:    type_ = Field(SecuritySchemeType.apiKey, alias="type")
+fastapi/openapi/models.py:278:class HTTPBase(SecurityBase):
+fastapi/openapi/models.py:279:    type_ = Field(SecuritySchemeType.http, alias="type")
+fastapi/openapi/models.py:283:class HTTPBearer(HTTPBase):
+fastapi/openapi/models.py:288:class OAuthFlow(BaseModel):
+fastapi/openapi/models.py:293:class OAuthFlowImplicit(OAuthFlow):
+fastapi/openapi/models.py:297:class OAuthFlowPassword(OAuthFlow):
+fastapi/openapi/models.py:301:class OAuthFlowClientCredentials(OAuthFlow):
+fastapi/openapi/models.py:305:class OAuthFlowAuthorizationCode(OAuthFlow):
+fastapi/openapi/models.py:310:class OAuthFlows(BaseModel):
+fastapi/openapi/models.py:317:class OAuth2(SecurityBase):
+fastapi/openapi/models.py:318:    type_ = Field(SecuritySchemeType.oauth2, alias="type")
+fastapi/openapi/models.py:322:class OpenIdConnect(SecurityBase):
+fastapi/openapi/models.py:323:    type_ = Field(SecuritySchemeType.openIdConnect, alias="type")
+fastapi/openapi/models.py:330:class Components(BaseModel):
+fastapi/openapi/models.py:342:class Tag(BaseModel):
+fastapi/openapi/models.py:348:class OpenAPI(BaseModel):
+fastapi/security/api_key.py:4:from fastapi.security.base import SecurityBase
+fastapi/security/base.py:1:from fastapi.openapi.models import SecurityBase as SecurityBaseModel
+fastapi/security/base.py:4:class SecurityBase:
+fastapi/security/api_key.py:5:from starlette.exceptions import HTTPException
+fastapi/security/api_key.py:6:from starlette.requests import Request
+fastapi/security/api_key.py:7:from starlette.status import HTTP_403_FORBIDDEN
+fastapi/security/api_key.py:10:class APIKeyBase(SecurityBase):
+fastapi/security/api_key.py:14:class APIKeyQuery(APIKeyBase):
+fastapi/security/api_key.py:32:class APIKeyHeader(APIKeyBase):
+fastapi/security/api_key.py:50:class APIKeyCookie(APIKeyBase):
+fastapi/security/__init__.py:2:from .http import (
+fastapi/security/__init__.py:3:    HTTPAuthorizationCredentials,
+fastapi/security/__init__.py:4:    HTTPBasic,
+fastapi/security/__init__.py:5:    HTTPBasicCredentials,
+fastapi/security/__init__.py:6:    HTTPBearer,
+fastapi/security/__init__.py:7:    HTTPDigest,
+fastapi/security/__init__.py:8:)
+fastapi/security/http.py:1:import binascii
+fastapi/security/http.py:2:from base64 import b64decode
+fastapi/security/http.py:3:from typing import Optional
+fastapi/security/http.py:5:from fastapi.exceptions import HTTPException
+fastapi/exceptions.py:1:from typing import Any, Sequence
+fastapi/exceptions.py:3:from fastapi.utils import PYDANTIC_1
+fastapi/utils.py:1:import re
+fastapi/utils.py:2:from dataclasses import is_dataclass
+fastapi/utils.py:3:from typing import Any, Dict, List, Sequence, Set, Type, cast
+fastapi/utils.py:5:from fastapi import routing
+fastapi/utils.py:6:from fastapi.logger import logger
+fastapi/utils.py:7:from fastapi.openapi.constants import REF_PREFIX
+fastapi/openapi/constants.py:1:METHODS_WITH_BODY = set(("POST", "PUT", "DELETE", "PATCH"))
+fastapi/openapi/constants.py:2:STATUS_CODES_WITH_NO_BODY = set((100, 101, 102, 103, 204, 304))
+fastapi/openapi/constants.py:3:REF_PREFIX = "#/components/schemas/"
+fastapi/utils.py:8:from pydantic import BaseConfig, BaseModel, create_model
+fastapi/utils.py:9:from pydantic.schema import get_flat_models_from_fields, model_process_schema
+fastapi/utils.py:10:from pydantic.utils import lenient_issubclass
+fastapi/utils.py:11:from starlette.routing import BaseRoute
+fastapi/utils.py:13:try:
+fastapi/utils.py:14:    from pydantic.fields import FieldInfo, ModelField
+fastapi/utils.py:16:    PYDANTIC_1 = True
+fastapi/exceptions.py:4:from pydantic import ValidationError, create_model
+fastapi/exceptions.py:5:from pydantic.error_wrappers import ErrorList
+fastapi/exceptions.py:6:from starlette.exceptions import HTTPException as StarletteHTTPException
+fastapi/exceptions.py:7:from starlette.requests import Request
+fastapi/exceptions.py:8:from starlette.websockets import WebSocket
+fastapi/exceptions.py:11:class HTTPException(StarletteHTTPException):
 fastapi/exceptions.py:19:RequestErrorModel = create_model("Request")
+fastapi/exceptions.py:23:class RequestValidationError(ValidationError):
+fastapi/exceptions.py:32:class WebSocketRequestValidationError(ValidationError):
+fastapi/security/http.py:6:from fastapi.openapi.models import (
+fastapi/security/http.py:7:    HTTPBase as HTTPBaseModel,
+fastapi/security/http.py:8:    HTTPBearer as HTTPBearerModel,
+fastapi/security/http.py:9:)
+fastapi/security/http.py:10:from fastapi.security.base import SecurityBase
+fastapi/security/http.py:11:from fastapi.security.utils import get_authorization_scheme_param
+fastapi/security/utils.py:1:from typing import Tuple
+fastapi/security/http.py:12:from pydantic import BaseModel
+fastapi/security/http.py:13:from starlette.requests import Request
+fastapi/security/http.py:14:from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
+fastapi/security/http.py:17:class HTTPBasicCredentials(BaseModel):
+fastapi/security/http.py:22:class HTTPAuthorizationCredentials(BaseModel):
+fastapi/security/http.py:27:class HTTPBase(SecurityBase):
+fastapi/security/http.py:50:class HTTPBasic(HTTPBase):
+fastapi/security/http.py:92:class HTTPBearer(HTTPBase):
+fastapi/security/http.py:127:class HTTPDigest(HTTPBase):
+fastapi/security/__init__.py:9:from .oauth2 import (
+fastapi/security/__init__.py:10:    OAuth2,
+fastapi/security/__init__.py:11:    OAuth2AuthorizationCodeBearer,
+fastapi/security/__init__.py:12:    OAuth2PasswordBearer,
+fastapi/security/__init__.py:13:    OAuth2PasswordRequestForm,
+fastapi/security/__init__.py:14:    SecurityScopes,
+fastapi/security/__init__.py:15:)
+fastapi/security/oauth2.py:1:from typing import List, Optional
+fastapi/security/oauth2.py:3:from fastapi.exceptions import HTTPException
+fastapi/security/oauth2.py:4:from fastapi.openapi.models import OAuth2 as OAuth2Model, OAuthFlows as OAuthFlowsModel
+fastapi/security/oauth2.py:5:from fastapi.param_functions import Form
+fastapi/param_functions.py:1:from typing import Any, Callable, Sequence
+fastapi/param_functions.py:3:from fastapi import params
+fastapi/security/oauth2.py:6:from fastapi.security.base import SecurityBase
+fastapi/security/oauth2.py:7:from fastapi.security.utils import get_authorization_scheme_param
+fastapi/security/oauth2.py:8:from starlette.requests import Request
+fastapi/security/oauth2.py:9:from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
+fastapi/security/oauth2.py:12:class OAuth2PasswordRequestForm:
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
+fastapi/security/oauth2.py:62:class OAuth2PasswordRequestFormStrict(OAuth2PasswordRequestForm):
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
+fastapi/security/oauth2.py:114:class OAuth2(SecurityBase):
+fastapi/security/oauth2.py:138:class OAuth2PasswordBearer(OAuth2):
+fastapi/security/oauth2.py:166:class OAuth2AuthorizationCodeBearer(OAuth2):
+fastapi/security/oauth2.py:203:class SecurityScopes:
+fastapi/security/__init__.py:16:from .open_id_connect_url import OpenIdConnect
+fastapi/security/open_id_connect_url.py:1:from typing import Optional
+fastapi/security/open_id_connect_url.py:3:from fastapi.openapi.models import OpenIdConnect as OpenIdConnectModel
+fastapi/security/open_id_connect_url.py:4:from fastapi.security.base import SecurityBase
+fastapi/security/open_id_connect_url.py:5:from starlette.exceptions import HTTPException
+fastapi/security/open_id_connect_url.py:6:from starlette.requests import Request
+fastapi/security/open_id_connect_url.py:7:from starlette.status import HTTP_403_FORBIDDEN
+fastapi/security/open_id_connect_url.py:10:class OpenIdConnect(SecurityBase):
+fastapi/dependencies/models.py:5:try:
+fastapi/dependencies/models.py:6:    from pydantic.fields import ModelField
+fastapi/dependencies/models.py:14:class SecurityRequirement:
+fastapi/dependencies/models.py:20:class Dependant:
+fastapi/routing.py:7:from fastapi.dependencies.utils import (
+fastapi/routing.py:8:    get_body_field,
+fastapi/routing.py:9:    get_dependant,
+fastapi/routing.py:10:    get_parameterless_sub_dependant,
+fastapi/routing.py:11:    solve_dependencies,
+fastapi/routing.py:12:)
+fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:2:import inspect
+fastapi/dependencies/utils.py:3:from contextlib import contextmanager
+fastapi/dependencies/utils.py:4:from copy import deepcopy
+fastapi/dependencies/utils.py:5:from typing import (
+fastapi/dependencies/utils.py:6:    Any,
+fastapi/dependencies/utils.py:7:    Callable,
+fastapi/dependencies/utils.py:8:    Dict,
+fastapi/dependencies/utils.py:9:    List,
+fastapi/dependencies/utils.py:10:    Mapping,
+fastapi/dependencies/utils.py:11:    Optional,
+fastapi/dependencies/utils.py:12:    Sequence,
+fastapi/dependencies/utils.py:13:    Tuple,
+fastapi/dependencies/utils.py:14:    Type,
+fastapi/dependencies/utils.py:15:    Union,
+fastapi/dependencies/utils.py:16:    cast,
+fastapi/dependencies/utils.py:17:)
+fastapi/dependencies/utils.py:19:from fastapi import params
+fastapi/dependencies/utils.py:20:from fastapi.concurrency import (
+fastapi/dependencies/utils.py:21:    AsyncExitStack,
+fastapi/dependencies/utils.py:22:    _fake_asynccontextmanager,
+fastapi/dependencies/utils.py:23:    asynccontextmanager,
+fastapi/dependencies/utils.py:24:    contextmanager_in_threadpool,
+fastapi/dependencies/utils.py:25:)
+fastapi/concurrency.py:1:from typing import Any, Callable
+fastapi/concurrency.py:3:from starlette.concurrency import iterate_in_threadpool  # noqa
+fastapi/concurrency.py:4:from starlette.concurrency import run_in_threadpool
+fastapi/concurrency.py:20:try:
+fastapi/concurrency.py:21:    from contextlib import asynccontextmanager  # type: ignore
+fastapi/concurrency.py:28:try:
+fastapi/concurrency.py:29:    from contextlib import AsyncExitStack  # type: ignore
+fastapi/dependencies/utils.py:26:from fastapi.dependencies.models import Dependant, SecurityRequirement
+fastapi/dependencies/utils.py:27:from fastapi.security.base import SecurityBase
+fastapi/dependencies/utils.py:28:from fastapi.security.oauth2 import OAuth2, SecurityScopes
+fastapi/dependencies/utils.py:29:from fastapi.security.open_id_connect_url import OpenIdConnect
+fastapi/dependencies/utils.py:30:from fastapi.utils import PYDANTIC_1, get_field_info, get_path_param_names
+fastapi/dependencies/utils.py:31:from pydantic import BaseConfig, BaseModel, create_model
+fastapi/dependencies/utils.py:32:from pydantic.error_wrappers import ErrorWrapper
+fastapi/dependencies/utils.py:33:from pydantic.errors import MissingError
+fastapi/dependencies/utils.py:34:from pydantic.utils import lenient_issubclass
+fastapi/dependencies/utils.py:35:from starlette.background import BackgroundTasks
+fastapi/dependencies/utils.py:36:from starlette.concurrency import run_in_threadpool
+fastapi/dependencies/utils.py:37:from starlette.datastructures import FormData, Headers, QueryParams, UploadFile
+fastapi/dependencies/utils.py:38:from starlette.requests import Request
+fastapi/dependencies/utils.py:39:from starlette.responses import Response
+fastapi/dependencies/utils.py:40:from starlette.websockets import WebSocket
 fastapi/dependencies/utils.py:42:try:
+fastapi/dependencies/utils.py:43:    from pydantic.fields import (
+fastapi/dependencies/utils.py:44:        SHAPE_LIST,
+fastapi/dependencies/utils.py:45:        SHAPE_SEQUENCE,
+fastapi/dependencies/utils.py:46:        SHAPE_SET,
+fastapi/dependencies/utils.py:47:        SHAPE_SINGLETON,
+fastapi/dependencies/utils.py:48:        SHAPE_TUPLE,
+fastapi/dependencies/utils.py:49:        SHAPE_TUPLE_ELLIPSIS,
+fastapi/dependencies/utils.py:50:        FieldInfo,
+fastapi/dependencies/utils.py:51:        ModelField,
+fastapi/dependencies/utils.py:52:        Required,
+fastapi/dependencies/utils.py:53:    )
+fastapi/dependencies/utils.py:54:    from pydantic.schema import get_annotation_from_field_info
+fastapi/dependencies/utils.py:55:    from pydantic.typing import ForwardRef, evaluate_forwardref
 fastapi/dependencies/utils.py:77:sequence_shapes = {
+fastapi/dependencies/utils.py:78:    SHAPE_LIST,
+fastapi/dependencies/utils.py:79:    SHAPE_SET,
+fastapi/dependencies/utils.py:80:    SHAPE_TUPLE,
+fastapi/dependencies/utils.py:81:    SHAPE_SEQUENCE,
+fastapi/dependencies/utils.py:82:    SHAPE_TUPLE_ELLIPSIS,
+fastapi/dependencies/utils.py:83:}
+fastapi/routing.py:13:from fastapi.encoders import DictIntStrAny, SetIntStr, jsonable_encoder
+fastapi/encoders.py:1:from enum import Enum
+fastapi/encoders.py:2:from types import GeneratorType
+fastapi/encoders.py:3:from typing import Any, Callable, Dict, List, Set, Tuple, Union
+fastapi/encoders.py:5:from fastapi.logger import logger
+fastapi/encoders.py:6:from fastapi.utils import PYDANTIC_1
+fastapi/encoders.py:7:from pydantic import BaseModel
+fastapi/encoders.py:8:from pydantic.json import ENCODERS_BY_TYPE
+fastapi/encoders.py:10:SetIntStr = Set[Union[int, str]]
+fastapi/encoders.py:11:DictIntStrAny = Dict[Union[int, str], Any]
+fastapi/encoders.py:14:def generate_encoders_by_class_tuples(
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:18:    for type_, encoder in type_encoder_map.items():
+fastapi/encoders.py:19:        encoders_by_classes.setdefault(encoder, []).append(type_)
+fastapi/encoders.py:21:    for encoder, classes in encoders_by_classes.items():
+fastapi/encoders.py:21:    for encoder, classes in encoders_by_classes.items():
+fastapi/encoders.py:22:        encoders_by_class_tuples[encoder] = tuple(classes)
+fastapi/encoders.py:21:    for encoder, classes in encoders_by_classes.items():
+fastapi/encoders.py:22:        encoders_by_class_tuples[encoder] = tuple(classes)
+fastapi/encoders.py:21:    for encoder, classes in encoders_by_classes.items():
+fastapi/encoders.py:22:        encoders_by_class_tuples[encoder] = tuple(classes)
+fastapi/encoders.py:21:    for encoder, classes in encoders_by_classes.items():
+fastapi/encoders.py:22:        encoders_by_class_tuples[encoder] = tuple(classes)
+fastapi/encoders.py:21:    for encoder, classes in encoders_by_classes.items():
+fastapi/encoders.py:22:        encoders_by_class_tuples[encoder] = tuple(classes)
+fastapi/encoders.py:21:    for encoder, classes in encoders_by_classes.items():
+fastapi/encoders.py:22:        encoders_by_class_tuples[encoder] = tuple(classes)
+fastapi/encoders.py:21:    for encoder, classes in encoders_by_classes.items():
+fastapi/encoders.py:22:        encoders_by_class_tuples[encoder] = tuple(classes)
+fastapi/encoders.py:23:    return encoders_by_class_tuples
+fastapi/encoders.py:26:encoders_by_class_tuples = generate_encoders_by_class_tuples(ENCODERS_BY_TYPE)
+fastapi/routing.py:14:from fastapi.exceptions import RequestValidationError, WebSocketRequestValidationError
+fastapi/routing.py:15:from fastapi.logger import logger
+fastapi/routing.py:16:from fastapi.openapi.constants import STATUS_CODES_WITH_NO_BODY
+fastapi/routing.py:17:from fastapi.utils import (
+fastapi/routing.py:18:    PYDANTIC_1,
+fastapi/routing.py:19:    create_cloned_field,
+fastapi/routing.py:20:    generate_operation_id_for_path,
+fastapi/routing.py:21:    get_field_info,
+fastapi/routing.py:22:    warning_response_model_skip_defaults_deprecated,
+fastapi/routing.py:23:)
+fastapi/routing.py:24:from pydantic import BaseConfig, BaseModel
+fastapi/routing.py:25:from pydantic.error_wrappers import ErrorWrapper, ValidationError
+fastapi/routing.py:26:from pydantic.utils import lenient_issubclass
+fastapi/routing.py:27:from starlette import routing
+fastapi/routing.py:28:from starlette.concurrency import run_in_threadpool
+fastapi/routing.py:29:from starlette.exceptions import HTTPException
+fastapi/routing.py:30:from starlette.requests import Request
+fastapi/routing.py:31:from starlette.responses import JSONResponse, Response
+fastapi/routing.py:32:from starlette.routing import (
+fastapi/routing.py:33:    compile_path,
+fastapi/routing.py:34:    get_name,
+fastapi/routing.py:35:    request_response,
+fastapi/routing.py:36:    websocket_session,
+fastapi/routing.py:37:)
+fastapi/routing.py:38:from starlette.status import WS_1008_POLICY_VIOLATION
+fastapi/routing.py:39:from starlette.types import ASGIApp
+fastapi/routing.py:40:from starlette.websockets import WebSocket
 fastapi/routing.py:42:try:
+fastapi/routing.py:43:    from pydantic.fields import FieldInfo, ModelField
+fastapi/routing.py:174:class APIWebSocketRoute(routing.WebSocketRoute):
+fastapi/routing.py:196:class APIRoute(routing.Route):
+fastapi/routing.py:360:class APIRouter(routing.Router):
+fastapi/applications.py:4:from fastapi.concurrency import AsyncExitStack
+fastapi/applications.py:5:from fastapi.encoders import DictIntStrAny, SetIntStr
+fastapi/applications.py:6:from fastapi.exception_handlers import (
+fastapi/applications.py:7:    http_exception_handler,
+fastapi/applications.py:8:    request_validation_exception_handler,
+fastapi/applications.py:9:)
+fastapi/exception_handlers.py:1:from fastapi.encoders import jsonable_encoder
+fastapi/exception_handlers.py:2:from fastapi.exceptions import RequestValidationError
+fastapi/exception_handlers.py:3:from starlette.exceptions import HTTPException
+fastapi/exception_handlers.py:4:from starlette.requests import Request
+fastapi/exception_handlers.py:5:from starlette.responses import JSONResponse
+fastapi/exception_handlers.py:6:from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY
+fastapi/applications.py:10:from fastapi.exceptions import RequestValidationError
+fastapi/applications.py:11:from fastapi.openapi.docs import (
+fastapi/applications.py:12:    get_redoc_html,
+fastapi/applications.py:13:    get_swagger_ui_html,
+fastapi/applications.py:14:    get_swagger_ui_oauth2_redirect_html,
+fastapi/applications.py:15:)
+fastapi/openapi/docs.py:1:import json
+fastapi/openapi/docs.py:2:from typing import Optional
+fastapi/openapi/docs.py:4:from fastapi.encoders import jsonable_encoder
+fastapi/openapi/docs.py:5:from starlette.responses import HTMLResponse
+fastapi/applications.py:16:from fastapi.openapi.utils import get_openapi
+fastapi/openapi/utils.py:1:import http.client
+fastapi/openapi/utils.py:2:from typing import Any, Dict, List, Optional, Sequence, Tuple, Type, cast
+fastapi/openapi/utils.py:4:from fastapi import routing
+fastapi/openapi/utils.py:5:from fastapi.dependencies.models import Dependant
+fastapi/openapi/utils.py:6:from fastapi.dependencies.utils import get_flat_dependant
+fastapi/openapi/utils.py:7:from fastapi.encoders import jsonable_encoder
+fastapi/openapi/utils.py:8:from fastapi.openapi.constants import (
+fastapi/openapi/utils.py:9:    METHODS_WITH_BODY,
+fastapi/openapi/utils.py:10:    REF_PREFIX,
+fastapi/openapi/utils.py:11:    STATUS_CODES_WITH_NO_BODY,
+fastapi/openapi/utils.py:12:)
+fastapi/openapi/utils.py:13:from fastapi.openapi.models import OpenAPI
+fastapi/openapi/utils.py:14:from fastapi.params import Body, Param
+fastapi/openapi/utils.py:15:from fastapi.utils import (
+fastapi/openapi/utils.py:16:    generate_operation_id_for_path,
+fastapi/openapi/utils.py:17:    get_field_info,
+fastapi/openapi/utils.py:18:    get_flat_models_from_routes,
+fastapi/openapi/utils.py:19:    get_model_definitions,
+fastapi/openapi/utils.py:20:)
+fastapi/openapi/utils.py:21:from pydantic import BaseModel
+fastapi/openapi/utils.py:22:from pydantic.schema import field_schema, get_model_name_map
+fastapi/openapi/utils.py:23:from pydantic.utils import lenient_issubclass
+fastapi/openapi/utils.py:24:from starlette.responses import JSONResponse
+fastapi/openapi/utils.py:25:from starlette.routing import BaseRoute
+fastapi/openapi/utils.py:26:from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY
+fastapi/openapi/utils.py:28:try:
+fastapi/openapi/utils.py:29:    from pydantic.fields import ModelField
+fastapi/applications.py:17:from fastapi.params import Depends
+fastapi/applications.py:18:from fastapi.utils import warning_response_model_skip_defaults_deprecated
+fastapi/applications.py:19:from starlette.applications import Starlette
+fastapi/applications.py:20:from starlette.datastructures import State
+fastapi/applications.py:21:from starlette.exceptions import ExceptionMiddleware, HTTPException
+fastapi/applications.py:22:from starlette.middleware.errors import ServerErrorMiddleware
+fastapi/applications.py:23:from starlette.requests import Request
+fastapi/applications.py:24:from starlette.responses import HTMLResponse, JSONResponse, Response
+fastapi/applications.py:25:from starlette.routing import BaseRoute
+fastapi/applications.py:26:from starlette.types import Receive, Scope, Send
+fastapi/applications.py:29:class FastAPI(Starlette):
+fastapi/__init__.py:8:from .datastructures import UploadFile
+fastapi/datastructures.py:1:from typing import Any, Callable, Iterable, Type
+fastapi/datastructures.py:3:from starlette.datastructures import UploadFile as StarletteUploadFile
+fastapi/datastructures.py:6:class UploadFile(StarletteUploadFile):
+fastapi/__init__.py:9:from .exceptions import HTTPException
+fastapi/__init__.py:10:from .param_functions import (
+fastapi/__init__.py:11:    Body,
+fastapi/__init__.py:12:    Cookie,
+fastapi/__init__.py:13:    Depends,
+fastapi/__init__.py:14:    File,
+fastapi/__init__.py:15:    Form,
+fastapi/__init__.py:16:    Header,
+fastapi/__init__.py:17:    Path,
+fastapi/__init__.py:18:    Query,
+fastapi/__init__.py:19:    Security,
+fastapi/__init__.py:20:)
+fastapi/__init__.py:21:from .routing import APIRouter
+tests/test_forms_from_non_typing_sequences.py:2:from starlette.testclient import TestClient
 fastapi/applications.py:30:    def __init__(
 fastapi/applications.py:47:        self.default_response_class = default_response_class
+fastapi/applications.py:48:        self._debug = debug
+fastapi/applications.py:49:        self.state = State()
 fastapi/routing.py:361:    def __init__(
 fastapi/routing.py:370:        super().__init__(
+fastapi/routing.py:371:            routes=routes, redirect_slashes=redirect_slashes, default=default
+fastapi/routing.py:372:        )
 fastapi/routing.py:373:        self.dependency_overrides_provider = dependency_overrides_provider
 fastapi/routing.py:374:        self.route_class = route_class
 fastapi/routing.py:375:        self.default_response_class = default_response_class
+fastapi/applications.py:53:        self.exception_middleware = ExceptionMiddleware(self.router, debug=debug)
+fastapi/applications.py:54:        self.error_middleware = ServerErrorMiddleware(
+fastapi/applications.py:55:            self.exception_middleware, debug=debug
+fastapi/applications.py:56:        )
 fastapi/applications.py:58:        self.title = title
 fastapi/applications.py:59:        self.description = description
 fastapi/applications.py:60:        self.version = version
@@ -41,6 +1079,9 @@ fastapi/applications.py:62:        self.openapi_prefix = openapi_prefix.rstrip("
 fastapi/applications.py:63:        self.docs_url = docs_url
 fastapi/applications.py:64:        self.redoc_url = redoc_url
 fastapi/applications.py:65:        self.swagger_ui_oauth2_redirect_url = swagger_ui_oauth2_redirect_url
+fastapi/applications.py:66:        self.swagger_ui_init_oauth = swagger_ui_init_oauth
+fastapi/applications.py:67:        self.extra = extra
+fastapi/applications.py:70:        self.openapi_version = "3.0.2"
 fastapi/applications.py:72:        if self.openapi_url:
 fastapi/applications.py:73:            assert self.title, "A title must be provided for OpenAPI, e.g.: 'My API'"
 fastapi/applications.py:74:            assert self.version, "A version must be provided for OpenAPI, e.g.: '2.1.0'"
@@ -55,10 +1096,16 @@ fastapi/applications.py:101:        if self.openapi_url and self.docs_url:
 fastapi/applications.py:111:            self.add_route(self.docs_url, swagger_ui_html, include_in_schema=False)
 fastapi/applications.py:113:            if self.swagger_ui_oauth2_redirect_url:
 fastapi/applications.py:118:                self.add_route(
+fastapi/applications.py:119:                    self.swagger_ui_oauth2_redirect_url,
+fastapi/applications.py:120:                    swagger_ui_redirect,
+fastapi/applications.py:121:                    include_in_schema=False,
+fastapi/applications.py:122:                )
 fastapi/applications.py:123:        if self.openapi_url and self.redoc_url:
 fastapi/applications.py:130:            self.add_route(self.redoc_url, redoc_html, include_in_schema=False)
 fastapi/applications.py:131:        self.add_exception_handler(HTTPException, http_exception_handler)
 fastapi/applications.py:132:        self.add_exception_handler(
+fastapi/applications.py:133:            RequestValidationError, request_validation_exception_handler
+fastapi/applications.py:134:        )
 tests/test_forms_from_non_typing_sequences.py:4:app = FastAPI()
 fastapi/applications.py:384:    def post(
 fastapi/applications.py:408:        if response_model_skip_defaults is not None:
@@ -68,23 +1115,128 @@ fastapi/routing.py:435:    def api_route(
 fastapi/routing.py:460:        if response_model_skip_defaults is not None:
 fastapi/routing.py:491:        return decorator
 fastapi/routing.py:704:        return self.api_route(
-fastapi/routing.py:435:    def api_route(
-fastapi/routing.py:460:        if response_model_skip_defaults is not None:
-fastapi/routing.py:491:        return decorator
+fastapi/routing.py:705:            path=path,
+fastapi/routing.py:706:            response_model=response_model,
+fastapi/routing.py:707:            status_code=status_code,
+fastapi/routing.py:708:            tags=tags or [],
+fastapi/routing.py:709:            dependencies=dependencies,
+fastapi/routing.py:710:            summary=summary,
+fastapi/routing.py:711:            description=description,
+fastapi/routing.py:712:            response_description=response_description,
+fastapi/routing.py:713:            responses=responses or {},
+fastapi/routing.py:714:            deprecated=deprecated,
+fastapi/routing.py:715:            methods=["POST"],
+fastapi/routing.py:716:            operation_id=operation_id,
+fastapi/routing.py:717:            response_model_include=response_model_include,
+fastapi/routing.py:718:            response_model_exclude=response_model_exclude,
+fastapi/routing.py:719:            response_model_by_alias=response_model_by_alias,
+fastapi/routing.py:720:            response_model_exclude_unset=bool(
+fastapi/routing.py:721:                response_model_exclude_unset or response_model_skip_defaults
+fastapi/routing.py:722:            ),
+fastapi/routing.py:723:            include_in_schema=include_in_schema,
+fastapi/routing.py:724:            response_class=response_class or self.default_response_class,
+fastapi/routing.py:725:            name=name,
+fastapi/routing.py:726:            callbacks=callbacks,
+fastapi/routing.py:727:        )
 fastapi/applications.py:410:        return self.router.post(
-fastapi/routing.py:678:    def post(
-fastapi/routing.py:702:        if response_model_skip_defaults is not None:
-fastapi/routing.py:435:    def api_route(
-fastapi/routing.py:460:        if response_model_skip_defaults is not None:
-fastapi/routing.py:491:        return decorator
-fastapi/routing.py:704:        return self.api_route(
-fastapi/routing.py:435:    def api_route(
-fastapi/routing.py:460:        if response_model_skip_defaults is not None:
-fastapi/routing.py:491:        return decorator
+fastapi/applications.py:411:            path,
+fastapi/applications.py:412:            response_model=response_model,
+fastapi/applications.py:413:            status_code=status_code,
+fastapi/applications.py:414:            tags=tags or [],
+fastapi/applications.py:415:            dependencies=dependencies,
+fastapi/applications.py:416:            summary=summary,
+fastapi/applications.py:417:            description=description,
+fastapi/applications.py:418:            response_description=response_description,
+fastapi/applications.py:419:            responses=responses or {},
+fastapi/applications.py:420:            deprecated=deprecated,
+fastapi/applications.py:421:            operation_id=operation_id,
+fastapi/applications.py:422:            response_model_include=response_model_include,
+fastapi/applications.py:423:            response_model_exclude=response_model_exclude,
+fastapi/applications.py:424:            response_model_by_alias=response_model_by_alias,
+fastapi/applications.py:425:            response_model_exclude_unset=bool(
+fastapi/applications.py:426:                response_model_exclude_unset or response_model_skip_defaults
+fastapi/applications.py:427:            ),
+fastapi/applications.py:428:            include_in_schema=include_in_schema,
+fastapi/applications.py:429:            response_class=response_class or self.default_response_class,
+fastapi/applications.py:430:            name=name,
+fastapi/applications.py:431:            callbacks=callbacks,
+fastapi/applications.py:432:        )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/routing.py:463:        def decorator(func: Callable) -> Callable:
 fastapi/routing.py:464:            self.add_api_route(
+fastapi/routing.py:465:                path,
+fastapi/routing.py:466:                func,
+fastapi/routing.py:467:                response_model=response_model,
+fastapi/routing.py:468:                status_code=status_code,
+fastapi/routing.py:469:                tags=tags or [],
+fastapi/routing.py:470:                dependencies=dependencies,
+fastapi/routing.py:471:                summary=summary,
+fastapi/routing.py:472:                description=description,
+fastapi/routing.py:473:                response_description=response_description,
+fastapi/routing.py:474:                responses=responses or {},
+fastapi/routing.py:475:                deprecated=deprecated,
+fastapi/routing.py:476:                methods=methods,
+fastapi/routing.py:477:                operation_id=operation_id,
+fastapi/routing.py:478:                response_model_include=response_model_include,
+fastapi/routing.py:479:                response_model_exclude=response_model_exclude,
+fastapi/routing.py:480:                response_model_by_alias=response_model_by_alias,
+fastapi/routing.py:481:                response_model_exclude_unset=bool(
+fastapi/routing.py:482:                    response_model_exclude_unset or response_model_skip_defaults
+fastapi/routing.py:483:                ),
+fastapi/routing.py:484:                include_in_schema=include_in_schema,
+fastapi/routing.py:485:                response_class=response_class or self.default_response_class,
+fastapi/routing.py:486:                name=name,
+fastapi/routing.py:487:                callbacks=callbacks,
+fastapi/routing.py:488:            )
 fastapi/routing.py:377:    def add_api_route(
 fastapi/routing.py:404:        if response_model_skip_defaults is not None:
 fastapi/routing.py:406:        route_class = route_class_override or self.route_class
@@ -95,21 +1247,48 @@ fastapi/routing.py:225:        self.name = get_name(endpoint) if name is None el
 fastapi/routing.py:226:        self.path_regex, self.path_format, self.param_convertors = compile_path(path)
 fastapi/routing.py:227:        if methods is None:
 fastapi/routing.py:229:        self.methods = set([method.upper() for method in methods])
+fastapi/utils.py:157:def generate_operation_id_for_path(*, name: str, path: str, method: str) -> str:
+fastapi/utils.py:158:    operation_id = name + path
+fastapi/utils.py:159:    operation_id = re.sub("[^0-9a-zA-Z_]", "_", operation_id)
+fastapi/utils.py:160:    operation_id = operation_id + "_" + method.lower()
+fastapi/utils.py:161:    return operation_id
 fastapi/routing.py:230:        self.unique_id = generate_operation_id_for_path(
+fastapi/routing.py:231:            name=self.name, path=self.path_format, method=list(methods)[0]
+fastapi/routing.py:232:        )
 fastapi/routing.py:233:        self.response_model = response_model
 fastapi/routing.py:234:        if self.response_model:
+fastapi/routing.py:270:            self.response_field = None
+fastapi/routing.py:270:            self.response_field = None
+fastapi/routing.py:271:            self.secure_cloned_response_field = None
 fastapi/routing.py:272:        self.status_code = status_code
+fastapi/routing.py:273:        self.tags = tags or []
 fastapi/routing.py:274:        if dependencies:
 fastapi/routing.py:277:            self.dependencies = []
 fastapi/routing.py:277:            self.dependencies = []
+fastapi/routing.py:278:        self.summary = summary
 fastapi/routing.py:279:        self.description = description or inspect.cleandoc(self.endpoint.__doc__ or "")
 fastapi/routing.py:282:        self.description = self.description.split("\f")[0]
+fastapi/routing.py:283:        self.response_description = response_description
+fastapi/routing.py:284:        self.responses = responses or {}
 fastapi/routing.py:285:        response_fields = {}
+fastapi/routing.py:286:        for additional_status_code, response in self.responses.items():
 fastapi/routing.py:318:        if response_fields:
 fastapi/routing.py:321:            self.response_fields = {}
 fastapi/routing.py:321:            self.response_fields = {}
+fastapi/routing.py:322:        self.deprecated = deprecated
+fastapi/routing.py:323:        self.operation_id = operation_id
+fastapi/routing.py:324:        self.response_model_include = response_model_include
+fastapi/routing.py:325:        self.response_model_exclude = response_model_exclude
+fastapi/routing.py:326:        self.response_model_by_alias = response_model_by_alias
+fastapi/routing.py:327:        self.response_model_exclude_unset = response_model_exclude_unset
+fastapi/routing.py:328:        self.include_in_schema = include_in_schema
+fastapi/routing.py:329:        self.response_class = response_class
 fastapi/routing.py:331:        assert inspect.isfunction(endpoint) or inspect.ismethod(
+fastapi/routing.py:332:            endpoint
+fastapi/routing.py:333:        ), f"An endpoint must be a function or method"
 fastapi/dependencies/utils.py:251:def get_dependant(
+fastapi/utils.py:85:def get_path_param_names(path: str) -> Set[str]:
+fastapi/utils.py:86:    return {item.strip("{}") for item in re.findall("{[^}]*}", path)}
 fastapi/dependencies/utils.py:259:    path_param_names = get_path_param_names(path)
 fastapi/dependencies/utils.py:215:def get_typed_signature(call: Callable) -> inspect.Signature:
 fastapi/dependencies/utils.py:217:    globalns = getattr(call, "__globals__", {})
@@ -117,27 +1296,47 @@ fastapi/dependencies/utils.py:231:def get_typed_annotation(param: inspect.Parame
 fastapi/dependencies/utils.py:232:    annotation = param.annotation
 fastapi/dependencies/utils.py:233:    if isinstance(annotation, str):
 fastapi/dependencies/utils.py:236:    return annotation
-fastapi/dependencies/utils.py:218:    typed_params = [
 fastapi/dependencies/utils.py:227:    typed_signature = inspect.Signature(typed_params)
 fastapi/dependencies/utils.py:228:    return typed_signature
 fastapi/dependencies/utils.py:260:    endpoint_signature = get_typed_signature(call)
 fastapi/dependencies/utils.py:261:    signature_params = endpoint_signature.parameters
 fastapi/dependencies/utils.py:262:    if inspect.isgeneratorfunction(call) or inspect.isasyncgenfunction(call):
+fastapi/dependencies/models.py:21:    def __init__(
+fastapi/dependencies/models.py:42:        self.path_params = path_params or []
+fastapi/dependencies/models.py:43:        self.query_params = query_params or []
+fastapi/dependencies/models.py:44:        self.header_params = header_params or []
+fastapi/dependencies/models.py:45:        self.cookie_params = cookie_params or []
+fastapi/dependencies/models.py:46:        self.body_params = body_params or []
+fastapi/dependencies/models.py:47:        self.dependencies = dependencies or []
+fastapi/dependencies/models.py:48:        self.security_requirements = security_schemes or []
+fastapi/dependencies/models.py:49:        self.request_param_name = request_param_name
+fastapi/dependencies/models.py:50:        self.websocket_param_name = websocket_param_name
+fastapi/dependencies/models.py:51:        self.response_param_name = response_param_name
+fastapi/dependencies/models.py:52:        self.background_tasks_param_name = background_tasks_param_name
+fastapi/dependencies/models.py:53:        self.security_scopes = security_scopes
+fastapi/dependencies/models.py:54:        self.security_scopes_param_name = security_scopes_param_name
+fastapi/dependencies/models.py:55:        self.name = name
+fastapi/dependencies/models.py:56:        self.call = call
+fastapi/dependencies/models.py:57:        self.use_cache = use_cache
+fastapi/dependencies/models.py:59:        self.path = path
+fastapi/dependencies/models.py:61:        self.cache_key = (self.call, tuple(sorted(set(self.security_scopes or []))))
 fastapi/dependencies/utils.py:264:    dependant = Dependant(call=call, name=name, path=path, use_cache=use_cache)
 fastapi/dependencies/utils.py:265:    for param_name, param in signature_params.items():
+fastapi/dependencies/utils.py:265:    for param_name, param in signature_params.items():
 fastapi/dependencies/utils.py:266:        if isinstance(param.default, params.Depends):
+fastapi/dependencies/utils.py:271:    for param_name, param in signature_params.items():
 fastapi/dependencies/utils.py:271:    for param_name, param in signature_params.items():
 fastapi/dependencies/utils.py:272:        if isinstance(param.default, params.Depends):
 fastapi/dependencies/utils.py:274:        if add_non_field_param_to_dependency(param=param, dependant=dependant):
 fastapi/dependencies/utils.py:310:def add_non_field_param_to_dependency(
 fastapi/dependencies/utils.py:313:    if lenient_issubclass(param.annotation, Request):
-fastapi/dependencies/utils.py:1:import asyncio
 fastapi/dependencies/utils.py:316:    elif lenient_issubclass(param.annotation, WebSocket):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:316:    elif lenient_issubclass(param.annotation, WebSocket):
 fastapi/dependencies/utils.py:319:    elif lenient_issubclass(param.annotation, Response):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:319:    elif lenient_issubclass(param.annotation, Response):
 fastapi/dependencies/utils.py:322:    elif lenient_issubclass(param.annotation, BackgroundTasks):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:322:    elif lenient_issubclass(param.annotation, BackgroundTasks):
+fastapi/dependencies/utils.py:325:    elif lenient_issubclass(param.annotation, SecurityScopes):
 fastapi/dependencies/utils.py:325:    elif lenient_issubclass(param.annotation, SecurityScopes):
 fastapi/dependencies/utils.py:328:    return None
 fastapi/dependencies/utils.py:331:def get_param_field(
@@ -159,23 +1358,32 @@ fastapi/dependencies/utils.py:361:    if not field_info.alias and getattr(field_
 fastapi/dependencies/utils.py:364:        alias = field_info.alias or param.name
 fastapi/dependencies/utils.py:364:        alias = field_info.alias or param.name
 fastapi/dependencies/utils.py:365:    if PYDANTIC_1:
-fastapi/dependencies/utils.py:366:        field = ModelField(
 fastapi/dependencies/utils.py:377:        field.required = required
 fastapi/dependencies/utils.py:390:    if not had_schema and not is_scalar_field(field=field):
 fastapi/dependencies/utils.py:396:    return field
 fastapi/dependencies/utils.py:276:        param_field = get_param_field(
+fastapi/dependencies/utils.py:277:            param=param, default_field_info=params.Query, param_name=param_name
+fastapi/dependencies/utils.py:278:        )
 fastapi/dependencies/utils.py:279:        if param_name in path_param_names:
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:295:        elif is_scalar_field(field=param_field):
 fastapi/dependencies/utils.py:295:        elif is_scalar_field(field=param_field):
 fastapi/dependencies/utils.py:186:def is_scalar_field(field: ModelField) -> bool:
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:187:    field_info = get_field_info(field)
 fastapi/dependencies/utils.py:188:    if not (
 fastapi/dependencies/utils.py:194:        return False
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:297:        elif isinstance(
 fastapi/dependencies/utils.py:297:        elif isinstance(
 fastapi/dependencies/utils.py:302:            field_info = get_field_info(param_field)
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:302:            field_info = get_field_info(param_field)
 fastapi/dependencies/utils.py:303:            assert isinstance(
+fastapi/dependencies/utils.py:304:                field_info, params.Body
+fastapi/dependencies/utils.py:305:            ), f"Param: {param_field.name} can only be a request body, using Body(...)"
 fastapi/dependencies/utils.py:306:            dependant.body_params.append(param_field)
 fastapi/dependencies/utils.py:307:    return dependant
 fastapi/routing.py:334:        self.dependant = get_dependant(path=self.path_format, call=self.endpoint)
@@ -184,15 +1392,48 @@ fastapi/dependencies/utils.py:154:def get_flat_dependant(
 fastapi/dependencies/utils.py:157:    if visited is None:
 fastapi/dependencies/utils.py:158:        visited = []
 fastapi/dependencies/utils.py:159:    visited.append(dependant.cache_key)
+fastapi/dependencies/models.py:21:    def __init__(
+fastapi/dependencies/models.py:42:        self.path_params = path_params or []
+fastapi/dependencies/models.py:43:        self.query_params = query_params or []
+fastapi/dependencies/models.py:44:        self.header_params = header_params or []
+fastapi/dependencies/models.py:45:        self.cookie_params = cookie_params or []
+fastapi/dependencies/models.py:46:        self.body_params = body_params or []
+fastapi/dependencies/models.py:47:        self.dependencies = dependencies or []
+fastapi/dependencies/models.py:48:        self.security_requirements = security_schemes or []
+fastapi/dependencies/models.py:49:        self.request_param_name = request_param_name
+fastapi/dependencies/models.py:50:        self.websocket_param_name = websocket_param_name
+fastapi/dependencies/models.py:51:        self.response_param_name = response_param_name
+fastapi/dependencies/models.py:52:        self.background_tasks_param_name = background_tasks_param_name
+fastapi/dependencies/models.py:53:        self.security_scopes = security_scopes
+fastapi/dependencies/models.py:54:        self.security_scopes_param_name = security_scopes_param_name
+fastapi/dependencies/models.py:55:        self.name = name
+fastapi/dependencies/models.py:56:        self.call = call
+fastapi/dependencies/models.py:57:        self.use_cache = use_cache
+fastapi/dependencies/models.py:59:        self.path = path
+fastapi/dependencies/models.py:61:        self.cache_key = (self.call, tuple(sorted(set(self.security_scopes or []))))
 fastapi/dependencies/utils.py:161:    flat_dependant = Dependant(
+fastapi/dependencies/utils.py:162:        path_params=dependant.path_params.copy(),
+fastapi/dependencies/utils.py:163:        query_params=dependant.query_params.copy(),
+fastapi/dependencies/utils.py:164:        header_params=dependant.header_params.copy(),
+fastapi/dependencies/utils.py:165:        cookie_params=dependant.cookie_params.copy(),
+fastapi/dependencies/utils.py:166:        body_params=dependant.body_params.copy(),
+fastapi/dependencies/utils.py:167:        security_schemes=dependant.security_requirements.copy(),
+fastapi/dependencies/utils.py:168:        use_cache=dependant.use_cache,
+fastapi/dependencies/utils.py:169:        path=dependant.path,
+fastapi/dependencies/utils.py:170:    )
 fastapi/dependencies/utils.py:183:    return flat_dependant
 fastapi/dependencies/utils.py:721:    flat_dependant = get_flat_dependant(dependant)
 fastapi/dependencies/utils.py:722:    if not flat_dependant.body_params:
 fastapi/dependencies/utils.py:724:    first_param = flat_dependant.body_params[0]
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:725:    field_info = get_field_info(first_param)
 fastapi/dependencies/utils.py:726:    embed = getattr(field_info, "embed", None)
 fastapi/dependencies/utils.py:727:    if len(flat_dependant.body_params) == 1 and not embed:
 fastapi/dependencies/utils.py:729:    model_name = "Body_" + name
+fastapi/dependencies/utils.py:730:    BodyModel = create_model(model_name)
+fastapi/dependencies/utils.py:731:    for f in flat_dependant.body_params:
 fastapi/dependencies/utils.py:731:    for f in flat_dependant.body_params:
 fastapi/dependencies/utils.py:688:def get_schema_compatible_field(*, field: ModelField) -> ModelField:
 fastapi/dependencies/utils.py:689:    out_field = field
@@ -201,25 +1442,101 @@ fastapi/dependencies/utils.py:717:    return out_field
 fastapi/dependencies/utils.py:732:        BodyModel.__fields__[f.name] = get_schema_compatible_field(field=f)
 fastapi/dependencies/utils.py:733:    required = any(True for f in flat_dependant.body_params if f.required)
 fastapi/dependencies/utils.py:736:    if any(
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:740:    elif any(
+fastapi/dependencies/utils.py:740:    elif any(
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
+fastapi/dependencies/utils.py:743:        BodyFieldInfo = params.Form
 fastapi/dependencies/utils.py:754:    if PYDANTIC_1:
-fastapi/dependencies/utils.py:755:        field = ModelField(
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/dependencies/utils.py:776:    return field
 fastapi/routing.py:340:        self.body_field = get_body_field(dependant=self.dependant, name=self.unique_id)
 fastapi/routing.py:341:        self.dependency_overrides_provider = dependency_overrides_provider
+fastapi/routing.py:342:        self.callbacks = callbacks
 fastapi/routing.py:345:    def get_route_handler(self) -> Callable:
 fastapi/routing.py:84:def get_request_handler(
 fastapi/routing.py:96:    assert dependant.call is not None, "dependant.call must be a function"
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/routing.py:98:    is_body_form = body_field and isinstance(get_field_info(body_field), params.Form)
 fastapi/routing.py:152:    return app
 fastapi/routing.py:346:        return get_request_handler(
-fastapi/routing.py:84:def get_request_handler(
-fastapi/routing.py:96:    assert dependant.call is not None, "dependant.call must be a function"
-fastapi/routing.py:98:    is_body_form = body_field and isinstance(get_field_info(body_field), params.Form)
-fastapi/routing.py:152:    return app
+fastapi/routing.py:347:            dependant=self.dependant,
+fastapi/routing.py:348:            body_field=self.body_field,
+fastapi/routing.py:349:            status_code=self.status_code,
+fastapi/routing.py:350:            response_class=self.response_class or JSONResponse,
+fastapi/routing.py:351:            response_field=self.secure_cloned_response_field,
+fastapi/routing.py:352:            response_model_include=self.response_model_include,
+fastapi/routing.py:353:            response_model_exclude=self.response_model_exclude,
+fastapi/routing.py:354:            response_model_by_alias=self.response_model_by_alias,
+fastapi/routing.py:355:            response_model_exclude_unset=self.response_model_exclude_unset,
+fastapi/routing.py:356:            dependency_overrides_provider=self.dependency_overrides_provider,
+fastapi/routing.py:357:        )
 fastapi/routing.py:343:        self.app = request_response(self.get_route_handler())
 fastapi/routing.py:407:        route = route_class(
+fastapi/routing.py:408:            path,
+fastapi/routing.py:409:            endpoint=endpoint,
+fastapi/routing.py:410:            response_model=response_model,
+fastapi/routing.py:411:            status_code=status_code,
+fastapi/routing.py:412:            tags=tags or [],
+fastapi/routing.py:413:            dependencies=dependencies,
+fastapi/routing.py:414:            summary=summary,
+fastapi/routing.py:415:            description=description,
+fastapi/routing.py:416:            response_description=response_description,
+fastapi/routing.py:417:            responses=responses or {},
+fastapi/routing.py:418:            deprecated=deprecated,
+fastapi/routing.py:419:            methods=methods,
+fastapi/routing.py:420:            operation_id=operation_id,
+fastapi/routing.py:421:            response_model_include=response_model_include,
+fastapi/routing.py:422:            response_model_exclude=response_model_exclude,
+fastapi/routing.py:423:            response_model_by_alias=response_model_by_alias,
+fastapi/routing.py:424:            response_model_exclude_unset=bool(
+fastapi/routing.py:425:                response_model_exclude_unset or response_model_skip_defaults
+fastapi/routing.py:426:            ),
+fastapi/routing.py:427:            include_in_schema=include_in_schema,
+fastapi/routing.py:428:            response_class=response_class or self.default_response_class,
+fastapi/routing.py:429:            name=name,
+fastapi/routing.py:430:            dependency_overrides_provider=self.dependency_overrides_provider,
+fastapi/routing.py:431:            callbacks=callbacks,
+fastapi/routing.py:432:        )
 fastapi/routing.py:433:        self.routes.append(route)
 fastapi/routing.py:489:            return func
 fastapi/applications.py:384:    def post(
@@ -230,23 +1547,128 @@ fastapi/routing.py:435:    def api_route(
 fastapi/routing.py:460:        if response_model_skip_defaults is not None:
 fastapi/routing.py:491:        return decorator
 fastapi/routing.py:704:        return self.api_route(
-fastapi/routing.py:435:    def api_route(
-fastapi/routing.py:460:        if response_model_skip_defaults is not None:
-fastapi/routing.py:491:        return decorator
+fastapi/routing.py:705:            path=path,
+fastapi/routing.py:706:            response_model=response_model,
+fastapi/routing.py:707:            status_code=status_code,
+fastapi/routing.py:708:            tags=tags or [],
+fastapi/routing.py:709:            dependencies=dependencies,
+fastapi/routing.py:710:            summary=summary,
+fastapi/routing.py:711:            description=description,
+fastapi/routing.py:712:            response_description=response_description,
+fastapi/routing.py:713:            responses=responses or {},
+fastapi/routing.py:714:            deprecated=deprecated,
+fastapi/routing.py:715:            methods=["POST"],
+fastapi/routing.py:716:            operation_id=operation_id,
+fastapi/routing.py:717:            response_model_include=response_model_include,
+fastapi/routing.py:718:            response_model_exclude=response_model_exclude,
+fastapi/routing.py:719:            response_model_by_alias=response_model_by_alias,
+fastapi/routing.py:720:            response_model_exclude_unset=bool(
+fastapi/routing.py:721:                response_model_exclude_unset or response_model_skip_defaults
+fastapi/routing.py:722:            ),
+fastapi/routing.py:723:            include_in_schema=include_in_schema,
+fastapi/routing.py:724:            response_class=response_class or self.default_response_class,
+fastapi/routing.py:725:            name=name,
+fastapi/routing.py:726:            callbacks=callbacks,
+fastapi/routing.py:727:        )
 fastapi/applications.py:410:        return self.router.post(
-fastapi/routing.py:678:    def post(
-fastapi/routing.py:702:        if response_model_skip_defaults is not None:
-fastapi/routing.py:435:    def api_route(
-fastapi/routing.py:460:        if response_model_skip_defaults is not None:
-fastapi/routing.py:491:        return decorator
-fastapi/routing.py:704:        return self.api_route(
-fastapi/routing.py:435:    def api_route(
-fastapi/routing.py:460:        if response_model_skip_defaults is not None:
-fastapi/routing.py:491:        return decorator
+fastapi/applications.py:411:            path,
+fastapi/applications.py:412:            response_model=response_model,
+fastapi/applications.py:413:            status_code=status_code,
+fastapi/applications.py:414:            tags=tags or [],
+fastapi/applications.py:415:            dependencies=dependencies,
+fastapi/applications.py:416:            summary=summary,
+fastapi/applications.py:417:            description=description,
+fastapi/applications.py:418:            response_description=response_description,
+fastapi/applications.py:419:            responses=responses or {},
+fastapi/applications.py:420:            deprecated=deprecated,
+fastapi/applications.py:421:            operation_id=operation_id,
+fastapi/applications.py:422:            response_model_include=response_model_include,
+fastapi/applications.py:423:            response_model_exclude=response_model_exclude,
+fastapi/applications.py:424:            response_model_by_alias=response_model_by_alias,
+fastapi/applications.py:425:            response_model_exclude_unset=bool(
+fastapi/applications.py:426:                response_model_exclude_unset or response_model_skip_defaults
+fastapi/applications.py:427:            ),
+fastapi/applications.py:428:            include_in_schema=include_in_schema,
+fastapi/applications.py:429:            response_class=response_class or self.default_response_class,
+fastapi/applications.py:430:            name=name,
+fastapi/applications.py:431:            callbacks=callbacks,
+fastapi/applications.py:432:        )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/routing.py:463:        def decorator(func: Callable) -> Callable:
 fastapi/routing.py:464:            self.add_api_route(
+fastapi/routing.py:465:                path,
+fastapi/routing.py:466:                func,
+fastapi/routing.py:467:                response_model=response_model,
+fastapi/routing.py:468:                status_code=status_code,
+fastapi/routing.py:469:                tags=tags or [],
+fastapi/routing.py:470:                dependencies=dependencies,
+fastapi/routing.py:471:                summary=summary,
+fastapi/routing.py:472:                description=description,
+fastapi/routing.py:473:                response_description=response_description,
+fastapi/routing.py:474:                responses=responses or {},
+fastapi/routing.py:475:                deprecated=deprecated,
+fastapi/routing.py:476:                methods=methods,
+fastapi/routing.py:477:                operation_id=operation_id,
+fastapi/routing.py:478:                response_model_include=response_model_include,
+fastapi/routing.py:479:                response_model_exclude=response_model_exclude,
+fastapi/routing.py:480:                response_model_by_alias=response_model_by_alias,
+fastapi/routing.py:481:                response_model_exclude_unset=bool(
+fastapi/routing.py:482:                    response_model_exclude_unset or response_model_skip_defaults
+fastapi/routing.py:483:                ),
+fastapi/routing.py:484:                include_in_schema=include_in_schema,
+fastapi/routing.py:485:                response_class=response_class or self.default_response_class,
+fastapi/routing.py:486:                name=name,
+fastapi/routing.py:487:                callbacks=callbacks,
+fastapi/routing.py:488:            )
 fastapi/routing.py:377:    def add_api_route(
 fastapi/routing.py:404:        if response_model_skip_defaults is not None:
 fastapi/routing.py:406:        route_class = route_class_override or self.route_class
@@ -257,21 +1679,48 @@ fastapi/routing.py:225:        self.name = get_name(endpoint) if name is None el
 fastapi/routing.py:226:        self.path_regex, self.path_format, self.param_convertors = compile_path(path)
 fastapi/routing.py:227:        if methods is None:
 fastapi/routing.py:229:        self.methods = set([method.upper() for method in methods])
+fastapi/utils.py:157:def generate_operation_id_for_path(*, name: str, path: str, method: str) -> str:
+fastapi/utils.py:158:    operation_id = name + path
+fastapi/utils.py:159:    operation_id = re.sub("[^0-9a-zA-Z_]", "_", operation_id)
+fastapi/utils.py:160:    operation_id = operation_id + "_" + method.lower()
+fastapi/utils.py:161:    return operation_id
 fastapi/routing.py:230:        self.unique_id = generate_operation_id_for_path(
+fastapi/routing.py:231:            name=self.name, path=self.path_format, method=list(methods)[0]
+fastapi/routing.py:232:        )
 fastapi/routing.py:233:        self.response_model = response_model
 fastapi/routing.py:234:        if self.response_model:
+fastapi/routing.py:270:            self.response_field = None
+fastapi/routing.py:270:            self.response_field = None
+fastapi/routing.py:271:            self.secure_cloned_response_field = None
 fastapi/routing.py:272:        self.status_code = status_code
+fastapi/routing.py:273:        self.tags = tags or []
 fastapi/routing.py:274:        if dependencies:
 fastapi/routing.py:277:            self.dependencies = []
 fastapi/routing.py:277:            self.dependencies = []
+fastapi/routing.py:278:        self.summary = summary
 fastapi/routing.py:279:        self.description = description or inspect.cleandoc(self.endpoint.__doc__ or "")
 fastapi/routing.py:282:        self.description = self.description.split("\f")[0]
+fastapi/routing.py:283:        self.response_description = response_description
+fastapi/routing.py:284:        self.responses = responses or {}
 fastapi/routing.py:285:        response_fields = {}
+fastapi/routing.py:286:        for additional_status_code, response in self.responses.items():
 fastapi/routing.py:318:        if response_fields:
 fastapi/routing.py:321:            self.response_fields = {}
 fastapi/routing.py:321:            self.response_fields = {}
+fastapi/routing.py:322:        self.deprecated = deprecated
+fastapi/routing.py:323:        self.operation_id = operation_id
+fastapi/routing.py:324:        self.response_model_include = response_model_include
+fastapi/routing.py:325:        self.response_model_exclude = response_model_exclude
+fastapi/routing.py:326:        self.response_model_by_alias = response_model_by_alias
+fastapi/routing.py:327:        self.response_model_exclude_unset = response_model_exclude_unset
+fastapi/routing.py:328:        self.include_in_schema = include_in_schema
+fastapi/routing.py:329:        self.response_class = response_class
 fastapi/routing.py:331:        assert inspect.isfunction(endpoint) or inspect.ismethod(
+fastapi/routing.py:332:            endpoint
+fastapi/routing.py:333:        ), f"An endpoint must be a function or method"
 fastapi/dependencies/utils.py:251:def get_dependant(
+fastapi/utils.py:85:def get_path_param_names(path: str) -> Set[str]:
+fastapi/utils.py:86:    return {item.strip("{}") for item in re.findall("{[^}]*}", path)}
 fastapi/dependencies/utils.py:259:    path_param_names = get_path_param_names(path)
 fastapi/dependencies/utils.py:215:def get_typed_signature(call: Callable) -> inspect.Signature:
 fastapi/dependencies/utils.py:217:    globalns = getattr(call, "__globals__", {})
@@ -279,27 +1728,47 @@ fastapi/dependencies/utils.py:231:def get_typed_annotation(param: inspect.Parame
 fastapi/dependencies/utils.py:232:    annotation = param.annotation
 fastapi/dependencies/utils.py:233:    if isinstance(annotation, str):
 fastapi/dependencies/utils.py:236:    return annotation
-fastapi/dependencies/utils.py:218:    typed_params = [
 fastapi/dependencies/utils.py:227:    typed_signature = inspect.Signature(typed_params)
 fastapi/dependencies/utils.py:228:    return typed_signature
 fastapi/dependencies/utils.py:260:    endpoint_signature = get_typed_signature(call)
 fastapi/dependencies/utils.py:261:    signature_params = endpoint_signature.parameters
 fastapi/dependencies/utils.py:262:    if inspect.isgeneratorfunction(call) or inspect.isasyncgenfunction(call):
+fastapi/dependencies/models.py:21:    def __init__(
+fastapi/dependencies/models.py:42:        self.path_params = path_params or []
+fastapi/dependencies/models.py:43:        self.query_params = query_params or []
+fastapi/dependencies/models.py:44:        self.header_params = header_params or []
+fastapi/dependencies/models.py:45:        self.cookie_params = cookie_params or []
+fastapi/dependencies/models.py:46:        self.body_params = body_params or []
+fastapi/dependencies/models.py:47:        self.dependencies = dependencies or []
+fastapi/dependencies/models.py:48:        self.security_requirements = security_schemes or []
+fastapi/dependencies/models.py:49:        self.request_param_name = request_param_name
+fastapi/dependencies/models.py:50:        self.websocket_param_name = websocket_param_name
+fastapi/dependencies/models.py:51:        self.response_param_name = response_param_name
+fastapi/dependencies/models.py:52:        self.background_tasks_param_name = background_tasks_param_name
+fastapi/dependencies/models.py:53:        self.security_scopes = security_scopes
+fastapi/dependencies/models.py:54:        self.security_scopes_param_name = security_scopes_param_name
+fastapi/dependencies/models.py:55:        self.name = name
+fastapi/dependencies/models.py:56:        self.call = call
+fastapi/dependencies/models.py:57:        self.use_cache = use_cache
+fastapi/dependencies/models.py:59:        self.path = path
+fastapi/dependencies/models.py:61:        self.cache_key = (self.call, tuple(sorted(set(self.security_scopes or []))))
 fastapi/dependencies/utils.py:264:    dependant = Dependant(call=call, name=name, path=path, use_cache=use_cache)
 fastapi/dependencies/utils.py:265:    for param_name, param in signature_params.items():
+fastapi/dependencies/utils.py:265:    for param_name, param in signature_params.items():
 fastapi/dependencies/utils.py:266:        if isinstance(param.default, params.Depends):
+fastapi/dependencies/utils.py:271:    for param_name, param in signature_params.items():
 fastapi/dependencies/utils.py:271:    for param_name, param in signature_params.items():
 fastapi/dependencies/utils.py:272:        if isinstance(param.default, params.Depends):
 fastapi/dependencies/utils.py:274:        if add_non_field_param_to_dependency(param=param, dependant=dependant):
 fastapi/dependencies/utils.py:310:def add_non_field_param_to_dependency(
 fastapi/dependencies/utils.py:313:    if lenient_issubclass(param.annotation, Request):
-fastapi/dependencies/utils.py:1:import asyncio
 fastapi/dependencies/utils.py:316:    elif lenient_issubclass(param.annotation, WebSocket):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:316:    elif lenient_issubclass(param.annotation, WebSocket):
 fastapi/dependencies/utils.py:319:    elif lenient_issubclass(param.annotation, Response):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:319:    elif lenient_issubclass(param.annotation, Response):
 fastapi/dependencies/utils.py:322:    elif lenient_issubclass(param.annotation, BackgroundTasks):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:322:    elif lenient_issubclass(param.annotation, BackgroundTasks):
+fastapi/dependencies/utils.py:325:    elif lenient_issubclass(param.annotation, SecurityScopes):
 fastapi/dependencies/utils.py:325:    elif lenient_issubclass(param.annotation, SecurityScopes):
 fastapi/dependencies/utils.py:328:    return None
 fastapi/dependencies/utils.py:331:def get_param_field(
@@ -321,23 +1790,32 @@ fastapi/dependencies/utils.py:361:    if not field_info.alias and getattr(field_
 fastapi/dependencies/utils.py:364:        alias = field_info.alias or param.name
 fastapi/dependencies/utils.py:364:        alias = field_info.alias or param.name
 fastapi/dependencies/utils.py:365:    if PYDANTIC_1:
-fastapi/dependencies/utils.py:366:        field = ModelField(
 fastapi/dependencies/utils.py:377:        field.required = required
 fastapi/dependencies/utils.py:390:    if not had_schema and not is_scalar_field(field=field):
 fastapi/dependencies/utils.py:396:    return field
 fastapi/dependencies/utils.py:276:        param_field = get_param_field(
+fastapi/dependencies/utils.py:277:            param=param, default_field_info=params.Query, param_name=param_name
+fastapi/dependencies/utils.py:278:        )
 fastapi/dependencies/utils.py:279:        if param_name in path_param_names:
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:295:        elif is_scalar_field(field=param_field):
 fastapi/dependencies/utils.py:295:        elif is_scalar_field(field=param_field):
 fastapi/dependencies/utils.py:186:def is_scalar_field(field: ModelField) -> bool:
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:187:    field_info = get_field_info(field)
 fastapi/dependencies/utils.py:188:    if not (
 fastapi/dependencies/utils.py:194:        return False
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:297:        elif isinstance(
 fastapi/dependencies/utils.py:297:        elif isinstance(
 fastapi/dependencies/utils.py:302:            field_info = get_field_info(param_field)
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:302:            field_info = get_field_info(param_field)
 fastapi/dependencies/utils.py:303:            assert isinstance(
+fastapi/dependencies/utils.py:304:                field_info, params.Body
+fastapi/dependencies/utils.py:305:            ), f"Param: {param_field.name} can only be a request body, using Body(...)"
 fastapi/dependencies/utils.py:306:            dependant.body_params.append(param_field)
 fastapi/dependencies/utils.py:307:    return dependant
 fastapi/routing.py:334:        self.dependant = get_dependant(path=self.path_format, call=self.endpoint)
@@ -346,15 +1824,48 @@ fastapi/dependencies/utils.py:154:def get_flat_dependant(
 fastapi/dependencies/utils.py:157:    if visited is None:
 fastapi/dependencies/utils.py:158:        visited = []
 fastapi/dependencies/utils.py:159:    visited.append(dependant.cache_key)
+fastapi/dependencies/models.py:21:    def __init__(
+fastapi/dependencies/models.py:42:        self.path_params = path_params or []
+fastapi/dependencies/models.py:43:        self.query_params = query_params or []
+fastapi/dependencies/models.py:44:        self.header_params = header_params or []
+fastapi/dependencies/models.py:45:        self.cookie_params = cookie_params or []
+fastapi/dependencies/models.py:46:        self.body_params = body_params or []
+fastapi/dependencies/models.py:47:        self.dependencies = dependencies or []
+fastapi/dependencies/models.py:48:        self.security_requirements = security_schemes or []
+fastapi/dependencies/models.py:49:        self.request_param_name = request_param_name
+fastapi/dependencies/models.py:50:        self.websocket_param_name = websocket_param_name
+fastapi/dependencies/models.py:51:        self.response_param_name = response_param_name
+fastapi/dependencies/models.py:52:        self.background_tasks_param_name = background_tasks_param_name
+fastapi/dependencies/models.py:53:        self.security_scopes = security_scopes
+fastapi/dependencies/models.py:54:        self.security_scopes_param_name = security_scopes_param_name
+fastapi/dependencies/models.py:55:        self.name = name
+fastapi/dependencies/models.py:56:        self.call = call
+fastapi/dependencies/models.py:57:        self.use_cache = use_cache
+fastapi/dependencies/models.py:59:        self.path = path
+fastapi/dependencies/models.py:61:        self.cache_key = (self.call, tuple(sorted(set(self.security_scopes or []))))
 fastapi/dependencies/utils.py:161:    flat_dependant = Dependant(
+fastapi/dependencies/utils.py:162:        path_params=dependant.path_params.copy(),
+fastapi/dependencies/utils.py:163:        query_params=dependant.query_params.copy(),
+fastapi/dependencies/utils.py:164:        header_params=dependant.header_params.copy(),
+fastapi/dependencies/utils.py:165:        cookie_params=dependant.cookie_params.copy(),
+fastapi/dependencies/utils.py:166:        body_params=dependant.body_params.copy(),
+fastapi/dependencies/utils.py:167:        security_schemes=dependant.security_requirements.copy(),
+fastapi/dependencies/utils.py:168:        use_cache=dependant.use_cache,
+fastapi/dependencies/utils.py:169:        path=dependant.path,
+fastapi/dependencies/utils.py:170:    )
 fastapi/dependencies/utils.py:183:    return flat_dependant
 fastapi/dependencies/utils.py:721:    flat_dependant = get_flat_dependant(dependant)
 fastapi/dependencies/utils.py:722:    if not flat_dependant.body_params:
 fastapi/dependencies/utils.py:724:    first_param = flat_dependant.body_params[0]
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:725:    field_info = get_field_info(first_param)
 fastapi/dependencies/utils.py:726:    embed = getattr(field_info, "embed", None)
 fastapi/dependencies/utils.py:727:    if len(flat_dependant.body_params) == 1 and not embed:
 fastapi/dependencies/utils.py:729:    model_name = "Body_" + name
+fastapi/dependencies/utils.py:730:    BodyModel = create_model(model_name)
+fastapi/dependencies/utils.py:731:    for f in flat_dependant.body_params:
 fastapi/dependencies/utils.py:731:    for f in flat_dependant.body_params:
 fastapi/dependencies/utils.py:688:def get_schema_compatible_field(*, field: ModelField) -> ModelField:
 fastapi/dependencies/utils.py:689:    out_field = field
@@ -363,25 +1874,101 @@ fastapi/dependencies/utils.py:717:    return out_field
 fastapi/dependencies/utils.py:732:        BodyModel.__fields__[f.name] = get_schema_compatible_field(field=f)
 fastapi/dependencies/utils.py:733:    required = any(True for f in flat_dependant.body_params if f.required)
 fastapi/dependencies/utils.py:736:    if any(
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:740:    elif any(
+fastapi/dependencies/utils.py:740:    elif any(
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
+fastapi/dependencies/utils.py:743:        BodyFieldInfo = params.Form
 fastapi/dependencies/utils.py:754:    if PYDANTIC_1:
-fastapi/dependencies/utils.py:755:        field = ModelField(
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/dependencies/utils.py:776:    return field
 fastapi/routing.py:340:        self.body_field = get_body_field(dependant=self.dependant, name=self.unique_id)
 fastapi/routing.py:341:        self.dependency_overrides_provider = dependency_overrides_provider
+fastapi/routing.py:342:        self.callbacks = callbacks
 fastapi/routing.py:345:    def get_route_handler(self) -> Callable:
 fastapi/routing.py:84:def get_request_handler(
 fastapi/routing.py:96:    assert dependant.call is not None, "dependant.call must be a function"
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/routing.py:98:    is_body_form = body_field and isinstance(get_field_info(body_field), params.Form)
 fastapi/routing.py:152:    return app
 fastapi/routing.py:346:        return get_request_handler(
-fastapi/routing.py:84:def get_request_handler(
-fastapi/routing.py:96:    assert dependant.call is not None, "dependant.call must be a function"
-fastapi/routing.py:98:    is_body_form = body_field and isinstance(get_field_info(body_field), params.Form)
-fastapi/routing.py:152:    return app
+fastapi/routing.py:347:            dependant=self.dependant,
+fastapi/routing.py:348:            body_field=self.body_field,
+fastapi/routing.py:349:            status_code=self.status_code,
+fastapi/routing.py:350:            response_class=self.response_class or JSONResponse,
+fastapi/routing.py:351:            response_field=self.secure_cloned_response_field,
+fastapi/routing.py:352:            response_model_include=self.response_model_include,
+fastapi/routing.py:353:            response_model_exclude=self.response_model_exclude,
+fastapi/routing.py:354:            response_model_by_alias=self.response_model_by_alias,
+fastapi/routing.py:355:            response_model_exclude_unset=self.response_model_exclude_unset,
+fastapi/routing.py:356:            dependency_overrides_provider=self.dependency_overrides_provider,
+fastapi/routing.py:357:        )
 fastapi/routing.py:343:        self.app = request_response(self.get_route_handler())
 fastapi/routing.py:407:        route = route_class(
+fastapi/routing.py:408:            path,
+fastapi/routing.py:409:            endpoint=endpoint,
+fastapi/routing.py:410:            response_model=response_model,
+fastapi/routing.py:411:            status_code=status_code,
+fastapi/routing.py:412:            tags=tags or [],
+fastapi/routing.py:413:            dependencies=dependencies,
+fastapi/routing.py:414:            summary=summary,
+fastapi/routing.py:415:            description=description,
+fastapi/routing.py:416:            response_description=response_description,
+fastapi/routing.py:417:            responses=responses or {},
+fastapi/routing.py:418:            deprecated=deprecated,
+fastapi/routing.py:419:            methods=methods,
+fastapi/routing.py:420:            operation_id=operation_id,
+fastapi/routing.py:421:            response_model_include=response_model_include,
+fastapi/routing.py:422:            response_model_exclude=response_model_exclude,
+fastapi/routing.py:423:            response_model_by_alias=response_model_by_alias,
+fastapi/routing.py:424:            response_model_exclude_unset=bool(
+fastapi/routing.py:425:                response_model_exclude_unset or response_model_skip_defaults
+fastapi/routing.py:426:            ),
+fastapi/routing.py:427:            include_in_schema=include_in_schema,
+fastapi/routing.py:428:            response_class=response_class or self.default_response_class,
+fastapi/routing.py:429:            name=name,
+fastapi/routing.py:430:            dependency_overrides_provider=self.dependency_overrides_provider,
+fastapi/routing.py:431:            callbacks=callbacks,
+fastapi/routing.py:432:        )
 fastapi/routing.py:433:        self.routes.append(route)
 fastapi/routing.py:489:            return func
 fastapi/applications.py:384:    def post(
@@ -392,23 +1979,128 @@ fastapi/routing.py:435:    def api_route(
 fastapi/routing.py:460:        if response_model_skip_defaults is not None:
 fastapi/routing.py:491:        return decorator
 fastapi/routing.py:704:        return self.api_route(
-fastapi/routing.py:435:    def api_route(
-fastapi/routing.py:460:        if response_model_skip_defaults is not None:
-fastapi/routing.py:491:        return decorator
+fastapi/routing.py:705:            path=path,
+fastapi/routing.py:706:            response_model=response_model,
+fastapi/routing.py:707:            status_code=status_code,
+fastapi/routing.py:708:            tags=tags or [],
+fastapi/routing.py:709:            dependencies=dependencies,
+fastapi/routing.py:710:            summary=summary,
+fastapi/routing.py:711:            description=description,
+fastapi/routing.py:712:            response_description=response_description,
+fastapi/routing.py:713:            responses=responses or {},
+fastapi/routing.py:714:            deprecated=deprecated,
+fastapi/routing.py:715:            methods=["POST"],
+fastapi/routing.py:716:            operation_id=operation_id,
+fastapi/routing.py:717:            response_model_include=response_model_include,
+fastapi/routing.py:718:            response_model_exclude=response_model_exclude,
+fastapi/routing.py:719:            response_model_by_alias=response_model_by_alias,
+fastapi/routing.py:720:            response_model_exclude_unset=bool(
+fastapi/routing.py:721:                response_model_exclude_unset or response_model_skip_defaults
+fastapi/routing.py:722:            ),
+fastapi/routing.py:723:            include_in_schema=include_in_schema,
+fastapi/routing.py:724:            response_class=response_class or self.default_response_class,
+fastapi/routing.py:725:            name=name,
+fastapi/routing.py:726:            callbacks=callbacks,
+fastapi/routing.py:727:        )
 fastapi/applications.py:410:        return self.router.post(
-fastapi/routing.py:678:    def post(
-fastapi/routing.py:702:        if response_model_skip_defaults is not None:
-fastapi/routing.py:435:    def api_route(
-fastapi/routing.py:460:        if response_model_skip_defaults is not None:
-fastapi/routing.py:491:        return decorator
-fastapi/routing.py:704:        return self.api_route(
-fastapi/routing.py:435:    def api_route(
-fastapi/routing.py:460:        if response_model_skip_defaults is not None:
-fastapi/routing.py:491:        return decorator
+fastapi/applications.py:411:            path,
+fastapi/applications.py:412:            response_model=response_model,
+fastapi/applications.py:413:            status_code=status_code,
+fastapi/applications.py:414:            tags=tags or [],
+fastapi/applications.py:415:            dependencies=dependencies,
+fastapi/applications.py:416:            summary=summary,
+fastapi/applications.py:417:            description=description,
+fastapi/applications.py:418:            response_description=response_description,
+fastapi/applications.py:419:            responses=responses or {},
+fastapi/applications.py:420:            deprecated=deprecated,
+fastapi/applications.py:421:            operation_id=operation_id,
+fastapi/applications.py:422:            response_model_include=response_model_include,
+fastapi/applications.py:423:            response_model_exclude=response_model_exclude,
+fastapi/applications.py:424:            response_model_by_alias=response_model_by_alias,
+fastapi/applications.py:425:            response_model_exclude_unset=bool(
+fastapi/applications.py:426:                response_model_exclude_unset or response_model_skip_defaults
+fastapi/applications.py:427:            ),
+fastapi/applications.py:428:            include_in_schema=include_in_schema,
+fastapi/applications.py:429:            response_class=response_class or self.default_response_class,
+fastapi/applications.py:430:            name=name,
+fastapi/applications.py:431:            callbacks=callbacks,
+fastapi/applications.py:432:        )
 fastapi/param_functions.py:175:def Form(  # noqa: N802
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/param_functions.py:191:    return params.Form(
+fastapi/param_functions.py:192:        default,
+fastapi/param_functions.py:193:        media_type=media_type,
+fastapi/param_functions.py:194:        alias=alias,
+fastapi/param_functions.py:195:        title=title,
+fastapi/param_functions.py:196:        description=description,
+fastapi/param_functions.py:197:        gt=gt,
+fastapi/param_functions.py:198:        ge=ge,
+fastapi/param_functions.py:199:        lt=lt,
+fastapi/param_functions.py:200:        le=le,
+fastapi/param_functions.py:201:        min_length=min_length,
+fastapi/param_functions.py:202:        max_length=max_length,
+fastapi/param_functions.py:203:        regex=regex,
+fastapi/param_functions.py:204:        **extra,
+fastapi/param_functions.py:205:    )
 fastapi/routing.py:463:        def decorator(func: Callable) -> Callable:
 fastapi/routing.py:464:            self.add_api_route(
+fastapi/routing.py:465:                path,
+fastapi/routing.py:466:                func,
+fastapi/routing.py:467:                response_model=response_model,
+fastapi/routing.py:468:                status_code=status_code,
+fastapi/routing.py:469:                tags=tags or [],
+fastapi/routing.py:470:                dependencies=dependencies,
+fastapi/routing.py:471:                summary=summary,
+fastapi/routing.py:472:                description=description,
+fastapi/routing.py:473:                response_description=response_description,
+fastapi/routing.py:474:                responses=responses or {},
+fastapi/routing.py:475:                deprecated=deprecated,
+fastapi/routing.py:476:                methods=methods,
+fastapi/routing.py:477:                operation_id=operation_id,
+fastapi/routing.py:478:                response_model_include=response_model_include,
+fastapi/routing.py:479:                response_model_exclude=response_model_exclude,
+fastapi/routing.py:480:                response_model_by_alias=response_model_by_alias,
+fastapi/routing.py:481:                response_model_exclude_unset=bool(
+fastapi/routing.py:482:                    response_model_exclude_unset or response_model_skip_defaults
+fastapi/routing.py:483:                ),
+fastapi/routing.py:484:                include_in_schema=include_in_schema,
+fastapi/routing.py:485:                response_class=response_class or self.default_response_class,
+fastapi/routing.py:486:                name=name,
+fastapi/routing.py:487:                callbacks=callbacks,
+fastapi/routing.py:488:            )
 fastapi/routing.py:377:    def add_api_route(
 fastapi/routing.py:404:        if response_model_skip_defaults is not None:
 fastapi/routing.py:406:        route_class = route_class_override or self.route_class
@@ -419,21 +2111,48 @@ fastapi/routing.py:225:        self.name = get_name(endpoint) if name is None el
 fastapi/routing.py:226:        self.path_regex, self.path_format, self.param_convertors = compile_path(path)
 fastapi/routing.py:227:        if methods is None:
 fastapi/routing.py:229:        self.methods = set([method.upper() for method in methods])
+fastapi/utils.py:157:def generate_operation_id_for_path(*, name: str, path: str, method: str) -> str:
+fastapi/utils.py:158:    operation_id = name + path
+fastapi/utils.py:159:    operation_id = re.sub("[^0-9a-zA-Z_]", "_", operation_id)
+fastapi/utils.py:160:    operation_id = operation_id + "_" + method.lower()
+fastapi/utils.py:161:    return operation_id
 fastapi/routing.py:230:        self.unique_id = generate_operation_id_for_path(
+fastapi/routing.py:231:            name=self.name, path=self.path_format, method=list(methods)[0]
+fastapi/routing.py:232:        )
 fastapi/routing.py:233:        self.response_model = response_model
 fastapi/routing.py:234:        if self.response_model:
+fastapi/routing.py:270:            self.response_field = None
+fastapi/routing.py:270:            self.response_field = None
+fastapi/routing.py:271:            self.secure_cloned_response_field = None
 fastapi/routing.py:272:        self.status_code = status_code
+fastapi/routing.py:273:        self.tags = tags or []
 fastapi/routing.py:274:        if dependencies:
 fastapi/routing.py:277:            self.dependencies = []
 fastapi/routing.py:277:            self.dependencies = []
+fastapi/routing.py:278:        self.summary = summary
 fastapi/routing.py:279:        self.description = description or inspect.cleandoc(self.endpoint.__doc__ or "")
 fastapi/routing.py:282:        self.description = self.description.split("\f")[0]
+fastapi/routing.py:283:        self.response_description = response_description
+fastapi/routing.py:284:        self.responses = responses or {}
 fastapi/routing.py:285:        response_fields = {}
+fastapi/routing.py:286:        for additional_status_code, response in self.responses.items():
 fastapi/routing.py:318:        if response_fields:
 fastapi/routing.py:321:            self.response_fields = {}
 fastapi/routing.py:321:            self.response_fields = {}
+fastapi/routing.py:322:        self.deprecated = deprecated
+fastapi/routing.py:323:        self.operation_id = operation_id
+fastapi/routing.py:324:        self.response_model_include = response_model_include
+fastapi/routing.py:325:        self.response_model_exclude = response_model_exclude
+fastapi/routing.py:326:        self.response_model_by_alias = response_model_by_alias
+fastapi/routing.py:327:        self.response_model_exclude_unset = response_model_exclude_unset
+fastapi/routing.py:328:        self.include_in_schema = include_in_schema
+fastapi/routing.py:329:        self.response_class = response_class
 fastapi/routing.py:331:        assert inspect.isfunction(endpoint) or inspect.ismethod(
+fastapi/routing.py:332:            endpoint
+fastapi/routing.py:333:        ), f"An endpoint must be a function or method"
 fastapi/dependencies/utils.py:251:def get_dependant(
+fastapi/utils.py:85:def get_path_param_names(path: str) -> Set[str]:
+fastapi/utils.py:86:    return {item.strip("{}") for item in re.findall("{[^}]*}", path)}
 fastapi/dependencies/utils.py:259:    path_param_names = get_path_param_names(path)
 fastapi/dependencies/utils.py:215:def get_typed_signature(call: Callable) -> inspect.Signature:
 fastapi/dependencies/utils.py:217:    globalns = getattr(call, "__globals__", {})
@@ -441,27 +2160,47 @@ fastapi/dependencies/utils.py:231:def get_typed_annotation(param: inspect.Parame
 fastapi/dependencies/utils.py:232:    annotation = param.annotation
 fastapi/dependencies/utils.py:233:    if isinstance(annotation, str):
 fastapi/dependencies/utils.py:236:    return annotation
-fastapi/dependencies/utils.py:218:    typed_params = [
 fastapi/dependencies/utils.py:227:    typed_signature = inspect.Signature(typed_params)
 fastapi/dependencies/utils.py:228:    return typed_signature
 fastapi/dependencies/utils.py:260:    endpoint_signature = get_typed_signature(call)
 fastapi/dependencies/utils.py:261:    signature_params = endpoint_signature.parameters
 fastapi/dependencies/utils.py:262:    if inspect.isgeneratorfunction(call) or inspect.isasyncgenfunction(call):
+fastapi/dependencies/models.py:21:    def __init__(
+fastapi/dependencies/models.py:42:        self.path_params = path_params or []
+fastapi/dependencies/models.py:43:        self.query_params = query_params or []
+fastapi/dependencies/models.py:44:        self.header_params = header_params or []
+fastapi/dependencies/models.py:45:        self.cookie_params = cookie_params or []
+fastapi/dependencies/models.py:46:        self.body_params = body_params or []
+fastapi/dependencies/models.py:47:        self.dependencies = dependencies or []
+fastapi/dependencies/models.py:48:        self.security_requirements = security_schemes or []
+fastapi/dependencies/models.py:49:        self.request_param_name = request_param_name
+fastapi/dependencies/models.py:50:        self.websocket_param_name = websocket_param_name
+fastapi/dependencies/models.py:51:        self.response_param_name = response_param_name
+fastapi/dependencies/models.py:52:        self.background_tasks_param_name = background_tasks_param_name
+fastapi/dependencies/models.py:53:        self.security_scopes = security_scopes
+fastapi/dependencies/models.py:54:        self.security_scopes_param_name = security_scopes_param_name
+fastapi/dependencies/models.py:55:        self.name = name
+fastapi/dependencies/models.py:56:        self.call = call
+fastapi/dependencies/models.py:57:        self.use_cache = use_cache
+fastapi/dependencies/models.py:59:        self.path = path
+fastapi/dependencies/models.py:61:        self.cache_key = (self.call, tuple(sorted(set(self.security_scopes or []))))
 fastapi/dependencies/utils.py:264:    dependant = Dependant(call=call, name=name, path=path, use_cache=use_cache)
 fastapi/dependencies/utils.py:265:    for param_name, param in signature_params.items():
+fastapi/dependencies/utils.py:265:    for param_name, param in signature_params.items():
 fastapi/dependencies/utils.py:266:        if isinstance(param.default, params.Depends):
+fastapi/dependencies/utils.py:271:    for param_name, param in signature_params.items():
 fastapi/dependencies/utils.py:271:    for param_name, param in signature_params.items():
 fastapi/dependencies/utils.py:272:        if isinstance(param.default, params.Depends):
 fastapi/dependencies/utils.py:274:        if add_non_field_param_to_dependency(param=param, dependant=dependant):
 fastapi/dependencies/utils.py:310:def add_non_field_param_to_dependency(
 fastapi/dependencies/utils.py:313:    if lenient_issubclass(param.annotation, Request):
-fastapi/dependencies/utils.py:1:import asyncio
 fastapi/dependencies/utils.py:316:    elif lenient_issubclass(param.annotation, WebSocket):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:316:    elif lenient_issubclass(param.annotation, WebSocket):
 fastapi/dependencies/utils.py:319:    elif lenient_issubclass(param.annotation, Response):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:319:    elif lenient_issubclass(param.annotation, Response):
 fastapi/dependencies/utils.py:322:    elif lenient_issubclass(param.annotation, BackgroundTasks):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:322:    elif lenient_issubclass(param.annotation, BackgroundTasks):
+fastapi/dependencies/utils.py:325:    elif lenient_issubclass(param.annotation, SecurityScopes):
 fastapi/dependencies/utils.py:325:    elif lenient_issubclass(param.annotation, SecurityScopes):
 fastapi/dependencies/utils.py:328:    return None
 fastapi/dependencies/utils.py:331:def get_param_field(
@@ -483,23 +2222,32 @@ fastapi/dependencies/utils.py:361:    if not field_info.alias and getattr(field_
 fastapi/dependencies/utils.py:364:        alias = field_info.alias or param.name
 fastapi/dependencies/utils.py:364:        alias = field_info.alias or param.name
 fastapi/dependencies/utils.py:365:    if PYDANTIC_1:
-fastapi/dependencies/utils.py:366:        field = ModelField(
 fastapi/dependencies/utils.py:377:        field.required = required
 fastapi/dependencies/utils.py:390:    if not had_schema and not is_scalar_field(field=field):
 fastapi/dependencies/utils.py:396:    return field
 fastapi/dependencies/utils.py:276:        param_field = get_param_field(
+fastapi/dependencies/utils.py:277:            param=param, default_field_info=params.Query, param_name=param_name
+fastapi/dependencies/utils.py:278:        )
 fastapi/dependencies/utils.py:279:        if param_name in path_param_names:
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:295:        elif is_scalar_field(field=param_field):
 fastapi/dependencies/utils.py:295:        elif is_scalar_field(field=param_field):
 fastapi/dependencies/utils.py:186:def is_scalar_field(field: ModelField) -> bool:
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:187:    field_info = get_field_info(field)
 fastapi/dependencies/utils.py:188:    if not (
 fastapi/dependencies/utils.py:194:        return False
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:297:        elif isinstance(
 fastapi/dependencies/utils.py:297:        elif isinstance(
 fastapi/dependencies/utils.py:302:            field_info = get_field_info(param_field)
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:302:            field_info = get_field_info(param_field)
 fastapi/dependencies/utils.py:303:            assert isinstance(
+fastapi/dependencies/utils.py:304:                field_info, params.Body
+fastapi/dependencies/utils.py:305:            ), f"Param: {param_field.name} can only be a request body, using Body(...)"
 fastapi/dependencies/utils.py:306:            dependant.body_params.append(param_field)
 fastapi/dependencies/utils.py:307:    return dependant
 fastapi/routing.py:334:        self.dependant = get_dependant(path=self.path_format, call=self.endpoint)
@@ -508,15 +2256,48 @@ fastapi/dependencies/utils.py:154:def get_flat_dependant(
 fastapi/dependencies/utils.py:157:    if visited is None:
 fastapi/dependencies/utils.py:158:        visited = []
 fastapi/dependencies/utils.py:159:    visited.append(dependant.cache_key)
+fastapi/dependencies/models.py:21:    def __init__(
+fastapi/dependencies/models.py:42:        self.path_params = path_params or []
+fastapi/dependencies/models.py:43:        self.query_params = query_params or []
+fastapi/dependencies/models.py:44:        self.header_params = header_params or []
+fastapi/dependencies/models.py:45:        self.cookie_params = cookie_params or []
+fastapi/dependencies/models.py:46:        self.body_params = body_params or []
+fastapi/dependencies/models.py:47:        self.dependencies = dependencies or []
+fastapi/dependencies/models.py:48:        self.security_requirements = security_schemes or []
+fastapi/dependencies/models.py:49:        self.request_param_name = request_param_name
+fastapi/dependencies/models.py:50:        self.websocket_param_name = websocket_param_name
+fastapi/dependencies/models.py:51:        self.response_param_name = response_param_name
+fastapi/dependencies/models.py:52:        self.background_tasks_param_name = background_tasks_param_name
+fastapi/dependencies/models.py:53:        self.security_scopes = security_scopes
+fastapi/dependencies/models.py:54:        self.security_scopes_param_name = security_scopes_param_name
+fastapi/dependencies/models.py:55:        self.name = name
+fastapi/dependencies/models.py:56:        self.call = call
+fastapi/dependencies/models.py:57:        self.use_cache = use_cache
+fastapi/dependencies/models.py:59:        self.path = path
+fastapi/dependencies/models.py:61:        self.cache_key = (self.call, tuple(sorted(set(self.security_scopes or []))))
 fastapi/dependencies/utils.py:161:    flat_dependant = Dependant(
+fastapi/dependencies/utils.py:162:        path_params=dependant.path_params.copy(),
+fastapi/dependencies/utils.py:163:        query_params=dependant.query_params.copy(),
+fastapi/dependencies/utils.py:164:        header_params=dependant.header_params.copy(),
+fastapi/dependencies/utils.py:165:        cookie_params=dependant.cookie_params.copy(),
+fastapi/dependencies/utils.py:166:        body_params=dependant.body_params.copy(),
+fastapi/dependencies/utils.py:167:        security_schemes=dependant.security_requirements.copy(),
+fastapi/dependencies/utils.py:168:        use_cache=dependant.use_cache,
+fastapi/dependencies/utils.py:169:        path=dependant.path,
+fastapi/dependencies/utils.py:170:    )
 fastapi/dependencies/utils.py:183:    return flat_dependant
 fastapi/dependencies/utils.py:721:    flat_dependant = get_flat_dependant(dependant)
 fastapi/dependencies/utils.py:722:    if not flat_dependant.body_params:
 fastapi/dependencies/utils.py:724:    first_param = flat_dependant.body_params[0]
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:725:    field_info = get_field_info(first_param)
 fastapi/dependencies/utils.py:726:    embed = getattr(field_info, "embed", None)
 fastapi/dependencies/utils.py:727:    if len(flat_dependant.body_params) == 1 and not embed:
 fastapi/dependencies/utils.py:729:    model_name = "Body_" + name
+fastapi/dependencies/utils.py:730:    BodyModel = create_model(model_name)
+fastapi/dependencies/utils.py:731:    for f in flat_dependant.body_params:
 fastapi/dependencies/utils.py:731:    for f in flat_dependant.body_params:
 fastapi/dependencies/utils.py:688:def get_schema_compatible_field(*, field: ModelField) -> ModelField:
 fastapi/dependencies/utils.py:689:    out_field = field
@@ -525,57 +2306,145 @@ fastapi/dependencies/utils.py:717:    return out_field
 fastapi/dependencies/utils.py:732:        BodyModel.__fields__[f.name] = get_schema_compatible_field(field=f)
 fastapi/dependencies/utils.py:733:    required = any(True for f in flat_dependant.body_params if f.required)
 fastapi/dependencies/utils.py:736:    if any(
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:740:    elif any(
+fastapi/dependencies/utils.py:740:    elif any(
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
+fastapi/dependencies/utils.py:743:        BodyFieldInfo = params.Form
 fastapi/dependencies/utils.py:754:    if PYDANTIC_1:
-fastapi/dependencies/utils.py:755:        field = ModelField(
+fastapi/params.py:244:    def __init__(
+fastapi/params.py:261:        super().__init__(
+fastapi/params.py:262:            default,
+fastapi/params.py:263:            embed=True,
+fastapi/params.py:264:            media_type=media_type,
+fastapi/params.py:265:            alias=alias,
+fastapi/params.py:266:            title=title,
+fastapi/params.py:267:            description=description,
+fastapi/params.py:268:            gt=gt,
+fastapi/params.py:269:            ge=ge,
+fastapi/params.py:270:            lt=lt,
+fastapi/params.py:271:            le=le,
+fastapi/params.py:272:            min_length=min_length,
+fastapi/params.py:273:            max_length=max_length,
+fastapi/params.py:274:            regex=regex,
+fastapi/params.py:275:            **extra,
+fastapi/params.py:276:        )
+fastapi/params.py:207:    def __init__(
+fastapi/params.py:225:        self.embed = embed
+fastapi/params.py:226:        self.media_type = media_type
+fastapi/params.py:227:        super().__init__(
+fastapi/params.py:228:            default,
+fastapi/params.py:229:            alias=alias,
+fastapi/params.py:230:            title=title,
+fastapi/params.py:231:            description=description,
+fastapi/params.py:232:            gt=gt,
+fastapi/params.py:233:            ge=ge,
+fastapi/params.py:234:            lt=lt,
+fastapi/params.py:235:            le=le,
+fastapi/params.py:236:            min_length=min_length,
+fastapi/params.py:237:            max_length=max_length,
+fastapi/params.py:238:            regex=regex,
+fastapi/params.py:239:            **extra,
+fastapi/params.py:240:        )
 fastapi/dependencies/utils.py:776:    return field
 fastapi/routing.py:340:        self.body_field = get_body_field(dependant=self.dependant, name=self.unique_id)
 fastapi/routing.py:341:        self.dependency_overrides_provider = dependency_overrides_provider
+fastapi/routing.py:342:        self.callbacks = callbacks
 fastapi/routing.py:345:    def get_route_handler(self) -> Callable:
 fastapi/routing.py:84:def get_request_handler(
 fastapi/routing.py:96:    assert dependant.call is not None, "dependant.call must be a function"
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/routing.py:98:    is_body_form = body_field and isinstance(get_field_info(body_field), params.Form)
 fastapi/routing.py:152:    return app
 fastapi/routing.py:346:        return get_request_handler(
-fastapi/routing.py:84:def get_request_handler(
-fastapi/routing.py:96:    assert dependant.call is not None, "dependant.call must be a function"
-fastapi/routing.py:98:    is_body_form = body_field and isinstance(get_field_info(body_field), params.Form)
-fastapi/routing.py:152:    return app
+fastapi/routing.py:347:            dependant=self.dependant,
+fastapi/routing.py:348:            body_field=self.body_field,
+fastapi/routing.py:349:            status_code=self.status_code,
+fastapi/routing.py:350:            response_class=self.response_class or JSONResponse,
+fastapi/routing.py:351:            response_field=self.secure_cloned_response_field,
+fastapi/routing.py:352:            response_model_include=self.response_model_include,
+fastapi/routing.py:353:            response_model_exclude=self.response_model_exclude,
+fastapi/routing.py:354:            response_model_by_alias=self.response_model_by_alias,
+fastapi/routing.py:355:            response_model_exclude_unset=self.response_model_exclude_unset,
+fastapi/routing.py:356:            dependency_overrides_provider=self.dependency_overrides_provider,
+fastapi/routing.py:357:        )
 fastapi/routing.py:343:        self.app = request_response(self.get_route_handler())
 fastapi/routing.py:407:        route = route_class(
+fastapi/routing.py:408:            path,
+fastapi/routing.py:409:            endpoint=endpoint,
+fastapi/routing.py:410:            response_model=response_model,
+fastapi/routing.py:411:            status_code=status_code,
+fastapi/routing.py:412:            tags=tags or [],
+fastapi/routing.py:413:            dependencies=dependencies,
+fastapi/routing.py:414:            summary=summary,
+fastapi/routing.py:415:            description=description,
+fastapi/routing.py:416:            response_description=response_description,
+fastapi/routing.py:417:            responses=responses or {},
+fastapi/routing.py:418:            deprecated=deprecated,
+fastapi/routing.py:419:            methods=methods,
+fastapi/routing.py:420:            operation_id=operation_id,
+fastapi/routing.py:421:            response_model_include=response_model_include,
+fastapi/routing.py:422:            response_model_exclude=response_model_exclude,
+fastapi/routing.py:423:            response_model_by_alias=response_model_by_alias,
+fastapi/routing.py:424:            response_model_exclude_unset=bool(
+fastapi/routing.py:425:                response_model_exclude_unset or response_model_skip_defaults
+fastapi/routing.py:426:            ),
+fastapi/routing.py:427:            include_in_schema=include_in_schema,
+fastapi/routing.py:428:            response_class=response_class or self.default_response_class,
+fastapi/routing.py:429:            name=name,
+fastapi/routing.py:430:            dependency_overrides_provider=self.dependency_overrides_provider,
+fastapi/routing.py:431:            callbacks=callbacks,
+fastapi/routing.py:432:        )
 fastapi/routing.py:433:        self.routes.append(route)
 fastapi/routing.py:489:            return func
 tests/test_forms_from_non_typing_sequences.py:22:client = TestClient(app)
 tests/test_forms_from_non_typing_sequences.py:25:def test_python_list_param_as_form():
 fastapi/applications.py:137:        if AsyncExitStack:
+fastapi/applications.py:139:                scope["fastapi_astack"] = stack
 fastapi/routing.py:101:        try:
 fastapi/routing.py:102:            body = None
 fastapi/routing.py:103:            if body_field:
 fastapi/routing.py:104:                if is_body_form:
 fastapi/routing.py:105:                    body = await request.form()
-fastapi/dependencies/utils.py:451:    response = response or Response(
 fastapi/dependencies/utils.py:458:    dependency_cache = dependency_cache or {}
 fastapi/dependencies/utils.py:569:def request_params_to_args(
 fastapi/dependencies/utils.py:573:    values = {}
 fastapi/dependencies/utils.py:574:    errors = []
+fastapi/dependencies/utils.py:575:    for field in required_params:
 fastapi/dependencies/utils.py:614:    return values, errors
 fastapi/dependencies/utils.py:526:    path_values, path_errors = request_params_to_args(
+fastapi/dependencies/utils.py:527:        dependant.path_params, request.path_params
+fastapi/dependencies/utils.py:528:    )
 fastapi/dependencies/utils.py:569:def request_params_to_args(
 fastapi/dependencies/utils.py:573:    values = {}
 fastapi/dependencies/utils.py:574:    errors = []
+fastapi/dependencies/utils.py:575:    for field in required_params:
 fastapi/dependencies/utils.py:614:    return values, errors
 fastapi/dependencies/utils.py:529:    query_values, query_errors = request_params_to_args(
+fastapi/dependencies/utils.py:530:        dependant.query_params, request.query_params
+fastapi/dependencies/utils.py:531:    )
 fastapi/dependencies/utils.py:569:def request_params_to_args(
 fastapi/dependencies/utils.py:573:    values = {}
 fastapi/dependencies/utils.py:574:    errors = []
+fastapi/dependencies/utils.py:575:    for field in required_params:
 fastapi/dependencies/utils.py:614:    return values, errors
 fastapi/dependencies/utils.py:532:    header_values, header_errors = request_params_to_args(
+fastapi/dependencies/utils.py:533:        dependant.header_params, request.headers
+fastapi/dependencies/utils.py:534:    )
 fastapi/dependencies/utils.py:569:def request_params_to_args(
 fastapi/dependencies/utils.py:573:    values = {}
 fastapi/dependencies/utils.py:574:    errors = []
+fastapi/dependencies/utils.py:575:    for field in required_params:
 fastapi/dependencies/utils.py:614:    return values, errors
 fastapi/dependencies/utils.py:535:    cookie_values, cookie_errors = request_params_to_args(
+fastapi/dependencies/utils.py:536:        dependant.cookie_params, request.cookies
+fastapi/dependencies/utils.py:537:    )
 fastapi/dependencies/utils.py:538:    values.update(path_values)
 fastapi/dependencies/utils.py:539:    values.update(query_values)
 fastapi/dependencies/utils.py:540:    values.update(header_values)
@@ -586,37 +2455,240 @@ fastapi/dependencies/utils.py:621:    values = {}
 fastapi/dependencies/utils.py:622:    errors = []
 fastapi/dependencies/utils.py:623:    if required_params:
 fastapi/dependencies/utils.py:624:        field = required_params[0]
+fastapi/utils.py:30:def get_field_info(field: ModelField) -> FieldInfo:
+fastapi/utils.py:31:    if PYDANTIC_1:
+fastapi/utils.py:32:        return field.field_info  # type: ignore
 fastapi/dependencies/utils.py:625:        field_info = get_field_info(field)
 fastapi/dependencies/utils.py:626:        embed = getattr(field_info, "embed", None)
 fastapi/dependencies/utils.py:627:        if len(required_params) == 1 and not embed:
 fastapi/dependencies/utils.py:629:        for field in required_params:
+fastapi/dependencies/utils.py:629:        for field in required_params:
 fastapi/dependencies/utils.py:631:            if received_body is not None:
 fastapi/dependencies/utils.py:632:                if field.shape in sequence_shapes and isinstance(
 fastapi/dependencies/utils.py:637:                    value = received_body.get(field.alias)
-fastapi/dependencies/utils.py:637:                    value = received_body.get(field.alias)
 fastapi/dependencies/utils.py:638:            if (
 fastapi/dependencies/utils.py:663:            if (
-fastapi/dependencies/utils.py:1:import asyncio
 fastapi/dependencies/utils.py:669:            elif (
 fastapi/dependencies/utils.py:678:            v_, errors_ = field.validate(value, values, loc=("body", field.alias))
 fastapi/dependencies/utils.py:679:            if isinstance(errors_, ErrorWrapper):
 fastapi/dependencies/utils.py:680:                errors.append(errors_)
 fastapi/dependencies/utils.py:685:    return values, errors
 fastapi/dependencies/utils.py:544:        (
+fastapi/dependencies/utils.py:545:            body_values,
+fastapi/dependencies/utils.py:546:            body_errors,
+fastapi/dependencies/utils.py:547:        ) = await request_body_to_args(  # body_params checked above
+fastapi/dependencies/utils.py:548:            required_params=dependant.body_params, received_body=body
+fastapi/dependencies/utils.py:549:        )
 fastapi/dependencies/utils.py:550:        values.update(body_values)
 fastapi/dependencies/utils.py:551:        errors.extend(body_errors)
 fastapi/dependencies/utils.py:552:    if dependant.request_param_name and isinstance(request, Request):
-fastapi/dependencies/utils.py:1:import asyncio
+fastapi/dependencies/utils.py:554:    elif dependant.websocket_param_name and isinstance(request, WebSocket):
 fastapi/dependencies/utils.py:554:    elif dependant.websocket_param_name and isinstance(request, WebSocket):
 fastapi/dependencies/utils.py:556:    if dependant.background_tasks_param_name:
 fastapi/dependencies/utils.py:560:    if dependant.response_param_name:
 fastapi/dependencies/utils.py:562:    if dependant.security_scopes_param_name:
 fastapi/dependencies/utils.py:566:    return values, errors, background_tasks, response, dependency_cache
 fastapi/routing.py:115:        solved_result = await solve_dependencies(
+fastapi/routing.py:116:            request=request,
+fastapi/routing.py:117:            dependant=dependant,
+fastapi/routing.py:118:            body=body,
+fastapi/routing.py:119:            dependency_overrides_provider=dependency_overrides_provider,
+fastapi/routing.py:120:        )
 fastapi/routing.py:121:        values, errors, background_tasks, sub_response, _ = solved_result
 fastapi/routing.py:122:        if errors:
+fastapi/routing.py:123:            raise RequestValidationError(errors, body=body)
 fastapi/exceptions.py:24:    def __init__(self, errors: Sequence[ErrorList], *, body: Any = None) -> None:
+fastapi/exceptions.py:25:        self.body = body
 fastapi/exceptions.py:26:        if PYDANTIC_1:
 fastapi/exceptions.py:27:            super().__init__(errors, RequestErrorModel)
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:78:    if isinstance(obj, dict):
+fastapi/encoders.py:108:    if isinstance(obj, (list, set, frozenset, GeneratorType, tuple)):
+fastapi/encoders.py:109:        encoded_list = []
+fastapi/encoders.py:110:        for item in obj:
+fastapi/encoders.py:110:        for item in obj:
+fastapi/encoders.py:111:            encoded_list.append(
+fastapi/encoders.py:112:                jsonable_encoder(
+fastapi/encoders.py:113:                    item,
+fastapi/encoders.py:114:                    include=include,
+fastapi/encoders.py:115:                    exclude=exclude,
+fastapi/encoders.py:116:                    by_alias=by_alias,
+fastapi/encoders.py:117:                    exclude_unset=exclude_unset,
+fastapi/encoders.py:118:                    include_none=include_none,
+fastapi/encoders.py:119:                    custom_encoder=custom_encoder,
+fastapi/encoders.py:120:                    sqlalchemy_safe=sqlalchemy_safe,
+fastapi/encoders.py:121:                )
+fastapi/encoders.py:122:            )
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:78:    if isinstance(obj, dict):
+fastapi/encoders.py:79:        encoded_dict = {}
+fastapi/encoders.py:80:        for key, value in obj.items():
+fastapi/encoders.py:80:        for key, value in obj.items():
+fastapi/encoders.py:81:            if (
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:77:        return obj
+fastapi/encoders.py:90:                encoded_key = jsonable_encoder(
+fastapi/encoders.py:91:                    key,
+fastapi/encoders.py:92:                    by_alias=by_alias,
+fastapi/encoders.py:93:                    exclude_unset=exclude_unset,
+fastapi/encoders.py:94:                    include_none=include_none,
+fastapi/encoders.py:95:                    custom_encoder=custom_encoder,
+fastapi/encoders.py:96:                    sqlalchemy_safe=sqlalchemy_safe,
+fastapi/encoders.py:97:                )
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:78:    if isinstance(obj, dict):
+fastapi/encoders.py:108:    if isinstance(obj, (list, set, frozenset, GeneratorType, tuple)):
+fastapi/encoders.py:109:        encoded_list = []
+fastapi/encoders.py:110:        for item in obj:
+fastapi/encoders.py:110:        for item in obj:
+fastapi/encoders.py:111:            encoded_list.append(
+fastapi/encoders.py:112:                jsonable_encoder(
+fastapi/encoders.py:113:                    item,
+fastapi/encoders.py:114:                    include=include,
+fastapi/encoders.py:115:                    exclude=exclude,
+fastapi/encoders.py:116:                    by_alias=by_alias,
+fastapi/encoders.py:117:                    exclude_unset=exclude_unset,
+fastapi/encoders.py:118:                    include_none=include_none,
+fastapi/encoders.py:119:                    custom_encoder=custom_encoder,
+fastapi/encoders.py:120:                    sqlalchemy_safe=sqlalchemy_safe,
+fastapi/encoders.py:121:                )
+fastapi/encoders.py:122:            )
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:77:        return obj
+fastapi/encoders.py:110:        for item in obj:
+fastapi/encoders.py:111:            encoded_list.append(
+fastapi/encoders.py:112:                jsonable_encoder(
+fastapi/encoders.py:113:                    item,
+fastapi/encoders.py:114:                    include=include,
+fastapi/encoders.py:115:                    exclude=exclude,
+fastapi/encoders.py:116:                    by_alias=by_alias,
+fastapi/encoders.py:117:                    exclude_unset=exclude_unset,
+fastapi/encoders.py:118:                    include_none=include_none,
+fastapi/encoders.py:119:                    custom_encoder=custom_encoder,
+fastapi/encoders.py:120:                    sqlalchemy_safe=sqlalchemy_safe,
+fastapi/encoders.py:121:                )
+fastapi/encoders.py:122:            )
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:77:        return obj
+fastapi/encoders.py:123:        return encoded_list
+fastapi/encoders.py:98:                encoded_value = jsonable_encoder(
+fastapi/encoders.py:99:                    value,
+fastapi/encoders.py:100:                    by_alias=by_alias,
+fastapi/encoders.py:101:                    exclude_unset=exclude_unset,
+fastapi/encoders.py:102:                    include_none=include_none,
+fastapi/encoders.py:103:                    custom_encoder=custom_encoder,
+fastapi/encoders.py:104:                    sqlalchemy_safe=sqlalchemy_safe,
+fastapi/encoders.py:105:                )
+fastapi/encoders.py:106:                encoded_dict[encoded_key] = encoded_value
+fastapi/encoders.py:80:        for key, value in obj.items():
+fastapi/encoders.py:81:            if (
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:77:        return obj
+fastapi/encoders.py:90:                encoded_key = jsonable_encoder(
+fastapi/encoders.py:91:                    key,
+fastapi/encoders.py:92:                    by_alias=by_alias,
+fastapi/encoders.py:93:                    exclude_unset=exclude_unset,
+fastapi/encoders.py:94:                    include_none=include_none,
+fastapi/encoders.py:95:                    custom_encoder=custom_encoder,
+fastapi/encoders.py:96:                    sqlalchemy_safe=sqlalchemy_safe,
+fastapi/encoders.py:97:                )
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:77:        return obj
+fastapi/encoders.py:98:                encoded_value = jsonable_encoder(
+fastapi/encoders.py:99:                    value,
+fastapi/encoders.py:100:                    by_alias=by_alias,
+fastapi/encoders.py:101:                    exclude_unset=exclude_unset,
+fastapi/encoders.py:102:                    include_none=include_none,
+fastapi/encoders.py:103:                    custom_encoder=custom_encoder,
+fastapi/encoders.py:104:                    sqlalchemy_safe=sqlalchemy_safe,
+fastapi/encoders.py:105:                )
+fastapi/encoders.py:106:                encoded_dict[encoded_key] = encoded_value
+fastapi/encoders.py:80:        for key, value in obj.items():
+fastapi/encoders.py:81:            if (
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:77:        return obj
+fastapi/encoders.py:90:                encoded_key = jsonable_encoder(
+fastapi/encoders.py:91:                    key,
+fastapi/encoders.py:92:                    by_alias=by_alias,
+fastapi/encoders.py:93:                    exclude_unset=exclude_unset,
+fastapi/encoders.py:94:                    include_none=include_none,
+fastapi/encoders.py:95:                    custom_encoder=custom_encoder,
+fastapi/encoders.py:96:                    sqlalchemy_safe=sqlalchemy_safe,
+fastapi/encoders.py:97:                )
+fastapi/encoders.py:29:def jsonable_encoder(
+fastapi/encoders.py:40:    if skip_defaults is not None:
+fastapi/encoders.py:46:    if include is not None and not isinstance(include, set):
+fastapi/encoders.py:48:    if exclude is not None and not isinstance(exclude, set):
+fastapi/encoders.py:50:    if isinstance(obj, BaseModel):
+fastapi/encoders.py:74:    if isinstance(obj, Enum):
+fastapi/encoders.py:76:    if isinstance(obj, (str, int, float, type(None))):
+fastapi/encoders.py:77:        return obj
+fastapi/encoders.py:98:                encoded_value = jsonable_encoder(
+fastapi/encoders.py:99:                    value,
+fastapi/encoders.py:100:                    by_alias=by_alias,
+fastapi/encoders.py:101:                    exclude_unset=exclude_unset,
+fastapi/encoders.py:102:                    include_none=include_none,
+fastapi/encoders.py:103:                    custom_encoder=custom_encoder,
+fastapi/encoders.py:104:                    sqlalchemy_safe=sqlalchemy_safe,
+fastapi/encoders.py:105:                )
+fastapi/encoders.py:106:                encoded_dict[encoded_key] = encoded_value
+fastapi/encoders.py:107:        return encoded_dict
+fastapi/encoders.py:123:        return encoded_list
 tests/test_forms_from_non_typing_sequences.py:26:    response = client.post(
+tests/test_forms_from_non_typing_sequences.py:27:        "/form/python-list", data={"items": ["first", "second", "third"]}
+tests/test_forms_from_non_typing_sequences.py:28:    )
 tests/test_forms_from_non_typing_sequences.py:29:    assert response.status_code == 200
