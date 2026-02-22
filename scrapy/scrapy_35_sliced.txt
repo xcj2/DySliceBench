@@ -1,0 +1,2630 @@
+tests/__init__.py:7:import os
+tests/__init__.py:9:try:
+tests/__init__.py:10:    import unittest.mock as mock
+tests/test_crawler.py:1:import warnings
+tests/test_crawler.py:2:import unittest
+tests/test_crawler.py:4:from zope.interface.verify import DoesNotImplement
+tests/test_crawler.py:6:from scrapy.crawler import Crawler, CrawlerRunner
+scrapy/__init__.py:9:import pkgutil
+scrapy/__init__.py:10:__version__ = pkgutil.get_data(__package__, 'VERSION').decode('ascii').strip()
+scrapy/__init__.py:11:version_info = tuple(int(v) if v.isdigit() else v
+scrapy/__init__.py:12:                     for v in __version__.split('.'))
+scrapy/__init__.py:16:import sys
+scrapy/__init__.py:17:if sys.version_info < (2, 7):
+scrapy/__init__.py:22:import warnings
+scrapy/__init__.py:23:warnings.filterwarnings('ignore', category=DeprecationWarning, module='twisted')
+scrapy/__init__.py:27:from . import _monkeypatches
+scrapy/_monkeypatches.py:1:import sys
+scrapy/_monkeypatches.py:3:if sys.version_info[0] == 2:
+scrapy/__init__.py:31:optional_features = set()
+scrapy/__init__.py:33:optional_features.add('ssl')
+scrapy/__init__.py:34:try:
+scrapy/__init__.py:35:    import boto
+scrapy/__init__.py:40:    optional_features.add('boto')
+scrapy/__init__.py:40:    optional_features.add('boto')
+scrapy/__init__.py:42:from twisted import version as _txv
+scrapy/__init__.py:43:twisted_version = (_txv.major, _txv.minor, _txv.micro)
+scrapy/__init__.py:44:if twisted_version >= (11, 1, 0):
+scrapy/__init__.py:45:    optional_features.add('http11')
+scrapy/__init__.py:48:from scrapy.spider import Spider
+scrapy/spider.py:6:import warnings
+scrapy/spider.py:8:from scrapy import log
+scrapy/log.py:6:import sys
+scrapy/log.py:7:import logging
+scrapy/log.py:8:import warnings
+scrapy/log.py:10:from twisted.python import log
+scrapy/log.py:12:import scrapy
+scrapy/log.py:13:from scrapy.utils.python import unicode_to_str
+scrapy/utils/python.py:8:import os
+scrapy/utils/python.py:9:import re
+scrapy/utils/python.py:10:import inspect
+scrapy/utils/python.py:11:import weakref
+scrapy/utils/python.py:12:import errno
+scrapy/utils/python.py:13:import six
+scrapy/utils/python.py:14:from functools import partial, wraps
+scrapy/utils/python.py:227:class WeakKeyCache(object):
+scrapy/log.py:14:from scrapy.settings import overridden_settings
+scrapy/settings/__init__.py:1:import six
+scrapy/settings/__init__.py:2:import json
+scrapy/settings/__init__.py:3:import copy
+scrapy/settings/__init__.py:4:import warnings
+scrapy/settings/__init__.py:5:from collections import MutableMapping
+scrapy/settings/__init__.py:6:from importlib import import_module
+scrapy/settings/__init__.py:8:from scrapy.utils.deprecate import create_deprecated_class
+scrapy/utils/deprecate.py:3:import warnings
+scrapy/utils/deprecate.py:4:import inspect
+scrapy/utils/deprecate.py:5:from scrapy.exceptions import ScrapyDeprecationWarning
+scrapy/exceptions.py:10:class NotConfigured(Exception):
+scrapy/exceptions.py:16:class IgnoreRequest(Exception):
+scrapy/exceptions.py:19:class DontCloseSpider(Exception):
+scrapy/exceptions.py:23:class CloseSpider(Exception):
+scrapy/exceptions.py:32:class DropItem(Exception):
+scrapy/exceptions.py:36:class NotSupported(Exception):
+scrapy/exceptions.py:42:class UsageError(Exception):
+scrapy/exceptions.py:48:class ScrapyDeprecationWarning(Warning):
+scrapy/exceptions.py:54:class ContractFail(AssertionError):
+scrapy/settings/__init__.py:9:from scrapy.exceptions import ScrapyDeprecationWarning
+scrapy/settings/__init__.py:11:from . import default_settings
+scrapy/settings/default_settings.py:16:import os
+scrapy/settings/default_settings.py:17:import sys
+scrapy/settings/default_settings.py:18:from importlib import import_module
+scrapy/settings/default_settings.py:19:from os.path import join, abspath, dirname
+scrapy/settings/default_settings.py:105:try:
+scrapy/settings/default_settings.py:107:except KeyError:
+scrapy/settings/default_settings.py:108:    if sys.platform == 'win32':
+scrapy/settings/default_settings.py:219:SPIDER_LOADER_CLASS = 'scrapy.spiderloader.SpiderLoader'
+scrapy/settings/default_settings.py:233:SPIDER_MODULES = []
+scrapy/settings/__init__.py:14:SETTINGS_PRIORITIES = {
+scrapy/settings/__init__.py:15:    'default': 0,
+scrapy/settings/__init__.py:16:    'command': 10,
+scrapy/settings/__init__.py:17:    'project': 20,
+scrapy/settings/__init__.py:18:    'spider': 30,
+scrapy/settings/__init__.py:19:    'cmdline': 40,
+scrapy/settings/__init__.py:20:}
+scrapy/settings/__init__.py:23:class SettingsAttribute(object):
+scrapy/settings/__init__.py:48:class Settings(object):
+scrapy/settings/__init__.py:153:class _DictProxy(MutableMapping):
+scrapy/settings/__init__.py:177:class CrawlerSettings(Settings):
+scrapy/utils/deprecate.py:15:def create_deprecated_class(name, new_class, clsdict=None,
+scrapy/utils/deprecate.py:50:    class DeprecatedClass(new_class.__class__):
+scrapy/utils/deprecate.py:52:        deprecated_class = None
+scrapy/utils/deprecate.py:53:        warned_on_subclass = False
+scrapy/utils/deprecate.py:55:        def __new__(metacls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:56:            cls = super(DeprecatedClass, metacls).__new__(metacls, name, bases, clsdict_)
+scrapy/utils/deprecate.py:57:            if metacls.deprecated_class is None:
+scrapy/utils/deprecate.py:58:                metacls.deprecated_class = cls
+scrapy/utils/deprecate.py:59:            return cls
+scrapy/utils/deprecate.py:61:        def __init__(cls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:62:            meta = cls.__class__
+scrapy/utils/deprecate.py:63:            old = meta.deprecated_class
+scrapy/utils/deprecate.py:64:            if old in bases and not (warn_once and meta.warned_on_subclass):
+scrapy/utils/deprecate.py:72:            super(DeprecatedClass, cls).__init__(name, bases, clsdict_)
+scrapy/utils/deprecate.py:103:    deprecated_cls = DeprecatedClass(name, (new_class,), clsdict or {})
+scrapy/utils/deprecate.py:105:    try:
+scrapy/utils/deprecate.py:106:        frm = inspect.stack()[1]
+scrapy/utils/deprecate.py:107:        parent_module = inspect.getmodule(frm[0])
+scrapy/utils/deprecate.py:108:        if parent_module is not None:
+scrapy/utils/deprecate.py:109:            deprecated_cls.__module__ = parent_module.__name__
+scrapy/utils/deprecate.py:117:    return deprecated_cls
+scrapy/log.py:17:DEBUG = logging.DEBUG
+scrapy/log.py:18:INFO = logging.INFO
+scrapy/log.py:19:WARNING = logging.WARNING
+scrapy/log.py:20:ERROR = logging.ERROR
+scrapy/log.py:21:CRITICAL = logging.CRITICAL
+scrapy/log.py:22:SILENT = CRITICAL + 1
+scrapy/log.py:33:class ScrapyFileLogObserver(log.FileLogObserver):
+scrapy/spider.py:9:from scrapy import signals
+scrapy/signals.py:10:spider_opened = object()
+scrapy/signals.py:12:spider_closed = object()
+scrapy/signals.py:14:request_scheduled = object()
+scrapy/signals.py:18:item_scraped = object()
+scrapy/spider.py:10:from scrapy.http import Request
+scrapy/http/__init__.py:8:from scrapy.http.headers import Headers
+scrapy/http/headers.py:1:import six
+scrapy/http/headers.py:2:from w3lib.http import headers_dict_to_raw
+scrapy/http/headers.py:3:from scrapy.utils.datatypes import CaselessDict
+scrapy/utils/datatypes.py:8:import copy
+scrapy/utils/datatypes.py:9:import six
+scrapy/utils/datatypes.py:10:from collections import OrderedDict
+scrapy/utils/datatypes.py:13:class MultiValueDictKeyError(KeyError):
+scrapy/utils/datatypes.py:16:class MultiValueDict(dict):
+scrapy/utils/datatypes.py:140:class SiteNode(object):
+scrapy/utils/datatypes.py:163:class CaselessDict(dict):
+scrapy/utils/datatypes.py:165:    __slots__ = ()
+scrapy/utils/datatypes.py:183:    has_key = __contains__
+scrapy/utils/datatypes.py:187:    copy = __copy__
+scrapy/utils/datatypes.py:216:class MergeDict(object):
+scrapy/utils/datatypes.py:262:    __contains__ = has_key
+scrapy/utils/datatypes.py:269:class LocalCache(OrderedDict):
+scrapy/http/headers.py:6:class Headers(CaselessDict):
+scrapy/http/headers.py:83:    copy = __copy__
+scrapy/http/__init__.py:10:from scrapy.http.request import Request
+scrapy/http/request/__init__.py:7:import six
+scrapy/http/request/__init__.py:8:from w3lib.url import safe_url_string
+scrapy/http/request/__init__.py:10:from scrapy.http.headers import Headers
+scrapy/http/request/__init__.py:11:from scrapy.utils.trackref import object_ref
+scrapy/utils/trackref.py:13:import weakref, os, six
+scrapy/utils/trackref.py:14:from collections import defaultdict
+scrapy/utils/trackref.py:15:from time import time
+scrapy/utils/trackref.py:16:from operator import itemgetter
+scrapy/utils/trackref.py:22:class object_ref(object):
+scrapy/utils/trackref.py:26:    __slots__ = ()
+scrapy/http/request/__init__.py:12:from scrapy.utils.url import escape_ajax
+scrapy/utils/url.py:8:import posixpath
+scrapy/utils/url.py:9:from six.moves.urllib.parse import (ParseResult, urlunparse, urldefrag,
+scrapy/utils/url.py:10:                                    urlparse, parse_qsl, urlencode,
+scrapy/utils/url.py:11:                                    unquote)
+scrapy/utils/url.py:14:from w3lib.url import *
+scrapy/utils/url.py:15:from scrapy.utils.python import unicode_to_str
+scrapy/http/request/__init__.py:13:from scrapy.http.common import obsolete_setter
+scrapy/http/request/__init__.py:16:class Request(object_ref):
+scrapy/http/common.py:1:def obsolete_setter(setter, attrname):
+scrapy/http/common.py:6:    return newsetter
+scrapy/http/request/__init__.py:61:    url = property(_get_url, obsolete_setter(_set_url, 'url'))
+scrapy/http/common.py:1:def obsolete_setter(setter, attrname):
+scrapy/http/common.py:6:    return newsetter
+scrapy/http/request/__init__.py:79:    body = property(_get_body, obsolete_setter(_set_body, 'body'))
+scrapy/http/__init__.py:11:from scrapy.http.request.form import FormRequest
+scrapy/http/request/form.py:8:from six.moves.urllib.parse import urljoin, urlencode
+scrapy/http/request/form.py:9:import lxml.html
+scrapy/http/request/form.py:10:import six
+scrapy/http/request/form.py:11:from scrapy.http.request import Request
+scrapy/http/request/form.py:12:from scrapy.utils.python import unicode_to_str
+scrapy/http/request/form.py:15:class FormRequest(Request):
+scrapy/http/__init__.py:12:from scrapy.http.request.rpc import XmlRpcRequest
+scrapy/http/request/rpc.py:7:from six.moves import xmlrpc_client as xmlrpclib
+scrapy/http/request/rpc.py:9:from scrapy.http.request import Request
+scrapy/http/request/rpc.py:10:from scrapy.utils.python import get_func_args
+scrapy/utils/python.py:141:def get_func_args(func, stripself=False):
+scrapy/utils/python.py:143:    if inspect.isfunction(func):
+scrapy/utils/python.py:144:        func_args, _, _, _ = inspect.getargspec(func)
+scrapy/utils/python.py:163:    if stripself:
+scrapy/utils/python.py:165:    return func_args
+scrapy/http/request/rpc.py:16:class XmlRpcRequest(Request):
+scrapy/http/__init__.py:14:from scrapy.http.response import Response
+scrapy/http/response/__init__.py:8:import copy
+scrapy/http/response/__init__.py:10:from six.moves.urllib.parse import urljoin
+scrapy/http/response/__init__.py:12:from scrapy.http.headers import Headers
+scrapy/http/response/__init__.py:13:from scrapy.utils.trackref import object_ref
+scrapy/http/response/__init__.py:14:from scrapy.http.common import obsolete_setter
+scrapy/http/response/__init__.py:16:class Response(object_ref):
+scrapy/http/common.py:1:def obsolete_setter(setter, attrname):
+scrapy/http/common.py:6:    return newsetter
+scrapy/http/response/__init__.py:44:    url = property(_get_url, obsolete_setter(_set_url, 'url'))
+scrapy/http/common.py:1:def obsolete_setter(setter, attrname):
+scrapy/http/common.py:6:    return newsetter
+scrapy/http/response/__init__.py:61:    body = property(_get_body, obsolete_setter(_set_body, 'body'))
+scrapy/http/__init__.py:15:from scrapy.http.response.html import HtmlResponse
+scrapy/http/response/html.py:8:from scrapy.http.response.text import TextResponse
+scrapy/http/response/text.py:8:from six.moves.urllib.parse import urljoin
+scrapy/http/response/text.py:10:from w3lib.encoding import html_to_unicode, resolve_encoding, \
+scrapy/http/response/text.py:11:    html_body_declared_encoding, http_content_type_encoding
+scrapy/http/response/text.py:12:from scrapy.http.response import Response
+scrapy/http/response/text.py:13:from scrapy.utils.response import get_base_url
+scrapy/utils/response.py:6:import os
+scrapy/utils/response.py:7:import re
+scrapy/utils/response.py:8:import weakref
+scrapy/utils/response.py:9:import webbrowser
+scrapy/utils/response.py:10:import tempfile
+scrapy/utils/response.py:12:from twisted.web import http
+scrapy/utils/response.py:13:from twisted.web.http import RESPONSES
+scrapy/utils/response.py:14:from w3lib import html
+scrapy/utils/response.py:16:from scrapy.utils.decorator import deprecated
+scrapy/utils/decorator.py:1:import warnings
+scrapy/utils/decorator.py:2:from functools import wraps
+scrapy/utils/decorator.py:4:from twisted.internet import defer, threads
+scrapy/utils/decorator.py:6:from scrapy.exceptions import ScrapyDeprecationWarning
+scrapy/utils/decorator.py:9:def deprecated(use_instead=None):
+scrapy/utils/decorator.py:24:    if callable(use_instead):
+scrapy/utils/decorator.py:14:    def deco(func):
+scrapy/utils/decorator.py:22:        return wrapped
+scrapy/utils/decorator.py:25:        deco = deco(use_instead)
+scrapy/utils/decorator.py:26:        use_instead = None
+scrapy/utils/decorator.py:27:    return deco
+scrapy/http/response/text.py:14:from scrapy.utils.python import memoizemethod_noargs
+scrapy/http/response/text.py:17:class TextResponse(Response):
+scrapy/utils/python.py:120:def memoizemethod_noargs(method):
+scrapy/utils/python.py:130:    return new_method
+scrapy/utils/python.py:120:def memoizemethod_noargs(method):
+scrapy/utils/python.py:130:    return new_method
+scrapy/http/response/html.py:10:class HtmlResponse(TextResponse):
+scrapy/http/__init__.py:16:from scrapy.http.response.xml import XmlResponse
+scrapy/http/response/xml.py:8:from scrapy.http.response.text import TextResponse
+scrapy/http/response/xml.py:10:class XmlResponse(TextResponse):
+scrapy/http/__init__.py:17:from scrapy.http.response.text import TextResponse
+scrapy/spider.py:11:from scrapy.utils.trackref import object_ref
+scrapy/spider.py:12:from scrapy.utils.url import url_is_from_spider
+scrapy/spider.py:13:from scrapy.utils.deprecate import create_deprecated_class
+scrapy/spider.py:14:from scrapy.exceptions import ScrapyDeprecationWarning
+scrapy/spider.py:17:class Spider(object_ref):
+scrapy/spider.py:22:    name = None
+scrapy/utils/deprecate.py:15:def create_deprecated_class(name, new_class, clsdict=None,
+scrapy/utils/deprecate.py:50:    class DeprecatedClass(new_class.__class__):
+scrapy/utils/deprecate.py:52:        deprecated_class = None
+scrapy/utils/deprecate.py:53:        warned_on_subclass = False
+scrapy/utils/deprecate.py:55:        def __new__(metacls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:56:            cls = super(DeprecatedClass, metacls).__new__(metacls, name, bases, clsdict_)
+scrapy/utils/deprecate.py:57:            if metacls.deprecated_class is None:
+scrapy/utils/deprecate.py:58:                metacls.deprecated_class = cls
+scrapy/utils/deprecate.py:59:            return cls
+scrapy/utils/deprecate.py:61:        def __init__(cls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:62:            meta = cls.__class__
+scrapy/utils/deprecate.py:63:            old = meta.deprecated_class
+scrapy/utils/deprecate.py:64:            if old in bases and not (warn_once and meta.warned_on_subclass):
+scrapy/utils/deprecate.py:72:            super(DeprecatedClass, cls).__init__(name, bases, clsdict_)
+scrapy/utils/deprecate.py:103:    deprecated_cls = DeprecatedClass(name, (new_class,), clsdict or {})
+scrapy/utils/deprecate.py:105:    try:
+scrapy/utils/deprecate.py:106:        frm = inspect.stack()[1]
+scrapy/utils/deprecate.py:107:        parent_module = inspect.getmodule(frm[0])
+scrapy/utils/deprecate.py:108:        if parent_module is not None:
+scrapy/utils/deprecate.py:109:            deprecated_cls.__module__ = parent_module.__name__
+scrapy/utils/deprecate.py:117:    return deprecated_cls
+scrapy/spider.py:93:class ObsoleteClass(object):
+scrapy/spider.py:94:    def __init__(self, message):
+scrapy/spider.py:95:        self.message = message
+scrapy/__init__.py:49:from scrapy.http import Request, FormRequest
+scrapy/__init__.py:50:from scrapy.selector import Selector
+scrapy/selector/__init__.py:4:from scrapy.selector.unified import *
+scrapy/selector/unified.py:5:from lxml import etree
+scrapy/selector/unified.py:6:import six
+scrapy/selector/unified.py:8:from scrapy.utils.misc import extract_regex
+scrapy/utils/misc.py:2:import re
+scrapy/utils/misc.py:3:import hashlib
+scrapy/utils/misc.py:4:from importlib import import_module
+scrapy/utils/misc.py:5:from pkgutil import iter_modules
+scrapy/utils/misc.py:7:import six
+scrapy/utils/misc.py:8:from w3lib.html import replace_entities
+scrapy/utils/misc.py:10:from scrapy.utils.python import flatten
+scrapy/utils/misc.py:11:from scrapy.item import BaseItem
+scrapy/item.py:7:from pprint import pformat
+scrapy/item.py:8:from collections import MutableMapping
+scrapy/item.py:9:from abc import ABCMeta
+scrapy/item.py:10:import six
+scrapy/item.py:12:from scrapy.utils.trackref import object_ref
+scrapy/item.py:15:class BaseItem(object_ref):
+scrapy/item.py:20:class Field(dict):
+scrapy/item.py:24:class ItemMeta(ABCMeta):
+scrapy/item.py:41:class DictItem(MutableMapping, BaseItem):
+scrapy/item.py:43:    fields = {}
+scrapy/item.py:94:class Item(DictItem):
+scrapy/item.py:26:    def __new__(mcs, class_name, bases, attrs):
+scrapy/item.py:27:        fields = {}
+scrapy/item.py:28:        new_attrs = {}
+scrapy/item.py:29:        for n, v in six.iteritems(attrs):
+scrapy/item.py:29:        for n, v in six.iteritems(attrs):
+scrapy/item.py:30:            if isinstance(v, Field):
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:29:        for n, v in six.iteritems(attrs):
+scrapy/item.py:30:            if isinstance(v, Field):
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:29:        for n, v in six.iteritems(attrs):
+scrapy/item.py:30:            if isinstance(v, Field):
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:29:        for n, v in six.iteritems(attrs):
+scrapy/item.py:30:            if isinstance(v, Field):
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:29:        for n, v in six.iteritems(attrs):
+scrapy/item.py:30:            if isinstance(v, Field):
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:33:                new_attrs[n] = v
+scrapy/item.py:35:        cls = super(ItemMeta, mcs).__new__(mcs, class_name, bases, new_attrs)
+scrapy/item.py:36:        cls.fields = cls.fields.copy()
+scrapy/item.py:37:        cls.fields.update(fields)
+scrapy/item.py:38:        return cls
+scrapy/selector/unified.py:9:from scrapy.utils.trackref import object_ref
+scrapy/selector/unified.py:10:from scrapy.utils.python import unicode_to_str, flatten, iflatten
+scrapy/selector/unified.py:11:from scrapy.utils.decorator import deprecated
+scrapy/selector/unified.py:12:from scrapy.http import HtmlResponse, XmlResponse
+scrapy/selector/unified.py:13:from .lxmldocument import LxmlDocument
+scrapy/selector/lxmldocument.py:6:import weakref
+scrapy/selector/lxmldocument.py:7:from lxml import etree
+scrapy/selector/lxmldocument.py:8:from scrapy.utils.trackref import object_ref
+scrapy/selector/lxmldocument.py:18:class LxmlDocument(object_ref):
+scrapy/selector/lxmldocument.py:21:    __slots__ = ['__weakref__']
+scrapy/selector/unified.py:14:from .csstranslator import ScrapyHTMLTranslator, ScrapyGenericTranslator
+scrapy/selector/csstranslator.py:1:from cssselect import GenericTranslator, HTMLTranslator
+scrapy/selector/csstranslator.py:2:from cssselect.xpath import _unicode_safe_getattr, XPathExpr, ExpressionError
+scrapy/selector/csstranslator.py:3:from cssselect.parser import FunctionalPseudoElement
+scrapy/selector/csstranslator.py:6:class ScrapyXPathExpr(XPathExpr):
+scrapy/selector/csstranslator.py:42:class TranslatorMixin(object):
+scrapy/selector/csstranslator.py:82:class ScrapyGenericTranslator(TranslatorMixin, GenericTranslator):
+scrapy/selector/csstranslator.py:86:class ScrapyHTMLTranslator(TranslatorMixin, HTMLTranslator):
+scrapy/selector/unified.py:20:class SafeXMLParser(etree.XMLParser):
+scrapy/selector/unified.py:50:class Selector(object_ref):
+scrapy/selector/unified.py:52:    __slots__ = ['response', 'text', 'namespaces', 'type', '_expr', '_root',
+scrapy/selector/unified.py:53:                 '__weakref__', '_parser', '_csstranslator', '_tostring_method']
+scrapy/selector/unified.py:55:    _default_type = None
+scrapy/utils/decorator.py:9:def deprecated(use_instead=None):
+scrapy/utils/decorator.py:24:    if callable(use_instead):
+scrapy/utils/decorator.py:27:    return deco
+scrapy/utils/decorator.py:14:    def deco(func):
+scrapy/utils/decorator.py:22:        return wrapped
+scrapy/utils/decorator.py:9:def deprecated(use_instead=None):
+scrapy/utils/decorator.py:24:    if callable(use_instead):
+scrapy/utils/decorator.py:27:    return deco
+scrapy/utils/decorator.py:14:    def deco(func):
+scrapy/utils/decorator.py:22:        return wrapped
+scrapy/selector/unified.py:166:class SelectorList(list):
+scrapy/utils/decorator.py:9:def deprecated(use_instead=None):
+scrapy/utils/decorator.py:24:    if callable(use_instead):
+scrapy/utils/decorator.py:27:    return deco
+scrapy/utils/decorator.py:14:    def deco(func):
+scrapy/utils/decorator.py:22:        return wrapped
+scrapy/utils/decorator.py:9:def deprecated(use_instead=None):
+scrapy/utils/decorator.py:24:    if callable(use_instead):
+scrapy/utils/decorator.py:27:    return deco
+scrapy/utils/decorator.py:14:    def deco(func):
+scrapy/utils/decorator.py:22:        return wrapped
+scrapy/utils/decorator.py:9:def deprecated(use_instead=None):
+scrapy/utils/decorator.py:24:    if callable(use_instead):
+scrapy/utils/decorator.py:27:    return deco
+scrapy/utils/decorator.py:14:    def deco(func):
+scrapy/utils/decorator.py:22:        return wrapped
+scrapy/selector/__init__.py:5:from scrapy.selector.lxmlsel import *
+scrapy/selector/lxmlsel.py:4:from scrapy.utils.deprecate import create_deprecated_class
+scrapy/selector/lxmlsel.py:5:from .unified import Selector, SelectorList
+scrapy/utils/deprecate.py:15:def create_deprecated_class(name, new_class, clsdict=None,
+scrapy/utils/deprecate.py:50:    class DeprecatedClass(new_class.__class__):
+scrapy/utils/deprecate.py:52:        deprecated_class = None
+scrapy/utils/deprecate.py:53:        warned_on_subclass = False
+scrapy/utils/deprecate.py:55:        def __new__(metacls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:56:            cls = super(DeprecatedClass, metacls).__new__(metacls, name, bases, clsdict_)
+scrapy/utils/deprecate.py:57:            if metacls.deprecated_class is None:
+scrapy/utils/deprecate.py:58:                metacls.deprecated_class = cls
+scrapy/utils/deprecate.py:59:            return cls
+scrapy/utils/deprecate.py:61:        def __init__(cls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:62:            meta = cls.__class__
+scrapy/utils/deprecate.py:63:            old = meta.deprecated_class
+scrapy/utils/deprecate.py:64:            if old in bases and not (warn_once and meta.warned_on_subclass):
+scrapy/utils/deprecate.py:72:            super(DeprecatedClass, cls).__init__(name, bases, clsdict_)
+scrapy/utils/deprecate.py:103:    deprecated_cls = DeprecatedClass(name, (new_class,), clsdict or {})
+scrapy/utils/deprecate.py:105:    try:
+scrapy/utils/deprecate.py:106:        frm = inspect.stack()[1]
+scrapy/utils/deprecate.py:107:        parent_module = inspect.getmodule(frm[0])
+scrapy/utils/deprecate.py:108:        if parent_module is not None:
+scrapy/utils/deprecate.py:109:            deprecated_cls.__module__ = parent_module.__name__
+scrapy/utils/deprecate.py:117:    return deprecated_cls
+scrapy/utils/deprecate.py:15:def create_deprecated_class(name, new_class, clsdict=None,
+scrapy/utils/deprecate.py:50:    class DeprecatedClass(new_class.__class__):
+scrapy/utils/deprecate.py:52:        deprecated_class = None
+scrapy/utils/deprecate.py:53:        warned_on_subclass = False
+scrapy/utils/deprecate.py:55:        def __new__(metacls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:55:        def __new__(metacls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:56:            cls = super(DeprecatedClass, metacls).__new__(metacls, name, bases, clsdict_)
+scrapy/utils/deprecate.py:57:            if metacls.deprecated_class is None:
+scrapy/utils/deprecate.py:58:                metacls.deprecated_class = cls
+scrapy/utils/deprecate.py:59:            return cls
+scrapy/utils/deprecate.py:56:            cls = super(DeprecatedClass, metacls).__new__(metacls, name, bases, clsdict_)
+scrapy/utils/deprecate.py:57:            if metacls.deprecated_class is None:
+scrapy/utils/deprecate.py:59:            return cls
+scrapy/utils/deprecate.py:61:        def __init__(cls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:62:            meta = cls.__class__
+scrapy/utils/deprecate.py:63:            old = meta.deprecated_class
+scrapy/utils/deprecate.py:64:            if old in bases and not (warn_once and meta.warned_on_subclass):
+scrapy/utils/deprecate.py:72:            super(DeprecatedClass, cls).__init__(name, bases, clsdict_)
+scrapy/utils/deprecate.py:61:        def __init__(cls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:62:            meta = cls.__class__
+scrapy/utils/deprecate.py:63:            old = meta.deprecated_class
+scrapy/utils/deprecate.py:64:            if old in bases and not (warn_once and meta.warned_on_subclass):
+scrapy/utils/deprecate.py:72:            super(DeprecatedClass, cls).__init__(name, bases, clsdict_)
+scrapy/utils/deprecate.py:103:    deprecated_cls = DeprecatedClass(name, (new_class,), clsdict or {})
+scrapy/utils/deprecate.py:105:    try:
+scrapy/utils/deprecate.py:106:        frm = inspect.stack()[1]
+scrapy/utils/deprecate.py:107:        parent_module = inspect.getmodule(frm[0])
+scrapy/utils/deprecate.py:108:        if parent_module is not None:
+scrapy/utils/deprecate.py:109:            deprecated_cls.__module__ = parent_module.__name__
+scrapy/utils/deprecate.py:117:    return deprecated_cls
+scrapy/utils/deprecate.py:15:def create_deprecated_class(name, new_class, clsdict=None,
+scrapy/utils/deprecate.py:50:    class DeprecatedClass(new_class.__class__):
+scrapy/utils/deprecate.py:52:        deprecated_class = None
+scrapy/utils/deprecate.py:53:        warned_on_subclass = False
+scrapy/utils/deprecate.py:55:        def __new__(metacls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:55:        def __new__(metacls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:56:            cls = super(DeprecatedClass, metacls).__new__(metacls, name, bases, clsdict_)
+scrapy/utils/deprecate.py:57:            if metacls.deprecated_class is None:
+scrapy/utils/deprecate.py:58:                metacls.deprecated_class = cls
+scrapy/utils/deprecate.py:59:            return cls
+scrapy/utils/deprecate.py:56:            cls = super(DeprecatedClass, metacls).__new__(metacls, name, bases, clsdict_)
+scrapy/utils/deprecate.py:57:            if metacls.deprecated_class is None:
+scrapy/utils/deprecate.py:59:            return cls
+scrapy/utils/deprecate.py:61:        def __init__(cls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:62:            meta = cls.__class__
+scrapy/utils/deprecate.py:63:            old = meta.deprecated_class
+scrapy/utils/deprecate.py:64:            if old in bases and not (warn_once and meta.warned_on_subclass):
+scrapy/utils/deprecate.py:72:            super(DeprecatedClass, cls).__init__(name, bases, clsdict_)
+scrapy/utils/deprecate.py:61:        def __init__(cls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:62:            meta = cls.__class__
+scrapy/utils/deprecate.py:63:            old = meta.deprecated_class
+scrapy/utils/deprecate.py:64:            if old in bases and not (warn_once and meta.warned_on_subclass):
+scrapy/utils/deprecate.py:72:            super(DeprecatedClass, cls).__init__(name, bases, clsdict_)
+scrapy/utils/deprecate.py:103:    deprecated_cls = DeprecatedClass(name, (new_class,), clsdict or {})
+scrapy/utils/deprecate.py:105:    try:
+scrapy/utils/deprecate.py:106:        frm = inspect.stack()[1]
+scrapy/utils/deprecate.py:107:        parent_module = inspect.getmodule(frm[0])
+scrapy/utils/deprecate.py:108:        if parent_module is not None:
+scrapy/utils/deprecate.py:109:            deprecated_cls.__module__ = parent_module.__name__
+scrapy/utils/deprecate.py:117:    return deprecated_cls
+scrapy/utils/deprecate.py:15:def create_deprecated_class(name, new_class, clsdict=None,
+scrapy/utils/deprecate.py:50:    class DeprecatedClass(new_class.__class__):
+scrapy/utils/deprecate.py:52:        deprecated_class = None
+scrapy/utils/deprecate.py:53:        warned_on_subclass = False
+scrapy/utils/deprecate.py:55:        def __new__(metacls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:56:            cls = super(DeprecatedClass, metacls).__new__(metacls, name, bases, clsdict_)
+scrapy/utils/deprecate.py:57:            if metacls.deprecated_class is None:
+scrapy/utils/deprecate.py:58:                metacls.deprecated_class = cls
+scrapy/utils/deprecate.py:59:            return cls
+scrapy/utils/deprecate.py:61:        def __init__(cls, name, bases, clsdict_):
+scrapy/utils/deprecate.py:62:            meta = cls.__class__
+scrapy/utils/deprecate.py:63:            old = meta.deprecated_class
+scrapy/utils/deprecate.py:64:            if old in bases and not (warn_once and meta.warned_on_subclass):
+scrapy/utils/deprecate.py:72:            super(DeprecatedClass, cls).__init__(name, bases, clsdict_)
+scrapy/utils/deprecate.py:103:    deprecated_cls = DeprecatedClass(name, (new_class,), clsdict or {})
+scrapy/utils/deprecate.py:105:    try:
+scrapy/utils/deprecate.py:106:        frm = inspect.stack()[1]
+scrapy/utils/deprecate.py:107:        parent_module = inspect.getmodule(frm[0])
+scrapy/utils/deprecate.py:108:        if parent_module is not None:
+scrapy/utils/deprecate.py:109:            deprecated_cls.__module__ = parent_module.__name__
+scrapy/utils/deprecate.py:117:    return deprecated_cls
+scrapy/selector/lxmlsel.py:50:XPathSelectorList = create_deprecated_class('XPathSelectorList', SelectorList)
+scrapy/__init__.py:51:from scrapy.item import Item, Field
+scrapy/crawler.py:1:import six
+scrapy/crawler.py:2:import signal
+scrapy/crawler.py:3:import warnings
+scrapy/crawler.py:5:from twisted.internet import reactor, defer
+scrapy/crawler.py:6:from zope.interface.verify import verifyClass
+scrapy/crawler.py:8:from scrapy.core.engine import ExecutionEngine
+scrapy/core/engine.py:7:from time import time
+scrapy/core/engine.py:9:from twisted.internet import defer
+scrapy/core/engine.py:10:from twisted.python.failure import Failure
+scrapy/core/engine.py:12:from scrapy import log, signals
+scrapy/core/engine.py:13:from scrapy.core.scraper import Scraper
+scrapy/core/scraper.py:4:from collections import deque
+scrapy/core/scraper.py:6:from twisted.python.failure import Failure
+scrapy/core/scraper.py:7:from twisted.internet import defer
+scrapy/core/scraper.py:9:from scrapy.utils.defer import defer_result, defer_succeed, parallel, iter_errback
+scrapy/utils/defer.py:5:from twisted.internet import defer, reactor, task
+scrapy/utils/defer.py:6:from twisted.python import failure
+scrapy/utils/defer.py:8:from scrapy.exceptions import IgnoreRequest
+scrapy/core/scraper.py:10:from scrapy.utils.spider import iterate_spider_output
+scrapy/utils/spider.py:1:import inspect
+scrapy/utils/spider.py:3:import six
+scrapy/utils/spider.py:5:from scrapy import log
+scrapy/utils/spider.py:6:from scrapy.spider import Spider
+scrapy/utils/spider.py:7:from scrapy.utils.misc import  arg_to_iter
+scrapy/utils/spider.py:56:class DefaultSpider(Spider):
+scrapy/utils/spider.py:57:    name = 'default'
+scrapy/core/scraper.py:11:from scrapy.utils.misc import load_object
+scrapy/core/scraper.py:12:from scrapy.exceptions import CloseSpider, DropItem, IgnoreRequest
+scrapy/core/scraper.py:13:from scrapy import signals
+scrapy/core/scraper.py:14:from scrapy.http import Request, Response
+scrapy/core/scraper.py:15:from scrapy.item import BaseItem
+scrapy/core/scraper.py:16:from scrapy.core.spidermw import SpiderMiddlewareManager
+scrapy/core/spidermw.py:7:from twisted.python.failure import Failure
+scrapy/core/spidermw.py:8:from scrapy.middleware import MiddlewareManager
+scrapy/middleware.py:1:from collections import defaultdict
+scrapy/middleware.py:3:from scrapy import log
+scrapy/middleware.py:4:from scrapy.exceptions import NotConfigured
+scrapy/middleware.py:5:from scrapy.utils.misc import load_object
+scrapy/middleware.py:6:from scrapy.utils.defer import process_parallel, process_chain, process_chain_both
+scrapy/middleware.py:8:class MiddlewareManager(object):
+scrapy/core/spidermw.py:9:from scrapy.utils.defer import mustbe_deferred
+scrapy/core/spidermw.py:10:from scrapy.utils.conf import build_component_list
+scrapy/utils/conf.py:1:import os
+scrapy/utils/conf.py:2:import sys
+scrapy/utils/conf.py:3:from operator import itemgetter
+scrapy/utils/conf.py:5:import six
+scrapy/utils/conf.py:6:from six.moves.configparser import SafeConfigParser
+scrapy/core/spidermw.py:15:class SpiderMiddlewareManager(MiddlewareManager):
+scrapy/core/scraper.py:17:from scrapy import log
+scrapy/core/scraper.py:20:class Slot(object):
+scrapy/core/scraper.py:61:class Scraper(object):
+scrapy/core/engine.py:14:from scrapy.exceptions import DontCloseSpider
+scrapy/core/engine.py:15:from scrapy.http import Response, Request
+scrapy/core/engine.py:16:from scrapy.utils.misc import load_object
+scrapy/core/engine.py:17:from scrapy.utils.reactor import CallLaterOnce
+scrapy/utils/reactor.py:1:from twisted.internet import reactor, error
+scrapy/utils/reactor.py:20:class CallLaterOnce(object):
+scrapy/core/engine.py:20:class Slot(object):
+scrapy/core/engine.py:49:class ExecutionEngine(object):
+scrapy/crawler.py:9:from scrapy.resolver import CachingThreadedResolver
+scrapy/resolver.py:1:from twisted.internet import defer
+scrapy/resolver.py:2:from twisted.internet.base import ThreadedResolver
+scrapy/resolver.py:4:from scrapy.utils.datatypes import LocalCache
+scrapy/utils/datatypes.py:276:    def __init__(self, limit=None):
+scrapy/utils/datatypes.py:277:        super(LocalCache, self).__init__()
+scrapy/utils/datatypes.py:278:        self.limit = limit
+scrapy/resolver.py:10:class CachingThreadedResolver(ThreadedResolver):
+scrapy/crawler.py:10:from scrapy.interfaces import ISpiderLoader
+scrapy/interfaces.py:1:from zope.interface import Interface
+scrapy/interfaces.py:3:class ISpiderLoader(Interface):
+scrapy/crawler.py:11:from scrapy.extension import ExtensionManager
+scrapy/extension.py:6:from scrapy.middleware import MiddlewareManager
+scrapy/extension.py:7:from scrapy.utils.conf import build_component_list
+scrapy/extension.py:9:class ExtensionManager(MiddlewareManager):
+scrapy/crawler.py:12:from scrapy.settings import Settings
+scrapy/crawler.py:13:from scrapy.signalmanager import SignalManager
+scrapy/signalmanager.py:1:from scrapy.xlib.pydispatch import dispatcher
+scrapy/xlib/pydispatch/__init__.py:3:__version__ = "2.0.0"
+scrapy/xlib/pydispatch/dispatcher.py:29:import types, weakref, six
+scrapy/xlib/pydispatch/dispatcher.py:30:from scrapy.xlib.pydispatch import saferef, robustapply, errors
+scrapy/xlib/pydispatch/saferef.py:3:import weakref, traceback
+scrapy/xlib/pydispatch/saferef.py:33:class BoundMethodWeakref(object):
+scrapy/xlib/pydispatch/robustapply.py:8:import inspect
+scrapy/xlib/pydispatch/errors.py:5:class DispatcherError(Exception):
+scrapy/xlib/pydispatch/errors.py:9:class DispatcherKeyError(KeyError, DispatcherError):
+scrapy/xlib/pydispatch/errors.py:13:class DispatcherTypeError(TypeError, DispatcherError):
+scrapy/xlib/pydispatch/dispatcher.py:34:__version__ = "$Revision: 1.1.1.1 $"[11:-2]
+scrapy/xlib/pydispatch/dispatcher.py:37:class _Parameter:
+scrapy/xlib/pydispatch/dispatcher.py:44:class _Any(_Parameter):
+scrapy/xlib/pydispatch/dispatcher.py:54:Any = _Any()
+scrapy/xlib/pydispatch/dispatcher.py:57:class _Anonymous(_Parameter):
+scrapy/xlib/pydispatch/dispatcher.py:77:Anonymous = _Anonymous()
+scrapy/signalmanager.py:2:from scrapy.utils import signal
+scrapy/utils/signal.py:3:from twisted.internet.defer import maybeDeferred, DeferredList, Deferred
+scrapy/utils/signal.py:4:from twisted.python.failure import Failure
+scrapy/utils/signal.py:6:from scrapy.xlib.pydispatch.dispatcher import Any, Anonymous, liveReceivers, \
+scrapy/utils/signal.py:7:    getAllReceivers, disconnect
+scrapy/utils/signal.py:8:from scrapy.xlib.pydispatch.robustapply import robustApply
+scrapy/utils/signal.py:10:from scrapy import log
+scrapy/signalmanager.py:4:class SignalManager(object):
+scrapy/crawler.py:14:from scrapy.exceptions import ScrapyDeprecationWarning
+scrapy/crawler.py:15:from scrapy.utils.ossignal import install_shutdown_handlers, signal_names
+scrapy/utils/ossignal.py:4:from twisted.internet import reactor
+scrapy/utils/ossignal.py:6:import signal
+scrapy/utils/ossignal.py:8:signal_names = {}
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:11:        signum = getattr(signal, signame)
+scrapy/utils/ossignal.py:12:        if isinstance(signum, int):
+scrapy/utils/ossignal.py:13:            signal_names[signum] = signame
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/utils/ossignal.py:9:for signame in dir(signal):
+scrapy/utils/ossignal.py:10:    if signame.startswith("SIG"):
+scrapy/crawler.py:16:from scrapy.utils.misc import load_object
+scrapy/crawler.py:17:from scrapy import log, signals
+scrapy/crawler.py:20:class Crawler(object):
+scrapy/crawler.py:81:class CrawlerRunner(object):
+scrapy/crawler.py:135:class CrawlerProcess(CrawlerRunner):
+tests/test_crawler.py:7:from scrapy.settings import Settings, default_settings
+tests/test_crawler.py:8:from scrapy.spiderloader import SpiderLoader
+scrapy/spiderloader.py:4:from zope.interface import implementer
+scrapy/spiderloader.py:6:from scrapy.interfaces import ISpiderLoader
+scrapy/spiderloader.py:7:from scrapy.utils.misc import walk_modules
+scrapy/spiderloader.py:8:from scrapy.utils.spider import iter_spider_classes
+scrapy/spiderloader.py:12:class SpiderLoader(object):
+tests/test_crawler.py:9:from scrapy.utils.spider import DefaultSpider
+tests/test_crawler.py:10:from scrapy.utils.misc import load_object
+tests/test_crawler.py:13:class CrawlerTestCase(unittest.TestCase):
+tests/test_crawler.py:58:class SpiderLoaderWithWrongInterface(object):
+tests/test_crawler.py:64:class CustomSpiderLoader(SpiderLoader):
+tests/test_crawler.py:68:class CrawlerRunnerTestCase(unittest.TestCase):
+tests/test_crawler.py:96:    def test_spidermanager_deprecation(self):
+tests/test_crawler.py:97:        with warnings.catch_warnings(record=True) as w:
+tests/test_crawler.py:98:            runner = CrawlerRunner({
+tests/test_crawler.py:99:                'SPIDER_MANAGER_CLASS': 'tests.test_crawler.CustomSpiderLoader'
+tests/test_crawler.py:100:            })
+tests/test_crawler.py:101:            self.assertIsInstance(runner.spider_loader, CustomSpiderLoader)
+tests/test_crawler.py:102:            self.assertEqual(len(w), 1)
+tests/test_crawler.py:103:            self.assertIn('Please use SPIDER_LOADER_CLASS', str(w[0].message))
+scrapy/crawler.py:83:    def __init__(self, settings):
+scrapy/crawler.py:84:        if isinstance(settings, dict):
+scrapy/settings/__init__.py:50:    def __init__(self, values=None, priority='project'):
+scrapy/settings/__init__.py:51:        self.frozen = False
+scrapy/settings/__init__.py:52:        self.attributes = {}
+scrapy/settings/__init__.py:53:        self.setmodule(default_settings, priority='default')
+scrapy/settings/__init__.py:105:    def setmodule(self, module, priority='project'):
+scrapy/settings/__init__.py:106:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:107:        if isinstance(module, six.string_types):
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:111:                self.set(key, getattr(module, key), priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:109:        for key in dir(module):
+scrapy/settings/__init__.py:110:            if key.isupper():
+scrapy/settings/__init__.py:54:        if values is not None:
+scrapy/settings/__init__.py:55:            self.setdict(values, priority)
+scrapy/settings/__init__.py:100:    def setdict(self, values, priority='project'):
+scrapy/settings/__init__.py:101:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:102:        for name, value in six.iteritems(values):
+scrapy/settings/__init__.py:102:        for name, value in six.iteritems(values):
+scrapy/settings/__init__.py:103:            self.set(name, value, priority)
+scrapy/settings/__init__.py:91:    def set(self, name, value, priority='project'):
+scrapy/settings/__init__.py:92:        self._assert_mutability()
+scrapy/settings/__init__.py:113:    def _assert_mutability(self):
+scrapy/settings/__init__.py:114:        if self.frozen:
+scrapy/settings/__init__.py:93:        if isinstance(priority, six.string_types):
+scrapy/settings/__init__.py:94:            priority = SETTINGS_PRIORITIES[priority]
+scrapy/settings/__init__.py:95:        if name not in self.attributes:
+scrapy/settings/__init__.py:31:    def __init__(self, value, priority):
+scrapy/settings/__init__.py:32:        self.value = value
+scrapy/settings/__init__.py:33:        self.priority = priority
+scrapy/settings/__init__.py:96:            self.attributes[name] = SettingsAttribute(value, priority)
+scrapy/crawler.py:85:            settings = Settings(settings)
+scrapy/crawler.py:86:        self.settings = settings
+scrapy/crawler.py:187:def _get_spider_loader(settings):
+scrapy/crawler.py:189:    if settings.get('SPIDER_MANAGER_CLASS'):
+scrapy/settings/__init__.py:63:    def get(self, name, default=None):
+scrapy/settings/__init__.py:57:    def __getitem__(self, opt_name):
+scrapy/settings/__init__.py:58:        value = None
+scrapy/settings/__init__.py:59:        if opt_name in self.attributes:
+scrapy/settings/__init__.py:60:            value = self.attributes[opt_name].value
+scrapy/settings/__init__.py:61:        return value
+scrapy/settings/__init__.py:57:    def __getitem__(self, opt_name):
+scrapy/settings/__init__.py:58:        value = None
+scrapy/settings/__init__.py:59:        if opt_name in self.attributes:
+scrapy/settings/__init__.py:60:            value = self.attributes[opt_name].value
+scrapy/settings/__init__.py:61:        return value
+scrapy/settings/__init__.py:64:        return self[name] if self[name] is not None else default
+scrapy/crawler.py:190:        warnings.warn(
+scrapy/crawler.py:191:            'SPIDER_MANAGER_CLASS option is deprecated. '
+scrapy/crawler.py:192:            'Please use SPIDER_LOADER_CLASS.',
+scrapy/crawler.py:193:            category=ScrapyDeprecationWarning, stacklevel=2
+scrapy/crawler.py:194:        )
+scrapy/settings/__init__.py:63:    def get(self, name, default=None):
+scrapy/settings/__init__.py:57:    def __getitem__(self, opt_name):
+scrapy/settings/__init__.py:58:        value = None
+scrapy/settings/__init__.py:59:        if opt_name in self.attributes:
+scrapy/settings/__init__.py:60:            value = self.attributes[opt_name].value
+scrapy/settings/__init__.py:61:        return value
+scrapy/settings/__init__.py:57:    def __getitem__(self, opt_name):
+scrapy/settings/__init__.py:58:        value = None
+scrapy/settings/__init__.py:59:        if opt_name in self.attributes:
+scrapy/settings/__init__.py:60:            value = self.attributes[opt_name].value
+scrapy/settings/__init__.py:61:        return value
+scrapy/settings/__init__.py:64:        return self[name] if self[name] is not None else default
+scrapy/settings/__init__.py:63:    def get(self, name, default=None):
+scrapy/settings/__init__.py:57:    def __getitem__(self, opt_name):
+scrapy/settings/__init__.py:58:        value = None
+scrapy/settings/__init__.py:59:        if opt_name in self.attributes:
+scrapy/settings/__init__.py:60:            value = self.attributes[opt_name].value
+scrapy/settings/__init__.py:61:        return value
+scrapy/settings/__init__.py:57:    def __getitem__(self, opt_name):
+scrapy/settings/__init__.py:58:        value = None
+scrapy/settings/__init__.py:59:        if opt_name in self.attributes:
+scrapy/settings/__init__.py:60:            value = self.attributes[opt_name].value
+scrapy/settings/__init__.py:61:        return value
+scrapy/settings/__init__.py:64:        return self[name] if self[name] is not None else default
+scrapy/crawler.py:195:    cls_path = settings.get('SPIDER_LOADER_CLASS',
+scrapy/crawler.py:196:                            settings.get('SPIDER_MANAGER_CLASS'))
+scrapy/utils/misc.py:31:def load_object(path):
+scrapy/utils/misc.py:38:    try:
+scrapy/utils/misc.py:39:        dot = path.rindex('.')
+scrapy/utils/misc.py:43:    module, name = path[:dot], path[dot+1:]
+scrapy/utils/misc.py:44:    mod = import_module(module)
+scrapy/utils/misc.py:46:    try:
+scrapy/utils/misc.py:47:        obj = getattr(mod, name)
+scrapy/utils/misc.py:51:    return obj
+scrapy/crawler.py:197:    loader_cls = load_object(cls_path)
+scrapy/crawler.py:198:    verifyClass(ISpiderLoader, loader_cls)
+scrapy/settings/__init__.py:123:    def frozencopy(self):
+scrapy/settings/__init__.py:117:    def copy(self):
+scrapy/settings/__init__.py:118:        return copy.deepcopy(self)
+scrapy/settings/__init__.py:124:        copy = self.copy()
+scrapy/settings/__init__.py:125:        copy.freeze()
+scrapy/settings/__init__.py:120:    def freeze(self):
+scrapy/settings/__init__.py:121:        self.frozen = True
+scrapy/settings/__init__.py:126:        return copy
+scrapy/spiderloader.py:29:    def from_settings(cls, settings):
+scrapy/spiderloader.py:17:    def __init__(self, settings):
+scrapy/settings/__init__.py:79:    def getlist(self, name, default=None):
+scrapy/settings/__init__.py:63:    def get(self, name, default=None):
+scrapy/settings/__init__.py:57:    def __getitem__(self, opt_name):
+scrapy/settings/__init__.py:58:        value = None
+scrapy/settings/__init__.py:59:        if opt_name in self.attributes:
+scrapy/settings/__init__.py:60:            value = self.attributes[opt_name].value
+scrapy/settings/__init__.py:61:        return value
+scrapy/settings/__init__.py:57:    def __getitem__(self, opt_name):
+scrapy/settings/__init__.py:58:        value = None
+scrapy/settings/__init__.py:59:        if opt_name in self.attributes:
+scrapy/settings/__init__.py:60:            value = self.attributes[opt_name].value
+scrapy/settings/__init__.py:61:        return value
+scrapy/settings/__init__.py:64:        return self[name] if self[name] is not None else default
+scrapy/settings/__init__.py:80:        value = self.get(name, default or [])
+scrapy/settings/__init__.py:81:        if isinstance(value, six.string_types):
+scrapy/settings/__init__.py:83:        return list(value)
+scrapy/spiderloader.py:18:        self.spider_modules = settings.getlist('SPIDER_MODULES')
+scrapy/spiderloader.py:19:        self._spiders = {}
+scrapy/spiderloader.py:20:        for name in self.spider_modules:
+scrapy/spiderloader.py:30:        return cls(settings)
+scrapy/crawler.py:199:    return loader_cls.from_settings(settings.frozencopy())
+scrapy/crawler.py:87:        self.spider_loader = _get_spider_loader(settings)
+scrapy/crawler.py:88:        self.crawlers = set()
+scrapy/crawler.py:89:        self._active = set()
+tests/test_crawler.py:98:            runner = CrawlerRunner({
+tests/test_crawler.py:99:                'SPIDER_MANAGER_CLASS': 'tests.test_crawler.CustomSpiderLoader'
+tests/test_crawler.py:100:            })
+tests/test_crawler.py:101:            self.assertIsInstance(runner.spider_loader, CustomSpiderLoader)
