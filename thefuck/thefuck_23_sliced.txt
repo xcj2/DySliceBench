@@ -1,0 +1,96 @@
+tests/conftest.py:1:import pytest
+tests/conftest.py:2:from mock import Mock
+tests/test_utils.py:1:import pytest
+tests/test_utils.py:2:from mock import Mock
+tests/test_utils.py:3:import six
+tests/test_utils.py:4:from thefuck.utils import wrap_settings, \
+tests/test_utils.py:5:    memoize, get_closest, get_all_executables, replace_argument, \
+tests/test_utils.py:6:    get_all_matched_commands, is_app, for_app, cache
+thefuck/utils.py:1:from difflib import get_close_matches
+thefuck/utils.py:2:from functools import wraps
+thefuck/utils.py:3:import shelve
+thefuck/utils.py:4:from decorator import decorator
+thefuck/utils.py:5:import tempfile
+thefuck/utils.py:7:import os
+thefuck/utils.py:8:import pickle
+thefuck/utils.py:9:import re
+thefuck/utils.py:11:from pathlib import Path
+thefuck/utils.py:12:import six
+thefuck/utils.py:17:if six.PY2:
+thefuck/utils.py:20:    from shlex import quote
+thefuck/utils.py:20:    from shlex import quote
+thefuck/utils.py:36:memoize.disabled = False
+thefuck/utils.py:23:def memoize(fn):
+thefuck/utils.py:35:    return wrapper
+thefuck/utils.py:23:def memoize(fn):
+thefuck/utils.py:35:    return wrapper
+thefuck/utils.py:23:def memoize(fn):
+thefuck/utils.py:35:    return wrapper
+thefuck/utils.py:191:cache.disabled = False
+tests/test_utils.py:7:from thefuck.types import Settings
+thefuck/types.py:1:from collections import namedtuple
+thefuck/types.py:2:from traceback import format_stack
+thefuck/types.py:3:from .logs import debug
+thefuck/logs.py:3:from contextlib import contextmanager
+thefuck/logs.py:4:from datetime import datetime
+thefuck/logs.py:5:import sys
+thefuck/logs.py:6:from traceback import format_exception
+thefuck/logs.py:7:import colorama
+thefuck/types.py:5:Command = namedtuple('Command', ('script', 'stdout', 'stderr'))
+thefuck/types.py:11:class CorrectedCommand(object):
+thefuck/types.py:33:class RulesNamesList(list):
+thefuck/types.py:40:class Settings(dict):
+thefuck/types.py:53:class SortedCorrectedCommandsSequence(object):
+tests/test_utils.py:8:from tests.utils import Command
+tests/utils.py:1:from pathlib import Path
+tests/utils.py:2:from thefuck import types
+tests/utils.py:3:from thefuck.conf import DEFAULT_PRIORITY
+thefuck/conf.py:1:from copy import copy
+thefuck/conf.py:2:from imp import load_source
+thefuck/conf.py:3:import os
+thefuck/conf.py:4:import sys
+thefuck/conf.py:5:from six import text_type
+thefuck/conf.py:6:from . import logs, types
+thefuck/conf.py:9:class _DefaultRulesNames(types.RulesNamesList):
+thefuck/conf.py:24:DEFAULT_RULES = _DefaultRulesNames([])
+thefuck/conf.py:25:DEFAULT_PRIORITY = 1000
+tests/test_utils.py:37:class TestGetClosest(object):
+tests/test_utils.py:121:class TestCache(object):
+tests/conftest.py:16:def no_cache(monkeypatch):
+tests/conftest.py:17:    monkeypatch.setattr('thefuck.utils.cache.disabled', True)
+tests/test_utils.py:123:    def enable_cache(self, monkeypatch):
+tests/test_utils.py:124:        monkeypatch.setattr('thefuck.utils.cache.disabled', False)
+tests/test_utils.py:150:    def mtime(self, mocker):
+tests/test_utils.py:151:        mocker.patch('thefuck.utils.os.path.getmtime', return_value=0)
+tests/test_utils.py:127:    def shelve(self, mocker):
+tests/test_utils.py:128:        value = {}
+tests/test_utils.py:130:        class _Shelve(object):
+tests/test_utils.py:146:        mocker.patch('thefuck.utils.shelve.open', new_callable=lambda: _Shelve)
+tests/test_utils.py:147:        return value
+tests/test_utils.py:154:    def fn(self):
+thefuck/utils.py:157:def cache(*depends_on):
+thefuck/utils.py:190:    return _cache
+tests/test_utils.py:159:        return fn
+tests/test_utils.py:162:    def key(self):
+tests/test_utils.py:163:        if six.PY3:
+tests/test_utils.py:164:            return 'tests.test_utils.<function TestCache.fn.<locals>.fn '
+tests/test_utils.py:179:    def test_when_etag_changed(self, shelve, fn, key):
+tests/test_utils.py:180:        shelve.update({key: {'etag': '-1', 'value': 'old-value'}})
+tests/test_utils.py:181:        assert fn() == 'test'
+thefuck/utils.py:174:    def _cache(fn, *args, **kwargs):
+thefuck/utils.py:175:        if cache.disabled:
+thefuck/utils.py:178:        cache_path = os.path.join(tempfile.gettempdir(), '.thefuck-cache')
+thefuck/utils.py:179:        key = '{}.{}'.format(fn.__module__, repr(fn).split('at')[0])
+thefuck/utils.py:166:    def _get_mtime(name):
+thefuck/utils.py:167:        path = os.path.join(os.path.expanduser('~'), name)
+thefuck/utils.py:168:        try:
+thefuck/utils.py:169:            return str(os.path.getmtime(path))
+thefuck/utils.py:181:        etag = '.'.join(_get_mtime(name) for name in depends_on)
+thefuck/utils.py:183:        with shelve.open(cache_path) as db:
+thefuck/utils.py:184:            if db.get(key, {}).get('etag') == etag:
+thefuck/utils.py:185:                return db[key]['value']
+thefuck/utils.py:186:            else:
+thefuck/utils.py:187:                value = fn(*args, **kwargs)
+thefuck/utils.py:188:                db[key] = {'etag': etag, 'value': value}
+thefuck/utils.py:189:                return value
+tests/test_utils.py:131:            def __init__(self, path):

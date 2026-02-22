@@ -1,0 +1,33 @@
+tests/conftest.py:1:import pytest
+tests/test_types.py:1:from thefuck.types import RulesNamesList, Settings
+thefuck/types.py:1:from collections import namedtuple
+thefuck/types.py:8:Rule = namedtuple('Rule', ('name', 'match', 'get_new_command',
+thefuck/types.py:9:                           'enabled_by_default', 'side_effect',
+thefuck/types.py:10:                           'priority', 'requires_output'))
+thefuck/types.py:13:class RulesNamesList(list):
+thefuck/types.py:20:class Settings(dict):
+tests/test_types.py:2:from tests.utils import Rule
+tests/utils.py:1:from thefuck import types
+tests/utils.py:2:from thefuck.conf import DEFAULT_PRIORITY
+thefuck/conf.py:1:from copy import copy
+thefuck/conf.py:2:from imp import load_source
+thefuck/conf.py:3:import os
+thefuck/conf.py:4:import sys
+thefuck/conf.py:5:from six import text_type
+thefuck/conf.py:6:from . import logs, types
+thefuck/logs.py:3:from contextlib import contextmanager
+thefuck/logs.py:4:from datetime import datetime
+thefuck/logs.py:5:import sys
+thefuck/logs.py:6:from traceback import format_exception
+thefuck/logs.py:7:import colorama
+thefuck/conf.py:9:class _DefaultRulesNames(types.RulesNamesList):
+thefuck/conf.py:24:DEFAULT_RULES = _DefaultRulesNames([])
+thefuck/conf.py:25:DEFAULT_PRIORITY = 1000
+tests/test_types.py:12:def test_update_settings():
+tests/test_types.py:13:    settings = Settings({'key': 'val'})
+thefuck/types.py:25:    def update(self, **kwargs):
+thefuck/types.py:27:        conf = dict(self)
+thefuck/types.py:28:        conf.update(kwargs)
+thefuck/types.py:29:        return Settings(conf)
+tests/test_types.py:14:    new_settings = settings.update(key='new-val', unset='unset-value')
+tests/test_types.py:15:    assert new_settings.key == 'val'

@@ -1,0 +1,45 @@
+tests/rules/conftest.py:1:import pytest
+tests/rules/test_ls_lah.py:1:from mock import patch, Mock
+tests/rules/test_ls_lah.py:2:from thefuck.rules.ls_lah import match, get_new_command
+tests/rules/conftest.py:5:def generic_shell(monkeypatch):
+tests/rules/conftest.py:6:    monkeypatch.setattr('thefuck.shells.and_', lambda *x: ' && '.join(x))
+thefuck/shells.py:6:from collections import defaultdict
+thefuck/shells.py:7:from subprocess import Popen, PIPE
+thefuck/shells.py:8:from time import time
+thefuck/shells.py:9:import os
+thefuck/shells.py:10:from psutil import Process
+thefuck/shells.py:11:from .utils import DEVNULL, memoize
+thefuck/utils.py:1:from functools import wraps
+thefuck/utils.py:2:import os
+thefuck/utils.py:3:import pickle
+thefuck/utils.py:4:import six
+thefuck/utils.py:5:from .types import Command
+thefuck/types.py:1:from collections import namedtuple
+thefuck/types.py:4:Command = namedtuple('Command', ('script', 'stdout', 'stderr'))
+thefuck/types.py:11:class RulesNamesList(list):
+thefuck/types.py:18:class Settings(dict):
+thefuck/utils.py:8:DEVNULL = open(os.devnull, 'w')
+thefuck/shells.py:14:class Generic(object):
+thefuck/shells.py:55:class Bash(Generic):
+thefuck/utils.py:68:def memoize(fn):
+thefuck/utils.py:80:    return wrapper
+thefuck/shells.py:83:class Fish(Generic):
+thefuck/utils.py:68:def memoize(fn):
+thefuck/utils.py:80:    return wrapper
+thefuck/shells.py:128:class Zsh(Generic):
+thefuck/utils.py:68:def memoize(fn):
+thefuck/utils.py:80:    return wrapper
+thefuck/shells.py:157:class Tcsh(Generic):
+thefuck/utils.py:68:def memoize(fn):
+thefuck/utils.py:80:    return wrapper
+thefuck/shells.py:182:shells = defaultdict(lambda: Generic(), {
+thefuck/shells.py:183:    'bash': Bash(),
+thefuck/shells.py:184:    'fish': Fish(),
+thefuck/shells.py:185:    'zsh': Zsh(),
+thefuck/shells.py:186:    'csh': Tcsh(),
+thefuck/shells.py:187:    'tcsh': Tcsh()})
+tests/rules/test_ls_lah.py:5:def test_match():
+tests/rules/test_ls_lah.py:6:    assert match(Mock(script='ls'), None)
+thefuck/rules/ls_lah.py:1:def match(command, settings):
+thefuck/rules/ls_lah.py:2:    return 'ls' in command.script and not ('ls -' in command.script)
+tests/rules/test_ls_lah.py:7:    assert match(Mock(script='ls file.py'), None)

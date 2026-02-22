@@ -1,0 +1,352 @@
+tests/conftest.py:1:import pytest
+tests/rules/conftest.py:1:import pytest
+tests/rules/test_fix_file.py:1:import pytest
+tests/rules/test_fix_file.py:2:import os
+tests/rules/test_fix_file.py:3:from thefuck.rules.fix_file import match, get_new_command
+thefuck/rules/fix_file.py:1:import re
+thefuck/rules/fix_file.py:2:import os
+thefuck/rules/fix_file.py:3:from thefuck.utils import memoize
+thefuck/utils.py:1:from .types import Command
+thefuck/types.py:1:from collections import namedtuple
+thefuck/types.py:4:Command = namedtuple('Command', ('script', 'stdout', 'stderr'))
+thefuck/types.py:13:class RulesNamesList(list):
+thefuck/types.py:20:class Settings(dict):
+thefuck/utils.py:2:from difflib import get_close_matches
+thefuck/utils.py:3:from functools import wraps
+thefuck/utils.py:4:from pathlib import Path
+thefuck/utils.py:5:from shlex import split
+thefuck/utils.py:6:import os
+thefuck/utils.py:7:import pickle
+thefuck/utils.py:8:import re
+thefuck/utils.py:9:import six
+thefuck/utils.py:12:DEVNULL = open(os.devnull, 'w')
+thefuck/utils.py:14:if six.PY2:
+thefuck/utils.py:17:    from shlex import quote
+thefuck/utils.py:17:    from shlex import quote
+thefuck/utils.py:124:memoize.disabled = False
+thefuck/utils.py:111:def memoize(fn):
+thefuck/utils.py:113:    memo = {}
+thefuck/utils.py:123:    return wrapper
+thefuck/utils.py:166:def eager(fn):
+thefuck/utils.py:170:    return wrapper
+thefuck/rules/fix_file.py:4:from thefuck import shells
+thefuck/shells.py:6:from collections import defaultdict
+thefuck/shells.py:7:from psutil import Process
+thefuck/shells.py:8:from subprocess import Popen, PIPE
+thefuck/shells.py:9:from time import time
+thefuck/shells.py:10:import io
+thefuck/shells.py:11:import os
+thefuck/shells.py:12:from .utils import DEVNULL, memoize
+thefuck/shells.py:15:class Generic(object):
+thefuck/shells.py:76:class Bash(Generic):
+thefuck/shells.py:106:class Fish(Generic):
+thefuck/shells.py:159:class Zsh(Generic):
+thefuck/shells.py:193:class Tcsh(Generic):
+thefuck/shells.py:219:shells = defaultdict(lambda: Generic(), {
+thefuck/shells.py:220:    'bash': Bash(),
+thefuck/shells.py:221:    'fish': Fish(),
+thefuck/shells.py:222:    'zsh': Zsh(),
+thefuck/shells.py:223:    'csh': Tcsh(),
+thefuck/shells.py:224:    'tcsh': Tcsh()})
+thefuck/utils.py:111:def memoize(fn):
+thefuck/utils.py:113:    memo = {}
+thefuck/utils.py:123:    return wrapper
+thefuck/utils.py:111:def memoize(fn):
+thefuck/utils.py:113:    memo = {}
+thefuck/utils.py:123:    return wrapper
+thefuck/utils.py:111:def memoize(fn):
+thefuck/utils.py:113:    memo = {}
+thefuck/utils.py:123:    return wrapper
+thefuck/rules/fix_file.py:7:patterns = (
+thefuck/rules/fix_file.py:8:        # js, node:
+thefuck/rules/fix_file.py:9:        '^    at {file}:{line}:{col}',
+thefuck/rules/fix_file.py:10:        # cargo:
+thefuck/rules/fix_file.py:11:        '^   {file}:{line}:{col}',
+thefuck/rules/fix_file.py:12:        # python, thefuck:
+thefuck/rules/fix_file.py:13:        '^  File "{file}", line {line}',
+thefuck/rules/fix_file.py:14:        # awk:
+thefuck/rules/fix_file.py:15:        '^awk: {file}:{line}:',
+thefuck/rules/fix_file.py:16:        # git
+thefuck/rules/fix_file.py:17:        '^fatal: bad config file line {line} in {file}',
+thefuck/rules/fix_file.py:18:        # llc:
+thefuck/rules/fix_file.py:19:        '^llc: {file}:{line}:{col}:',
+thefuck/rules/fix_file.py:20:        # lua:
+thefuck/rules/fix_file.py:21:        '^lua: {file}:{line}:',
+thefuck/rules/fix_file.py:22:        # fish:
+thefuck/rules/fix_file.py:23:        '^{file} \(line {line}\):',
+thefuck/rules/fix_file.py:24:        # bash, sh, ssh:
+thefuck/rules/fix_file.py:25:        '^{file}: line {line}: ',
+thefuck/rules/fix_file.py:26:        # ghc, make, ruby, zsh:
+thefuck/rules/fix_file.py:27:        '^{file}:{line}:',
+thefuck/rules/fix_file.py:28:        # cargo, clang, gcc, go, pep8, rustc:
+thefuck/rules/fix_file.py:29:        '^{file}:{line}:{col}',
+thefuck/rules/fix_file.py:30:        # perl:
+thefuck/rules/fix_file.py:31:        'at {file} line {line}',
+thefuck/rules/fix_file.py:32:    )
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:36:def _make_pattern(pattern):
+thefuck/rules/fix_file.py:37:    pattern = pattern.replace('{file}', '(?P<file>[^:\n]+)')
+thefuck/rules/fix_file.py:38:    pattern = pattern.replace('{line}', '(?P<line>[0-9]+)')
+thefuck/rules/fix_file.py:39:    pattern = pattern.replace('{col}',  '(?P<col>[0-9]+)')
+thefuck/rules/fix_file.py:40:    return re.compile(pattern, re.MULTILINE)
+thefuck/rules/fix_file.py:41:patterns = [_make_pattern(p) for p in patterns]
+thefuck/utils.py:111:def memoize(fn):
+thefuck/utils.py:113:    memo = {}
+thefuck/utils.py:123:    return wrapper
+tests/rules/test_fix_file.py:4:from tests.utils import Command
+tests/utils.py:1:from thefuck import types
+tests/utils.py:2:from thefuck.conf import DEFAULT_PRIORITY
+thefuck/conf.py:1:from copy import copy
+thefuck/conf.py:2:from imp import load_source
+thefuck/conf.py:3:import os
+thefuck/conf.py:4:import sys
+thefuck/conf.py:5:from six import text_type
+thefuck/conf.py:6:from . import logs, types
+thefuck/logs.py:3:from contextlib import contextmanager
+thefuck/logs.py:4:from datetime import datetime
+thefuck/logs.py:5:import sys
+thefuck/logs.py:6:from traceback import format_exception
+thefuck/logs.py:7:import colorama
+thefuck/conf.py:9:class _DefaultRulesNames(types.RulesNamesList):
+thefuck/conf.py:24:DEFAULT_RULES = _DefaultRulesNames([])
+thefuck/conf.py:25:DEFAULT_PRIORITY = 1000
+tests/rules/test_fix_file.py:5:from thefuck.types import Settings
+tests/rules/test_fix_file.py:9:tests = (
+tests/rules/test_fix_file.py:10:('gcc a.c', 'a.c', 3, 1, '',
+tests/rules/test_fix_file.py:11:"""
+tests/rules/test_fix_file.py:12:a.c: In function 'main':
+tests/rules/test_fix_file.py:13:a.c:3:1: error: expected expression before '}' token
+tests/rules/test_fix_file.py:14: }
+tests/rules/test_fix_file.py:15:  ^
+tests/rules/test_fix_file.py:16:"""),
+tests/rules/test_fix_file.py:17:
+tests/rules/test_fix_file.py:18:('clang a.c', 'a.c', 3, 1, '',
+tests/rules/test_fix_file.py:19:"""
+tests/rules/test_fix_file.py:20:a.c:3:1: error: expected expression
+tests/rules/test_fix_file.py:21:}
+tests/rules/test_fix_file.py:22:^
+tests/rules/test_fix_file.py:23:"""),
+tests/rules/test_fix_file.py:24:
+tests/rules/test_fix_file.py:25:('perl a.pl', 'a.pl', 3, None, '',
+tests/rules/test_fix_file.py:26:"""
+tests/rules/test_fix_file.py:27:syntax error at a.pl line 3, at EOF
+tests/rules/test_fix_file.py:28:Execution of a.pl aborted due to compilation errors.
+tests/rules/test_fix_file.py:29:"""),
+tests/rules/test_fix_file.py:30:
+tests/rules/test_fix_file.py:31:('perl a.pl', 'a.pl', 2, None, '',
+tests/rules/test_fix_file.py:32:"""
+tests/rules/test_fix_file.py:33:Search pattern not terminated at a.pl line 2.
+tests/rules/test_fix_file.py:34:"""),
+tests/rules/test_fix_file.py:35:
+tests/rules/test_fix_file.py:36:('sh a.sh', 'a.sh', 2, None, '',
+tests/rules/test_fix_file.py:37:"""
+tests/rules/test_fix_file.py:38:a.sh: line 2: foo: command not found
+tests/rules/test_fix_file.py:39:"""),
+tests/rules/test_fix_file.py:40:
+tests/rules/test_fix_file.py:41:('zsh a.sh', 'a.sh', 2, None, '',
+tests/rules/test_fix_file.py:42:"""
+tests/rules/test_fix_file.py:43:a.sh:2: command not found: foo
+tests/rules/test_fix_file.py:44:"""),
+tests/rules/test_fix_file.py:45:
+tests/rules/test_fix_file.py:46:('bash a.sh', 'a.sh', 2, None, '',
+tests/rules/test_fix_file.py:47:"""
+tests/rules/test_fix_file.py:48:a.sh: line 2: foo: command not found
+tests/rules/test_fix_file.py:49:"""),
+tests/rules/test_fix_file.py:50:
+tests/rules/test_fix_file.py:51:('rustc a.rs', 'a.rs', 2, 5, '',
+tests/rules/test_fix_file.py:52:"""
+tests/rules/test_fix_file.py:53:a.rs:2:5: 2:6 error: unexpected token: `+`
+tests/rules/test_fix_file.py:54:a.rs:2     +
+tests/rules/test_fix_file.py:55:           ^
+tests/rules/test_fix_file.py:56:"""),
+tests/rules/test_fix_file.py:57:
+tests/rules/test_fix_file.py:58:('cargo build', 'src/lib.rs', 3, 5, '',
+tests/rules/test_fix_file.py:59:"""
+tests/rules/test_fix_file.py:60:   Compiling test v0.1.0 (file:///tmp/fix-error/test)
+tests/rules/test_fix_file.py:61:   src/lib.rs:3:5: 3:6 error: unexpected token: `+`
+tests/rules/test_fix_file.py:62:   src/lib.rs:3     +
+tests/rules/test_fix_file.py:63:                    ^
+tests/rules/test_fix_file.py:64:Could not compile `test`.
+tests/rules/test_fix_file.py:65:
+tests/rules/test_fix_file.py:66:To learn more, run the command again with --verbose.
+tests/rules/test_fix_file.py:67:"""),
+tests/rules/test_fix_file.py:68:
+tests/rules/test_fix_file.py:69:('python a.py', 'a.py', 2, None, '',
+tests/rules/test_fix_file.py:70:"""
+tests/rules/test_fix_file.py:71:  File "a.py", line 2
+tests/rules/test_fix_file.py:72:      +
+tests/rules/test_fix_file.py:73:          ^
+tests/rules/test_fix_file.py:74:SyntaxError: invalid syntax
+tests/rules/test_fix_file.py:75:"""),
+tests/rules/test_fix_file.py:76:
+tests/rules/test_fix_file.py:77:('python a.py', 'a.py', 8, None, '',
+tests/rules/test_fix_file.py:78:"""
+tests/rules/test_fix_file.py:79:Traceback (most recent call last):
+tests/rules/test_fix_file.py:80:  File "a.py", line 8, in <module>
+tests/rules/test_fix_file.py:81:    match("foo")
+tests/rules/test_fix_file.py:82:  File "a.py", line 5, in match
+tests/rules/test_fix_file.py:83:    m = re.search(None, command)
+tests/rules/test_fix_file.py:84:  File "/usr/lib/python3.4/re.py", line 170, in search
+tests/rules/test_fix_file.py:85:    return _compile(pattern, flags).search(string)
+tests/rules/test_fix_file.py:86:  File "/usr/lib/python3.4/re.py", line 293, in _compile
+tests/rules/test_fix_file.py:87:    raise TypeError("first argument must be string or compiled pattern")
+tests/rules/test_fix_file.py:88:TypeError: first argument must be string or compiled pattern
+tests/rules/test_fix_file.py:89:"""),
+tests/rules/test_fix_file.py:90:
+tests/rules/test_fix_file.py:91:('ruby a.rb', 'a.rb', 3, None, '',
+tests/rules/test_fix_file.py:92:"""
+tests/rules/test_fix_file.py:93:a.rb:3: syntax error, unexpected keyword_end
+tests/rules/test_fix_file.py:94:"""),
+tests/rules/test_fix_file.py:95:
+tests/rules/test_fix_file.py:96:('lua a.lua', 'a.lua', 2, None, '',
+tests/rules/test_fix_file.py:97:"""
+tests/rules/test_fix_file.py:98:lua: a.lua:2: unexpected symbol near '+'
+tests/rules/test_fix_file.py:99:"""),
+tests/rules/test_fix_file.py:100:
+tests/rules/test_fix_file.py:101:('fish a.sh', '/tmp/fix-error/a.sh', 2, None, '',
+tests/rules/test_fix_file.py:102:"""
+tests/rules/test_fix_file.py:103:fish: Unknown command 'foo'
+tests/rules/test_fix_file.py:104:/tmp/fix-error/a.sh (line 2): foo
+tests/rules/test_fix_file.py:105:                              ^
+tests/rules/test_fix_file.py:106:"""),
+tests/rules/test_fix_file.py:107:
+tests/rules/test_fix_file.py:108:('./a', './a', 2, None, '',
+tests/rules/test_fix_file.py:109:"""
+tests/rules/test_fix_file.py:110:awk: ./a:2: BEGIN { print "Hello, world!" + }
+tests/rules/test_fix_file.py:111:awk: ./a:2:                                 ^ syntax error
+tests/rules/test_fix_file.py:112:"""),
+tests/rules/test_fix_file.py:113:
+tests/rules/test_fix_file.py:114:('llc a.ll', 'a.ll', 1, 2, '',
+tests/rules/test_fix_file.py:115:"""
+tests/rules/test_fix_file.py:116:llc: a.ll:1:2: error: expected top-level entity
+tests/rules/test_fix_file.py:117:+
+tests/rules/test_fix_file.py:118:^
+tests/rules/test_fix_file.py:119:"""),
+tests/rules/test_fix_file.py:120:
+tests/rules/test_fix_file.py:121:('go build a.go', 'a.go', 1, 2, '',
+tests/rules/test_fix_file.py:122:"""
+tests/rules/test_fix_file.py:123:can't load package:
+tests/rules/test_fix_file.py:124:a.go:1:2: expected 'package', found '+'
+tests/rules/test_fix_file.py:125:"""),
+tests/rules/test_fix_file.py:126:
+tests/rules/test_fix_file.py:127:('make', 'Makefile', 2, None, '',
+tests/rules/test_fix_file.py:128:"""
+tests/rules/test_fix_file.py:129:bidule
+tests/rules/test_fix_file.py:130:make: bidule: Command not found
+tests/rules/test_fix_file.py:131:Makefile:2: recipe for target 'target' failed
+tests/rules/test_fix_file.py:132:make: *** [target] Error 127
+tests/rules/test_fix_file.py:133:"""),
+tests/rules/test_fix_file.py:134:
+tests/rules/test_fix_file.py:135:('git st', '/home/martin/.config/git/config', 1, None, '',
+tests/rules/test_fix_file.py:136:"""
+tests/rules/test_fix_file.py:137:fatal: bad config file line 1 in /home/martin/.config/git/config
+tests/rules/test_fix_file.py:138:"""),
+tests/rules/test_fix_file.py:139:
+tests/rules/test_fix_file.py:140:('node fuck.js asdf qwer', '/Users/pablo/Workspace/barebones/fuck.js', '2', 5, '',
+tests/rules/test_fix_file.py:141:"""
+tests/rules/test_fix_file.py:142:/Users/pablo/Workspace/barebones/fuck.js:2
+tests/rules/test_fix_file.py:143:conole.log(arg);  // this should read console.log(arg);
+tests/rules/test_fix_file.py:144:^
+tests/rules/test_fix_file.py:145:ReferenceError: conole is not defined
+tests/rules/test_fix_file.py:146:    at /Users/pablo/Workspace/barebones/fuck.js:2:5
+tests/rules/test_fix_file.py:147:    at Array.forEach (native)
+tests/rules/test_fix_file.py:148:    at Object.<anonymous> (/Users/pablo/Workspace/barebones/fuck.js:1:85)
+tests/rules/test_fix_file.py:149:    at Module._compile (module.js:460:26)
+tests/rules/test_fix_file.py:150:    at Object.Module._extensions..js (module.js:478:10)
+tests/rules/test_fix_file.py:151:    at Module.load (module.js:355:32)
+tests/rules/test_fix_file.py:152:    at Function.Module._load (module.js:310:12)
+tests/rules/test_fix_file.py:153:    at Function.Module.runMain (module.js:501:10)
+tests/rules/test_fix_file.py:154:    at startup (node.js:129:16)
+tests/rules/test_fix_file.py:155:    at node.js:814:3
+tests/rules/test_fix_file.py:156:"""),
+tests/rules/test_fix_file.py:157:
+tests/rules/test_fix_file.py:158:('pep8', './tests/rules/test_systemctl.py', 17, 80,
+tests/rules/test_fix_file.py:159:"""
+tests/rules/test_fix_file.py:160:./tests/rules/test_systemctl.py:17:80: E501 line too long (93 > 79 characters)
+tests/rules/test_fix_file.py:161:./tests/rules/test_systemctl.py:18:80: E501 line too long (103 > 79 characters)
+tests/rules/test_fix_file.py:162:./tests/rules/test_whois.py:20:80: E501 line too long (89 > 79 characters)
+tests/rules/test_fix_file.py:163:./tests/rules/test_whois.py:22:80: E501 line too long (83 > 79 characters)
+tests/rules/test_fix_file.py:164:""", ''),
+tests/rules/test_fix_file.py:165:
+tests/rules/test_fix_file.py:166:('py.test', '/home/thefuck/tests/rules/test_fix_file.py', 218, None,
+tests/rules/test_fix_file.py:167:"""
+tests/rules/test_fix_file.py:168:monkeypatch = <_pytest.monkeypatch.monkeypatch object at 0x7fdb76a25b38>
+tests/rules/test_fix_file.py:169:test = ('fish a.sh', '/tmp/fix-error/a.sh', 2, None, '', "\\nfish: Unknown command 'foo'\\n/tmp/fix-error/a.sh (line 2): foo\\n                              ^\\n")
+tests/rules/test_fix_file.py:170:
+tests/rules/test_fix_file.py:171:    @pytest.mark.parametrize('test', tests)
+tests/rules/test_fix_file.py:172:    @pytest.mark.usefixtures('no_memoize')
+tests/rules/test_fix_file.py:173:    def test_get_new_command(monkeypatch, test):
+tests/rules/test_fix_file.py:174:>       mocker.patch('os.path.isfile', return_value=True)
+tests/rules/test_fix_file.py:175:E       NameError: name 'mocker' is not defined
+tests/rules/test_fix_file.py:176:
+tests/rules/test_fix_file.py:177:/home/thefuck/tests/rules/test_fix_file.py:218: NameError
+tests/rules/test_fix_file.py:178:""", ''),
+tests/rules/test_fix_file.py:179:)
+tests/rules/conftest.py:5:def generic_shell(monkeypatch):
+tests/rules/conftest.py:6:    monkeypatch.setattr('thefuck.shells.and_', lambda *x: ' && '.join(x))
+tests/conftest.py:5:def no_memoize(monkeypatch):
+tests/conftest.py:6:    monkeypatch.setattr('thefuck.utils.memoize.disabled', True)
+tests/rules/test_fix_file.py:222:def test_get_new_command_with_settings(mocker, monkeypatch, test):
+tests/rules/test_fix_file.py:223:    mocker.patch('os.path.isfile', return_value=True)
+tests/rules/test_fix_file.py:224:    monkeypatch.setenv('EDITOR', 'dummy_editor')
+tests/utils.py:5:def Command(script='', stdout='', stderr=''):
+tests/utils.py:6:    return types.Command(script, stdout, stderr)
+tests/rules/test_fix_file.py:226:    cmd = Command(script=test[0], stdout=test[4], stderr=test[5])
+tests/rules/test_fix_file.py:227:    settings = Settings({'fixcolcmd': '{editor} {file} +{line}:{col}'})
+tests/rules/test_fix_file.py:229:    if test[3]:
+tests/rules/test_fix_file.py:230:        assert (get_new_command(cmd, settings) ==
+tests/rules/test_fix_file.py:231:            'dummy_editor {} +{}:{} && {}'.format(test[1], test[2], test[3], test[0]))

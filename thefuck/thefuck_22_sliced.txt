@@ -1,0 +1,79 @@
+tests/conftest.py:1:import pytest
+tests/conftest.py:2:from mock import Mock
+tests/test_types.py:1:from thefuck.types import RulesNamesList, Settings, \
+tests/test_types.py:2:    SortedCorrectedCommandsSequence
+thefuck/types.py:1:from collections import namedtuple
+thefuck/types.py:2:from traceback import format_stack
+thefuck/types.py:3:from .logs import debug
+thefuck/logs.py:3:from contextlib import contextmanager
+thefuck/logs.py:4:from datetime import datetime
+thefuck/logs.py:5:import sys
+thefuck/logs.py:6:from traceback import format_exception
+thefuck/logs.py:7:import colorama
+thefuck/types.py:7:Rule = namedtuple('Rule', ('name', 'match', 'get_new_command',
+thefuck/types.py:8:                           'enabled_by_default', 'side_effect',
+thefuck/types.py:9:                           'priority', 'requires_output'))
+thefuck/types.py:11:class CorrectedCommand(object):
+thefuck/types.py:33:class RulesNamesList(list):
+thefuck/types.py:40:class Settings(dict):
+thefuck/types.py:53:class SortedCorrectedCommandsSequence(object):
+tests/test_types.py:3:from tests.utils import Rule, CorrectedCommand
+tests/utils.py:1:from pathlib import Path
+tests/utils.py:2:from thefuck import types
+tests/utils.py:3:from thefuck.conf import DEFAULT_PRIORITY
+thefuck/conf.py:1:from copy import copy
+thefuck/conf.py:2:from imp import load_source
+thefuck/conf.py:3:import os
+thefuck/conf.py:4:import sys
+thefuck/conf.py:5:from six import text_type
+thefuck/conf.py:6:from . import logs, types
+thefuck/conf.py:9:class _DefaultRulesNames(types.RulesNamesList):
+thefuck/conf.py:24:DEFAULT_RULES = _DefaultRulesNames([])
+thefuck/conf.py:25:DEFAULT_PRIORITY = 1000
+tests/test_types.py:21:class TestSortedCorrectedCommandsSequence(object):
+tests/test_types.py:52:class TestCorrectedCommand(object):
+tests/conftest.py:16:def no_cache(monkeypatch):
+tests/conftest.py:17:    monkeypatch.setattr('thefuck.utils.cache.disabled', True)
+thefuck/utils.py:1:from difflib import get_close_matches
+thefuck/utils.py:2:from functools import wraps
+thefuck/utils.py:3:import shelve
+thefuck/utils.py:4:from decorator import decorator
+thefuck/utils.py:5:from contextlib import closing
+thefuck/utils.py:6:import tempfile
+thefuck/utils.py:8:import os
+thefuck/utils.py:9:import pickle
+thefuck/utils.py:10:import re
+thefuck/utils.py:12:from pathlib import Path
+thefuck/utils.py:13:import six
+thefuck/utils.py:18:if six.PY2:
+thefuck/utils.py:21:    from shlex import quote
+thefuck/utils.py:21:    from shlex import quote
+thefuck/utils.py:37:memoize.disabled = False
+thefuck/utils.py:24:def memoize(fn):
+thefuck/utils.py:36:    return wrapper
+thefuck/utils.py:24:def memoize(fn):
+thefuck/utils.py:36:    return wrapper
+thefuck/utils.py:24:def memoize(fn):
+thefuck/utils.py:36:    return wrapper
+thefuck/utils.py:194:cache.disabled = False
+tests/conftest.py:11:def settings():
+tests/conftest.py:12:    return Mock(debug=False, no_colors=True)
+tests/test_types.py:47:    def test_with_blank(self, settings):
+thefuck/types.py:62:    def __init__(self, commands, settings):
+thefuck/types.py:63:        self._settings = settings
+thefuck/types.py:64:        self._commands = commands
+thefuck/types.py:68:    def _realise_first(self):
+thefuck/types.py:69:        try:
+thefuck/types.py:71:        except StopIteration:
+thefuck/types.py:72:            return []
+thefuck/types.py:65:        self._cached = self._realise_first()
+thefuck/types.py:66:        self._realised = False
+tests/test_types.py:48:        seq = SortedCorrectedCommandsSequence(iter([]), settings)
+tests/test_types.py:49:        assert list(seq) == []
+thefuck/types.py:104:    def __iter__(self):
+thefuck/types.py:105:        if not self._realised:
+thefuck/types.py:106:            self._realise()
+thefuck/types.py:82:    def _realise(self):
+thefuck/types.py:74:    def _remove_duplicates(self, corrected_commands):
+thefuck/types.py:80:        return commands
+thefuck/types.py:84:        commands = self._remove_duplicates(self._commands)
