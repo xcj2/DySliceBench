@@ -1,0 +1,147 @@
+tests/test_pysnooper.py:4:import io
+tests/test_pysnooper.py:5:import re
+tests/test_pysnooper.py:6:import abc
+tests/test_pysnooper.py:8:from python_toolbox import caching
+tests/test_pysnooper.py:9:from python_toolbox import sys_tools
+tests/test_pysnooper.py:10:from python_toolbox import temp_file_tools
+tests/test_pysnooper.py:12:import pysnooper
+pysnooper/__init__.py:4:import future.standard_library
+pysnooper/__init__.py:5:future.standard_library.install_aliases()
+pysnooper/__init__.py:8:from .pysnooper import snoop
+pysnooper/pysnooper.py:4:import sys
+pysnooper/pysnooper.py:5:import os
+pysnooper/pysnooper.py:6:import inspect
+pysnooper/pysnooper.py:7:import types
+pysnooper/pysnooper.py:8:import datetime as datetime_module
+pysnooper/pysnooper.py:9:import re
+pysnooper/pysnooper.py:10:import collections
+pysnooper/pysnooper.py:12:import decorator
+pysnooper/pysnooper.py:14:from . import utils
+pysnooper/utils.py:4:import abc
+pysnooper/utils.py:5:import sys
+pysnooper/utils.py:7:from .pycompat import ABC
+pysnooper/pycompat.py:5:import abc
+pysnooper/pycompat.py:6:import os
+pysnooper/pycompat.py:8:if hasattr(abc, 'ABC'):
+pysnooper/pycompat.py:9:    ABC = abc.ABC
+pysnooper/pycompat.py:19:if hasattr(os, 'PathLike'):
+pysnooper/pycompat.py:20:    PathLike = os.PathLike
+pysnooper/utils.py:22:class WritableStream(ABC):
+pysnooper/pysnooper.py:15:from . import pycompat
+pysnooper/pysnooper.py:16:from .tracer import Tracer
+pysnooper/tracer.py:4:import types
+pysnooper/tracer.py:5:import sys
+pysnooper/tracer.py:6:import re
+pysnooper/tracer.py:7:import collections
+pysnooper/tracer.py:8:import datetime as datetime_module
+pysnooper/tracer.py:10:import six
+pysnooper/tracer.py:98:class Tracer:
+tests/test_pysnooper.py:14:from .utils import (assert_output, VariableEntry, CallEntry, LineEntry,
+tests/test_pysnooper.py:15:                    ReturnEntry, OpcodeEntry, ExceptionEntry)
+tests/utils.py:4:import re
+tests/utils.py:5:import abc
+tests/utils.py:7:from python_toolbox import caching
+tests/utils.py:9:import pysnooper.pycompat
+tests/utils.py:12:class _BaseEntry(pysnooper.pycompat.ABC):
+tests/utils.py:17:class VariableEntry(_BaseEntry):
+tests/utils.py:71:class _BaseEventEntry(_BaseEntry):
+tests/utils.py:109:class CallEntry(_BaseEventEntry):
+tests/utils.py:112:class LineEntry(_BaseEventEntry):
+tests/utils.py:115:class ReturnEntry(_BaseEventEntry):
+tests/utils.py:118:class ExceptionEntry(_BaseEventEntry):
+tests/utils.py:121:class OpcodeEntry(_BaseEventEntry):
+tests/utils.py:125:class OutputFailure(Exception):
+tests/test_pysnooper.py:174:def test_file_output():
+tests/test_pysnooper.py:176:    with temp_file_tools.create_temp_folder(prefix='pysnooper') as folder:
+tests/test_pysnooper.py:177:        path = folder / 'foo.log'
+tests/test_pysnooper.py:178:        @pysnooper.snoop(str(path))
+tests/test_pysnooper.py:179:        def my_function(foo):
+tests/test_pysnooper.py:180:            x = 7
+tests/test_pysnooper.py:181:            y = 8
+tests/test_pysnooper.py:182:            return y + x
+tests/test_pysnooper.py:183:        result = my_function('baba')
+tests/test_pysnooper.py:184:        assert result == 15
+tests/test_pysnooper.py:185:        output = path.open().read()
+tests/test_pysnooper.py:186:        assert_output(
+tests/test_pysnooper.py:187:            output,
+tests/test_pysnooper.py:188:            (
+tests/test_pysnooper.py:189:                VariableEntry('foo', value_regex="u?'baba'"),
+tests/test_pysnooper.py:190:                CallEntry(),
+tests/test_pysnooper.py:191:                LineEntry('x = 7'),
+tests/test_pysnooper.py:192:                VariableEntry('x', '7'),
+tests/test_pysnooper.py:193:                LineEntry('y = 8'),
+tests/test_pysnooper.py:194:                VariableEntry('y', '8'),
+tests/test_pysnooper.py:195:                LineEntry('return y + x'),
+tests/test_pysnooper.py:196:                ReturnEntry('return y + x'),
+tests/test_pysnooper.py:197:            )
+tests/test_pysnooper.py:198:        )
+tests/test_pysnooper.py:177:        path = folder / 'foo.log'
+pysnooper/pysnooper.py:37:def snoop(output=None, variables=(), depth=1, prefix=''):
+pysnooper/pysnooper.py:19:def get_write_function(output):
+pysnooper/pysnooper.py:20:    if output is None:
+pysnooper/pysnooper.py:24:    elif isinstance(output, (pycompat.PathLike, str)):
+pysnooper/pysnooper.py:24:    elif isinstance(output, (pycompat.PathLike, str)):
+pysnooper/pysnooper.py:33:    return write
+pysnooper/pysnooper.py:65:    write = get_write_function(output)
+pysnooper/pysnooper.py:74:    return decorate
+pysnooper/pysnooper.py:67:    def decorate(function, *args, **kwargs):
+pysnooper/pysnooper.py:68:        target_code_object = function.__code__
+pysnooper/pysnooper.py:69:        with Tracer(target_code_object=target_code_object,
+pysnooper/pysnooper.py:70:                    write=write, variables=variables,
+pysnooper/pysnooper.py:71:                    depth=depth, prefix=prefix):
+pysnooper/pysnooper.py:72:            return function(*args, **kwargs)
+pysnooper/tracer.py:99:    def __init__(self, target_code_object, write, variables=(), depth=1,
+pysnooper/tracer.py:101:        self.target_code_object = target_code_object
+pysnooper/tracer.py:102:        self._write = write
+pysnooper/tracer.py:103:        self.variables = variables
+pysnooper/tracer.py:104:        self.frame_to_old_local_reprs = collections.defaultdict(lambda: {})
+pysnooper/tracer.py:105:        self.frame_to_local_reprs = collections.defaultdict(lambda: {})
+pysnooper/tracer.py:106:        self.depth = depth
+pysnooper/tracer.py:107:        self.prefix = prefix
+pysnooper/tracer.py:108:        assert self.depth >= 1
+pysnooper/tracer.py:116:    def __enter__(self):
+pysnooper/tracer.py:117:        self.original_trace_function = sys.gettrace()
+pysnooper/tracer.py:118:        sys.settrace(self.trace)
+pysnooper/tracer.py:124:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:132:        if frame.f_code is not self.target_code_object:
+pysnooper/tracer.py:150:            indent = ''
+pysnooper/tracer.py:150:            indent = ''
+pysnooper/tracer.py:156:        self.frame_to_old_local_reprs[frame] = old_local_reprs = \
+pysnooper/tracer.py:157:                                               self.frame_to_local_reprs[frame]
+pysnooper/tracer.py:156:        self.frame_to_old_local_reprs[frame] = old_local_reprs = \
+pysnooper/tracer.py:157:                                               self.frame_to_local_reprs[frame]
+pysnooper/tracer.py:18:def get_local_reprs(frame, variables=()):
+pysnooper/tracer.py:19:    result = {}
+pysnooper/tracer.py:20:    for key, value in frame.f_locals.items():
+pysnooper/tracer.py:20:    for key, value in frame.f_locals.items():
+pysnooper/tracer.py:21:        try:
+pysnooper/tracer.py:12:def get_shortish_repr(item):
+pysnooper/tracer.py:13:    r = repr(item)
+pysnooper/tracer.py:14:    if len(r) > 100:
+pysnooper/tracer.py:16:    return r
+pysnooper/tracer.py:22:            result[key] = get_shortish_repr(value)
+pysnooper/tracer.py:39:    return result
+pysnooper/tracer.py:158:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:159:                               get_local_reprs(frame, variables=self.variables)
+pysnooper/tracer.py:158:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:159:                               get_local_reprs(frame, variables=self.variables)
+pysnooper/tracer.py:162:        newish_local_reprs = {}
+pysnooper/tracer.py:164:        for key, value in local_reprs.items():
+pysnooper/tracer.py:164:        for key, value in local_reprs.items():
+pysnooper/tracer.py:165:            if key not in old_local_reprs:
+pysnooper/tracer.py:166:                newish_local_reprs[key] = value
+pysnooper/tracer.py:170:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:171:                                                            'New var:....... ')
+pysnooper/tracer.py:172:        for name, value_repr in newish_local_reprs.items():
+pysnooper/tracer.py:172:        for name, value_repr in newish_local_reprs.items():
+pysnooper/tracer.py:173:            self.write('{indent}{newish_string}{name} = {value_repr}'.format(
+pysnooper/tracer.py:174:                                                                   **locals()))
+pysnooper/tracer.py:110:    def write(self, s):
+pysnooper/tracer.py:111:        s = '{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:112:        if isinstance(s, bytes): # Python 2 compatibility
+pysnooper/tracer.py:114:        self._write(s)
+pysnooper/pysnooper.py:25:        def write(s):
+pysnooper/pysnooper.py:26:            with open(output_path, 'a') as output_file:
+pysnooper/pysnooper.py:27:                output_file.write(s)
+pysnooper/tracer.py:120:    def __exit__(self, exc_type, exc_value, exc_traceback):
+pysnooper/tracer.py:121:        sys.settrace(self.original_trace_function)

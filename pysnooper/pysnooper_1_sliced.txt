@@ -1,0 +1,1904 @@
+tests/__init__.py:1:import pytest
+tests/__init__.py:3:pytest.register_assert_rewrite('tests.utils')
+tests/test_chinese.py:5:import io
+tests/test_chinese.py:6:import textwrap
+tests/test_chinese.py:7:import threading
+tests/test_chinese.py:8:import types
+tests/test_chinese.py:9:import sys
+tests/test_chinese.py:11:from pysnooper.utils import truncate
+pysnooper/__init__.py:20:from .tracer import Tracer as snoop
+pysnooper/tracer.py:4:import functools
+pysnooper/tracer.py:5:import inspect
+pysnooper/tracer.py:6:import opcode
+pysnooper/tracer.py:7:import sys
+pysnooper/tracer.py:8:import re
+pysnooper/tracer.py:9:import collections
+pysnooper/tracer.py:10:import datetime as datetime_module
+pysnooper/tracer.py:11:import itertools
+pysnooper/tracer.py:12:import threading
+pysnooper/tracer.py:13:import traceback
+pysnooper/tracer.py:15:from .variables import CommonVariable, Exploding, BaseVariable
+pysnooper/variables.py:1:import itertools
+pysnooper/variables.py:2:import abc
+pysnooper/variables.py:3:from collections import Mapping, Sequence
+pysnooper/variables.py:4:from copy import deepcopy
+pysnooper/variables.py:6:from . import utils
+pysnooper/utils.py:4:import abc
+pysnooper/utils.py:6:import sys
+pysnooper/utils.py:7:from .pycompat import ABC, string_types
+pysnooper/pycompat.py:5:import abc
+pysnooper/pycompat.py:6:import os
+pysnooper/pycompat.py:7:import inspect
+pysnooper/pycompat.py:8:import sys
+pysnooper/pycompat.py:10:PY3 = (sys.version_info[0] == 3)
+pysnooper/pycompat.py:12:if hasattr(abc, 'ABC'):
+pysnooper/pycompat.py:13:    ABC = abc.ABC
+pysnooper/pycompat.py:23:if hasattr(os, 'PathLike'):
+pysnooper/pycompat.py:24:    PathLike = os.PathLike
+pysnooper/pycompat.py:44:try:
+pysnooper/pycompat.py:45:    iscoroutinefunction = inspect.iscoroutinefunction
+pysnooper/pycompat.py:50:if PY3:
+pysnooper/pycompat.py:51:    string_types = (str,)
+pysnooper/pycompat.py:52:    text_type = str
+pysnooper/utils.py:9:MAX_VARIABLE_LENGTH = 100
+pysnooper/utils.py:25:class WritableStream(ABC):
+pysnooper/variables.py:7:from . import pycompat
+pysnooper/variables.py:17:class BaseVariable(pycompat.ABC):
+pysnooper/variables.py:39:class CommonVariable(BaseVariable):
+pysnooper/variables.py:72:class Attrs(CommonVariable):
+pysnooper/variables.py:86:class Keys(CommonVariable):
+pysnooper/variables.py:97:class Indices(Keys):
+pysnooper/variables.py:110:class Exploding(BaseVariable):
+pysnooper/tracer.py:16:from . import utils, pycompat
+pysnooper/tracer.py:19:ipython_filename_pattern = re.compile('^<ipython-input-([0-9]+)-.*>$')
+pysnooper/tracer.py:35:class UnavailableSource(object):
+pysnooper/tracer.py:40:source_cache = {}
+pysnooper/tracer.py:127:class FileWriter(object):
+pysnooper/tracer.py:138:thread_global = threading.local()
+pysnooper/tracer.py:141:class Tracer:
+pysnooper/__init__.py:21:from .variables import Attrs, Exploding, Indices, Keys
+pysnooper/__init__.py:22:import collections
+pysnooper/__init__.py:24:__VersionInfo = collections.namedtuple('VersionInfo',
+pysnooper/__init__.py:25:                                       ('major', 'minor', 'micro'))
+pysnooper/__init__.py:27:__version__ = '0.0.38'
+tests/test_chinese.py:12:from python_toolbox import sys_tools, temp_file_tools
+tests/test_chinese.py:13:import pytest
+tests/test_chinese.py:15:import pysnooper
+tests/test_chinese.py:16:from pysnooper import pycompat
+tests/test_chinese.py:17:from pysnooper.variables import needs_parentheses
+tests/test_chinese.py:18:from .utils import (assert_output, assert_sample_output, VariableEntry,
+tests/test_chinese.py:19:                    CallEntry, LineEntry, ReturnEntry, OpcodeEntry,
+tests/test_chinese.py:20:                    ReturnValueEntry, ExceptionEntry)
+tests/utils.py:4:import re
+tests/utils.py:5:import abc
+tests/utils.py:6:import inspect
+tests/utils.py:8:try:
+tests/utils.py:9:    from itertools import zip_longest
+tests/utils.py:13:from python_toolbox import caching, sys_tools
+tests/utils.py:15:import pysnooper.pycompat
+tests/utils.py:30:class _BaseEntry(pysnooper.pycompat.ABC):
+tests/utils.py:53:class _BaseValueEntry(_BaseEntry):
+tests/utils.py:78:class VariableEntry(_BaseValueEntry):
+tests/utils.py:142:class ReturnValueEntry(_BaseValueEntry):
+tests/utils.py:171:class _BaseEventEntry(_BaseEntry):
+tests/utils.py:223:class CallEntry(_BaseEventEntry):
+tests/utils.py:227:class LineEntry(_BaseEventEntry):
+tests/utils.py:231:class ReturnEntry(_BaseEventEntry):
+tests/utils.py:235:class ExceptionEntry(_BaseEventEntry):
+tests/utils.py:239:class OpcodeEntry(_BaseEventEntry):
+tests/utils.py:243:class OutputFailure(Exception):
+tests/test_chinese.py:24:def test_chinese():
+tests/test_chinese.py:25:    with temp_file_tools.create_temp_folder(prefix='pysnooper') as folder:
+tests/test_chinese.py:26:        path = folder / 'foo.log'
+tests/test_chinese.py:27:        @pysnooper.snoop(path)
+tests/test_chinese.py:28:        def foo():
+tests/test_chinese.py:29:            a = 1
+tests/test_chinese.py:30:            x = '失败'
+tests/test_chinese.py:31:            return 7
+tests/test_chinese.py:32:
+tests/test_chinese.py:33:        foo()
+tests/test_chinese.py:34:        with path.open(encoding='utf-8') as file:
+tests/test_chinese.py:35:            output = file.read()
+tests/test_chinese.py:36:        assert_output(
+tests/test_chinese.py:37:            output,
+tests/test_chinese.py:38:            (
+tests/test_chinese.py:39:                CallEntry(),
+tests/test_chinese.py:40:                LineEntry(),
+tests/test_chinese.py:41:                VariableEntry('a'),
+tests/test_chinese.py:42:                LineEntry(u"x = '失败'"),
+tests/test_chinese.py:43:                VariableEntry(u'x', (u"'失败'" if pycompat.PY3 else None)),
+tests/test_chinese.py:44:                LineEntry(),
+tests/test_chinese.py:45:                ReturnEntry(),
+tests/test_chinese.py:46:                ReturnValueEntry('7')
+tests/test_chinese.py:47:            ),
+tests/test_chinese.py:48:        )
+tests/test_chinese.py:26:        path = folder / 'foo.log'
+pysnooper/tracer.py:180:    def __init__(
+pysnooper/tracer.py:102:def get_write_function(output, overwrite):
+pysnooper/tracer.py:103:    is_path = isinstance(output, (pycompat.PathLike, str))
+pysnooper/tracer.py:104:    if overwrite and not is_path:
+pysnooper/tracer.py:107:    if output is None:
+pysnooper/tracer.py:115:    elif is_path:
+pysnooper/tracer.py:115:    elif is_path:
+pysnooper/tracer.py:128:    def __init__(self, path, overwrite):
+pysnooper/tracer.py:129:        self.path = pycompat.text_type(path)
+pysnooper/tracer.py:130:        self.overwrite = overwrite
+pysnooper/tracer.py:116:        return FileWriter(output, overwrite).write
+pysnooper/tracer.py:190:        self._write = get_write_function(output, overwrite)
+pysnooper/utils.py:70:def ensure_tuple(x):
+pysnooper/utils.py:71:    if isinstance(x, string_types):
+pysnooper/utils.py:73:    return tuple(x)
+pysnooper/utils.py:70:def ensure_tuple(x):
+pysnooper/utils.py:71:    if isinstance(x, string_types):
+pysnooper/utils.py:73:    return tuple(x)
+pysnooper/tracer.py:192:        self.watch = [
+pysnooper/tracer.py:193:            v if isinstance(v, BaseVariable) else CommonVariable(v)
+pysnooper/tracer.py:194:            for v in utils.ensure_tuple(watch)
+pysnooper/tracer.py:195:         ] + [
+pysnooper/tracer.py:196:             v if isinstance(v, BaseVariable) else Exploding(v)
+pysnooper/tracer.py:197:             for v in utils.ensure_tuple(watch_explode)
+pysnooper/tracer.py:198:        ]
+pysnooper/tracer.py:199:        self.frame_to_local_reprs = {}
+pysnooper/tracer.py:200:        self.depth = depth
+pysnooper/tracer.py:201:        self.prefix = prefix
+pysnooper/tracer.py:202:        self.thread_info = thread_info
+pysnooper/tracer.py:203:        self.thread_info_padding = 0
+pysnooper/tracer.py:204:        assert self.depth >= 1
+pysnooper/tracer.py:205:        self.target_codes = set()
+pysnooper/tracer.py:206:        self.target_frames = set()
+pysnooper/tracer.py:207:        self.thread_local = threading.local()
+pysnooper/tracer.py:209:    def __call__(self, function):
+pysnooper/tracer.py:210:        self.target_codes.add(function.__code__)
+pysnooper/tracer.py:232:        if pycompat.iscoroutinefunction(function):
+pysnooper/tracer.py:235:        elif inspect.isgeneratorfunction(function):
+pysnooper/tracer.py:235:        elif inspect.isgeneratorfunction(function):
+pysnooper/tracer.py:238:            return simple_wrapper
+pysnooper/tracer.py:238:            return simple_wrapper
+tests/test_chinese.py:33:        foo()
+pysnooper/tracer.py:213:        def simple_wrapper(*args, **kwargs):
+pysnooper/tracer.py:214:            with self:
+pysnooper/tracer.py:215:                return function(*args, **kwargs)
+pysnooper/tracer.py:244:    def __enter__(self):
+pysnooper/tracer.py:245:        calling_frame = inspect.currentframe().f_back
+pysnooper/tracer.py:246:        if not self._is_internal_frame(calling_frame):
+pysnooper/tracer.py:261:    def _is_internal_frame(self, frame):
+pysnooper/tracer.py:262:        return frame.f_code.co_filename == Tracer.__enter__.__code__.co_filename
+pysnooper/tracer.py:250:        stack = self.thread_local.__dict__.setdefault('original_trace_functions', [])
+pysnooper/tracer.py:251:        stack.append(sys.gettrace())
+pysnooper/tracer.py:252:        sys.settrace(self.trace)
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:300:            thread_global.depth += 1
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:50:    except KeyError:
+pysnooper/tracer.py:52:    loader = globs.get('__loader__')
+pysnooper/tracer.py:54:    source = None
+pysnooper/tracer.py:55:    if hasattr(loader, 'get_source'):
+pysnooper/tracer.py:62:    if source is None:
+pysnooper/tracer.py:63:        ipython_filename_match = ipython_filename_pattern.match(file_name)
+pysnooper/tracer.py:64:        if ipython_filename_match:
+pysnooper/tracer.py:75:            try:
+pysnooper/tracer.py:75:            try:
+pysnooper/tracer.py:76:                with open(file_name, 'rb') as fp:
+pysnooper/tracer.py:77:                    source = fp.read().splitlines()
+pysnooper/tracer.py:77:                    source = fp.read().splitlines()
+pysnooper/tracer.py:80:    if source is None:
+pysnooper/tracer.py:86:    if isinstance(source[0], bytes):
+pysnooper/tracer.py:87:        encoding = 'ascii'
+pysnooper/tracer.py:88:        for line in source[:2]:
+pysnooper/tracer.py:88:        for line in source[:2]:
+pysnooper/tracer.py:91:            match = re.search(br'coding[:=]\s*([-\w.]+)', line)
+pysnooper/tracer.py:92:            if match:
+pysnooper/tracer.py:88:        for line in source[:2]:
+pysnooper/tracer.py:91:            match = re.search(br'coding[:=]\s*([-\w.]+)', line)
+pysnooper/tracer.py:92:            if match:
+pysnooper/tracer.py:95:        source = [pycompat.text_type(sline, encoding, 'replace') for sline in
+pysnooper/tracer.py:96:                  source]
+pysnooper/tracer.py:98:    source_cache[cache_key] = source
+pysnooper/tracer.py:99:    return source
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:341:            for candidate_line_no in itertools.count(line_no):
+pysnooper/tracer.py:341:            for candidate_line_no in itertools.count(line_no):
+pysnooper/tracer.py:342:                try:
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:343:                    candidate_source_line = \
+pysnooper/tracer.py:344:                            get_source_from_frame(frame)[candidate_line_no - 1]
+pysnooper/tracer.py:350:                if candidate_source_line.lstrip().startswith('def'):
+pysnooper/tracer.py:341:            for candidate_line_no in itertools.count(line_no):
+pysnooper/tracer.py:342:                try:
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:343:                    candidate_source_line = \
+pysnooper/tracer.py:344:                            get_source_from_frame(frame)[candidate_line_no - 1]
+pysnooper/tracer.py:350:                if candidate_source_line.lstrip().startswith('def'):
+pysnooper/tracer.py:352:                    line_no = candidate_line_no
+pysnooper/tracer.py:353:                    source_line = candidate_source_line
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+tests/test_chinese.py:28:        def foo():
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:317:                self.write('{indent}{newish_string}{name} = {value_repr}'.format(
+pysnooper/tracer.py:318:                                                                       **locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+tests/test_chinese.py:29:            a = 1
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:317:                self.write('{indent}{newish_string}{name} = {value_repr}'.format(
+pysnooper/tracer.py:318:                                                                       **locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+tests/test_chinese.py:30:            x = '失败'
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:317:                self.write('{indent}{newish_string}{name} = {value_repr}'.format(
+pysnooper/tracer.py:318:                                                                       **locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+tests/test_chinese.py:31:            return 7
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:298:        thread_global.__dict__.setdefault('depth', -1)
+pysnooper/tracer.py:299:        if event == 'call':
+pysnooper/tracer.py:301:        indent = ' ' * 4 * thread_global.depth
+pysnooper/tracer.py:308:        old_local_reprs = self.frame_to_local_reprs.get(frame, {})
+pysnooper/tracer.py:22:def get_local_reprs(frame, watch=()):
+pysnooper/tracer.py:23:    code = frame.f_code
+pysnooper/tracer.py:24:    vars_order = code.co_varnames + code.co_cellvars + code.co_freevars + tuple(frame.f_locals.keys())
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/tracer.py:26:    result_items = [(key, utils.get_shortish_repr(value)) for key, value in frame.f_locals.items()]
+pysnooper/tracer.py:27:    result_items.sort(key=lambda key_value: vars_order.index(key_value[0]))
+pysnooper/tracer.py:28:    result = collections.OrderedDict(result_items)
+pysnooper/tracer.py:32:    return result
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:309:        self.frame_to_local_reprs[frame] = local_reprs = \
+pysnooper/tracer.py:310:                                       get_local_reprs(frame, watch=self.watch)
+pysnooper/tracer.py:312:        newish_string = ('Starting var:.. ' if event == 'call' else
+pysnooper/tracer.py:313:                                                            'New var:....... ')
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:315:        for name, value_repr in local_reprs.items():
+pysnooper/tracer.py:316:            if name not in old_local_reprs:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:319:            elif old_local_reprs[name] != value_repr:
+pysnooper/tracer.py:326:        now_string = datetime_module.datetime.now().time().isoformat()
+pysnooper/tracer.py:327:        line_no = frame.f_lineno
+pysnooper/tracer.py:43:def get_source_from_frame(frame):
+pysnooper/tracer.py:44:    globs = frame.f_globals or {}
+pysnooper/tracer.py:45:    module_name = globs.get('__name__')
+pysnooper/tracer.py:46:    file_name = frame.f_code.co_filename
+pysnooper/tracer.py:47:    cache_key = (module_name, file_name)
+pysnooper/tracer.py:48:    try:
+pysnooper/tracer.py:49:        return source_cache[cache_key]
+pysnooper/tracer.py:328:        source_line = get_source_from_frame(frame)[line_no - 1]
+pysnooper/tracer.py:329:        thread_info = ""
+pysnooper/tracer.py:330:        if self.thread_info:
+pysnooper/tracer.py:264:    def set_thread_info_padding(self, thread_info):
+pysnooper/tracer.py:265:        current_thread_len = len(thread_info)
+pysnooper/tracer.py:266:        self.thread_info_padding = max(self.thread_info_padding,
+pysnooper/tracer.py:267:                                       current_thread_len)
+pysnooper/tracer.py:268:        return thread_info.ljust(self.thread_info_padding)
+pysnooper/tracer.py:334:        thread_info = self.set_thread_info_padding(thread_info)
+pysnooper/tracer.py:338:        if event == 'call' and source_line.lstrip().startswith('@'):
+pysnooper/tracer.py:361:        code_byte = frame.f_code.co_code[frame.f_lasti]
+pysnooper/tracer.py:362:        if not isinstance(code_byte, int):
+pysnooper/tracer.py:364:        ended_by_exception = (
+pysnooper/tracer.py:365:                event == 'return'
+pysnooper/tracer.py:366:                and arg is None
+pysnooper/tracer.py:367:                and (opcode.opname[code_byte]
+pysnooper/tracer.py:368:                     not in ('RETURN_VALUE', 'YIELD_VALUE'))
+pysnooper/tracer.py:369:        )
+pysnooper/tracer.py:371:        if ended_by_exception:
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:375:            self.write(u'{indent}{now_string} {thread_info}{event:9} '
+pysnooper/tracer.py:376:                       u'{line_no:4} {source_line}'.format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:378:        if event == 'return':
+pysnooper/tracer.py:380:            thread_global.depth -= 1
+pysnooper/tracer.py:382:            if not ended_by_exception:
+pysnooper/utils.py:52:def get_shortish_repr(item):
+pysnooper/utils.py:53:    try:
+pysnooper/utils.py:54:        r = repr(item)
+pysnooper/utils.py:57:    r = r.replace('\r', '').replace('\n', '')
+pysnooper/utils.py:62:def truncate(string, max_length):
+pysnooper/utils.py:63:    if len(string) > max_length:
+pysnooper/utils.py:67:    return string
+pysnooper/utils.py:58:    r = truncate(r, MAX_VARIABLE_LENGTH)
+pysnooper/utils.py:59:    return r
+pysnooper/tracer.py:383:                return_value_repr = utils.get_shortish_repr(arg)
+pysnooper/tracer.py:384:                self.write('{indent}Return value:.. {return_value_repr}'.
+pysnooper/tracer.py:385:                           format(**locals()))
+pysnooper/tracer.py:240:    def write(self, s):
+pysnooper/tracer.py:241:        s = u'{self.prefix}{s}\n'.format(**locals())
+pysnooper/tracer.py:242:        self._write(s)
+pysnooper/tracer.py:132:    def write(self, s):
+pysnooper/tracer.py:133:        with open(self.path, 'w' if self.overwrite else 'a') as output_file:
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:134:            output_file.write(s)
+pysnooper/tracer.py:135:        self.overwrite = False
+pysnooper/tracer.py:387:        if event == 'exception':
+pysnooper/tracer.py:393:        return self.trace
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:215:                return function(*args, **kwargs)
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:254:    def __exit__(self, exc_type, exc_value, exc_traceback):
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:255:        stack = self.thread_local.original_trace_functions
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:271:    def trace(self, frame, event, arg):
+pysnooper/tracer.py:279:        if not (frame.f_code in self.target_codes or frame in self.target_frames):
+pysnooper/tracer.py:280:            if self.depth == 1:
+pysnooper/tracer.py:284:                return None
+pysnooper/tracer.py:256:        sys.settrace(stack.pop())
+pysnooper/tracer.py:257:        calling_frame = inspect.currentframe().f_back
+pysnooper/tracer.py:258:        self.target_frames.discard(calling_frame)
+pysnooper/tracer.py:259:        self.frame_to_local_reprs.pop(calling_frame, None)
+tests/test_chinese.py:34:        with path.open(encoding='utf-8') as file:
+tests/test_chinese.py:35:            output = file.read()
+tests/test_chinese.py:35:            output = file.read()
+tests/test_chinese.py:36:        assert_output(
+tests/test_chinese.py:37:            output,
+tests/test_chinese.py:38:            (
+tests/test_chinese.py:39:                CallEntry(),
+tests/test_chinese.py:40:                LineEntry(),
+tests/test_chinese.py:41:                VariableEntry('a'),
+tests/test_chinese.py:42:                LineEntry(u"x = '失败'"),
+tests/test_chinese.py:43:                VariableEntry(u'x', (u"'失败'" if pycompat.PY3 else None)),
+tests/test_chinese.py:44:                LineEntry(),
+tests/test_chinese.py:45:                ReturnEntry(),
+tests/test_chinese.py:46:                ReturnValueEntry('7')
+tests/test_chinese.py:47:            ),
+tests/test_chinese.py:48:        )
+tests/utils.py:172:    def __init__(self, source=None, source_regex=None, thread_info=None,
+tests/utils.py:174:        _BaseEntry.__init__(self, prefix=prefix)
+tests/utils.py:31:    def __init__(self, prefix=''):
+tests/utils.py:32:        self.prefix = prefix
+tests/utils.py:175:        if type(self) is _BaseEventEntry:
+tests/utils.py:177:        if source is not None:
+tests/utils.py:179:        self.line_pattern = re.compile(
+tests/utils.py:180:            r"""^%s(?P<indent>(?: {4})*)[0-9:.]{15} """
+tests/utils.py:181:            r"""(?P<thread_info>[0-9]+-[0-9A-Za-z_-]+[ ]+)?"""
+tests/utils.py:182:            r"""(?P<event_name>[a-z_]*) +(?P<line_number>[0-9]*) """
+tests/utils.py:183:            r"""+(?P<source>.*)$""" % (re.escape(self.prefix,))
+tests/utils.py:184:        )
+tests/utils.py:186:        self.source = source
+tests/utils.py:187:        self.source_regex = (None if source_regex is None else
+tests/utils.py:188:                             re.compile(source_regex))
+tests/utils.py:189:        self.thread_info = thread_info
+tests/utils.py:190:        self.thread_info_regex = (None if thread_info_regex is None else
+tests/utils.py:191:                             re.compile(thread_info_regex))
+tests/utils.py:172:    def __init__(self, source=None, source_regex=None, thread_info=None,
+tests/utils.py:174:        _BaseEntry.__init__(self, prefix=prefix)
+tests/utils.py:31:    def __init__(self, prefix=''):
+tests/utils.py:32:        self.prefix = prefix
+tests/utils.py:175:        if type(self) is _BaseEventEntry:
+tests/utils.py:177:        if source is not None:
+tests/utils.py:179:        self.line_pattern = re.compile(
+tests/utils.py:180:            r"""^%s(?P<indent>(?: {4})*)[0-9:.]{15} """
+tests/utils.py:181:            r"""(?P<thread_info>[0-9]+-[0-9A-Za-z_-]+[ ]+)?"""
+tests/utils.py:182:            r"""(?P<event_name>[a-z_]*) +(?P<line_number>[0-9]*) """
+tests/utils.py:183:            r"""+(?P<source>.*)$""" % (re.escape(self.prefix,))
+tests/utils.py:184:        )
+tests/utils.py:186:        self.source = source
+tests/utils.py:187:        self.source_regex = (None if source_regex is None else
+tests/utils.py:188:                             re.compile(source_regex))
+tests/utils.py:189:        self.thread_info = thread_info
+tests/utils.py:190:        self.thread_info_regex = (None if thread_info_regex is None else
+tests/utils.py:191:                             re.compile(thread_info_regex))
+tests/utils.py:79:    def __init__(self, name=None, value=None, stage=None, prefix='',
+tests/utils.py:81:        _BaseValueEntry.__init__(self, prefix=prefix)
+tests/utils.py:54:    def __init__(self, prefix=''):
+tests/utils.py:55:        _BaseEntry.__init__(self, prefix=prefix)
+tests/utils.py:31:    def __init__(self, prefix=''):
+tests/utils.py:32:        self.prefix = prefix
+tests/utils.py:56:        self.line_pattern = re.compile(
+tests/utils.py:57:            r"""^%s(?P<indent>(?: {4})*)(?P<preamble>[^:]*):"""
+tests/utils.py:58:            r"""\.{2,7} (?P<content>.*)$""" % (re.escape(self.prefix),)
+tests/utils.py:59:        )
+tests/utils.py:82:        if name is not None:
+tests/utils.py:83:            assert name_regex is None
+tests/utils.py:84:        if value is not None:
+tests/utils.py:86:        assert stage in (None, 'starting', 'new', 'modified')
+tests/utils.py:88:        self.name = name
+tests/utils.py:89:        self.value = value
+tests/utils.py:90:        self.stage = stage
+tests/utils.py:91:        self.name_regex = (None if name_regex is None else
+tests/utils.py:92:                           re.compile(name_regex))
+tests/utils.py:93:        self.value_regex = (None if value_regex is None else
+tests/utils.py:94:                            re.compile(value_regex))
+tests/utils.py:172:    def __init__(self, source=None, source_regex=None, thread_info=None,
+tests/utils.py:174:        _BaseEntry.__init__(self, prefix=prefix)
+tests/utils.py:31:    def __init__(self, prefix=''):
+tests/utils.py:32:        self.prefix = prefix
+tests/utils.py:175:        if type(self) is _BaseEventEntry:
+tests/utils.py:177:        if source is not None:
+tests/utils.py:178:            assert source_regex is None
+tests/utils.py:179:        self.line_pattern = re.compile(
+tests/utils.py:180:            r"""^%s(?P<indent>(?: {4})*)[0-9:.]{15} """
+tests/utils.py:181:            r"""(?P<thread_info>[0-9]+-[0-9A-Za-z_-]+[ ]+)?"""
+tests/utils.py:182:            r"""(?P<event_name>[a-z_]*) +(?P<line_number>[0-9]*) """
+tests/utils.py:183:            r"""+(?P<source>.*)$""" % (re.escape(self.prefix,))
+tests/utils.py:184:        )
+tests/utils.py:186:        self.source = source
+tests/utils.py:187:        self.source_regex = (None if source_regex is None else
+tests/utils.py:188:                             re.compile(source_regex))
+tests/utils.py:189:        self.thread_info = thread_info
+tests/utils.py:190:        self.thread_info_regex = (None if thread_info_regex is None else
+tests/utils.py:191:                             re.compile(thread_info_regex))
+tests/utils.py:79:    def __init__(self, name=None, value=None, stage=None, prefix='',
+tests/utils.py:81:        _BaseValueEntry.__init__(self, prefix=prefix)
+tests/utils.py:54:    def __init__(self, prefix=''):
+tests/utils.py:55:        _BaseEntry.__init__(self, prefix=prefix)
+tests/utils.py:31:    def __init__(self, prefix=''):
+tests/utils.py:32:        self.prefix = prefix
+tests/utils.py:56:        self.line_pattern = re.compile(
+tests/utils.py:57:            r"""^%s(?P<indent>(?: {4})*)(?P<preamble>[^:]*):"""
+tests/utils.py:58:            r"""\.{2,7} (?P<content>.*)$""" % (re.escape(self.prefix),)
+tests/utils.py:59:        )
+tests/utils.py:82:        if name is not None:
+tests/utils.py:83:            assert name_regex is None
+tests/utils.py:84:        if value is not None:
+tests/utils.py:85:            assert value_regex is None
+tests/utils.py:86:        assert stage in (None, 'starting', 'new', 'modified')
