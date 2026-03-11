@@ -1,0 +1,3202 @@
+tqdm/tests/tests_tqdm.py:6:import sys
+tqdm/tests/tests_tqdm.py:7:import csv
+tqdm/tests/tests_tqdm.py:8:import re
+tqdm/tests/tests_tqdm.py:9:import os
+tqdm/tests/tests_tqdm.py:10:from nose import with_setup
+tqdm/tests/tests_tqdm.py:11:from nose.plugins.skip import SkipTest
+tqdm/tests/tests_tqdm.py:12:from nose.tools import assert_raises
+tqdm/tests/tests_tqdm.py:13:from contextlib import contextmanager
+tqdm/tests/tests_tqdm.py:15:from tqdm import tqdm
+tqdm/__init__.py:1:from ._tqdm import tqdm
+tqdm/_tqdm.py:14:from ._utils import _supports_unicode, _environ_cols_wrapper, _range, _unich, \
+tqdm/_tqdm.py:15:    _term_move_up, _unicode, WeakSet, _basestring, _OrderedDict, \
+tqdm/_tqdm.py:16:    Comparable
+tqdm/_utils.py:1:import os
+tqdm/_utils.py:2:import subprocess
+tqdm/_utils.py:3:from platform import system as _curos
+tqdm/_utils.py:4:CUR_OS = _curos()
+tqdm/_utils.py:5:IS_WIN = CUR_OS in ['Windows', 'cli']
+tqdm/_utils.py:12:if True:  # pragma: no cover
+tqdm/_utils.py:13:    try:
+tqdm/_utils.py:15:    except NameError:
+tqdm/_utils.py:16:        _range = range
+tqdm/_utils.py:18:    try:
+tqdm/_utils.py:20:    except NameError:
+tqdm/_utils.py:21:        _unich = chr
+tqdm/_utils.py:23:    try:
+tqdm/_utils.py:25:    except NameError:
+tqdm/_utils.py:26:        _unicode = str
+tqdm/_utils.py:28:    try:
+tqdm/_utils.py:29:        if IS_WIN:
+tqdm/_utils.py:37:    try:
+tqdm/_utils.py:38:        from weakref import WeakSet
+tqdm/_utils.py:42:    try:
+tqdm/_utils.py:44:    except NameError:
+tqdm/_utils.py:45:        _basestring = str
+tqdm/_utils.py:47:    try:  # py>=2.7,>=3.1
+tqdm/_utils.py:48:        from collections import OrderedDict as _OrderedDict
+tqdm/_utils.py:121:class Comparable(object):
+tqdm/_tqdm.py:17:from ._monitor import TMonitor
+tqdm/_monitor.py:1:from threading import Event, Thread
+tqdm/_monitor.py:2:from time import time
+tqdm/_monitor.py:3:from warnings import warn
+tqdm/_monitor.py:7:class TqdmSynchronisationWarning(RuntimeWarning):
+tqdm/_monitor.py:13:class TMonitor(Thread):
+tqdm/_monitor.py:28:    _time = None
+tqdm/_monitor.py:29:    _event = None
+tqdm/_tqdm.py:19:import sys
+tqdm/_tqdm.py:20:from numbers import Number
+tqdm/_tqdm.py:21:from time import time
+tqdm/_tqdm.py:22:from contextlib import contextmanager
+tqdm/_tqdm.py:24:import multiprocessing as mp
+tqdm/_tqdm.py:25:import threading as th
+tqdm/_tqdm.py:26:from warnings import warn
+tqdm/_tqdm.py:36:class TqdmTypeError(TypeError):
+tqdm/_tqdm.py:40:class TqdmKeyError(KeyError):
+tqdm/_tqdm.py:44:class TqdmWarning(Warning):
+tqdm/_tqdm.py:57:class TqdmExperimentalWarning(TqdmWarning, FutureWarning):
+tqdm/_tqdm.py:62:class TqdmDeprecationWarning(TqdmWarning, DeprecationWarning):
+tqdm/_tqdm.py:67:class TqdmMonitorWarning(TqdmWarning, RuntimeWarning):
+tqdm/_tqdm.py:74:try:
+tqdm/_tqdm.py:75:    mp_lock = mp.RLock()  # multiprocessing lock
+tqdm/_tqdm.py:80:try:
+tqdm/_tqdm.py:81:    th_lock = th.RLock()  # thread lock
+tqdm/_tqdm.py:86:class TqdmDefaultWriteLock(object):
+tqdm/_tqdm.py:112:class tqdm(Comparable):
+tqdm/_tqdm.py:119:    monitor_interval = 10  # set to 0 to disable the thread
+tqdm/_tqdm.py:120:    monitor = None
+tqdm/_tqdm.py:93:    def __init__(self):
+tqdm/_tqdm.py:95:        self.locks = [lk for lk in [mp_lock, th_lock] if lk is not None]
+tqdm/_tqdm.py:121:    _lock = TqdmDefaultWriteLock()
+tqdm/__init__.py:2:from ._tqdm import trange
+tqdm/__init__.py:3:from ._tqdm_gui import tqdm_gui
+tqdm/_tqdm_gui.py:15:from time import time
+tqdm/_tqdm_gui.py:16:from ._utils import _range
+tqdm/_tqdm_gui.py:18:from ._tqdm import tqdm, TqdmExperimentalWarning
+tqdm/_tqdm_gui.py:19:from warnings import warn
+tqdm/_tqdm_gui.py:26:class tqdm_gui(tqdm):  # pragma: no cover
+tqdm/__init__.py:4:from ._tqdm_gui import tgrange
+tqdm/__init__.py:5:from ._tqdm_pandas import tqdm_pandas
+tqdm/_tqdm_pandas.py:1:import sys
+tqdm/__init__.py:6:from ._main import main
+tqdm/_main.py:1:from ._tqdm import tqdm, TqdmTypeError, TqdmKeyError
+tqdm/_main.py:2:from ._version import __version__  # NOQA
+tqdm/_version.py:2:import os
+tqdm/_version.py:3:from io import open as io_open
+tqdm/_version.py:8:version_info = 4, 23, 4
+tqdm/_version.py:11:__version__ = '.'.join(map(str, version_info))
+tqdm/_version.py:15:scriptdir = os.path.dirname(__file__)
+tqdm/_version.py:16:gitdir = os.path.abspath(os.path.join(scriptdir, "..", ".git"))
+tqdm/_version.py:17:if os.path.isdir(gitdir):  # pragma: nocover
+tqdm/_version.py:18:    extra = None
+tqdm/_version.py:20:    with io_open(os.path.join(gitdir, "config"), 'r') as fh_config:
+tqdm/_version.py:21:        if 'tqdm' in fh_config.read():
+tqdm/_version.py:22:            # Open the HEAD file
+tqdm/_version.py:23:            with io_open(os.path.join(gitdir, "HEAD"), 'r') as fh_head:
+tqdm/_version.py:24:                extra = fh_head.readline().strip()
+tqdm/_version.py:25:            # in a branch => HEAD points to file containing last commit
+tqdm/_version.py:26:            if 'ref:' in extra:
+tqdm/_version.py:27:                # reference file path
+tqdm/_version.py:28:                ref_file = extra[5:]
+tqdm/_version.py:29:                branch_name = ref_file.rsplit('/', 1)[-1]
+tqdm/_version.py:30:
+tqdm/_version.py:31:                ref_file_path = os.path.abspath(os.path.join(gitdir, ref_file))
+tqdm/_version.py:32:                # check that we are in git folder
+tqdm/_version.py:33:                # (by stripping the git folder from the ref file path)
+tqdm/_version.py:34:                if os.path.relpath(
+tqdm/_version.py:35:                        ref_file_path, gitdir).replace('\\', '/') != ref_file:
+tqdm/_version.py:36:                    # out of git folder
+tqdm/_version.py:37:                    extra = None
+tqdm/_version.py:38:                else:
+tqdm/_version.py:39:                    # open the ref file
+tqdm/_version.py:40:                    with io_open(ref_file_path, 'r') as fh_branch:
+tqdm/_version.py:41:                        commit_hash = fh_branch.readline().strip()
+tqdm/_version.py:42:                        extra = commit_hash[:8]
+tqdm/_version.py:43:                        if branch_name != "master":
+tqdm/_version.py:44:                            extra += '.' + branch_name
+tqdm/_version.py:45:
+tqdm/_version.py:46:            # detached HEAD mode, already have commit hash
+tqdm/_version.py:47:            else:
+tqdm/_version.py:48:                extra = extra[:8]
+tqdm/_version.py:21:        if 'tqdm' in fh_config.read():
+tqdm/_version.py:23:            with io_open(os.path.join(gitdir, "HEAD"), 'r') as fh_head:
+tqdm/_version.py:24:                extra = fh_head.readline().strip()
+tqdm/_version.py:24:                extra = fh_head.readline().strip()
+tqdm/_version.py:26:            if 'ref:' in extra:
+tqdm/_version.py:28:                ref_file = extra[5:]
+tqdm/_version.py:29:                branch_name = ref_file.rsplit('/', 1)[-1]
+tqdm/_version.py:31:                ref_file_path = os.path.abspath(os.path.join(gitdir, ref_file))
+tqdm/_version.py:34:                if os.path.relpath(
+tqdm/_version.py:40:                    with io_open(ref_file_path, 'r') as fh_branch:
+tqdm/_version.py:40:                    with io_open(ref_file_path, 'r') as fh_branch:
+tqdm/_version.py:41:                        commit_hash = fh_branch.readline().strip()
+tqdm/_version.py:42:                        extra = commit_hash[:8]
+tqdm/_version.py:43:                        if branch_name != "master":
+tqdm/_version.py:44:                            extra += '.' + branch_name
+tqdm/_version.py:41:                        commit_hash = fh_branch.readline().strip()
+tqdm/_version.py:42:                        extra = commit_hash[:8]
+tqdm/_version.py:43:                        if branch_name != "master":
+tqdm/_version.py:51:    if extra is not None:
+tqdm/_version.py:52:        try:
+tqdm/_version.py:53:            with io_open(os.path.join(gitdir, "refs", "tags",
+tqdm/_version.py:54:                                      'v' + __version__)) as fdv:
+tqdm/_version.py:55:                if fdv.readline().strip()[:8] != extra[:8]:
+tqdm/_version.py:56:                    __version__ += '-' + extra
+tqdm/_version.py:57:        except Exception as e:
+tqdm/_version.py:58:            if "No such file" not in str(e):
+tqdm/_main.py:3:import sys
+tqdm/_main.py:4:import re
+tqdm/_main.py:5:import logging
+tqdm/__init__.py:7:from ._monitor import TMonitor, TqdmSynchronisationWarning
+tqdm/__init__.py:8:from ._version import __version__  # NOQA
+tqdm/__init__.py:9:from ._tqdm import TqdmTypeError, TqdmKeyError, TqdmWarning, \
+tqdm/__init__.py:10:    TqdmDeprecationWarning, TqdmExperimentalWarning, \
+tqdm/__init__.py:11:    TqdmMonitorWarning
+tqdm/tests/tests_tqdm.py:16:from tqdm import trange
+tqdm/tests/tests_tqdm.py:17:from tqdm import TqdmDeprecationWarning
+tqdm/tests/tests_tqdm.py:19:try:
+tqdm/tests/tests_tqdm.py:20:    from StringIO import StringIO
+tqdm/tests/tests_tqdm.py:21:except ImportError:
+tqdm/tests/tests_tqdm.py:22:    from io import StringIO
+tqdm/tests/tests_tqdm.py:24:from io import IOBase  # to support unicode strings
+tqdm/tests/tests_tqdm.py:27:class DeprecationError(Exception):
+tqdm/tests/tests_tqdm.py:32:if getattr(StringIO, '__exit__', False) and \
+tqdm/tests/tests_tqdm.py:39:try:
+tqdm/tests/tests_tqdm.py:41:except NameError:
+tqdm/tests/tests_tqdm.py:42:    _range = range
+tqdm/tests/tests_tqdm.py:44:try:
+tqdm/tests/tests_tqdm.py:46:except NameError:
+tqdm/tests/tests_tqdm.py:47:    _unicode = str
+tqdm/tests/tests_tqdm.py:50:if os.name == 'nt':
+tqdm/tests/tests_tqdm.py:58:CTRLCHR = [r'\r', r'\n', r'\x1b\[A']  # Need to escape [ for regex
+tqdm/tests/tests_tqdm.py:67:class DiscreteTimer(object):
+tqdm/tests/tests_tqdm.py:113:class UnicodeIO(IOBase):
+tqdm/tests/tests_tqdm.py:1485:class DummyTqdmFile(object):
+tqdm/tests/tests_tqdm.py:1487:    file = None
+tqdm/tests/tests_tqdm.py:92:def pretest():
+tqdm/tests/tests_tqdm.py:94:    getattr(sys, 'setswitchinterval', getattr(sys, 'setcheckinterval'))(100)
+tqdm/tests/tests_tqdm.py:96:    if getattr(tqdm, "_instances", False):
+tqdm/tests/tests_tqdm.py:1564:def test_bool():
+tqdm/tests/tests_tqdm.py:1589:    with closing(StringIO()) as our_file:
+tqdm/tests/tests_tqdm.py:1590:        internal(our_file, False)
+tqdm/tests/tests_tqdm.py:1591:        internal(our_file, True)
+tqdm/tests/tests_tqdm.py:34:    def closing(arg):
+tqdm/tests/tests_tqdm.py:35:        return arg
+tqdm/tests/tests_tqdm.py:1590:        internal(our_file, False)
+tqdm/tests/tests_tqdm.py:1566:    def internal(our_file, disable):
+tqdm/tests/tests_tqdm.py:1567:        with tqdm(total=10, file=our_file, disable=disable) as t:
+tqdm/tests/tests_tqdm.py:1568:            assert t
+tqdm/_tqdm.py:401:    def __new__(cls, *args, **kwargs):
+tqdm/_tqdm.py:403:        instance = object.__new__(cls)
+tqdm/_tqdm.py:405:        if "_instances" not in cls.__dict__:
+tqdm/_tqdm.py:406:            cls._instances = WeakSet()
+tqdm/_tqdm.py:407:        if "_lock" not in cls.__dict__:
+tqdm/_tqdm.py:409:        with cls._lock:
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:412:        if cls.monitor_interval and (cls.monitor is None or not
+tqdm/_tqdm.py:414:            try:
+tqdm/_monitor.py:31:    def __init__(self, tqdm_cls, sleep_interval):
+tqdm/_monitor.py:32:        Thread.__init__(self)
+tqdm/_monitor.py:33:        self.daemon = True  # kill thread when main killed (KeyboardInterrupt)
+tqdm/_monitor.py:34:        self.was_killed = Event()
+tqdm/_monitor.py:35:        self.woken = 0  # last time woken up, to sync with monitor
+tqdm/_monitor.py:36:        self.tqdm_cls = tqdm_cls
+tqdm/_monitor.py:37:        self.sleep_interval = sleep_interval
+tqdm/_monitor.py:38:        if TMonitor._time is not None:
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:42:        if TMonitor._event is not None:
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:46:        self.start()
+tqdm/_monitor.py:59:    def run(self):
+tqdm/_monitor.py:60:        cur_t = self._time()
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_tqdm.py:415:                cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/_tqdm.py:422:        return instance
+tqdm/_tqdm.py:641:    def __init__(self, iterable=None, desc=None, total=None, leave=True,
+tqdm/_tqdm.py:745:        if file is None:
+tqdm/_tqdm.py:748:        if disable is None and hasattr(file, "isatty") and not file.isatty():
+tqdm/_tqdm.py:751:        if disable:
+tqdm/_tqdm.py:759:        if kwargs:
+tqdm/_tqdm.py:769:        if total is None and iterable is not None:
+tqdm/_tqdm.py:775:        if ((ncols is None) and (file in (sys.stderr, sys.stdout))) or \
+tqdm/_tqdm.py:790:        if miniters is None:
+tqdm/_tqdm.py:791:            miniters = 0
+tqdm/_tqdm.py:792:            dynamic_miniters = True
+tqdm/_tqdm.py:796:        if mininterval is None:
+tqdm/_tqdm.py:799:        if maxinterval is None:
+tqdm/_tqdm.py:802:        if ascii is None:
+tqdm/_utils.py:156:def _supports_unicode(fp):
+tqdm/_utils.py:157:    try:
+tqdm/_utils.py:142:def _is_utf(encoding):
+tqdm/_utils.py:143:    try:
+tqdm/_utils.py:144:        u'\u2588\u2589'.encode(encoding)
+tqdm/_utils.py:147:    except Exception:  # pragma: no cover
+tqdm/_utils.py:148:        try:
+tqdm/_utils.py:150:        except:
+tqdm/_utils.py:151:            return False
+tqdm/_utils.py:158:        return _is_utf(fp.encoding)
+tqdm/_tqdm.py:803:            ascii = not _supports_unicode(file)
+tqdm/_tqdm.py:805:        if bar_format and not ascii:
+tqdm/_tqdm.py:809:        if smoothing is None:
+tqdm/_tqdm.py:813:        self.iterable = iterable
+tqdm/_tqdm.py:814:        self.desc = desc or ''
+tqdm/_tqdm.py:815:        self.total = total
+tqdm/_tqdm.py:816:        self.leave = leave
+tqdm/_tqdm.py:817:        self.fp = file
+tqdm/_tqdm.py:818:        self.ncols = ncols
+tqdm/_tqdm.py:819:        self.mininterval = mininterval
+tqdm/_tqdm.py:820:        self.maxinterval = maxinterval
+tqdm/_tqdm.py:821:        self.miniters = miniters
+tqdm/_tqdm.py:822:        self.dynamic_miniters = dynamic_miniters
+tqdm/_tqdm.py:823:        self.ascii = ascii
+tqdm/_tqdm.py:824:        self.disable = disable
+tqdm/_tqdm.py:825:        self.unit = unit
+tqdm/_tqdm.py:826:        self.unit_scale = unit_scale
+tqdm/_tqdm.py:827:        self.unit_divisor = unit_divisor
+tqdm/_tqdm.py:828:        self.gui = gui
+tqdm/_tqdm.py:829:        self.dynamic_ncols = dynamic_ncols
+tqdm/_tqdm.py:830:        self.smoothing = smoothing
+tqdm/_tqdm.py:831:        self.avg_time = None
+tqdm/_tqdm.py:832:        self._time = time
+tqdm/_tqdm.py:833:        self.bar_format = bar_format
+tqdm/_tqdm.py:834:        self.postfix = None
+tqdm/_tqdm.py:835:        if postfix:
+tqdm/_tqdm.py:842:        self.last_print_n = initial
+tqdm/_tqdm.py:843:        self.n = initial
+tqdm/_tqdm.py:847:        with self._lock:
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:850:            else:  # mark fixed positions as negative
+tqdm/_tqdm.py:851:                self.pos = -position
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:425:    def _get_free_pos(cls, instance=None):
+tqdm/_tqdm.py:427:        positions = set(abs(inst.pos) for inst in cls._instances
+tqdm/_tqdm.py:428:                        if inst is not instance and hasattr(inst, "pos"))
+tqdm/_tqdm.py:429:        return min(set(range(len(positions) + 1)).difference(positions))
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:853:        if not gui:
+tqdm/_tqdm.py:175:    def status_printer(file):
+tqdm/_tqdm.py:181:        fp = file
+tqdm/_tqdm.py:182:        fp_flush = getattr(fp, 'flush', lambda: None)  # pragma: no cover
+tqdm/_tqdm.py:188:        last_len = [0]
+tqdm/_tqdm.py:195:        return print_status
+tqdm/_tqdm.py:855:            self.sp = self.status_printer(self.fp)
+tqdm/_tqdm.py:856:            with self._lock:
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:858:                    self.moveto(abs(self.pos))
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:861:                    self.moveto(-abs(self.pos))
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:884:    def __repr__(self, elapsed=None):
+tqdm/_tqdm.py:198:    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+tqdm/_tqdm.py:262:        if total and n > total:
+tqdm/_tqdm.py:266:        if unit_scale and unit_scale not in (True, 1):
+tqdm/_tqdm.py:271:        format_interval = tqdm.format_interval
+tqdm/_tqdm.py:154:    def format_interval(t):
+tqdm/_tqdm.py:167:        mins, s = divmod(int(t), 60)
+tqdm/_tqdm.py:168:        h, m = divmod(mins, 60)
+tqdm/_tqdm.py:169:        if h:
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:272:        elapsed_str = format_interval(elapsed)
+tqdm/_tqdm.py:276:        if rate is None and elapsed:
+tqdm/_tqdm.py:278:        inv_rate = 1 / rate if rate else None
+tqdm/_tqdm.py:279:        format_sizeof = tqdm.format_sizeof
+tqdm/_tqdm.py:280:        rate_noinv_fmt = ((format_sizeof(rate) if unit_scale else
+tqdm/_tqdm.py:281:                           '{0:5.2f}'.format(rate))
+tqdm/_tqdm.py:282:                          if rate else '?') + unit + '/s'
+tqdm/_tqdm.py:283:        rate_inv_fmt = ((format_sizeof(inv_rate) if unit_scale else
+tqdm/_tqdm.py:284:                         '{0:5.2f}'.format(inv_rate))
+tqdm/_tqdm.py:285:                        if inv_rate else '?') + 's/' + unit
+tqdm/_tqdm.py:286:        rate_fmt = rate_inv_fmt if inv_rate and inv_rate > 1 else rate_noinv_fmt
+tqdm/_tqdm.py:288:        if unit_scale:
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:294:            total_fmt = str(total)
+tqdm/_tqdm.py:296:        try:
+tqdm/_tqdm.py:297:            postfix = ', ' + postfix if postfix else ''
+tqdm/_tqdm.py:302:        if total:
+tqdm/_tqdm.py:304:            frac = n / total
+tqdm/_tqdm.py:305:            percentage = frac * 100
+tqdm/_tqdm.py:307:            remaining_str = format_interval((total - n) / rate) \
+tqdm/_tqdm.py:308:                if rate else '?'
+tqdm/_tqdm.py:311:            if prefix:
+tqdm/_tqdm.py:316:                l_bar = ''
+tqdm/_tqdm.py:316:                l_bar = ''
+tqdm/_tqdm.py:317:            l_bar += '{0:3.0f}%|'.format(percentage)
+tqdm/_tqdm.py:318:            r_bar = '| {0}/{1} [{2}<{3}, {4}{5}]'.format(
+tqdm/_tqdm.py:319:                n_fmt, total_fmt, elapsed_str, remaining_str, rate_fmt, postfix)
+tqdm/_tqdm.py:321:            if ncols == 0:
+tqdm/_tqdm.py:324:            if bar_format:
+tqdm/_tqdm.py:365:            N_BARS = max(1, ncols - len(l_bar) - len(r_bar)) if ncols \
+tqdm/_tqdm.py:366:                else 10
+tqdm/_tqdm.py:369:            if ascii:
+tqdm/_tqdm.py:370:                bar_length, frac_bar_length = divmod(
+tqdm/_tqdm.py:371:                    int(frac * N_BARS * 10), 10)
+tqdm/_tqdm.py:373:                bar = '#' * bar_length
+tqdm/_tqdm.py:374:                frac_bar = chr(48 + frac_bar_length) if frac_bar_length \
+tqdm/_tqdm.py:375:                    else ' '
+tqdm/_tqdm.py:385:            if bar_length < N_BARS:
+tqdm/_tqdm.py:386:                full_bar = bar + frac_bar + \
+tqdm/_tqdm.py:387:                    ' ' * max(N_BARS - bar_length - 1, 0)
+tqdm/_tqdm.py:393:            return l_bar + full_bar + r_bar
+tqdm/_tqdm.py:885:        return self.format_meter(
+tqdm/_tqdm.py:886:            self.n, self.total,
+tqdm/_tqdm.py:887:            elapsed if elapsed is not None else self._time() - self.start_t,
+tqdm/_tqdm.py:888:            self.dynamic_ncols(self.fp) if self.dynamic_ncols else self.ncols,
+tqdm/_tqdm.py:889:            self.desc, self.ascii, self.unit,
+tqdm/_tqdm.py:890:            self.unit_scale, 1 / self.avg_time if self.avg_time else None,
+tqdm/_tqdm.py:891:            self.bar_format, self.postfix, self.unit_divisor)
+tqdm/_tqdm.py:190:        def print_status(s):
+tqdm/_tqdm.py:191:            len_s = len(s)
+tqdm/_tqdm.py:192:            fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+tqdm/_tqdm.py:184:        def fp_write(s):
+tqdm/_tqdm.py:185:            fp.write(_unicode(s))
+tqdm/_tqdm.py:186:            fp_flush()
+tqdm/_tqdm.py:193:            last_len[0] = len_s
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:864:        self.last_print_t = self._time()
+tqdm/_tqdm.py:866:        self.start_t = self.last_print_t
+tqdm/_tqdm.py:874:    def __enter__(self):
+tqdm/_tqdm.py:875:        return self
+tqdm/tests/tests_tqdm.py:1568:            assert t
+tqdm/_tqdm.py:868:    def __len__(self):
+tqdm/_tqdm.py:869:        return self.total if self.iterable is None else \
+tqdm/_tqdm.py:870:            (self.iterable.shape[0] if hasattr(self.iterable, "shape")
+tqdm/_tqdm.py:871:             else len(self.iterable) if hasattr(self.iterable, "__len__")
+tqdm/_tqdm.py:872:             else getattr(self, "total", None))
+tqdm/_tqdm.py:877:    def __exit__(self, *exc):
+tqdm/_tqdm.py:878:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1083:        self.disable = True
+tqdm/_tqdm.py:1086:        pos = abs(self.pos)
+tqdm/_tqdm.py:1087:        self._decr_instances(self)
+tqdm/_tqdm.py:432:    def _decr_instances(cls, instance):
+tqdm/_tqdm.py:437:        with cls._lock:
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:440:            except KeyError:
+tqdm/_tqdm.py:441:                if not instance.gui:  # pragma: no cover
+tqdm/_tqdm.py:442:                    raise
+tqdm/_tqdm.py:443:            else:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:445:                    # negative `pos` means fixed
+tqdm/_tqdm.py:446:                    if inst.pos > abs(instance.pos):
+tqdm/_tqdm.py:447:                        inst.pos -= 1
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_utils.py:129:    def __eq__(self, other):
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_utils.py:130:        return self._comparable == other._comparable
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:450:        if not cls._instances and cls.monitor:
+tqdm/_tqdm.py:451:            try:
+tqdm/_tqdm.py:452:                cls.monitor.exit()
+tqdm/_monitor.py:48:    def exit(self):
+tqdm/_monitor.py:49:        self.was_killed.set()
+tqdm/_monitor.py:50:        self.join()
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:95:    def report(self):
+tqdm/_monitor.py:96:        return not self.was_killed.is_set()
+tqdm/_monitor.py:51:        return self.report()
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:1090:        if not hasattr(self, "sp"):
+tqdm/_tqdm.py:1097:        try:
+tqdm/_tqdm.py:1098:            fp_write('')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:1104:        with self._lock:
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1106:                self.moveto(pos)
+tqdm/_tqdm.py:1107:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1110:                    # stats for overall rate (no weighted average)
+tqdm/_tqdm.py:1111:                    self.avg_time = None
+tqdm/_tqdm.py:1112:                    self.sp(self.__repr__())
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1114:                    self.moveto(-pos)
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1116:                              for i in self._instances] + [0]):
+tqdm/_tqdm.py:1117:                    # only if not nested (#477)
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1119:            else:
+tqdm/_tqdm.py:1120:                self.sp('')  # clear up last bar
+tqdm/_tqdm.py:1121:                if pos:
+tqdm/_tqdm.py:1122:                    self.moveto(-pos)
+tqdm/_tqdm.py:1123:                else:
+tqdm/_tqdm.py:1124:                    fp_write('\r')
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:879:        return False
+tqdm/tests/tests_tqdm.py:1569:        with tqdm(total=0, file=our_file, disable=disable) as t:
+tqdm/tests/tests_tqdm.py:1570:            assert not t
+tqdm/_tqdm.py:401:    def __new__(cls, *args, **kwargs):
+tqdm/_tqdm.py:403:        instance = object.__new__(cls)
+tqdm/_tqdm.py:405:        if "_instances" not in cls.__dict__:
+tqdm/_tqdm.py:407:        if "_lock" not in cls.__dict__:
+tqdm/_tqdm.py:409:        with cls._lock:
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:412:        if cls.monitor_interval and (cls.monitor is None or not
+tqdm/_tqdm.py:414:            try:
+tqdm/_monitor.py:31:    def __init__(self, tqdm_cls, sleep_interval):
+tqdm/_monitor.py:32:        Thread.__init__(self)
+tqdm/_monitor.py:33:        self.daemon = True  # kill thread when main killed (KeyboardInterrupt)
+tqdm/_monitor.py:34:        self.was_killed = Event()
+tqdm/_monitor.py:35:        self.woken = 0  # last time woken up, to sync with monitor
+tqdm/_monitor.py:36:        self.tqdm_cls = tqdm_cls
+tqdm/_monitor.py:37:        self.sleep_interval = sleep_interval
+tqdm/_monitor.py:38:        if TMonitor._time is not None:
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:42:        if TMonitor._event is not None:
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:46:        self.start()
+tqdm/_monitor.py:59:    def run(self):
+tqdm/_monitor.py:60:        cur_t = self._time()
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_tqdm.py:415:                cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/_tqdm.py:422:        return instance
+tqdm/_tqdm.py:641:    def __init__(self, iterable=None, desc=None, total=None, leave=True,
+tqdm/_tqdm.py:745:        if file is None:
+tqdm/_tqdm.py:748:        if disable is None and hasattr(file, "isatty") and not file.isatty():
+tqdm/_tqdm.py:751:        if disable:
+tqdm/_tqdm.py:759:        if kwargs:
+tqdm/_tqdm.py:769:        if total is None and iterable is not None:
+tqdm/_tqdm.py:775:        if ((ncols is None) and (file in (sys.stderr, sys.stdout))) or \
+tqdm/_tqdm.py:790:        if miniters is None:
+tqdm/_tqdm.py:791:            miniters = 0
+tqdm/_tqdm.py:792:            dynamic_miniters = True
+tqdm/_tqdm.py:796:        if mininterval is None:
+tqdm/_tqdm.py:799:        if maxinterval is None:
+tqdm/_tqdm.py:802:        if ascii is None:
+tqdm/_utils.py:156:def _supports_unicode(fp):
+tqdm/_utils.py:157:    try:
+tqdm/_utils.py:142:def _is_utf(encoding):
+tqdm/_utils.py:143:    try:
+tqdm/_utils.py:144:        u'\u2588\u2589'.encode(encoding)
+tqdm/_utils.py:147:    except Exception:  # pragma: no cover
+tqdm/_utils.py:148:        try:
+tqdm/_utils.py:150:        except:
+tqdm/_utils.py:151:            return False
+tqdm/_utils.py:158:        return _is_utf(fp.encoding)
+tqdm/_tqdm.py:803:            ascii = not _supports_unicode(file)
+tqdm/_tqdm.py:805:        if bar_format and not ascii:
+tqdm/_tqdm.py:809:        if smoothing is None:
+tqdm/_tqdm.py:813:        self.iterable = iterable
+tqdm/_tqdm.py:814:        self.desc = desc or ''
+tqdm/_tqdm.py:815:        self.total = total
+tqdm/_tqdm.py:816:        self.leave = leave
+tqdm/_tqdm.py:817:        self.fp = file
+tqdm/_tqdm.py:818:        self.ncols = ncols
+tqdm/_tqdm.py:819:        self.mininterval = mininterval
+tqdm/_tqdm.py:820:        self.maxinterval = maxinterval
+tqdm/_tqdm.py:821:        self.miniters = miniters
+tqdm/_tqdm.py:822:        self.dynamic_miniters = dynamic_miniters
+tqdm/_tqdm.py:823:        self.ascii = ascii
+tqdm/_tqdm.py:824:        self.disable = disable
+tqdm/_tqdm.py:825:        self.unit = unit
+tqdm/_tqdm.py:826:        self.unit_scale = unit_scale
+tqdm/_tqdm.py:827:        self.unit_divisor = unit_divisor
+tqdm/_tqdm.py:828:        self.gui = gui
+tqdm/_tqdm.py:829:        self.dynamic_ncols = dynamic_ncols
+tqdm/_tqdm.py:830:        self.smoothing = smoothing
+tqdm/_tqdm.py:831:        self.avg_time = None
+tqdm/_tqdm.py:832:        self._time = time
+tqdm/_tqdm.py:833:        self.bar_format = bar_format
+tqdm/_tqdm.py:834:        self.postfix = None
+tqdm/_tqdm.py:835:        if postfix:
+tqdm/_tqdm.py:842:        self.last_print_n = initial
+tqdm/_tqdm.py:843:        self.n = initial
+tqdm/_tqdm.py:847:        with self._lock:
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:850:            else:  # mark fixed positions as negative
+tqdm/_tqdm.py:851:                self.pos = -position
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:425:    def _get_free_pos(cls, instance=None):
+tqdm/_tqdm.py:427:        positions = set(abs(inst.pos) for inst in cls._instances
+tqdm/_tqdm.py:428:                        if inst is not instance and hasattr(inst, "pos"))
+tqdm/_tqdm.py:429:        return min(set(range(len(positions) + 1)).difference(positions))
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:853:        if not gui:
+tqdm/_tqdm.py:175:    def status_printer(file):
+tqdm/_tqdm.py:181:        fp = file
+tqdm/_tqdm.py:182:        fp_flush = getattr(fp, 'flush', lambda: None)  # pragma: no cover
+tqdm/_tqdm.py:188:        last_len = [0]
+tqdm/_tqdm.py:195:        return print_status
+tqdm/_tqdm.py:855:            self.sp = self.status_printer(self.fp)
+tqdm/_tqdm.py:856:            with self._lock:
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:858:                    self.moveto(abs(self.pos))
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:861:                    self.moveto(-abs(self.pos))
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:884:    def __repr__(self, elapsed=None):
+tqdm/_tqdm.py:198:    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+tqdm/_tqdm.py:262:        if total and n > total:
+tqdm/_tqdm.py:266:        if unit_scale and unit_scale not in (True, 1):
+tqdm/_tqdm.py:271:        format_interval = tqdm.format_interval
+tqdm/_tqdm.py:154:    def format_interval(t):
+tqdm/_tqdm.py:167:        mins, s = divmod(int(t), 60)
+tqdm/_tqdm.py:168:        h, m = divmod(mins, 60)
+tqdm/_tqdm.py:169:        if h:
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:272:        elapsed_str = format_interval(elapsed)
+tqdm/_tqdm.py:276:        if rate is None and elapsed:
+tqdm/_tqdm.py:278:        inv_rate = 1 / rate if rate else None
+tqdm/_tqdm.py:279:        format_sizeof = tqdm.format_sizeof
+tqdm/_tqdm.py:280:        rate_noinv_fmt = ((format_sizeof(rate) if unit_scale else
+tqdm/_tqdm.py:281:                           '{0:5.2f}'.format(rate))
+tqdm/_tqdm.py:282:                          if rate else '?') + unit + '/s'
+tqdm/_tqdm.py:283:        rate_inv_fmt = ((format_sizeof(inv_rate) if unit_scale else
+tqdm/_tqdm.py:284:                         '{0:5.2f}'.format(inv_rate))
+tqdm/_tqdm.py:285:                        if inv_rate else '?') + 's/' + unit
+tqdm/_tqdm.py:286:        rate_fmt = rate_inv_fmt if inv_rate and inv_rate > 1 else rate_noinv_fmt
+tqdm/_tqdm.py:288:        if unit_scale:
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:294:            total_fmt = str(total)
+tqdm/_tqdm.py:296:        try:
+tqdm/_tqdm.py:297:            postfix = ', ' + postfix if postfix else ''
+tqdm/_tqdm.py:302:        if total:
+tqdm/_tqdm.py:397:            return ((prefix + ": ") if prefix else '') + \
+tqdm/_tqdm.py:397:            return ((prefix + ": ") if prefix else '') + \
+tqdm/_tqdm.py:398:                '{0}{1} [{2}, {3}{4}]'.format(
+tqdm/_tqdm.py:399:                    n_fmt, unit, elapsed_str, rate_fmt, postfix)
+tqdm/_tqdm.py:885:        return self.format_meter(
+tqdm/_tqdm.py:886:            self.n, self.total,
+tqdm/_tqdm.py:887:            elapsed if elapsed is not None else self._time() - self.start_t,
+tqdm/_tqdm.py:888:            self.dynamic_ncols(self.fp) if self.dynamic_ncols else self.ncols,
+tqdm/_tqdm.py:889:            self.desc, self.ascii, self.unit,
+tqdm/_tqdm.py:890:            self.unit_scale, 1 / self.avg_time if self.avg_time else None,
+tqdm/_tqdm.py:891:            self.bar_format, self.postfix, self.unit_divisor)
+tqdm/_tqdm.py:190:        def print_status(s):
+tqdm/_tqdm.py:191:            len_s = len(s)
+tqdm/_tqdm.py:192:            fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+tqdm/_tqdm.py:184:        def fp_write(s):
+tqdm/_tqdm.py:185:            fp.write(_unicode(s))
+tqdm/_tqdm.py:186:            fp_flush()
+tqdm/_tqdm.py:193:            last_len[0] = len_s
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:864:        self.last_print_t = self._time()
+tqdm/_tqdm.py:866:        self.start_t = self.last_print_t
+tqdm/_tqdm.py:874:    def __enter__(self):
+tqdm/_tqdm.py:875:        return self
+tqdm/_tqdm.py:881:    def __del__(self):
+tqdm/_tqdm.py:882:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1080:            return
+tqdm/tests/tests_tqdm.py:1570:            assert not t
+tqdm/_tqdm.py:868:    def __len__(self):
+tqdm/_tqdm.py:869:        return self.total if self.iterable is None else \
+tqdm/_tqdm.py:870:            (self.iterable.shape[0] if hasattr(self.iterable, "shape")
+tqdm/_tqdm.py:871:             else len(self.iterable) if hasattr(self.iterable, "__len__")
+tqdm/_tqdm.py:872:             else getattr(self, "total", None))
+tqdm/_tqdm.py:877:    def __exit__(self, *exc):
+tqdm/_tqdm.py:878:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1083:        self.disable = True
+tqdm/_tqdm.py:1086:        pos = abs(self.pos)
+tqdm/_tqdm.py:1087:        self._decr_instances(self)
+tqdm/_tqdm.py:432:    def _decr_instances(cls, instance):
+tqdm/_tqdm.py:437:        with cls._lock:
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:440:            except KeyError:
+tqdm/_tqdm.py:441:                if not instance.gui:  # pragma: no cover
+tqdm/_tqdm.py:442:                    raise
+tqdm/_tqdm.py:443:            else:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:445:                    # negative `pos` means fixed
+tqdm/_tqdm.py:446:                    if inst.pos > abs(instance.pos):
+tqdm/_tqdm.py:447:                        inst.pos -= 1
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_utils.py:129:    def __eq__(self, other):
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_utils.py:130:        return self._comparable == other._comparable
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:450:        if not cls._instances and cls.monitor:
+tqdm/_tqdm.py:451:            try:
+tqdm/_tqdm.py:452:                cls.monitor.exit()
+tqdm/_monitor.py:48:    def exit(self):
+tqdm/_monitor.py:49:        self.was_killed.set()
+tqdm/_monitor.py:50:        self.join()
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:95:    def report(self):
+tqdm/_monitor.py:96:        return not self.was_killed.is_set()
+tqdm/_monitor.py:51:        return self.report()
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:1090:        if not hasattr(self, "sp"):
+tqdm/_tqdm.py:1097:        try:
+tqdm/_tqdm.py:1098:            fp_write('')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:1104:        with self._lock:
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1106:                self.moveto(pos)
+tqdm/_tqdm.py:1107:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1110:                    # stats for overall rate (no weighted average)
+tqdm/_tqdm.py:1111:                    self.avg_time = None
+tqdm/_tqdm.py:1112:                    self.sp(self.__repr__())
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1114:                    self.moveto(-pos)
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1116:                              for i in self._instances] + [0]):
+tqdm/_tqdm.py:1117:                    # only if not nested (#477)
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1119:            else:
+tqdm/_tqdm.py:1120:                self.sp('')  # clear up last bar
+tqdm/_tqdm.py:1121:                if pos:
+tqdm/_tqdm.py:1122:                    self.moveto(-pos)
+tqdm/_tqdm.py:1123:                else:
+tqdm/_tqdm.py:1124:                    fp_write('\r')
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:879:        return False
+tqdm/tests/tests_tqdm.py:1571:        with trange(10, file=our_file, disable=disable) as t:
+tqdm/tests/tests_tqdm.py:1572:            assert t
+tqdm/_tqdm.py:1231:def trange(*args, **kwargs):
+tqdm/_tqdm.py:401:    def __new__(cls, *args, **kwargs):
+tqdm/_tqdm.py:403:        instance = object.__new__(cls)
+tqdm/_tqdm.py:405:        if "_instances" not in cls.__dict__:
+tqdm/_tqdm.py:407:        if "_lock" not in cls.__dict__:
+tqdm/_tqdm.py:409:        with cls._lock:
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:412:        if cls.monitor_interval and (cls.monitor is None or not
+tqdm/_tqdm.py:414:            try:
+tqdm/_monitor.py:31:    def __init__(self, tqdm_cls, sleep_interval):
+tqdm/_monitor.py:32:        Thread.__init__(self)
+tqdm/_monitor.py:33:        self.daemon = True  # kill thread when main killed (KeyboardInterrupt)
+tqdm/_monitor.py:34:        self.was_killed = Event()
+tqdm/_monitor.py:35:        self.woken = 0  # last time woken up, to sync with monitor
+tqdm/_monitor.py:36:        self.tqdm_cls = tqdm_cls
+tqdm/_monitor.py:37:        self.sleep_interval = sleep_interval
+tqdm/_monitor.py:38:        if TMonitor._time is not None:
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:42:        if TMonitor._event is not None:
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:46:        self.start()
+tqdm/_monitor.py:59:    def run(self):
+tqdm/_monitor.py:60:        cur_t = self._time()
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_tqdm.py:415:                cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_tqdm.py:422:        return instance
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_tqdm.py:641:    def __init__(self, iterable=None, desc=None, total=None, leave=True,
+tqdm/_tqdm.py:745:        if file is None:
+tqdm/_tqdm.py:748:        if disable is None and hasattr(file, "isatty") and not file.isatty():
+tqdm/_tqdm.py:751:        if disable:
+tqdm/_tqdm.py:759:        if kwargs:
+tqdm/_tqdm.py:769:        if total is None and iterable is not None:
+tqdm/_tqdm.py:770:            try:
+tqdm/_tqdm.py:771:                total = len(iterable)
+tqdm/_tqdm.py:775:        if ((ncols is None) and (file in (sys.stderr, sys.stdout))) or \
+tqdm/_tqdm.py:790:        if miniters is None:
+tqdm/_tqdm.py:791:            miniters = 0
+tqdm/_tqdm.py:792:            dynamic_miniters = True
+tqdm/_tqdm.py:796:        if mininterval is None:
+tqdm/_tqdm.py:799:        if maxinterval is None:
+tqdm/_tqdm.py:802:        if ascii is None:
+tqdm/_utils.py:156:def _supports_unicode(fp):
+tqdm/_utils.py:157:    try:
+tqdm/_utils.py:142:def _is_utf(encoding):
+tqdm/_utils.py:143:    try:
+tqdm/_utils.py:144:        u'\u2588\u2589'.encode(encoding)
+tqdm/_utils.py:147:    except Exception:  # pragma: no cover
+tqdm/_utils.py:148:        try:
+tqdm/_utils.py:150:        except:
+tqdm/_utils.py:151:            return False
+tqdm/_utils.py:158:        return _is_utf(fp.encoding)
+tqdm/_tqdm.py:803:            ascii = not _supports_unicode(file)
+tqdm/_tqdm.py:805:        if bar_format and not ascii:
+tqdm/_tqdm.py:809:        if smoothing is None:
+tqdm/_tqdm.py:813:        self.iterable = iterable
+tqdm/_tqdm.py:814:        self.desc = desc or ''
+tqdm/_tqdm.py:815:        self.total = total
+tqdm/_tqdm.py:816:        self.leave = leave
+tqdm/_tqdm.py:817:        self.fp = file
+tqdm/_tqdm.py:818:        self.ncols = ncols
+tqdm/_tqdm.py:819:        self.mininterval = mininterval
+tqdm/_tqdm.py:820:        self.maxinterval = maxinterval
+tqdm/_tqdm.py:821:        self.miniters = miniters
+tqdm/_tqdm.py:822:        self.dynamic_miniters = dynamic_miniters
+tqdm/_tqdm.py:823:        self.ascii = ascii
+tqdm/_tqdm.py:824:        self.disable = disable
+tqdm/_tqdm.py:825:        self.unit = unit
+tqdm/_tqdm.py:826:        self.unit_scale = unit_scale
+tqdm/_tqdm.py:827:        self.unit_divisor = unit_divisor
+tqdm/_tqdm.py:828:        self.gui = gui
+tqdm/_tqdm.py:829:        self.dynamic_ncols = dynamic_ncols
+tqdm/_tqdm.py:830:        self.smoothing = smoothing
+tqdm/_tqdm.py:831:        self.avg_time = None
+tqdm/_tqdm.py:832:        self._time = time
+tqdm/_tqdm.py:833:        self.bar_format = bar_format
+tqdm/_tqdm.py:834:        self.postfix = None
+tqdm/_tqdm.py:835:        if postfix:
+tqdm/_tqdm.py:842:        self.last_print_n = initial
+tqdm/_tqdm.py:843:        self.n = initial
+tqdm/_tqdm.py:847:        with self._lock:
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:850:            else:  # mark fixed positions as negative
+tqdm/_tqdm.py:851:                self.pos = -position
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:425:    def _get_free_pos(cls, instance=None):
+tqdm/_tqdm.py:427:        positions = set(abs(inst.pos) for inst in cls._instances
+tqdm/_tqdm.py:428:                        if inst is not instance and hasattr(inst, "pos"))
+tqdm/_tqdm.py:429:        return min(set(range(len(positions) + 1)).difference(positions))
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:853:        if not gui:
+tqdm/_tqdm.py:175:    def status_printer(file):
+tqdm/_tqdm.py:181:        fp = file
+tqdm/_tqdm.py:182:        fp_flush = getattr(fp, 'flush', lambda: None)  # pragma: no cover
+tqdm/_tqdm.py:188:        last_len = [0]
+tqdm/_tqdm.py:195:        return print_status
+tqdm/_tqdm.py:855:            self.sp = self.status_printer(self.fp)
+tqdm/_tqdm.py:856:            with self._lock:
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:858:                    self.moveto(abs(self.pos))
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:861:                    self.moveto(-abs(self.pos))
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:884:    def __repr__(self, elapsed=None):
+tqdm/_tqdm.py:198:    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+tqdm/_tqdm.py:262:        if total and n > total:
+tqdm/_tqdm.py:266:        if unit_scale and unit_scale not in (True, 1):
+tqdm/_tqdm.py:271:        format_interval = tqdm.format_interval
+tqdm/_tqdm.py:154:    def format_interval(t):
+tqdm/_tqdm.py:167:        mins, s = divmod(int(t), 60)
+tqdm/_tqdm.py:168:        h, m = divmod(mins, 60)
+tqdm/_tqdm.py:169:        if h:
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:272:        elapsed_str = format_interval(elapsed)
+tqdm/_tqdm.py:276:        if rate is None and elapsed:
+tqdm/_tqdm.py:278:        inv_rate = 1 / rate if rate else None
+tqdm/_tqdm.py:279:        format_sizeof = tqdm.format_sizeof
+tqdm/_tqdm.py:280:        rate_noinv_fmt = ((format_sizeof(rate) if unit_scale else
+tqdm/_tqdm.py:281:                           '{0:5.2f}'.format(rate))
+tqdm/_tqdm.py:282:                          if rate else '?') + unit + '/s'
+tqdm/_tqdm.py:283:        rate_inv_fmt = ((format_sizeof(inv_rate) if unit_scale else
+tqdm/_tqdm.py:284:                         '{0:5.2f}'.format(inv_rate))
+tqdm/_tqdm.py:285:                        if inv_rate else '?') + 's/' + unit
+tqdm/_tqdm.py:286:        rate_fmt = rate_inv_fmt if inv_rate and inv_rate > 1 else rate_noinv_fmt
+tqdm/_tqdm.py:288:        if unit_scale:
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:294:            total_fmt = str(total)
+tqdm/_tqdm.py:296:        try:
+tqdm/_tqdm.py:297:            postfix = ', ' + postfix if postfix else ''
+tqdm/_tqdm.py:302:        if total:
+tqdm/_tqdm.py:304:            frac = n / total
+tqdm/_tqdm.py:305:            percentage = frac * 100
+tqdm/_tqdm.py:307:            remaining_str = format_interval((total - n) / rate) \
+tqdm/_tqdm.py:308:                if rate else '?'
+tqdm/_tqdm.py:311:            if prefix:
+tqdm/_tqdm.py:316:                l_bar = ''
+tqdm/_tqdm.py:316:                l_bar = ''
+tqdm/_tqdm.py:317:            l_bar += '{0:3.0f}%|'.format(percentage)
+tqdm/_tqdm.py:318:            r_bar = '| {0}/{1} [{2}<{3}, {4}{5}]'.format(
+tqdm/_tqdm.py:319:                n_fmt, total_fmt, elapsed_str, remaining_str, rate_fmt, postfix)
+tqdm/_tqdm.py:321:            if ncols == 0:
+tqdm/_tqdm.py:324:            if bar_format:
+tqdm/_tqdm.py:365:            N_BARS = max(1, ncols - len(l_bar) - len(r_bar)) if ncols \
+tqdm/_tqdm.py:366:                else 10
+tqdm/_tqdm.py:369:            if ascii:
+tqdm/_tqdm.py:370:                bar_length, frac_bar_length = divmod(
+tqdm/_tqdm.py:371:                    int(frac * N_BARS * 10), 10)
+tqdm/_tqdm.py:373:                bar = '#' * bar_length
+tqdm/_tqdm.py:374:                frac_bar = chr(48 + frac_bar_length) if frac_bar_length \
+tqdm/_tqdm.py:375:                    else ' '
+tqdm/_tqdm.py:385:            if bar_length < N_BARS:
+tqdm/_tqdm.py:386:                full_bar = bar + frac_bar + \
+tqdm/_tqdm.py:387:                    ' ' * max(N_BARS - bar_length - 1, 0)
+tqdm/_tqdm.py:393:            return l_bar + full_bar + r_bar
+tqdm/_tqdm.py:885:        return self.format_meter(
+tqdm/_tqdm.py:886:            self.n, self.total,
+tqdm/_tqdm.py:887:            elapsed if elapsed is not None else self._time() - self.start_t,
+tqdm/_tqdm.py:888:            self.dynamic_ncols(self.fp) if self.dynamic_ncols else self.ncols,
+tqdm/_tqdm.py:889:            self.desc, self.ascii, self.unit,
+tqdm/_tqdm.py:890:            self.unit_scale, 1 / self.avg_time if self.avg_time else None,
+tqdm/_tqdm.py:891:            self.bar_format, self.postfix, self.unit_divisor)
+tqdm/_tqdm.py:190:        def print_status(s):
+tqdm/_tqdm.py:191:            len_s = len(s)
+tqdm/_tqdm.py:192:            fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+tqdm/_tqdm.py:184:        def fp_write(s):
+tqdm/_tqdm.py:185:            fp.write(_unicode(s))
+tqdm/_tqdm.py:186:            fp_flush()
+tqdm/_tqdm.py:193:            last_len[0] = len_s
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:864:        self.last_print_t = self._time()
+tqdm/_tqdm.py:866:        self.start_t = self.last_print_t
+tqdm/_tqdm.py:1236:    return tqdm(_range(*args), **kwargs)
+tqdm/_tqdm.py:874:    def __enter__(self):
+tqdm/_tqdm.py:875:        return self
+tqdm/_tqdm.py:881:    def __del__(self):
+tqdm/_tqdm.py:882:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1080:            return
+tqdm/tests/tests_tqdm.py:1572:            assert t
+tqdm/_tqdm.py:868:    def __len__(self):
+tqdm/_tqdm.py:869:        return self.total if self.iterable is None else \
+tqdm/_tqdm.py:870:            (self.iterable.shape[0] if hasattr(self.iterable, "shape")
+tqdm/_tqdm.py:871:             else len(self.iterable) if hasattr(self.iterable, "__len__")
+tqdm/_tqdm.py:872:             else getattr(self, "total", None))
+tqdm/_tqdm.py:877:    def __exit__(self, *exc):
+tqdm/_tqdm.py:878:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1083:        self.disable = True
+tqdm/_tqdm.py:1086:        pos = abs(self.pos)
+tqdm/_tqdm.py:1087:        self._decr_instances(self)
+tqdm/_tqdm.py:432:    def _decr_instances(cls, instance):
+tqdm/_tqdm.py:437:        with cls._lock:
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:440:            except KeyError:
+tqdm/_tqdm.py:441:                if not instance.gui:  # pragma: no cover
+tqdm/_tqdm.py:442:                    raise
+tqdm/_tqdm.py:443:            else:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:445:                    # negative `pos` means fixed
+tqdm/_tqdm.py:446:                    if inst.pos > abs(instance.pos):
+tqdm/_tqdm.py:447:                        inst.pos -= 1
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_utils.py:129:    def __eq__(self, other):
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_utils.py:130:        return self._comparable == other._comparable
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:450:        if not cls._instances and cls.monitor:
+tqdm/_tqdm.py:451:            try:
+tqdm/_tqdm.py:452:                cls.monitor.exit()
+tqdm/_monitor.py:48:    def exit(self):
+tqdm/_monitor.py:49:        self.was_killed.set()
+tqdm/_monitor.py:50:        self.join()
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:95:    def report(self):
+tqdm/_monitor.py:96:        return not self.was_killed.is_set()
+tqdm/_monitor.py:51:        return self.report()
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:1090:        if not hasattr(self, "sp"):
+tqdm/_tqdm.py:1097:        try:
+tqdm/_tqdm.py:1098:            fp_write('')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:1104:        with self._lock:
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1106:                self.moveto(pos)
+tqdm/_tqdm.py:1107:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1110:                    # stats for overall rate (no weighted average)
+tqdm/_tqdm.py:1111:                    self.avg_time = None
+tqdm/_tqdm.py:1112:                    self.sp(self.__repr__())
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1114:                    self.moveto(-pos)
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1116:                              for i in self._instances] + [0]):
+tqdm/_tqdm.py:1117:                    # only if not nested (#477)
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1119:            else:
+tqdm/_tqdm.py:1120:                self.sp('')  # clear up last bar
+tqdm/_tqdm.py:1121:                if pos:
+tqdm/_tqdm.py:1122:                    self.moveto(-pos)
+tqdm/_tqdm.py:1123:                else:
+tqdm/_tqdm.py:1124:                    fp_write('\r')
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:879:        return False
+tqdm/tests/tests_tqdm.py:1573:        with trange(0, file=our_file, disable=disable) as t:
+tqdm/tests/tests_tqdm.py:1574:            assert not t
+tqdm/_tqdm.py:1231:def trange(*args, **kwargs):
+tqdm/_tqdm.py:401:    def __new__(cls, *args, **kwargs):
+tqdm/_tqdm.py:403:        instance = object.__new__(cls)
+tqdm/_tqdm.py:405:        if "_instances" not in cls.__dict__:
+tqdm/_tqdm.py:407:        if "_lock" not in cls.__dict__:
+tqdm/_tqdm.py:409:        with cls._lock:
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:412:        if cls.monitor_interval and (cls.monitor is None or not
+tqdm/_tqdm.py:414:            try:
+tqdm/_monitor.py:31:    def __init__(self, tqdm_cls, sleep_interval):
+tqdm/_monitor.py:32:        Thread.__init__(self)
+tqdm/_monitor.py:33:        self.daemon = True  # kill thread when main killed (KeyboardInterrupt)
+tqdm/_monitor.py:34:        self.was_killed = Event()
+tqdm/_monitor.py:35:        self.woken = 0  # last time woken up, to sync with monitor
+tqdm/_monitor.py:36:        self.tqdm_cls = tqdm_cls
+tqdm/_monitor.py:37:        self.sleep_interval = sleep_interval
+tqdm/_monitor.py:38:        if TMonitor._time is not None:
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:42:        if TMonitor._event is not None:
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:46:        self.start()
+tqdm/_monitor.py:59:    def run(self):
+tqdm/_monitor.py:60:        cur_t = self._time()
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_tqdm.py:415:                cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_tqdm.py:422:        return instance
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_tqdm.py:641:    def __init__(self, iterable=None, desc=None, total=None, leave=True,
+tqdm/_tqdm.py:745:        if file is None:
+tqdm/_tqdm.py:748:        if disable is None and hasattr(file, "isatty") and not file.isatty():
+tqdm/_tqdm.py:751:        if disable:
+tqdm/_tqdm.py:759:        if kwargs:
+tqdm/_tqdm.py:769:        if total is None and iterable is not None:
+tqdm/_tqdm.py:770:            try:
+tqdm/_tqdm.py:771:                total = len(iterable)
+tqdm/_tqdm.py:775:        if ((ncols is None) and (file in (sys.stderr, sys.stdout))) or \
+tqdm/_tqdm.py:790:        if miniters is None:
+tqdm/_tqdm.py:791:            miniters = 0
+tqdm/_tqdm.py:792:            dynamic_miniters = True
+tqdm/_tqdm.py:796:        if mininterval is None:
+tqdm/_tqdm.py:799:        if maxinterval is None:
+tqdm/_tqdm.py:802:        if ascii is None:
+tqdm/_utils.py:156:def _supports_unicode(fp):
+tqdm/_utils.py:157:    try:
+tqdm/_utils.py:142:def _is_utf(encoding):
+tqdm/_utils.py:143:    try:
+tqdm/_utils.py:144:        u'\u2588\u2589'.encode(encoding)
+tqdm/_utils.py:147:    except Exception:  # pragma: no cover
+tqdm/_utils.py:148:        try:
+tqdm/_utils.py:150:        except:
+tqdm/_utils.py:151:            return False
+tqdm/_utils.py:158:        return _is_utf(fp.encoding)
+tqdm/_tqdm.py:803:            ascii = not _supports_unicode(file)
+tqdm/_tqdm.py:805:        if bar_format and not ascii:
+tqdm/_tqdm.py:809:        if smoothing is None:
+tqdm/_tqdm.py:813:        self.iterable = iterable
+tqdm/_tqdm.py:814:        self.desc = desc or ''
+tqdm/_tqdm.py:815:        self.total = total
+tqdm/_tqdm.py:816:        self.leave = leave
+tqdm/_tqdm.py:817:        self.fp = file
+tqdm/_tqdm.py:818:        self.ncols = ncols
+tqdm/_tqdm.py:819:        self.mininterval = mininterval
+tqdm/_tqdm.py:820:        self.maxinterval = maxinterval
+tqdm/_tqdm.py:821:        self.miniters = miniters
+tqdm/_tqdm.py:822:        self.dynamic_miniters = dynamic_miniters
+tqdm/_tqdm.py:823:        self.ascii = ascii
+tqdm/_tqdm.py:824:        self.disable = disable
+tqdm/_tqdm.py:825:        self.unit = unit
+tqdm/_tqdm.py:826:        self.unit_scale = unit_scale
+tqdm/_tqdm.py:827:        self.unit_divisor = unit_divisor
+tqdm/_tqdm.py:828:        self.gui = gui
+tqdm/_tqdm.py:829:        self.dynamic_ncols = dynamic_ncols
+tqdm/_tqdm.py:830:        self.smoothing = smoothing
+tqdm/_tqdm.py:831:        self.avg_time = None
+tqdm/_tqdm.py:832:        self._time = time
+tqdm/_tqdm.py:833:        self.bar_format = bar_format
+tqdm/_tqdm.py:834:        self.postfix = None
+tqdm/_tqdm.py:835:        if postfix:
+tqdm/_tqdm.py:842:        self.last_print_n = initial
+tqdm/_tqdm.py:843:        self.n = initial
+tqdm/_tqdm.py:847:        with self._lock:
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:850:            else:  # mark fixed positions as negative
+tqdm/_tqdm.py:851:                self.pos = -position
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:425:    def _get_free_pos(cls, instance=None):
+tqdm/_tqdm.py:427:        positions = set(abs(inst.pos) for inst in cls._instances
+tqdm/_tqdm.py:428:                        if inst is not instance and hasattr(inst, "pos"))
+tqdm/_tqdm.py:429:        return min(set(range(len(positions) + 1)).difference(positions))
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:853:        if not gui:
+tqdm/_tqdm.py:175:    def status_printer(file):
+tqdm/_tqdm.py:181:        fp = file
+tqdm/_tqdm.py:182:        fp_flush = getattr(fp, 'flush', lambda: None)  # pragma: no cover
+tqdm/_tqdm.py:188:        last_len = [0]
+tqdm/_tqdm.py:195:        return print_status
+tqdm/_tqdm.py:855:            self.sp = self.status_printer(self.fp)
+tqdm/_tqdm.py:856:            with self._lock:
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:858:                    self.moveto(abs(self.pos))
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:861:                    self.moveto(-abs(self.pos))
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:884:    def __repr__(self, elapsed=None):
+tqdm/_tqdm.py:198:    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+tqdm/_tqdm.py:262:        if total and n > total:
+tqdm/_tqdm.py:266:        if unit_scale and unit_scale not in (True, 1):
+tqdm/_tqdm.py:271:        format_interval = tqdm.format_interval
+tqdm/_tqdm.py:154:    def format_interval(t):
+tqdm/_tqdm.py:167:        mins, s = divmod(int(t), 60)
+tqdm/_tqdm.py:168:        h, m = divmod(mins, 60)
+tqdm/_tqdm.py:169:        if h:
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:272:        elapsed_str = format_interval(elapsed)
+tqdm/_tqdm.py:276:        if rate is None and elapsed:
+tqdm/_tqdm.py:278:        inv_rate = 1 / rate if rate else None
+tqdm/_tqdm.py:279:        format_sizeof = tqdm.format_sizeof
+tqdm/_tqdm.py:280:        rate_noinv_fmt = ((format_sizeof(rate) if unit_scale else
+tqdm/_tqdm.py:281:                           '{0:5.2f}'.format(rate))
+tqdm/_tqdm.py:282:                          if rate else '?') + unit + '/s'
+tqdm/_tqdm.py:283:        rate_inv_fmt = ((format_sizeof(inv_rate) if unit_scale else
+tqdm/_tqdm.py:284:                         '{0:5.2f}'.format(inv_rate))
+tqdm/_tqdm.py:285:                        if inv_rate else '?') + 's/' + unit
+tqdm/_tqdm.py:286:        rate_fmt = rate_inv_fmt if inv_rate and inv_rate > 1 else rate_noinv_fmt
+tqdm/_tqdm.py:288:        if unit_scale:
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:294:            total_fmt = str(total)
+tqdm/_tqdm.py:296:        try:
+tqdm/_tqdm.py:297:            postfix = ', ' + postfix if postfix else ''
+tqdm/_tqdm.py:302:        if total:
+tqdm/_tqdm.py:397:            return ((prefix + ": ") if prefix else '') + \
+tqdm/_tqdm.py:397:            return ((prefix + ": ") if prefix else '') + \
+tqdm/_tqdm.py:398:                '{0}{1} [{2}, {3}{4}]'.format(
+tqdm/_tqdm.py:399:                    n_fmt, unit, elapsed_str, rate_fmt, postfix)
+tqdm/_tqdm.py:885:        return self.format_meter(
+tqdm/_tqdm.py:886:            self.n, self.total,
+tqdm/_tqdm.py:887:            elapsed if elapsed is not None else self._time() - self.start_t,
+tqdm/_tqdm.py:888:            self.dynamic_ncols(self.fp) if self.dynamic_ncols else self.ncols,
+tqdm/_tqdm.py:889:            self.desc, self.ascii, self.unit,
+tqdm/_tqdm.py:890:            self.unit_scale, 1 / self.avg_time if self.avg_time else None,
+tqdm/_tqdm.py:891:            self.bar_format, self.postfix, self.unit_divisor)
+tqdm/_tqdm.py:190:        def print_status(s):
+tqdm/_tqdm.py:191:            len_s = len(s)
+tqdm/_tqdm.py:192:            fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+tqdm/_tqdm.py:184:        def fp_write(s):
+tqdm/_tqdm.py:185:            fp.write(_unicode(s))
+tqdm/_tqdm.py:186:            fp_flush()
+tqdm/_tqdm.py:193:            last_len[0] = len_s
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:864:        self.last_print_t = self._time()
+tqdm/_tqdm.py:866:        self.start_t = self.last_print_t
+tqdm/_tqdm.py:1236:    return tqdm(_range(*args), **kwargs)
+tqdm/_tqdm.py:874:    def __enter__(self):
+tqdm/_tqdm.py:875:        return self
+tqdm/_tqdm.py:881:    def __del__(self):
+tqdm/_tqdm.py:882:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1080:            return
+tqdm/tests/tests_tqdm.py:1574:            assert not t
+tqdm/_tqdm.py:868:    def __len__(self):
+tqdm/_tqdm.py:869:        return self.total if self.iterable is None else \
+tqdm/_tqdm.py:870:            (self.iterable.shape[0] if hasattr(self.iterable, "shape")
+tqdm/_tqdm.py:871:             else len(self.iterable) if hasattr(self.iterable, "__len__")
+tqdm/_tqdm.py:872:             else getattr(self, "total", None))
+tqdm/_tqdm.py:877:    def __exit__(self, *exc):
+tqdm/_tqdm.py:878:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1083:        self.disable = True
+tqdm/_tqdm.py:1086:        pos = abs(self.pos)
+tqdm/_tqdm.py:1087:        self._decr_instances(self)
+tqdm/_tqdm.py:432:    def _decr_instances(cls, instance):
+tqdm/_tqdm.py:437:        with cls._lock:
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:440:            except KeyError:
+tqdm/_tqdm.py:441:                if not instance.gui:  # pragma: no cover
+tqdm/_tqdm.py:442:                    raise
+tqdm/_tqdm.py:443:            else:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:445:                    # negative `pos` means fixed
+tqdm/_tqdm.py:446:                    if inst.pos > abs(instance.pos):
+tqdm/_tqdm.py:447:                        inst.pos -= 1
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_utils.py:129:    def __eq__(self, other):
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_utils.py:130:        return self._comparable == other._comparable
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:450:        if not cls._instances and cls.monitor:
+tqdm/_tqdm.py:451:            try:
+tqdm/_tqdm.py:452:                cls.monitor.exit()
+tqdm/_monitor.py:48:    def exit(self):
+tqdm/_monitor.py:49:        self.was_killed.set()
+tqdm/_monitor.py:50:        self.join()
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:95:    def report(self):
+tqdm/_monitor.py:96:        return not self.was_killed.is_set()
+tqdm/_monitor.py:51:        return self.report()
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:1090:        if not hasattr(self, "sp"):
+tqdm/_tqdm.py:1097:        try:
+tqdm/_tqdm.py:1098:            fp_write('')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:1104:        with self._lock:
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1106:                self.moveto(pos)
+tqdm/_tqdm.py:1107:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1110:                    # stats for overall rate (no weighted average)
+tqdm/_tqdm.py:1111:                    self.avg_time = None
+tqdm/_tqdm.py:1112:                    self.sp(self.__repr__())
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1114:                    self.moveto(-pos)
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1116:                              for i in self._instances] + [0]):
+tqdm/_tqdm.py:1117:                    # only if not nested (#477)
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1119:            else:
+tqdm/_tqdm.py:1120:                self.sp('')  # clear up last bar
+tqdm/_tqdm.py:1121:                if pos:
+tqdm/_tqdm.py:1122:                    self.moveto(-pos)
+tqdm/_tqdm.py:1123:                else:
+tqdm/_tqdm.py:1124:                    fp_write('\r')
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:879:        return False
+tqdm/tests/tests_tqdm.py:1575:        with tqdm([], file=our_file, disable=disable) as t:
+tqdm/tests/tests_tqdm.py:1576:            assert not t
+tqdm/_tqdm.py:401:    def __new__(cls, *args, **kwargs):
+tqdm/_tqdm.py:403:        instance = object.__new__(cls)
+tqdm/_tqdm.py:405:        if "_instances" not in cls.__dict__:
+tqdm/_tqdm.py:407:        if "_lock" not in cls.__dict__:
+tqdm/_tqdm.py:409:        with cls._lock:
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:412:        if cls.monitor_interval and (cls.monitor is None or not
+tqdm/_tqdm.py:414:            try:
+tqdm/_monitor.py:31:    def __init__(self, tqdm_cls, sleep_interval):
+tqdm/_monitor.py:32:        Thread.__init__(self)
+tqdm/_monitor.py:33:        self.daemon = True  # kill thread when main killed (KeyboardInterrupt)
+tqdm/_monitor.py:34:        self.was_killed = Event()
+tqdm/_monitor.py:35:        self.woken = 0  # last time woken up, to sync with monitor
+tqdm/_monitor.py:36:        self.tqdm_cls = tqdm_cls
+tqdm/_monitor.py:37:        self.sleep_interval = sleep_interval
+tqdm/_monitor.py:38:        if TMonitor._time is not None:
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:42:        if TMonitor._event is not None:
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:46:        self.start()
+tqdm/_monitor.py:59:    def run(self):
+tqdm/_monitor.py:60:        cur_t = self._time()
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_tqdm.py:415:                cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_tqdm.py:422:        return instance
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_tqdm.py:641:    def __init__(self, iterable=None, desc=None, total=None, leave=True,
+tqdm/_tqdm.py:745:        if file is None:
+tqdm/_tqdm.py:748:        if disable is None and hasattr(file, "isatty") and not file.isatty():
+tqdm/_tqdm.py:751:        if disable:
+tqdm/_tqdm.py:759:        if kwargs:
+tqdm/_tqdm.py:769:        if total is None and iterable is not None:
+tqdm/_tqdm.py:770:            try:
+tqdm/_tqdm.py:771:                total = len(iterable)
+tqdm/_tqdm.py:775:        if ((ncols is None) and (file in (sys.stderr, sys.stdout))) or \
+tqdm/_tqdm.py:790:        if miniters is None:
+tqdm/_tqdm.py:791:            miniters = 0
+tqdm/_tqdm.py:792:            dynamic_miniters = True
+tqdm/_tqdm.py:796:        if mininterval is None:
+tqdm/_tqdm.py:799:        if maxinterval is None:
+tqdm/_tqdm.py:802:        if ascii is None:
+tqdm/_utils.py:156:def _supports_unicode(fp):
+tqdm/_utils.py:157:    try:
+tqdm/_utils.py:142:def _is_utf(encoding):
+tqdm/_utils.py:143:    try:
+tqdm/_utils.py:144:        u'\u2588\u2589'.encode(encoding)
+tqdm/_utils.py:147:    except Exception:  # pragma: no cover
+tqdm/_utils.py:148:        try:
+tqdm/_utils.py:150:        except:
+tqdm/_utils.py:151:            return False
+tqdm/_utils.py:158:        return _is_utf(fp.encoding)
+tqdm/_tqdm.py:803:            ascii = not _supports_unicode(file)
+tqdm/_tqdm.py:805:        if bar_format and not ascii:
+tqdm/_tqdm.py:809:        if smoothing is None:
+tqdm/_tqdm.py:813:        self.iterable = iterable
+tqdm/_tqdm.py:814:        self.desc = desc or ''
+tqdm/_tqdm.py:815:        self.total = total
+tqdm/_tqdm.py:816:        self.leave = leave
+tqdm/_tqdm.py:817:        self.fp = file
+tqdm/_tqdm.py:818:        self.ncols = ncols
+tqdm/_tqdm.py:819:        self.mininterval = mininterval
+tqdm/_tqdm.py:820:        self.maxinterval = maxinterval
+tqdm/_tqdm.py:821:        self.miniters = miniters
+tqdm/_tqdm.py:822:        self.dynamic_miniters = dynamic_miniters
+tqdm/_tqdm.py:823:        self.ascii = ascii
+tqdm/_tqdm.py:824:        self.disable = disable
+tqdm/_tqdm.py:825:        self.unit = unit
+tqdm/_tqdm.py:826:        self.unit_scale = unit_scale
+tqdm/_tqdm.py:827:        self.unit_divisor = unit_divisor
+tqdm/_tqdm.py:828:        self.gui = gui
+tqdm/_tqdm.py:829:        self.dynamic_ncols = dynamic_ncols
+tqdm/_tqdm.py:830:        self.smoothing = smoothing
+tqdm/_tqdm.py:831:        self.avg_time = None
+tqdm/_tqdm.py:832:        self._time = time
+tqdm/_tqdm.py:833:        self.bar_format = bar_format
+tqdm/_tqdm.py:834:        self.postfix = None
+tqdm/_tqdm.py:835:        if postfix:
+tqdm/_tqdm.py:842:        self.last_print_n = initial
+tqdm/_tqdm.py:843:        self.n = initial
+tqdm/_tqdm.py:847:        with self._lock:
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:850:            else:  # mark fixed positions as negative
+tqdm/_tqdm.py:851:                self.pos = -position
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:425:    def _get_free_pos(cls, instance=None):
+tqdm/_tqdm.py:427:        positions = set(abs(inst.pos) for inst in cls._instances
+tqdm/_tqdm.py:428:                        if inst is not instance and hasattr(inst, "pos"))
+tqdm/_tqdm.py:429:        return min(set(range(len(positions) + 1)).difference(positions))
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:853:        if not gui:
+tqdm/_tqdm.py:175:    def status_printer(file):
+tqdm/_tqdm.py:181:        fp = file
+tqdm/_tqdm.py:182:        fp_flush = getattr(fp, 'flush', lambda: None)  # pragma: no cover
+tqdm/_tqdm.py:188:        last_len = [0]
+tqdm/_tqdm.py:195:        return print_status
+tqdm/_tqdm.py:855:            self.sp = self.status_printer(self.fp)
+tqdm/_tqdm.py:856:            with self._lock:
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:858:                    self.moveto(abs(self.pos))
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:861:                    self.moveto(-abs(self.pos))
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:884:    def __repr__(self, elapsed=None):
+tqdm/_tqdm.py:198:    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+tqdm/_tqdm.py:262:        if total and n > total:
+tqdm/_tqdm.py:266:        if unit_scale and unit_scale not in (True, 1):
+tqdm/_tqdm.py:271:        format_interval = tqdm.format_interval
+tqdm/_tqdm.py:154:    def format_interval(t):
+tqdm/_tqdm.py:167:        mins, s = divmod(int(t), 60)
+tqdm/_tqdm.py:168:        h, m = divmod(mins, 60)
+tqdm/_tqdm.py:169:        if h:
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:272:        elapsed_str = format_interval(elapsed)
+tqdm/_tqdm.py:276:        if rate is None and elapsed:
+tqdm/_tqdm.py:278:        inv_rate = 1 / rate if rate else None
+tqdm/_tqdm.py:279:        format_sizeof = tqdm.format_sizeof
+tqdm/_tqdm.py:280:        rate_noinv_fmt = ((format_sizeof(rate) if unit_scale else
+tqdm/_tqdm.py:281:                           '{0:5.2f}'.format(rate))
+tqdm/_tqdm.py:282:                          if rate else '?') + unit + '/s'
+tqdm/_tqdm.py:283:        rate_inv_fmt = ((format_sizeof(inv_rate) if unit_scale else
+tqdm/_tqdm.py:284:                         '{0:5.2f}'.format(inv_rate))
+tqdm/_tqdm.py:285:                        if inv_rate else '?') + 's/' + unit
+tqdm/_tqdm.py:286:        rate_fmt = rate_inv_fmt if inv_rate and inv_rate > 1 else rate_noinv_fmt
+tqdm/_tqdm.py:288:        if unit_scale:
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:294:            total_fmt = str(total)
+tqdm/_tqdm.py:296:        try:
+tqdm/_tqdm.py:297:            postfix = ', ' + postfix if postfix else ''
+tqdm/_tqdm.py:302:        if total:
+tqdm/_tqdm.py:397:            return ((prefix + ": ") if prefix else '') + \
+tqdm/_tqdm.py:397:            return ((prefix + ": ") if prefix else '') + \
+tqdm/_tqdm.py:398:                '{0}{1} [{2}, {3}{4}]'.format(
+tqdm/_tqdm.py:399:                    n_fmt, unit, elapsed_str, rate_fmt, postfix)
+tqdm/_tqdm.py:885:        return self.format_meter(
+tqdm/_tqdm.py:886:            self.n, self.total,
+tqdm/_tqdm.py:887:            elapsed if elapsed is not None else self._time() - self.start_t,
+tqdm/_tqdm.py:888:            self.dynamic_ncols(self.fp) if self.dynamic_ncols else self.ncols,
+tqdm/_tqdm.py:889:            self.desc, self.ascii, self.unit,
+tqdm/_tqdm.py:890:            self.unit_scale, 1 / self.avg_time if self.avg_time else None,
+tqdm/_tqdm.py:891:            self.bar_format, self.postfix, self.unit_divisor)
+tqdm/_tqdm.py:190:        def print_status(s):
+tqdm/_tqdm.py:191:            len_s = len(s)
+tqdm/_tqdm.py:192:            fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+tqdm/_tqdm.py:184:        def fp_write(s):
+tqdm/_tqdm.py:185:            fp.write(_unicode(s))
+tqdm/_tqdm.py:186:            fp_flush()
+tqdm/_tqdm.py:193:            last_len[0] = len_s
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:864:        self.last_print_t = self._time()
+tqdm/_tqdm.py:866:        self.start_t = self.last_print_t
+tqdm/_tqdm.py:874:    def __enter__(self):
+tqdm/_tqdm.py:875:        return self
+tqdm/_tqdm.py:881:    def __del__(self):
+tqdm/_tqdm.py:882:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1080:            return
+tqdm/tests/tests_tqdm.py:1576:            assert not t
+tqdm/_tqdm.py:868:    def __len__(self):
+tqdm/_tqdm.py:869:        return self.total if self.iterable is None else \
+tqdm/_tqdm.py:870:            (self.iterable.shape[0] if hasattr(self.iterable, "shape")
+tqdm/_tqdm.py:871:             else len(self.iterable) if hasattr(self.iterable, "__len__")
+tqdm/_tqdm.py:872:             else getattr(self, "total", None))
+tqdm/_tqdm.py:877:    def __exit__(self, *exc):
+tqdm/_tqdm.py:878:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1083:        self.disable = True
+tqdm/_tqdm.py:1086:        pos = abs(self.pos)
+tqdm/_tqdm.py:1087:        self._decr_instances(self)
+tqdm/_tqdm.py:432:    def _decr_instances(cls, instance):
+tqdm/_tqdm.py:437:        with cls._lock:
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:440:            except KeyError:
+tqdm/_tqdm.py:441:                if not instance.gui:  # pragma: no cover
+tqdm/_tqdm.py:442:                    raise
+tqdm/_tqdm.py:443:            else:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:445:                    # negative `pos` means fixed
+tqdm/_tqdm.py:446:                    if inst.pos > abs(instance.pos):
+tqdm/_tqdm.py:447:                        inst.pos -= 1
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_utils.py:129:    def __eq__(self, other):
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_utils.py:130:        return self._comparable == other._comparable
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:450:        if not cls._instances and cls.monitor:
+tqdm/_tqdm.py:451:            try:
+tqdm/_tqdm.py:452:                cls.monitor.exit()
+tqdm/_monitor.py:48:    def exit(self):
+tqdm/_monitor.py:49:        self.was_killed.set()
+tqdm/_monitor.py:50:        self.join()
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:95:    def report(self):
+tqdm/_monitor.py:96:        return not self.was_killed.is_set()
+tqdm/_monitor.py:51:        return self.report()
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:1090:        if not hasattr(self, "sp"):
+tqdm/_tqdm.py:1097:        try:
+tqdm/_tqdm.py:1098:            fp_write('')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:1104:        with self._lock:
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1106:                self.moveto(pos)
+tqdm/_tqdm.py:1107:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1110:                    # stats for overall rate (no weighted average)
+tqdm/_tqdm.py:1111:                    self.avg_time = None
+tqdm/_tqdm.py:1112:                    self.sp(self.__repr__())
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1114:                    self.moveto(-pos)
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1116:                              for i in self._instances] + [0]):
+tqdm/_tqdm.py:1117:                    # only if not nested (#477)
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1119:            else:
+tqdm/_tqdm.py:1120:                self.sp('')  # clear up last bar
+tqdm/_tqdm.py:1121:                if pos:
+tqdm/_tqdm.py:1122:                    self.moveto(-pos)
+tqdm/_tqdm.py:1123:                else:
+tqdm/_tqdm.py:1124:                    fp_write('\r')
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:879:        return False
+tqdm/tests/tests_tqdm.py:1577:        with tqdm([0], file=our_file, disable=disable) as t:
+tqdm/tests/tests_tqdm.py:1578:            assert t
+tqdm/_tqdm.py:401:    def __new__(cls, *args, **kwargs):
+tqdm/_tqdm.py:403:        instance = object.__new__(cls)
+tqdm/_tqdm.py:405:        if "_instances" not in cls.__dict__:
+tqdm/_tqdm.py:407:        if "_lock" not in cls.__dict__:
+tqdm/_tqdm.py:409:        with cls._lock:
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:412:        if cls.monitor_interval and (cls.monitor is None or not
+tqdm/_tqdm.py:414:            try:
+tqdm/_monitor.py:31:    def __init__(self, tqdm_cls, sleep_interval):
+tqdm/_monitor.py:32:        Thread.__init__(self)
+tqdm/_monitor.py:33:        self.daemon = True  # kill thread when main killed (KeyboardInterrupt)
+tqdm/_monitor.py:34:        self.was_killed = Event()
+tqdm/_monitor.py:35:        self.woken = 0  # last time woken up, to sync with monitor
+tqdm/_monitor.py:36:        self.tqdm_cls = tqdm_cls
+tqdm/_monitor.py:37:        self.sleep_interval = sleep_interval
+tqdm/_monitor.py:38:        if TMonitor._time is not None:
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:42:        if TMonitor._event is not None:
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:46:        self.start()
+tqdm/_monitor.py:59:    def run(self):
+tqdm/_monitor.py:60:        cur_t = self._time()
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_tqdm.py:415:                cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/_tqdm.py:422:        return instance
+tqdm/_tqdm.py:641:    def __init__(self, iterable=None, desc=None, total=None, leave=True,
+tqdm/_tqdm.py:745:        if file is None:
+tqdm/_tqdm.py:748:        if disable is None and hasattr(file, "isatty") and not file.isatty():
+tqdm/_tqdm.py:751:        if disable:
+tqdm/_tqdm.py:759:        if kwargs:
+tqdm/_tqdm.py:769:        if total is None and iterable is not None:
+tqdm/_tqdm.py:770:            try:
+tqdm/_tqdm.py:771:                total = len(iterable)
+tqdm/_tqdm.py:775:        if ((ncols is None) and (file in (sys.stderr, sys.stdout))) or \
+tqdm/_tqdm.py:790:        if miniters is None:
+tqdm/_tqdm.py:791:            miniters = 0
+tqdm/_tqdm.py:792:            dynamic_miniters = True
+tqdm/_tqdm.py:796:        if mininterval is None:
+tqdm/_tqdm.py:799:        if maxinterval is None:
+tqdm/_tqdm.py:802:        if ascii is None:
+tqdm/_utils.py:156:def _supports_unicode(fp):
+tqdm/_utils.py:157:    try:
+tqdm/_utils.py:142:def _is_utf(encoding):
+tqdm/_utils.py:143:    try:
+tqdm/_utils.py:144:        u'\u2588\u2589'.encode(encoding)
+tqdm/_utils.py:147:    except Exception:  # pragma: no cover
+tqdm/_utils.py:148:        try:
+tqdm/_utils.py:150:        except:
+tqdm/_utils.py:151:            return False
+tqdm/_utils.py:158:        return _is_utf(fp.encoding)
+tqdm/_tqdm.py:803:            ascii = not _supports_unicode(file)
+tqdm/_tqdm.py:805:        if bar_format and not ascii:
+tqdm/_tqdm.py:809:        if smoothing is None:
+tqdm/_tqdm.py:813:        self.iterable = iterable
+tqdm/_tqdm.py:814:        self.desc = desc or ''
+tqdm/_tqdm.py:815:        self.total = total
+tqdm/_tqdm.py:816:        self.leave = leave
+tqdm/_tqdm.py:817:        self.fp = file
+tqdm/_tqdm.py:818:        self.ncols = ncols
+tqdm/_tqdm.py:819:        self.mininterval = mininterval
+tqdm/_tqdm.py:820:        self.maxinterval = maxinterval
+tqdm/_tqdm.py:821:        self.miniters = miniters
+tqdm/_tqdm.py:822:        self.dynamic_miniters = dynamic_miniters
+tqdm/_tqdm.py:823:        self.ascii = ascii
+tqdm/_tqdm.py:824:        self.disable = disable
+tqdm/_tqdm.py:825:        self.unit = unit
+tqdm/_tqdm.py:826:        self.unit_scale = unit_scale
+tqdm/_tqdm.py:827:        self.unit_divisor = unit_divisor
+tqdm/_tqdm.py:828:        self.gui = gui
+tqdm/_tqdm.py:829:        self.dynamic_ncols = dynamic_ncols
+tqdm/_tqdm.py:830:        self.smoothing = smoothing
+tqdm/_tqdm.py:831:        self.avg_time = None
+tqdm/_tqdm.py:832:        self._time = time
+tqdm/_tqdm.py:833:        self.bar_format = bar_format
+tqdm/_tqdm.py:834:        self.postfix = None
+tqdm/_tqdm.py:835:        if postfix:
+tqdm/_tqdm.py:842:        self.last_print_n = initial
+tqdm/_tqdm.py:843:        self.n = initial
+tqdm/_tqdm.py:847:        with self._lock:
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:850:            else:  # mark fixed positions as negative
+tqdm/_tqdm.py:851:                self.pos = -position
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:425:    def _get_free_pos(cls, instance=None):
+tqdm/_tqdm.py:427:        positions = set(abs(inst.pos) for inst in cls._instances
+tqdm/_tqdm.py:428:                        if inst is not instance and hasattr(inst, "pos"))
+tqdm/_tqdm.py:429:        return min(set(range(len(positions) + 1)).difference(positions))
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:853:        if not gui:
+tqdm/_tqdm.py:175:    def status_printer(file):
+tqdm/_tqdm.py:181:        fp = file
+tqdm/_tqdm.py:182:        fp_flush = getattr(fp, 'flush', lambda: None)  # pragma: no cover
+tqdm/_tqdm.py:188:        last_len = [0]
+tqdm/_tqdm.py:195:        return print_status
+tqdm/_tqdm.py:855:            self.sp = self.status_printer(self.fp)
+tqdm/_tqdm.py:856:            with self._lock:
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:858:                    self.moveto(abs(self.pos))
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:861:                    self.moveto(-abs(self.pos))
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:884:    def __repr__(self, elapsed=None):
+tqdm/_tqdm.py:198:    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+tqdm/_tqdm.py:262:        if total and n > total:
+tqdm/_tqdm.py:266:        if unit_scale and unit_scale not in (True, 1):
+tqdm/_tqdm.py:271:        format_interval = tqdm.format_interval
+tqdm/_tqdm.py:154:    def format_interval(t):
+tqdm/_tqdm.py:167:        mins, s = divmod(int(t), 60)
+tqdm/_tqdm.py:168:        h, m = divmod(mins, 60)
+tqdm/_tqdm.py:169:        if h:
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:272:        elapsed_str = format_interval(elapsed)
+tqdm/_tqdm.py:276:        if rate is None and elapsed:
+tqdm/_tqdm.py:278:        inv_rate = 1 / rate if rate else None
+tqdm/_tqdm.py:279:        format_sizeof = tqdm.format_sizeof
+tqdm/_tqdm.py:280:        rate_noinv_fmt = ((format_sizeof(rate) if unit_scale else
+tqdm/_tqdm.py:281:                           '{0:5.2f}'.format(rate))
+tqdm/_tqdm.py:282:                          if rate else '?') + unit + '/s'
+tqdm/_tqdm.py:283:        rate_inv_fmt = ((format_sizeof(inv_rate) if unit_scale else
+tqdm/_tqdm.py:284:                         '{0:5.2f}'.format(inv_rate))
+tqdm/_tqdm.py:285:                        if inv_rate else '?') + 's/' + unit
+tqdm/_tqdm.py:286:        rate_fmt = rate_inv_fmt if inv_rate and inv_rate > 1 else rate_noinv_fmt
+tqdm/_tqdm.py:288:        if unit_scale:
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:294:            total_fmt = str(total)
+tqdm/_tqdm.py:296:        try:
+tqdm/_tqdm.py:297:            postfix = ', ' + postfix if postfix else ''
+tqdm/_tqdm.py:302:        if total:
+tqdm/_tqdm.py:304:            frac = n / total
+tqdm/_tqdm.py:305:            percentage = frac * 100
+tqdm/_tqdm.py:307:            remaining_str = format_interval((total - n) / rate) \
+tqdm/_tqdm.py:308:                if rate else '?'
+tqdm/_tqdm.py:311:            if prefix:
+tqdm/_tqdm.py:316:                l_bar = ''
+tqdm/_tqdm.py:316:                l_bar = ''
+tqdm/_tqdm.py:317:            l_bar += '{0:3.0f}%|'.format(percentage)
+tqdm/_tqdm.py:318:            r_bar = '| {0}/{1} [{2}<{3}, {4}{5}]'.format(
+tqdm/_tqdm.py:319:                n_fmt, total_fmt, elapsed_str, remaining_str, rate_fmt, postfix)
+tqdm/_tqdm.py:321:            if ncols == 0:
+tqdm/_tqdm.py:324:            if bar_format:
+tqdm/_tqdm.py:365:            N_BARS = max(1, ncols - len(l_bar) - len(r_bar)) if ncols \
+tqdm/_tqdm.py:366:                else 10
+tqdm/_tqdm.py:369:            if ascii:
+tqdm/_tqdm.py:370:                bar_length, frac_bar_length = divmod(
+tqdm/_tqdm.py:371:                    int(frac * N_BARS * 10), 10)
+tqdm/_tqdm.py:373:                bar = '#' * bar_length
+tqdm/_tqdm.py:374:                frac_bar = chr(48 + frac_bar_length) if frac_bar_length \
+tqdm/_tqdm.py:375:                    else ' '
+tqdm/_tqdm.py:385:            if bar_length < N_BARS:
+tqdm/_tqdm.py:386:                full_bar = bar + frac_bar + \
+tqdm/_tqdm.py:387:                    ' ' * max(N_BARS - bar_length - 1, 0)
+tqdm/_tqdm.py:393:            return l_bar + full_bar + r_bar
+tqdm/_tqdm.py:885:        return self.format_meter(
+tqdm/_tqdm.py:886:            self.n, self.total,
+tqdm/_tqdm.py:887:            elapsed if elapsed is not None else self._time() - self.start_t,
+tqdm/_tqdm.py:888:            self.dynamic_ncols(self.fp) if self.dynamic_ncols else self.ncols,
+tqdm/_tqdm.py:889:            self.desc, self.ascii, self.unit,
+tqdm/_tqdm.py:890:            self.unit_scale, 1 / self.avg_time if self.avg_time else None,
+tqdm/_tqdm.py:891:            self.bar_format, self.postfix, self.unit_divisor)
+tqdm/_tqdm.py:190:        def print_status(s):
+tqdm/_tqdm.py:191:            len_s = len(s)
+tqdm/_tqdm.py:192:            fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+tqdm/_tqdm.py:184:        def fp_write(s):
+tqdm/_tqdm.py:185:            fp.write(_unicode(s))
+tqdm/_tqdm.py:186:            fp_flush()
+tqdm/_tqdm.py:193:            last_len[0] = len_s
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:864:        self.last_print_t = self._time()
+tqdm/_tqdm.py:866:        self.start_t = self.last_print_t
+tqdm/_tqdm.py:874:    def __enter__(self):
+tqdm/_tqdm.py:875:        return self
+tqdm/_tqdm.py:881:    def __del__(self):
+tqdm/_tqdm.py:882:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1080:            return
+tqdm/tests/tests_tqdm.py:1578:            assert t
+tqdm/_tqdm.py:868:    def __len__(self):
+tqdm/_tqdm.py:869:        return self.total if self.iterable is None else \
+tqdm/_tqdm.py:870:            (self.iterable.shape[0] if hasattr(self.iterable, "shape")
+tqdm/_tqdm.py:871:             else len(self.iterable) if hasattr(self.iterable, "__len__")
+tqdm/_tqdm.py:872:             else getattr(self, "total", None))
+tqdm/_tqdm.py:877:    def __exit__(self, *exc):
+tqdm/_tqdm.py:878:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1083:        self.disable = True
+tqdm/_tqdm.py:1086:        pos = abs(self.pos)
+tqdm/_tqdm.py:1087:        self._decr_instances(self)
+tqdm/_tqdm.py:432:    def _decr_instances(cls, instance):
+tqdm/_tqdm.py:437:        with cls._lock:
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:440:            except KeyError:
+tqdm/_tqdm.py:441:                if not instance.gui:  # pragma: no cover
+tqdm/_tqdm.py:442:                    raise
+tqdm/_tqdm.py:443:            else:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:445:                    # negative `pos` means fixed
+tqdm/_tqdm.py:446:                    if inst.pos > abs(instance.pos):
+tqdm/_tqdm.py:447:                        inst.pos -= 1
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_utils.py:129:    def __eq__(self, other):
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_utils.py:130:        return self._comparable == other._comparable
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:450:        if not cls._instances and cls.monitor:
+tqdm/_tqdm.py:451:            try:
+tqdm/_tqdm.py:452:                cls.monitor.exit()
+tqdm/_monitor.py:48:    def exit(self):
+tqdm/_monitor.py:49:        self.was_killed.set()
+tqdm/_monitor.py:50:        self.join()
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:95:    def report(self):
+tqdm/_monitor.py:96:        return not self.was_killed.is_set()
+tqdm/_monitor.py:51:        return self.report()
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:1090:        if not hasattr(self, "sp"):
+tqdm/_tqdm.py:1097:        try:
+tqdm/_tqdm.py:1098:            fp_write('')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:1104:        with self._lock:
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1106:                self.moveto(pos)
+tqdm/_tqdm.py:1107:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1110:                    # stats for overall rate (no weighted average)
+tqdm/_tqdm.py:1111:                    self.avg_time = None
+tqdm/_tqdm.py:1112:                    self.sp(self.__repr__())
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1114:                    self.moveto(-pos)
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1116:                              for i in self._instances] + [0]):
+tqdm/_tqdm.py:1117:                    # only if not nested (#477)
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1119:            else:
+tqdm/_tqdm.py:1120:                self.sp('')  # clear up last bar
+tqdm/_tqdm.py:1121:                if pos:
+tqdm/_tqdm.py:1122:                    self.moveto(-pos)
+tqdm/_tqdm.py:1123:                else:
+tqdm/_tqdm.py:1124:                    fp_write('\r')
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:879:        return False
+tqdm/tests/tests_tqdm.py:1579:        with tqdm(file=our_file, disable=disable) as t:
+tqdm/tests/tests_tqdm.py:1580:            try:
+tqdm/tests/tests_tqdm.py:1581:                print(bool(t))
+tqdm/tests/tests_tqdm.py:1582:            except TypeError:
+tqdm/tests/tests_tqdm.py:1583:                pass
+tqdm/tests/tests_tqdm.py:1584:            else:
+tqdm/tests/tests_tqdm.py:1585:                raise TypeError(
+tqdm/tests/tests_tqdm.py:1586:                    "Expected tqdm() with neither total nor iterable to fail")
+tqdm/_tqdm.py:401:    def __new__(cls, *args, **kwargs):
+tqdm/_tqdm.py:403:        instance = object.__new__(cls)
+tqdm/_tqdm.py:405:        if "_instances" not in cls.__dict__:
+tqdm/_tqdm.py:407:        if "_lock" not in cls.__dict__:
+tqdm/_tqdm.py:409:        with cls._lock:
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:412:        if cls.monitor_interval and (cls.monitor is None or not
+tqdm/_tqdm.py:414:            try:
+tqdm/_monitor.py:31:    def __init__(self, tqdm_cls, sleep_interval):
+tqdm/_monitor.py:32:        Thread.__init__(self)
+tqdm/_monitor.py:33:        self.daemon = True  # kill thread when main killed (KeyboardInterrupt)
+tqdm/_monitor.py:34:        self.was_killed = Event()
+tqdm/_monitor.py:35:        self.woken = 0  # last time woken up, to sync with monitor
+tqdm/_monitor.py:36:        self.tqdm_cls = tqdm_cls
+tqdm/_monitor.py:37:        self.sleep_interval = sleep_interval
+tqdm/_monitor.py:38:        if TMonitor._time is not None:
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:42:        if TMonitor._event is not None:
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:46:        self.start()
+tqdm/_monitor.py:59:    def run(self):
+tqdm/_monitor.py:60:        cur_t = self._time()
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_tqdm.py:415:                cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_tqdm.py:422:        return instance
+tqdm/_tqdm.py:641:    def __init__(self, iterable=None, desc=None, total=None, leave=True,
+tqdm/_tqdm.py:745:        if file is None:
+tqdm/_tqdm.py:748:        if disable is None and hasattr(file, "isatty") and not file.isatty():
+tqdm/_tqdm.py:751:        if disable:
+tqdm/_tqdm.py:759:        if kwargs:
+tqdm/_tqdm.py:769:        if total is None and iterable is not None:
+tqdm/_tqdm.py:775:        if ((ncols is None) and (file in (sys.stderr, sys.stdout))) or \
+tqdm/_tqdm.py:790:        if miniters is None:
+tqdm/_tqdm.py:791:            miniters = 0
+tqdm/_tqdm.py:792:            dynamic_miniters = True
+tqdm/_tqdm.py:796:        if mininterval is None:
+tqdm/_tqdm.py:799:        if maxinterval is None:
+tqdm/_tqdm.py:802:        if ascii is None:
+tqdm/_utils.py:156:def _supports_unicode(fp):
+tqdm/_utils.py:157:    try:
+tqdm/_utils.py:142:def _is_utf(encoding):
+tqdm/_utils.py:143:    try:
+tqdm/_utils.py:144:        u'\u2588\u2589'.encode(encoding)
+tqdm/_utils.py:147:    except Exception:  # pragma: no cover
+tqdm/_utils.py:148:        try:
+tqdm/_utils.py:150:        except:
+tqdm/_utils.py:151:            return False
+tqdm/_utils.py:158:        return _is_utf(fp.encoding)
+tqdm/_tqdm.py:803:            ascii = not _supports_unicode(file)
+tqdm/_tqdm.py:805:        if bar_format and not ascii:
+tqdm/_tqdm.py:809:        if smoothing is None:
+tqdm/_tqdm.py:813:        self.iterable = iterable
+tqdm/_tqdm.py:814:        self.desc = desc or ''
+tqdm/_tqdm.py:815:        self.total = total
+tqdm/_tqdm.py:816:        self.leave = leave
+tqdm/_tqdm.py:817:        self.fp = file
+tqdm/_tqdm.py:818:        self.ncols = ncols
+tqdm/_tqdm.py:819:        self.mininterval = mininterval
+tqdm/_tqdm.py:820:        self.maxinterval = maxinterval
+tqdm/_tqdm.py:821:        self.miniters = miniters
+tqdm/_tqdm.py:822:        self.dynamic_miniters = dynamic_miniters
+tqdm/_tqdm.py:823:        self.ascii = ascii
+tqdm/_tqdm.py:824:        self.disable = disable
+tqdm/_tqdm.py:825:        self.unit = unit
+tqdm/_tqdm.py:826:        self.unit_scale = unit_scale
+tqdm/_tqdm.py:827:        self.unit_divisor = unit_divisor
+tqdm/_tqdm.py:828:        self.gui = gui
+tqdm/_tqdm.py:829:        self.dynamic_ncols = dynamic_ncols
+tqdm/_tqdm.py:830:        self.smoothing = smoothing
+tqdm/_tqdm.py:831:        self.avg_time = None
+tqdm/_tqdm.py:832:        self._time = time
+tqdm/_tqdm.py:833:        self.bar_format = bar_format
+tqdm/_tqdm.py:834:        self.postfix = None
+tqdm/_tqdm.py:835:        if postfix:
+tqdm/_tqdm.py:842:        self.last_print_n = initial
+tqdm/_tqdm.py:843:        self.n = initial
+tqdm/_tqdm.py:847:        with self._lock:
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:850:            else:  # mark fixed positions as negative
+tqdm/_tqdm.py:851:                self.pos = -position
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:848:            if position is None:
+tqdm/_tqdm.py:425:    def _get_free_pos(cls, instance=None):
+tqdm/_tqdm.py:427:        positions = set(abs(inst.pos) for inst in cls._instances
+tqdm/_tqdm.py:428:                        if inst is not instance and hasattr(inst, "pos"))
+tqdm/_tqdm.py:429:        return min(set(range(len(positions) + 1)).difference(positions))
+tqdm/_tqdm.py:849:                self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:853:        if not gui:
+tqdm/_tqdm.py:175:    def status_printer(file):
+tqdm/_tqdm.py:181:        fp = file
+tqdm/_tqdm.py:182:        fp_flush = getattr(fp, 'flush', lambda: None)  # pragma: no cover
+tqdm/_tqdm.py:188:        last_len = [0]
+tqdm/_tqdm.py:195:        return print_status
+tqdm/_tqdm.py:855:            self.sp = self.status_printer(self.fp)
+tqdm/_tqdm.py:856:            with self._lock:
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:858:                    self.moveto(abs(self.pos))
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:861:                    self.moveto(-abs(self.pos))
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:857:                if self.pos:
+tqdm/_tqdm.py:859:                self.sp(self.__repr__(elapsed=0))
+tqdm/_tqdm.py:884:    def __repr__(self, elapsed=None):
+tqdm/_tqdm.py:198:    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+tqdm/_tqdm.py:262:        if total and n > total:
+tqdm/_tqdm.py:266:        if unit_scale and unit_scale not in (True, 1):
+tqdm/_tqdm.py:271:        format_interval = tqdm.format_interval
+tqdm/_tqdm.py:154:    def format_interval(t):
+tqdm/_tqdm.py:167:        mins, s = divmod(int(t), 60)
+tqdm/_tqdm.py:168:        h, m = divmod(mins, 60)
+tqdm/_tqdm.py:169:        if h:
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:172:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/_tqdm.py:272:        elapsed_str = format_interval(elapsed)
+tqdm/_tqdm.py:276:        if rate is None and elapsed:
+tqdm/_tqdm.py:278:        inv_rate = 1 / rate if rate else None
+tqdm/_tqdm.py:279:        format_sizeof = tqdm.format_sizeof
+tqdm/_tqdm.py:280:        rate_noinv_fmt = ((format_sizeof(rate) if unit_scale else
+tqdm/_tqdm.py:281:                           '{0:5.2f}'.format(rate))
+tqdm/_tqdm.py:282:                          if rate else '?') + unit + '/s'
+tqdm/_tqdm.py:283:        rate_inv_fmt = ((format_sizeof(inv_rate) if unit_scale else
+tqdm/_tqdm.py:284:                         '{0:5.2f}'.format(inv_rate))
+tqdm/_tqdm.py:285:                        if inv_rate else '?') + 's/' + unit
+tqdm/_tqdm.py:286:        rate_fmt = rate_inv_fmt if inv_rate and inv_rate > 1 else rate_noinv_fmt
+tqdm/_tqdm.py:288:        if unit_scale:
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:293:            n_fmt = str(n)
+tqdm/_tqdm.py:294:            total_fmt = str(total)
+tqdm/_tqdm.py:296:        try:
+tqdm/_tqdm.py:297:            postfix = ', ' + postfix if postfix else ''
+tqdm/_tqdm.py:302:        if total:
+tqdm/_tqdm.py:397:            return ((prefix + ": ") if prefix else '') + \
+tqdm/_tqdm.py:397:            return ((prefix + ": ") if prefix else '') + \
+tqdm/_tqdm.py:398:                '{0}{1} [{2}, {3}{4}]'.format(
+tqdm/_tqdm.py:399:                    n_fmt, unit, elapsed_str, rate_fmt, postfix)
+tqdm/_tqdm.py:885:        return self.format_meter(
+tqdm/_tqdm.py:886:            self.n, self.total,
+tqdm/_tqdm.py:887:            elapsed if elapsed is not None else self._time() - self.start_t,
+tqdm/_tqdm.py:888:            self.dynamic_ncols(self.fp) if self.dynamic_ncols else self.ncols,
+tqdm/_tqdm.py:889:            self.desc, self.ascii, self.unit,
+tqdm/_tqdm.py:890:            self.unit_scale, 1 / self.avg_time if self.avg_time else None,
+tqdm/_tqdm.py:891:            self.bar_format, self.postfix, self.unit_divisor)
+tqdm/_tqdm.py:190:        def print_status(s):
+tqdm/_tqdm.py:191:            len_s = len(s)
+tqdm/_tqdm.py:192:            fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+tqdm/_tqdm.py:184:        def fp_write(s):
+tqdm/_tqdm.py:185:            fp.write(_unicode(s))
+tqdm/_tqdm.py:186:            fp_flush()
+tqdm/_tqdm.py:193:            last_len[0] = len_s
+tqdm/_tqdm.py:860:                if self.pos:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:864:        self.last_print_t = self._time()
+tqdm/_tqdm.py:866:        self.start_t = self.last_print_t
+tqdm/_tqdm.py:874:    def __enter__(self):
+tqdm/_tqdm.py:875:        return self
+tqdm/_tqdm.py:881:    def __del__(self):
+tqdm/_tqdm.py:882:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1080:            return
+tqdm/tests/tests_tqdm.py:1580:            try:
+tqdm/tests/tests_tqdm.py:1581:                print(bool(t))
+tqdm/_tqdm.py:868:    def __len__(self):
+tqdm/_tqdm.py:869:        return self.total if self.iterable is None else \
+tqdm/_tqdm.py:870:            (self.iterable.shape[0] if hasattr(self.iterable, "shape")
+tqdm/_tqdm.py:871:             else len(self.iterable) if hasattr(self.iterable, "__len__")
+tqdm/_tqdm.py:872:             else getattr(self, "total", None))
+tqdm/tests/tests_tqdm.py:1582:            except TypeError:
+tqdm/_tqdm.py:877:    def __exit__(self, *exc):
+tqdm/_tqdm.py:878:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1083:        self.disable = True
+tqdm/_tqdm.py:1086:        pos = abs(self.pos)
+tqdm/_tqdm.py:1087:        self._decr_instances(self)
+tqdm/_tqdm.py:432:    def _decr_instances(cls, instance):
+tqdm/_tqdm.py:437:        with cls._lock:
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:440:            except KeyError:
+tqdm/_tqdm.py:441:                if not instance.gui:  # pragma: no cover
+tqdm/_tqdm.py:442:                    raise
+tqdm/_tqdm.py:443:            else:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:445:                    # negative `pos` means fixed
+tqdm/_tqdm.py:446:                    if inst.pos > abs(instance.pos):
+tqdm/_tqdm.py:447:                        inst.pos -= 1
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:438:            try:
+tqdm/_tqdm.py:439:                cls._instances.remove(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_utils.py:129:    def __eq__(self, other):
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_utils.py:130:        return self._comparable == other._comparable
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:444:                for inst in cls._instances:
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:450:        if not cls._instances and cls.monitor:
+tqdm/_tqdm.py:451:            try:
+tqdm/_tqdm.py:452:                cls.monitor.exit()
+tqdm/_monitor.py:48:    def exit(self):
+tqdm/_monitor.py:49:        self.was_killed.set()
+tqdm/_monitor.py:50:        self.join()
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:95:    def report(self):
+tqdm/_monitor.py:96:        return not self.was_killed.is_set()
+tqdm/_monitor.py:51:        return self.report()
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:457:                cls.monitor = None
+tqdm/_tqdm.py:1090:        if not hasattr(self, "sp"):
+tqdm/_tqdm.py:1097:        try:
+tqdm/_tqdm.py:1098:            fp_write('')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:1104:        with self._lock:
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1106:                self.moveto(pos)
+tqdm/_tqdm.py:1107:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1110:                    # stats for overall rate (no weighted average)
+tqdm/_tqdm.py:1111:                    self.avg_time = None
+tqdm/_tqdm.py:1112:                    self.sp(self.__repr__())
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1114:                    self.moveto(-pos)
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1116:                              for i in self._instances] + [0]):
+tqdm/_tqdm.py:1117:                    # only if not nested (#477)
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1119:            else:
+tqdm/_tqdm.py:1120:                self.sp('')  # clear up last bar
+tqdm/_tqdm.py:1121:                if pos:
+tqdm/_tqdm.py:1122:                    self.moveto(-pos)
+tqdm/_tqdm.py:1123:                else:
+tqdm/_tqdm.py:1124:                    fp_write('\r')
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:1105:            if pos:
+tqdm/_tqdm.py:1108:            if self.leave:
+tqdm/_tqdm.py:1109:                if self.last_print_n < self.n:
+tqdm/_tqdm.py:1113:                if pos:
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1115:                elif not max([abs(getattr(i, "pos", 0))
+tqdm/_tqdm.py:1118:                    fp_write('\n')
+tqdm/_tqdm.py:1094:        def fp_write(s):
+tqdm/_tqdm.py:1095:            self.fp.write(_unicode(s))
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:879:        return False
+tqdm/_tqdm.py:881:    def __del__(self):
+tqdm/_tqdm.py:882:        self.close()
+tqdm/_tqdm.py:1075:    def close(self):
+tqdm/_tqdm.py:1079:        if self.disable:
+tqdm/_tqdm.py:1080:            return
+tqdm/tests/tests_tqdm.py:1591:        internal(our_file, True)
+tqdm/tests/tests_tqdm.py:1566:    def internal(our_file, disable):
+tqdm/tests/tests_tqdm.py:1567:        with tqdm(total=10, file=our_file, disable=disable) as t:
+tqdm/tests/tests_tqdm.py:1568:            assert t
+tqdm/_tqdm.py:401:    def __new__(cls, *args, **kwargs):
+tqdm/_tqdm.py:403:        instance = object.__new__(cls)
+tqdm/_tqdm.py:405:        if "_instances" not in cls.__dict__:
+tqdm/_tqdm.py:407:        if "_lock" not in cls.__dict__:
+tqdm/_tqdm.py:409:        with cls._lock:
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:105:    def __enter__(self):
+tqdm/_tqdm.py:106:        self.acquire()
+tqdm/_tqdm.py:97:    def acquire(self):
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:98:        for lock in self.locks:
+tqdm/_tqdm.py:99:            lock.acquire()
+tqdm/_tqdm.py:410:            cls._instances.add(instance)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_tqdm.py:108:    def __exit__(self, *exc):
+tqdm/_tqdm.py:109:        self.release()
+tqdm/_tqdm.py:101:    def release(self):
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:102:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/_tqdm.py:103:            lock.release()
+tqdm/_tqdm.py:412:        if cls.monitor_interval and (cls.monitor is None or not
+tqdm/_tqdm.py:414:            try:
+tqdm/_monitor.py:31:    def __init__(self, tqdm_cls, sleep_interval):
+tqdm/_monitor.py:32:        Thread.__init__(self)
+tqdm/_monitor.py:33:        self.daemon = True  # kill thread when main killed (KeyboardInterrupt)
+tqdm/_monitor.py:34:        self.was_killed = Event()
+tqdm/_monitor.py:35:        self.woken = 0  # last time woken up, to sync with monitor
+tqdm/_monitor.py:36:        self.tqdm_cls = tqdm_cls
+tqdm/_monitor.py:37:        self.sleep_interval = sleep_interval
+tqdm/_monitor.py:38:        if TMonitor._time is not None:
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:41:            self._time = time
+tqdm/_monitor.py:42:        if TMonitor._event is not None:
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:45:            self._event = Event
+tqdm/_monitor.py:46:        self.start()
+tqdm/_monitor.py:59:    def run(self):
+tqdm/_monitor.py:60:        cur_t = self._time()
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_monitor.py:61:        while True:
+tqdm/_monitor.py:62:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:63:            # Need to be done just before sleeping
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_monitor.py:65:            # Sleep some time...
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:67:            # Quit if killed
+tqdm/_monitor.py:68:            if self.was_killed.is_set():
+tqdm/_monitor.py:69:                return
+tqdm/_monitor.py:70:            # Then monitor!
+tqdm/_monitor.py:71:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:72:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:73:                cur_t = self._time()
+tqdm/_monitor.py:74:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:75:                instances = self.get_instances()
+tqdm/_monitor.py:76:                for instance in instances:
+tqdm/_monitor.py:77:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:78:                    if self.was_killed.is_set():
+tqdm/_monitor.py:79:                        return
+tqdm/_monitor.py:80:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:81:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:82:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:83:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:84:                            instance.maxinterval:
+tqdm/_monitor.py:85:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:86:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:87:                        instance.miniters = 1
+tqdm/_monitor.py:88:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:89:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:90:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:91:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:92:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:93:                         TqdmSynchronisationWarning)
+tqdm/_tqdm.py:415:                cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/_tqdm.py:422:        return instance
+tqdm/_tqdm.py:641:    def __init__(self, iterable=None, desc=None, total=None, leave=True,
+tqdm/_tqdm.py:745:        if file is None:
+tqdm/_monitor.py:64:            self.woken = cur_t
+tqdm/_tqdm.py:748:        if disable is None and hasattr(file, "isatty") and not file.isatty():
+tqdm/_monitor.py:66:            self.was_killed.wait(self.sleep_interval)
+tqdm/_tqdm.py:751:        if disable:
+tqdm/_tqdm.py:752:            self.iterable = iterable
+tqdm/_tqdm.py:753:            self.disable = disable
+tqdm/_tqdm.py:425:    def _get_free_pos(cls, instance=None):
+tqdm/_tqdm.py:427:        positions = set(abs(inst.pos) for inst in cls._instances
+tqdm/_tqdm.py:428:                        if inst is not instance and hasattr(inst, "pos"))
+tqdm/_tqdm.py:429:        return min(set(range(len(positions) + 1)).difference(positions))
+tqdm/_tqdm.py:754:            self.pos = self._get_free_pos(self)
+tqdm/_tqdm.py:755:            self._instances.remove(self)
+tqdm/_tqdm.py:897:    def __hash__(self):
+tqdm/_tqdm.py:898:        return id(self)
+tqdm/_utils.py:129:    def __eq__(self, other):
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_tqdm.py:894:    def _comparable(self):
+tqdm/_tqdm.py:895:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/_utils.py:130:        return self._comparable == other._comparable
+tqdm/_tqdm.py:756:            self.n = initial
+tqdm/_tqdm.py:757:            return
+tqdm/_tqdm.py:874:    def __enter__(self):
+tqdm/_tqdm.py:875:        return self
+tqdm/tests/tests_tqdm.py:1568:            assert t

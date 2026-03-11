@@ -1,0 +1,974 @@
+tqdm/tests/tests_contrib.py:4:import sys
+tqdm/tests/tests_contrib.py:5:from tqdm.contrib import tenumerate, tzip, tmap
+tqdm/__init__.py:1:from .std import tqdm, trange
+tqdm/std.py:12:from .utils import _supports_unicode, _environ_cols_wrapper, _range, _unich, \
+tqdm/std.py:13:    _term_move_up, _unicode, WeakSet, _basestring, _OrderedDict, \
+tqdm/std.py:14:    Comparable, _is_ascii, FormatReplace, disp_len, disp_trim, \
+tqdm/std.py:15:    SimpleTextIOWrapper, CallbackIOWrapper
+tqdm/utils.py:1:from functools import wraps
+tqdm/utils.py:2:import os
+tqdm/utils.py:3:from platform import system as _curos
+tqdm/utils.py:4:import re
+tqdm/utils.py:5:import subprocess
+tqdm/utils.py:6:CUR_OS = _curos()
+tqdm/utils.py:7:IS_WIN = CUR_OS in ['Windows', 'cli']
+tqdm/utils.py:16:if True:  # pragma: no cover
+tqdm/utils.py:17:    try:
+tqdm/utils.py:19:    except NameError:
+tqdm/utils.py:20:        _range = range
+tqdm/utils.py:22:    try:
+tqdm/utils.py:24:    except NameError:
+tqdm/utils.py:25:        _unich = chr
+tqdm/utils.py:27:    try:
+tqdm/utils.py:29:    except NameError:
+tqdm/utils.py:30:        _unicode = str
+tqdm/utils.py:32:    try:
+tqdm/utils.py:33:        if IS_WIN:
+tqdm/utils.py:36:            raise ImportError
+tqdm/utils.py:36:            raise ImportError
+tqdm/utils.py:37:    except ImportError:
+tqdm/utils.py:45:    try:
+tqdm/utils.py:46:        from weakref import WeakSet
+tqdm/utils.py:50:    try:
+tqdm/utils.py:52:    except NameError:
+tqdm/utils.py:53:        _basestring = str
+tqdm/utils.py:55:    try:  # py>=2.7,>=3.1
+tqdm/utils.py:56:        from collections import OrderedDict as _OrderedDict
+tqdm/utils.py:129:class FormatReplace(object):
+tqdm/utils.py:144:class Comparable(object):
+tqdm/utils.py:165:class ObjectWrapper(object):
+tqdm/utils.py:190:class SimpleTextIOWrapper(ObjectWrapper):
+tqdm/utils.py:207:class CallbackIOWrapper(ObjectWrapper):
+tqdm/utils.py:337:try:
+tqdm/utils.py:339:    from unicodedata import east_asian_width
+tqdm/utils.py:343:    def _text_width(s):
+tqdm/std.py:16:from ._monitor import TMonitor
+tqdm/_monitor.py:1:from threading import Event, Thread, current_thread
+tqdm/_monitor.py:2:from time import time
+tqdm/_monitor.py:3:from warnings import warn
+tqdm/_monitor.py:4:import atexit
+tqdm/_monitor.py:8:class TqdmSynchronisationWarning(RuntimeWarning):
+tqdm/_monitor.py:14:class TMonitor(Thread):
+tqdm/_monitor.py:29:    _time = None
+tqdm/_monitor.py:30:    _event = None
+tqdm/std.py:18:from contextlib import contextmanager
+tqdm/std.py:19:import sys
+tqdm/std.py:20:from numbers import Number
+tqdm/std.py:21:from time import time
+tqdm/std.py:23:import threading as th
+tqdm/std.py:24:from warnings import warn
+tqdm/std.py:34:class TqdmTypeError(TypeError):
+tqdm/std.py:38:class TqdmKeyError(KeyError):
+tqdm/std.py:42:class TqdmWarning(Warning):
+tqdm/std.py:55:class TqdmExperimentalWarning(TqdmWarning, FutureWarning):
+tqdm/std.py:60:class TqdmDeprecationWarning(TqdmWarning, DeprecationWarning):
+tqdm/std.py:65:class TqdmMonitorWarning(TqdmWarning, RuntimeWarning):
+tqdm/std.py:70:class TqdmDefaultWriteLock(object):
+tqdm/std.py:125:TqdmDefaultWriteLock.create_th_lock()
+tqdm/std.py:113:    def create_th_lock(cls):
+tqdm/std.py:114:        if not hasattr(cls, 'th_lock'):
+tqdm/std.py:115:            try:
+tqdm/std.py:116:                cls.th_lock = th.RLock()  # thread lock
+tqdm/std.py:128:class Bar(object):
+tqdm/std.py:141:    ASCII = " 123456789#"
+tqdm/std.py:142:    UTF = u" " + u''.join(map(_unich, range(0x258F, 0x2587, -1)))
+tqdm/std.py:187:class tqdm(Comparable):
+tqdm/std.py:194:    monitor_interval = 10  # set to 0 to disable the thread
+tqdm/std.py:195:    monitor = None
+tqdm/__init__.py:2:from .gui import tqdm as tqdm_gui  # TODO: remove in v5.0.0
+tqdm/gui.py:14:from .utils import _range
+tqdm/gui.py:16:from .std import tqdm as std_tqdm
+tqdm/gui.py:17:from .std import TqdmExperimentalWarning
+tqdm/gui.py:18:from warnings import warn
+tqdm/gui.py:25:class tqdm_gui(std_tqdm):  # pragma: no cover
+tqdm/gui.py:320:tqdm = tqdm_gui
+tqdm/gui.py:321:trange = tgrange
+tqdm/__init__.py:3:from .gui import trange as tgrange  # TODO: remove in v5.0.0
+tqdm/__init__.py:4:from ._tqdm_pandas import tqdm_pandas
+tqdm/_tqdm_pandas.py:1:import sys
+tqdm/__init__.py:5:from .cli import main  # TODO: remove in v5.0.0
+tqdm/cli.py:1:from .std import tqdm, TqdmTypeError, TqdmKeyError
+tqdm/cli.py:2:from ._version import __version__  # NOQA
+tqdm/_version.py:2:import os
+tqdm/_version.py:3:from io import open as io_open
+tqdm/_version.py:8:version_info = 4, 41, 1
+tqdm/_version.py:11:__version__ = '.'.join(map(str, version_info))
+tqdm/_version.py:15:scriptdir = os.path.dirname(__file__)
+tqdm/_version.py:16:gitdir = os.path.abspath(os.path.join(scriptdir, "..", ".git"))
+tqdm/_version.py:17:if os.path.isdir(gitdir):  # pragma: nocover
+tqdm/_version.py:18:    extra = None
+tqdm/_version.py:20:    with io_open(os.path.join(gitdir, "config"), 'r') as fh_config:
+tqdm/_version.py:21:        if 'tqdm' in fh_config.read():
+tqdm/_version.py:22:            # Open the HEAD file
+tqdm/_version.py:23:            with io_open(os.path.join(gitdir, "HEAD"), 'r') as fh_head:
+tqdm/_version.py:24:                extra = fh_head.readline().strip()
+tqdm/_version.py:25:            # in a branch => HEAD points to file containing last commit
+tqdm/_version.py:26:            if 'ref:' in extra:
+tqdm/_version.py:27:                # reference file path
+tqdm/_version.py:28:                ref_file = extra[5:]
+tqdm/_version.py:29:                branch_name = ref_file.rsplit('/', 1)[-1]
+tqdm/_version.py:30:
+tqdm/_version.py:31:                ref_file_path = os.path.abspath(os.path.join(gitdir, ref_file))
+tqdm/_version.py:32:                # check that we are in git folder
+tqdm/_version.py:33:                # (by stripping the git folder from the ref file path)
+tqdm/_version.py:34:                if os.path.relpath(
+tqdm/_version.py:35:                        ref_file_path, gitdir).replace('\\', '/') != ref_file:
+tqdm/_version.py:36:                    # out of git folder
+tqdm/_version.py:37:                    extra = None
+tqdm/_version.py:38:                else:
+tqdm/_version.py:39:                    # open the ref file
+tqdm/_version.py:40:                    with io_open(ref_file_path, 'r') as fh_branch:
+tqdm/_version.py:41:                        commit_hash = fh_branch.readline().strip()
+tqdm/_version.py:42:                        extra = commit_hash[:8]
+tqdm/_version.py:43:                        if branch_name != "master":
+tqdm/_version.py:44:                            extra += '.' + branch_name
+tqdm/_version.py:45:
+tqdm/_version.py:46:            # detached HEAD mode, already have commit hash
+tqdm/_version.py:47:            else:
+tqdm/_version.py:48:                extra = extra[:8]
+tqdm/_version.py:21:        if 'tqdm' in fh_config.read():
+tqdm/_version.py:23:            with io_open(os.path.join(gitdir, "HEAD"), 'r') as fh_head:
+tqdm/_version.py:24:                extra = fh_head.readline().strip()
+tqdm/_version.py:24:                extra = fh_head.readline().strip()
+tqdm/_version.py:26:            if 'ref:' in extra:
+tqdm/_version.py:28:                ref_file = extra[5:]
+tqdm/_version.py:29:                branch_name = ref_file.rsplit('/', 1)[-1]
+tqdm/_version.py:31:                ref_file_path = os.path.abspath(os.path.join(gitdir, ref_file))
+tqdm/_version.py:34:                if os.path.relpath(
+tqdm/_version.py:40:                    with io_open(ref_file_path, 'r') as fh_branch:
+tqdm/_version.py:40:                    with io_open(ref_file_path, 'r') as fh_branch:
+tqdm/_version.py:41:                        commit_hash = fh_branch.readline().strip()
+tqdm/_version.py:42:                        extra = commit_hash[:8]
+tqdm/_version.py:43:                        if branch_name != "master":
+tqdm/_version.py:44:                            extra += '.' + branch_name
+tqdm/_version.py:41:                        commit_hash = fh_branch.readline().strip()
+tqdm/_version.py:42:                        extra = commit_hash[:8]
+tqdm/_version.py:43:                        if branch_name != "master":
+tqdm/_version.py:51:    if extra is not None:
+tqdm/_version.py:52:        try:
+tqdm/_version.py:53:            with io_open(os.path.join(gitdir, "refs", "tags",
+tqdm/_version.py:54:                                      'v' + __version__)) as fdv:
+tqdm/_version.py:55:                if fdv.readline().strip()[:8] != extra[:8]:
+tqdm/_version.py:56:                    __version__ += '-' + extra
+tqdm/_version.py:57:        except Exception as e:
+tqdm/_version.py:58:            if "No such file" not in str(e):
+tqdm/cli.py:3:import sys
+tqdm/cli.py:4:import re
+tqdm/cli.py:5:import logging
+tqdm/__init__.py:6:from ._monitor import TMonitor, TqdmSynchronisationWarning
+tqdm/__init__.py:7:from ._version import __version__  # NOQA
+tqdm/__init__.py:8:from .std import TqdmTypeError, TqdmKeyError, TqdmWarning, \
+tqdm/__init__.py:9:    TqdmDeprecationWarning, TqdmExperimentalWarning, \
+tqdm/__init__.py:10:    TqdmMonitorWarning
+tqdm/contrib/__init__.py:6:from tqdm import tqdm
+tqdm/contrib/__init__.py:7:from tqdm.auto import tqdm as tqdm_auto
+tqdm/auto.py:1:import warnings
+tqdm/auto.py:2:from .std import TqdmExperimentalWarning
+tqdm/auto.py:3:with warnings.catch_warnings():
+tqdm/auto.py:4:    warnings.simplefilter("ignore", category=TqdmExperimentalWarning)
+tqdm/auto.py:5:    from .autonotebook import tqdm, trange
+tqdm/auto.py:4:    warnings.simplefilter("ignore", category=TqdmExperimentalWarning)
+tqdm/auto.py:5:    from .autonotebook import tqdm, trange
+tqdm/autonotebook.py:1:import os
+tqdm/autonotebook.py:3:try:
+tqdm/autonotebook.py:4:    from IPython import get_ipython
+tqdm/autonotebook.py:9:except:
+tqdm/autonotebook.py:10:    from .std import tqdm, trange
+tqdm/contrib/__init__.py:8:from tqdm.utils import ObjectWrapper
+tqdm/contrib/__init__.py:9:from copy import deepcopy
+tqdm/contrib/__init__.py:10:import functools
+tqdm/contrib/__init__.py:11:import sys
+tqdm/contrib/__init__.py:16:class DummyTqdmFile(ObjectWrapper):
+tqdm/contrib/__init__.py:70:if sys.version_info[:1] < (3,):
+tqdm/contrib/__init__.py:79:    tzip = _tzip
+tqdm/contrib/__init__.py:79:    tzip = _tzip
+tqdm/contrib/__init__.py:80:    tmap = _tmap
+tqdm/tests/tests_contrib.py:6:from tests_tqdm import with_setup, pretest, posttest, SkipTest, StringIO, \
+tqdm/tests/tests_contrib.py:7:    closing
+tqdm/tests/tests_tqdm.py:5:import sys
+tqdm/tests/tests_tqdm.py:6:import csv
+tqdm/tests/tests_tqdm.py:7:import re
+tqdm/tests/tests_tqdm.py:8:import os
+tqdm/tests/tests_tqdm.py:9:from nose import with_setup
+tqdm/tests/tests_tqdm.py:10:from nose.plugins.skip import SkipTest
+tqdm/tests/tests_tqdm.py:11:from nose.tools import assert_raises
+tqdm/tests/tests_tqdm.py:12:from nose.tools import eq_
+tqdm/tests/tests_tqdm.py:13:from contextlib import contextmanager
+tqdm/tests/tests_tqdm.py:14:from warnings import catch_warnings, simplefilter
+tqdm/tests/tests_tqdm.py:16:from tqdm import tqdm
+tqdm/tests/tests_tqdm.py:17:from tqdm import trange
+tqdm/tests/tests_tqdm.py:18:from tqdm import TqdmDeprecationWarning
+tqdm/tests/tests_tqdm.py:19:from tqdm.std import Bar
+tqdm/tests/tests_tqdm.py:20:from tqdm.contrib import DummyTqdmFile
+tqdm/tests/tests_tqdm.py:22:try:
+tqdm/tests/tests_tqdm.py:23:    from StringIO import StringIO
+tqdm/tests/tests_tqdm.py:24:except ImportError:
+tqdm/tests/tests_tqdm.py:25:    from io import StringIO
+tqdm/tests/tests_tqdm.py:27:from io import BytesIO
+tqdm/tests/tests_tqdm.py:28:from io import IOBase  # to support unicode strings
+tqdm/tests/tests_tqdm.py:31:class DeprecationError(Exception):
+tqdm/tests/tests_tqdm.py:36:if getattr(StringIO, '__exit__', False) and \
+tqdm/tests/tests_tqdm.py:43:try:
+tqdm/tests/tests_tqdm.py:45:except NameError:
+tqdm/tests/tests_tqdm.py:46:    _range = range
+tqdm/tests/tests_tqdm.py:48:try:
+tqdm/tests/tests_tqdm.py:50:except NameError:
+tqdm/tests/tests_tqdm.py:51:    _unicode = str
+tqdm/tests/tests_tqdm.py:54:if os.name == 'nt':
+tqdm/tests/tests_tqdm.py:62:CTRLCHR = [r'\r', r'\n', r'\x1b\[A']  # Need to escape [ for regex
+tqdm/tests/tests_tqdm.py:99:class DiscreteTimer(object):
+tqdm/tests/tests_tqdm.py:145:class UnicodeIO(IOBase):
+tqdm/tests/tests_tqdm.py:425:class WriteTypeChecker(BytesIO):
+tqdm/tests/tests_tqdm.py:124:def pretest():
+tqdm/tests/tests_tqdm.py:126:    getattr(sys, 'setswitchinterval', getattr(sys, 'setcheckinterval'))(100)
+tqdm/tests/tests_tqdm.py:128:    if getattr(tqdm, "_instances", False):
+tqdm/tests/tests_contrib.py:16:def test_enumerate():
+tqdm/tests/tests_contrib.py:18:    with closing(StringIO()) as our_file:
+tqdm/tests/tests_contrib.py:19:        a = range(9)
+tqdm/tests/tests_contrib.py:20:        assert list(tenumerate(a, file=our_file)) == list(enumerate(a))
+tqdm/tests/tests_contrib.py:21:        assert list(tenumerate(a, 42, file=our_file)) == list(enumerate(a, 42))
+tqdm/tests/tests_tqdm.py:38:    def closing(arg):
+tqdm/tests/tests_tqdm.py:39:        return arg
+tqdm/tests/tests_contrib.py:19:        a = range(9)
+tqdm/tests/tests_contrib.py:20:        assert list(tenumerate(a, file=our_file)) == list(enumerate(a))
+tqdm/contrib/__init__.py:24:def tenumerate(iterable, start=0, total=None, tqdm_class=tqdm_auto,
+tqdm/contrib/__init__.py:33:    try:
+tqdm/contrib/__init__.py:34:        import numpy as np
+tqdm/contrib/__init__.py:35:    except ImportError:
+tqdm/std.py:511:    def __new__(cls, *args, **kwargs):
+tqdm/std.py:513:        instance = object.__new__(cls)
+tqdm/std.py:515:        with cls.get_lock():
+tqdm/std.py:516:            # Add to the list of instances
+tqdm/std.py:517:            if not hasattr(cls, '_instances'):
+tqdm/std.py:518:                cls._instances = WeakSet()
+tqdm/std.py:519:            cls._instances.add(instance)
+tqdm/std.py:520:            # Create the monitoring thread
+tqdm/std.py:521:            if cls.monitor_interval and (cls.monitor is None or not
+tqdm/std.py:522:                                         cls.monitor.report()):
+tqdm/std.py:523:                try:
+tqdm/std.py:524:                    cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/std.py:525:                except Exception as e:  # pragma: nocover
+tqdm/std.py:526:                    warn("tqdm:disabling monitor support"
+tqdm/std.py:527:                         " (monitor_interval = 0) due to:\n" + str(e),
+tqdm/std.py:528:                         TqdmMonitorWarning, stacklevel=2)
+tqdm/std.py:529:                    cls.monitor_interval = 0
+tqdm/std.py:614:    def get_lock(cls):
+tqdm/std.py:616:        if not hasattr(cls, '_lock'):
+tqdm/std.py:79:    def __init__(self):
+tqdm/std.py:82:        self.create_mp_lock()
+tqdm/std.py:102:    def create_mp_lock(cls):
+tqdm/std.py:103:        if not hasattr(cls, 'mp_lock'):
+tqdm/std.py:104:            try:
+tqdm/std.py:105:                from multiprocessing import RLock
+tqdm/std.py:106:                cls.mp_lock = RLock()  # multiprocessing lock
+tqdm/std.py:83:        self.create_th_lock()
+tqdm/std.py:113:    def create_th_lock(cls):
+tqdm/std.py:114:        if not hasattr(cls, 'th_lock'):
+tqdm/std.py:84:        cls = type(self)
+tqdm/std.py:85:        self.locks = [lk for lk in [cls.mp_lock, cls.th_lock] if lk is not None]
+tqdm/std.py:617:            cls._lock = TqdmDefaultWriteLock()
+tqdm/std.py:618:        return cls._lock
+tqdm/std.py:95:    def __enter__(self):
+tqdm/std.py:96:        self.acquire()
+tqdm/std.py:87:    def acquire(self, *a, **k):
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:517:            if not hasattr(cls, '_instances'):
+tqdm/std.py:518:                cls._instances = WeakSet()
+tqdm/std.py:519:            cls._instances.add(instance)
+tqdm/std.py:1071:    def __hash__(self):
+tqdm/std.py:1072:        return id(self)
+tqdm/std.py:521:            if cls.monitor_interval and (cls.monitor is None or not
+tqdm/std.py:523:                try:
+tqdm/_monitor.py:32:    def __init__(self, tqdm_cls, sleep_interval):
+tqdm/_monitor.py:33:        Thread.__init__(self)
+tqdm/_monitor.py:34:        self.daemon = True  # kill thread when main killed (KeyboardInterrupt)
+tqdm/_monitor.py:35:        self.was_killed = Event()
+tqdm/_monitor.py:36:        self.woken = 0  # last time woken up, to sync with monitor
+tqdm/_monitor.py:37:        self.tqdm_cls = tqdm_cls
+tqdm/_monitor.py:38:        self.sleep_interval = sleep_interval
+tqdm/_monitor.py:39:        if TMonitor._time is not None:
+tqdm/_monitor.py:42:            self._time = time
+tqdm/_monitor.py:42:            self._time = time
+tqdm/_monitor.py:43:        if TMonitor._event is not None:
+tqdm/_monitor.py:46:            self._event = Event
+tqdm/_monitor.py:46:            self._event = Event
+tqdm/_monitor.py:47:        atexit.register(self.exit)
+tqdm/_monitor.py:48:        self.start()
+tqdm/_monitor.py:62:    def run(self):
+tqdm/_monitor.py:63:        cur_t = self._time()
+tqdm/_monitor.py:64:        while True:
+tqdm/_monitor.py:65:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:66:            # Need to be done just before sleeping
+tqdm/_monitor.py:67:            self.woken = cur_t
+tqdm/_monitor.py:68:            # Sleep some time...
+tqdm/_monitor.py:69:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:70:            # Quit if killed
+tqdm/_monitor.py:71:            if self.was_killed.is_set():
+tqdm/_monitor.py:72:                return
+tqdm/_monitor.py:73:            # Then monitor!
+tqdm/_monitor.py:74:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:75:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:76:                cur_t = self._time()
+tqdm/_monitor.py:77:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:78:                instances = self.get_instances()
+tqdm/_monitor.py:79:                for instance in instances:
+tqdm/_monitor.py:80:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:81:                    if self.was_killed.is_set():
+tqdm/_monitor.py:82:                        return
+tqdm/_monitor.py:83:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:84:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:85:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:86:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:87:                            instance.maxinterval:
+tqdm/_monitor.py:88:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:89:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:90:                        instance.miniters = 1
+tqdm/_monitor.py:91:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:92:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:93:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:94:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:95:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:96:                         TqdmSynchronisationWarning, stacklevel=2)
+tqdm/_monitor.py:64:        while True:
+tqdm/_monitor.py:65:            # After processing and before sleeping, notify that we woke
+tqdm/_monitor.py:66:            # Need to be done just before sleeping
+tqdm/_monitor.py:67:            self.woken = cur_t
+tqdm/_monitor.py:68:            # Sleep some time...
+tqdm/_monitor.py:69:            self.was_killed.wait(self.sleep_interval)
+tqdm/_monitor.py:70:            # Quit if killed
+tqdm/_monitor.py:71:            if self.was_killed.is_set():
+tqdm/_monitor.py:72:                return
+tqdm/_monitor.py:73:            # Then monitor!
+tqdm/_monitor.py:74:            # Acquire lock (to access _instances)
+tqdm/_monitor.py:75:            with self.tqdm_cls.get_lock():
+tqdm/_monitor.py:76:                cur_t = self._time()
+tqdm/_monitor.py:77:                # Check tqdm instances are waiting too long to print
+tqdm/_monitor.py:78:                instances = self.get_instances()
+tqdm/_monitor.py:79:                for instance in instances:
+tqdm/_monitor.py:80:                    # Check event in loop to reduce blocking time on exit
+tqdm/_monitor.py:81:                    if self.was_killed.is_set():
+tqdm/_monitor.py:82:                        return
+tqdm/_monitor.py:83:                    # Only if mininterval > 1 (else iterations are just slow)
+tqdm/_monitor.py:84:                    # and last refresh exceeded maxinterval
+tqdm/_monitor.py:85:                    if instance.miniters > 1 and \
+tqdm/_monitor.py:86:                            (cur_t - instance.last_print_t) >= \
+tqdm/_monitor.py:87:                            instance.maxinterval:
+tqdm/_monitor.py:88:                        # force bypassing miniters on next iteration
+tqdm/_monitor.py:89:                        # (dynamic_miniters adjusts mininterval automatically)
+tqdm/_monitor.py:90:                        instance.miniters = 1
+tqdm/_monitor.py:91:                        # Refresh now! (works only for manual tqdm)
+tqdm/_monitor.py:92:                        instance.refresh(nolock=True)
+tqdm/_monitor.py:93:                if instances != self.get_instances():  # pragma: nocover
+tqdm/_monitor.py:94:                    warn("Set changed size during iteration" +
+tqdm/_monitor.py:95:                         " (see https://github.com/tqdm/tqdm/issues/481)",
+tqdm/_monitor.py:96:                         TqdmSynchronisationWarning, stacklevel=2)
+tqdm/_monitor.py:67:            self.woken = cur_t
+tqdm/_monitor.py:69:            self.was_killed.wait(self.sleep_interval)
+tqdm/std.py:524:                    cls.monitor = TMonitor(cls, cls.monitor_interval)
+tqdm/std.py:98:    def __exit__(self, *exc):
+tqdm/std.py:99:        self.release()
+tqdm/std.py:91:    def release(self):
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:531:        return instance
+tqdm/std.py:784:    def __init__(self, iterable=None, desc=None, total=None, leave=True,
+tqdm/std.py:900:        if write_bytes is None:
+tqdm/std.py:901:            write_bytes = file is None and sys.version_info < (3,)
+tqdm/std.py:903:        if file is None:
+tqdm/std.py:906:        if write_bytes:
+tqdm/std.py:912:        if disable is None and hasattr(file, "isatty") and not file.isatty():
+tqdm/std.py:915:        if total is None and iterable is not None:
+tqdm/std.py:916:            try:
+tqdm/std.py:917:                total = len(iterable)
+tqdm/std.py:920:        if total == float("inf"):
+tqdm/std.py:924:        if disable:
+tqdm/std.py:934:        if kwargs:
+tqdm/std.py:948:        if ((ncols is None) and (file in (sys.stderr, sys.stdout))) or \
+tqdm/std.py:959:        if miniters is None:
+tqdm/std.py:960:            miniters = 0
+tqdm/std.py:961:            dynamic_miniters = True
+tqdm/std.py:965:        if mininterval is None:
+tqdm/std.py:968:        if maxinterval is None:
+tqdm/std.py:971:        if ascii is None:
+tqdm/utils.py:247:def _supports_unicode(fp):
+tqdm/utils.py:248:    try:
+tqdm/utils.py:233:def _is_utf(encoding):
+tqdm/utils.py:234:    try:
+tqdm/utils.py:235:        u'\u2588\u2589'.encode(encoding)
+tqdm/utils.py:238:    except Exception:  # pragma: no cover
+tqdm/utils.py:239:        try:
+tqdm/utils.py:241:        except:
+tqdm/utils.py:242:            return False
+tqdm/utils.py:249:        return _is_utf(fp.encoding)
+tqdm/std.py:972:            ascii = not _supports_unicode(file)
+tqdm/std.py:974:        if bar_format and not ((ascii is True) or _is_ascii(ascii)):
+tqdm/std.py:978:        if smoothing is None:
+tqdm/std.py:982:        self.iterable = iterable
+tqdm/std.py:983:        self.desc = desc or ''
+tqdm/std.py:984:        self.total = total
+tqdm/std.py:985:        self.leave = leave
+tqdm/std.py:986:        self.fp = file
+tqdm/std.py:987:        self.ncols = ncols
+tqdm/std.py:988:        self.mininterval = mininterval
+tqdm/std.py:989:        self.maxinterval = maxinterval
+tqdm/std.py:990:        self.miniters = miniters
+tqdm/std.py:991:        self.dynamic_miniters = dynamic_miniters
+tqdm/std.py:992:        self.ascii = ascii
+tqdm/std.py:993:        self.disable = disable
+tqdm/std.py:994:        self.unit = unit
+tqdm/std.py:995:        self.unit_scale = unit_scale
+tqdm/std.py:996:        self.unit_divisor = unit_divisor
+tqdm/std.py:997:        self.lock_args = lock_args
+tqdm/std.py:998:        self.gui = gui
+tqdm/std.py:999:        self.dynamic_ncols = dynamic_ncols
+tqdm/std.py:1000:        self.smoothing = smoothing
+tqdm/std.py:1001:        self.avg_time = None
+tqdm/std.py:1002:        self._time = time
+tqdm/std.py:1003:        self.bar_format = bar_format
+tqdm/std.py:1004:        self.postfix = None
+tqdm/std.py:1005:        if postfix:
+tqdm/std.py:1012:        self.last_print_n = initial
+tqdm/std.py:1013:        self.n = initial
+tqdm/std.py:1017:        with self._lock:
+tqdm/std.py:1018:            if position is None:
+tqdm/std.py:1019:                self.pos = self._get_free_pos(self)
+tqdm/std.py:1020:            else:  # mark fixed positions as negative
+tqdm/std.py:1021:                self.pos = -position
+tqdm/std.py:95:    def __enter__(self):
+tqdm/std.py:96:        self.acquire()
+tqdm/std.py:87:    def acquire(self, *a, **k):
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:1018:            if position is None:
+tqdm/std.py:534:    def _get_free_pos(cls, instance=None):
+tqdm/std.py:536:        positions = set(abs(inst.pos) for inst in cls._instances
+tqdm/std.py:537:                        if inst is not instance and hasattr(inst, "pos"))
+tqdm/std.py:538:        return min(set(range(len(positions) + 1)).difference(positions))
+tqdm/std.py:1019:                self.pos = self._get_free_pos(self)
+tqdm/std.py:98:    def __exit__(self, *exc):
+tqdm/std.py:99:        self.release()
+tqdm/std.py:91:    def release(self):
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:1023:        if not gui:
+tqdm/std.py:288:    def status_printer(file):
+tqdm/std.py:294:        fp = file
+tqdm/std.py:295:        fp_flush = getattr(fp, 'flush', lambda: None)  # pragma: no cover
+tqdm/std.py:301:        last_len = [0]
+tqdm/std.py:308:        return print_status
+tqdm/std.py:1025:            self.sp = self.status_printer(self.fp)
+tqdm/std.py:1026:            self.refresh(lock_args=self.lock_args)
+tqdm/std.py:1289:    def refresh(self, nolock=False, lock_args=None):
+tqdm/std.py:1302:        if self.disable:
+tqdm/std.py:1305:        if not nolock:
+tqdm/std.py:1306:            if lock_args:
+tqdm/std.py:1310:                self._lock.acquire()
+tqdm/std.py:1310:                self._lock.acquire()
+tqdm/std.py:87:    def acquire(self, *a, **k):
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:1311:        self.display()
+tqdm/std.py:1417:    def display(self, msg=None, pos=None):
+tqdm/std.py:1430:        if pos is None:
+tqdm/std.py:1431:            pos = abs(self.pos)
+tqdm/std.py:1433:        if pos:
+tqdm/std.py:1435:        self.sp(self.__repr__() if msg is None else msg)
+tqdm/std.py:1064:    def __repr__(self):
+tqdm/std.py:1403:    def format_dict(self):
+tqdm/std.py:1405:        return dict(
+tqdm/std.py:1406:            n=self.n, total=self.total,
+tqdm/std.py:1407:            elapsed=self._time() - self.start_t
+tqdm/std.py:1408:            if hasattr(self, 'start_t') else 0,
+tqdm/std.py:1409:            ncols=self.dynamic_ncols(self.fp)
+tqdm/std.py:1410:            if self.dynamic_ncols else self.ncols,
+tqdm/std.py:1411:            prefix=self.desc, ascii=self.ascii, unit=self.unit,
+tqdm/std.py:1412:            unit_scale=self.unit_scale,
+tqdm/std.py:1413:            rate=1 / self.avg_time if self.avg_time else None,
+tqdm/std.py:1414:            bar_format=self.bar_format, postfix=self.postfix,
+tqdm/std.py:1415:            unit_divisor=self.unit_divisor)
+tqdm/std.py:311:    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+tqdm/std.py:376:        if total and n >= (total + 0.5):  # allow float imprecision (#849)
+tqdm/std.py:380:        if unit_scale and unit_scale not in (True, 1):
+tqdm/std.py:228:    def format_interval(t):
+tqdm/std.py:242:        mins, s = divmod(int(t), 60)
+tqdm/std.py:243:        h, m = divmod(mins, 60)
+tqdm/std.py:244:        if h:
+tqdm/std.py:247:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/std.py:247:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/std.py:388:        elapsed_str = tqdm.format_interval(elapsed)
+tqdm/std.py:392:        if rate is None and elapsed:
+tqdm/std.py:394:        inv_rate = 1 / rate if rate else None
+tqdm/std.py:395:        format_sizeof = tqdm.format_sizeof
+tqdm/std.py:396:        rate_noinv_fmt = ((format_sizeof(rate) if unit_scale else
+tqdm/std.py:397:                           '{0:5.2f}'.format(rate))
+tqdm/std.py:398:                          if rate else '?') + unit + '/s'
+tqdm/std.py:399:        rate_inv_fmt = ((format_sizeof(inv_rate) if unit_scale else
+tqdm/std.py:400:                         '{0:5.2f}'.format(inv_rate))
+tqdm/std.py:401:                        if inv_rate else '?') + 's/' + unit
+tqdm/std.py:402:        rate_fmt = rate_inv_fmt if inv_rate and inv_rate > 1 else rate_noinv_fmt
+tqdm/std.py:404:        if unit_scale:
+tqdm/std.py:409:            n_fmt = str(n)
+tqdm/std.py:409:            n_fmt = str(n)
+tqdm/std.py:410:            total_fmt = str(total) if total is not None else '?'
+tqdm/std.py:412:        try:
+tqdm/std.py:413:            postfix = ', ' + postfix if postfix else ''
+tqdm/std.py:417:        remaining = (total - n) / rate if rate and total else 0
+tqdm/std.py:418:        remaining_str = tqdm.format_interval(remaining) if rate else '?'
+tqdm/std.py:421:        if prefix:
+tqdm/std.py:426:            l_bar = ''
+tqdm/std.py:426:            l_bar = ''
+tqdm/std.py:428:        r_bar = '| {0}/{1} [{2}<{3}, {4}{5}]'.format(
+tqdm/std.py:429:            n_fmt, total_fmt, elapsed_str, remaining_str, rate_fmt, postfix)
+tqdm/std.py:433:        format_dict = dict(
+tqdm/std.py:434:            # slight extension of self.format_dict
+tqdm/std.py:435:            n=n, n_fmt=n_fmt, total=total, total_fmt=total_fmt,
+tqdm/std.py:436:            elapsed=elapsed_str, elapsed_s=elapsed,
+tqdm/std.py:437:            ncols=ncols, desc=prefix or '', unit=unit,
+tqdm/std.py:438:            rate=inv_rate if inv_rate and inv_rate > 1 else rate,
+tqdm/std.py:439:            rate_fmt=rate_fmt, rate_noinv=rate,
+tqdm/std.py:440:            rate_noinv_fmt=rate_noinv_fmt, rate_inv=inv_rate,
+tqdm/std.py:441:            rate_inv_fmt=rate_inv_fmt,
+tqdm/std.py:442:            postfix=postfix, unit_divisor=unit_divisor,
+tqdm/std.py:443:            # plus more useful definitions
+tqdm/std.py:444:            remaining=remaining_str, remaining_s=remaining,
+tqdm/std.py:445:            l_bar=l_bar, r_bar=r_bar,
+tqdm/std.py:446:            **extra_kwargs)
+tqdm/std.py:449:        if total:
+tqdm/std.py:451:            frac = n / total
+tqdm/std.py:452:            percentage = frac * 100
+tqdm/std.py:454:            l_bar += '{0:3.0f}%|'.format(percentage)
+tqdm/std.py:456:            if ncols == 0:
+tqdm/std.py:459:            format_dict.update(l_bar=l_bar)
+tqdm/std.py:460:            if bar_format:
+tqdm/std.py:467:                bar_format = "{l_bar}{bar}{r_bar}"
+tqdm/std.py:467:                bar_format = "{l_bar}{bar}{r_bar}"
+tqdm/utils.py:135:    def __init__(self, replace=''):
+tqdm/utils.py:136:        self.replace = replace
+tqdm/utils.py:137:        self.format_called = 0
+tqdm/std.py:469:            full_bar = FormatReplace()
+tqdm/std.py:470:            try:
+tqdm/utils.py:139:    def __format__(self, _):
+tqdm/utils.py:140:        self.format_called += 1
+tqdm/utils.py:141:        return self.replace
+tqdm/std.py:471:                nobar = bar_format.format(bar=full_bar, **format_dict)
+tqdm/std.py:475:            if not full_bar.format_called:
+tqdm/std.py:145:    def __init__(self, frac, default_len=10, charset=UTF):
+tqdm/std.py:146:        if not (0 <= frac <= 1):
+tqdm/std.py:149:        assert default_len > 0
+tqdm/std.py:150:        self.frac = frac
+tqdm/std.py:151:        self.default_len = default_len
+tqdm/std.py:152:        self.charset = charset
+tqdm/std.py:480:            full_bar = Bar(
+tqdm/std.py:481:                frac,
+tqdm/std.py:482:                max(1, ncols - disp_len(nobar))
+tqdm/std.py:483:                if ncols else 10,
+tqdm/std.py:484:                charset=Bar.ASCII if ascii is True else ascii or Bar.UTF)
+tqdm/std.py:485:            if not _is_ascii(full_bar.charset) and _is_ascii(bar_format):
+tqdm/utils.py:254:def _is_ascii(s):
+tqdm/utils.py:255:    if isinstance(s, str):
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:259:        return True
+tqdm/std.py:154:    def __format__(self, format_spec):
+tqdm/std.py:155:        if format_spec:
+tqdm/std.py:170:            charset = self.charset
+tqdm/std.py:170:            charset = self.charset
+tqdm/std.py:171:            N_BARS = self.default_len
+tqdm/std.py:173:        nsyms = len(charset) - 1
+tqdm/std.py:174:        bar_length, frac_bar_length = divmod(
+tqdm/std.py:175:            int(self.frac * N_BARS * nsyms), nsyms)
+tqdm/std.py:177:        bar = charset[-1] * bar_length
+tqdm/std.py:178:        frac_bar = charset[frac_bar_length]
+tqdm/std.py:181:        if bar_length < N_BARS:
+tqdm/std.py:182:            return bar + frac_bar + \
+tqdm/std.py:183:                charset[0] * (N_BARS - bar_length - 1)
+tqdm/std.py:487:            res = bar_format.format(bar=full_bar, **format_dict)
+tqdm/std.py:488:            return disp_trim(res, ncols) if ncols else res
+tqdm/std.py:1065:        return self.format_meter(**self.format_dict)
+tqdm/std.py:303:        def print_status(s):
+tqdm/std.py:304:            len_s = len(s)
+tqdm/std.py:305:            fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+tqdm/std.py:297:        def fp_write(s):
+tqdm/std.py:298:            fp.write(_unicode(s))
+tqdm/std.py:299:            fp_flush()
+tqdm/std.py:306:            last_len[0] = len_s
+tqdm/std.py:1436:        if pos:
+tqdm/std.py:1312:        if not nolock:
+tqdm/std.py:1313:            self._lock.release()
+tqdm/std.py:91:    def release(self):
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:1314:        return True
+tqdm/std.py:1029:        self.last_print_t = self._time()
+tqdm/std.py:1031:        self.start_t = self.last_print_t
+tqdm/contrib/__init__.py:41:    return enumerate(tqdm_class(iterable, start, **tqdm_kwargs))
+tqdm/std.py:1074:    def __iter__(self):
+tqdm/std.py:1078:        iterable = self.iterable
+tqdm/std.py:1082:        if self.disable:
+tqdm/std.py:1087:        mininterval = self.mininterval
+tqdm/std.py:1088:        maxinterval = self.maxinterval
+tqdm/std.py:1089:        miniters = self.miniters
+tqdm/std.py:1090:        dynamic_miniters = self.dynamic_miniters
+tqdm/std.py:1091:        last_print_t = self.last_print_t
+tqdm/std.py:1092:        last_print_n = self.last_print_n
+tqdm/std.py:1093:        n = self.n
+tqdm/std.py:1094:        smoothing = self.smoothing
+tqdm/std.py:1095:        avg_time = self.avg_time
+tqdm/std.py:1096:        time = self._time
+tqdm/std.py:1098:        if not hasattr(self, 'sp'):
+tqdm/std.py:1108:            n += 1
+tqdm/std.py:1110:            if n - last_print_n >= self.miniters:
+tqdm/std.py:1111:                miniters = self.miniters  # watch monitoring thread changes
+tqdm/std.py:1112:                delta_t = time() - last_print_t
+tqdm/std.py:1113:                if delta_t >= mininterval:
+tqdm/std.py:1108:            n += 1
+tqdm/std.py:1110:            if n - last_print_n >= self.miniters:
+tqdm/std.py:1111:                miniters = self.miniters  # watch monitoring thread changes
+tqdm/std.py:1112:                delta_t = time() - last_print_t
+tqdm/std.py:1113:                if delta_t >= mininterval:
+tqdm/std.py:1108:            n += 1
+tqdm/std.py:1110:            if n - last_print_n >= self.miniters:
+tqdm/std.py:1111:                miniters = self.miniters  # watch monitoring thread changes
+tqdm/std.py:1112:                delta_t = time() - last_print_t
+tqdm/std.py:1113:                if delta_t >= mininterval:
+tqdm/std.py:1108:            n += 1
+tqdm/std.py:1110:            if n - last_print_n >= self.miniters:
+tqdm/std.py:1111:                miniters = self.miniters  # watch monitoring thread changes
+tqdm/std.py:1112:                delta_t = time() - last_print_t
+tqdm/std.py:1113:                if delta_t >= mininterval:
+tqdm/std.py:1108:            n += 1
+tqdm/std.py:1110:            if n - last_print_n >= self.miniters:
+tqdm/std.py:1111:                miniters = self.miniters  # watch monitoring thread changes
+tqdm/std.py:1112:                delta_t = time() - last_print_t
+tqdm/std.py:1113:                if delta_t >= mininterval:
+tqdm/std.py:1108:            n += 1
+tqdm/std.py:1110:            if n - last_print_n >= self.miniters:
+tqdm/std.py:1111:                miniters = self.miniters  # watch monitoring thread changes
+tqdm/std.py:1112:                delta_t = time() - last_print_t
+tqdm/std.py:1113:                if delta_t >= mininterval:
+tqdm/std.py:1108:            n += 1
+tqdm/std.py:1110:            if n - last_print_n >= self.miniters:
+tqdm/std.py:1111:                miniters = self.miniters  # watch monitoring thread changes
+tqdm/std.py:1112:                delta_t = time() - last_print_t
+tqdm/std.py:1113:                if delta_t >= mininterval:
+tqdm/std.py:1108:            n += 1
+tqdm/std.py:1110:            if n - last_print_n >= self.miniters:
+tqdm/std.py:1111:                miniters = self.miniters  # watch monitoring thread changes
+tqdm/std.py:1112:                delta_t = time() - last_print_t
+tqdm/std.py:1113:                if delta_t >= mininterval:
+tqdm/std.py:1108:            n += 1
+tqdm/std.py:1110:            if n - last_print_n >= self.miniters:
+tqdm/std.py:1111:                miniters = self.miniters  # watch monitoring thread changes
+tqdm/std.py:1112:                delta_t = time() - last_print_t
+tqdm/std.py:1113:                if delta_t >= mininterval:
+tqdm/std.py:1154:        self.last_print_n = last_print_n
+tqdm/std.py:1155:        self.n = n
+tqdm/std.py:1156:        self.miniters = miniters
+tqdm/std.py:1157:        self.close()
+tqdm/std.py:1235:    def close(self):
+tqdm/std.py:1237:        if self.disable:
+tqdm/std.py:1241:        self.disable = True
+tqdm/std.py:1244:        pos = abs(self.pos)
+tqdm/std.py:1245:        self._decr_instances(self)
+tqdm/std.py:541:    def _decr_instances(cls, instance):
+tqdm/std.py:546:        with cls._lock:
+tqdm/std.py:547:            try:
+tqdm/std.py:548:                cls._instances.remove(instance)
+tqdm/std.py:549:            except KeyError:
+tqdm/std.py:550:                # if not instance.gui:  # pragma: no cover
+tqdm/std.py:551:                #     raise
+tqdm/std.py:552:                pass  # py2: maybe magically removed already
+tqdm/std.py:553:            # else:
+tqdm/std.py:554:            if not instance.gui:
+tqdm/std.py:555:                for inst in cls._instances:
+tqdm/std.py:556:                    # negative `pos` means fixed
+tqdm/std.py:557:                    if hasattr(inst, "pos") and inst.pos > abs(instance.pos):
+tqdm/std.py:558:                        inst.clear(nolock=True)
+tqdm/std.py:559:                        inst.pos -= 1
+tqdm/std.py:560:                        # TODO: check this doesn't overwrite another fixed bar
+tqdm/std.py:561:            # Kill monitor if no instances are left
+tqdm/std.py:562:            if not cls._instances and cls.monitor:
+tqdm/std.py:563:                try:
+tqdm/std.py:564:                    cls.monitor.exit()
+tqdm/std.py:565:                    del cls.monitor
+tqdm/std.py:566:                except AttributeError:  # pragma: nocover
+tqdm/std.py:567:                    pass
+tqdm/std.py:568:                else:
+tqdm/std.py:569:                    cls.monitor = None
+tqdm/std.py:95:    def __enter__(self):
+tqdm/std.py:96:        self.acquire()
+tqdm/std.py:87:    def acquire(self, *a, **k):
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:547:            try:
+tqdm/std.py:548:                cls._instances.remove(instance)
+tqdm/std.py:1071:    def __hash__(self):
+tqdm/std.py:1072:        return id(self)
+tqdm/utils.py:152:    def __eq__(self, other):
+tqdm/std.py:1068:    def _comparable(self):
+tqdm/std.py:1069:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/std.py:1068:    def _comparable(self):
+tqdm/std.py:1069:        return abs(getattr(self, "pos", 1 << 31))
+tqdm/utils.py:153:        return self._comparable == other._comparable
+tqdm/std.py:554:            if not instance.gui:
+tqdm/std.py:555:                for inst in cls._instances:
+tqdm/std.py:562:            if not cls._instances and cls.monitor:
+tqdm/std.py:563:                try:
+tqdm/std.py:564:                    cls.monitor.exit()
+tqdm/_monitor.py:50:    def exit(self):
+tqdm/_monitor.py:51:        self.was_killed.set()
+tqdm/_monitor.py:52:        if self is not current_thread():
+tqdm/_monitor.py:53:            self.join()
+tqdm/_monitor.py:71:            if self.was_killed.is_set():
+tqdm/_monitor.py:72:                return
+tqdm/_monitor.py:98:    def report(self):
+tqdm/_monitor.py:99:        return not self.was_killed.is_set()
+tqdm/_monitor.py:54:        return self.report()
+tqdm/std.py:569:                    cls.monitor = None
+tqdm/std.py:569:                    cls.monitor = None
+tqdm/std.py:98:    def __exit__(self, *exc):
+tqdm/std.py:99:        self.release()
+tqdm/std.py:91:    def release(self):
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:1248:        if not hasattr(self, "sp"):
+tqdm/std.py:1255:        try:
+tqdm/std.py:1256:            fp_write('')
+tqdm/std.py:1252:        def fp_write(s):
+tqdm/std.py:1253:            self.fp.write(_unicode(s))
+tqdm/std.py:1262:        leave = pos == 0 if self.leave is None else self.leave
+tqdm/std.py:1264:        with self._lock:
+tqdm/std.py:1265:            if leave:
+tqdm/std.py:1266:                # stats for overall rate (no weighted average)
+tqdm/std.py:1267:                self.avg_time = None
+tqdm/std.py:1268:                self.display(pos=0)
+tqdm/std.py:1269:                fp_write('\n')
+tqdm/std.py:1270:            else:
+tqdm/std.py:1271:                self.display(msg='', pos=pos)
+tqdm/std.py:1272:                if not pos:
+tqdm/std.py:1273:                    fp_write('\r')
+tqdm/std.py:95:    def __enter__(self):
+tqdm/std.py:96:        self.acquire()
+tqdm/std.py:87:    def acquire(self, *a, **k):
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:88:        for lock in self.locks:
+tqdm/std.py:89:            lock.acquire(*a, **k)
+tqdm/std.py:1265:            if leave:
+tqdm/std.py:1267:                self.avg_time = None
+tqdm/std.py:1268:                self.display(pos=0)
+tqdm/std.py:1417:    def display(self, msg=None, pos=None):
+tqdm/std.py:1430:        if pos is None:
+tqdm/std.py:1433:        if pos:
+tqdm/std.py:1435:        self.sp(self.__repr__() if msg is None else msg)
+tqdm/std.py:1064:    def __repr__(self):
+tqdm/std.py:1403:    def format_dict(self):
+tqdm/std.py:1405:        return dict(
+tqdm/std.py:1406:            n=self.n, total=self.total,
+tqdm/std.py:1407:            elapsed=self._time() - self.start_t
+tqdm/std.py:1408:            if hasattr(self, 'start_t') else 0,
+tqdm/std.py:1409:            ncols=self.dynamic_ncols(self.fp)
+tqdm/std.py:1410:            if self.dynamic_ncols else self.ncols,
+tqdm/std.py:1411:            prefix=self.desc, ascii=self.ascii, unit=self.unit,
+tqdm/std.py:1412:            unit_scale=self.unit_scale,
+tqdm/std.py:1413:            rate=1 / self.avg_time if self.avg_time else None,
+tqdm/std.py:1414:            bar_format=self.bar_format, postfix=self.postfix,
+tqdm/std.py:1415:            unit_divisor=self.unit_divisor)
+tqdm/std.py:311:    def format_meter(n, total, elapsed, ncols=None, prefix='', ascii=False,
+tqdm/std.py:376:        if total and n >= (total + 0.5):  # allow float imprecision (#849)
+tqdm/std.py:380:        if unit_scale and unit_scale not in (True, 1):
+tqdm/std.py:228:    def format_interval(t):
+tqdm/std.py:242:        mins, s = divmod(int(t), 60)
+tqdm/std.py:243:        h, m = divmod(mins, 60)
+tqdm/std.py:244:        if h:
+tqdm/std.py:247:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/std.py:247:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/std.py:388:        elapsed_str = tqdm.format_interval(elapsed)
+tqdm/std.py:392:        if rate is None and elapsed:
+tqdm/std.py:393:            rate = n / elapsed
+tqdm/std.py:394:        inv_rate = 1 / rate if rate else None
+tqdm/std.py:395:        format_sizeof = tqdm.format_sizeof
+tqdm/std.py:396:        rate_noinv_fmt = ((format_sizeof(rate) if unit_scale else
+tqdm/std.py:397:                           '{0:5.2f}'.format(rate))
+tqdm/std.py:398:                          if rate else '?') + unit + '/s'
+tqdm/std.py:399:        rate_inv_fmt = ((format_sizeof(inv_rate) if unit_scale else
+tqdm/std.py:400:                         '{0:5.2f}'.format(inv_rate))
+tqdm/std.py:401:                        if inv_rate else '?') + 's/' + unit
+tqdm/std.py:402:        rate_fmt = rate_inv_fmt if inv_rate and inv_rate > 1 else rate_noinv_fmt
+tqdm/std.py:404:        if unit_scale:
+tqdm/std.py:409:            n_fmt = str(n)
+tqdm/std.py:409:            n_fmt = str(n)
+tqdm/std.py:410:            total_fmt = str(total) if total is not None else '?'
+tqdm/std.py:412:        try:
+tqdm/std.py:413:            postfix = ', ' + postfix if postfix else ''
+tqdm/std.py:417:        remaining = (total - n) / rate if rate and total else 0
+tqdm/std.py:228:    def format_interval(t):
+tqdm/std.py:242:        mins, s = divmod(int(t), 60)
+tqdm/std.py:243:        h, m = divmod(mins, 60)
+tqdm/std.py:244:        if h:
+tqdm/std.py:247:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/std.py:247:            return '{0:02d}:{1:02d}'.format(m, s)
+tqdm/std.py:418:        remaining_str = tqdm.format_interval(remaining) if rate else '?'
+tqdm/std.py:421:        if prefix:
+tqdm/std.py:426:            l_bar = ''
+tqdm/std.py:426:            l_bar = ''
+tqdm/std.py:428:        r_bar = '| {0}/{1} [{2}<{3}, {4}{5}]'.format(
+tqdm/std.py:429:            n_fmt, total_fmt, elapsed_str, remaining_str, rate_fmt, postfix)
+tqdm/std.py:433:        format_dict = dict(
+tqdm/std.py:434:            # slight extension of self.format_dict
+tqdm/std.py:435:            n=n, n_fmt=n_fmt, total=total, total_fmt=total_fmt,
+tqdm/std.py:436:            elapsed=elapsed_str, elapsed_s=elapsed,
+tqdm/std.py:437:            ncols=ncols, desc=prefix or '', unit=unit,
+tqdm/std.py:438:            rate=inv_rate if inv_rate and inv_rate > 1 else rate,
+tqdm/std.py:439:            rate_fmt=rate_fmt, rate_noinv=rate,
+tqdm/std.py:440:            rate_noinv_fmt=rate_noinv_fmt, rate_inv=inv_rate,
+tqdm/std.py:441:            rate_inv_fmt=rate_inv_fmt,
+tqdm/std.py:442:            postfix=postfix, unit_divisor=unit_divisor,
+tqdm/std.py:443:            # plus more useful definitions
+tqdm/std.py:444:            remaining=remaining_str, remaining_s=remaining,
+tqdm/std.py:445:            l_bar=l_bar, r_bar=r_bar,
+tqdm/std.py:446:            **extra_kwargs)
+tqdm/std.py:449:        if total:
+tqdm/std.py:451:            frac = n / total
+tqdm/std.py:452:            percentage = frac * 100
+tqdm/std.py:454:            l_bar += '{0:3.0f}%|'.format(percentage)
+tqdm/std.py:456:            if ncols == 0:
+tqdm/std.py:459:            format_dict.update(l_bar=l_bar)
+tqdm/std.py:460:            if bar_format:
+tqdm/std.py:467:                bar_format = "{l_bar}{bar}{r_bar}"
+tqdm/std.py:467:                bar_format = "{l_bar}{bar}{r_bar}"
+tqdm/utils.py:135:    def __init__(self, replace=''):
+tqdm/utils.py:136:        self.replace = replace
+tqdm/utils.py:137:        self.format_called = 0
+tqdm/std.py:469:            full_bar = FormatReplace()
+tqdm/std.py:470:            try:
+tqdm/utils.py:139:    def __format__(self, _):
+tqdm/utils.py:140:        self.format_called += 1
+tqdm/utils.py:141:        return self.replace
+tqdm/std.py:471:                nobar = bar_format.format(bar=full_bar, **format_dict)
+tqdm/std.py:475:            if not full_bar.format_called:
+tqdm/std.py:145:    def __init__(self, frac, default_len=10, charset=UTF):
+tqdm/std.py:146:        if not (0 <= frac <= 1):
+tqdm/std.py:149:        assert default_len > 0
+tqdm/std.py:150:        self.frac = frac
+tqdm/std.py:151:        self.default_len = default_len
+tqdm/std.py:152:        self.charset = charset
+tqdm/std.py:480:            full_bar = Bar(
+tqdm/std.py:481:                frac,
+tqdm/std.py:482:                max(1, ncols - disp_len(nobar))
+tqdm/std.py:483:                if ncols else 10,
+tqdm/std.py:484:                charset=Bar.ASCII if ascii is True else ascii or Bar.UTF)
+tqdm/std.py:485:            if not _is_ascii(full_bar.charset) and _is_ascii(bar_format):
+tqdm/utils.py:254:def _is_ascii(s):
+tqdm/utils.py:255:    if isinstance(s, str):
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:256:        for c in s:
+tqdm/utils.py:257:            if ord(c) > 255:
+tqdm/utils.py:259:        return True
+tqdm/std.py:154:    def __format__(self, format_spec):
+tqdm/std.py:155:        if format_spec:
+tqdm/std.py:170:            charset = self.charset
+tqdm/std.py:170:            charset = self.charset
+tqdm/std.py:171:            N_BARS = self.default_len
+tqdm/std.py:173:        nsyms = len(charset) - 1
+tqdm/std.py:174:        bar_length, frac_bar_length = divmod(
+tqdm/std.py:175:            int(self.frac * N_BARS * nsyms), nsyms)
+tqdm/std.py:177:        bar = charset[-1] * bar_length
+tqdm/std.py:178:        frac_bar = charset[frac_bar_length]
+tqdm/std.py:181:        if bar_length < N_BARS:
+tqdm/std.py:184:        return bar
+tqdm/std.py:487:            res = bar_format.format(bar=full_bar, **format_dict)
+tqdm/std.py:488:            return disp_trim(res, ncols) if ncols else res
+tqdm/std.py:1065:        return self.format_meter(**self.format_dict)
+tqdm/std.py:303:        def print_status(s):
+tqdm/std.py:304:            len_s = len(s)
+tqdm/std.py:305:            fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+tqdm/std.py:297:        def fp_write(s):
+tqdm/std.py:298:            fp.write(_unicode(s))
+tqdm/std.py:299:            fp_flush()
+tqdm/std.py:306:            last_len[0] = len_s
+tqdm/std.py:1436:        if pos:
+tqdm/std.py:1269:                fp_write('\n')
+tqdm/std.py:1252:        def fp_write(s):
+tqdm/std.py:1253:            self.fp.write(_unicode(s))
+tqdm/std.py:98:    def __exit__(self, *exc):
+tqdm/std.py:99:        self.release()
+tqdm/std.py:91:    def release(self):
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:92:        for lock in self.locks[::-1]:  # Release in inverse order of acquisition
+tqdm/std.py:93:            lock.release()
+tqdm/std.py:1061:    def __del__(self):
+tqdm/std.py:1062:        self.close()
+tqdm/std.py:1235:    def close(self):
+tqdm/std.py:1237:        if self.disable:
+tqdm/std.py:1238:            return
+tqdm/tests/tests_contrib.py:21:        assert list(tenumerate(a, 42, file=our_file)) == list(enumerate(a, 42))

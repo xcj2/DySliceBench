@@ -1,0 +1,209 @@
+tqdm/tests/tests_main.py:1:import sys
+tqdm/tests/tests_main.py:2:import subprocess
+tqdm/tests/tests_main.py:3:from tqdm import main, TqdmKeyError, TqdmTypeError
+tqdm/__init__.py:1:from ._tqdm import tqdm
+tqdm/_tqdm.py:14:from ._utils import _supports_unicode, _environ_cols_wrapper, _range, _unich, \
+tqdm/_tqdm.py:15:    _term_move_up, _unicode, WeakSet, _basestring, _OrderedDict
+tqdm/_utils.py:1:import os
+tqdm/_utils.py:2:import subprocess
+tqdm/_utils.py:3:from platform import system as _curos
+tqdm/_utils.py:4:CUR_OS = _curos()
+tqdm/_utils.py:5:IS_WIN = CUR_OS in ['Windows', 'cli']
+tqdm/_utils.py:6:IS_NIX = (not IS_WIN) and any(
+tqdm/_utils.py:7:    CUR_OS.startswith(i) for i in
+tqdm/_utils.py:8:    ['CYGWIN', 'MSYS', 'Linux', 'Darwin', 'SunOS', 'FreeBSD', 'NetBSD'])
+tqdm/_utils.py:12:if True:  # pragma: no cover
+tqdm/_utils.py:13:    try:
+tqdm/_utils.py:15:    except NameError:
+tqdm/_utils.py:16:        _range = range
+tqdm/_utils.py:18:    try:
+tqdm/_utils.py:20:    except NameError:
+tqdm/_utils.py:21:        _unich = chr
+tqdm/_utils.py:23:    try:
+tqdm/_utils.py:25:    except NameError:
+tqdm/_utils.py:26:        _unicode = str
+tqdm/_utils.py:28:    try:
+tqdm/_utils.py:29:        if IS_WIN:
+tqdm/_utils.py:37:    try:
+tqdm/_utils.py:38:        from weakref import WeakSet
+tqdm/_utils.py:42:    try:
+tqdm/_utils.py:44:    except NameError:
+tqdm/_utils.py:45:        _basestring = str
+tqdm/_utils.py:47:    try:  # py>=2.7,>=3.1
+tqdm/_utils.py:48:        from collections import OrderedDict as _OrderedDict
+tqdm/_tqdm.py:17:import sys
+tqdm/_tqdm.py:18:from numbers import Number
+tqdm/_tqdm.py:19:from threading import Thread
+tqdm/_tqdm.py:20:from time import time
+tqdm/_tqdm.py:21:from time import sleep
+tqdm/_tqdm.py:22:from contextlib import contextmanager
+tqdm/_tqdm.py:24:import multiprocessing as mp
+tqdm/_tqdm.py:25:import threading as th
+tqdm/_tqdm.py:34:class TqdmTypeError(TypeError):
+tqdm/_tqdm.py:38:class TqdmKeyError(KeyError):
+tqdm/_tqdm.py:42:class TqdmDeprecationWarning(Exception):
+tqdm/_tqdm.py:53:try:
+tqdm/_tqdm.py:54:    mp_lock = mp.RLock()  # multiprocessing lock
+tqdm/_tqdm.py:55:    th_lock = th.RLock()  # thread lock
+tqdm/_tqdm.py:61:class TqdmDefaultWriteLock(object):
+tqdm/_tqdm.py:87:class TMonitor(Thread):
+tqdm/_tqdm.py:102:    _time = None
+tqdm/_tqdm.py:103:    _sleep = None
+tqdm/_tqdm.py:161:class tqdm(object):
+tqdm/_tqdm.py:168:    monitor_interval = 10  # set to 0 to disable the thread
+tqdm/_tqdm.py:169:    monitor = None
+tqdm/_tqdm.py:68:    def __init__(self):
+tqdm/_tqdm.py:70:        self.locks = [lk for lk in [mp_lock, th_lock] if lk is not None]
+tqdm/_tqdm.py:170:    _lock = TqdmDefaultWriteLock()
+tqdm/__init__.py:2:from ._tqdm import trange
+tqdm/__init__.py:3:from ._tqdm_gui import tqdm_gui
+tqdm/_tqdm_gui.py:15:from time import time
+tqdm/_tqdm_gui.py:16:from ._utils import _range
+tqdm/_tqdm_gui.py:18:from ._tqdm import tqdm
+tqdm/_tqdm_gui.py:25:class tqdm_gui(tqdm):  # pragma: no cover
+tqdm/__init__.py:4:from ._tqdm_gui import tgrange
+tqdm/__init__.py:5:from ._tqdm_pandas import tqdm_pandas
+tqdm/_tqdm_pandas.py:1:import sys
+tqdm/__init__.py:6:from ._main import main
+tqdm/_main.py:1:from ._tqdm import tqdm, TqdmTypeError, TqdmKeyError
+tqdm/_main.py:2:from ._version import __version__  # NOQA
+tqdm/_version.py:2:import os
+tqdm/_version.py:3:from io import open as io_open
+tqdm/_version.py:8:version_info = 4, 19, 5
+tqdm/_version.py:11:__version__ = '.'.join(map(str, version_info))
+tqdm/_version.py:15:scriptdir = os.path.dirname(__file__)
+tqdm/_version.py:16:gitdir = os.path.abspath(os.path.join(scriptdir, "..", ".git"))
+tqdm/_version.py:17:if os.path.isdir(gitdir):  # pragma: nocover
+tqdm/_version.py:18:    extra = None
+tqdm/_version.py:20:    with io_open(os.path.join(gitdir, "config"), 'r') as fh_config:
+tqdm/_version.py:21:        if 'tqdm' in fh_config.read():
+tqdm/_version.py:22:            # Open the HEAD file
+tqdm/_version.py:23:            with io_open(os.path.join(gitdir, "HEAD"), 'r') as fh_head:
+tqdm/_version.py:24:                extra = fh_head.readline().strip()
+tqdm/_version.py:25:            # in a branch => HEAD points to file containing last commit
+tqdm/_version.py:26:            if 'ref:' in extra:
+tqdm/_version.py:27:                # reference file path
+tqdm/_version.py:28:                ref_file = extra[5:]
+tqdm/_version.py:29:                branch_name = ref_file.rsplit('/', 1)[-1]
+tqdm/_version.py:30:
+tqdm/_version.py:31:                ref_file_path = os.path.abspath(os.path.join(gitdir, ref_file))
+tqdm/_version.py:32:                # check that we are in git folder
+tqdm/_version.py:33:                # (by stripping the git folder from the ref file path)
+tqdm/_version.py:34:                if os.path.relpath(
+tqdm/_version.py:35:                        ref_file_path, gitdir).replace('\\', '/') != ref_file:
+tqdm/_version.py:36:                    # out of git folder
+tqdm/_version.py:37:                    extra = None
+tqdm/_version.py:38:                else:
+tqdm/_version.py:39:                    # open the ref file
+tqdm/_version.py:40:                    with io_open(ref_file_path, 'r') as fh_branch:
+tqdm/_version.py:41:                        commit_hash = fh_branch.readline().strip()
+tqdm/_version.py:42:                        extra = commit_hash[:8]
+tqdm/_version.py:43:                        if branch_name != "master":
+tqdm/_version.py:44:                            extra += '.' + branch_name
+tqdm/_version.py:45:
+tqdm/_version.py:46:            # detached HEAD mode, already have commit hash
+tqdm/_version.py:47:            else:
+tqdm/_version.py:48:                extra = extra[:8]
+tqdm/_version.py:21:        if 'tqdm' in fh_config.read():
+tqdm/_version.py:23:            with io_open(os.path.join(gitdir, "HEAD"), 'r') as fh_head:
+tqdm/_version.py:24:                extra = fh_head.readline().strip()
+tqdm/_version.py:24:                extra = fh_head.readline().strip()
+tqdm/_version.py:26:            if 'ref:' in extra:
+tqdm/_version.py:28:                ref_file = extra[5:]
+tqdm/_version.py:29:                branch_name = ref_file.rsplit('/', 1)[-1]
+tqdm/_version.py:31:                ref_file_path = os.path.abspath(os.path.join(gitdir, ref_file))
+tqdm/_version.py:34:                if os.path.relpath(
+tqdm/_version.py:40:                    with io_open(ref_file_path, 'r') as fh_branch:
+tqdm/_version.py:40:                    with io_open(ref_file_path, 'r') as fh_branch:
+tqdm/_version.py:41:                        commit_hash = fh_branch.readline().strip()
+tqdm/_version.py:42:                        extra = commit_hash[:8]
+tqdm/_version.py:43:                        if branch_name != "master":
+tqdm/_version.py:44:                            extra += '.' + branch_name
+tqdm/_version.py:41:                        commit_hash = fh_branch.readline().strip()
+tqdm/_version.py:42:                        extra = commit_hash[:8]
+tqdm/_version.py:43:                        if branch_name != "master":
+tqdm/_version.py:51:    if extra is not None:
+tqdm/_version.py:52:        try:
+tqdm/_version.py:53:            with io_open(os.path.join(gitdir, "refs", "tags",
+tqdm/_version.py:54:                                      'v' + __version__)) as fdv:
+tqdm/_version.py:55:                if fdv.readline().strip()[:8] != extra[:8]:
+tqdm/_version.py:56:                    __version__ += '-' + extra
+tqdm/_version.py:57:        except Exception as e:
+tqdm/_version.py:58:            if "No such file" not in str(e):
+tqdm/_main.py:3:import sys
+tqdm/_main.py:4:import re
+tqdm/_main.py:5:import logging
+tqdm/_main.py:90:RE_OPTS = re.compile(r'\n {8}(\S+)\s{2,}:\s*([^,]+)')
+tqdm/_main.py:92:RE_SHLEX = re.compile(r'\s*--?([^\s=]+)(?:\s*|=|$)')
+tqdm/_main.py:95:UNSUPPORTED_OPTS = ('iterable', 'gui', 'out', 'file')
+tqdm/_main.py:98:CLI_EXTRA_DOC = r"""
+tqdm/_main.py:99:        Extra CLI Options
+tqdm/_main.py:100:        -----------------
+tqdm/_main.py:101:        name  : type, optional
+tqdm/_main.py:102:             TODO: find out why this is needed.
+tqdm/_main.py:103:        delim  : chr, optional
+tqdm/_main.py:104:            Delimiting character [default: '\n']. Use '\0' for null.
+tqdm/_main.py:105:            N.B.: on Windows systems, Python converts '\n' to '\r\n'.
+tqdm/_main.py:106:        buf_size  : int, optional
+tqdm/_main.py:107:            String buffer size in bytes [default: 256]
+tqdm/_main.py:108:            used when `delim` is specified.
+tqdm/_main.py:109:        bytes  : bool, optional
+tqdm/_main.py:110:            If true, will count bytes, ignore `delim`, and default
+tqdm/_main.py:111:            `unit_scale` to True, `unit_divisor` to 1024, and `unit` to 'B'.
+tqdm/_main.py:112:        log  : str, optional
+tqdm/_main.py:113:            CRITICAL|FATAL|ERROR|WARN(ING)|[default: 'INFO']|DEBUG|NOTSET.
+tqdm/_main.py:114:"""
+tqdm/__init__.py:7:from ._version import __version__  # NOQA
+tqdm/__init__.py:8:from ._tqdm import TqdmTypeError, TqdmKeyError, TqdmDeprecationWarning
+tqdm/tests/tests_main.py:5:from tests_tqdm import with_setup, pretest, posttest, _range, closing, \
+tqdm/tests/tests_main.py:6:    UnicodeIO, StringIO
+tqdm/tests/tests_tqdm.py:6:import sys
+tqdm/tests/tests_tqdm.py:7:import csv
+tqdm/tests/tests_tqdm.py:8:import re
+tqdm/tests/tests_tqdm.py:9:import os
+tqdm/tests/tests_tqdm.py:10:from nose import with_setup
+tqdm/tests/tests_tqdm.py:11:from nose.plugins.skip import SkipTest
+tqdm/tests/tests_tqdm.py:12:from nose.tools import assert_raises
+tqdm/tests/tests_tqdm.py:13:from time import sleep
+tqdm/tests/tests_tqdm.py:14:from contextlib import contextmanager
+tqdm/tests/tests_tqdm.py:16:from tqdm import tqdm
+tqdm/tests/tests_tqdm.py:17:from tqdm import trange
+tqdm/tests/tests_tqdm.py:18:from tqdm import TqdmDeprecationWarning
+tqdm/tests/tests_tqdm.py:19:from tqdm._tqdm import TMonitor
+tqdm/tests/tests_tqdm.py:21:try:
+tqdm/tests/tests_tqdm.py:22:    from StringIO import StringIO
+tqdm/tests/tests_tqdm.py:23:except ImportError:
+tqdm/tests/tests_tqdm.py:24:    from io import StringIO
+tqdm/tests/tests_tqdm.py:26:from io import IOBase  # to support unicode strings
+tqdm/tests/tests_tqdm.py:29:class DeprecationError(Exception):
+tqdm/tests/tests_tqdm.py:34:if getattr(StringIO, '__exit__', False) and \
+tqdm/tests/tests_tqdm.py:42:try:
+tqdm/tests/tests_tqdm.py:44:except NameError:
+tqdm/tests/tests_tqdm.py:45:    _range = range
+tqdm/tests/tests_tqdm.py:47:try:
+tqdm/tests/tests_tqdm.py:49:except NameError:
+tqdm/tests/tests_tqdm.py:50:    _unicode = str
+tqdm/tests/tests_tqdm.py:53:if os.name == 'nt':
+tqdm/tests/tests_tqdm.py:61:CTRLCHR = [r'\r', r'\n', r'\x1b\[A']  # Need to escape [ for regex
+tqdm/tests/tests_tqdm.py:70:class DiscreteTimer(object):
+tqdm/tests/tests_tqdm.py:85:class FakeSleep(object):
+tqdm/tests/tests_tqdm.py:128:class UnicodeIO(IOBase):
+tqdm/tests/tests_tqdm.py:1596:class DummyTqdmFile(object):
+tqdm/tests/tests_tqdm.py:1598:    file = None
+tqdm/tests/tests_tqdm.py:107:def pretest():
+tqdm/tests/tests_tqdm.py:109:    getattr(sys, 'setswitchinterval', getattr(sys, 'setcheckinterval'))(100)
+tqdm/tests/tests_tqdm.py:111:    if getattr(tqdm, "_instances", False):
+tqdm/tests/tests_main.py:16:def test_main():
+tqdm/tests/tests_main.py:9:def _sh(*cmd, **kwargs):
+tqdm/tests/tests_main.py:10:    return subprocess.Popen(cmd, stdout=subprocess.PIPE,
+tqdm/tests/tests_main.py:11:                            **kwargs).communicate()[0].decode('utf-8')
+tqdm/tests/tests_main.py:18:    ls_out = _sh('ls').replace('\r\n', '\n')
+tqdm/tests/tests_main.py:19:    ls = subprocess.Popen('ls', stdout=subprocess.PIPE,
+tqdm/tests/tests_main.py:20:                          stderr=subprocess.STDOUT)
+tqdm/tests/tests_main.py:9:def _sh(*cmd, **kwargs):
+tqdm/tests/tests_main.py:10:    return subprocess.Popen(cmd, stdout=subprocess.PIPE,
+tqdm/tests/tests_main.py:11:                            **kwargs).communicate()[0].decode('utf-8')
+tqdm/tests/tests_main.py:21:    res = _sh(sys.executable, '-c', 'from tqdm import main; main()',
+tqdm/tests/tests_main.py:22:              stdin=ls.stdout, stderr=subprocess.STDOUT)
+tqdm/tests/tests_main.py:23:    ls.wait()
+tqdm/tests/tests_main.py:27:    assert (ls_out in res.replace('\r\n', '\n'))
